@@ -9,6 +9,7 @@ for root, _, files in os.walk(pdf_dir):
     for f in files:
         if f.lower().endswith(".pdf"):
             pdf_path = os.path.join(root, f)
+            f_prefix = f.split(".")[0]
             doc = fitz.open(pdf_path)
 
             # Create corresponding output directory
@@ -16,7 +17,12 @@ for root, _, files in os.walk(pdf_dir):
             out_dir = os.path.join(png_dir, rel_path)
             os.makedirs(out_dir, exist_ok=True)
 
+            name, _ = os.path.splitext(f)
             for i, page in enumerate(doc):
-                pix = page.get_pixmap()
-                name, _ = os.path.splitext(f)
-                pix.save(os.path.join(out_dir, f"{name}.png"))
+                zoom = 3
+                mat = fitz.Matrix(zoom, zoom)
+                pix = page.get_pixmap(matrix=mat)
+                page_name = f"{i}.png" 
+                os.makedirs(os.path.join(out_dir, f_prefix), exist_ok=True)
+                pix.save(os.path.join(out_dir, f_prefix ,page_name))
+
