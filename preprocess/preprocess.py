@@ -1,6 +1,10 @@
 import os
 import fitz  # PyMuPDF
 
+"""
+Convert PDFs to PNGs
+"""
+
 pdf_dir = "pdfs"
 png_dir = "pngs"
 
@@ -22,7 +26,6 @@ for root, _, files in os.walk(pdf_dir):
                 zoom = 3
                 mat = fitz.Matrix(zoom, zoom)
                 pix = page.get_pixmap(matrix=mat)
-                page_name = f"{i}.png" 
-                os.makedirs(os.path.join(out_dir, f_prefix), exist_ok=True)
-                pix.save(os.path.join(out_dir, f_prefix ,page_name))
-
+                page_name = f"{name}_{i}.png"
+                os.makedirs(os.path.join(out_dir), exist_ok=True)
+                pix.save(os.path.join(out_dir, page_name))
