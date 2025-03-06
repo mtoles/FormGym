@@ -1,0 +1,148 @@
+{
+  "form_fields": [
+    {
+      "field_name": "Completed & Signed TD Bank Small Business Loan Application",
+      "bounding_box": {
+        "x": 0.0388,
+        "y": 0.2332,
+        "width": 0.0182,
+        "height": 0.0132
+      }
+    },
+    {
+      "field_name": "Personal Financial Statement for each owner with 10% or more ownership (not required for loans to Non-Profits or loans that are fully secured by a TD Business account)",
+      "bounding_box": {
+        "x": 0.0388,
+        "y": 0.2664,
+        "width": 0.0182,
+        "height": 0.0132
+      }
+    },
+    {
+      "field_name": "How much are you looking to borrow?",
+      "bounding_box": {
+        "x": 0.7482,
+        "y": 0.3191,
+        "width": 0.1964,
+        "height": 0.0305
+      }
+    },
+    {
+      "field_name": "If yes, list your total balances with these loans (do not include personal loans):",
+      "bounding_box": {
+        "x": 0.7482,
+        "y": 0.3927,
+        "width": 0.1964,
+        "height": 0.0305
+      }
+    },
+    {
+      "field_name": "If yes, list your total maximum credit limit with these lines (do not include personal lines):",
+      "bounding_box": {
+        "x": 0.7482,
+        "y": 0.4495,
+        "width": 0.1964,
+        "height": 0.0318
+      }
+    },
+    {
+      "field_name": "If yes, list your total maximum credit limit with these lines (do not include personal lines):",
+      "bounding_box": {
+        "x": 0.7482,
+        "y": 0.5077,
+        "width": 0.1964,
+        "height": 0.0305
+      }
+    },
+    {
+      "field_name": "Your projected total business lending exposure is:",
+      "bounding_box": {
+        "x": 0.7482,
+        "y": 0.5677,
+        "width": 0.1964,
+        "height": 0.0323
+      }
+    },
+    {
+      "field_name": "$100,000 or less:",
+      "bounding_box": {
+        "x": 0.0376,
+        "y": 0.6782,
+        "width": 0.0176,
+        "height": 0.0132
+      }
+    },
+    {
+      "field_name": "Over $100,000 to $250,000:",
+      "bounding_box": {
+        "x": 0.0376,
+        "y": 0.73,
+        "width": 0.0176,
+        "height": 0.0132
+      }
+    },
+    {
+      "field_name": "Greater than $250,000:",
+      "bounding_box": {
+        "x": 0.0376,
+        "y": 0.7927,
+        "width": 0.0176,
+        "height": 0.0127
+      }
+    },
+    {
+      "field_name": "Credit requests with a total business exposure greater than $250,000 require an Accounts Receivable aging report",
+      "bounding_box": {
+        "x": 0.0394,
+        "y": 0.8609,
+        "width": 0.0176,
+        "height": 0.0136
+      }
+    },
+    {
+      "field_name": "Owner Occupied & Investment: Copy of Purchase and Sales Agreement or Bill of Sale",
+      "bounding_box": {
+        "x": 0.0394,
+        "y": 0.9018,
+        "width": 0.0176,
+        "height": 0.0136
+      }
+    },
+    {
+      "field_name": "Investment Only: Schedule of Real Estate Owned (Rent Roll) for all requests and Corresponding Leases for Total Business Exposure greater than $250,000",
+      "bounding_box": {
+        "x": 0.0394,
+        "y": 0.9268,
+        "width": 0.0176,
+        "height": 0.0132
+      }
+    },
+    {
+      "field_name": "Invoice or Bill of Sale",
+      "bounding_box": {
+        "x": 0.0394,
+        "y": 0.9627,
+        "width": 0.0176,
+        "height": 0.0132
+      }
+    },
+    {
+      "field_name": "Start Ups: Business plan, including financial projections",
+      "bounding_box": {
+        "x": 0.54,
+        "y": 0.8609,
+        "width": 0.0176,
+        "height": 0.0136
+      }
+    },
+    {
+      "field_name": "Religious Organizations or Homeowner Condominium Associations: Additional business questionnaires (please consult your TD Banking Specialist)",
+      "bounding_box": {
+        "x": 0.54,
+        "y": 0.9018,
+        "width": 0.0176,
+        "height": 0.0132
+      }
+    }
+  ]
+}

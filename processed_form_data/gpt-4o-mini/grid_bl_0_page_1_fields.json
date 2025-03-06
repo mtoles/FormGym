@@ -1,0 +1,103 @@
+{
+  "form_fields": [
+    {
+      "field_name": "How much are you looking to borrow?",
+      "bounding_box": {
+        "x": 0.078,
+        "y": 0.227,
+        "width": 0.697,
+        "height": 0.046
+      }
+    },
+    {
+      "field_name": "Your projected total business lending exposure is:",
+      "bounding_box": {
+        "x": 0.078,
+        "y": 0.29,
+        "width": 0.697,
+        "height": 0.046
+      }
+    },
+    {
+      "field_name": "For total business lending exposure:",
+      "bounding_box": {
+        "x": 0.078,
+        "y": 0.35,
+        "width": 0.697,
+        "height": 0.046
+      }
+    },
+    {
+      "field_name": "$",
+      "bounding_box": {
+        "x": 0.901,
+        "y": 0.29,
+        "width": 0.049,
+        "height": 0.046
+      }
+    },
+    {
+      "field_name": "Is your request for a line of credit to obtain working capital?",
+      "bounding_box": {
+        "x": 0.078,
+        "y": 0.49,
+        "width": 0.697,
+        "height": 0.046
+      }
+    },
+    {
+      "field_name": "Is your request for commercial real estate?",
+      "bounding_box": {
+        "x": 0.078,
+        "y": 0.54,
+        "width": 0.697,
+        "height": 0.046
+      }
+    },
+    {
+      "field_name": "Owner Occupied & Investment: Copy of Purchase and Sale Agreement or Bill of Sale",
+      "bounding_box": {
+        "x": 0.078,
+        "y": 0.59,
+        "width": 0.697,
+        "height": 0.046
+      }
+    },
+    {
+      "field_name": "Is your request for vehicle or equipment financing?",
+      "bounding_box": {
+        "x": 0.078,
+        "y": 0.64,
+        "width": 0.697,
+        "height": 0.046
+      }
+    },
+    {
+      "field_name": "Invoice or Bill of Sale",
+      "bounding_box": {
+        "x": 0.078,
+        "y": 0.69,
+        "width": 0.697,
+        "height": 0.046
+      }
+    },
+    {
+      "field_name": "Start Ups: Business plan, including financial projections",
+      "bounding_box": {
+        "x": 0.078,
+        "y": 0.74,
+        "width": 0.697,
+        "height": 0.046
+      }
+    },
+    {
+      "field_name": "Religious Organizations or Homeowner condominium associations:",
+      "bounding_box": {
+        "x": 0.078,
+        "y": 0.79,
+        "width": 0.697,
+        "height": 0.046
+      }
+    }
+  ]
+}

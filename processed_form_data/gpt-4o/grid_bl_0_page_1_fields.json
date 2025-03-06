@@ -1,0 +1,67 @@
+{
+  "form_fields": [
+    {
+      "field_name": "your total balances with these loans (do not include personal loans):",
+      "bounding_box": {
+        "x": 0.77,
+        "y": 0.225,
+        "width": 0.08,
+        "height": 0.015
+      }
+    },
+    {
+      "field_name": "your total maximum credit limit with these lines (do not include personal lines):",
+      "bounding_box": {
+        "x": 0.77,
+        "y": 0.268,
+        "width": 0.08,
+        "height": 0.015
+      }
+    },
+    {
+      "field_name": "your total maximum credit limit with these lines (do not include personal lines here):",
+      "bounding_box": {
+        "x": 0.77,
+        "y": 0.311,
+        "width": 0.08,
+        "height": 0.015
+      }
+    },
+    {
+      "field_name": "Your projected total business lending exposure is:",
+      "bounding_box": {
+        "x": 0.78,
+        "y": 0.36,
+        "width": 0.075,
+        "height": 0.015
+      }
+    },
+    {
+      "field_name": "Is your request for a line of credit to obtain working capital?",
+      "bounding_box": {
+        "x": 0.07,
+        "y": 0.615,
+        "width": 0.012,
+        "height": 0.014
+      }
+    },
+    {
+      "field_name": "Is your request for commercial real estate?",
+      "bounding_box": {
+        "x": 0.07,
+        "y": 0.727,
+        "width": 0.012,
+        "height": 0.014
+      }
+    },
+    {
+      "field_name": "Is your request for vehicle or equipment financing?",
+      "bounding_box": {
+        "x": 0.07,
+        "y": 0.801,
+        "width": 0.012,
+        "height": 0.014
+      }
+    }
+  ]
+}

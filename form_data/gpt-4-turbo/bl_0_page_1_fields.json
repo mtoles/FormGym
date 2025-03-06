@@ -1,0 +1,49 @@
+{
+  "form_fields": [
+    {
+      "field_name": "How much are you looking to borrow?",
+      "bounding_box": {
+        "x": 0.7594117647058825,
+        "y": 0.36227272727272725,
+        "width": 0.15,
+        "height": 0.015454545454545455
+      }
+    },
+    {
+      "field_name": "Do you have a TD Business Term Loan, Lease, Time Note or Commercial Mortgage?",
+      "bounding_box": {
+        "x": 0.7594117647058825,
+        "y": 0.38727272727272727,
+        "width": 0.15,
+        "height": 0.015454545454545455
+      }
+    },
+    {
+      "field_name": "Do you have a TD Business Credit Card or Small Business Line of Credit?",
+      "bounding_box": {
+        "x": 0.7594117647058825,
+        "y": 0.4118181818181818,
+        "width": 0.15,
+        "height": 0.015454545454545455
+      }
+    },
+    {
+      "field_name": "Do you have other business exposure not listed above, such as an ACH line or letter of credit?",
+      "bounding_box": {
+        "x": 0.7594117647058825,
+        "y": 0.43727272727272726,
+        "width": 0.15,
+        "height": 0.015454545454545455
+      }
+    },
+    {
+      "field_name": "Your projected total business lending exposure is:",
+      "bounding_box": {
+        "x": 0.7594117647058825,
+        "y": 0.4636363636363636,
+        "width": 0.15,
+        "height": 0.015454545454545455
+      }
+    }
+  ]
+}

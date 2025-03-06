@@ -1,0 +1,67 @@
+{
+  "form_fields": [
+    {
+      "field_name": "How much are you looking to borrow?",
+      "bounding_box": {
+        "x": 0.66,
+        "y": 0.224,
+        "width": 0.314,
+        "height": 0.026
+      }
+    },
+    {
+      "field_name": "Do you have a TD Business Term Loan, Lease, Time Note or Commercial Mortgage?",
+      "bounding_box": {
+        "x": 0.66,
+        "y": 0.26,
+        "width": 0.314,
+        "height": 0.026
+      }
+    },
+    {
+      "field_name": "Do you have a TD Business Credit Card or Small Business Line of Credit?",
+      "bounding_box": {
+        "x": 0.66,
+        "y": 0.296,
+        "width": 0.314,
+        "height": 0.026
+      }
+    },
+    {
+      "field_name": "Do you have other business exposure not listed above, such as an ACH line or letter of credit?",
+      "bounding_box": {
+        "x": 0.66,
+        "y": 0.332,
+        "width": 0.314,
+        "height": 0.026
+      }
+    },
+    {
+      "field_name": "Your projected total business lending exposure is:",
+      "bounding_box": {
+        "x": 0.786,
+        "y": 0.368,
+        "width": 0.188,
+        "height": 0.026
+      }
+    },
+    {
+      "field_name": "For total business lending exposure:",
+      "bounding_box": {
+        "x": 0.865,
+        "y": 0.404,
+        "width": 0.109,
+        "height": 0.026
+      }
+    },
+    {
+      "field_name": "Credit requests with a total business exposure greater than $250,000 requiring an Accounts Receivable aging report",
+      "bounding_box": {
+        "x": 0.805,
+        "y": 0.514,
+        "width": 0.169,
+        "height": 0.051
+      }
+    }
+  ]
+}

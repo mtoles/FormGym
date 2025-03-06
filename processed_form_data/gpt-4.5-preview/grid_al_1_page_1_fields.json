@@ -1,0 +1,238 @@
+{
+  "form_fields": [
+    {
+      "field_name": "Amt Requested $",
+      "bounding_box": {
+        "x": 0.255,
+        "y": 0.154,
+        "width": 0.131,
+        "height": 0.019
+      }
+    },
+    {
+      "field_name": "Term",
+      "bounding_box": {
+        "x": 0.419,
+        "y": 0.153,
+        "width": 0.101,
+        "height": 0.018
+      }
+    },
+    {
+      "field_name": "VIN#",
+      "bounding_box": {
+        "x": 0.548,
+        "y": 0.154,
+        "width": 0.127,
+        "height": 0.019
+      }
+    },
+    {
+      "field_name": "Vehicle Year",
+      "bounding_box": {
+        "x": 0.163,
+        "y": 0.182,
+        "width": 0.196,
+        "height": 0.021
+      }
+    },
+    {
+      "field_name": "Vehicle Make/Model",
+      "bounding_box": {
+        "x": 0.375,
+        "y": 0.18,
+        "width": 0.193,
+        "height": 0.021
+      }
+    },
+    {
+      "field_name": "Miles",
+      "bounding_box": {
+        "x": 0.59,
+        "y": 0.181,
+        "width": 0.303,
+        "height": 0.021
+      }
+    },
+    {
+      "field_name": "(Applicant\u2019s initials)",
+      "bounding_box": {
+        "x": 0.628,
+        "y": 0.207,
+        "width": 0.116,
+        "height": 0.018
+      }
+    },
+    {
+      "field_name": "(Joint Applicant\u2019s initials)",
+      "bounding_box": {
+        "x": 0.84,
+        "y": 0.208,
+        "width": 0.115,
+        "height": 0.018
+      }
+    },
+    {
+      "field_name": "Applicant",
+      "bounding_box": {
+        "x": 0.163,
+        "y": 0.237,
+        "width": 0.344,
+        "height": 0.022
+      }
+    },
+    {
+      "field_name": "Joint Applicant",
+      "bounding_box": {
+        "x": 0.568,
+        "y": 0.24,
+        "width": 0.325,
+        "height": 0.022
+      }
+    },
+    {
+      "field_name": "SS#",
+      "bounding_box": {
+        "x": 0.189,
+        "y": 0.264,
+        "width": 0.189,
+        "height": 0.021
+      }
+    },
+    {
+      "field_name": "Date of Birth",
+      "bounding_box": {
+        "x": 0.425,
+        "y": 0.264,
+        "width": 0.097,
+        "height": 0.019
+      }
+    },
+    {
+      "field_name": "SS#",
+      "bounding_box": {
+        "x": 0.595,
+        "y": 0.265,
+        "width": 0.191,
+        "height": 0.019
+      }
+    },
+    {
+      "field_name": "Date of Birth",
+      "bounding_box": {
+        "x": 0.835,
+        "y": 0.263,
+        "width": 0.088,
+        "height": 0.02
+      }
+    },
+    {
+      "field_name": "Phone: (   )",
+      "bounding_box": {
+        "x": 0.165,
+        "y": 0.289,
+        "width": 0.217,
+        "height": 0.023
+      }
+    },
+    {
+      "field_name": "Age",
+      "bounding_box": {
+        "x": 0.433,
+        "y": 0.292,
+        "width": 0.09,
+        "height": 0.019
+      }
+    },
+    {
+      "field_name": "Phone: (   )",
+      "bounding_box": {
+        "x": 0.575,
+        "y": 0.29,
+        "width": 0.211,
+        "height": 0.021
+      }
+    },
+    {
+      "field_name": "Age",
+      "bounding_box": {
+        "x": 0.842,
+        "y": 0.289,
+        "width": 0.086,
+        "height": 0.022
+      }
+    },
+    {
+      "field_name": "Cell Phone: (   )",
+      "bounding_box": {
+        "x": 0.165,
+        "y": 0.318,
+        "width": 0.217,
+        "height": 0.022
+      }
+    },
+    {
+      "field_name": "Email Address:",
+      "bounding_box": {
+        "x": 0.387,
+        "y": 0.318,
+        "width": 0.142,
+        "height": 0.021
+      }
+    },
+    {
+      "field_name": "Cell Phone: (   )",
+      "bounding_box": {
+        "x": 0.576,
+        "y": 0.318,
+        "width": 0.211,
+        "height": 0.02
+      }
+    },
+    {
+      "field_name": "Email Address:",
+      "bounding_box": {
+        "x": 0.789,
+        "y": 0.316,
+        "width": 0.14,
+        "height": 0.026
+      }
+    },
+    {
+      "field_name": "Applicant Signature",
+      "bounding_box": {
+        "x": 0.095,
+        "y": 0.957,
+        "width": 0.31,
+        "height": 0.022
+      }
+    },
+    {
+      "field_name": "Date",
+      "bounding_box": {
+        "x": 0.433,
+        "y": 0.957,
+        "width": 0.141,
+        "height": 0.021
+      }
+    },
+    {
+      "field_name": "Joint Applicant Signature",
+      "bounding_box": {
+        "x": 0.598,
+        "y": 0.958,
+        "width": 0.273,
+        "height": 0.023
+      }
+    },
+    {
+      "field_name": "Date",
+      "bounding_box": {
+        "x": 0.887,
+        "y": 0.956,
+        "width": 0.102,
+        "height": 0.022
+      }
+    }
+  ]
+}

@@ -1,0 +1,328 @@
+{
+  "form_fields": [
+    {
+      "field_name": "Applicant",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.072,
+        "width": 0.657,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "SSN",
+      "bounding_box": {
+        "x": 0.668,
+        "y": 0.072,
+        "width": 0.169,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Date of Birth",
+      "bounding_box": {
+        "x": 0.835,
+        "y": 0.072,
+        "width": 0.143,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Phone:",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.12,
+        "width": 0.329,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Cell Phone: ( )",
+      "bounding_box": {
+        "x": 0.337,
+        "y": 0.12,
+        "width": 0.193,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Email Address:",
+      "bounding_box": {
+        "x": 0.532,
+        "y": 0.12,
+        "width": 0.461,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Residency 5 Years History Required:",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.166,
+        "width": 0.993,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Home Address",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.224,
+        "width": 0.993,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "City/State",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.275,
+        "width": 0.507,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Zip",
+      "bounding_box": {
+        "x": 0.513,
+        "y": 0.275,
+        "width": 0.131,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Time at Address",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.321,
+        "width": 0.403,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Buy or Rent",
+      "bounding_box": {
+        "x": 0.418,
+        "y": 0.321,
+        "width": 0.426,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Relatives",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.369,
+        "width": 0.507,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "References:",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.418,
+        "width": 0.993,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Additional Relative or Friend (not living with you)",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.469,
+        "width": 0.993,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Address",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.518,
+        "width": 0.993,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Phone:",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.566,
+        "width": 0.329,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Cell Phone: ( )",
+      "bounding_box": {
+        "x": 0.337,
+        "y": 0.566,
+        "width": 0.193,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Employment (5 Years History Required):",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.611,
+        "width": 0.993,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Employer",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.671,
+        "width": 0.493,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Position",
+      "bounding_box": {
+        "x": 0.504,
+        "y": 0.671,
+        "width": 0.159,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Gross Monthly Income",
+      "bounding_box": {
+        "x": 0.668,
+        "y": 0.671,
+        "width": 0.326,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Additional Monthly Income",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.719,
+        "width": 0.661,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Source",
+      "bounding_box": {
+        "x": 0.672,
+        "y": 0.719,
+        "width": 0.276,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Credit History:",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.769,
+        "width": 0.993,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Bank Name: (Checking/Savings)",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.818,
+        "width": 0.661,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Account Number:",
+      "bounding_box": {
+        "x": 0.672,
+        "y": 0.818,
+        "width": 0.276,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Have you ever filed for Bankruptcy?",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.866,
+        "width": 0.473,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "When?",
+      "bounding_box": {
+        "x": 0.484,
+        "y": 0.866,
+        "width": 0.215,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Auto Information:",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.914,
+        "width": 0.993,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Auto Credit Reference",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 0.963,
+        "width": 0.661,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Balance Due:",
+      "bounding_box": {
+        "x": 0.668,
+        "y": 0.963,
+        "width": 0.276,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Will it be registered in whose name?",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 1.012,
+        "width": 0.993,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Applicant Signature",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 1.06,
+        "width": 0.661,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Date",
+      "bounding_box": {
+        "x": 0.668,
+        "y": 1.06,
+        "width": 0.276,
+        "height": 0.045
+      }
+    },
+    {
+      "field_name": "Joint Applicant Signature",
+      "bounding_box": {
+        "x": 0.004,
+        "y": 1.107,
+        "width": 0.661,
+        "height": 0.045
+      }
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "form_fields": [
+    {
+      "field_name": "Amt Requested $",
+      "bounding_box": {
+        "x": 0.0735,
+        "y": 0.1036,
+        "width": 0.1741,
+        "height": 0.0182
+      }
+    },
+    {
+      "field_name": "Term",
+      "bounding_box": {
+        "x": 0.2594,
+        "y": 0.1036,
+        "width": 0.0618,
+        "height": 0.0182
+      }
+    },
+    {
+      "field_name": "VIN#",
+      "bounding_box": {
+        "x": 0.3941,
+        "y": 0.1036,
+        "width": 0.1659,
+        "height": 0.0182
+      }
+    },
+    {
+      "field_name": "Vehicle Year",
+      "bounding_box": {
+        "x": 0.0735,
+        "y": 0.1273,
+        "width": 0.1677,
+        "height": 0.0182
+      }
+    },
+    {
+      "field_name": "Vehicle Make/Model",
+      "bounding_box": {
+        "x": 0.2535,
+        "y": 0.1273,
+        "width": 0.3088,
+        "height": 0.0182
+      }
+    },
+    {
+      "field_name": "Miles",
+      "bounding_box": {
+        "x": 0.5706,
+        "y": 0.1273,
+        "width": 0.1082,
+        "height": 0.0182
+      }
+    },
+    {
+      "field_name": "Applicant",
+      "bounding_box": {
+        "x": 0.0006,
+        "y": 0.1426,
+        "width": 0.3329,
+        "height": 0.1396
+      }
+    },
+    {
+      "field_name": "Joint Applicant",
+      "bounding_box": {
+        "x": 0.3865,
+        "y": 0.1426,
+        "width": 0.3312,
+        "height": 0.1396
+      }
+    },
+    {
+      "field_name": "EMPLOYMENT (5 YEARS HISTORY REQUIRED):",
+      "bounding_box": {
+        "x": 0.0,
+        "y": 0.6463,
+        "width": 0.7465,
+        "height": 0.0795
+      }
+    },
+    {
+      "field_name": "CREDIT HISTORY:",
+      "bounding_box": {
+        "x": 0.0006,
+        "y": 0.7527,
+        "width": 0.7465,
+        "height": 0.0358
+      }
+    },
+    {
+      "field_name": "AUTO INFORMATION:",
+      "bounding_box": {
+        "x": 0.0006,
+        "y": 0.7873,
+        "width": 0.7465,
+        "height": 0.0359
+      }
+    },
+    {
+      "field_name": "Car will be registered in whose name?",
+      "bounding_box": {
+        "x": 0.0747,
+        "y": 0.8259,
+        "width": 0.5424,
+        "height": 0.0182
+      }
+    },
+    {
+      "field_name": "Balance Due:",
+      "bounding_box": {
+        "x": 0.6194,
+        "y": 0.8259,
+        "width": 0.2535,
+        "height": 0.0182
+      }
+    },
+    {
+      "field_name": "Trading in Car?",
+      "bounding_box": {
+        "x": 0.8794,
+        "y": 0.8259,
+        "width": 0.1177,
+        "height": 0.0182
+      }
+    },
+    {
+      "field_name": "Applicant Signature",
+      "bounding_box": {
+        "x": 0.0012,
+        "y": 0.9173,
+        "width": 0.3659,
+        "height": 0.0264
+      }
+    },
+    {
+      "field_name": "Date",
+      "bounding_box": {
+        "x": 0.4194,
+        "y": 0.9159,
+        "width": 0.2353,
+        "height": 0.0286
+      }
+    },
+    {
+      "field_name": "Joint Applicant Signature",
+      "bounding_box": {
+        "x": 0.6776,
+        "y": 0.9173,
+        "width": 0.3194,
+        "height": 0.0264
+      }
+    }
+  ]
+}
