@@ -1,4 +1,5 @@
 import fields
+import openai
 
 from PIL import Image, ImageDraw, ImageFont
 
@@ -70,3 +71,43 @@ class CheaterModel:
             )
         visualize_preds(preds, doc_image_path)
         return preds
+
+
+class GptModelE2E:
+    def __init__(self, model_name: str):
+        self.model_name = model_name
+        self.e2e_prompt = """Complete the attached form based on the following user profile:
+        
+{}
+
+You have access to a form-filling API that takes input in the form {{x: float, y: float, value: str}}, which will place text on the form at the coordinate (x, y). (0,0) represents the top left corner of the form. (1,1) represents the bottom left. 
+
+Complete the form to the best of your abiliites, leaving signatures blank.
+Fill checkboxes with a single "x".
+
+Generate a form-filling API call as a JSON list of dictionaries, e.g.:
+
+[
+    {{0.1, 0.1, "John Doe"}},
+    {{0.2, 0.2, "123 Main St."}},
+]
+
+"""
+
+    def forward(self, user_profile: str, doc_image_path: str):
+        # Fill in the prompt with the user profile.
+        prompt = self.e2e_prompt.format(user_profile)
+        # Read the image file in binary mode.
+        with open(doc_image_path, "rb") as image_file:
+            image_data = image_file.read()
+        
+        # Call the OpenAI ChatCompletion API with both text and image.
+        # Note: This assumes the model supports multimodal input where an "image" key can be added.
+        response = openai.ChatCompletion.create(
+            model=self.model_name,
+            messages=[
+                {"role": "system", "content": "You are a helpful form filling assistant."},
+                {"role": "user", "content": prompt, "image": image_data}
+            ]
+        )
+        return response

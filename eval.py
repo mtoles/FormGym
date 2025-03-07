@@ -2,7 +2,7 @@ import fields
 import form_state
 import user_features
 import annotations
-from models import CheaterModel
+import models
 
 ### Setup ###
 form_state = form_state.FormState()
@@ -21,22 +21,31 @@ doc = fields.Doc(doc_fields)
 
 # cheat to get the ground truth
 
-cheater_model = CheaterModel()
+# cheater_model = CheaterModel()
 
-cheater_model.forward(
-    user_profile=user_profile,
-    annotated_doc=doc,
+# cheater_model.forward(
+#     user_profile=user_profile,
+#     annotated_doc=doc,
+#     doc_image_path="pngs/al_1_0.png",
+# )
+
+user_profile_str = "Your name is John Doe and you live at 123 Main St., Seattle WA 98105. You are buying a honda civic."
+
+model = models.GptModelE2E(model_name="gpt-4o-mini-2024-07-18")
+
+agent_input = model.forward(
+    user_profile=user_profile_str,
     doc_image_path="pngs/al_1_0.png",
 )
 
-# test a single model output
-agent_input = [
-    {
-        "value": user_features.AutoAmountRequested.options[0],
-        "x": 0.338,
-        "y": 0.104,
-    }
-]
+# # test a single model output
+# agent_input = [
+#     {
+#         "value": user_features.AutoAmountRequested.options[0],
+#         "x": 0.338,
+#         "y": 0.104,
+#     }
+# ]
 
 
 # TODO: make a visualization of the doc
