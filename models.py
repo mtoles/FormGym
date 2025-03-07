@@ -1,7 +1,11 @@
 import fields
-import openai
-
+from openai import OpenAI
+import base64
 from PIL import Image, ImageDraw, ImageFont
+import json
+from joblib import Memory
+
+memory = Memory(".joblib_cache", verbose=0)
 
 
 def visualize_preds(preds, doc_image_path):
@@ -31,12 +35,15 @@ def visualize_preds(preds, doc_image_path):
 
         # Load Times New Roman font, size 10.
         try:
-            font = ImageFont.truetype("Times New Roman.ttf", 50) # BROKEN
+            font = ImageFont.truetype(
+                "/usr/share/fonts/truetype/DejaVuSerif.ttf", 30
+            )  # BROKEN
             pass
         except IOError:
             font = ImageFont.load_default()
 
-        text = pred["field_name"] + ":\n" + str(pred["value"])
+        field_name = pred["field_name"] if "field_name" in pred else ""
+        text = ":\n".join([field_name, str(pred["value"])])
         text_x, text_y, text_w, text_h = font.getbbox(text)
         # Compute position so that the text is centered at (x, y)
         text_x = x - text_w / 2
@@ -82,8 +89,10 @@ class GptModelE2E:
 
 You have access to a form-filling API that takes input in the form {{x: float, y: float, value: str}}, which will place text on the form at the coordinate (x, y). (0,0) represents the top left corner of the form. (1,1) represents the bottom left. 
 
-Complete the form to the best of your abiliites, leaving signatures blank.
+Complete the form to the best of your abiliites, leaving signatures blank. If you do not know value for a field, fill it with "[UNK]".
+
 Fill checkboxes with a single "x".
+Format all dates as "MM/DD/YYYY", including leading zeros.
 
 Generate a form-filling API call as a JSON list of dictionaries, e.g.:
 
@@ -99,15 +108,62 @@ Generate a form-filling API call as a JSON list of dictionaries, e.g.:
         prompt = self.e2e_prompt.format(user_profile)
         # Read the image file in binary mode.
         with open(doc_image_path, "rb") as image_file:
-            image_data = image_file.read()
-        
+            base64_image = base64.b64encode(image_file.read()).decode("utf-8")
+
         # Call the OpenAI ChatCompletion API with both text and image.
         # Note: This assumes the model supports multimodal input where an "image" key can be added.
-        response = openai.ChatCompletion.create(
-            model=self.model_name,
-            messages=[
-                {"role": "system", "content": "You are a helpful form filling assistant."},
-                {"role": "user", "content": prompt, "image": image_data}
-            ]
+        response = forward_gpt(
+            self.model_name,
+            prompt,
+            base64_image,
         )
-        return response
+        return json.loads(response.choices[0].message.function_call.arguments)["result"]
+
+
+@memory.cache
+def forward_gpt(model_name, prompt, base64_image):
+    print("calling gpt...")
+    client = OpenAI()
+    return client.chat.completions.create(
+        model=model_name,
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": prompt,
+                    },
+                    {
+                        "type": "image_url",
+                        "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"},
+                    },
+                ],
+            }
+        ],
+        functions=[
+            {
+                "name": "extract_image_info",
+                "description": "Writes a string `value` to the location (x, y) on the form.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "result": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "x": {"type": "integer"},
+                                    "y": {"type": "integer"},
+                                    "value": {"type": "string"},
+                                },
+                                "required": ["x", "y", "value"],
+                            },
+                        }
+                    },
+                    "required": ["result"],
+                },
+            }
+        ],
+        function_call={"name": "extract_image_info"},
+    )

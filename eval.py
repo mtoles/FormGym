@@ -7,6 +7,7 @@ import models
 ### Setup ###
 form_state = form_state.FormState()
 user_profile = user_features.UserProfile(0)
+nl_profile = "\n".join(user_profile.get_nl_profile())
 
 annots = annotations.read_annotations("annotations/one-file/al_1_0.json")
 
@@ -29,14 +30,16 @@ doc = fields.Doc(doc_fields)
 #     doc_image_path="pngs/al_1_0.png",
 # )
 
-user_profile_str = "Your name is John Doe and you live at 123 Main St., Seattle WA 98105. You are buying a honda civic."
+# user_profile_str = "Your name is Timmy Chang and you live at 145 14th st., Seattle WA 98105. You are buying a honda civic."
 
 model = models.GptModelE2E(model_name="gpt-4o-mini-2024-07-18")
 
 agent_input = model.forward(
-    user_profile=user_profile_str,
+    user_profile=nl_profile,
     doc_image_path="pngs/al_1_0.png",
 )
+
+models.visualize_preds(agent_input, "pngs/al_1_0.png")
 
 # # test a single model output
 # agent_input = [
