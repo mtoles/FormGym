@@ -22,17 +22,17 @@ doc = fields.Doc(doc_fields)
 
 # cheat to get the ground truth
 
-# cheater_model = CheaterModel()
+cheater_model = models.CheaterModel()
 
-# cheater_model.forward(
-#     user_profile=user_profile,
-#     annotated_doc=doc,
-#     doc_image_path="pngs/al_1_0.png",
-# )
+agent_input = cheater_model.forward(
+    user_profile=user_profile,
+    annotated_doc=doc,
+    doc_image_path="pngs/al_1_0.png",
+)
 
-# user_profile_str = "Your name is Timmy Chang and you live at 145 14th st., Seattle WA 98105. You are buying a honda civic."
 
-model = models.GptModelE2E(model_name="gpt-4o-mini-2024-07-18")
+# model = models.GptModelE2E(model_name="gpt-4o-mini-2024-07-18")
+model = models.GptModelE2E(model_name="gpt-4o-2024-08-06")
 
 agent_input = model.forward(
     user_profile=nl_profile,

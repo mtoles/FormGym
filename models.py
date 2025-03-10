@@ -36,21 +36,24 @@ def visualize_preds(preds, doc_image_path):
         # Load Times New Roman font, size 10.
         try:
             font = ImageFont.truetype(
-                "/usr/share/fonts/truetype/DejaVuSerif.ttf", 30
+                "/usr/share/fonts/truetype/DejaVuSerif.ttf", 20
             )  # BROKEN
             pass
         except IOError:
             font = ImageFont.load_default()
 
         field_name = pred["field_name"] if "field_name" in pred else ""
-        text = ":\n".join([field_name, str(pred["value"])])
-        text_x, text_y, text_w, text_h = font.getbbox(text)
+        text = str(pred["value"])
+        # text = ":\n".join([field_name, str(pred["value"])])
+        # text = "x"
+
+        # text_l, text_t, text_, text_h = font.getbbox(text)
         # Compute position so that the text is centered at (x, y)
-        text_x = x - text_w / 2
-        text_y = y - text_h / 2
+        # text_x = x + text_w / 2
+        # text_y = y + text_h / 2
 
         # Draw the text in blue.
-        draw.text((text_x, text_y), text, fill="blue", font=font)
+        draw.text((x, y), text, fill="blue", font=font, anchor="mm")
     # Save the image.
     img.save("output.png")
 
@@ -122,7 +125,7 @@ Generate a form-filling API call as a JSON list of dictionaries, e.g.:
 
 @memory.cache
 def forward_gpt(model_name, prompt, base64_image):
-    print("calling gpt...")
+    print("calling gpt uncached...")
     client = OpenAI()
     return client.chat.completions.create(
         model=model_name,
