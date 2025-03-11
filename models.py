@@ -4,11 +4,33 @@ import base64
 from PIL import Image, ImageDraw, ImageFont
 import json
 from joblib import Memory
+import io
 
 memory = Memory(".joblib_cache", verbose=0)
 
+e2e_prompt_template = """Complete the attached form based on the following user profile:
+        
+{}
 
-def visualize_preds(preds, doc_image_path):
+You have access to a form-filling API that takes input in the form {{x: float, y: float, value: str}}, which will place text on the form at the coordinate (x, y). (0,0) represents the top left corner of the form. (1,1) represents the bottom left. 
+
+Complete the form to the best of your abiliites, leaving signatures blank. If you do not know value for a field, fill it with "[UNK]".
+
+Fill checkboxes with a single "x".
+Format all dates as "MM/DD/YYYY", including leading zeros.
+
+Generate a form-filling API call as a JSON list of dictionaries, e.g.:
+
+[
+    {{0.1, 0.1, "John Doe"}},
+    {{0.2, 0.2, "123 Main St."}},
+]
+
+{}
+"""
+
+grid_subprompt = "To assist you, the image has been overlaid with a 10x10 grid of red lines at intervals of 0.1 * the image width and height. This grid can be used to determine relative positions of text. Each intersection is labeled with the grid coordinates in green. Use these coordinates to help you fill out the form by interpolating between them."
+def visualize_preds(preds, fields, doc_image_path):
     # Open the image and prepare drawing context.
     """
     Visualizes prediction results on a document image by drawing text at specified coordinates.
@@ -24,8 +46,11 @@ def visualize_preds(preds, doc_image_path):
     this position in blue color. The result is saved as 'output.png' in the current directory.
     """
 
-    img = Image.open(doc_image_path)
-    draw = ImageDraw.Draw(img)
+    img = Image.open(doc_image_path).convert("RGBA")
+    overlay = Image.new("RGBA", img.size, (255, 255, 255, 0))
+
+    correctness_draw = ImageDraw.Draw(overlay)
+    text_draw = ImageDraw.Draw(img)
     width, height = img.size
 
     # Calculate absolute coordinates.
@@ -53,22 +78,98 @@ def visualize_preds(preds, doc_image_path):
         # text_y = y + text_h / 2
 
         # Draw the text in blue.
-        draw.text((x, y), text, fill="blue", font=font, anchor="mm")
+        text_draw.text((x, y), text, fill="blue", font=font, anchor="mm")
+    # Draw correct text boxes in green and incorrect text boxes in red
+
+    for field in fields:
+        x = field["bbox"]["x"] * width
+        y = field["bbox"]["y"] * height
+        w = field["bbox"]["w"] * width
+        h = field["bbox"]["h"] * height
+        correctness_draw.rectangle(
+            (x, y, x + w, y + h), fill=(0, 255, 0, 64) if field["correct"] else (255, 0, 0, 64)
+        )
     # Save the image.
-    img.save("output.png")
+    # Combine the overlay with the base image
+    result = Image.alpha_composite(img, overlay)
+
+    result.save("output.png")
+
+
+def add_grid_overlay(img):
+    """
+    Add a 10x10 grid overlay to an image with coordinates and dots at intersections.
+
+    Args:
+        img (PIL.Image.Image): The image to which the grid overlay will be added.
+
+    Returns:
+        PIL.Image.Image: The image with the grid overlay.
+    """
+    # Ensure the image is in RGB mode
+    if img.mode != "RGB":
+        img = img.convert("RGB")
+
+    draw = ImageDraw.Draw(img)
+    width, height = img.size
+
+    # Calculate grid spacing
+    x_spacing = width / 10
+    y_spacing = height / 10
+
+    # Draw vertical and horizontal grid lines
+    for i in range(11):
+        # Calculate x position for vertical lines
+        x = i * x_spacing
+        # Draw vertical line
+        draw.line([(x, 0), (x, height)], fill="red", width=2)
+
+        # Calculate y position for horizontal lines
+        y = i * y_spacing
+        # Draw horizontal line
+        draw.line([(0, y), (width, y)], fill="red", width=2)
+
+        # Add dots and coordinates at intersections
+        for j in range(11):
+            # Recalculate positions for intersections
+            x = i * x_spacing
+            y = j * y_spacing
+            # Draw a filled circle (dot) at the intersection
+            dot_radius = 5
+            draw.ellipse(
+                [(x - dot_radius, y - dot_radius), (x + dot_radius, y + dot_radius)],
+                fill="blue",
+            )
+
+            # Add coordinate text near the intersection, if within grid bounds
+            if i < 10 and j < 10:
+                coord_x = round(i / 10, 1)
+                coord_y = round(j / 10, 1)
+                text = f"({coord_x}, {coord_y})"
+                # Position text slightly offset from the intersection for visibility
+                draw.text((x + 10, y + 10), text, fill="green")
+
+    return img
 
 
 class CheaterModel:
-    def __init__(self):
-        pass
+    def __init__(self, doc, user_profile):
+        self.doc = doc
+        self.user_profile = user_profile
 
-    def forward(self, user_profile, annotated_doc, doc_image_path):
+    def forward(self, nl_profile, doc_image_path):
         """
         Give the model the ground truth annotated doc so it can cheat, for data validation
         """
         preds = []
-        for field in annotated_doc.fields:
-            cheat_input = field["field"].get_profile_info(user_profile)
+        for field in self.doc.fields:
+            cheat_input = field["field"].get_profile_info(self.user_profile)
+            if cheat_input == True:
+                cheat_input = "x"
+            elif cheat_input == False:
+                cheat_input = ""
+            else:
+                pass
             field_mid_x = field["bbox"]["x"] + field["bbox"]["w"] / 2
             field_mid_y = field["bbox"]["y"] + field["bbox"]["h"] / 2
             preds.append(
@@ -79,40 +180,28 @@ class CheaterModel:
                     "value": cheat_input,
                 }
             )
-        visualize_preds(preds, doc_image_path)
         return preds
 
 
 class GptModelE2E:
-    def __init__(self, model_name: str):
+    def __init__(self, model_name: str, draw_grid: bool = False):
         self.model_name = model_name
-        self.e2e_prompt = """Complete the attached form based on the following user profile:
-        
-{}
+        self.draw_grid = draw_grid
 
-You have access to a form-filling API that takes input in the form {{x: float, y: float, value: str}}, which will place text on the form at the coordinate (x, y). (0,0) represents the top left corner of the form. (1,1) represents the bottom left. 
-
-Complete the form to the best of your abiliites, leaving signatures blank. If you do not know value for a field, fill it with "[UNK]".
-
-Fill checkboxes with a single "x".
-Format all dates as "MM/DD/YYYY", including leading zeros.
-
-Generate a form-filling API call as a JSON list of dictionaries, e.g.:
-
-[
-    {{0.1, 0.1, "John Doe"}},
-    {{0.2, 0.2, "123 Main St."}},
-]
-
-"""
-
-    def forward(self, user_profile: str, doc_image_path: str):
+    def forward(self, nl_profile: str, doc_image_path: str):
         # Fill in the prompt with the user profile.
-        prompt = self.e2e_prompt.format(user_profile)
+        prompt = e2e_prompt_template.format(nl_profile, grid_subprompt if self.draw_grid else "")
         # Read the image file in binary mode.
-        with open(doc_image_path, "rb") as image_file:
-            base64_image = base64.b64encode(image_file.read()).decode("utf-8")
+        img = Image.open(doc_image_path)
+        if self.draw_grid:
+            img = Image.open(doc_image_path)
+            img = add_grid_overlay(img)
 
+        with open(doc_image_path, "rb") as image_file:
+            # base64_image = base64.b64encode(image_file.read()).decode("utf-8") # rewrite this line
+            buffer = io.BytesIO()
+            img.save(buffer, format="PNG")
+            base64_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
         # Call the OpenAI ChatCompletion API with both text and image.
         # Note: This assumes the model supports multimodal input where an "image" key can be added.
         response = forward_gpt(

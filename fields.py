@@ -80,27 +80,46 @@ class BaseField(metaclass=FieldMeta):
 
 
 class BaseNumericField(BaseField):
-    def is_correct(self, agent_input, user_profile):
-        agent_inputs_inside = get_inputs_inside_field(self, agent_input)
+    # def is_correct(self, agent_input, user_profile):
+    def is_correct(self, agent_inputs_inside, profile_info: str):
+        # agent_inputs_inside = get_inputs_inside_field(self, agent_input)
         concatted_input = concat_agent_inputs(agent_inputs_inside)
-        profile_info = self.get_profile_info(user_profile)
+        # profile_info = self.get_profile_info(user_profile)
         return numerize(profile_info) == numerize(concatted_input)
 
 
 class BaseStringField(BaseField):
-    def is_correct(self, agent_input, user_profile):
-        agent_inputs_inside = get_inputs_inside_field(self, agent_input)
+    # def is_correct(self, agent_input, user_profile):
+    def is_correct(self, agent_inputs_inside, profile_info: str):
+        # agent_inputs_inside = get_inputs_inside_field(self, agent_input)
         concatted_input = concat_agent_inputs(agent_inputs_inside)
-        profile_info = self.get_profile_info(user_profile)
+        # profile_info = self.get_profile_info(user_profile)
         return remove_punctuation(profile_info) == remove_punctuation(concatted_input)
 
 
 class BaseCheckboxField(BaseField):
-    def is_correct(self, agent_input, user_profile):
+    # def is_correct(self, agent_input, user_profile):
+    def is_correct(self, agent_inputs_inside, profile_info: bool):
+        assert isinstance(profile_info, bool)
         # ignoring underscore-based fields for now, so skip
-        raise NotImplementedError(
-            "Checkbox logic is not updated yet (fields with underscores are ignored)."
-        )
+        # agent_inputs_inside = get_inputs_inside_field(self, agent_input)
+        concatted_input = concat_agent_inputs(agent_inputs_inside)
+        # profile_info_bool = self.get_profile_info(user_profile)
+
+        # replace `True`` with 'x'
+        # for i, ai in enumerate(concatted_input):
+        #     if ai["value"] == True:
+        #         # agent_inputs_inside[i]["value"] = "x"
+        #         concatted_input[i]["value"] = "x"
+        #     elif ai["value"] == False:
+        #         concatted_input[i]["value"] = ""
+        #     else:
+        #         pass
+
+        if profile_info:
+            return concatted_input == "x"
+        else:
+            return concatted_input == ""
 
 
 def get_inputs_inside_field(field: BaseField, agent_inputs: List):
@@ -130,25 +149,25 @@ class AutoAmountRequested(BaseNumericField):
         return user_profile.features.AutoAmountRequested
 
 
-class Term(BaseField):
+class Term(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Term
 
 
-class Vin(BaseField):
+class Vin(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Vin
 
 
-class VehicleYear(BaseField):
+class VehicleYear(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.VehicleYear
 
 
-class VehicleMakeAndModel(BaseField):
+class VehicleMakeAndModel(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
@@ -156,7 +175,7 @@ class VehicleMakeAndModel(BaseField):
         )
 
 
-class VehicleMiles(BaseField):
+class VehicleMiles(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.VehicleMiles
@@ -165,13 +184,13 @@ class VehicleMiles(BaseField):
 # -----------------------------------------
 # APPLICANT PERSONAL INFORMATION
 # -----------------------------------------
-class ApplyingWithJointCredit(BaseField):
+class ApplyingWithJointCredit(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApplyingWithJointCredit
 
 
-class FullName(BaseField):
+class FullName(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         if (
@@ -185,31 +204,31 @@ class FullName(BaseField):
         return f"{user_profile.features.FirstName} {user_profile.features.MiddleName} {user_profile.features.LastName}"
 
 
-class Age(BaseField):
+class Age(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Age
 
 
-class HomePhoneNumber(BaseField):
+class HomePhoneNumber(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HomePhoneNumber
 
 
-class EmailAddress(BaseField):
+class EmailAddress(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EmailAddress
 
 
-class CellPhoneNumber(BaseField):
+class CellPhoneNumber(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CellPhoneNumber
 
 
-class FullAddress(BaseField):
+class FullAddress(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         feat = user_profile.features
@@ -218,14 +237,14 @@ class FullAddress(BaseField):
         )
 
 
-class HouseNumberAndStreetAddress(BaseField):
+class HouseNumberAndStreetAddress(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         feat = user_profile.features
         return feat.HouseNumber + " " + feat.StreetName
 
 
-class CityState(BaseField):
+class CityState(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         feat = user_profile.features
@@ -236,19 +255,19 @@ class CityState(BaseField):
         return f"{feat.City}, {feat.State}"
 
 
-class Zip(BaseField):
+class Zip(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Zip
 
 
-class SocialSecurityNumber(BaseField):
+class SocialSecurityNumber(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SocialSecurityNumber
 
 
-class FullBirthDate(BaseField):
+class FullBirthDate(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         feat = user_profile.features
@@ -262,7 +281,7 @@ class FullBirthDate(BaseField):
 # -----------------------------------------
 # JOINT APPLICANT PERSONAL INFORMATION
 # -----------------------------------------
-class JointFullName(BaseField):
+class JointFullName(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         # user_features do not provide separate joint first/middle/last name attributes
@@ -276,31 +295,31 @@ class JointFullName(BaseField):
         )
 
 
-class JointAge(BaseField):
+class JointAge(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointAge
 
 
-class JointHomePhoneNumber(BaseField):
+class JointHomePhoneNumber(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointHomePhoneNumber
 
 
-class JointEmailAddress(BaseField):
+class JointEmailAddress(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointEmailAddress
 
 
-class JointCellPhoneNumber(BaseField):
+class JointCellPhoneNumber(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointCellPhoneNumber
 
 
-class JointFullAddress(BaseField):
+class JointFullAddress(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return concatenate_address(
@@ -312,7 +331,7 @@ class JointFullAddress(BaseField):
         )
 
 
-class JointHouseNumberAndStreetAddress(BaseField):
+class JointHouseNumberAndStreetAddress(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
@@ -322,25 +341,25 @@ class JointHouseNumberAndStreetAddress(BaseField):
         )
 
 
-class JointCity(BaseField):
+class JointCity(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointCity
 
 
-class JointZip(BaseField):
+class JointZip(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointZip
 
 
-class JointSocialSecurityNumber(BaseField):
+class JointSocialSecurityNumber(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointSocialSecurityNumber
 
 
-class JointFullBirthDate(BaseField):
+class JointFullBirthDate(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return f"{user_profile.features.JointBirthMonth}/{user_profile.features.JointBirthDay}/{user_profile.features.JointBirthYear}"
@@ -356,49 +375,49 @@ class JointFullBirthDate(BaseField):
 # -----------------------------------------
 # TIME AT ADDRESS (no underscore)
 # -----------------------------------------
-class TimeAtAddressYears(BaseField):
+class TimeAtAddressYears(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TimeAtAddressYears
 
 
-class TimeAtAddressMonths(BaseField):
+class TimeAtAddressMonths(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TimeAtAddressMonths
 
 
-class JointTimeAtAddressYears(BaseField):
+class JointTimeAtAddressYears(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointTimeAtAddressYears
 
 
-class JointTimeAtAddressMonths(BaseField):
+class JointTimeAtAddressMonths(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointTimeAtAddressMonths
 
 
-class MortgageCompanyLandlord(BaseField):
+class MortgageCompanyLandlord(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MortgageCompanyLandlord
 
 
-class JointMortgageCompanyLandlord(BaseField):
+class JointMortgageCompanyLandlord(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointMortgageCompanyLandlord
 
 
-class MonthlyMortgageOrRent(BaseField):
+class MonthlyMortgageOrRent(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MonthlyMortgageOrRent
 
 
-class JointMortgageRent(BaseField):
+class JointMortgageRent(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointMortgageRent
@@ -407,7 +426,7 @@ class JointMortgageRent(BaseField):
 # -----------------------------------------
 # PREVIOUS RESIDENCE
 # -----------------------------------------
-class PreviousFullAddress(BaseField):
+class PreviousFullAddress(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         feat = user_profile.features
@@ -424,7 +443,7 @@ class PreviousFullAddress(BaseField):
         return f"{feat.PreviousHouseNumber} {feat.PreviousStreetName}, {feat.PreviousCity}, {feat.PreviousState}, {feat.PreviousZip}"
 
 
-class JointPreviousFullAddress(BaseField):
+class JointPreviousFullAddress(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         feat = user_profile.features
@@ -441,25 +460,25 @@ class JointPreviousFullAddress(BaseField):
         return f"{feat.JointPreviousHouseNumber} {feat.JointPreviousStreetName}, {feat.JointPreviousCity}, {feat.JointPreviousState}, {feat.JointPreviousZip}"
 
 
-class TimeAtPreviousAddressYears(BaseField):
+class TimeAtPreviousAddressYears(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TimeAtPreviousAddressYears
 
 
-class TimeAtPreviousAddressMonths(BaseField):
+class TimeAtPreviousAddressMonths(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TimeAtPreviousAddressMonths
 
 
-class JointTimeAtPreviousAddressYears(BaseField):
+class JointTimeAtPreviousAddressYears(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointTimeAtPreviousAddressYears
 
 
-class JointTimeAtPreviousAddressMonths(BaseField):
+class JointTimeAtPreviousAddressMonths(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointTimeAtPreviousAddressMonths
@@ -468,19 +487,19 @@ class JointTimeAtPreviousAddressMonths(BaseField):
 # -----------------------------------------
 # REFERENCES
 # -----------------------------------------
-class ReferenceName(BaseField):
+class ReferenceName(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReferenceName
 
 
-class ReferenceRelationship(BaseField):
+class ReferenceRelationship(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReferenceRelationship
 
 
-class ReferenceFullAddress(BaseField):
+class ReferenceFullAddress(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         feat = user_profile.features
@@ -497,45 +516,45 @@ class ReferenceFullAddress(BaseField):
         return f"{feat.ReferenceHouseNumber} {feat.ReferenceStreetName}, {feat.ReferenceCity}, {feat.ReferenceState}, {feat.ReferenceZip}"
 
 
-class ReferenceCellPhone(BaseField):
+class ReferenceCellPhone(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReferenceCellPhone
 
 
-class ReferenceHomePhone(BaseField):
+class ReferenceHomePhone(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReferenceHomePhone
 
 
-class JointReferenceName(BaseField):
+class JointReferenceName(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         feat = user_profile.features
         return f"{feat.JointReferenceFirstName} {feat.JointReferenceLastName}"
 
 
-class JointReferenceRelationship(BaseField):
+class JointReferenceRelationship(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointReferenceRelationship
 
 
-class JointReferenceFullAddress(BaseField):
+class JointReferenceFullAddress(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         feat = user_profile.features
         return f"{feat.JointReferenceHouseNumber} {feat.JointReferenceStreetName}, {feat.JointReferenceCity}, {feat.JointReferenceState}, {feat.JointReferenceZip}"
 
 
-class JointReferenceCellPhone(BaseField):
+class JointReferenceCellPhone(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointReferenceCellPhone
 
 
-class JointReferenceHomePhone(BaseField):
+class JointReferenceHomePhone(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointReferenceHomePhone
@@ -544,51 +563,51 @@ class JointReferenceHomePhone(BaseField):
 # -----------------------------------------
 # SECOND REFERENCE
 # -----------------------------------------
-class Reference2Name(BaseField):
+class Reference2Name(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Reference2Name
 
 
-class Reference2FullAddress(BaseField):
+class Reference2FullAddress(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         feat = user_profile.features
         return f"{feat.Reference2HouseNumber} {feat.Reference2StreetName}, {feat.Reference2City}, {feat.Reference2State}, {feat.Reference2Zip}"
 
 
-class Reference2CellPhone(BaseField):
+class Reference2CellPhone(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Reference2CellPhone
 
 
-class Reference2HomePhone(BaseField):
+class Reference2HomePhone(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Reference2HomePhone
 
 
-class JointReference2Name(BaseField):
+class JointReference2Name(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointReference2Name
 
 
-class JointReference2FullAddress(BaseField):
+class JointReference2FullAddress(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         # This is provided as one string in user_features
         return user_profile.features.JointReference2FullAddress
 
 
-class JointReference2CellPhone(BaseField):
+class JointReference2CellPhone(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointReference2CellPhone
 
 
-class JointReference2HomePhone(BaseField):
+class JointReference2HomePhone(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointReference2HomePhone
@@ -597,73 +616,73 @@ class JointReference2HomePhone(BaseField):
 # -----------------------------------------
 # EMPLOYMENT
 # -----------------------------------------
-class EmployerName(BaseField):
+class EmployerName(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EmployerName
 
 
-class EmployerCity(BaseField):
+class EmployerCity(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EmployerCity
 
 
-class EmployerLengthYears(BaseField):
+class EmployerLengthYears(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EmployerLengthYears
 
 
-class EmployerPosition(BaseField):
+class EmployerPosition(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EmployerPosition
 
 
-class EmployerWorkPhone(BaseField):
+class EmployerWorkPhone(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EmployerWorkPhone
 
 
-class GrossMonthlyIncome(BaseField):
+class GrossMonthlyIncome(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GrossMonthlyIncome
 
 
-class JointEmployerName(BaseField):
+class JointEmployerName(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointEmployerName
 
 
-class JointEmployerCity(BaseField):
+class JointEmployerCity(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointEmployerCity
 
 
-class JointEmployerLengthYears(BaseField):
+class JointEmployerLengthYears(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointEmployerLengthYears
 
 
-class JointEmployerPosition(BaseField):
+class JointEmployerPosition(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointEmployerPosition
 
 
-class JointEmployerWorkPhone(BaseField):
+class JointEmployerWorkPhone(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointEmployerWorkPhone
 
 
-class JointGrossMonthlyIncome(BaseField):
+class JointGrossMonthlyIncome(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointGrossMonthlyIncome
@@ -672,25 +691,25 @@ class JointGrossMonthlyIncome(BaseField):
 # -----------------------------------------
 # ADDITIONAL INCOME
 # -----------------------------------------
-class AdditionalIncomeSource(BaseField):
+class AdditionalIncomeSource(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AdditionalIncomeSource
 
 
-class AdditionalMonthlyIncome(BaseField):
+class AdditionalMonthlyIncome(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AdditionalMonthlyIncome
 
 
-class JointAdditionalIncomeSource(BaseField):
+class JointAdditionalIncomeSource(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointAdditionalIncomeSource
 
 
-class JointAdditionalMonthlyIncome(BaseField):
+class JointAdditionalMonthlyIncome(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointAdditionalMonthlyIncome
@@ -699,49 +718,49 @@ class JointAdditionalMonthlyIncome(BaseField):
 # -----------------------------------------
 # PREVIOUS EMPLOYER
 # -----------------------------------------
-class PreviousEmployerName(BaseField):
+class PreviousEmployerName(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PreviousEmployerName
 
 
-class PreviousEmployerCity(BaseField):
+class PreviousEmployerCity(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PreviousEmployerCity
 
 
-class PreviousEmployerPosition(BaseField):
+class PreviousEmployerPosition(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PreviousEmployerPosition
 
 
-class PreviousLengthEmployed(BaseField):
+class PreviousLengthEmployed(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PreviousLengthEmployed
 
 
-class JointPreviousEmployerName(BaseField):
+class JointPreviousEmployerName(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointPreviousEmployerName
 
 
-class JointPreviousEmployerCity(BaseField):
+class JointPreviousEmployerCity(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointPreviousEmployerCity
 
 
-class JointPreviousEmployerPosition(BaseField):
+class JointPreviousEmployerPosition(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointPreviousEmployerPosition
 
 
-class JointPreviousLengthEmployed(BaseField):
+class JointPreviousLengthEmployed(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointPreviousLengthEmployed
@@ -750,37 +769,37 @@ class JointPreviousLengthEmployed(BaseField):
 # -----------------------------------------
 # BANK INFORMATION
 # -----------------------------------------
-class BankName(BaseField):
+class BankName(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BankName
 
 
-class BankAddress(BaseField):
+class BankAddress(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BankAddress
 
 
-class BankAccountNumber(BaseField):
+class BankAccountNumber(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BankAccountNumber
 
 
-class JointBankName(BaseField):
+class JointBankName(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointBankName
 
 
-class JointBankAddress(BaseField):
+class JointBankAddress(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointBankAddress
 
 
-class JointBankAccountNumber(BaseField):
+class JointBankAccountNumber(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointBankAccountNumber
@@ -789,25 +808,25 @@ class JointBankAccountNumber(BaseField):
 # -----------------------------------------
 # BANKRUPTCY
 # -----------------------------------------
-class BankruptcyStatus(BaseField):
+class BankruptcyStatus(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BankruptcyStatus
 
 
-class BankruptcyYear(BaseField):
+class BankruptcyYear(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BankruptcyYear
 
 
-class JointBankruptcyStatus(BaseField):
+class JointBankruptcyStatus(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointBankruptcyStatus
 
 
-class JointBankruptcyYear(BaseField):
+class JointBankruptcyYear(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointBankruptcyYear
@@ -816,25 +835,25 @@ class JointBankruptcyYear(BaseField):
 # -----------------------------------------
 # AUTO TRADE-IN
 # -----------------------------------------
-class TradingInCar(BaseField):
+class TradingInCar(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TradingInCar
 
 
-class AutoBalanceDue(BaseField):
+class AutoBalanceDue(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AutoBalanceDue
 
 
-class AutoCreditReference(BaseField):
+class AutoCreditReference(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AutoCreditReference
 
 
-class RegisteredCarOwner(BaseField):
+class RegisteredCarOwner(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RegisteredCarOwner
@@ -843,7 +862,7 @@ class RegisteredCarOwner(BaseField):
 # -----------------------------------------
 # DATE FIELDS
 # -----------------------------------------
-class TodaysDate(BaseField):
+class TodaysDate(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TodaysDate
@@ -855,63 +874,110 @@ class TodaysDate(BaseField):
 
 # Additional classes with underscores that raise exceptions:
 
-class ResidenceStatus_Buying(BaseField):
+
+class ResidenceStatus_Buying(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.ResidenceStatus == user_features.ResidenceStatusEnum.Buying.value
+        return (
+            user_profile.features.ResidenceStatus
+            == user_features.ResidenceStatusEnum.Buying.value
+        )
 
-class ResidenceStatus_Renting(BaseField):
+
+class ResidenceStatus_Renting(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.ResidenceStatus == user_features.ResidenceStatusEnum.Renting.value
+        return (
+            user_profile.features.ResidenceStatus
+            == user_features.ResidenceStatusEnum.Renting.value
+        )
 
-class ResidenceStatus_Relatives(BaseField):
+
+class ResidenceStatus_Relatives(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.ResidenceStatus == user_features.ResidenceStatusEnum.LivingWithRelatives.value
+        return (
+            user_profile.features.ResidenceStatus
+            == user_features.ResidenceStatusEnum.LivingWithRelatives.value
+        )
 
-class JointResidenceStatus_Buying(BaseField):
+
+class JointResidenceStatus_Buying(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.JointResidenceStatus == user_features.ResidenceStatusEnum.Buying.value
+        return (
+            user_profile.features.JointResidenceStatus
+            == user_features.ResidenceStatusEnum.Buying.value
+        )
 
-class JointResidenceStatus_Renting(BaseField):
+
+class JointResidenceStatus_Renting(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.JointResidenceStatus == user_features.ResidenceStatusEnum.Renting.value
+        return (
+            user_profile.features.JointResidenceStatus
+            == user_features.ResidenceStatusEnum.Renting.value
+        )
 
-class JointResidenceStatus_Relatives(BaseField):
+
+class JointResidenceStatus_Relatives(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.JointResidenceStatus == user_features.ResidenceStatusEnum.LivingWithRelatives.value
+        return (
+            user_profile.features.JointResidenceStatus
+            == user_features.ResidenceStatusEnum.LivingWithRelatives.value
+        )
 
-class PreviousResidenceStatus_Buying(BaseField):
+
+class PreviousResidenceStatus_Buying(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.PreviousResidenceStatus == user_features.ResidenceStatusEnum.Buying.value
+        return (
+            user_profile.features.PreviousResidenceStatus
+            == user_features.ResidenceStatusEnum.Buying.value
+        )
 
-class PreviousResidenceStatus_Renting(BaseField):
+
+class PreviousResidenceStatus_Renting(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.PreviousResidenceStatus == user_features.ResidenceStatusEnum.Renting.value
+        return (
+            user_profile.features.PreviousResidenceStatus
+            == user_features.ResidenceStatusEnum.Renting.value
+        )
 
-class PreviousResidenceStatus_Relatives(BaseField):
+
+class PreviousResidenceStatus_Relatives(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.PreviousResidenceStatus == user_features.ResidenceStatusEnum.LivingWithRelatives.value
+        return (
+            user_profile.features.PreviousResidenceStatus
+            == user_features.ResidenceStatusEnum.LivingWithRelatives.value
+        )
 
-class JointPreviousResidenceStatus_Buying(BaseField):
+
+class JointPreviousResidenceStatus_Buying(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.JointPreviousResidenceStatus == user_features.ResidenceStatusEnum.Buying.value
+        return (
+            user_profile.features.JointPreviousResidenceStatus
+            == user_features.ResidenceStatusEnum.Buying.value
+        )
 
-class JointPreviousResidenceStatus_Renting(BaseField):
+
+class JointPreviousResidenceStatus_Renting(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.JointPreviousResidenceStatus == user_features.ResidenceStatusEnum.Renting.value
+        return (
+            user_profile.features.JointPreviousResidenceStatus
+            == user_features.ResidenceStatusEnum.Renting.value
+        )
 
-class JointPreviousResidenceStatus_Relatives(BaseField):
+
+class JointPreviousResidenceStatus_Relatives(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.JointPreviousResidenceStatus == user_features.ResidenceStatusEnum.LivingWithRelatives.value
-
+        return (
+            user_profile.features.JointPreviousResidenceStatus
+            == user_features.ResidenceStatusEnum.LivingWithRelatives.value
+        )
