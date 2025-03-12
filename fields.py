@@ -31,11 +31,11 @@ def remove_punctuation(s):
     return s
 
 
-def concat_agent_inputs(agent_inputs):
+def concat_agent_generations(agent_generations):
     return " ".join(
         [
             x["value"]
-            for x in sorted(agent_inputs, key=lambda item: (item["y"], item["x"]))
+            for x in sorted(agent_generations, key=lambda item: (item["y"], item["x"]))
         ]
     )
 
@@ -71,7 +71,7 @@ class BaseField(metaclass=FieldMeta):
         self.h = h
 
     @abstractmethod
-    def is_correct(self, agent_input, user_profile):
+    def is_correct(self, agent_generation, user_profile):
         raise NotImplemented
 
     @abstractmethod
@@ -80,36 +80,36 @@ class BaseField(metaclass=FieldMeta):
 
 
 class BaseNumericField(BaseField):
-    # def is_correct(self, agent_input, user_profile):
-    def is_correct(self, agent_inputs_inside, profile_info: str):
-        # agent_inputs_inside = get_inputs_inside_field(self, agent_input)
-        concatted_input = concat_agent_inputs(agent_inputs_inside)
+    # def is_correct(self, agent_generation, user_profile):
+    def is_correct(self, agent_generations_inside, profile_info: str):
+        # agent_generations_inside = get_inputs_inside_field(self, agent_generation)
+        concatted_input = concat_agent_generations(agent_generations_inside)
         # profile_info = self.get_profile_info(user_profile)
         return numerize(profile_info) == numerize(concatted_input)
 
 
 class BaseStringField(BaseField):
-    # def is_correct(self, agent_input, user_profile):
-    def is_correct(self, agent_inputs_inside, profile_info: str):
-        # agent_inputs_inside = get_inputs_inside_field(self, agent_input)
-        concatted_input = concat_agent_inputs(agent_inputs_inside)
+    # def is_correct(self, agent_generation, user_profile):
+    def is_correct(self, agent_generations_inside, profile_info: str):
+        # agent_generations_inside = get_inputs_inside_field(self, agent_generation)
+        concatted_input = concat_agent_generations(agent_generations_inside)
         # profile_info = self.get_profile_info(user_profile)
         return remove_punctuation(profile_info) == remove_punctuation(concatted_input)
 
 
 class BaseCheckboxField(BaseField):
-    # def is_correct(self, agent_input, user_profile):
-    def is_correct(self, agent_inputs_inside, profile_info: bool):
+    # def is_correct(self, agent_generation, user_profile):
+    def is_correct(self, agent_generations_inside, profile_info: bool):
         assert isinstance(profile_info, bool)
         # ignoring underscore-based fields for now, so skip
-        # agent_inputs_inside = get_inputs_inside_field(self, agent_input)
-        concatted_input = concat_agent_inputs(agent_inputs_inside)
+        # agent_generations_inside = get_inputs_inside_field(self, agent_generation)
+        concatted_input = concat_agent_generations(agent_generations_inside)
         # profile_info_bool = self.get_profile_info(user_profile)
 
         # replace `True`` with 'x'
         # for i, ai in enumerate(concatted_input):
         #     if ai["value"] == True:
-        #         # agent_inputs_inside[i]["value"] = "x"
+        #         # agent_generations_inside[i]["value"] = "x"
         #         concatted_input[i]["value"] = "x"
         #     elif ai["value"] == False:
         #         concatted_input[i]["value"] = ""
@@ -122,22 +122,19 @@ class BaseCheckboxField(BaseField):
             return concatted_input == ""
 
 
-def get_inputs_inside_field(field: BaseField, agent_inputs: List):
+def get_inputs_inside_field(field: BaseField, agent_generations: List):
     return [
-        ai
-        for ai in agent_inputs
+        ag
+        for ag in agent_generations
         if (
-            ai["x"] >= field.x
-            and ai["x"] <= field.x + field.w
-            and ai["y"] >= field.y
-            and ai["y"] <= field.y + field.h
+            ag["x"] >= field.x
+            and ag["x"] <= field.x + field.w
+            and ag["y"] >= field.y
+            and ag["y"] <= field.y + field.h
         )
     ]
 
 
-class Doc:
-    def __init__(self, fields: List[BaseField]):
-        self.fields = fields
 
 
 # -----------------------------------------

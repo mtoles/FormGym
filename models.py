@@ -5,6 +5,7 @@ from PIL import Image, ImageDraw, ImageFont
 import json
 from joblib import Memory
 import io
+from typing import List, Dict
 
 memory = Memory(".joblib_cache", verbose=0)
 
@@ -30,6 +31,8 @@ Generate a form-filling API call as a JSON list of dictionaries, e.g.:
 """
 
 grid_subprompt = "To assist you, the image has been overlaid with a 10x10 grid of red lines at intervals of 0.1 * the image width and height. This grid can be used to determine relative positions of text. Each intersection is labeled with the grid coordinates in green. Use these coordinates to help you fill out the form by interpolating between them."
+
+
 def visualize_preds(preds, fields, doc_image_path):
     # Open the image and prepare drawing context.
     """
@@ -87,7 +90,8 @@ def visualize_preds(preds, fields, doc_image_path):
         w = field["bbox"]["w"] * width
         h = field["bbox"]["h"] * height
         correctness_draw.rectangle(
-            (x, y, x + w, y + h), fill=(0, 255, 0, 64) if field["correct"] else (255, 0, 0, 64)
+            (x, y, x + w, y + h),
+            fill=(0, 255, 0, 64) if field["correct"] else (255, 0, 0, 64),
         )
     # Save the image.
     # Combine the overlay with the base image
@@ -153,16 +157,16 @@ def add_grid_overlay(img):
 
 
 class CheaterModel:
-    def __init__(self, doc, user_profile):
-        self.doc = doc
+    def __init__(self, doc_state, user_profile):
+        self.doc_state = doc_state
         self.user_profile = user_profile
 
-    def forward(self, nl_profile, doc_image_path):
+    def forward(self, nl_profile, doc_image_path) -> List[Dict]:
         """
         Give the model the ground truth annotated doc so it can cheat, for data validation
         """
         preds = []
-        for field in self.doc.fields:
+        for field in self.doc_state.fields:
             cheat_input = field["field"].get_profile_info(self.user_profile)
             if cheat_input == True:
                 cheat_input = "x"
@@ -174,6 +178,7 @@ class CheaterModel:
             field_mid_y = field["bbox"]["y"] + field["bbox"]["h"] / 2
             preds.append(
                 {
+                    "action": "TextPlace",
                     "x": field_mid_x,
                     "y": field_mid_y,
                     "field_name": field["field_name"],
@@ -190,7 +195,9 @@ class GptModelE2E:
 
     def forward(self, nl_profile: str, doc_image_path: str):
         # Fill in the prompt with the user profile.
-        prompt = e2e_prompt_template.format(nl_profile, grid_subprompt if self.draw_grid else "")
+        prompt = e2e_prompt_template.format(
+            nl_profile, grid_subprompt if self.draw_grid else ""
+        )
         # Read the image file in binary mode.
         img = Image.open(doc_image_path)
         if self.draw_grid:
@@ -216,7 +223,7 @@ class GptModelE2E:
 def forward_gpt(model_name, prompt, base64_image):
     print("calling gpt uncached...")
     client = OpenAI()
-    return client.chat.completions.create(
+    completion = client.chat.completions.create(
         model=model_name,
         messages=[
             {
@@ -259,3 +266,5 @@ def forward_gpt(model_name, prompt, base64_image):
         ],
         function_call={"name": "extract_image_info"},
     )
+
+    return completion
