@@ -1,4 +1,5 @@
 import fields
+from actions import ActionMeta
 from openai import OpenAI
 import base64
 from PIL import Image, ImageDraw, ImageFont
@@ -11,23 +12,22 @@ memory = Memory(".joblib_cache", verbose=0)
 
 e2e_prompt_template = """Complete the attached form based on the following user profile:
         
-{}
+{user_profile}
 
-You have access to a form-filling API that takes input in the form {{x: float, y: float, value: str}}, which will place text on the form at the coordinate (x, y). (0,0) represents the top left corner of the form. (1,1) represents the bottom left. 
+You have access to the following APIs:
 
-Complete the form to the best of your abiliites, leaving signatures blank. If you do not know value for a field, fill it with "[UNK]".
+{api_documentation}
 
+Generate a sequence of actions that will fill out the form. 
+
+Complete the form to the best of your abilites, leaving signatures blank. 
+If you do not know value for a field, fill it with "[UNK]".
 Fill checkboxes with a single "x".
 Format all dates as "MM/DD/YYYY", including leading zeros.
 
-Generate a form-filling API call as a JSON list of dictionaries, e.g.:
+{grid_subprompt}
 
-[
-    {{0.1, 0.1, "John Doe"}},
-    {{0.2, 0.2, "123 Main St."}},
-]
-
-{}
+Return a form-filling API call as a JSON list of dictionaries.
 """
 
 grid_subprompt = "To assist you, the image has been overlaid with a 10x10 grid of red lines at intervals of 0.1 * the image width and height. This grid can be used to determine relative positions of text. Each intersection is labeled with the grid coordinates in green. Use these coordinates to help you fill out the form by interpolating between them."
@@ -161,7 +161,7 @@ class CheaterModel:
         self.doc_state = doc_state
         self.user_profile = user_profile
 
-    def forward(self, nl_profile, doc_image_path) -> List[Dict]:
+    def forward(self, nl_profile, doc_image_path, available_actions: List[str]) -> List[Dict]:
         """
         Give the model the ground truth annotated doc so it can cheat, for data validation
         """
@@ -178,7 +178,7 @@ class CheaterModel:
             field_mid_y = field["bbox"]["y"] + field["bbox"]["h"] / 2
             preds.append(
                 {
-                    "action": "TextPlace",
+                    "action": "PlaceText",
                     "x": field_mid_x,
                     "y": field_mid_y,
                     "field_name": field["field_name"],
@@ -193,10 +193,14 @@ class GptModelE2E:
         self.model_name = model_name
         self.draw_grid = draw_grid
 
-    def forward(self, nl_profile: str, doc_image_path: str):
+    def forward(
+        self, nl_profile: str, doc_image_path: str, available_actions: List[str]
+    ) -> List[Dict]:
         # Fill in the prompt with the user profile.
         prompt = e2e_prompt_template.format(
-            nl_profile, grid_subprompt if self.draw_grid else ""
+            user_profile=nl_profile,
+            api_documentation=ActionMeta.all_documentation(available_actions),
+            grid_subprompt=grid_subprompt if self.draw_grid else "",
         )
         # Read the image file in binary mode.
         img = Image.open(doc_image_path)
@@ -252,6 +256,7 @@ def forward_gpt(model_name, prompt, base64_image):
                             "items": {
                                 "type": "object",
                                 "properties": {
+                                    "action": {"type": "string"},
                                     "x": {"type": "integer"},
                                     "y": {"type": "integer"},
                                     "value": {"type": "string"},
