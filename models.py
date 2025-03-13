@@ -11,17 +11,41 @@ from utils import *
 
 memory = Memory(".joblib_cache", verbose=0)
 
-e2e_prompt_template = """Complete the attached form based on the following user profile:
-        
-{user_profile}
+
+def construct_prompt(
+    nl_profile: str, available_actions: List[str], draw_grid: bool, flow: str
+) -> str:
+    if flow == FlowEnum.iterative.value:
+        flow_instruction = "Generate a single action that will help you fill out the form. If the form is already complete, use an action to mark it as complete. Do not call more than one action at a time."
+    elif flow == FlowEnum.full.value:
+        flow_instruction = "Generate a sequence of actions that will fill out the entire form. Call multiple actions at a time if necessary."
+    else:
+        raise NotImplementedError
+    """
+    Constructs the prompt string with the necessary details.
+    """
+    api_documentation = ActionMeta.all_documentation(available_actions)
+    grid_subprompt = (
+        """
+    To assist you, the image has been overlaid with a 10x10 grid of red lines at intervals of 0.1 * the image width and height. 
+    This grid can be used to determine relative positions of text. Each intersection is labeled with the grid coordinates in green. 
+    Use these coordinates to help you fill out the form by interpolating between them.
+    """
+        if draw_grid
+        else ""
+    )
+
+    output = f"""Complete the attached form based on the following user profile:
+    
+{nl_profile}
 
 You have access to the following APIs:
 
 {api_documentation}
 
-Generate a sequence of actions that will fill out the form. 
+{flow_instruction}
 
-Complete the form to the best of your abilites, leaving signatures blank. 
+Complete the form to the best of your abilities, leaving signatures blank. 
 If you do not know value for a field, fill it with "[UNK]".
 Fill checkboxes with a single "x".
 Format all dates as "MM/DD/YYYY", including leading zeros.
@@ -31,7 +55,7 @@ Format all dates as "MM/DD/YYYY", including leading zeros.
 Return a form-filling API call as a JSON list of dictionaries.
 """
 
-grid_subprompt = "To assist you, the image has been overlaid with a 10x10 grid of red lines at intervals of 0.1 * the image width and height. This grid can be used to determine relative positions of text. Each intersection is labeled with the grid coordinates in green. Use these coordinates to help you fill out the form by interpolating between them."
+    return output
 
 
 def visualize_preds(preds, fields, doc_image_path):
@@ -64,9 +88,7 @@ def visualize_preds(preds, fields, doc_image_path):
 
         # Load Times New Roman font, size 10.
         try:
-            font = ImageFont.truetype(
-                "/usr/share/fonts/truetype/DejaVuSerif.ttf", 20
-            )
+            font = ImageFont.truetype("/usr/share/fonts/truetype/DejaVuSerif.ttf", 20)
             pass
         except IOError:
             font = ImageFont.load_default()
@@ -162,7 +184,9 @@ class CheaterModel:
         self.doc_state = doc_state
         self.user_profile = user_profile
 
-    def forward(self, nl_profile, doc_image_path, available_actions: List[str]) -> List[Dict]:
+    def forward(
+        self, nl_profile, doc_image_path, available_actions: List[str]
+    ) -> List[Dict]:
         """
         Give the model the ground truth annotated doc so it can cheat, for data validation
         """
@@ -195,49 +219,63 @@ class GptModelE2E:
         self.draw_grid = draw_grid
 
     def forward(
-        self, nl_profile: str, doc_image_path: str, available_actions: List[str], flow: str
+        self,
+        nl_profile: str,
+        doc_image_path: str,
+        available_actions: List[str],
+        flow: str,
     ) -> List[Dict]:
-        # Fill in the prompt with the user profile.
-        prompt = e2e_prompt_template.format(
-            user_profile=nl_profile,
-            api_documentation=ActionMeta.all_documentation(available_actions),
-            grid_subprompt=grid_subprompt if self.draw_grid else "",
+        # Construct the prompt using the dedicated function
+        prompt = construct_prompt(
+            nl_profile=nl_profile,
+            available_actions=available_actions,
+            draw_grid=self.draw_grid,
+            flow=flow,
         )
-        # Read the image file in binary mode.
+
+        # Read the image file in binary mode
         img = Image.open(doc_image_path)
         if self.draw_grid:
-            img = Image.open(doc_image_path)
             img = add_grid_overlay(img)
 
-        with open(doc_image_path, "rb") as image_file:
-            # base64_image = base64.b64encode(image_file.read()).decode("utf-8") # rewrite this line
-            buffer = io.BytesIO()
-            img.save(buffer, format="PNG")
-            base64_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
-        # Call the OpenAI ChatCompletion API with both text and image.
-        # Note: This assumes the model supports multimodal input where an "image" key can be added.
+        buffer = io.BytesIO()
+        img.save(buffer, format="PNG")
+        base64_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
+
+        # Call the OpenAI ChatCompletion API with both text and image
         response = forward_gpt(
-            self.model_name,
-            prompt,
-            base64_image,
+            model_name=self.model_name,
+            prompt=prompt,
+            base64_image=base64_image,
+            flow=flow,
         )
-        return json.loads(response.choices[0].message.function_call.arguments)["result"]
+        tool_params = [
+            json.loads(tc.function.arguments)
+            for tc in response.choices[0].message.tool_calls
+        ]  # [0]["result"]
+        if flow == FlowEnum.full.value:
+            tool_params = tool_params[0]
+        print(tool_params)
+        raise NotImplementedError
+        # tool_params = tool_params["result"]
+        return tool_params
+
+
+# [json.loads(tc.function.arguments) for tc in response.choices[0].message.tool_calls for x in tc]
 
 
 @memory.cache
-def forward_gpt(model_name, prompt, base64_image):
+def forward_gpt(model_name, prompt, base64_image, flow: str):
     print("calling gpt uncached...")
     client = OpenAI()
+    single_call = flow == FlowEnum.full.value
     completion = client.chat.completions.create(
         model=model_name,
         messages=[
             {
                 "role": "user",
                 "content": [
-                    {
-                        "type": "text",
-                        "text": prompt,
-                    },
+                    {"type": "text", "text": prompt},
                     {
                         "type": "image_url",
                         "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"},
@@ -245,32 +283,41 @@ def forward_gpt(model_name, prompt, base64_image):
                 ],
             }
         ],
-        functions=[
+        tools=[
             {
-                "name": "extract_image_info",
-                "description": "Writes a string `value` to the location (x, y) on the form.",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "result": {
-                            "type": "array",
-                            "items": {
+                "type": "function",
+                "function": {
+                    "name": "write_string_on_image",
+                    "description": "Writes a string `value` to the location (x, y) on the form.",
+                    "strict": True,
+                    # "parallel_tool_calls": parallel_tool_calls,
+                    "parallel_tool_calls": False,
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "result": {
+                                # "type": "array" if parallel_tool_calls else "object",
                                 "type": "object",
+                                # "items": {
+                                #     "type": "object",
                                 "properties": {
                                     "action": {"type": "string"},
                                     "x": {"type": "integer"},
                                     "y": {"type": "integer"},
                                     "value": {"type": "string"},
                                 },
-                                "required": ["x", "y", "value"],
-                            },
-                        }
+                                "required": ["x", "y", "action", "value"],
+                                "additionalProperties": False,
+                                # },
+                                # "additionalProperties": False,
+                            }
+                        },
+                        "required": ["result"],
+                        "additionalProperties": False,
                     },
-                    "required": ["result"],
                 },
             }
         ],
-        function_call={"name": "extract_image_info"},
+        # function_call={"name": "write_string_on_image"},
     )
-
     return completion
