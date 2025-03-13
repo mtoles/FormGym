@@ -7,6 +7,7 @@ import json
 from joblib import Memory
 import io
 from typing import List, Dict
+from utils import *
 
 memory = Memory(".joblib_cache", verbose=0)
 
@@ -65,7 +66,7 @@ def visualize_preds(preds, fields, doc_image_path):
         try:
             font = ImageFont.truetype(
                 "/usr/share/fonts/truetype/DejaVuSerif.ttf", 20
-            )  # BROKEN
+            )
             pass
         except IOError:
             font = ImageFont.load_default()
@@ -194,7 +195,7 @@ class GptModelE2E:
         self.draw_grid = draw_grid
 
     def forward(
-        self, nl_profile: str, doc_image_path: str, available_actions: List[str]
+        self, nl_profile: str, doc_image_path: str, available_actions: List[str], flow: str
     ) -> List[Dict]:
         # Fill in the prompt with the user profile.
         prompt = e2e_prompt_template.format(
