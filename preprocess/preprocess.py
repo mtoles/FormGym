@@ -23,7 +23,7 @@ for root, _, files in os.walk(pdf_dir):
 
             name, _ = os.path.splitext(f)
             for i, page in enumerate(doc):
-                zoom = 3
+                zoom = 2
                 mat = fitz.Matrix(zoom, zoom)
                 pix = page.get_pixmap(matrix=mat)
                 page_name = f"{name}_{i}.png"

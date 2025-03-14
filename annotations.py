@@ -10,19 +10,30 @@ def read_annotations(filename):
     doc_width = data["item"]["slots"][0]["width"]
     doc_height = data["item"]["slots"][0]["height"]
     # Extract annotations
-    annotations = [
-        {
-            "id": annotation["id"],
-            "field_name": annotation["name"],
-            "bbox": {
-                "x": annotation["bounding_box"]["x"] / doc_width,
-                "y": annotation["bounding_box"]["y"] / doc_height,
-                "w": annotation["bounding_box"]["w"] / doc_width,
-                "h": annotation["bounding_box"]["h"] / doc_height,
-            },
-            "field": getattr(fields, annotation["name"]),
-        }
-        for annotation in data.get("annotations", [])
-    ]
+    # print("missing fields: ")
+    annotations = []
+    missing_fields = []
+    for annotation in data.get("annotations", []):
+        try:
+            annotations.append(
+                {
+                    "id": annotation["id"],
+                    "field_name": annotation["name"],
+                    "bbox": {
+                        "x": annotation["bounding_box"]["x"] / doc_width,
+                        "y": annotation["bounding_box"]["y"] / doc_height,
+                        "w": annotation["bounding_box"]["w"] / doc_width,
+                        "h": annotation["bounding_box"]["h"] / doc_height,
+                    },
+                    "field": getattr(fields, annotation["name"]),
+                }
+            )
+        except AttributeError:
+            missing_fields.append(annotation["name"])
+
+    if missing_fields:
+        print("Fields are missing:")
+        print("\n".join(missing_fields))
+        raise ValueError
 
     return annotations

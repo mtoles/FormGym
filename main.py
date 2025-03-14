@@ -22,7 +22,7 @@ assert args.flow in [e.value for e in FlowEnum]
 user_profile = user_features.UserProfile(0)
 nl_profile = "\n".join(user_profile.get_nl_profile())
 
-annots = annotations.read_annotations("annotations/one-file/al_1_0.json")
+annots = annotations.read_annotations("annotations/all-al/al_3_0.json")
 img_pdf_fill_task = ImagePdfFill()
 ### Define the doc ###
 

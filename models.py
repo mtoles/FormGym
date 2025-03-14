@@ -16,11 +16,14 @@ def construct_prompt(
     nl_profile: str, available_actions: List[str], draw_grid: bool, flow: str
 ) -> str:
     if flow == FlowEnum.iterative.value:
-        flow_instruction = "Generate a single action that will help you fill out the form. If the form is already complete, use an action to mark it as complete. Do not call more than one action at a time."
+        flow_instruction = "Generate a single action that will help you fill out the first empty field in the form. If the form is already complete, use an action to mark it as complete. Do not call more than one action at a time."
+        additional_instructions = ""
     elif flow == FlowEnum.full.value:
         flow_instruction = "Generate a sequence of actions that will fill out the entire form. Call multiple actions at a time if necessary."
+        additional_instructions = "Complete the form to the best of your abilities, leaving signatures blank.\nIf you do not know value for a field, fill it with [UNK]."
     else:
         raise NotImplementedError
+
     """
     Constructs the prompt string with the necessary details.
     """
@@ -45,14 +48,13 @@ You have access to the following APIs:
 
 {flow_instruction}
 
-Complete the form to the best of your abilities, leaving signatures blank. 
-If you do not know value for a field, fill it with "[UNK]".
-Fill checkboxes with a single "x".
+{additional_instructions}
+To fill a checkbox, place an "x" inside it.
 Format all dates as "MM/DD/YYYY", including leading zeros.
 
 {grid_subprompt}
 
-Return a form-filling API call as a JSON list of dictionaries.
+Return a form-filling API call as a JSON list of dictionaries. 
 """
 
     return output
@@ -185,7 +187,7 @@ class CheaterModel:
         self.user_profile = user_profile
 
     def forward(
-        self, nl_profile, doc_image_path, available_actions: List[str]
+        self, nl_profile, doc_image_path, available_actions: List[str], flow: str
     ) -> List[Dict]:
         """
         Give the model the ground truth annotated doc so it can cheat, for data validation
