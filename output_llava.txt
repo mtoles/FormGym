@@ -1,0 +1,301 @@
+ER:  
+
+    Analyze this form image and extract all form fields.
+    
+    YOUR RESPONSE MUST CONTAIN NOTHING BUT VALID JSON - NO EXPLANATION, NO CODE BLOCKS, NO MARKDOWN.
+    
+    Format your entire response as this exact JSON structure:
+    {
+        "form_fields": [
+            {
+                "field_name": "exact label from form",
+                "bounding_box": {
+                    "x": float,
+                    "y": float,
+                    "width": float,
+                    "height": float
+                }
+            }
+        ]
+    }
+
+    Notes:
+    - Coordinates must be normalized between 0-1 (divide by image width 1700 and height 2200)
+    - (0,0) is top-left, (1,1) is bottom-right
+    - The bounding box should cover the entire input area
+    - Include ALL form fields requiring user input
+    - Copy field names exactly as they appear
+     ASSISTANT: {
+"form\_fields": [
+{
+"field\_name": "Vehicle Make",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Model",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Year",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle VIN",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Title",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Odometer",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Purchase Price",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Trade-in Value",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Mileage",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle License Plate",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Insurance",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Registration",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Warranty",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Maintenance",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Service",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Repairs",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Replacement",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Replacement Cost",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Replacement Mileage",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Replacement Year",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Replacement Make",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Replacement Model",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Replacement VIN",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Replacement Title",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Replacement Odometer",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Replacement Purchase Price",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Replacement Trade-in Value",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Replacement Mileage",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Replacement License Plate",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name": "Vehicle Replacement Insurance",
+"bounding\_box": {
+"x": 0.32,
+"y": 0.17,
+"width": 0.4,
+"height": 0.22
+}
+},
+{
+"field\_name":

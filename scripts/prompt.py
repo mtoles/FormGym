@@ -1,5 +1,12 @@
 from PIL import Image
+import json
+import base64
 
+def encode_image(image_path):
+    """Encode image to base64 string."""
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode("utf-8")
+    
 def get_image_dimensions(image_path):
     """Get the dimensions of the image."""
     with Image.open(image_path) as img:
@@ -9,37 +16,79 @@ def get_prompt(image_path):
     img_width, img_height = get_image_dimensions(image_path)
 
     prompt = f"""
-    Analyze this form image and identify all form fields where information needs to be filled in.
-    Return ONLY valid JSON. Do not include any code blocks, markdown, or extra text in your response. 
-    For each field:
-    1. Extract the field label/name exactly as it appears in the form
-    2. Identify the bounding box coordinates of where the value should be filled (the empty space, box, or line where user input goes)
-    3. Return the information in this exact JSON format:
+    Analyze this form image and extract all form fields.
+    
+    YOUR RESPONSE MUST CONTAIN NOTHING BUT VALID JSON - NO EXPLANATION, NO CODE BLOCKS, NO MARKDOWN.
+    
+    Format your entire response as this exact JSON structure:
     {{
         "form_fields": [
             {{
                 "field_name": "exact label from form",
                 "bounding_box": {{
-                    "x": float between 0 and 1 (normalized x-coordinate of top-left corner),
-                    "y": float between 0 and 1 (normalized y-coordinate of top-left corner),
-                    "width": float between 0 and 1 (normalized width of input area),
-                    "height": float between 0 and 1 (normalized height of input area)
+                    "x": float,
+                    "y": float,
+                    "width": float,
+                    "height": float
                 }}
             }}
         ]
     }}
 
-    Important Notes:
-    - Coordinates should be NORMALIZED between 0 and 1, where:
-        * (0,0) is the top-left corner of the image
-        * (1,1) is the bottom-right corner
-        * x values are normalized by dividing by image width ({img_width})
-        * y values are normalized by dividing by image height ({img_height})
-    - Include ALL form fields where user input is expected
-    - Be precise with field names, copying them exactly as they appear
-    - For each field, the bounding box should cover the entire area where the answer/value should be written
-    - Include checkboxes, text fields, signature areas, date fields, etc.
-    - If a field has multiple input areas (like separate boxes for each digit), combine them into one bounding box
+    Notes:
+    - Coordinates must be normalized between 0-1 (divide by image width {img_width} and height {img_height})
+    - (0,0) is top-left, (1,1) is bottom-right
+    - The bounding box should cover the entire input area
+    - Include ALL form fields requiring user input
+    - Copy field names exactly as they appear
     """
 
     return prompt
+
+import json
+
+def parse_json_from_response(raw_response: str, start_text: str):
+    """
+    Locates 'ASSISTANT:' in the response (if present). Then extracts and parses
+    the substring from the first '{' after that (or from the first '{' in the
+    entire string if 'ASSISTANT:' isn't found) to the final '}' in the entire string.
+
+    Returns the parsed JSON (as a Python object) on success, or None if extraction/parsing fails.
+    """
+
+    # Attempt to locate "ASSISTANT:"
+    assistant_index = raw_response.find(start_text)
+    
+    # If found, search for the first '{' after "ASSISTANT:"
+    if assistant_index != -1:
+        first_brace_index = raw_response.find("{", assistant_index)
+    else:
+        # If not found, just locate the first '{' in the entire string
+        first_brace_index = raw_response.find("{")
+
+    if first_brace_index == -1:
+        print("No '{' found in the response.")
+        return None
+
+    # Find the last '}' in the entire string
+    last_brace_index = raw_response.rfind("}")
+    if last_brace_index == -1:
+        print("No '}' found in the response.")
+        return None
+
+    # Ensure the first '{' is before the last '}'
+    if first_brace_index > last_brace_index:
+        print("First '{' occurs after the last '}'. Invalid JSON structure.")
+        return None
+
+    # Extract the substring containing the potential JSON
+    json_str = raw_response[first_brace_index : last_brace_index + 1]
+
+    return json_str
+
+    # Attempt to parse as JSON
+    try:
+        return json.loads(json_str)
+    except json.JSONDecodeError:
+        print("Failed to parse JSON.")
+        return None

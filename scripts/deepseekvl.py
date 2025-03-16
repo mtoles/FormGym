@@ -3,11 +3,11 @@ from transformers import AutoModelForCausalLM
 
 from deepseek_vl.models import VLChatProcessor, MultiModalityCausalLM
 from deepseek_vl.utils.io import load_pil_images
-from prompt import get_prompt
+from prompt import get_prompt, parse_json_from_response
 
 # specify the path to the model
-# model_path = "deepseek-ai/deepseek-vl-7b-chat"
-model_path = "deepseek-ai/Janus-Pro-7B"
+model_path = "deepseek-ai/deepseek-vl-7b-chat"
+# model_path = "deepseek-ai/Janus-Pro-7B"
 
 vl_chat_processor: VLChatProcessor = VLChatProcessor.from_pretrained(model_path)
 tokenizer = vl_chat_processor.tokenizer
@@ -15,7 +15,7 @@ tokenizer = vl_chat_processor.tokenizer
 vl_gpt: MultiModalityCausalLM = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True)
 vl_gpt = vl_gpt.to(torch.bfloat16).cuda().eval()
 
-local_image_path = "../processed_pngs/grid_al_1_page_1.png"
+local_image_path = "./processed_pngs/grid_al_1_page_1.png"
 prompt_text = get_prompt(local_image_path)
 
 conversation = [
@@ -54,4 +54,14 @@ outputs = vl_gpt.language_model.generate(
 )
 
 answer = tokenizer.decode(outputs[0].cpu().tolist(), skip_special_tokens=True)
-print(f"{prepare_inputs['sft_format'][0]}", answer)
+raw_response = f"{prepare_inputs['sft_format'][0]}", answer
+
+model_raw_response = raw_response[1]
+
+with open("output_deepseekvl.txt", "w") as f:
+    f.write(model_raw_response)
+
+parsed_response = parse_json_from_response(model_raw_response, '"form_fields": [')
+
+with open("output_deepseekvl_parsed.txt", "w") as f:
+    f.write(parsed_response)
