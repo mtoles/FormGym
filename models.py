@@ -229,7 +229,7 @@ class GptModelE2E:
             prompt,
             image_b64,
         )
-        return json.loads(response.choices[0].message.function_call.arguments)["result"]
+        return json.loads(response.choices[0].message.content)
 
 
 @memory.cache
@@ -253,32 +253,32 @@ def forward_gpt(model_name, prompt, base64_image):
                 ],
             }
         ],
-        functions=[
-            {
-                "name": "extract_image_info",
-                "description": "Writes a string `value` to the location (x, y) on the form.",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "result": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "action": {"type": "string"},
-                                    "x": {"type": "integer"},
-                                    "y": {"type": "integer"},
-                                    "value": {"type": "string"},
-                                },
-                                "required": ["x", "y", "value"],
-                            },
-                        }
-                    },
-                    "required": ["result"],
-                },
-            }
-        ],
-        function_call={"name": "extract_image_info"},
+        # functions=[
+        #     {
+        #         "name": "extract_image_info",
+        #         "description": "Writes a string `value` to the location (x, y) on the form.",
+        #         "parameters": {
+        #             "type": "object",
+        #             "properties": {
+        #                 "result": {
+        #                     "type": "array",
+        #                     "items": {
+        #                         "type": "object",
+        #                         "properties": {
+        #                             "action": {"type": "string"},
+        #                             "x": {"type": "integer"},
+        #                             "y": {"type": "integer"},
+        #                             "value": {"type": "string"},
+        #                         },
+        #                         "required": ["x", "y", "value"],
+        #                     },
+        #                 }
+        #             },
+        #             "required": ["result"],
+        #         },
+        #     }
+        # ],
+        # function_call={"name": "extract_image_info"},
     )
 
     return completion

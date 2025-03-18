@@ -96,12 +96,13 @@ for i, fid in enumerate(args.file_ids):
             blank_img=blank_img,
         )
 
-        agent_generations = model.forward(
+        agent_generation_str = model.forward(
             nl_profile=nl_profile,
             doc_image=current_state_img,  # Use current PNG file
             available_actions=["PlaceText"],
             flow=flow,
         )
+        agent_generations = 
         if flow == FlowEnum.iterative.value:
             agent_generations = agent_generations[:1]
 
