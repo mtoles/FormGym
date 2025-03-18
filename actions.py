@@ -2,8 +2,9 @@
 Definitions of actions that an agent can take on a form
 """
 import json
-from typing import List, Dict
+from typing import List, Dict, Literal
 from copy import deepcopy
+from pydantic import BaseModel
 
 class ActionMeta(type):
     registry = {}
@@ -22,27 +23,34 @@ class ActionMeta(type):
                 docstring += f"{name}: {action.documentation}\n\n"
         return docstring
     
-class Action(metaclass=ActionMeta):
+class BaseAction(metaclass=ActionMeta):
     @staticmethod
     def act(doc_state, **kwargs):
         """
         Must always return doc_state. Use kwargs to update the doc state in some way.
         """
+        print("Subclasses must implement this method")
         raise NotImplementedError
-        return doc_state
+
+    class Schema(BaseModel):
+        """
+        A pydantic schema defining valid input for this action. The schema should always be a subclass of pydantic.BaseModel and contain an `action` field whose value is the action name, as a literal.
+        """
+        def __call__(self, *args, **kwds):
+            print("Subclasses must implement this method")
+            raise NotImplementedError
     
 ### Actions for image pdfs
 
-class PlaceText(Action):
+class PlaceText(BaseAction):
     """
     
     """
 
     documentation = """
-    Place a text on an image or pdf. The center of the text will be placed at (x, y), where (0, 0) is the top left corner and (1, 1) is the bottom right. `Value` is the text to place.
+    Place a text on a document, image, or pdf. The center of the text will be placed at (x, y), where (0, 0) is the top left corner and (1, 1) is the bottom right of the image. `Value` is the text to place.
 
     Args:
-        doc_state: The form being interacted with. Can be a pdf or a website.
         x: The x position of the text relative to the top left corner of the screen
         y: The y position of the text relative to the top left corner of the screen
         value: The text to place on the pdf
@@ -52,26 +60,54 @@ class PlaceText(Action):
     """
 
     def act(doc_state, x: float, y: float, value: str, **kwargs):
-        doc_state.marks.append({"x": x, "y": y, "value": value})
+        doc_state.marks.append({"action": "PlaceText", "x": x, "y": y, "value": value})
         return doc_state
+    
 
+    class Schema(BaseModel):
+        action: Literal["PlaceText"]
+        x: float
+        y: float
+        value: str
 
-class Sign(Action):
-    pass
+    
+
+class SignOrInitial(BaseAction):
+    documentation = """
+    Sign or initial a document, image, or pdf. The center of the signature will be placed at (x, y), where (0, 0) is the top left corner and (1, 1) is the bottom right of the image. `Value` is the name or initials of the signer.
+
+    Args:
+        x: The x position of the signature relative to the top left corner of the screen
+        y: The y position of the signature relative to the top left corner of the screen
+        value: The name or initials of the signer
+
+    Example input:
+        {"action": "SignOrInitial", "x": 0.5, "y": 0.5, "value": "John Doe"}
+    """
+
+    def act(doc_state, x: float, y: float, value: str, **kwargs):
+        doc_state.marks.append({"action": "Sign", "x": x, "y": y, "value": value})
+        return doc_state
+    
+    class Schema(BaseModel):
+        action: Literal["SignOrInitial"]
+        x: float
+        y: float
+        value: str
 
 ### Actions for editable pdfs and websites
 
-class Click(Action):
-    pass
+# class Click(BaseAction):
+#     pass
 
-class ModifyText(Action):
-    pass
+# class ModifyText(BaseAction):
+#     pass
 
-class SelectFileUpload(Action):
-    pass
+# class SelectFileUpload(BaseAction):
+#     pass
 
-class Terminate(Action):
-    pass
+# class Terminate(BaseAction):
+#     pass
 
 
 def update_doc_state(doc_state, agent_generations: List[Dict]):

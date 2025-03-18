@@ -6,8 +6,10 @@ from PIL import Image, ImageDraw, ImageFont
 import json
 from joblib import Memory
 import io
-from typing import List, Dict
+from typing import List, Dict, Any, Optional
 from utils import *
+import re
+from pydantic import BaseModel, ValidationError
 
 memory = Memory(".joblib_cache", verbose=0)
 
@@ -180,6 +182,84 @@ def add_grid_overlay(img):
 
     return img
 
+def parse_and_reconstruct_fields_old(response_text):
+    # Two regex patterns to match both escaped and non-escaped variants
+    # Pattern 1: For escaped format with backslashes (field\_name)
+    pattern_escaped = r'\{\s*"field\\_name":\s*"([^"]+)",\s*"bounding\\_box":\s*\{\s*"x":\s*([0-9.]+),\s*"y":\s*([0-9.]+),\s*"width":\s*([0-9.]+),\s*"height":\s*([0-9.]+)\s*\}\s*\}'
+
+    # Pattern 2: For standard format without escapes (field_name)
+    pattern_standard = r'\{\s*"field_name":\s*"([^"]+)",\s*"bounding_box":\s*\{\s*"x":\s*([0-9.]+),\s*"y":\s*([0-9.]+),\s*"width":\s*([0-9.]+),\s*"height":\s*([0-9.]+)\s*\}\s*\}'
+
+    # Find all matches for both patterns
+    matches_escaped = re.finditer(pattern_escaped, response_text)
+    matches_standard = re.finditer(pattern_standard, response_text)
+
+    # Combine the matches
+    form_fields = []
+
+    # Process escaped matches
+    for match in matches_escaped:
+        field_name = match.group(1)
+        x = float(match.group(2))
+        y = float(match.group(3))
+        width = float(match.group(4))
+        height = float(match.group(5))
+
+        field_entry = {
+            "field_name": field_name,
+            "bounding_box": {
+                "x": x,
+                "y": y,
+                "width": width,
+                "height": height
+            }
+        }
+        form_fields.append(field_entry)
+
+    # Process standard matches
+    for match in matches_standard:
+        field_name = match.group(1)
+        x = float(match.group(2))
+        y = float(match.group(3))
+        width = float(match.group(4))
+        height = float(match.group(5))
+
+        field_entry = {
+            "field_name": field_name,
+            "bounding_box": {
+                "x": x,
+                "y": y,
+                "width": width,
+                "height": height
+            }
+        }
+        form_fields.append(field_entry)
+
+    # Create the final structure
+    result = {
+        "form_fields": form_fields
+    }
+
+    return result
+
+def parse_and_reconstruct_fields(response_text):
+    pattern = r"(\{[^}]*\})"
+    matches = re.findall(pattern, response_text)
+
+    passed_actions = []
+    failed_actions = []
+    for match in matches:
+        try:
+            match_dict = json.loads(match)
+            action_name = match_dict["action"]
+            action = ActionMeta.registry[action_name]
+            action.Schema(**match_dict)
+            passed_actions.append(match_dict)
+        except ValidationError as e:
+            print(f"Validation error for {match}: {e}")
+            failed_actions.append(match)
+    return passed_actions
+    
 
 class CheaterModel:
     def __init__(self, doc_state, user_profile):
@@ -261,16 +341,16 @@ class GptModelE2E:
             prompt=prompt,
             base64_image=base64_image,
             flow=flow,
-        )
-        tool_params = [
-            json.loads(tc.function.arguments)
-            for tc in response.choices[0].message.tool_calls
-        ]  # [0]["result"]
+        ).choices[0].message.content
+        tool_params = parse_and_reconstruct_fields(response)
+        # tool_params = [
+        #     json.loads(tc.function.arguments)
+        #     for tc in response.choices[0].message.content
+        # ]  # [0]["result"]
         if flow == FlowEnum.iterative.value:
             tool_params = tool_params[0]
         print(tool_params)
         # raise NotImplementedError
-        tool_params = [tp["result"] for tp in tool_params]
         return tool_params
 
 
@@ -296,41 +376,42 @@ def forward_gpt(model_name, prompt, base64_image, flow: str):
                 ],
             }
         ],
-        tools=[
-            {
-                "type": "function",
-                "function": {
-                    "name": "write_string_on_image",
-                    "description": "Writes a string `value` to the location (x, y) on the form.",
-                    "strict": True,
-                    # "parallel_tool_calls": parallel_tool_calls,
-                    "parallel_tool_calls": False,
-                    "parameters": {
-                        "type": "object",
-                        "properties": {
-                            "result": {
-                                # "type": "array" if parallel_tool_calls else "object",
-                                "type": "object",
-                                # "items": {
-                                #     "type": "object",
-                                "properties": {
-                                    "action": {"type": "string"},
-                                    "x": {"type": "integer"},
-                                    "y": {"type": "integer"},
-                                    "value": {"type": "string"},
-                                },
-                                "required": ["x", "y", "action", "value"],
-                                "additionalProperties": False,
-                                # },
-                                # "additionalProperties": False,
-                            }
-                        },
-                        "required": ["result"],
-                        "additionalProperties": False,
-                    },
-                },
-            }
-        ],
+        # remove cuz other models will not have this advantage
+        # tools=[
+        #     {
+        #         "type": "function",
+        #         "function": {
+        #             "name": "write_string_on_image",
+        #             "description": "Writes a string `value` to the location (x, y) on the form.",
+        #             "strict": True,
+        #             # "parallel_tool_calls": parallel_tool_calls,
+        #             "parallel_tool_calls": False,
+        #             "parameters": {
+        #                 "type": "object",
+        #                 "properties": {
+        #                     "result": {
+        #                         # "type": "array" if parallel_tool_calls else "object",
+        #                         "type": "object",
+        #                         # "items": {
+        #                         #     "type": "object",
+        #                         "properties": {
+        #                             "action": {"type": "string"},
+        #                             "x": {"type": "integer"},
+        #                             "y": {"type": "integer"},
+        #                             "value": {"type": "string"},
+        #                         },
+        #                         "required": ["x", "y", "action", "value"],
+        #                         "additionalProperties": False,
+        #                         # },
+        #                         # "additionalProperties": False,
+        #                     }
+        #                 },
+        #                 "required": ["result"],
+        #                 "additionalProperties": False,
+        #             },
+        #         },
+        #     }
+        # ],
         # function_call={"name": "write_string_on_image"},
     )
     return completion

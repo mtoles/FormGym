@@ -110,8 +110,14 @@ class BaseCheckboxField(BaseField):
 
 class SignOrInitial(BaseField):
     def is_correct(self, agent_generations_inside, profile_info: bool):
-        concatted_input = concat_agent_generations(agent_generations_inside)
-        return profile_info == concatted_input
+        if len(agent_generations_inside) != 1:
+            return False
+        agent_gen = agent_generations_inside[0]
+        if agent_gen["action"] != "Sign":
+            return False
+        signature_val = agent_gen["value"]
+
+        return profile_info == signature_val
 
 
 class Signature(SignOrInitial):
