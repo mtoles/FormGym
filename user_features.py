@@ -2,14 +2,56 @@ from enum import Enum
 
 ### ENUMS ###
 
+
 class ResidenceStatusEnum(Enum):
     Buying = "Buying"
     Renting = "Renting"
     LivingWithRelatives = "Living with relatives"
     Other = "Other"
+    Own = "Own"
 
 
-### USER ATTRIBUTES ###
+class LoanTypeEnum(Enum):
+    Vehicle = "Vehicle"
+    Personal = "Personal"
+    Credit = "Credit"
+
+
+class VehicleLoanConditionEnum(Enum):
+    New = "New"
+    Used = "Used"
+    Refinance = "Refinance"
+
+
+class VehicleLoanTypeEnum(Enum):
+    Auto = "Auto"
+    Boat = "Boat"
+    Motorcycle = "Motorcycle"
+    RV = "RV"
+    TruckOrSUV = "Truck or SUV"
+    Watercraft = "Watercraft"
+
+
+class MarriageStatusEnum(Enum):
+    Married = "Married"
+    Single = "Single"
+    Separated = "Separated"
+
+
+class EnterpriseTypeEnum(Enum):
+    Corporation = "Corporation"
+    Partnership = "Partnership"
+    Proprietorship = "Proprietorship"
+    NoEnterprise = "No Enterprise Type"
+    LLC = "LLC"
+
+class GrossIncomePeriodEnum(Enum):
+    Monthly = "Monthly"
+    Yearly = "Yearly"
+
+
+## USER ATTRIBUTES ###
+
 
 class UserAttributeMeta(type):
     registry = {}
@@ -33,7 +75,7 @@ class UserProfile:
                 setattr(self.features, name, attr_class.options[idx])
             else:
                 raise AttributeError(f"Class {name} must have an 'options' list.")
-            
+
     def get_nl_profile(self):
         nl_profile = []
         for name, attr_class in UserAttributeMeta.registry.items():
@@ -207,12 +249,25 @@ class ResidenceStatus(BaseUserAttr):
         ResidenceStatusEnum.Buying.value,
         ResidenceStatusEnum.Renting.value,
         ResidenceStatusEnum.LivingWithRelatives.value,
-        ResidenceStatusEnum.Other.value,
+        ResidenceStatusEnum.Own.value,
     ]
 
     @staticmethod
     def nl_desc(option):
         return f"The user's residence status ({", ".join([e.value for e in ResidenceStatusEnum])}) is: {option}"
+
+
+class JointResidenceStatus(BaseUserAttr):
+    options = [
+        ResidenceStatusEnum.Renting.value,
+        ResidenceStatusEnum.Other.value,
+        ResidenceStatusEnum.Own.value,
+        ResidenceStatusEnum.LivingWithRelatives.value,
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's residence status ({", ".join([e.value for e in ResidenceStatusEnum])}) is: {option}"
 
 
 class MortgageCompany(BaseUserAttr):
@@ -332,6 +387,14 @@ class ReferenceRelationship(BaseUserAttr):
         return f"The user's reference's relationship is: {option}"
 
 
+class Reference2Relationship(BaseUserAttr):
+    options = ["Sister", "Uncle", "Friend", "Cousin"][::-1]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's reference's relationship is: {option}"
+
+
 class ReferenceHouseNumber(BaseUserAttr):
     options = ["4502", "128", "67", "999"]
 
@@ -380,6 +443,14 @@ class ReferencePhone(BaseUserAttr):
         return f"The user's reference's phone number is: {option}"
 
 
+class JointReferencePhone(BaseUserAttr):
+    options = ["310-555-0202", "415-555-2021", "202-555-3301", "646-555-4041"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's reference's phone number is: {option}"
+
+
 class Employment(BaseUserAttr):
     options = ["Data Scientist", "HR Manager", "Graphic Designer", "Account Executive"]
 
@@ -399,14 +470,6 @@ class EmployeNamer(BaseUserAttr):
     @staticmethod
     def nl_desc(option):
         return f"The employer name is: {option}"
-
-
-class EmployerCity(BaseUserAttr):
-    options = ["Newton", "Parkside", "Glendale", "Brookline"]
-
-    @staticmethod
-    def nl_desc(option):
-        return f"The user's employer is in: {option}"
 
 
 class LengthEmployed(BaseUserAttr):
@@ -703,19 +766,6 @@ class JointSocialSecurityNumber(BaseUserAttr):
     @staticmethod
     def nl_desc(option):
         return f"The joint filer's social security number is: {option}"
-
-
-class JointResidenceStatus(BaseUserAttr):
-    options = [
-        ResidenceStatusEnum.Buying.value,
-        ResidenceStatusEnum.Renting.value,
-        ResidenceStatusEnum.LivingWithRelatives.value,
-        ResidenceStatusEnum.Other.value,
-    ]
-
-    @staticmethod
-    def nl_desc(option):
-        return f"The joint filer's residence status ({", ".join([e.value for e in ResidenceStatusEnum])}) is: {option}"
 
 
 class TimeAtAddressYears(BaseUserAttr):
@@ -1308,3 +1358,390 @@ class TodaysDate(BaseUserAttr):
     @staticmethod
     def nl_desc(option):
         return f"Today's date is (MM/DD/YYYY): {option}"
+
+
+class LoanType(BaseUserAttr):
+    options = [o.value for o in list(LoanTypeEnum) * 4]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's loan type is: {option}"
+
+
+class VehicleLoanCondition(BaseUserAttr):
+    options = [o.value for o in VehicleLoanConditionEnum]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The condition of the user's trade-in vehicle is: {option}"
+
+
+class VehicleLoanType(BaseUserAttr):
+    options = [o.value for o in VehicleLoanTypeEnum]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user is applying for a loan to buy a: {option}"
+
+
+class PersonalAmountRequested(BaseUserAttr):
+    options = ["None", "None", "None", "None"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The amount the user is requesting for a personal loan is: {option}"
+
+
+class CreditAmountRequested(BaseUserAttr):
+    options = ["None", "None", "None", "None"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The amount the user is requesting for a line of credit is: {option}"
+
+
+class CreditLoanPurpose(BaseUserAttr):
+    options = ["None", "None", "None", "None"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The purpose the user is requesting for a line of credit is: {option}"
+
+
+class PersonalLoanPurpose(BaseUserAttr):
+    options = ["None", "None", "None", "None"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The purpose the user is requesting for a personal loan is: {option}"
+
+
+class AfcuAccountNo(BaseUserAttr):
+    options = ["72340865", "72340866", "72340867", "72340868"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's AFCU account number is: {option}"
+
+
+class JointAfcuAccountNo(BaseUserAttr):
+    options = ["69749832", "69749833", "69749834", "69749835"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's AFCU account number is: {option}"
+
+
+class EmployerHouseNumber(BaseUserAttr):
+    options = ["2551", "4821", "16", "156"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's employer's house number is: {option}"
+
+
+class JointEmployerHouseNumber(BaseUserAttr):
+    options = ["2273", "Po Box 573", "1005", "138"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's employer's house number is: {option}"
+
+
+class EmployerStreetName(BaseUserAttr):
+    options = ["Vista Dr", "Ridge Top Cir", "Rr 2", "Michael Ct"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's employer's street name is: {option}"
+
+
+class JointEmployerStreetName(BaseUserAttr):
+    options = ["Cox Rd", "Woodlands Cv", "Patterson Dr"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's employer's street name is: {option}"
+
+
+class EmployerCity(BaseUserAttr):
+    options = ["Juneau", "Anchorage", "Ketchikan", "Anchorage"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's employer's city is: {option}"
+
+
+class EmployerState(BaseUserAttr):
+    options = ["AK", "AK", "AK", "AK"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's employer's state is: {option}"
+
+
+class JointEmployerState(BaseUserAttr):
+    options = ["AL", "AL", "AL", "AL"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's employer's state is: {option}"
+
+
+class EmployerZip(BaseUserAttr):
+    options = ["99801", "99508", "99901", "99504"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's employer's zip is: {option}"
+
+
+class JointEmployerZip(BaseUserAttr):
+    options = ["36832", "35671", "35080", "36040"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's employer's zip is: {option}"
+
+
+class EmployerHireDate(BaseUserAttr):
+    options = ["01/01/2000", "01/01/2001", "01/01/2002", "01/01/2003"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's hire date at their current employer is: {option}"
+
+
+class JointEmployerHireDate(BaseUserAttr):
+    options = ["02/02/2000", "02/02/2001", "02/02/2002", "02/02/2003"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's hire date at their current employer is: {option}"
+
+
+class EmployerLengthMonths(BaseUserAttr):
+    options = [
+        # must match `EmployerHireDate`
+        str(25 * 12),
+        str(24 * 12),
+        str(23 * 12),
+        str(22 * 12),
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user has been working for their current employer for (months): {option}"
+
+
+class JointEmployerLengthMonths(BaseUserAttr):
+    options = [
+        # must match `JointEmployerHireDate`
+        str(25 * 12 - 1),
+        str(24 * 12 - 1),
+        str(23 * 12 - 1),
+        str(22 * 12 - 1),
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer has been working for their current employer for (months): {option}"
+
+
+class DriversLicenseNo(BaseUserAttr):
+    options = ["4789109349", "4789109348", "4789109347", "4789109346"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's driver license number is: {option}"
+
+
+class JointDriversLicenseNo(BaseUserAttr):
+    options = ["4789109345", "4789109344", "4789109343", "4789109342"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's driver license number is: {option}"
+
+
+class DriversLicenseExpirationDate(BaseUserAttr):
+    options = ["01/01/2030", "01/01/2031", "01/01/2032", "01/01/2033"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's driver license expiration date is: {option}"
+
+
+class JointDriversLicenseExpirationDate(BaseUserAttr):
+    options = ["02/02/2030", "02/02/2031", "02/02/2032", "02/02/2033"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's driver license expiration date is: {option}"
+
+
+class DriversLicenseState(BaseUserAttr):
+    options = ["AK", "AL", "AR", "AZ"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's driver license state is: {option}"
+
+
+class JointDriversLicenseState(BaseUserAttr):
+    options = ["CA", "CO", "CT", "DC"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's driver license state is: {option}"
+
+
+class MarriageStatus(BaseUserAttr):
+    options = [o.value for o in MarriageStatusEnum]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's marriage status is: {option}"
+
+
+class JointMarriageStatus(BaseUserAttr):
+    options = [o.value for o in MarriageStatusEnum][::-1]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's marriage status is: {option}"
+
+
+class NumDependents(BaseUserAttr):
+    options = ["0", "1", "2", "3"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's dependents number: {option}"
+
+
+class JointNumDependents(BaseUserAttr):
+    options = ["4", "5", "6", "7"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's dependents number: {option}"
+
+
+class Suffix(BaseUserAttr):
+    options = [
+        "Jr.",
+        "Sr.",
+        "",
+        "",
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        if option == "":
+            option = "no suffix"
+        return f"The user's suffix is: {option}"
+
+
+class JointSuffix(BaseUserAttr):
+    options = [
+        "",
+        "",
+        "Sr.",
+        "Jr.",
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        if option == "":
+            option = "no suffix"
+        return f"The joint filer's suffix is: {option}"
+
+
+class EnterpriseType(BaseUserAttr):
+    options = ["N/A"] * 4
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's enterprise type (for the purpose of auto loan applications) is: {option}"
+    
+class BusinessType(BaseUserAttr):
+    options = [
+        "Not a business",
+    ] * 4
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's business type (for the purpose of auto loan applications) is: {option}"
+
+
+class TimeInBusinessYears(BaseUserAttr):
+    options = ["N/A"] * 4
+
+    @staticmethod
+    def nl_desc(option):
+        if option == "":
+            option = "N/A"
+        return f"The user's time in business (for the purpose of auto loan applications) is: {option}"
+
+
+class TimeInBusinessMonths(BaseUserAttr):
+    options = ["N/A"] * 4
+
+    @staticmethod
+    def nl_desc(option):
+        if option == "":
+            option = "N/A"
+        return f"The user's time in business (for the purpose of auto loan applications) is: {option}"
+
+
+class JointEnterpriseType(BaseUserAttr):
+    options = ["N/A"] * 4
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's enterprise type (for the purpose of auto loan applications) is: {option}"
+
+
+class JointBusinessType(BaseUserAttr):
+    options = [
+        "Not a business",
+    ] * 4
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's business type (for the purpose of auto loan applications) is: {option}"
+
+
+class JointTimeInBusinessYears(BaseUserAttr):
+    options = ["N/A"] * 4
+
+    @staticmethod
+    def nl_desc(option):
+        if option == "":
+            option = "N/A"
+        return f"The joint filer's time in business (for the purpose of auto loan applications) is: {option}"
+
+
+class JointTimeInBusinessMonths(BaseUserAttr):
+    options = ["N/A"] * 4
+
+    @staticmethod
+    def nl_desc(option):
+        if option == "":
+            option = "N/A"
+        return f"The joint filer's time in business (for the purpose of auto loan applications) is: {option}"
+
+class GrossIncomePeriod(BaseUserAttr):
+    options = [GrossIncomePeriodEnum.Monthly.value, GrossIncomePeriodEnum.Yearly.value] * 4
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's gross income period is: {option}"
+    
+class JointGrossIncomePeriod(BaseUserAttr):
+    options = [GrossIncomePeriodEnum.Yearly.value, GrossIncomePeriodEnum.Monthly.value] * 4
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's gross income period is: {option}"

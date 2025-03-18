@@ -193,8 +193,15 @@ class CheaterModel:
         Give the model the ground truth annotated doc so it can cheat, for data validation
         """
         preds = []
+        missing_attributes = []
         for field in self.doc_state.fields:
-            cheat_input = field["field"].get_profile_info(self.user_profile)
+            try:
+                cheat_input = field["field"].get_profile_info(self.user_profile)
+            except AttributeError as e:
+                print(e)
+                missing_attributes.append(field["field_name"])
+                cheat_input = "MISSING ATTRIBUTE"
+
             if cheat_input == True:
                 cheat_input = "x"
             elif cheat_input == False:
@@ -212,6 +219,10 @@ class CheaterModel:
                     "value": cheat_input,
                 }
             )
+
+        if missing_attributes:
+            print(f"Missing attributes:\n{"\n".join(missing_attributes)}")
+            raise ValueError("Missing attributes")
         return preds
 
 

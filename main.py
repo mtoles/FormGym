@@ -19,6 +19,8 @@ args = parser.parse_args()
 
 assert args.flow in [e.value for e in FlowEnum]
 
+
+
 user_profile = user_features.UserProfile(0)
 nl_profile = "\n".join(user_profile.get_nl_profile())
 
@@ -41,7 +43,7 @@ while True:
 
     agent_generations = model.forward(
         nl_profile=nl_profile,
-        doc_image_path="pngs/al_1_0.png",
+        doc_image_path="pngs/al_3_0.png",
         available_actions=["PlaceText"],
         flow=args.flow,
     )
