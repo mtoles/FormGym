@@ -266,11 +266,11 @@ class GptModelE2E:
             json.loads(tc.function.arguments)
             for tc in response.choices[0].message.tool_calls
         ]  # [0]["result"]
-        if flow == FlowEnum.full.value:
+        if flow == FlowEnum.iterative.value:
             tool_params = tool_params[0]
         print(tool_params)
-        raise NotImplementedError
-        # tool_params = tool_params["result"]
+        # raise NotImplementedError
+        tool_params = [tp["result"] for tp in tool_params]
         return tool_params
 
 
