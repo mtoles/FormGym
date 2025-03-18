@@ -12,15 +12,10 @@ class DocState:
         # sort fields by y coordinate
         self.fields.sort(key=lambda x: x["bbox"]["y"])
         return self.fields[-k:]
-    
+
     def pop_last_k_fields(self, k):
         """Edits the doc state IN PLACE and pops/returns the last k fields (sorted by y coordinate, ascending)"""
         self.fields.sort(key=lambda x: x["bbox"]["y"])
-        popped = self.fields[-k:]
-        self.fields = self.fields[:k]
+        popped = self.marks[-k:]
+        self.marks = self.marks[:-k]
         return popped
-    
-
-
-
-

@@ -8,6 +8,8 @@ from joblib import Memory
 import io
 from typing import List, Dict, Union
 from utils import *
+import re
+from pydantic import ValidationError
 
 memory = Memory(".joblib_cache", verbose=0)
 
@@ -99,8 +101,8 @@ def get_image_of_state(doc_state, blank_img: Image.Image) -> Image.Image:
         # Draw the text in blue.
         text_draw.text((x, y), text, fill="blue", font=font, anchor="mm")
     # save the image
-    # blank_img.save("get_image_of_state.png")
-    return blank_img # drawn on
+    blank_img.save("get_image_of_state.png")
+    return blank_img  # drawn on
 
 
 def add_grid_overlay(img):
@@ -157,6 +159,25 @@ def add_grid_overlay(img):
                 draw.text((x + 10, y + 10), text, fill="green")
 
     return img
+
+
+def parse_and_reconstruct_fields(response_text):
+    pattern = r"(\{[^}]*\})"
+    matches = re.findall(pattern, response_text)
+
+    passed_actions = []
+    failed_actions = []
+    for match in matches:
+        try:
+            match_dict = json.loads(match)
+            action_name = match_dict["action"]
+            action = ActionMeta.registry[action_name]
+            action.Schema(**match_dict)
+            passed_actions.append(match_dict)
+        except ValidationError as e:
+            print(f"Validation error for {match}: {e}")
+            failed_actions.append(match)
+    return passed_actions
 
 
 class CheaterModel:
@@ -224,12 +245,20 @@ class GptModelE2E:
 
         # Call the OpenAI ChatCompletion API with both text and image.
         # Note: This assumes the model supports multimodal input where an "image" key can be added.
-        response = forward_gpt(
-            self.model_name,
-            prompt,
-            image_b64,
+        response = (
+            forward_gpt(
+                self.model_name,
+                prompt,
+                image_b64,
+            )
+            .choices[0]
+            .message.content
         )
-        return json.loads(response.choices[0].message.content)
+
+        tool_params = parse_and_reconstruct_fields(response)
+        if flow == FlowEnum.iterative.value:
+            tool_params = tool_params[:1]
+        return tool_params
 
 
 @memory.cache

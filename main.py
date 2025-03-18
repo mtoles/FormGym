@@ -75,7 +75,8 @@ for i, fid in enumerate(args.file_ids):
         # change change all mark creators to "prefilled"
         for mark in doc_state.marks:
             mark["creator"] = actions.CreatorEnum.prefilled.value
-        popped_fields = doc_state.pop_last_k_fields(
+        print(f"before: {len(doc_state.marks)}")
+        popped_fields = new_doc_state.pop_last_k_fields(
             k=args.k_missing_fields
         )  # edits in place
         doc_state = new_doc_state
@@ -96,13 +97,13 @@ for i, fid in enumerate(args.file_ids):
             blank_img=blank_img,
         )
 
-        agent_generation_str = model.forward(
+        agent_generations = model.forward(
             nl_profile=nl_profile,
             doc_image=current_state_img,  # Use current PNG file
             available_actions=["PlaceText"],
             flow=flow,
         )
-        agent_generations = 
+        # agent_generations = 
         if flow == FlowEnum.iterative.value:
             agent_generations = agent_generations[:1]
 
