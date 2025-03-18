@@ -6,63 +6,35 @@ from PIL import Image, ImageDraw, ImageFont
 import json
 from joblib import Memory
 import io
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Union
 from utils import *
-import re
-from pydantic import BaseModel, ValidationError
 
 memory = Memory(".joblib_cache", verbose=0)
 
-
-def construct_prompt(
-    nl_profile: str, available_actions: List[str], draw_grid: bool, flow: str
-) -> str:
-    if flow == FlowEnum.iterative.value:
-        flow_instruction = "Generate a single action that will help you fill out the first empty field in the form. If the form is already complete, use an action to mark it as complete. Do not call more than one action at a time."
-        additional_instructions = ""
-    elif flow == FlowEnum.full.value:
-        flow_instruction = "Generate a sequence of actions that will fill out the entire form. Call multiple actions at a time if necessary."
-        additional_instructions = "Complete the form to the best of your abilities, leaving signatures blank.\nIf you do not know value for a field, fill it with [UNK]."
-    else:
-        raise NotImplementedError
-
-    """
-    Constructs the prompt string with the necessary details.
-    """
-    api_documentation = ActionMeta.all_documentation(available_actions)
-    grid_subprompt = (
-        """
-    To assist you, the image has been overlaid with a 10x10 grid of red lines at intervals of 0.1 * the image width and height. 
-    This grid can be used to determine relative positions of text. Each intersection is labeled with the grid coordinates in green. 
-    Use these coordinates to help you fill out the form by interpolating between them.
-    """
-        if draw_grid
-        else ""
-    )
-
-    output = f"""Complete the attached form based on the following user profile:
-    
-{nl_profile}
+e2e_prompt_template = """Complete the attached form based on the following user profile:
+        
+{user_profile}
 
 You have access to the following APIs:
 
 {api_documentation}
 
-{flow_instruction}
+Generate a sequence of actions that will fill out the form. 
 
-{additional_instructions}
-To fill a checkbox, place an "x" inside it.
+Complete the form to the best of your abilites, leaving signatures blank. 
+If you do not know value for a field, fill it with "[UNK]".
+Fill checkboxes with a single "x".
 Format all dates as "MM/DD/YYYY", including leading zeros.
 
 {grid_subprompt}
 
-Return a form-filling API call as a JSON list of dictionaries. 
+Return a form-filling API call as a JSON list of dictionaries.
 """
 
-    return output
+grid_subprompt = "To assist you, the image has been overlaid with a 10x10 grid of red lines at intervals of 0.1 * the image width and height. This grid can be used to determine relative positions of text. Each intersection is labeled with the grid coordinates in green. Use these coordinates to help you fill out the form by interpolating between them."
 
 
-def visualize_preds(preds, fields, doc_image_path):
+def visualize_preds(doc_state, fields, img):
     # Open the image and prepare drawing context.
     """
     Visualizes prediction results on a document image by drawing text at specified coordinates.
@@ -71,44 +43,22 @@ def visualize_preds(preds, fields, doc_image_path):
     preds (list): List of dictionaries containing predicted coordinates and value.
                   Expected keys are "x", "y", and "value", where "x" and "y" are
                   relative positions (0 to 1) and "value" is the text to be displayed.
-    doc_image_path (str): File path to the document image on which predictions are to be visualized.
 
     The function opens the specified image, calculates the absolute position for the
     text using the relative coordinates from `preds`, and draws the text centered at
     this position in blue color. The result is saved as 'output.png' in the current directory.
     """
 
-    img = Image.open(doc_image_path).convert("RGBA")
+    img = img.convert("RGBA")
     overlay = Image.new("RGBA", img.size, (255, 255, 255, 0))
 
     correctness_draw = ImageDraw.Draw(overlay)
-    text_draw = ImageDraw.Draw(img)
     width, height = img.size
 
     # Calculate absolute coordinates.
-    for pred in preds:
-        x = pred["x"] * width
-        y = pred["y"] * height
 
-        # Load Times New Roman font, size 10.
-        try:
-            font = ImageFont.truetype("/usr/share/fonts/truetype/DejaVuSerif.ttf", 20)
-            pass
-        except IOError:
-            font = ImageFont.load_default()
+    img = get_image_of_state(doc_state=doc_state, blank_img=img)
 
-        field_name = pred["field_name"] if "field_name" in pred else ""
-        text = str(pred["value"])
-        # text = ":\n".join([field_name, str(pred["value"])])
-        # text = "x"
-
-        # text_l, text_t, text_, text_h = font.getbbox(text)
-        # Compute position so that the text is centered at (x, y)
-        # text_x = x + text_w / 2
-        # text_y = y + text_h / 2
-
-        # Draw the text in blue.
-        text_draw.text((x, y), text, fill="blue", font=font, anchor="mm")
     # Draw correct text boxes in green and incorrect text boxes in red
 
     for field in fields:
@@ -125,6 +75,32 @@ def visualize_preds(preds, fields, doc_image_path):
     result = Image.alpha_composite(img, overlay)
 
     result.save("output.png")
+
+
+def get_image_of_state(doc_state, blank_img: Image.Image) -> Image.Image:
+    text_draw = ImageDraw.Draw(blank_img)
+    preds = doc_state.marks
+    width, height = blank_img.size
+
+    for pred in preds:
+        x = pred["x"] * width
+        y = pred["y"] * height
+
+        # Load Times New Roman font, size 10.
+        try:
+            font = ImageFont.truetype("/usr/share/fonts/truetype/DejaVuSerif.ttf", 20)
+            pass
+        except IOError:
+            font = ImageFont.load_default()
+
+        field_name = pred["field_name"] if "field_name" in pred else ""
+        text = str(pred["value"])
+
+        # Draw the text in blue.
+        text_draw.text((x, y), text, fill="blue", font=font, anchor="mm")
+    # save the image
+    # blank_img.save("get_image_of_state.png")
+    return blank_img # drawn on
 
 
 def add_grid_overlay(img):
@@ -182,84 +158,6 @@ def add_grid_overlay(img):
 
     return img
 
-def parse_and_reconstruct_fields_old(response_text):
-    # Two regex patterns to match both escaped and non-escaped variants
-    # Pattern 1: For escaped format with backslashes (field\_name)
-    pattern_escaped = r'\{\s*"field\\_name":\s*"([^"]+)",\s*"bounding\\_box":\s*\{\s*"x":\s*([0-9.]+),\s*"y":\s*([0-9.]+),\s*"width":\s*([0-9.]+),\s*"height":\s*([0-9.]+)\s*\}\s*\}'
-
-    # Pattern 2: For standard format without escapes (field_name)
-    pattern_standard = r'\{\s*"field_name":\s*"([^"]+)",\s*"bounding_box":\s*\{\s*"x":\s*([0-9.]+),\s*"y":\s*([0-9.]+),\s*"width":\s*([0-9.]+),\s*"height":\s*([0-9.]+)\s*\}\s*\}'
-
-    # Find all matches for both patterns
-    matches_escaped = re.finditer(pattern_escaped, response_text)
-    matches_standard = re.finditer(pattern_standard, response_text)
-
-    # Combine the matches
-    form_fields = []
-
-    # Process escaped matches
-    for match in matches_escaped:
-        field_name = match.group(1)
-        x = float(match.group(2))
-        y = float(match.group(3))
-        width = float(match.group(4))
-        height = float(match.group(5))
-
-        field_entry = {
-            "field_name": field_name,
-            "bounding_box": {
-                "x": x,
-                "y": y,
-                "width": width,
-                "height": height
-            }
-        }
-        form_fields.append(field_entry)
-
-    # Process standard matches
-    for match in matches_standard:
-        field_name = match.group(1)
-        x = float(match.group(2))
-        y = float(match.group(3))
-        width = float(match.group(4))
-        height = float(match.group(5))
-
-        field_entry = {
-            "field_name": field_name,
-            "bounding_box": {
-                "x": x,
-                "y": y,
-                "width": width,
-                "height": height
-            }
-        }
-        form_fields.append(field_entry)
-
-    # Create the final structure
-    result = {
-        "form_fields": form_fields
-    }
-
-    return result
-
-def parse_and_reconstruct_fields(response_text):
-    pattern = r"(\{[^}]*\})"
-    matches = re.findall(pattern, response_text)
-
-    passed_actions = []
-    failed_actions = []
-    for match in matches:
-        try:
-            match_dict = json.loads(match)
-            action_name = match_dict["action"]
-            action = ActionMeta.registry[action_name]
-            action.Schema(**match_dict)
-            passed_actions.append(match_dict)
-        except ValidationError as e:
-            print(f"Validation error for {match}: {e}")
-            failed_actions.append(match)
-    return passed_actions
-    
 
 class CheaterModel:
     def __init__(self, doc_state, user_profile):
@@ -267,21 +165,17 @@ class CheaterModel:
         self.user_profile = user_profile
 
     def forward(
-        self, nl_profile, doc_image_path, available_actions: List[str], flow: str
+        self,
+        nl_profile: str,
+        doc_image: Image.Image,
+        available_actions: List[str],
     ) -> List[Dict]:
         """
         Give the model the ground truth annotated doc so it can cheat, for data validation
         """
         preds = []
-        missing_attributes = []
         for field in self.doc_state.fields:
-            try:
-                cheat_input = field["field"].get_profile_info(self.user_profile)
-            except AttributeError as e:
-                print(e)
-                missing_attributes.append(field["field_name"])
-                cheat_input = "MISSING ATTRIBUTE"
-
+            cheat_input = field["field"].get_profile_info(self.user_profile)
             if cheat_input == True:
                 cheat_input = "x"
             elif cheat_input == False:
@@ -299,10 +193,6 @@ class CheaterModel:
                     "value": cheat_input,
                 }
             )
-
-        if missing_attributes:
-            print(f"Missing attributes:\n{"\n".join(missing_attributes)}")
-            raise ValueError("Missing attributes")
         return preds
 
 
@@ -314,61 +204,48 @@ class GptModelE2E:
     def forward(
         self,
         nl_profile: str,
-        doc_image_path: str,
+        doc_image: Image.Image,
         available_actions: List[str],
         flow: str,
     ) -> List[Dict]:
-        # Construct the prompt using the dedicated function
-        prompt = construct_prompt(
-            nl_profile=nl_profile,
-            available_actions=available_actions,
-            draw_grid=self.draw_grid,
-            flow=flow,
+        # Fill in the prompt with the user profile.
+        prompt = e2e_prompt_template.format(
+            user_profile=nl_profile,
+            api_documentation=ActionMeta.all_documentation(available_actions),
+            grid_subprompt=grid_subprompt if self.draw_grid else "",
         )
 
-        # Read the image file in binary mode
-        img = Image.open(doc_image_path)
-        if self.draw_grid:
-            img = add_grid_overlay(img)
-
         buffer = io.BytesIO()
-        img.save(buffer, format="PNG")
-        base64_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
+        doc_image.save(buffer, format="PNG")
+        image_b64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
 
-        # Call the OpenAI ChatCompletion API with both text and image
+        if self.draw_grid:
+            doc_image = add_grid_overlay(doc_image)
+
+        # Call the OpenAI ChatCompletion API with both text and image.
+        # Note: This assumes the model supports multimodal input where an "image" key can be added.
         response = forward_gpt(
-            model_name=self.model_name,
-            prompt=prompt,
-            base64_image=base64_image,
-            flow=flow,
-        ).choices[0].message.content
-        tool_params = parse_and_reconstruct_fields(response)
-        # tool_params = [
-        #     json.loads(tc.function.arguments)
-        #     for tc in response.choices[0].message.content
-        # ]  # [0]["result"]
-        if flow == FlowEnum.iterative.value:
-            tool_params = tool_params[0]
-        print(tool_params)
-        # raise NotImplementedError
-        return tool_params
-
-
-# [json.loads(tc.function.arguments) for tc in response.choices[0].message.tool_calls for x in tc]
+            self.model_name,
+            prompt,
+            image_b64,
+        )
+        return json.loads(response.choices[0].message.function_call.arguments)["result"]
 
 
 @memory.cache
-def forward_gpt(model_name, prompt, base64_image, flow: str):
+def forward_gpt(model_name, prompt, base64_image):
     print("calling gpt uncached...")
     client = OpenAI()
-    single_call = flow == FlowEnum.full.value
     completion = client.chat.completions.create(
         model=model_name,
         messages=[
             {
                 "role": "user",
                 "content": [
-                    {"type": "text", "text": prompt},
+                    {
+                        "type": "text",
+                        "text": prompt,
+                    },
                     {
                         "type": "image_url",
                         "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"},
@@ -376,42 +253,32 @@ def forward_gpt(model_name, prompt, base64_image, flow: str):
                 ],
             }
         ],
-        # remove cuz other models will not have this advantage
-        # tools=[
-        #     {
-        #         "type": "function",
-        #         "function": {
-        #             "name": "write_string_on_image",
-        #             "description": "Writes a string `value` to the location (x, y) on the form.",
-        #             "strict": True,
-        #             # "parallel_tool_calls": parallel_tool_calls,
-        #             "parallel_tool_calls": False,
-        #             "parameters": {
-        #                 "type": "object",
-        #                 "properties": {
-        #                     "result": {
-        #                         # "type": "array" if parallel_tool_calls else "object",
-        #                         "type": "object",
-        #                         # "items": {
-        #                         #     "type": "object",
-        #                         "properties": {
-        #                             "action": {"type": "string"},
-        #                             "x": {"type": "integer"},
-        #                             "y": {"type": "integer"},
-        #                             "value": {"type": "string"},
-        #                         },
-        #                         "required": ["x", "y", "action", "value"],
-        #                         "additionalProperties": False,
-        #                         # },
-        #                         # "additionalProperties": False,
-        #                     }
-        #                 },
-        #                 "required": ["result"],
-        #                 "additionalProperties": False,
-        #             },
-        #         },
-        #     }
-        # ],
-        # function_call={"name": "write_string_on_image"},
+        functions=[
+            {
+                "name": "extract_image_info",
+                "description": "Writes a string `value` to the location (x, y) on the form.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "result": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "action": {"type": "string"},
+                                    "x": {"type": "integer"},
+                                    "y": {"type": "integer"},
+                                    "value": {"type": "string"},
+                                },
+                                "required": ["x", "y", "value"],
+                            },
+                        }
+                    },
+                    "required": ["result"],
+                },
+            }
+        ],
+        function_call={"name": "extract_image_info"},
     )
+
     return completion

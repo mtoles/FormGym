@@ -5,6 +5,11 @@ import json
 from typing import List, Dict, Literal
 from copy import deepcopy
 from pydantic import BaseModel
+from enum import Enum
+
+class CreatorEnum(Enum):
+    agent = "agent"
+    prefilled = "prefilled"
 
 class ActionMeta(type):
     registry = {}
@@ -43,10 +48,6 @@ class BaseAction(metaclass=ActionMeta):
 ### Actions for image pdfs
 
 class PlaceText(BaseAction):
-    """
-    
-    """
-
     documentation = """
     Place a text on a document, image, or pdf. The center of the text will be placed at (x, y), where (0, 0) is the top left corner and (1, 1) is the bottom right of the image. `Value` is the text to place.
 
@@ -60,7 +61,7 @@ class PlaceText(BaseAction):
     """
 
     def act(doc_state, x: float, y: float, value: str, **kwargs):
-        doc_state.marks.append({"action": "PlaceText", "x": x, "y": y, "value": value})
+        doc_state.marks.append({"action": "PlaceText", "x": x, "y": y, "value": value, "creator": "agent"})
         return doc_state
     
 
@@ -86,7 +87,7 @@ class SignOrInitial(BaseAction):
     """
 
     def act(doc_state, x: float, y: float, value: str, **kwargs):
-        doc_state.marks.append({"action": "Sign", "x": x, "y": y, "value": value})
+        doc_state.marks.append({"action": "Sign", "x": x, "y": y, "value": value, "creator": "agent"})
         return doc_state
     
     class Schema(BaseModel):
@@ -94,6 +95,23 @@ class SignOrInitial(BaseAction):
         x: float
         y: float
         value: str
+
+
+class Terminate(BaseAction):
+    documentation = """
+    Terminate the document generation process.
+    Args:
+        None
+    
+    Example input:
+        {"action": "Terminate"}
+    """
+
+    class Schema(BaseModel):
+        action: Literal["Terminate"]
+
+    def act(doc_state, **kwargs):
+        return doc_state
 
 ### Actions for editable pdfs and websites
 
