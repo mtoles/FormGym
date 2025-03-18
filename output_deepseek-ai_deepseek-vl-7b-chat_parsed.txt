@@ -62,6 +62,60 @@
         "width": 1.0,
         "height": 1.0
       }
+    },
+    {
+      "field_name": "City",
+      "bounding_box": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "field_name": "State",
+      "bounding_box": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "field_name": "Zip Code",
+      "bounding_box": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "field_name": "Country",
+      "bounding_box": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "field_name": "Phone",
+      "bounding_box": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "field_name": "Terms and Conditions",
+      "bounding_box": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      }
     }
   ]
 }

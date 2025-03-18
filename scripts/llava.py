@@ -1,7 +1,8 @@
 from PIL import Image
 import torch
 from transformers import AutoProcessor, LlavaForConditionalGeneration
-from prompt import get_prompt, parse_json_from_response
+from prompt import get_prompt, parse_json_from_response, parse_and_reconstruct_fields
+import json
 
 # model_id = "llava-hf/llava-1.5-7b-hf"
 model_id = "llava-hf/llava-1.5-13b-hf"
@@ -36,10 +37,14 @@ inputs = processor(images=raw_image, text=prompt, return_tensors='pt').to(0, tor
 output = model.generate(**inputs, max_new_tokens=2000, do_sample=False)
 raw_response = processor.decode(output[0][2:], skip_special_tokens=True)
 
-parsed_response = parse_json_from_response(raw_response, "ASSISTANT: ")
+# parsed_response = parse_json_from_response(raw_response, "ASSISTANT: ")
+parsed_response = parse_and_reconstruct_fields(raw_response)
+parsed_output = json.dumps(parsed_response, indent=2)
+
+print(parsed_output)
 
 with open("output_llava.txt", "w") as f:
     f.write(raw_response)
 
 with open("output_llava_parsed.txt", "w") as f:
-    f.write(parsed_response)
+    f.write(parsed_output)

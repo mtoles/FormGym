@@ -1,21 +1,20 @@
 from PIL import Image
 import torch
 from transformers import AutoProcessor, LlavaForConditionalGeneration
-from prompt import get_prompt, parse_json_from_response, encode_image
+from prompt import get_prompt, parse_json_from_response, encode_image, parse_and_reconstruct_fields
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 from transformers import Qwen2VLForConditionalGeneration, AutoTokenizer, AutoProcessor
+import json
 
 model = Qwen2VLForConditionalGeneration.from_pretrained(
     "Qwen/Qwen2-VL-7B-Instruct", 
     device_map="auto", 
     load_in_8bit=True,       
-    trust_remote_code=True
 )
 
 processor = AutoProcessor.from_pretrained(
     "Qwen/Qwen2-VL-7B-Instruct",
-    trust_remote_code=True
 )
 
 local_image_path = "./processed_pngs/grid_al_1_page_1.png"
@@ -51,5 +50,13 @@ generated_ids = [output_ids[len(input_ids):] for input_ids, output_ids in zip(in
 raw_response = processor.batch_decode(generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True)
 raw_response = raw_response[0]
 
+parsed_response = parse_and_reconstruct_fields(raw_response)
+parsed_output = json.dumps(parsed_response, indent=2)
+
+print(parsed_output)
+
 with open("output_qwen2vl.txt", "w") as f:
     f.write(raw_response)
+
+with open("output_qwen2vl_parsed.txt", "w") as f:
+    f.write(parsed_output)

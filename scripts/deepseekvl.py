@@ -3,7 +3,8 @@ from transformers import AutoModelForCausalLM
 
 from deepseek_vl.models import VLChatProcessor, MultiModalityCausalLM
 from deepseek_vl.utils.io import load_pil_images
-from prompt import get_prompt, parse_json_from_response
+from prompt import get_prompt, parse_json_from_response, parse_and_reconstruct_fields
+import json
 
 # specify the path to the model
 model_path = "deepseek-ai/deepseek-vl-7b-chat"
@@ -61,7 +62,10 @@ model_raw_response = raw_response[1]
 with open("output_deepseekvl.txt", "w") as f:
     f.write(model_raw_response)
 
-parsed_response = parse_json_from_response(model_raw_response, '"form_fields": [')
+parsed_response = parse_and_reconstruct_fields(model_raw_response)
+parsed_output = json.dumps(parsed_response, indent=2)
+
+print(parsed_output)
 
 with open("output_deepseekvl_parsed.txt", "w") as f:
-    f.write(parsed_response)
+    f.write(parsed_output)
