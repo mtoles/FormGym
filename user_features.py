@@ -45,6 +45,7 @@ class EnterpriseTypeEnum(Enum):
     NoEnterprise = "No Enterprise Type"
     LLC = "LLC"
 
+
 class GrossIncomePeriodEnum(Enum):
     Monthly = "Monthly"
     Yearly = "Yearly"
@@ -237,7 +238,7 @@ class Zip(BaseUserAttr):
 
 
 class Country(BaseUserAttr):
-    options = ["US"]
+    options = ["US"] * 4
 
     @staticmethod
     def nl_desc(option):
@@ -1664,7 +1665,8 @@ class EnterpriseType(BaseUserAttr):
     @staticmethod
     def nl_desc(option):
         return f"The user's enterprise type (for the purpose of auto loan applications) is: {option}"
-    
+
+
 class BusinessType(BaseUserAttr):
     options = [
         "Not a business",
@@ -1732,15 +1734,23 @@ class JointTimeInBusinessMonths(BaseUserAttr):
             option = "N/A"
         return f"The joint filer's time in business (for the purpose of auto loan applications) is: {option}"
 
+
 class GrossIncomePeriod(BaseUserAttr):
-    options = [GrossIncomePeriodEnum.Monthly.value, GrossIncomePeriodEnum.Yearly.value] * 4
+    options = [
+        GrossIncomePeriodEnum.Monthly.value,
+        GrossIncomePeriodEnum.Yearly.value,
+    ] * 4
 
     @staticmethod
     def nl_desc(option):
         return f"The user's gross income period is: {option}"
-    
+
+
 class JointGrossIncomePeriod(BaseUserAttr):
-    options = [GrossIncomePeriodEnum.Yearly.value, GrossIncomePeriodEnum.Monthly.value] * 4
+    options = [
+        GrossIncomePeriodEnum.Yearly.value,
+        GrossIncomePeriodEnum.Monthly.value,
+    ] * 4
 
     @staticmethod
     def nl_desc(option):

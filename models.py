@@ -229,43 +229,42 @@ class GptModelE2E:
 
     def forward(
         self,
-        nl_profile: str,
-        doc_image: Image.Image,
+        nl_profile: List[str],
+        doc_image: List[Image.Image],
         available_actions: List[str],
-        flow: str,
+        flow: List[str],
     ) -> List[Dict]:
-        # Fill in the prompt with the user profile.
-        prompt = e2e_prompt_template.format(
-            user_profile=nl_profile,
-            api_documentation=ActionMeta.all_documentation(available_actions),
-            grid_subprompt=grid_subprompt if self.draw_grid else "",
-        )
-
-        buffer = io.BytesIO()
-        doc_image.save(buffer, format="PNG")
-        image_b64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
-
-        if self.draw_grid:
-            doc_image = add_grid_overlay(doc_image)
-
-        # Call the OpenAI ChatCompletion API with both text and image.
-        # Note: This assumes the model supports multimodal input where an "image" key can be added.
-        response = (
-            forward_gpt(
-                self.model_name,
-                prompt,
-                image_b64,
+        outputs = []
+        for profile, image, action, f in zip(nl_profile, doc_image, available_actions, flow):
+            prompt = e2e_prompt_template.format(
+                user_profile=profile,
+                api_documentation=ActionMeta.all_documentation([action]),
+                grid_subprompt=grid_subprompt if self.draw_grid else "",
             )
-            .choices[0]
-            .message.content
-        )
 
-        tool_params = parse_and_reconstruct_fields(response)
-        if flow == FlowEnum.iterative.value:
-            tool_params = tool_params[:1]
-        return tool_params
+            if self.draw_grid:
+                image = add_grid_overlay(image)
 
+            buffer = io.BytesIO()
+            image.save(buffer, format="PNG")
+            image_b64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
 
+            response = (
+                forward_gpt(
+                    self.model_name,
+                    prompt,
+                    image_b64,
+                )
+                .choices[0]
+                .message.content
+            )
+
+            tool_params = parse_and_reconstruct_fields(response)
+            if f == FlowEnum.iterative.value:
+                tool_params = tool_params[:1]
+            outputs.append(tool_params)
+        return outputs
+    
 @memory.cache
 def forward_gpt(model_name, prompt, base64_image):
     print("calling gpt uncached...")

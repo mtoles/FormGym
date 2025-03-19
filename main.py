@@ -18,7 +18,7 @@ parser.add_argument("--doc_format", type=str)
 parser.add_argument("--task", type=str)
 # New argument to take a list of PNG file paths
 parser.add_argument(
-    "--file_ids", type=str, nargs="+", help="List of file ids, e.g. `al_0_0`"
+    "--file_ids", type=str, nargs="+", help="List of file ids, e.g. al_0_0"
 )
 parser.add_argument("--k_missing_fields", type=int, default=1)
 args = parser.parse_args()
@@ -27,37 +27,25 @@ VALID_TASKS = [
     "AutoLoan-Full",
     "AutoLoan-Iterative",
 ]
-
 assert args.task in VALID_TASKS
 
-# To collect metrics for each file
-metrics_summary = []
-
-
-# Iterate over each provided PNG file
+# Prepare list to collect per-file data for batch processing
+all_files = []
 for i, fid in enumerate(args.file_ids):
-    ### User setup
     user_profile = user_features.UserProfile(i)
     nl_profile = "\n".join(user_profile.get_nl_profile())
-
-    ### Document setup
     png_path = f"pngs/{fid}.png"
     blank_img = Image.open(png_path)
-    annot_path = f"annotations/all-al/{fid}.json"
+    annot_path = f"annotations/{fid}.json"
     annots = annotations.read_annotations(annot_path)
-
-    # Reset document state for each image
-    doc_fields = annots
-    doc_state = DocState(doc_fields)
+    doc_state = DocState(annots)
     action_count = 0
 
-    ### Task setup
+    flow = None
     if args.task == "AutoLoan-Full":
         flow = FlowEnum.full.value
-        img_pdf_fill_task = ImagePdfFill()
     elif args.task == "AutoLoan-Iterative":
         flow = FlowEnum.iterative.value
-        img_pdf_fill_task = ImagePdfFill()
         cheater_model = models.CheaterModel(
             doc_state=doc_state, user_profile=user_profile
         )
@@ -65,85 +53,110 @@ for i, fid in enumerate(args.file_ids):
             nl_profile=nl_profile,
             doc_image=blank_img,
             available_actions=["PlaceText"],
-            # flow=FlowEnum.full.value,
         )
         doc_state = actions.update_doc_state(
             doc_state=doc_state, agent_generations=cheater_gens
         )
-
         new_doc_state = deepcopy(doc_state)
-        # change change all mark creators to "prefilled"
-
-        for i in range(len(new_doc_state.marks)):
-            new_doc_state.marks[i]["creator"] = actions.CreatorEnum.prefilled.value
-        print(f"before: {len(doc_state.marks)}")
-        popped_fields = new_doc_state.pop_last_k_fields(
-            k=args.k_missing_fields
-        )  # edits in place
+        for j in range(len(new_doc_state.marks)):
+            new_doc_state.marks[j]["creator"] = actions.CreatorEnum.prefilled.value
+        new_doc_state.pop_last_k_fields(k=args.k_missing_fields)
         doc_state = new_doc_state
 
-    assert flow in [e.value for e in FlowEnum]
-
-    ### Do the task
-    while True:
-        if args.model_name == "cheater":
-            model = models.CheaterModel(doc_state=doc_state, user_profile=user_profile)
-        elif args.model_name.lower().startswith("gpt"):
-            model = models.GptModelE2E(model_name=args.model_name, draw_grid=True)
-        else:
-            raise ValueError(f"Unknown model name: {args.model_name}")
-
-        current_state_img = models.get_image_of_state(
-            doc_state=doc_state,
-            blank_img=blank_img,
-        )
-
-        agent_generations = model.forward(
-            nl_profile=nl_profile,
-            doc_image=current_state_img,  # Use current PNG file
-            available_actions=["PlaceText"],
-            flow=flow,
-        )
-        # agent_generations =
-        if flow == FlowEnum.iterative.value:
-            agent_generations = agent_generations[:1]
-
-        # Update document state based on agent outputs
-        for gen in agent_generations:
-            if gen["action"] == "Terminate":
-                break
-            doc_state = actions.update_doc_state(
-                doc_state=doc_state, agent_generations=[gen]
-            )
-
-        # Break if we've filled at least 2 * k fields or if we are in full flow
-        if action_count >= 2 * args.k_missing_fields or flow == FlowEnum.full.value:
-            break
-
-        action_count += 1
-
-    # Evaluate results for the current image
-    result = img_pdf_fill_task.eval(user_profile=user_profile, doc_state=doc_state)
-    overall_acc = sum([f["correct"] for f in result.fields]) / len(result.fields)
-
-    # Optional: visualize predictions for the current image
-    models.visualize_preds(
-        # preds=agent_generations,
-        doc_state=doc_state,
-        fields=result.fields,
-        img=blank_img,
-    )
-
-    # Save metrics for the current file
-    metrics_summary.append(
+    all_files.append(
         {
-            "png_file": png_path,
-            "overall_accuracy": overall_acc,
+            "user_profile": user_profile,
+            "nl_profile": nl_profile,
+            "png_path": png_path,
+            "blank_img": blank_img,
+            "doc_state": doc_state,
             "action_count": action_count,
+            "flow": flow,
         }
     )
 
-# Summarize metrics for all processed images
+# Set batch size to 2 and process in batches
+BATCH_SIZE = 2
+metrics_summary = []
+for batch_start in range(0, len(all_files), BATCH_SIZE):
+    batch = all_files[batch_start : batch_start + BATCH_SIZE]
+    # 'active' flags indicate which files still need processing
+    active = [True] * len(batch)
+
+    while any(active):
+        # Build batched inputs for active files
+        batch_nl = []
+        batch_imgs = []
+        batch_actions = []
+        batch_flows = []
+        active_indices = []
+        for idx, file in enumerate(batch):
+            if active[idx]:
+                current_img = models.get_image_of_state(
+                    doc_state=file["doc_state"], blank_img=file["blank_img"]
+                )
+                batch_nl.append(file["nl_profile"])
+                batch_imgs.append(current_img)
+                batch_actions.append("PlaceText")  # same for all
+                batch_flows.append(file["flow"])
+                active_indices.append(idx)
+
+        # Create a model instance based on the model name.
+        if args.model_name == "cheater":
+            model = models.CheaterModel()  # Instance now will use batched inputs
+        elif args.model_name.lower().startswith("gpt"):
+            model = models.GptModelE2E(model_name=args.model_name, draw_grid=False)
+        else:
+            raise ValueError(f"Unknown model name: {args.model_name}")
+
+        # Call forward in batch (assume it now accepts list inputs)
+        batch_outputs = model.forward(
+            nl_profile=batch_nl,
+            doc_image=batch_imgs,
+            available_actions=batch_actions,
+            flow=batch_flows,
+        )
+
+        # Process outputs and update each file’s doc_state
+        for i, idx in enumerate(active_indices):
+            gens = batch_outputs[i]
+            for gen in gens:
+                if gen["action"] == "Terminate":
+                    active[idx] = False
+                    continue
+                else:
+                    batch[idx]["doc_state"] = actions.update_doc_state(
+                        doc_state=batch[idx]["doc_state"], agent_generations=[gen]
+                    )
+                    batch[idx]["action_count"] += 1
+                    # Termination condition: either enough actions have been taken or flow is full
+                    if (
+                        batch[idx]["action_count"] >= 2 * args.k_missing_fields
+                        or batch[idx]["flow"] == FlowEnum.full.value
+                    ):
+                        active[idx] = False
+                        continue
+
+    # Evaluate each processed file in the batch
+    for file in batch:
+        result = ImagePdfFill().eval(
+            user_profile=file["user_profile"], doc_state=file["doc_state"]
+        )
+        overall_acc = sum([f["correct"] for f in result.fields]) / len(result.fields)
+        models.visualize_preds(
+            doc_state=file["doc_state"],
+            fields=result.fields,
+            img=file["blank_img"],
+        )
+        metrics_summary.append(
+            {
+                "png_file": file["png_path"],
+                "overall_accuracy": overall_acc,
+                "action_count": file["action_count"],
+            }
+        )
+
+# Print summary of metrics for all processed images
 print("Summary of Metrics:")
 for metrics in metrics_summary:
     print(
