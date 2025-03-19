@@ -1,5 +1,5 @@
 import fields
-from actions import ActionMeta
+from actions import ActionMeta, CreatorEnum
 from openai import OpenAI
 import base64
 from PIL import Image, ImageDraw, ImageFont
@@ -84,6 +84,10 @@ def get_image_of_state(doc_state, blank_img: Image.Image) -> Image.Image:
     preds = doc_state.marks
     width, height = blank_img.size
 
+    color_map = {
+        CreatorEnum.prefilled.value: "blue",
+        CreatorEnum.agent.value: "green",
+    }
     for pred in preds:
         x = pred["x"] * width
         y = pred["y"] * height
@@ -99,7 +103,8 @@ def get_image_of_state(doc_state, blank_img: Image.Image) -> Image.Image:
         text = str(pred["value"])
 
         # Draw the text in blue.
-        text_draw.text((x, y), text, fill="blue", font=font, anchor="mm")
+
+        text_draw.text((x, y), text, fill=color_map[pred["creator"]], font=font, anchor="mm")
     # save the image
     blank_img.save("get_image_of_state.png")
     return blank_img  # drawn on

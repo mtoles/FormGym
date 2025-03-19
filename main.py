@@ -73,8 +73,9 @@ for i, fid in enumerate(args.file_ids):
 
         new_doc_state = deepcopy(doc_state)
         # change change all mark creators to "prefilled"
-        for mark in doc_state.marks:
-            mark["creator"] = actions.CreatorEnum.prefilled.value
+
+        for i in range(len(new_doc_state.marks)):
+            new_doc_state.marks[i]["creator"] = actions.CreatorEnum.prefilled.value
         print(f"before: {len(doc_state.marks)}")
         popped_fields = new_doc_state.pop_last_k_fields(
             k=args.k_missing_fields
@@ -103,7 +104,7 @@ for i, fid in enumerate(args.file_ids):
             available_actions=["PlaceText"],
             flow=flow,
         )
-        # agent_generations = 
+        # agent_generations =
         if flow == FlowEnum.iterative.value:
             agent_generations = agent_generations[:1]
 
