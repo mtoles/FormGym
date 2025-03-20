@@ -12,6 +12,7 @@ import argparse
 from copy import deepcopy
 from PIL import Image
 
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--model_name", type=str)
 parser.add_argument("--doc_format", type=str)
@@ -23,11 +24,11 @@ parser.add_argument(
 parser.add_argument("--k_missing_fields", type=int, default=1)
 args = parser.parse_args()
 
-VALID_TASKS = [
-    "AutoLoan-Full",
-    "AutoLoan-Iterative",
-]
-assert args.task in VALID_TASKS
+# Validate the task argument
+try:
+    task = TaskEnum(args.task).value
+except ValueError:
+    raise ValueError(f"Invalid task specified: {args.task}")
 
 # Prepare list to collect per-file data for batch processing
 all_files = []
@@ -38,14 +39,15 @@ for i, fid in enumerate(args.file_ids):
     blank_img = Image.open(png_path)
     annot_path = f"annotations/{fid}.json"
     annots = annotations.read_annotations(annot_path)
+    targets = annotations.read_targets(f"targets/{fid}_targets.json")["selected_ids"]
     doc_state = DocState(annots)
     action_count = 0
 
     flow = None
-    if args.task == "AutoLoan-Full":
-        flow = FlowEnum.full.value
-    elif args.task == "AutoLoan-Iterative":
-        flow = FlowEnum.iterative.value
+    if task == TaskEnum.ONESHOT.value:
+        flow = FlowEnum.ONESHOT.value
+    elif task == TaskEnum.MULTISHOT.value:
+        flow = FlowEnum.ITERATIVE.value
         cheater_model = models.CheaterModel(
             doc_state=doc_state, user_profile=user_profile
         )
@@ -53,15 +55,19 @@ for i, fid in enumerate(args.file_ids):
             nl_profile=nl_profile,
             doc_image=blank_img,
             available_actions=["PlaceText"],
+            targets=targets,
         )
         doc_state = actions.update_doc_state(
             doc_state=doc_state, agent_generations=cheater_gens
         )
         new_doc_state = deepcopy(doc_state)
         for j in range(len(new_doc_state.marks)):
-            new_doc_state.marks[j]["creator"] = actions.CreatorEnum.prefilled.value
-        new_doc_state.pop_last_k_fields(k=args.k_missing_fields)
+            new_doc_state.marks[j]["creator"] = CreatorEnum.PREFILLED.value
+        # new_doc_state.pop_last_k_fields(k=args.k_missing_fields)
+        # target_fields = new_doc_state.pop_target_fields(targets=targets)
         doc_state = new_doc_state
+    else:
+        raise ValueError(f"Invalid task specified: {args.task}")
 
     all_files.append(
         {
@@ -72,6 +78,7 @@ for i, fid in enumerate(args.file_ids):
             "doc_state": doc_state,
             "action_count": action_count,
             "flow": flow,
+            "targets": targets,
         }
     )
 
@@ -82,8 +89,10 @@ for batch_start in range(0, len(all_files), BATCH_SIZE):
     batch = all_files[batch_start : batch_start + BATCH_SIZE]
     # 'active' flags indicate which files still need processing
     active = [True] * len(batch)
+    actions_taken = [[] for _ in range(len(batch))]
 
-    while any(active):
+    # while any(active):
+    while True:
         # Build batched inputs for active files
         batch_nl = []
         batch_imgs = []
@@ -93,7 +102,9 @@ for batch_start in range(0, len(all_files), BATCH_SIZE):
         for idx, file in enumerate(batch):
             if active[idx]:
                 current_img = models.get_image_of_state(
-                    doc_state=file["doc_state"], blank_img=file["blank_img"]
+                    doc_state=file["doc_state"],
+                    blank_img=file["blank_img"],
+                    save_path=f"tmp/{args.file_ids[idx]}-{file['action_count']}.png",
                 )
                 batch_nl.append(file["nl_profile"])
                 batch_imgs.append(current_img)
@@ -116,27 +127,47 @@ for batch_start in range(0, len(all_files), BATCH_SIZE):
             available_actions=batch_actions,
             flow=batch_flows,
         )
+        if flow == FlowEnum.ITERATIVE.value:
+            for ba in batch_outputs:
+                if len(ba) > 1:
+                    print(
+                        "warning: multiple generations despite being in iterative flow"
+                    )
+                    ba = [ba[0]]
 
         # Process outputs and update each file’s doc_state
         for i, idx in enumerate(active_indices):
             gens = batch_outputs[i]
+            actions_taken[i].append(gens)
             for gen in gens:
                 if gen["action"] == "Terminate":
                     active[idx] = False
-                    continue
+                    models.get_image_of_state(
+                        doc_state=file["doc_state"],
+                        blank_img=file["blank_img"],
+                        save_path=f"tmp/{args.file_ids[idx]}-{file['action_count']}.png",
+                    )
                 else:
                     batch[idx]["doc_state"] = actions.update_doc_state(
                         doc_state=batch[idx]["doc_state"], agent_generations=[gen]
                     )
                     batch[idx]["action_count"] += 1
-                    # Termination condition: either enough actions have been taken or flow is full
-                    if (
-                        batch[idx]["action_count"] >= 2 * args.k_missing_fields
-                        or batch[idx]["flow"] == FlowEnum.full.value
-                    ):
-                        active[idx] = False
-                        continue
-
+                    
+        if not any(active):
+            print("Terminating: no active files left")
+            break
+        if batch[idx]["action_count"] >= 2 * args.k_missing_fields:
+            print("Terminating: action limit reached")
+            break
+        if batch[idx]["flow"] == FlowEnum.ONESHOT.value:
+            print("Terminating: oneshot")
+            break
+    for idx, file in enumerate(batch):
+        models.get_image_of_state(
+            doc_state=file["doc_state"],
+            blank_img=file["blank_img"],
+            save_path=f"tmp/{args.file_ids[idx]}-last.png",
+        )
     # Evaluate each processed file in the batch
     for file in batch:
         result = ImagePdfFill().eval(

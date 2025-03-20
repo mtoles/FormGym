@@ -37,3 +37,18 @@ def read_annotations(filename):
         raise ValueError
 
     return annotations
+
+def read_targets(filename):
+    """
+    Assumed data scheme in targets/al_0_0_targets.json
+    {
+        "selected_ids": [
+            "9c17a3d4-6acd-41d9-8c9d-88b757ccd021",
+            "da1f21ce-b797-4f6e-8973-65e6ebb8c144"
+        ]
+    }
+    """
+
+    with open(filename, "r") as f:
+        data = json.load(f)
+    return data

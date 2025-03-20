@@ -1,5 +1,5 @@
 import fields
-from actions import ActionMeta, CreatorEnum
+from actions import ActionMeta
 from openai import OpenAI
 import base64
 from PIL import Image, ImageDraw, ImageFont
@@ -79,14 +79,16 @@ def visualize_preds(doc_state, fields, img):
     result.save("output.png")
 
 
-def get_image_of_state(doc_state, blank_img: Image.Image) -> Image.Image:
+def get_image_of_state(
+    doc_state, blank_img: Image.Image, save_path: str = None
+) -> Image.Image:
     text_draw = ImageDraw.Draw(blank_img)
     preds = doc_state.marks
     width, height = blank_img.size
 
     color_map = {
-        CreatorEnum.prefilled.value: "blue",
-        CreatorEnum.agent.value: "green",
+        CreatorEnum.PREFILLED.value: "blue",
+        CreatorEnum.AGENT.value: "green",
     }
     for pred in preds:
         x = pred["x"] * width
@@ -104,9 +106,12 @@ def get_image_of_state(doc_state, blank_img: Image.Image) -> Image.Image:
 
         # Draw the text in blue.
 
-        text_draw.text((x, y), text, fill=color_map[pred["creator"]], font=font, anchor="mm")
+        text_draw.text(
+            (x, y), text, fill=color_map[pred["creator"]], font=font, anchor="mm"
+        )
     # save the image
-    blank_img.save("get_image_of_state.png")
+    if save_path:
+        blank_img.save(save_path)
     return blank_img  # drawn on
 
 
@@ -195,12 +200,16 @@ class CheaterModel:
         nl_profile: str,
         doc_image: Image.Image,
         available_actions: List[str],
+        targets: List[str]=[],
     ) -> List[Dict]:
         """
         Give the model the ground truth annotated doc so it can cheat, for data validation
         """
         preds = []
+        targets = set(targets)
         for field in self.doc_state.fields:
+            if field["id"] in targets:
+                continue
             cheat_input = field["field"].get_profile_info(self.user_profile)
             if cheat_input == True:
                 cheat_input = "x"
@@ -235,7 +244,9 @@ class GptModelE2E:
         flow: List[str],
     ) -> List[Dict]:
         outputs = []
-        for profile, image, action, f in zip(nl_profile, doc_image, available_actions, flow):
+        for profile, image, action, f in zip(
+            nl_profile, doc_image, available_actions, flow
+        ):
             prompt = e2e_prompt_template.format(
                 user_profile=profile,
                 api_documentation=ActionMeta.all_documentation([action]),
@@ -260,11 +271,12 @@ class GptModelE2E:
             )
 
             tool_params = parse_and_reconstruct_fields(response)
-            if f == FlowEnum.iterative.value:
+            if f == FlowEnum.ITERATIVE.value:
                 tool_params = tool_params[:1]
             outputs.append(tool_params)
         return outputs
-    
+
+
 @memory.cache
 def forward_gpt(model_name, prompt, base64_image):
     print("calling gpt uncached...")
