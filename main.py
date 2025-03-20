@@ -57,6 +57,7 @@ for i, fid in enumerate(args.file_ids):
             available_actions=["PlaceText"],
             targets=targets,
         )
+        # cheater_gens["bbox"] = get_text_bbox()
         doc_state = actions.update_doc_state(
             doc_state=doc_state, agent_generations=cheater_gens
         )
@@ -82,8 +83,18 @@ for i, fid in enumerate(args.file_ids):
         }
     )
 
-# Set batch size to 2 and process in batches
+
+# Create a model instance based on the model name.
 BATCH_SIZE = 2
+if args.model_name == "cheater":
+    model = models.CheaterModel()  # Instance now will use batched inputs
+elif args.model_name == "scripted":
+    model = models.ScriptedModel(batch_size=BATCH_SIZE)
+elif args.model_name.lower().startswith("gpt"):
+    model = models.GptModelE2E(model_name=args.model_name, draw_grid=False)
+else:
+    raise ValueError(f"Unknown model name: {args.model_name}")
+# Set batch size to 2 and process in batches
 metrics_summary = []
 for batch_start in range(0, len(all_files), BATCH_SIZE):
     batch = all_files[batch_start : batch_start + BATCH_SIZE]
@@ -112,13 +123,7 @@ for batch_start in range(0, len(all_files), BATCH_SIZE):
                 batch_flows.append(file["flow"])
                 active_indices.append(idx)
 
-        # Create a model instance based on the model name.
-        if args.model_name == "cheater":
-            model = models.CheaterModel()  # Instance now will use batched inputs
-        elif args.model_name.lower().startswith("gpt"):
-            model = models.GptModelE2E(model_name=args.model_name, draw_grid=False)
-        else:
-            raise ValueError(f"Unknown model name: {args.model_name}")
+
 
         # Call forward in batch (assume it now accepts list inputs)
         batch_outputs = model.forward(
@@ -128,12 +133,21 @@ for batch_start in range(0, len(all_files), BATCH_SIZE):
             flow=batch_flows,
         )
         if flow == FlowEnum.ITERATIVE.value:
-            for ba in batch_outputs:
-                if len(ba) > 1:
+            for gen in batch_outputs:
+                # for act in gen:
+                    # add the text bbox
+                    # act["bbox"] = get_text_bbox(
+                    #     text=act["value"],
+                    #     doc_width=file["blank_img"].width,
+                    #     doc_height=file["blank_img"].height,
+                    #     cx=act["cx"],
+                    #     cy=act["cy"],
+                    # )
+                if len(gen) > 1:
                     print(
                         "warning: multiple generations despite being in iterative flow"
                     )
-                    ba = [ba[0]]
+                    gen = gen[:1]
 
         # Process outputs and update each file’s doc_state
         for i, idx in enumerate(active_indices):
@@ -156,7 +170,7 @@ for batch_start in range(0, len(all_files), BATCH_SIZE):
         if not any(active):
             print("Terminating: no active files left")
             break
-        if batch[idx]["action_count"] >= 2 * args.k_missing_fields:
+        if batch[idx]["action_count"] >= 5 * args.k_missing_fields:
             print("Terminating: action limit reached")
             break
         if batch[idx]["flow"] == FlowEnum.ONESHOT.value:

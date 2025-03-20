@@ -55,24 +55,24 @@ class PlaceText(BaseAction):
     Place a text on a document, image, or pdf. The center of the text will be placed at (x, y), where (0, 0) is the top left corner and (1, 1) is the bottom right of the image. `Value` is the text to place.
 
     Args:
-        x: The x position of the text relative to the top left corner of the screen
-        y: The y position of the text relative to the top left corner of the screen
+        cx: The x position of the center of the text relative to the top left corner of the screen
+        cy: The y position of the center of the text relative to the top left corner of the screen
         value: The text to place on the pdf
 
     Example input:
-        {"action": "PlaceText", "x": 0.5, "y": 0.5, "value": "Hello World!"}
+        {"action": "PlaceText", "cx": 0.5, "cy": 0.5, "value": "Hello World!"}
     """
 
-    def act(doc_state, x: float, y: float, value: str, **kwargs):
+    def act(doc_state, cx: float, cy: float, value: str, bbox: dict, **kwargs):
         doc_state.marks.append(
-            {"action": "PlaceText", "x": x, "y": y, "value": value, "creator": "agent"}
+            {"action": "PlaceText", "cx": cx, "cy": cy, "value": value, "creator": "agent", "bbox": bbox}
         )
         return doc_state
 
     class Schema(BaseModel):
         action: Literal["PlaceText"]
-        x: float
-        y: float
+        cx: float
+        cy: float
         value: str
 
 
@@ -81,22 +81,22 @@ class DeleteText(BaseAction):
     Delete all text at a point on a document, image, or pdf. Any textbox intersecting with the point (x, y), where (0,0) is the top left corner and (1,1) is the bottom right corner of the image, will be deleted. 
 
     Args:
-        x: The x position of the text relative to the top left corner of the screen
-        y: The y position of the text relative to the top left corner of the screen
+        x: The x position of the center of the text relative to the top left corner of the screen
+        y: The y position of the center of thetext relative to the top left corner of the screen
 
     Example input:
-        {"action": "DeleteText", "x": 0.5, "y": 0.5}
+        {"action": "DeleteText", "cx": 0.5, "cy": 0.5}
     """
 
-    def act(doc_state, x: float, y: float, **kwargs):
+    def act(doc_state, cx: float, cy: float, **kwargs):
         # Find all marks in doc_state.marks that intersect with (x, y)
         doc_state.marks = [
             mark
             for mark in doc_state.marks
-            if x >= mark["bbox"]["x"]
-            and x <= mark["bbox"]["x"] + mark["bbox"]["width"]
-            and y >= mark["bbox"]["y"]
-            and y <= mark["bbox"]["y"] + mark["bbox"]["height"]
+            if cx >= mark["bbox"]["x"]
+            and cx <= mark["bbox"]["x"] + mark["bbox"]["width"]
+            and cy >= mark["bbox"]["y"]
+            and cy <= mark["bbox"]["y"] + mark["bbox"]["height"]
         ]
         return doc_state
 
@@ -106,24 +106,24 @@ class SignOrInitial(BaseAction):
     Sign or initial a document, image, or pdf. The center of the signature will be placed at (x, y), where (0, 0) is the top left corner and (1, 1) is the bottom right of the image. `Value` is the name or initials of the signer.
 
     Args:
-        x: The x position of the signature relative to the top left corner of the screen
-        y: The y position of the signature relative to the top left corner of the screen
+        x: The x position of the center of the signature relative to the top left corner of the screen
+        y: The y position of the center of thesignature relative to the top left corner of the screen
         value: The name or initials of the signer
 
     Example input:
-        {"action": "SignOrInitial", "x": 0.5, "y": 0.5, "value": "John Doe"}
+        {"action": "SignOrInitial", "cx": 0.5, "cy": 0.5, "value": "John Doe"}
     """
 
-    def act(doc_state, x: float, y: float, value: str, **kwargs):
+    def act(doc_state, cx: float, cy: float, value: str, bbox: dict, **kwargs):
         doc_state.marks.append(
-            {"action": "Sign", "x": x, "y": y, "value": value, "creator": "agent"}
+            {"action": "Sign", "cx": cx, "cy": cy, "value": value, "creator": "agent", "bbox": bbox}
         )
         return doc_state
 
     class Schema(BaseModel):
         action: Literal["SignOrInitial"]
-        x: float
-        y: float
+        cx: float
+        cy: float
         value: str
 
 

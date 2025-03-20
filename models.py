@@ -11,6 +11,7 @@ from utils import *
 import re
 from pydantic import ValidationError
 
+
 memory = Memory(".joblib_cache", verbose=0)
 
 e2e_prompt_template = """Complete the attached form based on the following user profile:
@@ -43,8 +44,8 @@ def visualize_preds(doc_state, fields, img):
 
     Parameters:
     preds (list): List of dictionaries containing predicted coordinates and value.
-                  Expected keys are "x", "y", and "value", where "x" and "y" are
-                  relative positions (0 to 1) and "value" is the text to be displayed.
+                  Expected keys are "cx", "cy", and "value", where "cx" and "cy" are
+                  relative positions (0 to 1) of the center of the text and "value" is the text to be displayed.
 
     The function opens the specified image, calculates the absolute position for the
     text using the relative coordinates from `preds`, and draws the text centered at
@@ -91,15 +92,14 @@ def get_image_of_state(
         CreatorEnum.AGENT.value: "green",
     }
     for pred in preds:
-        x = pred["x"] * width
-        y = pred["y"] * height
+        x = pred["cx"] * width
+        y = pred["cy"] * height
 
         # Load Times New Roman font, size 10.
-        try:
-            font = ImageFont.truetype("/usr/share/fonts/truetype/DejaVuSerif.ttf", 20)
-            pass
-        except IOError:
-            font = ImageFont.load_default()
+        # try:
+        #     pass
+        # except IOError:
+        #     font = ImageFont.load_default()
 
         field_name = pred["field_name"] if "field_name" in pred else ""
         text = str(pred["value"])
@@ -108,6 +108,18 @@ def get_image_of_state(
 
         text_draw.text(
             (x, y), text, fill=color_map[pred["creator"]], font=font, anchor="mm"
+        )
+
+        # Draw a rectangle based on the bbox
+        bbox = pred["bbox"]
+        text_draw.rectangle(
+            (
+                bbox["x"] * width,
+                bbox["y"] * height,
+                (bbox["x"] + bbox["width"]) * width,
+                (bbox["y"] + bbox["height"]) * height,
+            ),
+            outline=(0, 0, 255),
         )
     # save the image
     if save_path:
@@ -190,17 +202,40 @@ def parse_and_reconstruct_fields(response_text):
     return passed_actions
 
 
+def add_bbox(forward_fn):
+    def wrapper(
+        self,
+        nl_profile: str,
+        doc_image: Image.Image,
+        available_actions: List[str],
+        targets: List[str] = [],
+    ):
+        result = forward_fn(self, nl_profile, doc_image, available_actions, targets)
+        for i, r in enumerate(result):
+            r["bbox"] = get_text_bbox(
+                text=r["value"],
+                doc_width=doc_image.width,
+                doc_height=doc_image.height,
+                cx=r["cx"],
+                cy=r["cy"],
+            )
+        return result
+
+    return wrapper
+
+
 class CheaterModel:
     def __init__(self, doc_state, user_profile):
         self.doc_state = doc_state
         self.user_profile = user_profile
 
+    @add_bbox
     def forward(
         self,
         nl_profile: str,
         doc_image: Image.Image,
         available_actions: List[str],
-        targets: List[str]=[],
+        targets: List[str] = [],
     ) -> List[Dict]:
         """
         Give the model the ground truth annotated doc so it can cheat, for data validation
@@ -219,11 +254,12 @@ class CheaterModel:
                 pass
             field_mid_x = field["bbox"]["x"] + field["bbox"]["w"] / 2
             field_mid_y = field["bbox"]["y"] + field["bbox"]["h"] / 2
+            # bbox = get_text_bbox(cheat_input, doc_image.width, doc_image.height, field_mid_x, field_mid_y)
             preds.append(
                 {
                     "action": "PlaceText",
-                    "x": field_mid_x,
-                    "y": field_mid_y,
+                    "cx": field_mid_x,
+                    "cy": field_mid_y,
                     "field_name": field["field_name"],
                     "value": cheat_input,
                 }
@@ -231,11 +267,82 @@ class CheaterModel:
         return preds
 
 
+class ScriptedModel:
+    def __init__(self, batch_size):
+        w = 732
+        h = 454
+        self.batch_size = batch_size
+        self.script = [
+            {
+                "action": "PlaceText",
+                "cx": 551 / w,
+                "cy": 20 / h,
+                "value": "WRONG TEXT 1",
+            },
+            {
+                "action": "PlaceText",
+                "cx": 560 / w,
+                "cy": 114 / h,
+                "value": "WRONG TEXT 2",
+            },
+            {
+                "action": "PlaceText",
+                "cx": 37 / w,
+                "cy": 247 / h,
+                "value": "x",
+            },
+            {
+                "action": "SignOrInitial",
+                "cx": 209 / w,
+                "cy": 368 / h,
+                "value": "LR",
+            },
+            {
+                "action": "DeleteText",
+                "cx": 754 / w,
+                "cy": 29 / h,
+            },
+            {
+                "action": "DeleteText",
+                "cx": 560 / w,
+                "cy": 114 / h,
+            },
+            {
+                "action": "PlaceText",
+                "cx": 754 / w,
+                "cy": 29 / h,
+                "value": "MidFirst Bank",
+            },
+            {
+                "action": "PlaceText",
+                "cx": 560 / w,
+                "cy": 114 / h,
+                "value": "787412324",
+            },
+        ]
+        self.count = 0
+
+    @add_bbox
+    def forward(
+        self,
+        nl_profile: str,
+        doc_image: Image.Image,
+        available_actions: List[str],
+        targets: List[str] = [],
+        **kwargs,
+    ) -> List[Dict]:
+        pred = self.script[self.count]
+        self.count += 1
+
+        return [[pred] for _ in range(self.batch_size)]
+
+
 class GptModelE2E:
     def __init__(self, model_name: str, draw_grid: bool = False):
         self.model_name = model_name
         self.draw_grid = draw_grid
 
+    @add_bbox
     def forward(
         self,
         nl_profile: List[str],
