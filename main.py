@@ -40,7 +40,7 @@ for i, fid in enumerate(args.file_ids):
     annot_path = f"annotations/{fid}.json"
     annots = annotations.read_annotations(annot_path)
     targets = annotations.read_targets(f"targets/{fid}_targets.json")["selected_ids"]
-    doc_state = DocState(annots)
+    doc_state = DocState(annots, blank_img.width, blank_img.height)
     action_count = 0
 
     flow = None

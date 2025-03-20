@@ -202,26 +202,26 @@ def parse_and_reconstruct_fields(response_text):
     return passed_actions
 
 
-def add_bbox(forward_fn):
-    def wrapper(
-        self,
-        nl_profile: str,
-        doc_image: Image.Image,
-        available_actions: List[str],
-        targets: List[str] = [],
-    ):
-        result = forward_fn(self, nl_profile, doc_image, available_actions, targets)
-        for i, r in enumerate(result):
-            r["bbox"] = get_text_bbox(
-                text=r["value"],
-                doc_width=doc_image.width,
-                doc_height=doc_image.height,
-                cx=r["cx"],
-                cy=r["cy"],
-            )
-        return result
+# def add_bbox(forward_fn):
+#     def wrapper(
+#         self,
+#         nl_profile: str,
+#         doc_image: Image.Image,
+#         available_actions: List[str],
+#         targets: List[str] = [],
+#     ):
+#         result = forward_fn(self, nl_profile, doc_image, available_actions, targets)
+#         for i, r in enumerate(result):
+#             r["bbox"] = get_text_bbox(
+#                 text=r["value"],
+#                 doc_width=doc_image.width,
+#                 doc_height=doc_image.height,
+#                 cx=r["cx"],
+#                 cy=r["cy"],
+#             )
+#         return result
 
-    return wrapper
+#     return wrapper
 
 
 class CheaterModel:
@@ -229,7 +229,7 @@ class CheaterModel:
         self.doc_state = doc_state
         self.user_profile = user_profile
 
-    @add_bbox
+    # @add_bbox
     def forward(
         self,
         nl_profile: str,
@@ -322,7 +322,7 @@ class ScriptedModel:
         ]
         self.count = 0
 
-    @add_bbox
+    # @add_bbox
     def forward(
         self,
         nl_profile: str,
@@ -342,7 +342,7 @@ class GptModelE2E:
         self.model_name = model_name
         self.draw_grid = draw_grid
 
-    @add_bbox
+    # @add_bbox
     def forward(
         self,
         nl_profile: List[str],

@@ -7,6 +7,7 @@ from typing import List, Dict, Literal
 from copy import deepcopy
 from pydantic import BaseModel
 from enum import Enum
+from utils import *
 
 
 class ActionMeta(type):
@@ -63,9 +64,9 @@ class PlaceText(BaseAction):
         {"action": "PlaceText", "cx": 0.5, "cy": 0.5, "value": "Hello World!"}
     """
 
-    def act(doc_state, cx: float, cy: float, value: str, bbox: dict, **kwargs):
+    def act(doc_state, cx: float, cy: float, value: str, **kwargs):
         doc_state.marks.append(
-            {"action": "PlaceText", "cx": cx, "cy": cy, "value": value, "creator": "agent", "bbox": bbox}
+            {"action": "PlaceText", "cx": cx, "cy": cy, "value": value, "creator": "agent"}
         )
         return doc_state
 
@@ -114,9 +115,9 @@ class SignOrInitial(BaseAction):
         {"action": "SignOrInitial", "cx": 0.5, "cy": 0.5, "value": "John Doe"}
     """
 
-    def act(doc_state, cx: float, cy: float, value: str, bbox: dict, **kwargs):
+    def act(doc_state, cx: float, cy: float, value: str, **kwargs):
         doc_state.marks.append(
-            {"action": "Sign", "cx": cx, "cy": cy, "value": value, "creator": "agent", "bbox": bbox}
+            {"action": "Sign", "cx": cx, "cy": cy, "value": value, "creator": "agent"}
         )
         return doc_state
 
@@ -167,4 +168,14 @@ def update_doc_state(doc_state, agent_generations: List[Dict]):
         act_name = ag["action"]
         act = ActionMeta.registry[act_name]
         doc_state = act.act(doc_state, **ag)
+
+    # add bboxes to every mark
+    for mark in doc_state.marks:
+        mark["bbox"] = get_text_bbox(
+            text=mark["value"],
+            doc_width=doc_state.w,
+            doc_height=doc_state.h,
+            cx=mark["cx"],
+            cy=mark["cy"],
+        )
     return doc_state
