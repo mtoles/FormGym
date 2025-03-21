@@ -22,6 +22,7 @@ parser.add_argument(
     "--file_ids", type=str, nargs="+", help="List of file ids, e.g. al_0_0"
 )
 parser.add_argument("--k_missing_fields", type=int, default=1)
+parser.add_argument("--max_actions_multiplier", type=int, default=2)
 args = parser.parse_args()
 
 # Validate the task argument
@@ -123,8 +124,6 @@ for batch_start in range(0, len(all_files), BATCH_SIZE):
                 batch_flows.append(file["flow"])
                 active_indices.append(idx)
 
-
-
         # Call forward in batch (assume it now accepts list inputs)
         batch_outputs = model.forward(
             nl_profile=batch_nl,
@@ -135,14 +134,14 @@ for batch_start in range(0, len(all_files), BATCH_SIZE):
         if flow == FlowEnum.ITERATIVE.value:
             for gen in batch_outputs:
                 # for act in gen:
-                    # add the text bbox
-                    # act["bbox"] = get_text_bbox(
-                    #     text=act["value"],
-                    #     doc_width=file["blank_img"].width,
-                    #     doc_height=file["blank_img"].height,
-                    #     cx=act["cx"],
-                    #     cy=act["cy"],
-                    # )
+                # add the text bbox
+                # act["bbox"] = get_text_bbox(
+                #     text=act["value"],
+                #     doc_width=file["blank_img"].width,
+                #     doc_height=file["blank_img"].height,
+                #     cx=act["cx"],
+                #     cy=act["cy"],
+                # )
                 if len(gen) > 1:
                     print(
                         "warning: multiple generations despite being in iterative flow"
@@ -166,11 +165,14 @@ for batch_start in range(0, len(all_files), BATCH_SIZE):
                         doc_state=batch[idx]["doc_state"], agent_generations=[gen]
                     )
                     batch[idx]["action_count"] += 1
-                    
+
         if not any(active):
             print("Terminating: no active files left")
             break
-        if batch[idx]["action_count"] >= 5 * args.k_missing_fields:
+        if (
+            batch[idx]["action_count"]
+            >= args.max_actions_multiplier * args.k_missing_fields
+        ):
             print("Terminating: action limit reached")
             break
         if batch[idx]["flow"] == FlowEnum.ONESHOT.value:

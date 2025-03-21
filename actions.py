@@ -66,7 +66,13 @@ class PlaceText(BaseAction):
 
     def act(doc_state, cx: float, cy: float, value: str, **kwargs):
         doc_state.marks.append(
-            {"action": "PlaceText", "cx": cx, "cy": cy, "value": value, "creator": "agent"}
+            {
+                "action": "PlaceText",
+                "cx": cx,
+                "cy": cy,
+                "value": value,
+                "creator": "agent",
+            }
         )
         return doc_state
 
@@ -91,14 +97,28 @@ class DeleteText(BaseAction):
 
     def act(doc_state, cx: float, cy: float, **kwargs):
         # Find all marks in doc_state.marks that intersect with (x, y)
-        doc_state.marks = [
-            mark
-            for mark in doc_state.marks
-            if cx >= mark["bbox"]["x"]
-            and cx <= mark["bbox"]["x"] + mark["bbox"]["width"]
-            and cy >= mark["bbox"]["y"]
-            and cy <= mark["bbox"]["y"] + mark["bbox"]["height"]
-        ]
+        retained_marks = []
+        deleted_marks = []
+        for mark in doc_state.marks:
+            if (
+                (cx >= mark["bbox"]["x"])
+                and (cx <= mark["bbox"]["x"] + mark["bbox"]["width"])
+                and (cy >= mark["bbox"]["y"])
+                and (cy <= mark["bbox"]["y"] + mark["bbox"]["height"])
+            ):
+                deleted_marks.append(mark)
+            else:
+                retained_marks.append(mark)
+        doc_state.marks = retained_marks
+        # doc_state.marks = [
+        #     mark
+        #     for mark in doc_state.marks
+        #     if cx >= mark["bbox"]["x"]
+        #     and cx <= mark["bbox"]["x"] + mark["bbox"]["width"]
+        #     and cy >= mark["bbox"]["y"]
+        #     and cy <= mark["bbox"]["y"] + mark["bbox"]["height"]
+        # ]
+        print(f"Marks deleted: {deleted_marks}")
         return doc_state
 
 

@@ -60,7 +60,7 @@ def visualize_preds(doc_state, fields, img):
 
     # Calculate absolute coordinates.
 
-    img = get_image_of_state(doc_state=doc_state, blank_img=img)
+    img = get_image_of_state(doc_state=doc_state, new_img=img)
 
     # Draw correct text boxes in green and incorrect text boxes in red
 
@@ -83,9 +83,10 @@ def visualize_preds(doc_state, fields, img):
 def get_image_of_state(
     doc_state, blank_img: Image.Image, save_path: str = None
 ) -> Image.Image:
-    text_draw = ImageDraw.Draw(blank_img)
+    new_img = blank_img.copy()
+    text_draw = ImageDraw.Draw(new_img)
     preds = doc_state.marks
-    width, height = blank_img.size
+    width, height = new_img.size
 
     color_map = {
         CreatorEnum.PREFILLED.value: "blue",
@@ -123,8 +124,8 @@ def get_image_of_state(
         )
     # save the image
     if save_path:
-        blank_img.save(save_path)
-    return blank_img  # drawn on
+        new_img.save(save_path)
+    return new_img  # drawn on
 
 
 def add_grid_overlay(img):
@@ -273,51 +274,54 @@ class ScriptedModel:
         h = 454
         self.batch_size = batch_size
         self.script = [
-            {
-                "action": "PlaceText",
-                "cx": 551 / w,
-                "cy": 20 / h,
-                "value": "WRONG TEXT 1",
-            },
-            {
-                "action": "PlaceText",
-                "cx": 560 / w,
-                "cy": 114 / h,
-                "value": "WRONG TEXT 2",
-            },
-            {
-                "action": "PlaceText",
-                "cx": 37 / w,
-                "cy": 247 / h,
-                "value": "x",
-            },
-            {
-                "action": "SignOrInitial",
-                "cx": 209 / w,
-                "cy": 368 / h,
-                "value": "LR",
-            },
-            {
+            # {
+            #     "action": "PlaceText",
+            #     "cx": 551 / w,
+            #     "cy": 20 / h,
+            #     "value": "WRONG TEXT 1",
+            # },
+            # {
+            #     "action": "PlaceText",
+            #     "cx": 560 / w,
+            #     "cy": 114 / h,
+            #     "value": "WRONG TEXT 2",
+            # },
+            # {
+            #     "action": "PlaceText",
+            #     "cx": 37 / w,
+            #     "cy": 247 / h,
+            #     "value": "x",
+            # },
+            # {
+            #     "action": "SignOrInitial",
+            #     "cx": 209 / w,
+            #     "cy": 368 / h,
+            #     "value": "LR",
+            # },
+            # {  # delete action 0
+            #     "action": "DeleteText",
+            #     "cx": 551 / w,
+            #     "cy": 20 / h,
+            # },
+            {  # delete action 1
                 "action": "DeleteText",
-                "cx": 754 / w,
-                "cy": 29 / h,
-            },
-            {
-                "action": "DeleteText",
                 "cx": 560 / w,
                 "cy": 114 / h,
             },
+            # {
+            #     "action": "PlaceText",
+            #     "cx": 560 / w,
+            #     "cy": 20 / h,
+            #     "value": "MidFirst Bank",
+            # },
+            # {
+            #     "action": "PlaceText",
+            #     "cx": 560 / w,
+            #     "cy": 114 / h,
+            #     "value": "787412324",
+            # },
             {
-                "action": "PlaceText",
-                "cx": 754 / w,
-                "cy": 29 / h,
-                "value": "MidFirst Bank",
-            },
-            {
-                "action": "PlaceText",
-                "cx": 560 / w,
-                "cy": 114 / h,
-                "value": "787412324",
+                "action": "Terminate",
             },
         ]
         self.count = 0
