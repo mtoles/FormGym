@@ -19,13 +19,18 @@ class CreatorEnum(Enum):
     PREFILLED = "prefilled"
 
 
-font = ImageFont.truetype("/usr/share/fonts/truetype/DejaVuSerif.ttf", 20)
+class DatasetEnum(Enum):
+    AL = "al"  # auto loans
+    CR = "cr"  # consolidated report of income
+
+
+FILLER_FONT = ImageFont.truetype("/usr/share/fonts/truetype/DejaVuSerif.ttf", 20)
 
 
 def get_text_bbox(
     text: str, doc_width: int, doc_height: int, cx: float, cy: float
 ) -> List:
-    bbox = font.getbbox(text)
+    bbox = FILLER_FONT.getbbox(text)
     text_width = (bbox[2] - bbox[0]) / doc_width
     text_height = (bbox[3] - bbox[1]) / doc_height
     return {

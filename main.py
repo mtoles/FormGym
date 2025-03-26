@@ -6,6 +6,7 @@ import actions
 from tasks import ImagePdfFill
 from doc_state import DocState
 from utils import *
+from apis import SqlDb
 
 from tqdm import tqdm
 import argparse
@@ -31,6 +32,8 @@ try:
 except ValueError:
     raise ValueError(f"Invalid task specified: {args.task}")
 
+# set up the db
+
 # Prepare list to collect per-file data for batch processing
 all_files = []
 for i, fid in enumerate(args.file_ids):
@@ -42,24 +45,28 @@ for i, fid in enumerate(args.file_ids):
     annots = annotations.read_annotations(annot_path)
     targets = annotations.read_targets(f"targets/{fid}_targets.json")["selected_ids"]
     doc_state = DocState(annots, blank_img.width, blank_img.height)
+    db = SqlDb(user_profile=user_profile)
+
     action_count = 0
 
     flow = None
     if task == TaskEnum.ONESHOT.value:
         flow = FlowEnum.ONESHOT.value
+        available_actions = ["PlaceText"]
     elif task == TaskEnum.MULTISHOT.value:
         flow = FlowEnum.ITERATIVE.value
         cheater_model = models.CheaterModel(
             doc_state=doc_state, user_profile=user_profile
         )
+        available_actions = ["PlaceText", "DeleteText", "SignOrInitial", "Terminate"]
         cheater_gens = cheater_model.forward(
             nl_profile=nl_profile,
             doc_image=blank_img,
-            available_actions=["PlaceText"],
+            available_actions=available_actions,
             targets=targets,
         )
         # cheater_gens["bbox"] = get_text_bbox()
-        doc_state = actions.update_doc_state(
+        doc_state, feedback = actions.update_doc_state(
             doc_state=doc_state, agent_generations=cheater_gens
         )
         new_doc_state = deepcopy(doc_state)
@@ -108,7 +115,7 @@ for batch_start in range(0, len(all_files), BATCH_SIZE):
         # Build batched inputs for active files
         batch_nl = []
         batch_imgs = []
-        batch_actions = []
+        # batch_actions = []
         batch_flows = []
         active_indices = []
         for idx, file in enumerate(batch):
@@ -120,28 +127,18 @@ for batch_start in range(0, len(all_files), BATCH_SIZE):
                 )
                 batch_nl.append(file["nl_profile"])
                 batch_imgs.append(current_img)
-                batch_actions.append("PlaceText")  # same for all
+                # batch_actions.append(available_actions)  # same for all
                 batch_flows.append(file["flow"])
                 active_indices.append(idx)
 
-        # Call forward in batch (assume it now accepts list inputs)
         batch_outputs = model.forward(
             nl_profile=batch_nl,
             doc_image=batch_imgs,
-            available_actions=batch_actions,
+            available_actions=available_actions,
             flow=batch_flows,
         )
         if flow == FlowEnum.ITERATIVE.value:
             for gen in batch_outputs:
-                # for act in gen:
-                # add the text bbox
-                # act["bbox"] = get_text_bbox(
-                #     text=act["value"],
-                #     doc_width=file["blank_img"].width,
-                #     doc_height=file["blank_img"].height,
-                #     cx=act["cx"],
-                #     cy=act["cy"],
-                # )
                 if len(gen) > 1:
                     print(
                         "warning: multiple generations despite being in iterative flow"
@@ -161,7 +158,7 @@ for batch_start in range(0, len(all_files), BATCH_SIZE):
                         save_path=f"tmp/{args.file_ids[idx]}-{file['action_count']}.png",
                     )
                 else:
-                    batch[idx]["doc_state"] = actions.update_doc_state(
+                    batch[idx]["doc_state"], feedback = actions.update_doc_state(
                         doc_state=batch[idx]["doc_state"], agent_generations=[gen]
                     )
                     batch[idx]["action_count"] += 1

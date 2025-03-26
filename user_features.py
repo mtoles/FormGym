@@ -1,4 +1,5 @@
 from enum import Enum
+from utils import *
 
 ### ENUMS ###
 
@@ -59,7 +60,7 @@ class UserAttributeMeta(type):
 
     def __new__(cls, name, bases, attrs):
         new_p_attr = super().__new__(cls, name, bases, attrs)
-        if name != "BaseUserAttr":
+        if name not in  ["BaseUserAttr", "BaseUserDbAttr"]:
             assert name not in cls.registry, f"User attribute {name} already exists"
             cls.registry[name] = new_p_attr
         return new_p_attr
@@ -87,6 +88,15 @@ class UserProfile:
 class BaseUserAttr(metaclass=UserAttributeMeta):
     pass
 
+class BaseUserDbAttr(metaclass=UserAttributeMeta):
+    form_name, cell_id = __name__.split("_")
+    @staticmethod
+    def nl_desc(option):
+        # form_name, cell_id = __class__.__name__.split("_")
+        return f"The user's value for form {__class__.form_name} in cell {__class__.cell_id} ({__class__.__doc__}) is: {option}"
+
+
+### AUTO LOAN FEATURES ###
 
 class FirstName(BaseUserAttr):
     options = ["Lucas", "Ava", "Ethan", "Mia"]
@@ -1755,3 +1765,81 @@ class JointGrossIncomePeriod(BaseUserAttr):
     @staticmethod
     def nl_desc(option):
         return f"The joint filer's gross income period is: {option}"
+
+### CONSOLIDATED REPORT OF INCOME FEATURES ###
+class CROI_4435(BaseUserDbAttr):
+    """1.a.(1)(a): Loans secured by 1–4 family residential properties"""
+    options = ["23456", "34567", "45678", "56789"]
+
+class CROI_4436(BaseUserDbAttr):
+    """1.a.(1)(b): All other loans secured by real estate"""
+    options = ["67890", "78901", "89012", "90123"]
+
+class CROI_4012(BaseUserDbAttr):
+    """1.a.(2): Commercial and industrial loans"""
+    options = ["11234", "22345", "33456", "44567"]
+
+class CROI_B485(BaseUserDbAttr):
+    """1.a.(3)(a): Credit cards"""
+    options = ["55678", "66789", "77890", "88901"]
+
+class CROI_4058(BaseUserDbAttr):
+    """1.a.(5): All other loans"""
+    options = ["99012", "10123", "21234", "32345"]
+
+class CROI_4010(BaseUserDbAttr):
+    """1.a.(6): Total interest and fee income on loans"""
+    options = ["43456", "54567", "65678", "76789"]
+
+class CROI_4065(BaseUserDbAttr):
+    """1.b: Income from lease financing receivables"""
+    options = ["87890", "98901", "10912", "21023"]
+
+class CROI_4115(BaseUserDbAttr):
+    """1.c: Interest income on balances due from depository institutions"""
+    options = ["31134", "42245", "53356", "64467"]
+
+class CROI_B488(BaseUserDbAttr):
+    """1.d.(1): U.S. Treasury securities and U.S. Government agency obligations"""
+    options = ["75578", "86689", "97790", "10891"]
+
+class CROI_B489(BaseUserDbAttr):
+    """1.d.(2): Mortgage-backed securities"""
+    options = ["21902", "32013", "42124", "52235"]
+
+class CROI_4020(BaseUserDbAttr):
+    """1.f: Interest income on federal funds sold and securities purchased under agreements to resell"""
+    options = ["62346", "72457", "82568", "92679"]
+
+class CROI_4518(BaseUserDbAttr):
+    """1.g: Other interest income"""
+    options = ["10234", "21345", "32456", "43567"]
+
+class CROI_4107(BaseUserDbAttr):
+    """1.h: Total interest income"""
+    options = ["54678", "65789", "76890", "87901"]
+
+class CROI_4508(BaseUserDbAttr):
+    """2.a.(1): Interest on deposits - transaction accounts"""
+    options = ["98012", "10123", "21234", "32345"]
+
+class CROI_0093(BaseUserDbAttr):
+    """2.a.(2)(a): Savings deposits (includes MMDAs)"""
+    options = ["43456", "54567", "65678", "76789"]
+
+class CROI_HK03(BaseUserDbAttr):
+    """2.a.(2)(b): Time deposits of $250,000 or less"""
+    options = ["87890", "98901", "10912", "21023"]
+
+class CROI_HK04(BaseUserDbAttr):
+    """2.a.(2)(c): Time deposits of more than $250,000"""
+    options = ["31134", "42245", "53356", "64467"]
+
+class CROI_4180(BaseUserDbAttr):
+    """2.b: Expense of federal funds purchased and securities sold under agreements to repurchase"""
+    options = ["75578", "86689", "97790", "10891"]
+
+class CROI_4185(BaseUserDbAttr):
+    """2.c: Interest on trading liabilities and other borrowed money"""
+    options = ["21902", "32013", "42124", "52235"]
+

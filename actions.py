@@ -74,7 +74,8 @@ class PlaceText(BaseAction):
                 "creator": "agent",
             }
         )
-        return doc_state
+        feedback = f"Placed text: {value} at ({cx}, {cy})"
+        return doc_state, feedback
 
     class Schema(BaseModel):
         action: Literal["PlaceText"]
@@ -119,7 +120,8 @@ class DeleteText(BaseAction):
         #     and cy <= mark["bbox"]["y"] + mark["bbox"]["height"]
         # ]
         print(f"Marks deleted: {deleted_marks}")
-        return doc_state
+        feedback = f"Marks deleted: {deleted_marks}"
+        return doc_state, feedback
 
 
 class SignOrInitial(BaseAction):
@@ -147,6 +149,18 @@ class SignOrInitial(BaseAction):
         cy: float
         value: str
 
+class QuerySql(BaseAction):
+    documentation = """
+    Query a SQL database.
+    Args:
+        query: The SQL query to execute.
+    
+    Example input:
+        {"action": "QuerySql", "query": "SELECT * FROM table_name WHERE column_name = 'value'"}
+    """
+
+    def act(doc_state, query: str, db, **kwargs):
+        return doc_state, str(db)
 
 class Terminate(BaseAction):
     documentation = """
@@ -162,7 +176,10 @@ class Terminate(BaseAction):
         action: Literal["Terminate"]
 
     def act(doc_state, **kwargs):
-        return doc_state
+        feedback = "Terminated"
+        return doc_state, feedback
+    
+
 
 
 ### Actions for editable pdfs and websites
@@ -180,14 +197,14 @@ class Terminate(BaseAction):
 #     pass
 
 
-def update_doc_state(doc_state, agent_generations: List[Dict]):
+def update_doc_state(doc_state, agent_generations: List[Dict], db=None):
     doc_state = deepcopy(doc_state)
     assert isinstance(agent_generations, list)
     assert isinstance(agent_generations[0], dict)
     for ag in agent_generations:
         act_name = ag["action"]
         act = ActionMeta.registry[act_name]
-        doc_state = act.act(doc_state, **ag)
+        doc_state, feedback = act.act(doc_state, **ag, db=db)
 
     # add bboxes to every mark
     for mark in doc_state.marks:

@@ -108,7 +108,7 @@ def get_image_of_state(
         # Draw the text in blue.
 
         text_draw.text(
-            (x, y), text, fill=color_map[pred["creator"]], font=font, anchor="mm"
+            (x, y), text, fill=color_map[pred["creator"]], font=FILLER_FONT, anchor="mm"
         )
 
         # Draw a rectangle based on the bbox
