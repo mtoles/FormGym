@@ -88,6 +88,7 @@ for i, fid in enumerate(args.file_ids):
             "action_count": action_count,
             "flow": flow,
             "targets": targets,
+            # fields calculated dynamically 
         }
     )
 
@@ -206,3 +207,4 @@ for metrics in metrics_summary:
     print(
         f"File: {metrics['png_file']}, Overall Accuracy: {metrics['overall_accuracy']:.2f}, Actions: {metrics['action_count']}"
     )
+

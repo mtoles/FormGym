@@ -60,7 +60,7 @@ def visualize_preds(doc_state, fields, img):
 
     # Calculate absolute coordinates.
 
-    img = get_image_of_state(doc_state=doc_state, new_img=img)
+    img = get_image_of_state(doc_state=doc_state, blank_img=img)
 
     # Draw correct text boxes in green and incorrect text boxes in red
 

@@ -201,10 +201,12 @@ def update_doc_state(doc_state, agent_generations: List[Dict], db=None):
     doc_state = deepcopy(doc_state)
     assert isinstance(agent_generations, list)
     assert isinstance(agent_generations[0], dict)
+    feedbacks = []
     for ag in agent_generations:
         act_name = ag["action"]
         act = ActionMeta.registry[act_name]
         doc_state, feedback = act.act(doc_state, **ag, db=db)
+        feedbacks.append(feedback)
 
     # add bboxes to every mark
     for mark in doc_state.marks:
@@ -215,4 +217,4 @@ def update_doc_state(doc_state, agent_generations: List[Dict], db=None):
             cx=mark["cx"],
             cy=mark["cy"],
         )
-    return doc_state
+    return doc_state, feedbacks

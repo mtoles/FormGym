@@ -35,7 +35,9 @@ def concat_agent_generations(agent_generations):
     return " ".join(
         [
             x["value"]
-            for x in sorted(agent_generations, key=lambda item: (item["y"], item["x"]))
+            for x in sorted(
+                agent_generations, key=lambda item: (item["cy"], item["cx"])
+            )
         ]
     )
 
@@ -126,7 +128,6 @@ class Signature(SignOrInitial):
         return user_profile.features.FirstName + " " + user_profile.features.LastName
 
 
-
 class Initials(SignOrInitial):
     @classmethod
     def get_profile_info(self, user_profile):
@@ -157,10 +158,10 @@ def get_inputs_inside_field(field: BaseField, agent_generations: List):
         ag
         for ag in agent_generations
         if (
-            ag["x"] >= field.x
-            and ag["x"] <= field.x + field.w
-            and ag["y"] >= field.y
-            and ag["y"] <= field.y + field.h
+            ag["cx"] >= field.x
+            and ag["cx"] <= field.x + field.w
+            and ag["cy"] >= field.y
+            and ag["cy"] <= field.y + field.h
         )
     ]
 
