@@ -1,5 +1,5 @@
 import fields
-from actions import ActionMeta
+from actions import ActionMeta, InvalidAction
 from openai import OpenAI
 import base64
 from PIL import Image, ImageDraw, ImageFont
@@ -194,7 +194,10 @@ def parse_and_reconstruct_fields(response_text):
         try:
             match_dict = json.loads(match)
             action_name = match_dict["action"]
-            action = ActionMeta.registry[action_name]
+            if action_name in ActionMeta.registry:
+                action = ActionMeta.registry[action_name]
+            else:
+                action = InvalidAction
             action.Schema(**match_dict)
             passed_actions.append(match_dict)
         except ValidationError as e:
@@ -274,52 +277,52 @@ class ScriptedModel:
         h = 454
         self.batch_size = batch_size
         self.script = [
-            # {
-            #     "action": "PlaceText",
-            #     "cx": 551 / w,
-            #     "cy": 20 / h,
-            #     "value": "WRONG TEXT 1",
-            # },
-            # {
-            #     "action": "PlaceText",
-            #     "cx": 560 / w,
-            #     "cy": 114 / h,
-            #     "value": "WRONG TEXT 2",
-            # },
-            # {
-            #     "action": "PlaceText",
-            #     "cx": 37 / w,
-            #     "cy": 247 / h,
-            #     "value": "x",
-            # },
-            # {
-            #     "action": "SignOrInitial",
-            #     "cx": 209 / w,
-            #     "cy": 368 / h,
-            #     "value": "LR",
-            # },
-            # {  # delete action 0
-            #     "action": "DeleteText",
-            #     "cx": 551 / w,
-            #     "cy": 20 / h,
-            # },
+            {
+                "action": "PlaceText",
+                "cx": 551 / w,
+                "cy": 20 / h,
+                "value": "WRONG TEXT 1",
+            },
+            {
+                "action": "PlaceText",
+                "cx": 560 / w,
+                "cy": 114 / h,
+                "value": "WRONG TEXT 2",
+            },
+            {
+                "action": "PlaceText",
+                "cx": 37 / w,
+                "cy": 247 / h,
+                "value": "x",
+            },
+            {
+                "action": "SignOrInitial",
+                "cx": 209 / w,
+                "cy": 368 / h,
+                "value": "LR",
+            },
+            {  # delete action 0
+                "action": "DeleteText",
+                "cx": 551 / w,
+                "cy": 20 / h,
+            },
             {  # delete action 1
                 "action": "DeleteText",
                 "cx": 560 / w,
                 "cy": 114 / h,
             },
-            # {
-            #     "action": "PlaceText",
-            #     "cx": 560 / w,
-            #     "cy": 20 / h,
-            #     "value": "MidFirst Bank",
-            # },
-            # {
-            #     "action": "PlaceText",
-            #     "cx": 560 / w,
-            #     "cy": 114 / h,
-            #     "value": "787412324",
-            # },
+            {
+                "action": "PlaceText",
+                "cx": 560 / w,
+                "cy": 20 / h,
+                "value": "MidFirst Bank",
+            },
+            {
+                "action": "PlaceText",
+                "cx": 560 / w,
+                "cy": 114 / h,
+                "value": "787412324",
+            },
             {
                 "action": "Terminate",
             },

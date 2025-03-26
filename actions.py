@@ -15,7 +15,7 @@ class ActionMeta(type):
 
     def __new__(cls, name, bases, attrs):
         new_p_attr = super().__new__(cls, name, bases, attrs)
-        if name != "BaseAction":
+        if name not in ["BaseAction", "InvalidAction"]:
             # check for duplicates
             assert name not in cls.registry, f"User attribute {name} already exists"
             cls.registry[name] = new_p_attr
@@ -74,7 +74,7 @@ class PlaceText(BaseAction):
                 "creator": "agent",
             }
         )
-        feedback = f"Placed text: {value} at ({cx}, {cy})"
+        feedback = f"Action: 'PlaceText'\nText placed: <`{value}` at ({cx}, {cy})>"
         return doc_state, feedback
 
     class Schema(BaseModel):
@@ -120,7 +120,7 @@ class DeleteText(BaseAction):
         #     and cy <= mark["bbox"]["y"] + mark["bbox"]["height"]
         # ]
         print(f"Marks deleted: {deleted_marks}")
-        feedback = f"Marks deleted: {deleted_marks}"
+        feedback = f"Action: 'DeleteText'\nMarks deleted: {deleted_marks}"
         return doc_state, feedback
 
 
@@ -141,13 +141,17 @@ class SignOrInitial(BaseAction):
         doc_state.marks.append(
             {"action": "Sign", "cx": cx, "cy": cy, "value": value, "creator": "agent"}
         )
-        return doc_state
+        feedback = (
+            f"Action: 'SignOrInitial'\nSignature placed: <`{value}` at ({cx}, {cy})>"
+        )
+        return doc_state, feedback
 
     class Schema(BaseModel):
         action: Literal["SignOrInitial"]
         cx: float
         cy: float
         value: str
+
 
 class QuerySql(BaseAction):
     documentation = """
@@ -161,6 +165,7 @@ class QuerySql(BaseAction):
 
     def act(doc_state, query: str, db, **kwargs):
         return doc_state, str(db)
+
 
 class Terminate(BaseAction):
     documentation = """
@@ -176,10 +181,18 @@ class Terminate(BaseAction):
         action: Literal["Terminate"]
 
     def act(doc_state, **kwargs):
-        feedback = "Terminated"
+        feedback = "Action: 'Terminate'\nDocument generation process terminated."
         return doc_state, feedback
-    
 
+
+class InvalidAction(BaseAction):
+    class Schema(BaseModel):
+        pass
+        # allow anything
+
+    def act(doc_state, **kwargs):
+        feedback = "Action: 'InvalidAction'\nDocument returned unchanged."
+        return doc_state, feedback
 
 
 ### Actions for editable pdfs and websites
