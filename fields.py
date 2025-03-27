@@ -1660,67 +1660,182 @@ class ReferenceZip(BaseNumericField):
         return user_profile.features.ReferenceZip
 
 
-# class JointEnterpriseType_Corporation(BaseCheckboxField):
-#     @classmethod
-#     def get_profile_info(cls, user_profile):
-#         return (
-#             user_profile.features.JointEnterpriseType
-#             == user_features.EnterpriseTypeEnum.Corporation.value
-#         )
+### CROI classes ###
 
 
-# class JointEnterpriseType_Partnership(BaseCheckboxField):
-#     @classmethod
-#     def get_profile_info(cls, user_profile):
-#         return (
-#             user_profile.features.JointEnterpriseType
-#             == user_features.EnterpriseTypeEnum.Partnership.value
-#         )
+class CROI_4435(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_4435
 
 
-# class JointEnterpriseType_LLC(BaseCheckboxField):
-#     @classmethod
-#     def get_profile_info(cls, user_profile):
-#         return (
-#             user_profile.features.JointEnterpriseType
-#             == user_features.EnterpriseTypeEnum.LLC.value
-#         )
+class CROI_4436(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_4436
 
 
-# class JointEnterpriseType_Proprietorship(BaseCheckboxField):
-#     @classmethod
-#     def get_profile_info(cls, user_profile):
-#         return (
-#             user_profile.features.JointEnterpriseType
-#             == user_features.EnterpriseTypeEnum.Proprietorship.value
-#         )
+class CROI_4012(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_4012
 
 
-# class JointTimeInBusinessYears(BaseNumericField):
-#     @classmethod
-#     def get_profile_info(cls, user_profile):
-#         return user_profile.features.JointTimeInBusinessYears
+class CROI_B485(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_B485
 
 
-# class JointTimeInBusinessMonths(BaseNumericField):
-#     @classmethod
-#     def get_profile_info(cls, user_profile):
-#         return user_profile.features.JointTimeInBusinessMonths
+class CROI_B486(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_B486
 
 
-# class JointGrossIncomePeriod_Monthly(BaseCheckboxField):
-#     @classmethod
-#     def get_profile_info(cls, user_profile):
-#         return (
-#             user_profile.features.JointGrossIncomePeriod
-#             == user_features.GrossIncomePeriodEnum.Monthly.value
-#         )
+class CROI_4058(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_4058
 
 
-# class JointGrossIncomePeriod_Yearly(BaseCheckboxField):
-#     @classmethod
-#     def get_profile_info(cls, user_profile):
-#         return (
-#             user_profile.features.JointGrossIncomePeriod
-#             == user_features.GrossIncomePeriodEnum.Yearly.value
-#         )
+class CROI_4010(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        # return user_profile.features.CROI_4010A
+        return str(
+            int(user_profile.features.CROI_4435)
+            + int(user_profile.features.CROI_4436)
+            + int(user_profile.features.CROI_4012)
+            + int(user_profile.features.CROI_B485)
+            + int(user_profile.features.CROI_B486)
+            + int(user_profile.features.CROI_4058)
+        )
+
+
+class CROI_4065(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_4065
+
+
+class CROI_4115(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_4115
+
+
+class CROI_B488(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_B488
+
+
+class CROI_B489(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_B489
+
+
+class CROI_4060(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_4060
+
+
+class CROI_4020(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_4020
+
+
+class CROI_4518(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_4518
+
+
+class CROI_4107(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return str(
+            int(CROI_4010.get_profile_info(user_profile))
+            + int(user_profile.features.CROI_4065)
+            + int(user_profile.features.CROI_4115)
+            + int(user_profile.features.CROI_B488)
+            + int(user_profile.features.CROI_B489)
+            + int(user_profile.features.CROI_4060)
+            + int(user_profile.features.CROI_4020)
+            + int(user_profile.features.CROI_4518)
+        )
+
+
+class CROI_4508(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_4508
+
+
+class CROI_0093(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_0093
+
+
+class CROI_HK03(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_HK03
+
+
+class CROI_HK04(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_HK04
+
+
+class CROI_4180(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_4180
+
+
+class CROI_4185(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_4185
+
+
+class CROI_4200(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_4200
+
+
+class CROI_4073(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return str(
+            int(user_profile.features.CROI_4508)
+            + int(user_profile.features.CROI_0093)
+            + int(user_profile.features.CROI_HK03)
+            + int(user_profile.features.CROI_HK04)
+            + int(user_profile.features.CROI_4180)
+            + int(user_profile.features.CROI_4185)
+            + int(user_profile.features.CROI_4200)
+        )
+
+
+class CROI_4074(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return str(
+            int(CROI_4107.get_profile_info(user_profile))
+            - int(CROI_4073.get_profile_info(user_profile))
+        )
+
+
+class CROI_JJ33(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CROI_JJ33

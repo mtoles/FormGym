@@ -272,61 +272,71 @@ class CheaterModel:
 
 
 class ScriptedModel:
-    def __init__(self, batch_size):
+    def __init__(self, batch_size, script_name: str):
         w = 732
         h = 454
         self.batch_size = batch_size
-        self.script = [
-            {
-                "action": "PlaceText",
-                "cx": 551 / w,
-                "cy": 20 / h,
-                "value": "WRONG TEXT 1",
-            },
-            {
-                "action": "PlaceText",
-                "cx": 560 / w,
-                "cy": 114 / h,
-                "value": "WRONG TEXT 2",
-            },
-            {
-                "action": "PlaceText",
-                "cx": 37 / w,
-                "cy": 247 / h,
-                "value": "x",
-            },
-            {
-                "action": "SignOrInitial",
-                "cx": 209 / w,
-                "cy": 368 / h,
-                "value": "LR",
-            },
-            {  # delete action 0
-                "action": "DeleteText",
-                "cx": 551 / w,
-                "cy": 20 / h,
-            },
-            {  # delete action 1
-                "action": "DeleteText",
-                "cx": 560 / w,
-                "cy": 114 / h,
-            },
-            {
-                "action": "PlaceText",
-                "cx": 560 / w,
-                "cy": 20 / h,
-                "value": "MidFirst Bank",
-            },
-            {
-                "action": "PlaceText",
-                "cx": 560 / w,
-                "cy": 114 / h,
-                "value": "787412324",
-            },
-            {
-                "action": "Terminate",
-            },
-        ]
+        # self.script = [
+        scripts = {
+            "xx_0_0": [
+                {
+                    "action": "PlaceText",
+                    "cx": 551 / w,
+                    "cy": 20 / h,
+                    "value": "WRONG TEXT 1",
+                },
+                {
+                    "action": "PlaceText",
+                    "cx": 560 / w,
+                    "cy": 114 / h,
+                    "value": "WRONG TEXT 2",
+                },
+                {
+                    "action": "PlaceText",
+                    "cx": 37 / w,
+                    "cy": 247 / h,
+                    "value": "x",
+                },
+                {
+                    "action": "SignOrInitial",
+                    "cx": 209 / w,
+                    "cy": 368 / h,
+                    "value": "LR",
+                },
+                {  # delete action 0
+                    "action": "DeleteText",
+                    "cx": 551 / w,
+                    "cy": 20 / h,
+                },
+                {  # delete action 1
+                    "action": "DeleteText",
+                    "cx": 560 / w,
+                    "cy": 114 / h,
+                },
+                {
+                    "action": "PlaceText",
+                    "cx": 560 / w,
+                    "cy": 20 / h,
+                    "value": "MidFirst Bank",
+                },
+                {
+                    "action": "PlaceText",
+                    "cx": 560 / w,
+                    "cy": 114 / h,
+                    "value": "787412324",
+                },
+                {
+                    "action": "Terminate",
+                },
+            ],
+            "cr_0_0": [
+                {
+                    "action": "QuerySql",
+                    "query": "SELECT * FROM table_name WHERE column_name = 'value'",
+                }
+            ],
+        }
+        self.script = scripts[script_name]
         self.count = 0
 
     # @add_bbox
@@ -338,6 +348,14 @@ class ScriptedModel:
         targets: List[str] = [],
         **kwargs,
     ) -> List[Dict]:
+        if self.count >= len(self.script):
+            # todo: terminate and check for errors
+            # raise StopIteration
+            return [
+                [{
+                    "action": "Terminate",
+                }] for _ in range(self.batch_size) 
+            ]
         pred = self.script[self.count]
         self.count += 1
 

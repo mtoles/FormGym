@@ -121,7 +121,7 @@ if args.model_name == "cheater":
     raise NotImplementedError
     model = models.CheaterModel()  # Instance now will use batched inputs
 elif args.model_name == "scripted":
-    model = models.ScriptedModel(batch_size=BATCH_SIZE)
+    model = models.ScriptedModel(batch_size=BATCH_SIZE, script_name=args.file_ids[0])
 elif args.model_name.lower().startswith("gpt"):
     model = models.GptModelE2E(model_name=args.model_name, draw_grid=False)
 else:
