@@ -267,7 +267,7 @@ if __name__ == "__main__":
         doc_image_path="./processed_pngs/grid_al_1_page_1.png"
     )
     
-    output_filename = "output_" + model_name.value.replace('/', '_').replace('.', '_') + "_parsed.txt"
+    output_filename = "outputs/output_" + model_name.value.replace('/', '_').replace('.', '_') + "_parsed.txt"
 
     final_result = json.dumps(result, indent=2)
 
