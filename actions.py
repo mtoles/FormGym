@@ -157,14 +157,21 @@ class QuerySql(BaseAction):
     documentation = """
     Query a SQL database.
     Args:
-        query: The SQL query to execute.
+        query: The SQL query to execute. The table is called "features".
     
     Example input:
-        {"action": "QuerySql", "query": "SELECT * FROM table_name WHERE column_name = 'value'"}
+        {"action": "QuerySql", "query": "SELECT * FROM features WHERE column_name = 'value'"}
     """
 
     def act(doc_state, query: str, db, **kwargs):
-        return doc_state, str(db)
+        assert db is not None
+        try:
+            output = db.query(query)
+            feedback = f"Action: 'QuerySql'\nQuery executed successfully. Output: {output}"
+        except Exception as e:
+            feedback = f"Action: 'QuerySql'\nError executing query: {str(e)}"
+            print(feedback)
+        return doc_state, feedback
 
 
 class Terminate(BaseAction):

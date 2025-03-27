@@ -332,7 +332,7 @@ class ScriptedModel:
             "cr_0_0": [
                 {
                     "action": "QuerySql",
-                    "query": "SELECT * FROM table_name WHERE column_name = 'value'",
+                    "query": "SELECT * FROM features WHERE key = 'CROI_4435'",
                 }
             ],
         }
@@ -352,9 +352,12 @@ class ScriptedModel:
             # todo: terminate and check for errors
             # raise StopIteration
             return [
-                [{
-                    "action": "Terminate",
-                }] for _ in range(self.batch_size) 
+                [
+                    {
+                        "action": "Terminate",
+                    }
+                ]
+                for _ in range(self.batch_size)
             ]
         pred = self.script[self.count]
         self.count += 1

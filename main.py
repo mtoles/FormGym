@@ -148,7 +148,7 @@ while not (active_df := df[df.active.apply(lambda x: x[-1])]).empty:
             doc_state, feedback = actions.update_doc_state(
                 doc_state=example["doc_state"][-1],
                 agent_generations=act,
-                # targets=example["targets"],
+                db=db,
             )
             # save_path=f"tmp/{args.file_ids[idx]}-last.png",
             example["doc_state"].append(doc_state)
@@ -182,25 +182,6 @@ for example in df.iloc:
             "action_count": example["action_count"],
         }
     )
-
-    # # Evaluate each processed file in the batch
-    # for file in batch:
-    #     result = ImagePdfFill().eval(
-    #         user_profile=file["user_profile"], doc_state=file["doc_state"]
-    #     )
-    #     overall_acc = sum([f["correct"] for f in result.fields]) / len(result.fields)
-    #     models.visualize_preds(
-    #         doc_state=file["doc_state"],
-    #         fields=result.fields,
-    #         img=file["blank_img"],
-    #     )
-    #     metrics_summary.append(
-    #         {
-    #             "png_file": file["png_path"],
-    #             "overall_accuracy": overall_acc,
-    #             "action_count": file["action_count"],
-    #         }
-    #     )
 
 # Print summary of metrics for all processed images
 print("Summary of Metrics:")
