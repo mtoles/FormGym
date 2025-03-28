@@ -1,0 +1,123 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "xx_1_0.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0195af67-4e1c-686b-209c-bdf35cb9b177",
+      "dataset": {
+        "name": "Form Filling",
+        "slug": "form-filling",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1649572/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1649572&item=0195af67-4e1c-686b-209c-bdf35cb9b177"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 528,
+        "height": 510,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/0b9b04e2-a3c2-4509-96ea-cbd0d5845d50/thumbnail",
+        "source_files": [
+          {
+            "file_name": "xx_1_0.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/1a8d6c7e-c284-40a5-b649-35290a624427"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 45.9317,
+        "w": 232.8261,
+        "x": 206.1894,
+        "y": 8.7112
+      },
+      "id": "8e1c023d-de87-40d6-b6a5-827d7ff818dc",
+      "name": "FirstName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 43.5559,
+        "w": 228.8665,
+        "x": 206.1894,
+        "y": 95.823
+      },
+      "id": "25d144ae-e361-4348-8973-fb4d9a0010c6",
+      "name": "LastName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 45.9317,
+        "w": 235.2019,
+        "x": 203.0217,
+        "y": 177.3913
+      },
+      "id": "21a4c2a7-b832-4bce-a022-e47195b183e7",
+      "name": "FullBirthDate",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 36.4286,
+        "w": 41.1801,
+        "x": 21.6708,
+        "y": 314.3944
+      },
+      "id": "539bae9a-5f1f-4d3d-abdc-4b90f118f614",
+      "name": "GrossIncomePeriod_Yearly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 35.6366,
+        "w": 41.1801,
+        "x": 20.8789,
+        "y": 355.5745
+      },
+      "id": "488b221c-9ded-4ffc-9fe5-f996cf5d8142",
+      "name": "GrossIncomePeriod_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 46.7236,
+        "w": 411.0093,
+        "x": 90.5683,
+        "y": 430.8075
+      },
+      "id": "f02212fe-c41c-4a2c-8054-283be8ff0f57",
+      "name": "Signature",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

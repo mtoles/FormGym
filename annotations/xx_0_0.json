@@ -1,0 +1,109 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "xx_0_0.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0195af67-4e1b-9f8f-5371-4e266fba1b25",
+      "dataset": {
+        "name": "Form Filling",
+        "slug": "form-filling",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1649572/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1649572&item=0195af67-4e1b-9f8f-5371-4e266fba1b25"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 732,
+        "height": 454,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/182c4cee-7ff6-417c-9f5d-1a3f1b9c6b07/thumbnail",
+        "source_files": [
+          {
+            "file_name": "xx_0_0.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/f6d209fb-c119-41e3-a604-4bb216e2da70"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 45.4747,
+        "w": 319.4321,
+        "x": 395.9627,
+        "y": 8.8731
+      },
+      "id": "a411b313-6b9b-4f3d-8f27-40e7471ff196",
+      "name": "BankName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 36.6016,
+        "w": 321.6504,
+        "x": 393.7445,
+        "y": 97.6043
+      },
+      "id": "f083bf48-cdc0-4f21-8d27-b1fef20b8d6a",
+      "name": "BankAccountNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 36.6016,
+        "w": 46.5839,
+        "x": 13.3097,
+        "y": 227.3736
+      },
+      "id": "c33a53d5-0fa2-4eca-92f2-ecaca187ebc0",
+      "name": "MarriageStatus_Single",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 36.6016,
+        "w": 36.6016,
+        "x": 16.6371,
+        "y": 271.7391
+      },
+      "id": "37853dc8-0f87-4501-908a-0eab14b189c6",
+      "name": "MarriageStatus_Married",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 42.1473,
+        "w": 242.9015,
+        "x": 99.8225,
+        "y": 353.8154
+      },
+      "id": "351bdda4-e930-4d7d-97e0-91e87dfc3367",
+      "name": "Initials",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}
