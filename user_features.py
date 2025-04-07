@@ -268,7 +268,7 @@ class ResidenceStatus(BaseUserAttr):
 
     @staticmethod
     def nl_desc(option):
-        return f"The user's residence status ({", ".join([e.value for e in ResidenceStatusEnum])}) is: {option}"
+        return f"The user's residence status ({', '.join([e.value for e in ResidenceStatusEnum])}) is: {option}"
 
 
 class JointResidenceStatus(BaseUserAttr):
@@ -281,7 +281,7 @@ class JointResidenceStatus(BaseUserAttr):
 
     @staticmethod
     def nl_desc(option):
-        return f"The joint filer's residence status ({", ".join([e.value for e in ResidenceStatusEnum])}) is: {option}"
+        return f"The joint filer's residence status ({', '.join([e.value for e in ResidenceStatusEnum])}) is: {option}"
 
 
 class MortgageCompany(BaseUserAttr):
@@ -858,7 +858,7 @@ class PreviousResidenceStatus(BaseUserAttr):
 
     @staticmethod
     def nl_desc(option):
-        return f"The user's most recent previous residence status ({", ".join([e.value for e in ResidenceStatusEnum])}) is: {option}"
+        return f"The user's most recent previous residence status ({', '.join([e.value for e in ResidenceStatusEnum])}) is: {option}"
 
 
 class JointPreviousResidenceStatus(BaseUserAttr):
@@ -871,7 +871,7 @@ class JointPreviousResidenceStatus(BaseUserAttr):
 
     @staticmethod
     def nl_desc(option):
-        return f"The joint filer's most recent previous residence status ({", ".join([e.value for e in ResidenceStatusEnum])}) is: {option}"
+        return f"The joint filer's most recent previous residence status ({', '.join([e.value for e in ResidenceStatusEnum])}) is: {option}"
 
 
 class TimeAtPreviousAddressYears(BaseUserAttr):
