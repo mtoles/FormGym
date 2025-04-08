@@ -128,13 +128,15 @@ else:
     raise ValueError(f"Unknown model name: {args.model_name}")
 # Set batch size to 2 and process in batches
 
+# Main processing loop: continue while there are active examples to process
 while not (active_df := df[df.active.apply(lambda x: x[-1])]).empty:
-    # active_df = df[df.active.apply(lambda x: x[-1])]
-    # prep the images
+    # Process examples in batches for efficiency
     for batch_start in range(0, len(active_df), BATCH_SIZE):
+        # Get current batch of examples
         batch = active_df.iloc[batch_start : batch_start + BATCH_SIZE]
         batch = batch.reset_index(drop=True)
 
+        # Get model predictions for the current batch
         batch_model_outputs = model.forward(
             nl_profile=batch["nl_profile"].to_list(),
             doc_image=batch["img"].apply(lambda x: x[-1]).to_list(),
@@ -142,17 +144,24 @@ while not (active_df := df[df.active.apply(lambda x: x[-1])]).empty:
             flow=batch["flow"].to_list(),
         )
 
+        # Process each example in the batch
         for i, act in enumerate(batch_model_outputs):
             example = batch.iloc[i]
+            # Record the action taken
             example["actions"].append(act)
+            
+            # Update document state based on the action
             doc_state, feedback = actions.update_doc_state(
                 doc_state=example["doc_state"][-1],
                 agent_generations=act,
                 db=db,
             )
-            # save_path=f"tmp/{args.file_ids[idx]}-last.png",
+            
+            # Update example state with new document state and feedback
             example["doc_state"].append(doc_state)
             example["feedback"].append(feedback)
+            
+            # Generate and save visualization of the updated document state
             example["img"].append(
                 models.get_image_of_state(
                     doc_state=doc_state,
@@ -160,10 +169,11 @@ while not (active_df := df[df.active.apply(lambda x: x[-1])]).empty:
                     save_path=f"tmp/{example['fid']}-{len(example['doc_state'])}.png",
                 )
             )
+            
+            # Update whether this example should continue being processed
             example["active"].append(example_should_be_active(example=example))
             print
 
-            # any([a for a in act if a["action"] == "Terminate"])
 metrics_summary = []
 for example in df.iloc:
     doc_state = example["doc_state"][-1]
