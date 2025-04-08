@@ -23,6 +23,7 @@ from hfmodels import (
 from vllm import LLM, EngineArgs, SamplingParams
 import time
 from prompt import parse_raw_output
+from json import JSONDecodeError
 
 memory = Memory(".joblib_cache", verbose=0)
 
@@ -196,6 +197,8 @@ def add_grid_overlay(img):
 
 
 def parse_and_reconstruct_fields(response_text):
+    # Regex that attempts to capture top-level { ... } blocks (no nested braces).
+    # If there's a missing '}', that chunk won't match and won't be parsed.
     pattern = r"(\{[^}]*\})"
     matches = re.findall(pattern, response_text)
 
@@ -205,15 +208,25 @@ def parse_and_reconstruct_fields(response_text):
         try:
             match_dict = json.loads(match)
             action_name = match_dict["action"]
+            
+            # Assume these are defined somewhere in your code:
+            #   ActionMeta.registry -> dict of valid actions
+            #   InvalidAction -> some fallback action class
+            #   Each action has a Schema for validation
             if action_name in ActionMeta.registry:
                 action = ActionMeta.registry[action_name]
             else:
                 action = InvalidAction
+            
+            # Validate against the schema
             action.Schema(**match_dict)
             passed_actions.append(match_dict)
-        except ValidationError as e:
-            print(f"Validation error for {match}: {e}")
+
+        except (JSONDecodeError, ValidationError) as e:
+            # Instead of crashing, just skip the broken chunk
+            print(f"Skipping invalid JSON block: {match}\nError: {e}")
             failed_actions.append(match)
+    
     return passed_actions
 
 
