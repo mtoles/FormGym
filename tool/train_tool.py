@@ -37,17 +37,25 @@ class FormDataset(Dataset):
             padding="max_length",
             # max_length=2048,
             truncation=True,
-
         )
+
+
         
         # Get the bounding box coordinates
-        bbox = torch.tensor(item['question_bbox'], dtype=torch.bfloat16)
+        # bbox = torch.tensor(item['question_bbox'], dtype=torch.bfloat16)
+        bbox = str(item["answer_bbox"])
+        labels = self.processor.tokenizer(
+            bbox,
+            return_tensors="pt",
+            padding="max_length",
+            truncation=True,
+        )['input_ids'].squeeze(0)
         
         return {
             'pixel_values': inputs['pixel_values'].squeeze(0).to(torch.bfloat16),
             'input_ids': inputs['input_ids'].squeeze(0),
             'attention_mask': inputs['attention_mask'].squeeze(0),
-            'bbox': bbox
+            'labels': labels
         }
 
 def train():
@@ -98,27 +106,31 @@ def train():
             pixel_values = batch['pixel_values'].to(device)
             input_ids = batch['input_ids'].to(device)
             attention_mask = batch['attention_mask'].to(device)
-            bbox = batch['bbox'].to(device)
+            labels = batch['labels'].to(device)
             
             # Forward pass
             outputs = model(
                 input_ids=input_ids,
                 pixel_values=pixel_values,
-                attention_mask=attention_mask
+                attention_mask=attention_mask,
+                labels=labels
             )
+
+            loss = outputs.loss
             
             # Extract the predicted bounding box from the model's output
             # Note: This is a placeholder - you'll need to modify this based on how
             # Florence-2 outputs bounding box predictions
-            predicted_bbox = outputs.last_hidden_state[:, -1, :4]  # Assuming last 4 tokens are bbox coords
+            # predicted_bbox = outputs.last_hidden_state[:, -1, :4]  # Assuming last 4 tokens are bbox coords
             
             # Calculate loss
-            loss = criterion(predicted_bbox, bbox)
+            # loss = criterion(predicted_bbox, bbox)
             
             # Backward pass
-            optimizer.zero_grad()
             loss.backward()
             optimizer.step()
+            # lr_scheduler.step()
+            optimizer.zero_grad()
             
             total_loss += loss.item()
             progress_bar.set_postfix({'loss': loss.item()})
