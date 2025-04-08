@@ -22,6 +22,7 @@ from hfmodels import (
 )
 from vllm import LLM, EngineArgs, SamplingParams
 import time
+from prompt import parse_and_reconstruct_fields
 
 memory = Memory(".joblib_cache", verbose=0)
 
@@ -47,8 +48,6 @@ memory = Memory(".joblib_cache", verbose=0)
 # """
 
 e2e_prompt_template = """Complete the attached form based on the following user profile:
-        
-{user_profile}
 
 Generate a sequence of actions that will fill out the form. 
 
@@ -376,8 +375,6 @@ class ScriptedModel:
         targets: List[str] = [],
         **kwargs,
     ) -> List[Dict]:
-        print("ScriptedModel forward called")
-
         if self.count >= len(self.script):
             # todo: terminate and check for errors
             # raise StopIteration
@@ -408,7 +405,6 @@ class GptModelE2E:
         available_actions: List[str],
         flow: List[str],
     ) -> List[Dict]:
-        print("GptModelE2E forward called")
         outputs = []
         for profile, image, f in zip(
             nl_profile, doc_image, flow
@@ -435,8 +431,6 @@ class GptModelE2E:
                 .choices[0]
                 .message.content
             )
-
-            print(f"Response: {response}")
             
             tool_params = parse_and_reconstruct_fields(response)
             if f == FlowEnum.ITERATIVE.value:
@@ -497,7 +491,7 @@ def forward_gpt(model_name, prompt, base64_image):
     return completion
 
 class HFE2EModel:
-    def __init__(self, model_name: str, download_dir: str = "/local/data/rs4478/vllm_cache", seed=None, draw_grid: bool = False):
+    def __init__(self, model_name: str, download_dir: str, seed=None, draw_grid: bool = False):
         model_registry = {
             "aria": AriaModel,
             "llava": LlavaModel,
@@ -506,7 +500,6 @@ class HFE2EModel:
             "deepseek_vl2": DeepseekVL2Model,
             "gemma3": Gemma3Model,
             "mllama": MLLamaModel,
-            # add more models here (MyFancyModel, etc.)
         }
 
         if model_name not in model_registry:
@@ -517,7 +510,7 @@ class HFE2EModel:
         engine_args_dict = asdict(self.model.engine_args)
         engine_args_dict["download_dir"] = download_dir
         engine_args_dict["seed"] = seed
-        # Argument for multiple GPUs
+        # TODO - Argument for multiple GPUs
         # engine_args_dict["tensor_parallel_size"] = 4
 
         self.llm = LLM(**engine_args_dict)
@@ -561,7 +554,17 @@ class HFE2EModel:
         outputs = self.llm.generate(all_inputs, sampling_params=self.sampling_params)
         elapsed_time = time.time() - start_time
         print(f"[HFE2EModel.forward] Generation time: {elapsed_time:.2f} s")
-        print(f"Ouput:")
-        print(outputs.outputs[0].text)
-        print("===="*20)
+        print(f"Raw Ouputs:")
+        for o in outputs:
+            generated_text = o.outputs[0].text
+            print(generated_text)
+            print("===="*20)
+
+        parsed_outputs = []
+        for i, out in enumerate(outputs):
+            raw_text = out.outputs[0].text
+            # parsed_response = parse_and_reconstruct_fields(raw_text)
+            # parsed_output_json = json.dumps(parsed_response, indent=2)
+            parsed_outputs.append(raw_text)
+
         return outputs

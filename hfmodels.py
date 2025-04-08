@@ -13,7 +13,7 @@ from vllm.assets.video import VideoAsset
 from vllm.lora.request import LoRARequest
 from vllm.utils import FlexibleArgumentParser
 
-from prompt import get_prompt, parse_and_reconstruct_fields
+from prompt import parse_and_reconstruct_fields
 import json
 from vllm.sampling_params import GuidedDecodingParams
 from pydantic import BaseModel
@@ -34,7 +34,6 @@ class BaseHFModel:
         """Subclasses must override this with prompt-building logic."""
         raise NotImplementedError("Subclasses must implement get_prompt()")
 
-# ARIA Model
 class AriaModel(BaseHFModel):
     def __init__(self):
         super().__init__()

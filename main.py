@@ -29,7 +29,7 @@ def example_should_be_active(example):
 parser = argparse.ArgumentParser()
 parser.add_argument("--model_type", type=str, default="hf")
 
-parser.add_argument("--model_name", type=str, default="llava")
+parser.add_argument("--model_name", type=str, default="deepseek_vl2")
 parser.add_argument("--download_dir", type=str, default="/local/data/rs4478/vllm_cache")
 
 parser.add_argument("--doc_format", type=str)  # No default provided in the command
@@ -58,8 +58,7 @@ for i, fid in enumerate(args.file_ids):
     png_path = f"pngs/{fid}.png"
     print(f"Processing file: {png_path}")
 
-    blank_img = Image.open(png_path)
-    blank_img_rgb = blank_img.convert("RGB")
+    blank_img = Image.open(png_path).convert("RGB")
     annot_path = f"annotations/{fid}.json"
     annots = annotations.read_annotations(annot_path)
     targets = annotations.read_targets(f"targets/{fid}_targets.json")["selected_ids"]
@@ -104,7 +103,6 @@ for i, fid in enumerate(args.file_ids):
             "nl_profile": nl_profile,
             "png_path": png_path,
             "blank_img": blank_img,
-            "blank_img_rgb": blank_img_rgb,
             "action_count": action_count,
             "flow": flow,
             "targets": targets,
@@ -162,7 +160,9 @@ while not (active_df := df[df.active.apply(lambda x: x[-1])]).empty:
             example = batch.iloc[i]
             # Record the action taken
             example["actions"].append(act)
-            
+
+            print(f"Processing example: {example['fid']}, Action: {act}")
+
             # Update document state based on the action
             doc_state, feedback = actions.update_doc_state(
                 doc_state=example["doc_state"][-1],
