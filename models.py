@@ -10,7 +10,18 @@ from typing import List, Dict, Union
 from utils import *
 import re
 from pydantic import ValidationError
-
+from dataclasses import asdict
+from hfmodels import (
+    AriaModel,
+    LlavaModel,
+    MolmoModel,
+    QwenVLModel,
+    DeepseekVL2Model,
+    Gemma3Model,
+    MLLamaModel,
+)
+from vllm import LLM, EngineArgs, SamplingParams
+import time
 
 memory = Memory(".joblib_cache", verbose=0)
 
@@ -348,6 +359,8 @@ class ScriptedModel:
         targets: List[str] = [],
         **kwargs,
     ) -> List[Dict]:
+        print("ScriptedModel forward called")
+
         if self.count >= len(self.script):
             # todo: terminate and check for errors
             # raise StopIteration
@@ -378,6 +391,7 @@ class GptModelE2E:
         available_actions: List[str],
         flow: List[str],
     ) -> List[Dict]:
+        print("GptModelE2E forward called")
         outputs = []
         for profile, image, action, f in zip(
             nl_profile, doc_image, available_actions, flow
@@ -405,6 +419,8 @@ class GptModelE2E:
                 .message.content
             )
 
+            print(f"Response: {response}")
+            
             tool_params = parse_and_reconstruct_fields(response)
             if f == FlowEnum.ITERATIVE.value:
                 tool_params = tool_params[:1]
@@ -462,3 +478,55 @@ def forward_gpt(model_name, prompt, base64_image):
     )
 
     return completion
+
+class HFE2EModel:
+    def __init__(self, model_name: str, download_dir: str = "/local/data/rs4478/vllm_cache", seed=None):
+        model_registry = {
+            "aria": AriaModel,
+            "llava": LlavaModel,
+            "molmo": MolmoModel, 
+            "qwen_vl": QwenVLModel,
+            "deepseek_vl2": DeepseekVL2Model,
+            "gemma3": Gemma3Model,
+            "mllama": MLLamaModel,
+            # add more models here (MyFancyModel, etc.)
+        }
+
+        if model_name not in model_registry:
+            raise ValueError(f"Unsupported model: {model_name}")
+
+        self.model = model_registry[model_name]()
+
+        engine_args_dict = asdict(self.model.engine_args)
+        engine_args_dict["download_dir"] = download_dir
+        engine_args_dict["seed"] = seed
+        # Argument for multiple GPUs
+        # engine_args_dict["tensor_parallel_size"] = 4
+
+        self.llm = LLM(**engine_args_dict)
+
+        self.sampling_params = SamplingParams(
+            temperature=0.2,
+            max_tokens=64,
+            stop_token_ids=self.model.stop_token_ids,
+        )
+
+        self.model_name = model_name
+
+    def forward(self, images: List[Image.Image]):
+        prompts = self.model.get_prompt(images)
+
+        all_inputs = []
+        for img, prompt in zip(images, prompts):
+            all_inputs.append(
+                {
+                    "prompt": prompt,
+                    "multi_modal_data": {"image": img},
+                }
+            )
+
+        start_time = time.time()
+        outputs = self.llm.generate(all_inputs, sampling_params=self.sampling_params)
+        elapsed_time = time.time() - start_time
+        print(f"[HFE2EModel.forward] Generation time: {elapsed_time:.2f} s")
+        return outputs
