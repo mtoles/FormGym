@@ -25,13 +25,30 @@ import time
 
 memory = Memory(".joblib_cache", verbose=0)
 
+# TODO: need separate prompt for iterative and non-iterative
+# e2e_prompt_template = """Complete the attached form based on the following user profile:
+        
+# {user_profile}
+
+# You have access to the following APIs:
+
+# {api_documentation}
+
+# Generate a sequence of actions that will fill out the form. 
+
+# Complete the form to the best of your abilites, leaving signatures blank. 
+# If you do not know value for a field, fill it with "[UNK]".
+# Fill checkboxes with a single "x".
+# Format all dates as "MM/DD/YYYY", including leading zeros.
+
+# {grid_subprompt}
+
+# Return a form-filling API call as a JSON list of dictionaries.
+# """
+
 e2e_prompt_template = """Complete the attached form based on the following user profile:
         
 {user_profile}
-
-You have access to the following APIs:
-
-{api_documentation}
 
 Generate a sequence of actions that will fill out the form. 
 
@@ -393,12 +410,12 @@ class GptModelE2E:
     ) -> List[Dict]:
         print("GptModelE2E forward called")
         outputs = []
-        for profile, image, action, f in zip(
-            nl_profile, doc_image, available_actions, flow
+        for profile, image, f in zip(
+            nl_profile, doc_image, flow
         ):
             prompt = e2e_prompt_template.format(
                 user_profile=profile,
-                api_documentation=ActionMeta.all_documentation([action]),
+                api_documentation=ActionMeta.all_documentation('\n\n'.join(available_actions)),
                 grid_subprompt=grid_subprompt if self.draw_grid else "",
             )
 
@@ -480,7 +497,7 @@ def forward_gpt(model_name, prompt, base64_image):
     return completion
 
 class HFE2EModel:
-    def __init__(self, model_name: str, download_dir: str = "/local/data/rs4478/vllm_cache", seed=None):
+    def __init__(self, model_name: str, download_dir: str = "/local/data/rs4478/vllm_cache", seed=None, draw_grid: bool = False):
         model_registry = {
             "aria": AriaModel,
             "llava": LlavaModel,
@@ -512,12 +529,27 @@ class HFE2EModel:
         )
 
         self.model_name = model_name
+        self.draw_grid = draw_grid
 
-    def forward(self, images: List[Image.Image]):
-        prompts = self.model.get_prompt(images)
+    def forward(self, nl_profile: List[str],
+        doc_image: List[Image.Image],
+        available_actions: List[str],
+        flow: List[str],
+    ):
+        base_prompts = []
+
+        for profile, f in zip(nl_profile, flow):
+            base_prompt = e2e_prompt_template.format(
+                user_profile=profile,
+                api_documentation=ActionMeta.all_documentation('\n\n'.join(available_actions)),
+                grid_subprompt=grid_subprompt if self.draw_grid else "",
+            )
+            base_prompts.append(base_prompt)
+
+        prompts = self.model.get_templated_prompts(base_prompts)
 
         all_inputs = []
-        for img, prompt in zip(images, prompts):
+        for img, prompt in zip(doc_image, prompts):
             all_inputs.append(
                 {
                     "prompt": prompt,
@@ -529,4 +561,7 @@ class HFE2EModel:
         outputs = self.llm.generate(all_inputs, sampling_params=self.sampling_params)
         elapsed_time = time.time() - start_time
         print(f"[HFE2EModel.forward] Generation time: {elapsed_time:.2f} s")
+        print(f"Ouput:")
+        print(outputs.outputs[0].text)
+        print("===="*20)
         return outputs

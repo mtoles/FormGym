@@ -45,7 +45,7 @@ def get_prompt(img):
     - Copy field names exactly as they appear
     """
 
-    prompt = textwrap.dedent(prompt).strip()
+    
 
     return prompt
 

@@ -141,76 +141,75 @@ else:
     raise ValueError(f"Unknown model type: {args.model_type}")
 # Set batch size to 2 and process in batches
 
+# Main processing loop: continue while there are active examples to process
+while not (active_df := df[df.active.apply(lambda x: x[-1])]).empty:
+    # Process examples in batches for efficiency
+    for batch_start in range(0, len(active_df), BATCH_SIZE):
+        # Get current batch of examples
+        batch = active_df.iloc[batch_start : batch_start + BATCH_SIZE]
+        batch = batch.reset_index(drop=True)
 
-# Don't know how to integrate in below code
-images = df["blank_img_rgb"].to_list()
-res = model.forward(images=images)
+        # Get model predictions for the current batch
+        batch_model_outputs = model.forward(
+            nl_profile=batch["nl_profile"].to_list(),
+            doc_image=batch["img"].apply(lambda x: x[-1]).to_list(),
+            available_actions=available_actions,
+            flow=batch["flow"].to_list(),
+        )
 
-for i, out in enumerate(res):
-    # raw text from the LLM
-    raw_text = out.outputs[0].text
-    print(f"Raw output for image {i}: {raw_text}")
-    print("==========================")
+        # Process each example in the batch
+        for i, act in enumerate(batch_model_outputs):
+            example = batch.iloc[i]
+            # Record the action taken
+            example["actions"].append(act)
+            
+            # Update document state based on the action
+            doc_state, feedback = actions.update_doc_state(
+                doc_state=example["doc_state"][-1],
+                agent_generations=act,
+                db=db,
+            )
+            
+            # Update example state with new document state and feedback
+            example["doc_state"].append(doc_state)
+            example["feedback"].append(feedback)
+            
+            # Generate and save visualization of the updated document state
+            example["img"].append(
+                models.get_image_of_state(
+                    doc_state=doc_state,
+                    blank_img=example["blank_img"],
+                    save_path=f"tmp/{example['fid']}-{len(example['doc_state'])}.png",
+                )
+            )
+            
+            # Update whether this example should continue being processed
+            example["active"].append(example_should_be_active(example=example))
+            print
 
-# while not (active_df := df[df.active.apply(lambda x: x[-1])]).empty:
-#     # active_df = df[df.active.apply(lambda x: x[-1])]
-#     # prep the images
-#     for batch_start in range(0, len(active_df), BATCH_SIZE):
-#         batch = active_df.iloc[batch_start : batch_start + BATCH_SIZE]
-#         batch = batch.reset_index(drop=True)
+metrics_summary = []
+for example in df.iloc:
+    doc_state = example["doc_state"][-1]
+    user_profile = example["user_profile"]
+    result = ImagePdfFill().eval(user_profile=user_profile, doc_state=doc_state)
+    overall_acc = sum([f["correct"] for f in result.fields]) / len(result.fields)
+    models.visualize_preds(
+        doc_state=doc_state,
+        fields=result.fields,
+        img=example["blank_img"],
+    )
+    metrics_summary.append(
+        {
+            "png_file": example["png_path"],
+            "overall_accuracy": overall_acc,
+            "action_count": example["action_count"],
+        }
+    )
 
-#         batch_model_outputs = model.forward(
-#             nl_profile=batch["nl_profile"].to_list(),
-#             doc_image=batch["img"].apply(lambda x: x[-1]).to_list(),
-#             available_actions=available_actions,
-#             flow=batch["flow"].to_list(),
-#         )
-
-#         for i, act in enumerate(batch_model_outputs):
-#             example = batch.iloc[i]
-#             example["actions"].append(act)
-#             doc_state, feedback = actions.update_doc_state(
-#                 doc_state=example["doc_state"][-1],
-#                 agent_generations=act,
-#                 db=db,
-#             )
-#             # save_path=f"tmp/{args.file_ids[idx]}-last.png",
-#             example["doc_state"].append(doc_state)
-#             example["feedback"].append(feedback)
-#             example["img"].append(
-#                 models.get_image_of_state(
-#                     doc_state=doc_state,
-#                     blank_img=example["blank_img"],
-#                     save_path=f"tmp/{example['fid']}-{len(example['doc_state'])}.png",
-#                 )
-#             )
-#             example["active"].append(example_should_be_active(example=example))
-#             print
-
-#             # any([a for a in act if a["action"] == "Terminate"])
-# metrics_summary = []
-# for example in df.iloc:
-#     doc_state = example["doc_state"][-1]
-#     user_profile = example["user_profile"]
-#     result = ImagePdfFill().eval(user_profile=user_profile, doc_state=doc_state)
-#     overall_acc = sum([f["correct"] for f in result.fields]) / len(result.fields)
-#     models.visualize_preds(
-#         doc_state=doc_state,
-#         fields=result.fields,
-#         img=example["blank_img"],
-#     )
-#     metrics_summary.append(
-#         {
-#             "png_file": example["png_path"],
-#             "overall_accuracy": overall_acc,
-#             "action_count": example["action_count"],
-#         }
-#     )
-
-# # Print summary of metrics for all processed images
-# print("Summary of Metrics:")
-# for metrics in metrics_summary:
-#     print(
-#         f"File: {metrics['png_file']}, Overall Accuracy: {metrics['overall_accuracy']:.2f}, Actions: {metrics['action_count']}"
-#     )
-# print
+# Print summary of metrics for all processed images
+print("Summary of Metrics:")
+for metrics in metrics_summary:
+    print(
+        f"File: {metrics['png_file']}, Overall Accuracy: {metrics['overall_accuracy']:.2f}, Actions: {metrics['action_count']}"
+    )
+print
