@@ -92,6 +92,10 @@ def main():
     df = pd.DataFrame(all_pairs)
     df.to_json(output_json_path, orient='records', indent=2)
     
+    # Save a shorter version with 64 rows
+    short_output_path = 'tool/dataset/processed/qa_pairs_short.json'
+    df.head(64).to_json(short_output_path, orient='records', indent=2)
+    
     print(f"Processed {len(df)} question-answer pairs")
     print(f"Saved processed images to {output_images_dir}")
     print(f"Saved QA pairs to {output_json_path}")

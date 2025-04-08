@@ -3,6 +3,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 from PIL import Image
 import os
+import numpy as np
 from transformers import AutoProcessor, AutoModelForCausalLM
 import torch.nn as nn
 from tqdm import tqdm
@@ -20,24 +21,30 @@ class FormDataset(Dataset):
     
     def __getitem__(self, idx):
         item = self.data[idx]
-        image_path = os.path.join(self.image_dir, f"{item['form_id']}.png")
+        image_path = os.path.join(self.image_dir, f"{item['processed_image']}")
         image = Image.open(image_path).convert('RGB')
+        image = np.array(image)
         
         # Format the prompt
-        prompt = f"Where is the bounding box for '{item['question_text']}'"
+        # prompt = f"Where is the bounding box for '{item['question_text']}'"
+        prompt = "0"
         
-        # Process the image and text
+        # Process the image and text with padding
         inputs = self.processor(
             images=image,
             text=prompt,
-            return_tensors="pt"
+            return_tensors="pt",
+            padding="max_length",
+            # max_length=2048,
+            truncation=True,
+
         )
         
         # Get the bounding box coordinates
-        bbox = torch.tensor(item['question_bbox'], dtype=torch.float32)
+        bbox = torch.tensor(item['question_bbox'], dtype=torch.bfloat16)
         
         return {
-            'pixel_values': inputs['pixel_values'].squeeze(0),
+            'pixel_values': inputs['pixel_values'].squeeze(0).to(torch.bfloat16),
             'input_ids': inputs['input_ids'].squeeze(0),
             'attention_mask': inputs['attention_mask'].squeeze(0),
             'bbox': bbox
@@ -45,8 +52,10 @@ class FormDataset(Dataset):
 
 def train():
     # Initialize model and processor
-    model_id = "microsoft/Florence-2-large"
-    model = AutoModelForCausalLM.from_pretrained(model_id, trust_remote_code=True)
+    # model_id = "microsoft/Florence-2-large"
+    model_id = "microsoft/Florence-2-base"
+    torch_dtype = torch.bfloat16 #if torch.cuda.is_available() else torch.float32
+    model = AutoModelForCausalLM.from_pretrained(model_id, trust_remote_code=True, torch_dtype=torch_dtype, device_map="auto")
     processor = AutoProcessor.from_pretrained(model_id, trust_remote_code=True)
     
     # Move model to GPU
@@ -55,7 +64,7 @@ def train():
     
     # Initialize dataset and dataloader
     dataset = FormDataset(
-        json_path="tool/dataset/processed/qa_pairs.json",
+        json_path="tool/dataset/processed/qa_pairs_short.json",
         image_dir="tool/dataset/processed/images",
         processor=processor
     )
@@ -67,11 +76,16 @@ def train():
         num_workers=4,
         pin_memory=True
     )
+
+    
     
     # Initialize optimizer and loss function
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-5)
     criterion = nn.MSELoss()
     
+    # Save first batch for debugging
+    # first_batch = next(iter(dataloader))
+
     # Training loop
     num_epochs = 1
     for epoch in range(num_epochs):
@@ -88,8 +102,8 @@ def train():
             
             # Forward pass
             outputs = model(
-                pixel_values=pixel_values,
                 input_ids=input_ids,
+                pixel_values=pixel_values,
                 attention_mask=attention_mask
             )
             
