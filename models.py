@@ -27,27 +27,13 @@ from prompt import parse_and_reconstruct_fields
 memory = Memory(".joblib_cache", verbose=0)
 
 # TODO: need separate prompt for iterative and non-iterative
-# e2e_prompt_template = """Complete the attached form based on the following user profile:
-        
-# {user_profile}
-
-# You have access to the following APIs:
-
-# {api_documentation}
-
-# Generate a sequence of actions that will fill out the form. 
-
-# Complete the form to the best of your abilites, leaving signatures blank. 
-# If you do not know value for a field, fill it with "[UNK]".
-# Fill checkboxes with a single "x".
-# Format all dates as "MM/DD/YYYY", including leading zeros.
-
-# {grid_subprompt}
-
-# Return a form-filling API call as a JSON list of dictionaries.
-# """
-
 e2e_prompt_template = """Complete the attached form based on the following user profile:
+        
+{user_profile}
+
+You have access to the following APIs:
+
+{api_documentation}
 
 Generate a sequence of actions that will fill out the form. 
 
@@ -515,11 +501,18 @@ class HFE2EModel:
 
         self.llm = LLM(**engine_args_dict)
 
+        print("Engine Args:")
+        print(engine_args_dict)
+        print("==="*20)
+        
         self.sampling_params = SamplingParams(
             temperature=0.2,
             max_tokens=64,
             stop_token_ids=self.model.stop_token_ids,
         )
+
+        print("Sampling Params:")
+        print(self.sampling_params)
 
         self.model_name = model_name
         self.draw_grid = draw_grid

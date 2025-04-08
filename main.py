@@ -27,6 +27,8 @@ def example_should_be_active(example):
 
 
 parser = argparse.ArgumentParser()
+parser.add_argument("--model_type", type=str, help="Specify model type, e.g., hf")
+parser.add_argument("--download_dir", type=str)
 parser.add_argument("--model_name", type=str)
 parser.add_argument("--doc_format", type=str)
 parser.add_argument("--task", type=str)
