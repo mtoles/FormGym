@@ -27,19 +27,15 @@ def example_should_be_active(example):
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--model_type", type=str, default="hf")
-
-parser.add_argument("--model_name", type=str, default="deepseek_vl2")
-parser.add_argument("--download_dir", type=str, default="/local/data/rs4478/vllm_cache")
-
-parser.add_argument("--doc_format", type=str)  # No default provided in the command
-parser.add_argument("--task", type=str, default="iterative")
+parser.add_argument("--model_name", type=str)
+parser.add_argument("--doc_format", type=str)
+parser.add_argument("--task", type=str)
+# New argument to take a list of PNG file paths
 parser.add_argument(
-    "--file_ids", type=str, nargs="+", default=["xx_0_0", "xx_1_0"],
-    help="List of file ids, e.g. al_0_0"
+    "--file_ids", type=str, nargs="+", help="List of file ids, e.g. al_0_0"
 )
-parser.add_argument("--k_missing_fields", type=int, default=2)
-parser.add_argument("--max_actions_multiplier", type=int, default=4)
+parser.add_argument("--k_missing_fields", type=int, default=1)
+parser.add_argument("--max_actions_multiplier", type=int, default=2)
 args = parser.parse_args()
 
 # Validate the task argument
