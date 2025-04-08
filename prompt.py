@@ -63,3 +63,56 @@ def parse_and_reconstruct_fields(response_text):
     }
     
     return result
+
+def parse_raw_output(raw_text):
+    """
+    Parse 'raw_text' that is intended to be a JSON array of objects with
+    keys: 'action', 'cx', 'cy', and 'value'. If the text is not strictly
+    valid JSON (for example because it ends abruptly), fall back to a
+    regex approach to extract valid dictionary blocks. 
+    """
+    # Remove any leading/trailing backticks or ```json fences.
+    raw_text = raw_text.strip().strip('`')
+    raw_text = raw_text.replace('```json', '').replace('```', '').strip()
+    
+    # Attempt 1: Try loading as valid JSON
+    try:
+        data = json.loads(raw_text)
+    except json.JSONDecodeError:
+        data = None
+    
+    # If direct JSON parsing failed or returned something invalid,
+    # fall back to a regex approach.
+    if not isinstance(data, list):
+        data = []
+        # Regex to capture minimal well-formed objects of the kind:
+        # {"action": "...", "cx": 0.5, "cy": 0.5, "value": "..."}
+        pattern = re.compile(
+            r'\{\s*"action":\s*"([^"]+)"\s*,'
+            r'\s*"cx":\s*([\d.]+)\s*,'
+            r'\s*"cy":\s*([\d.]+)\s*,'
+            r'\s*"value":\s*"([^"]+)"\s*\}'
+        )
+        for match in pattern.finditer(raw_text):
+            entry = {
+                "action": match.group(1),
+                "cx": float(match.group(2)),
+                "cy": float(match.group(3)),
+                "value": match.group(4)
+            }
+            data.append(entry)
+    
+    # Filter out anything that does not have the required keys
+    required_keys = {"action", "cx", "cy", "value"}
+    valid_entries = []
+    for item in data:
+        # Check that it's a dictionary and has all keys
+        if isinstance(item, dict) and required_keys.issubset(item.keys()):
+            valid_entries.append({
+                "action": item["action"],
+                "cx": item["cx"],
+                "cy": item["cy"],
+                "value": item["value"]
+            })
+    
+    return valid_entries

@@ -22,14 +22,12 @@ from hfmodels import (
 )
 from vllm import LLM, EngineArgs, SamplingParams
 import time
-from prompt import parse_and_reconstruct_fields
+from prompt import parse_raw_output
 
 memory = Memory(".joblib_cache", verbose=0)
 
 # TODO: need separate prompt for iterative and non-iterative
 e2e_prompt_template = """Complete the attached form based on the following user profile:
-        
-{user_profile}
 
 You have access to the following APIs:
 
@@ -500,19 +498,12 @@ class HFE2EModel:
         # engine_args_dict["tensor_parallel_size"] = 4
 
         self.llm = LLM(**engine_args_dict)
-
-        print("Engine Args:")
-        print(engine_args_dict)
-        print("==="*20)
         
         self.sampling_params = SamplingParams(
             temperature=0.2,
             max_tokens=64,
             stop_token_ids=self.model.stop_token_ids,
         )
-
-        print("Sampling Params:")
-        print(self.sampling_params)
 
         self.model_name = model_name
         self.draw_grid = draw_grid
@@ -546,18 +537,17 @@ class HFE2EModel:
         start_time = time.time()
         outputs = self.llm.generate(all_inputs, sampling_params=self.sampling_params)
         elapsed_time = time.time() - start_time
-        print(f"[HFE2EModel.forward] Generation time: {elapsed_time:.2f} s")
-        print(f"Raw Ouputs:")
-        for o in outputs:
-            generated_text = o.outputs[0].text
-            print(generated_text)
-            print("===="*20)
 
         parsed_outputs = []
         for i, out in enumerate(outputs):
             raw_text = out.outputs[0].text
-            # parsed_response = parse_and_reconstruct_fields(raw_text)
-            # parsed_output_json = json.dumps(parsed_response, indent=2)
-            parsed_outputs.append(raw_text)
+            print(f"Raw Outputs for input {i}:")
+            print(raw_text)
+            print("===="*20)
+            parsed_response = parse_and_reconstruct_fields(raw_text)
+            print(f"Parsed Outputs for input {i}:")
+            print(parsed_response)
+            print("===="*20)
+            parsed_outputs.append(parsed_response)
 
-        return outputs
+        return parsed_outputs
