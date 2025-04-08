@@ -65,15 +65,24 @@ class PlaceText(BaseAction):
     """
 
     def act(doc_state, cx: float, cy: float, value: str, **kwargs):
-        doc_state.marks.append(
-            {
-                "action": "PlaceText",
-                "cx": cx,
-                "cy": cy,
-                "value": value,
-                "creator": "agent",
-            }
+        mark = {
+            "action": "PlaceText",
+            "cx": cx,
+            "cy": cy,
+            "value": value,
+            "creator": "agent",
+        }
+        
+        mark["bbox"] = get_text_bbox(
+            text=value,
+            doc_width=doc_state.w,
+            doc_height=doc_state.h,
+            cx=cx,
+            cy=cy,
         )
+
+        doc_state.marks.append(mark)
+
         feedback = f"Action: 'PlaceText'\nText placed: <`{value}` at ({cx}, {cy})>"
         return doc_state, feedback
 
@@ -100,6 +109,12 @@ class DeleteText(BaseAction):
         # Find all marks in doc_state.marks that intersect with (x, y)
         retained_marks = []
         deleted_marks = []
+
+        # Add a check to see if there are no marks to delete then skip
+        if not doc_state.marks:
+            feedback = "Action: 'DeleteText'\nNo marks to delete."
+            return doc_state, feedback
+        
         for mark in doc_state.marks:
             if (
                 (cx >= mark["bbox"]["x"])
@@ -111,14 +126,6 @@ class DeleteText(BaseAction):
             else:
                 retained_marks.append(mark)
         doc_state.marks = retained_marks
-        # doc_state.marks = [
-        #     mark
-        #     for mark in doc_state.marks
-        #     if cx >= mark["bbox"]["x"]
-        #     and cx <= mark["bbox"]["x"] + mark["bbox"]["width"]
-        #     and cy >= mark["bbox"]["y"]
-        #     and cy <= mark["bbox"]["y"] + mark["bbox"]["height"]
-        # ]
         print(f"Marks deleted: {deleted_marks}")
         feedback = f"Action: 'DeleteText'\nMarks deleted: {deleted_marks}"
         return doc_state, feedback
@@ -138,9 +145,24 @@ class SignOrInitial(BaseAction):
     """
 
     def act(doc_state, cx: float, cy: float, value: str, **kwargs):
-        doc_state.marks.append(
-            {"action": "Sign", "cx": cx, "cy": cy, "value": value, "creator": "agent"}
+        mark = {
+            "action": "Sign",
+            "cx": cx,
+            "cy": cy,
+            "value": value,
+            "creator": "agent",
+        }
+        
+        mark["bbox"] = get_text_bbox(
+            text=value,
+            doc_width=doc_state.w,
+            doc_height=doc_state.h,
+            cx=cx,
+            cy=cy,
         )
+
+        doc_state.marks.append(mark)
+
         feedback = (
             f"Action: 'SignOrInitial'\nSignature placed: <`{value}` at ({cx}, {cy})>"
         )
@@ -218,6 +240,7 @@ class InvalidAction(BaseAction):
 
 
 def update_doc_state(doc_state, agent_generations: List[Dict], db=None):
+    print("Updating doc state with agent generations")
     doc_state = deepcopy(doc_state)
     assert isinstance(agent_generations, list)
     if agent_generations:
@@ -229,13 +252,14 @@ def update_doc_state(doc_state, agent_generations: List[Dict], db=None):
         doc_state, feedback = act.act(doc_state, **ag, db=db)
         feedbacks.append(feedback)
 
-    # add bboxes to every mark
-    for mark in doc_state.marks:
-        mark["bbox"] = get_text_bbox(
-            text=mark["value"],
-            doc_width=doc_state.w,
-            doc_height=doc_state.h,
-            cx=mark["cx"],
-            cy=mark["cy"],
-        )
+    # # add bboxes to every mark
+    # for mark in doc_state.marks:
+    #     mark["bbox"] = get_text_bbox(
+    #         text=mark["value"],
+    #         doc_width=doc_state.w,
+    #         doc_height=doc_state.h,
+    #         cx=mark["cx"],
+    #         cy=mark["cy"],
+    #     )
+
     return doc_state, feedbacks
