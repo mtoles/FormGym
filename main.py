@@ -145,15 +145,15 @@ while not (active_df := df[df.active.apply(lambda x: x[-1])]).empty:
         )
 
         # Process each example in the batch
-        for i, act in enumerate(batch_model_outputs):
+        for i, acts in enumerate(batch_model_outputs):
             example = batch.iloc[i]
             # Record the action taken
-            example["actions"].append(act)
+            example["actions"].append(acts)
             
             # Update document state based on the action
             doc_state, feedback = actions.update_doc_state(
                 doc_state=example["doc_state"][-1],
-                agent_generations=act,
+                agent_generations=acts,
                 db=db,
             )
             
