@@ -4,6 +4,9 @@ from datasets import load_dataset
 from torch.utils.data import Dataset, DataLoader
 from tqdm import tqdm
 from transformers import AutoModelForCausalLM, AutoProcessor, AdamW, get_scheduler
+import json
+from PIL import Image
+import numpy as np
 
 data = load_dataset("HuggingFaceM4/DocumentVQA")
 
@@ -20,19 +23,26 @@ for param in model.vision_tower.parameters():
     param.is_trainable = False
 
 
-class DocVQADataset(Dataset):
+class FormGymDataset(Dataset):
 
     def __init__(self, data):
-        self.data = data
+        # self.data = data
+        self.image_dir = "tool/dataset/processed/images"
+        json_path = "tool/dataset/processed/qa_pairs_short.json"
+        with open(json_path, "r") as f:
+            self.data = json.load(f)
 
     def __len__(self):
         return len(self.data)
 
     def __getitem__(self, idx):
         example = self.data[idx]
-        question = "<DocVQA>" + example["question"]
-        first_answer = example["answers"][0]
-        image = example["image"].convert("RGB")
+        question = f"<CAPTION_TO_PHRASE_GROUNDING>Where is the bounding box for '{example['question_text']}'"
+        image_path = os.path.join(self.image_dir, f"{example['processed_image']}")
+        image = Image.open(image_path).convert("RGB")
+        image = np.array(image)
+        first_answer = str(example["answer_bbox"])
+
         return question, first_answer, image
 
 
@@ -50,8 +60,8 @@ def collate_fn(batch):
     return inputs, answers
 
 
-train_dataset = DocVQADataset(data["train"])
-val_dataset = DocVQADataset(data["validation"])
+train_dataset = FormGymDataset(data["train"])
+val_dataset = FormGymDataset(data["validation"])
 batch_size = 6
 num_workers = 0
 
@@ -66,6 +76,52 @@ val_loader = DataLoader(
     val_dataset, batch_size=batch_size, collate_fn=collate_fn, num_workers=num_workers
 )
 
+# Debug: Run a single forward pass for debugging...
+print("\nRunning single forward pass for debugging...")
+model.eval()
+with torch.no_grad():
+    # Get a single batch
+    inputs, answers = next(iter(val_loader))
+    print("\nInput shape:", inputs["input_ids"].shape)
+    print("Pixel values shape:", inputs["pixel_values"].shape)
+    print("Sample answer:", answers[0])
+
+    # Run forward pass
+    outputs = model(
+        input_ids=inputs["input_ids"],
+        pixel_values=inputs["pixel_values"],
+        labels=processor.tokenizer(
+            text=answers,
+            return_tensors="pt",
+            padding=True,
+            return_token_type_ids=False,
+        ).input_ids.to(device),
+    )
+    print("\nModel output loss:", outputs.loss.item())
+    print("Logits shape:", outputs.logits.shape)
+
+    # Get the generated text from the model
+    generated_ids = model.generate(
+        input_ids=inputs["input_ids"],
+        pixel_values=inputs["pixel_values"],
+        max_new_tokens=1024,
+        num_beams=3
+    )
+    generated_text = processor.batch_decode(generated_ids, skip_special_tokens=False)[0]
+    print("\nGenerated text:", generated_text)
+    
+    # Try post-processing
+    print("\nAttempting post-processing...")
+    try:
+        parsed_answer = processor.post_process_generation(
+            generated_text, 
+            task="<OD>", 
+            image_size=(inputs["pixel_values"].shape[-2], inputs["pixel_values"].shape[-1])
+        )
+        print("Post-processed answer:", parsed_answer)
+    except Exception as e:
+        print("Error in post-processing:", str(e))
+
 epochs = 7
 optimizer = AdamW(model.parameters(), lr=1e-6)
 num_training_steps = epochs * len(train_loader)
@@ -76,6 +132,9 @@ lr_scheduler = get_scheduler(
     num_warmup_steps=0,
     num_training_steps=num_training_steps,
 )
+
+# do a dry run so we can see what the output is supposed to look like
+
 
 for epoch in range(epochs):
     model.train()
