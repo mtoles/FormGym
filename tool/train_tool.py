@@ -28,7 +28,8 @@ class FormGymDataset(Dataset):
     def __init__(self, data):
         # self.data = data
         self.image_dir = "tool/dataset/processed/images"
-        json_path = "tool/dataset/processed/qa_pairs_short.json"
+        # json_path = "tool/dataset/processed/qa_pairs_short.json"
+        json_path = "tool/dataset/processed/qa_pairs.json"
         with open(json_path, "r") as f:
             self.data = json.load(f)
 
@@ -37,13 +38,21 @@ class FormGymDataset(Dataset):
 
     def __getitem__(self, idx):
         example = self.data[idx]
-        question = f"<CAPTION_TO_PHRASE_GROUNDING>Where is the bounding box for '{example['question_text']}'"
+        w = example["w"]
+        h = example["h"]
+        bbox = example["answer_bbox"]
+        x1 = str(int(bbox[0] / w * 1000))
+        y1 = str(int(bbox[1] / h * 1000))
+        x2 = str(int(bbox[2] / w * 1000))
+        y2 = str(int(bbox[3] / h * 1000))
+        question = f"<CAPTION_TO_PHRASE_GROUNDING>'{example['question_text']}' text entry field"
         image_path = os.path.join(self.image_dir, f"{example['processed_image']}")
         image = Image.open(image_path).convert("RGB")
         image = np.array(image)
-        first_answer = str(example["answer_bbox"])
+        # first_answer = str(example["answer_bbox"])
+        label = f"<loc_{x1}><loc_{y1}><loc_{x2}><loc_{y2}>"
 
-        return question, first_answer, image
+        return question, label, image
 
 
 import os
@@ -115,7 +124,7 @@ with torch.no_grad():
     try:
         parsed_answer = processor.post_process_generation(
             generated_text, 
-            task="<OD>", 
+            task="<CAPTION_TO_PHRASE_GROUNDING>", 
             image_size=(inputs["pixel_values"].shape[-2], inputs["pixel_values"].shape[-1])
         )
         print("Post-processed answer:", parsed_answer)
