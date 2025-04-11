@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 # Python
+=======
+# custom
+
+output.png
+
+
+# Byte-compiled / optimized / DLL files
+>>>>>>> main
 __pycache__/
 *.py[cod]
 *$py.class

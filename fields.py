@@ -108,6 +108,9 @@ class BaseCheckboxField(BaseField):
             return concatted_input == "x"
         else:
             return concatted_input == ""
+        
+class AnnotatedField(BaseField):
+    pass
 
 
 class SignOrInitial(BaseField):

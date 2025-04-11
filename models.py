@@ -14,6 +14,7 @@ from pydantic import ValidationError
 
 memory = Memory(".joblib_cache", verbose=0)
 
+# TODO: need separate prompt for iterative and non-iterative
 e2e_prompt_template = """Complete the attached form based on the following user profile:
         
 {user_profile}
@@ -379,12 +380,12 @@ class GptModelE2E:
         flow: List[str],
     ) -> List[Dict]:
         outputs = []
-        for profile, image, action, f in zip(
-            nl_profile, doc_image, available_actions, flow
+        for profile, image, f in zip(
+            nl_profile, doc_image, flow
         ):
             prompt = e2e_prompt_template.format(
                 user_profile=profile,
-                api_documentation=ActionMeta.all_documentation([action]),
+                api_documentation=ActionMeta.all_documentation('\n\n'.join(available_actions)),
                 grid_subprompt=grid_subprompt if self.draw_grid else "",
             )
 
