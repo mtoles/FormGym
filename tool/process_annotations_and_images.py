@@ -103,13 +103,22 @@ def main():
     # Create DataFrame
     df = pd.DataFrame(all_pairs)
 
-    # Shuffle the dataset
-    df = df.sample(frac=1, random_state=42).reset_index(drop=True)
+    # Get unique form_ids and shuffle them
+    unique_forms = df["form_id"].unique()
+    np.random.shuffle(unique_forms)
 
-    # Split into train and test sets (80/20)
-    train_size = int(0.8 * len(df))
-    train_df = df[:train_size]
-    test_df = df[train_size:]
+    # Split form_ids into train and test (80/20)
+    train_size = int(0.8 * len(unique_forms))
+    train_forms = unique_forms[:train_size]
+    test_forms = unique_forms[train_size:]
+
+    # Split the dataset based on form_ids
+    train_df = df[df["form_id"].isin(train_forms)]
+    test_df = df[df["form_id"].isin(test_forms)]
+
+    # Shuffle the train and test sets
+    train_df = train_df.sample(frac=1, random_state=42).reset_index(drop=True)
+    test_df = test_df.sample(frac=1, random_state=42).reset_index(drop=True)
 
     # Save full train and test sets
     train_df.to_json(

@@ -18,11 +18,11 @@ TASK_NAME_PREFIX = "<OPEN_VOCABULARY_DETECTION>"
 TRAIN_BATCH_SIZE = 16
 VAL_BATCH_SIZE = 64
 NUM_WORKERS = 0
-EPOCHS = 200
+EPOCHS = 10
 LEARNING_RATE = 1e-6
 MODEL_NAME = "microsoft/Florence-2-base-ft"
 MODEL_REVISION = "refs/pr/6"
-EPOCHS_PER_EVAL = 4
+EPOCHS_PER_EVAL = 2
 
 # Initialize wandb with config
 config = {
@@ -55,9 +55,9 @@ for param in model.vision_tower.parameters():
 
 class FormGymDataset(Dataset):
 
-    def __init__(self):
+    def __init__(self, json_path: str):
         self.image_dir = "tool/dataset/processed/images"
-        json_path = "tool/dataset/processed/train_qa_pairs_short.json"
+        # json_path = "tool/dataset/processed/train_qa_pairs_short.json"
         # json_path = "tool/dataset/processed/qa_pairs.json"
         with open(json_path, "r") as f:
             self.data = json.load(f)
@@ -225,7 +225,7 @@ def metrics(model, data_loader, split_name):
     print(f"val outputs (final batch):\n{generated_texts}")
     print(f"Validation Accuracy: {avg_iou}")
     print(f"Validation Loss: {avg_loss}")
-    wandb.log({f"{split_name}_iou": avg_iou, f"{split_name}_loss": avg_loss})
+    wandb.log({f"accuracy/{split_name}_iou": avg_iou, f"loss/{split_name}_loss": avg_loss})
     return avg_iou, avg_loss
 
 
@@ -243,8 +243,8 @@ def collate_fn(batch):
     return inputs, answers, widths, heights, bboxes
 
 
-train_dataset = FormGymDataset()
-val_dataset = FormGymDataset()  # TODO: add validation set
+train_dataset = FormGymDataset("tool/dataset/processed/train_qa_pairs.json")
+val_dataset = FormGymDataset("tool/dataset/processed/test_qa_pairs.json")  
 
 train_loader = DataLoader(
     train_dataset,
@@ -304,10 +304,10 @@ for epoch in range(EPOCHS):
         # Log batch-level metrics
         wandb.log(
             {
-                "batch_loss": loss.item(),
-                "learning_rate": lr_scheduler.get_last_lr()[0],
-                "epoch": epoch,
-                "batch": batch_no,
+                "loss/train_loss": loss.item(),
+                "config/learning_rate": lr_scheduler.get_last_lr()[0],
+                "config/epoch": epoch,
+                "config/batch": batch_no,
             }
         )
 
@@ -315,12 +315,12 @@ for epoch in range(EPOCHS):
     print(f"Average Training Loss: {avg_train_loss}")
     wandb.log(
         {
-            "epoch": epoch,
-            "train_loss": avg_train_loss,
-            "learning_rate": lr_scheduler.get_last_lr()[0],
+            "loss/train_loss": avg_train_loss,
+            "config/learning_rate": lr_scheduler.get_last_lr()[0],
+            "config/epoch": epoch,
         }
     )
 
     if epoch % EPOCHS_PER_EVAL == 0:
-        val_accuracy, val_loss = metrics(model, train_loader, "train")
+        val_accuracy, val_loss = metrics(model, val_loader, "train")
         # wandb.log({"epoch": epoch, "val_accuracy": val_accuracy, "val_loss": val_loss})
