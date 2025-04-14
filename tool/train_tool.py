@@ -12,31 +12,112 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 from transformers import AdamW, get_scheduler
 import wandb
+from datetime import datetime
+import argparse
+import yaml
+from pathlib import Path
+
+
+def load_config(config_path, override_args=None):
+    """Load configuration from YAML file and override with command line arguments"""
+    with open(config_path, "r") as f:
+        config = yaml.safe_load(f)
+
+    # Convert values to proper types based on argument parser types
+    for action in parser._actions:
+        if action.dest in config and action.type is not None:
+            try:
+                config[action.dest] = action.type(config[action.dest])
+            except (ValueError, TypeError):
+                # If conversion fails, keep the original value
+                pass
+
+    if override_args:
+        # Update config with command line arguments
+        for key, value in vars(override_args).items():
+            if value is not None and key in config:
+                config[key] = value
+
+    return config
+
+
+# Parse command line arguments
+parser = argparse.ArgumentParser(description="Train form filler model")
+parser.add_argument(
+    "--config",
+    type=str,
+    default="tool/config.yaml",
+    help="Path to configuration YAML file",
+)
+parser.add_argument(
+    "--train_path",
+    type=str,
+    help="Path to training data JSON file (overrides config)",
+)
+parser.add_argument(
+    "--eval_path",
+    type=str,
+    help="Path to evaluation data JSON file (overrides config)",
+)
+parser.add_argument(
+    "--epochs",
+    type=int,
+    help="Number of training epochs (overrides config)",
+)
+parser.add_argument(
+    "--learning_rate",
+    type=float,
+    help="Learning rate for training (overrides config)",
+)
+parser.add_argument(
+    "--train_batch_size",
+    type=int,
+    help="Training batch size (overrides config)",
+)
+parser.add_argument(
+    "--val_batch_size",
+    type=int,
+    help="Validation batch size (overrides config)",
+)
+parser.add_argument(
+    "--epochs_per_eval",
+    type=int,
+    help="Number of epochs between evaluations (overrides config)",
+)
+args = parser.parse_args()
+
+# Load configuration
+config = load_config(args.config, args)
 
 # Configuration
-TASK_NAME_PREFIX = "<OPEN_VOCABULARY_DETECTION>"
-TRAIN_BATCH_SIZE = 16
-VAL_BATCH_SIZE = 64
-NUM_WORKERS = 0
-EPOCHS = 10
-LEARNING_RATE = 1e-6
-MODEL_NAME = "microsoft/Florence-2-base-ft"
-MODEL_REVISION = "refs/pr/6"
-EPOCHS_PER_EVAL = 2
+TASK_NAME_PREFIX = config["task_name_prefix"]
+TRAIN_BATCH_SIZE = config["train_batch_size"]
+VAL_BATCH_SIZE = config["val_batch_size"]
+NUM_WORKERS = config["num_workers"]
+EPOCHS = config["epochs"]
+LEARNING_RATE = config["learning_rate"]
+MODEL_NAME = config["model_name"]
+MODEL_REVISION = config["model_revision"]
+EPOCHS_PER_EVAL = config["epochs_per_eval"]
+CHECKPOINT_DIR = config["checkpoint_dir"]
 
 # Initialize wandb with config
-config = {
+wandb_config = {
     "task_name_prefix": TASK_NAME_PREFIX,
     "train_batch_size": TRAIN_BATCH_SIZE,
-    # "val_batch_size": VAL_BATCH_SIZE,
-    # "num_workers": NUM_WORKERS,
     "epochs": EPOCHS,
     "learning_rate": LEARNING_RATE,
     "model": MODEL_NAME,
     "model_revision": MODEL_REVISION,
+    "train_path": config["train_path"],
+    "eval_path": config["eval_path"],
 }
 
-run = wandb.init(project="form-filler", name="train_tool", config=config)
+# Create a unique run name with timestamp
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+run_name = f"train_tool_{timestamp}"
+
+run = wandb.init(project="form-filler", name=run_name, config=wandb_config)
 
 disable_caching()
 
@@ -254,8 +335,8 @@ def collate_fn(batch):
     return inputs, answers, widths, heights, bboxes
 
 
-train_dataset = FormGymDataset("tool/dataset/processed/train_qa_pairs.json")
-val_dataset = FormGymDataset("tool/dataset/processed/test_qa_pairs.json")
+train_dataset = FormGymDataset(config["train_path"])
+val_dataset = FormGymDataset(config["eval_path"])
 
 
 train_loader = DataLoader(
@@ -333,5 +414,13 @@ for epoch in range(EPOCHS):
     )
 
     if epoch % EPOCHS_PER_EVAL == 0:
-        val_accuracy, val_loss = metrics(model, val_loader, "train")
+        val_accuracy, val_loss = metrics(model, val_loader, "val")
+        # save model
+        checkpoint_path = os.path.join(
+            CHECKPOINT_DIR, timestamp, f"model_epoch_{epoch}"
+        )
+        os.makedirs(os.path.dirname(checkpoint_path), exist_ok=True)
+        print(f"Saving model checkpoint to {checkpoint_path}")
+        model.save_pretrained(checkpoint_path)
+        print(f"Model checkpoint saved successfully")
         # wandb.log({"epoch": epoch, "val_accuracy": val_accuracy, "val_loss": val_loss})

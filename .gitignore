@@ -1,13 +1,11 @@
-<<<<<<< HEAD
 # Python
-=======
 # custom
 
 output.png
-
+tool/checkpoints
+tool/dataset
 
 # Byte-compiled / optimized / DLL files
->>>>>>> main
 __pycache__/
 *.py[cod]
 *$py.class

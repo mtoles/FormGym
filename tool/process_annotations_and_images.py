@@ -81,8 +81,8 @@ def process_annotation_and_image(file_path, input_images_dir, output_images_dir)
 
 def main():
     # Directory paths
-    annotations_dir = Path("tool/dataset/raw/annotations")
-    input_images_dir = "tool/dataset/raw/images"
+    annotations_dir = Path("tool/dataset/funsd/annotations")
+    input_images_dir = "tool/dataset/funsd/images"
     output_images_dir = "tool/dataset/processed/images"
     output_dir = "tool/dataset/processed"
 
