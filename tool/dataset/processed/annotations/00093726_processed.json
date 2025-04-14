@@ -1,0 +1,59 @@
+{
+  "Date:": "September 21, 1976",
+  "on": "September 21, 1976",
+  "BLEND": "OGS",
+  "CASING": "OGS",
+  "RECASING": "OGS",
+  "Sample No.": "6030",
+  "Type of Cigarette": "85 mm Filter",
+  "Batch Size": "50 lbs.",
+  "Original Request Made By": "Dr. A. W. Spears",
+  "Sample Specifications Written By": "W. E. Routh",
+  "FINAL FLAVOR": "OGS",
+  "Additional Spray": "3. 4% PMO in EtoH",
+  "Pressure Drop": "To be determined",
+  "Laboratory Analysis": "Smoke Analysis PMO Analysis",
+  "Special Requirements": "Spray 50 lbs. tobacco with solution of 880 g (= 1. 94 lbs.) PMC in 1175 ml of denatured alcohol. This should give 3. 4% PMO add- on (3. 3% PMO contained) assuming 88% spraying efficiency. PMO delivery from 85 mm cigarette smoked to 30 mm butt should be 6. 5 mg/ cig.",
+  "Cigarettes": {
+    "Maker": "AMF",
+    "Length": "85 mm",
+    "Circumference": "25.",
+    "Weight": "To be det. (803 mg tobacco)",
+    "Filter Length": "20 mm",
+    "Tipping Paper": "30 mm",
+    "Paper": "554"
+  },
+  "Filters": {
+    "Kind": "20 mm True plastic rod",
+    "Process": "",
+    "Rod Length": "",
+    "Pressure Drop": "",
+    "Circumference": "",
+    "Weight": "",
+    "Plasticizer": "",
+    "Plug Wrap": ""
+  },
+  "Responsibility": {
+    "Tobacco Blend": "Ammons",
+    "Filter Production": "Wicker",
+    "Making & Packing": "Brown /Routh",
+    "Shipping": "Routh",
+    "Sample Requisition [Form 02: 02: 06]": "\""
+  },
+  "apping": {
+    "Labels": "White",
+    "Tear rape": "White",
+    "Closures": "Blue",
+    "Cartons": "\"",
+    "Markings": "Sample No. on overwrap"
+  },
+  "Requirements": {
+    "Laboratory": "3 cartons",
+    "Other": "20, 000 cigts."
+  },
+  "Reports": {
+    "Written by": "P. D. Schickedantz",
+    "Original to": "Dr. A. W. Spears",
+    "Copies to": "Dr. F. J. Schulz Dr. H. J. Minnemeyer"
+  }
+}
