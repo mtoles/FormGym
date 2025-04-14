@@ -84,11 +84,11 @@ def main():
     annotations_dir = Path("tool/dataset/raw/annotations")
     input_images_dir = "tool/dataset/raw/images"
     output_images_dir = "tool/dataset/processed/images"
-    output_json_path = "tool/dataset/processed/qa_pairs.json"
+    output_dir = "tool/dataset/processed"
 
     # Create output directories
     os.makedirs(output_images_dir, exist_ok=True)
-    os.makedirs(os.path.dirname(output_json_path), exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
 
     # Process all JSON files
     all_pairs = []
@@ -100,17 +100,40 @@ def main():
         )
         all_pairs.extend(pairs)
 
-    # Create DataFrame and save to JSON
+    # Create DataFrame
     df = pd.DataFrame(all_pairs)
-    df.to_json(output_json_path, orient="records", indent=2)
 
-    # Save a shorter version with 64 rows
-    short_output_path = "tool/dataset/processed/qa_pairs_short.json"
-    df.head(64).to_json(short_output_path, orient="records", indent=2)
+    # Shuffle the dataset
+    df = df.sample(frac=1, random_state=42).reset_index(drop=True)
+
+    # Split into train and test sets (80/20)
+    train_size = int(0.8 * len(df))
+    train_df = df[:train_size]
+    test_df = df[train_size:]
+
+    # Save full train and test sets
+    train_df.to_json(
+        os.path.join(output_dir, "train_qa_pairs.json"), orient="records", indent=2
+    )
+    test_df.to_json(
+        os.path.join(output_dir, "test_qa_pairs.json"), orient="records", indent=2
+    )
+
+    # Save short versions (64 samples each)
+    train_df.head(64).to_json(
+        os.path.join(output_dir, "train_qa_pairs_short.json"),
+        orient="records",
+        indent=2,
+    )
+    test_df.head(64).to_json(
+        os.path.join(output_dir, "test_qa_pairs_short.json"), orient="records", indent=2
+    )
 
     print(f"Processed {len(df)} question-answer pairs")
+    print(f"Train set size: {len(train_df)}")
+    print(f"Test set size: {len(test_df)}")
     print(f"Saved processed images to {output_images_dir}")
-    print(f"Saved QA pairs to {output_json_path}")
+    print(f"Saved QA pairs to {output_dir}")
 
 
 if __name__ == "__main__":

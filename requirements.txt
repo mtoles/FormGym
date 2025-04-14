@@ -1,5 +1,6 @@
 transformers==4.49.0
 accelerate==1.6.0
+wandb
 
 acres==0.3.0
 aiofiles==24.1.0
