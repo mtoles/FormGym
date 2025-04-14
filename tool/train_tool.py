@@ -55,12 +55,22 @@ for param in model.vision_tower.parameters():
 
 class FormGymDataset(Dataset):
 
-    def __init__(self, json_path: str):
+    def __init__(self, json_path: str, drop_duplicates: bool = False):
         self.image_dir = "tool/dataset/processed/images"
-        # json_path = "tool/dataset/processed/train_qa_pairs_short.json"
-        # json_path = "tool/dataset/processed/qa_pairs.json"
         with open(json_path, "r") as f:
-            self.data = json.load(f)
+            raw_data = json.load(f)
+
+        if drop_duplicates:
+            # Filter to keep only first example per form_id
+            seen_forms = set()
+            self.data = []
+            for example in raw_data:
+                form_id = example["form_id"]
+                if form_id not in seen_forms:
+                    seen_forms.add(form_id)
+                    self.data.append(example)
+        else:
+            self.data = raw_data
 
     def __len__(self):
         return len(self.data)
@@ -129,7 +139,6 @@ def metrics(model, data_loader, split_name):
                 image_size=(widths[0], heights[0]),
             )
             print(test_gen)
-
 
             input_text = processor.batch_decode(
                 inputs["input_ids"], skip_special_tokens=False
@@ -225,7 +234,9 @@ def metrics(model, data_loader, split_name):
     print(f"val outputs (final batch):\n{generated_texts}")
     print(f"Validation Accuracy: {avg_iou}")
     print(f"Validation Loss: {avg_loss}")
-    wandb.log({f"accuracy/{split_name}_iou": avg_iou, f"loss/{split_name}_loss": avg_loss})
+    wandb.log(
+        {f"accuracy/{split_name}_iou": avg_iou, f"loss/{split_name}_loss": avg_loss}
+    )
     return avg_iou, avg_loss
 
 
@@ -244,7 +255,8 @@ def collate_fn(batch):
 
 
 train_dataset = FormGymDataset("tool/dataset/processed/train_qa_pairs.json")
-val_dataset = FormGymDataset("tool/dataset/processed/test_qa_pairs.json")  
+val_dataset = FormGymDataset("tool/dataset/processed/test_qa_pairs.json")
+
 
 train_loader = DataLoader(
     train_dataset,
@@ -274,7 +286,6 @@ lr_scheduler = get_scheduler(
     num_warmup_steps=0,
     num_training_steps=num_training_steps,
 )
-
 
 
 batch_no = -1
