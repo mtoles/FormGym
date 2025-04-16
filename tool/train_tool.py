@@ -1,11 +1,17 @@
 import os
 import torch
 from datasets import load_dataset, disable_caching
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset, DataLoader, ConcatDataset
 from tqdm import tqdm
-from transformers import AutoModelForCausalLM, AutoProcessor, AdamW, get_scheduler
+from transformers import (
+    AutoModelForCausalLM,
+    AutoProcessor,
+    AdamW,
+    get_scheduler,
+    AutoConfig,
+)
 import json
-from PIL import Image
+from PIL import Image, ImageDraw
 import numpy as np
 import os
 from torch.utils.data import DataLoader
@@ -16,6 +22,8 @@ from datetime import datetime
 import argparse
 import yaml
 from pathlib import Path
+import pandas as pd  # Add pandas import
+import matplotlib.pyplot as plt
 
 
 def load_config(config_path, override_args=None):
@@ -26,16 +34,12 @@ def load_config(config_path, override_args=None):
     # Convert values to proper types based on argument parser types
     for action in parser._actions:
         if action.dest in config and action.type is not None:
-            try:
-                config[action.dest] = action.type(config[action.dest])
-            except (ValueError, TypeError):
-                # If conversion fails, keep the original value
-                pass
+            config[action.dest] = action.type(config[action.dest])
 
     if override_args:
         # Update config with command line arguments
         for key, value in vars(override_args).items():
-            if value is not None and key in config:
+            if value is not None:  # Remove the key in config check to allow new keys
                 config[key] = value
 
     return config
@@ -50,9 +54,10 @@ parser.add_argument(
     help="Path to configuration YAML file",
 )
 parser.add_argument(
-    "--train_path",
-    type=str,
+    "--train_paths",
+    type=list,
     help="Path to training data JSON file (overrides config)",
+    nargs="+",
 )
 parser.add_argument(
     "--eval_path",
@@ -84,6 +89,21 @@ parser.add_argument(
     type=int,
     help="Number of epochs between evaluations (overrides config)",
 )
+parser.add_argument(
+    "--load_checkpoint_from",
+    type=str,
+    help="Path to checkpoint to load from (overrides config)",
+)
+parser.add_argument(
+    "--train_size",
+    type=int,
+    help="Number of samples to use for training (overrides config)",
+)
+parser.add_argument(
+    "--val_size",
+    type=int,
+    help="Number of samples to use for validation (overrides config)",
+)
 args = parser.parse_args()
 
 # Load configuration
@@ -97,9 +117,18 @@ NUM_WORKERS = config["num_workers"]
 EPOCHS = config["epochs"]
 LEARNING_RATE = config["learning_rate"]
 MODEL_NAME = config["model_name"]
-MODEL_REVISION = config["model_revision"]
+# MODEL_REVISION = config["model_revision"]
 EPOCHS_PER_EVAL = config["epochs_per_eval"]
 CHECKPOINT_DIR = config["checkpoint_dir"]
+LOAD_CHECKPOINT_FROM = config.get("load_checkpoint_from", None)
+TRAIN_SIZE = config.get("train_size", None)
+VAL_SIZE = config.get("val_size", None)
+
+# Override with command line arguments if provided
+if args.train_size is not None:
+    TRAIN_SIZE = args.train_size
+if args.val_size is not None:
+    VAL_SIZE = args.val_size
 
 # Initialize wandb with config
 wandb_config = {
@@ -108,9 +137,12 @@ wandb_config = {
     "epochs": EPOCHS,
     "learning_rate": LEARNING_RATE,
     "model": MODEL_NAME,
-    "model_revision": MODEL_REVISION,
-    "train_path": config["train_path"],
+    # "model_revision": MODEL_REVISION,
+    "train_paths": config["train_paths"],
     "eval_path": config["eval_path"],
+    "load_checkpoint_from": LOAD_CHECKPOINT_FROM,
+    "train_size": TRAIN_SIZE,
+    "val_size": VAL_SIZE,
 }
 
 # Create a unique run name with timestamp
@@ -123,11 +155,23 @@ disable_caching()
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-model = AutoModelForCausalLM.from_pretrained(
-    MODEL_NAME, trust_remote_code=True, revision=MODEL_REVISION
-).to(device)
+# Load model from checkpoint if specified, otherwise load from pretrained
+if LOAD_CHECKPOINT_FROM:
+    print(f"Loading model from checkpoint: {LOAD_CHECKPOINT_FROM}")
+    model_config = AutoConfig.from_pretrained(
+        # LOAD_CHECKPOINT_FROM, trust_remote_code=True
+        "microsoft/Florence-2-large-ft",
+        trust_remote_code=True,
+    )
+    model = AutoModelForCausalLM.from_pretrained(
+        LOAD_CHECKPOINT_FROM, trust_remote_code=True, config=model_config
+    ).to(device)
+else:
+    model = AutoModelForCausalLM.from_pretrained(
+        MODEL_NAME, trust_remote_code=True  # , revision=MODEL_REVISION
+    ).to(device)
 processor = AutoProcessor.from_pretrained(
-    MODEL_NAME, trust_remote_code=True, revision=MODEL_REVISION
+    MODEL_NAME, trust_remote_code=True  # , revision=MODEL_REVISION
 )
 
 for param in model.vision_tower.parameters():
@@ -136,7 +180,9 @@ for param in model.vision_tower.parameters():
 
 class FormGymDataset(Dataset):
 
-    def __init__(self, json_path: str, drop_duplicates: bool = False):
+    def __init__(
+        self, json_path: str, drop_duplicates: bool = False, max_size: int = None
+    ):
         self.image_dir = "tool/dataset/processed/images"
         with open(json_path, "r") as f:
             raw_data = json.load(f)
@@ -152,6 +198,13 @@ class FormGymDataset(Dataset):
                     self.data.append(example)
         else:
             self.data = raw_data
+
+        # Apply downsampling if max_size is specified
+        if max_size is not None and max_size < len(self.data):
+            import random
+
+            random.seed(42)  # For reproducibility
+            self.data = random.sample(self.data, max_size)
 
     def __len__(self):
         return len(self.data)
@@ -172,7 +225,7 @@ class FormGymDataset(Dataset):
         # first_answer = str(example["answer_bbox"])
         label = f"{example['question_text']}<loc_{x1}><loc_{y1}><loc_{x2}><loc_{y2}>"
 
-        return question, label, image, bbox
+        return question, label, image, bbox, image_path
 
 
 # def parse_model_output(generated_text):
@@ -184,6 +237,8 @@ def calculate_iou(bbox1, bbox2):
     Calculate Intersection over Union (IoU) between two bounding boxes.
     Bounding boxes are expected in format [x1, y1, x2, y2]
     """
+    if bbox1 is None or bbox2 is None:
+        return 0
     # Calculate intersection area
     x1 = max(bbox1[0], bbox2[0])
     y1 = max(bbox1[1], bbox2[1])
@@ -202,6 +257,12 @@ def calculate_iou(bbox1, bbox2):
     return iou
 
 
+def evaluate(model, val_loader, epoch, timestamp, CHECKPOINT_DIR):
+    """Evaluate model performance"""
+    val_accuracy, val_loss, predictions_df = metrics(model, val_loader, "val")
+    return val_accuracy, val_loss, predictions_df
+
+
 def metrics(model, data_loader, split_name):
     def _failed_output(generated_text):
         print(f"Cannot parse generated text:\n{generated_text}")
@@ -211,16 +272,11 @@ def metrics(model, data_loader, split_name):
     total_loss = 0
     num_samples = 0
 
-    with torch.no_grad():
-        for inputs, answers, widths, heights, gt_bboxes in data_loader:
-            # TESTING
-            test_gen = processor.post_process_generation(
-                answers[0],
-                task=TASK_NAME_PREFIX,
-                image_size=(widths[0], heights[0]),
-            )
-            print(test_gen)
+    # Initialize lists to store data for DataFrame
+    predictions_data = []
 
+    with torch.no_grad():
+        for inputs, answers, widths, heights, gt_bboxes, image_paths in data_loader:
             input_text = processor.batch_decode(
                 inputs["input_ids"], skip_special_tokens=False
             )
@@ -299,13 +355,29 @@ def metrics(model, data_loader, split_name):
                 )
                 pred_bboxes = parsed_answer[TASK_NAME_PREFIX]["bboxes"]
                 if len(pred_bboxes) == 0:
-                    pred_bbox = [-2, -2, -1, -1]  # always wrong
+                    pred_bbox = None  # always wrong
                 else:
                     pred_bbox = pred_bboxes[0]
 
                 # Calculate IoU
                 iou = calculate_iou(pred_bbox, gt_bboxes[i])
                 total_iou += iou
+
+                # Store data for DataFrame
+                predictions_data.append(
+                    {
+                        "input_text": input_text[i],
+                        "generated_text": generated_text,
+                        "ground_truth_bbox": gt_bboxes[i],
+                        "predicted_bbox": pred_bbox,
+                        "iou": iou,
+                        "image_width": widths[i],
+                        "image_height": heights[i],
+                        "pixel_values": inputs["pixel_values"][i].cpu().numpy(),
+                        "answer": answers[i],
+                        "image_path": image_paths[i],
+                    }
+                )
 
                 num_samples += 1
 
@@ -318,11 +390,14 @@ def metrics(model, data_loader, split_name):
     wandb.log(
         {f"accuracy/{split_name}_iou": avg_iou, f"loss/{split_name}_loss": avg_loss}
     )
-    return avg_iou, avg_loss
+
+    # Create and return DataFrame
+    predictions_df = pd.DataFrame(predictions_data)
+    return avg_iou, avg_loss, predictions_df
 
 
 def collate_fn(batch):
-    questions, answers, images, bboxes = zip(*batch)
+    questions, answers, images, bboxes, image_paths = zip(*batch)
     inputs = processor(
         text=list(questions),
         images=list(images),
@@ -332,11 +407,13 @@ def collate_fn(batch):
     # Get image dimensions (width, height) for each image
     widths = [img.shape[1] for img in images]
     heights = [img.shape[0] for img in images]
-    return inputs, answers, widths, heights, bboxes
+    return inputs, answers, widths, heights, bboxes, image_paths
 
 
-train_dataset = FormGymDataset(config["train_path"])
-val_dataset = FormGymDataset(config["eval_path"])
+train_dataset = ConcatDataset(
+    [FormGymDataset(path, max_size=TRAIN_SIZE) for path in config["train_paths"]]
+)
+val_dataset = FormGymDataset(config["eval_path"], max_size=VAL_SIZE)
 
 
 train_loader = DataLoader(
@@ -370,10 +447,11 @@ lr_scheduler = get_scheduler(
 
 
 batch_no = -1
+val_accuracy, val_loss, predictions_df = None, None, None
 for epoch in range(EPOCHS):
     model.train()
     train_loss = 0
-    for inputs, answers, widths, heights, bboxes in tqdm(
+    for inputs, answers, widths, heights, bboxes, image_paths in tqdm(
         train_loader, desc=f"Training Epoch {epoch + 1}/{EPOCHS}"
     ):
         batch_no += 1
@@ -414,8 +492,10 @@ for epoch in range(EPOCHS):
     )
 
     if epoch % EPOCHS_PER_EVAL == 0:
-        val_accuracy, val_loss = metrics(model, val_loader, "val")
-        # save model
+        val_accuracy, val_loss, predictions_df = evaluate(
+            model, val_loader, epoch, timestamp, CHECKPOINT_DIR
+        )
+        # Save model checkpoint after evaluation
         checkpoint_path = os.path.join(
             CHECKPOINT_DIR, timestamp, f"model_epoch_{epoch}"
         )
@@ -424,3 +504,41 @@ for epoch in range(EPOCHS):
         model.save_pretrained(checkpoint_path)
         print(f"Model checkpoint saved successfully")
         # wandb.log({"epoch": epoch, "val_accuracy": val_accuracy, "val_loss": val_loss})
+
+# visualize the model's predictions
+os.makedirs("tmp/tool", exist_ok=True)
+if predictions_df is None:
+    val_accuracy, val_loss, predictions_df = evaluate(
+        model, val_loader, 0, timestamp, CHECKPOINT_DIR
+    )
+for index, row in predictions_df.iterrows():
+    # Load the actual image file
+    image = Image.open(row["image_path"]).convert("RGB")
+    draw = ImageDraw.Draw(image)
+
+    # Draw ground truth box in green
+    gt_bbox = row["ground_truth_bbox"]
+    draw.rectangle(gt_bbox, outline="green", width=2)
+    label = row.answer.split("<")[0]
+    draw.text(gt_bbox[:2], label, fill="green")
+
+    # Draw predicted box in red
+    if row["predicted_bbox"] is not None:
+        pred_bbox = row["predicted_bbox"]
+        draw.rectangle(pred_bbox, outline="red", width=2)
+    else:
+        # Draw text when predicted bbox is None
+        draw.text((10, 10), "pred bbox is none", fill="red")
+
+    # Save the image
+    output_path = f"tmp/tool/prediction_{index}.png"
+    image.save(output_path)
+
+    # Log to wandb
+    wandb.log(
+        {
+            "visualization": wandb.Image(
+                image, caption=f"Prediction {index} (Green: GT, Red: Pred)"
+            )
+        }
+    )

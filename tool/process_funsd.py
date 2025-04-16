@@ -122,20 +122,22 @@ def main():
 
     # Save full train and test sets
     train_df.to_json(
-        os.path.join(output_dir, "train_qa_pairs.json"), orient="records", indent=2
+        os.path.join(output_dir, "funsd_train_qa_pairs.json"), orient="records", indent=2
     )
     test_df.to_json(
-        os.path.join(output_dir, "test_qa_pairs.json"), orient="records", indent=2
+        os.path.join(output_dir, "funsd_test_qa_pairs.json"), orient="records", indent=2
     )
 
     # Save short versions (64 samples each)
     train_df.head(64).to_json(
-        os.path.join(output_dir, "train_qa_pairs_short.json"),
+        os.path.join(output_dir, "funsd_train_qa_pairs_short.json"),
         orient="records",
         indent=2,
     )
     test_df.head(64).to_json(
-        os.path.join(output_dir, "test_qa_pairs_short.json"), orient="records", indent=2
+        os.path.join(output_dir, "funsd_test_qa_pairs_short.json"),
+        orient="records",
+        indent=2,
     )
 
     print(f"Processed {len(df)} question-answer pairs")

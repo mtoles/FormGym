@@ -6,6 +6,7 @@ from PIL import Image
 import numpy as np
 from collections import defaultdict
 from tqdm import tqdm
+from multiprocessing import Pool, cpu_count
 
 
 def process_annotation_and_image(doc, form_id, input_images_dir, output_images_dir):
@@ -19,7 +20,7 @@ def process_annotation_and_image(doc, form_id, input_images_dir, output_images_d
     counter = 1
 
     # Process each entry
-    for entry in tqdm(doc, desc="Entries"):
+    for entry in doc:
         if entry["label"] == "question" and entry.get("linking"):
             for link in entry["linking"]:
                 question_id, answer_id = link
@@ -75,6 +76,20 @@ def process_annotation_and_image(doc, form_id, input_images_dir, output_images_d
     return pairs
 
 
+def process_document(data, input_images_dir, output_images_dir):
+    """Process a single document and return its pairs."""
+    doc = data["document"]
+    form_id = data["id"]
+    return process_annotation_and_image(
+        doc, form_id, input_images_dir, output_images_dir
+    )
+
+
+def process_document_with_dirs(data, input_images_dir, output_images_dir):
+    """Process a single document with directory paths."""
+    return process_document(data, input_images_dir, output_images_dir)
+
+
 def main():
     # Directory paths
     # annotations_dir = Path("tool/dataset/funsd/annotations")
@@ -90,18 +105,30 @@ def main():
 
     # Process all JSON files
     all_pairs = []
-    for json_file in tqdm(
-        list(annotations_dir.glob("*.json")), desc="JSON files"
-    ):
+    for json_file in tqdm(list(annotations_dir.glob("*.json")), desc="JSON files"):
         with open(json_file, "r") as f:
             dataset = json.load(f)["documents"]
-        for data in tqdm(dataset, desc="Documents"):
-            doc = data["document"]
-            form_id = data["id"]
-            pairs = process_annotation_and_image(
-                doc, form_id, input_images_dir, output_images_dir
-            )
-            all_pairs.extend(pairs)
+
+        # Process documents in parallel
+        num_processes = min(cpu_count() // 2 + 1, len(dataset))
+        with Pool(processes=num_processes) as pool:
+            # Create a progress bar
+            # pbar = tqdm(total=len(dataset), desc="Processing documents")
+
+            # Process documents and update progress as results come in
+            results = []
+            for result in pool.starmap(
+                process_document_with_dirs,
+                [(d, input_images_dir, output_images_dir) for d in dataset],
+            ):
+                results.append(result)
+                # pbar.update(1)
+
+            # pbar.close()
+
+            # Combine all results
+            for pairs in results:
+                all_pairs.extend(pairs)
 
     # Create DataFrame
     df = pd.DataFrame(all_pairs)
@@ -125,20 +152,22 @@ def main():
 
     # Save full train and test sets
     train_df.to_json(
-        os.path.join(output_dir, "train_qa_pairs.json"), orient="records", indent=2
+        os.path.join(output_dir, "xfund_train_qa_pairs.json"), orient="records", indent=2
     )
     test_df.to_json(
-        os.path.join(output_dir, "test_qa_pairs.json"), orient="records", indent=2
+        os.path.join(output_dir, "xfund_test_qa_pairs.json"), orient="records", indent=2
     )
 
     # Save short versions (64 samples each)
     train_df.head(64).to_json(
-        os.path.join(output_dir, "train_qa_pairs_short.json"),
+        os.path.join(output_dir, "xfund_train_qa_pairs_short.json"),
         orient="records",
         indent=2,
     )
     test_df.head(64).to_json(
-        os.path.join(output_dir, "test_qa_pairs_short.json"), orient="records", indent=2
+        os.path.join(output_dir, "xfund_test_qa_pairs_short.json"),
+        orient="records",
+        indent=2,
     )
 
     print(f"Processed {len(df)} question-answer pairs")
