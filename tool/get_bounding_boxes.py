@@ -52,8 +52,8 @@ def process_annotation_files(annotations_dir, output_file):
 
 if __name__ == "__main__":
     # Directories
-    annotations_dir = "dataset/raw/annotations"
-    output_file = "dataset/all_bounding_boxes.txt"
+    annotations_dir = "dataset/funsd/annotations"
+    output_file = "dataset/funsd/all_bounding_boxes.txt"
     
     # Ensure the output directory exists
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
