@@ -209,20 +209,59 @@ def collate_fn(batch, processor):
     return inputs, answers, widths, heights, bboxes, image_paths
 
 
-def metrics(model, data_loader, split_name, processor):
-    def _failed_output(generated_text):
-        print(f"Cannot parse generated text:\n{generated_text}")
+def calculate_loss(model, data_loader, processor):
+    """Calculate the loss for the entire dataset"""
+    model.eval()
+    total_loss = 0
+    num_batches = 0
 
+    with torch.no_grad():
+        for batch_idx, (
+            inputs,
+            answers,
+            widths,
+            heights,
+            gt_bboxes,
+            image_paths,
+        ) in enumerate(data_loader):
+            # Calculate loss for the batch
+            labels = processor.tokenizer(
+                text=answers,
+                return_tensors="pt",
+                padding=True,
+                return_token_type_ids=False,
+            ).input_ids.to(device)
+            loss_outputs = model(
+                input_ids=inputs["input_ids"],
+                pixel_values=inputs["pixel_values"],
+                labels=labels,
+            )
+            total_loss += loss_outputs.loss.item()
+            num_batches += 1
+
+    avg_loss = total_loss / num_batches if num_batches > 0 else 0
+    return avg_loss
+
+
+def calculate_iou_accuracy(model, data_loader, processor, max_examples=64):
+    """Calculate IoU accuracy for the first max_examples examples"""
     model.eval()
     total_iou = 0
-    total_loss = 0
     num_samples = 0
-
-    # Initialize lists to store data for DataFrame
     predictions_data = []
 
     with torch.no_grad():
-        for inputs, answers, widths, heights, gt_bboxes, image_paths in data_loader:
+        for batch_idx, (
+            inputs,
+            answers,
+            widths,
+            heights,
+            gt_bboxes,
+            image_paths,
+        ) in enumerate(data_loader):
+            if num_samples >= max_examples:
+                break
+
             input_text = processor.batch_decode(
                 inputs["input_ids"], skip_special_tokens=False
             )
@@ -255,12 +294,6 @@ def metrics(model, data_loader, split_name, processor):
                         != model.config.text_config.eos_token_id
                     ):
                         generated_ids_list[i].append(next_tokens[i].item())
-                current_ids_text = processor.batch_decode(
-                    current_ids, skip_special_tokens=False
-                )
-                generated_ids_list_text = processor.batch_decode(
-                    generated_ids_list, skip_special_tokens=False
-                )
 
                 # Check if all sequences have reached EOS
                 if all(
@@ -279,21 +312,10 @@ def metrics(model, data_loader, split_name, processor):
                 generated_ids_list, skip_special_tokens=False
             )
 
-            # Calculate loss for the batch
-            labels = processor.tokenizer(
-                text=answers,
-                return_tensors="pt",
-                padding=True,
-                return_token_type_ids=False,
-            ).input_ids.to(device)
-            loss_outputs = model(
-                input_ids=inputs["input_ids"],
-                pixel_values=inputs["pixel_values"],
-                labels=labels,
-            )
-            total_loss += loss_outputs.loss.item()
-
             for i, generated_text in enumerate(generated_texts):
+                if num_samples >= max_examples:
+                    break
+
                 parsed_answer = processor.post_process_generation(
                     generated_text,
                     task=TASK_NAME_PREFIX,
@@ -328,18 +350,21 @@ def metrics(model, data_loader, split_name, processor):
                 num_samples += 1
 
     avg_iou = total_iou / num_samples if num_samples > 0 else 0
-    avg_loss = total_loss / len(data_loader)
+    return avg_iou, predictions_data
 
-    print(f"val outputs (final batch):\n{generated_texts}")
-    print(f"Validation Accuracy: {avg_iou}")
-    print(f"Validation Loss: {avg_loss}")
-    wandb.log(
-        {f"accuracy/{split_name}_iou": avg_iou, f"loss/{split_name}_loss": avg_loss}
-    )
+
+def metrics(model, data_loader, split_name, processor):
+    """Calculate both loss and IoU accuracy metrics"""
+    loss = calculate_loss(model, data_loader, processor)
+    iou, predictions_data = calculate_iou_accuracy(model, data_loader, processor)
+
+    print(f"Validation IoU: {iou}")
+    print(f"Validation Loss: {loss}")
+    wandb.log({f"accuracy/{split_name}_iou": iou, f"loss/{split_name}_loss": loss})
 
     # Create and return DataFrame
     predictions_df = pd.DataFrame(predictions_data)
-    return avg_iou, avg_loss, predictions_df
+    return iou, loss, predictions_df
 
 
 def evaluate(model, val_loader, epoch, timestamp, CHECKPOINT_DIR, processor):
@@ -479,7 +504,7 @@ num_training_steps = EPOCHS * len(train_loader)
 lr_scheduler = get_scheduler(
     name="linear",
     optimizer=optimizer,
-    num_warmup_steps=0,
+    num_warmup_steps=int(0.05 * num_training_steps),
     num_training_steps=num_training_steps,
 )
 
