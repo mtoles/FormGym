@@ -24,6 +24,7 @@ import yaml
 from pathlib import Path
 import pandas as pd  # Add pandas import
 import matplotlib.pyplot as plt
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 
 
 def load_config(config_path, override_args=None):
@@ -104,6 +105,16 @@ parser.add_argument(
     type=int,
     help="Number of samples to use for validation (overrides config)",
 )
+parser.add_argument(
+    "--note",
+    type=str,
+    help="A note to be logged to wandb and included in save paths",
+)
+parser.add_argument(
+    "--use_peft",
+    type=bool,
+    help="Whether to use PEFT (overrides config)",
+)
 args = parser.parse_args()
 
 # Load configuration
@@ -123,12 +134,15 @@ CHECKPOINT_DIR = config["checkpoint_dir"]
 LOAD_CHECKPOINT_FROM = config.get("load_checkpoint_from", None)
 TRAIN_SIZE = config.get("train_size", None)
 VAL_SIZE = config.get("val_size", None)
+NOTE = config.get("note", "")  # Get note from config, default to empty string
 
 # Override with command line arguments if provided
 if args.train_size is not None:
     TRAIN_SIZE = args.train_size
 if args.val_size is not None:
     VAL_SIZE = args.val_size
+if args.note is not None:
+    NOTE = args.note
 
 # Initialize wandb with config
 wandb_config = {
@@ -143,11 +157,14 @@ wandb_config = {
     "load_checkpoint_from": LOAD_CHECKPOINT_FROM,
     "train_size": TRAIN_SIZE,
     "val_size": VAL_SIZE,
+    "note": NOTE,  # Add note to wandb config
 }
 
 # Create a unique run name with timestamp
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 run_name = f"train_tool_{timestamp}"
+if NOTE:
+    run_name = f"{run_name}_{NOTE.replace(' ', '_')}"
 
 run = wandb.init(project="form-filler", name=run_name, config=wandb_config)
 
@@ -159,7 +176,6 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 if LOAD_CHECKPOINT_FROM:
     print(f"Loading model from checkpoint: {LOAD_CHECKPOINT_FROM}")
     model_config = AutoConfig.from_pretrained(
-        # LOAD_CHECKPOINT_FROM, trust_remote_code=True
         "microsoft/Florence-2-large-ft",
         trust_remote_code=True,
     )
@@ -167,12 +183,39 @@ if LOAD_CHECKPOINT_FROM:
         LOAD_CHECKPOINT_FROM, trust_remote_code=True, config=model_config
     ).to(device)
 else:
-    model = AutoModelForCausalLM.from_pretrained(
-        MODEL_NAME, trust_remote_code=True  # , revision=MODEL_REVISION
-    ).to(device)
-processor = AutoProcessor.from_pretrained(
-    MODEL_NAME, trust_remote_code=True  # , revision=MODEL_REVISION
-)
+    model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, trust_remote_code=True).to(
+        device
+    )
+
+# Apply PEFT if configured
+if config.get("use_peft", False):
+    print("Applying PEFT configuration...")
+    peft_config = LoraConfig(**config["peft_config"])
+
+    # First prepare the model for k-bit training
+    model = prepare_model_for_kbit_training(model)
+
+    # Get PEFT model
+    model = get_peft_model(model, peft_config)
+
+    # Freeze all parameters except LoRA parameters
+    for name, param in model.named_parameters():
+        if "lora" not in name.lower():
+            param.requires_grad = False
+
+    # Print trainable parameters
+    model.print_trainable_parameters()
+
+    # Verify that only LoRA parameters are trainable
+    trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    total_params = sum(p.numel() for p in model.parameters())
+    print(f"Trainable parameters: {trainable_params}")
+    print(f"Total parameters: {total_params}")
+    print(
+        f"Percentage of trainable parameters: {100 * trainable_params / total_params:.2f}%"
+    )
+
+processor = AutoProcessor.from_pretrained(MODEL_NAME, trust_remote_code=True)
 
 for param in model.vision_tower.parameters():
     param.is_trainable = False
@@ -499,6 +542,8 @@ for epoch in range(EPOCHS):
         checkpoint_path = os.path.join(
             CHECKPOINT_DIR, timestamp, f"model_epoch_{epoch}"
         )
+        if NOTE:
+            checkpoint_path = f"{checkpoint_path}_{NOTE.replace(' ', '_')}"
         os.makedirs(os.path.dirname(checkpoint_path), exist_ok=True)
         print(f"Saving model checkpoint to {checkpoint_path}")
         model.save_pretrained(checkpoint_path)
