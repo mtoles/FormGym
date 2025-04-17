@@ -27,23 +27,6 @@ import matplotlib.pyplot as plt
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 
 
-def load_config(config_path, override_args=None):
-    """Load configuration from YAML file and override with command line arguments"""
-    with open(config_path, "r") as f:
-        config = yaml.safe_load(f)
-
-    # Convert values to proper types based on argument parser types
-    for action in parser._actions:
-        if action.dest in config and action.type is not None:
-            config[action.dest] = action.type(config[action.dest])
-
-    if override_args:
-        # Update config with command line arguments
-        for key, value in vars(override_args).items():
-            if value is not None:  # Remove the key in config check to allow new keys
-                config[key] = value
-
-    return config
 
 
 # Parse command line arguments
@@ -116,6 +99,24 @@ parser.add_argument(
     help="Whether to use PEFT (overrides config)",
 )
 args = parser.parse_args()
+
+def load_config(config_path, override_args=None):
+    """Load configuration from YAML file and override with command line arguments"""
+    with open(config_path, "r") as f:
+        config = yaml.safe_load(f)
+
+    # Convert values to proper types based on argument parser types
+    for action in parser._actions:
+        if action.dest in config and action.type is not None:
+            config[action.dest] = action.type(config[action.dest])
+
+    if override_args:
+        # Update config with command line arguments
+        for key, value in vars(override_args).items():
+            if value is not None:  # Remove the key in config check to allow new keys
+                config[key] = value
+
+    return config
 
 # Load configuration
 config = load_config(args.config, args)
