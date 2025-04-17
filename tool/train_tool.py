@@ -67,7 +67,7 @@ parser.add_argument(
 )
 parser.add_argument(
     "--epochs_per_eval",
-    type=int,
+    type=float,
     help="Number of epochs between evaluations (overrides config)",
 )
 parser.add_argument(
@@ -481,6 +481,8 @@ lr_scheduler = get_scheduler(
 
 batch_no = -1
 val_accuracy, val_loss, predictions_df = None, None, None
+total_batches = 0
+batches_per_epoch = len(train_loader)
 for epoch in range(EPOCHS):
     model.train()
     train_loss = 0
@@ -488,6 +490,7 @@ for epoch in range(EPOCHS):
         train_loader, desc=f"Training Epoch {epoch + 1}/{EPOCHS}"
     ):
         batch_no += 1
+        total_batches += 1
         input_ids = inputs["input_ids"]
         pixel_values = inputs["pixel_values"]
         labels = processor.tokenizer(
@@ -514,6 +517,28 @@ for epoch in range(EPOCHS):
             }
         )
 
+        # Check if we should evaluate based on fractional epochs
+        current_epoch_fraction = total_batches / batches_per_epoch
+        if current_epoch_fraction % EPOCHS_PER_EVAL < 1.0 / batches_per_epoch:
+            val_accuracy, val_loss, predictions_df = evaluate(
+                model,
+                val_loader,
+                current_epoch_fraction,
+                timestamp,
+                CHECKPOINT_DIR,
+                processor,
+            )
+            # Save model checkpoint after evaluation
+            checkpoint_path = os.path.join(
+                CHECKPOINT_DIR, timestamp, f"model_epoch_{current_epoch_fraction:.2f}"
+            )
+            if NOTE:
+                checkpoint_path = f"{checkpoint_path}_{NOTE.replace(' ', '_')}"
+            os.makedirs(os.path.dirname(checkpoint_path), exist_ok=True)
+            print(f"Saving model checkpoint to {checkpoint_path}")
+            model.save_pretrained(checkpoint_path)
+            print(f"Model checkpoint saved successfully")
+
     avg_train_loss = train_loss / len(train_loader)
     print(f"Average Training Loss: {avg_train_loss}")
     wandb.log(
@@ -523,22 +548,6 @@ for epoch in range(EPOCHS):
             "config/epoch": epoch,
         }
     )
-
-    if epoch % EPOCHS_PER_EVAL == 0:
-        val_accuracy, val_loss, predictions_df = evaluate(
-            model, val_loader, epoch, timestamp, CHECKPOINT_DIR, processor
-        )
-        # Save model checkpoint after evaluation
-        checkpoint_path = os.path.join(
-            CHECKPOINT_DIR, timestamp, f"model_epoch_{epoch}"
-        )
-        if NOTE:
-            checkpoint_path = f"{checkpoint_path}_{NOTE.replace(' ', '_')}"
-        os.makedirs(os.path.dirname(checkpoint_path), exist_ok=True)
-        print(f"Saving model checkpoint to {checkpoint_path}")
-        model.save_pretrained(checkpoint_path)
-        print(f"Model checkpoint saved successfully")
-        # wandb.log({"epoch": epoch, "val_accuracy": val_accuracy, "val_loss": val_loss})
 
 # visualize the model's predictions
 os.makedirs("tmp/tool", exist_ok=True)
