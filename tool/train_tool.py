@@ -10,6 +10,7 @@ from transformers import (
     get_scheduler,
     AutoConfig,
 )
+import random
 import json
 from PIL import Image, ImageDraw
 import numpy as np
@@ -100,29 +101,32 @@ args = parser.parse_args()
 
 class FormGymDataset(Dataset):
     def __init__(
-        self, json_path: str, drop_duplicates: bool = False, max_size: int = None
+        self, json_path: str, max_examples_per_image: int = 5, max_size: int = None
     ):
         self.image_dir = "tool/dataset/processed/images"
         with open(json_path, "r") as f:
             raw_data = json.load(f)
 
-        if drop_duplicates:
-            # Filter to keep only first example per form_id
-            seen_forms = set()
-            self.data = []
-            for example in raw_data:
-                form_id = example["form_id"]
-                if form_id not in seen_forms:
-                    seen_forms.add(form_id)
-                    self.data.append(example)
-        else:
-            self.data = raw_data
+        # Shuffle the data
+        random.shuffle(raw_data)
+
+        # Group examples by image file
+        image_groups = {}
+        for example in raw_data:
+            image_path = example["processed_image"]
+            if image_path not in image_groups:
+                image_groups[image_path] = []
+            image_groups[image_path].append(example)
+
+        # Keep at most max_examples_per_image examples per image
+        self.data = []
+        for image_path, examples in image_groups.items():
+            if max_examples_per_image is not None:
+                examples = examples[:max_examples_per_image]
+            self.data.extend(examples)
 
         # Apply downsampling if max_size is specified
         if max_size is not None and max_size < len(self.data):
-            import random
-
-            random.seed(42)  # For reproducibility
             self.data = random.sample(self.data, max_size)
 
     def __len__(self):
