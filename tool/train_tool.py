@@ -26,9 +26,6 @@ import pandas as pd  # Add pandas import
 import matplotlib.pyplot as plt
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 
-
-
-
 # Parse command line arguments
 parser = argparse.ArgumentParser(description="Train form filler model")
 parser.add_argument(
@@ -100,130 +97,8 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-def load_config(config_path, override_args=None):
-    """Load configuration from YAML file and override with command line arguments"""
-    with open(config_path, "r") as f:
-        config = yaml.safe_load(f)
-
-    # Convert values to proper types based on argument parser types
-    for action in parser._actions:
-        if action.dest in config and action.type is not None:
-            config[action.dest] = action.type(config[action.dest])
-
-    if override_args:
-        # Update config with command line arguments
-        for key, value in vars(override_args).items():
-            if value is not None:  # Remove the key in config check to allow new keys
-                config[key] = value
-
-    return config
-
-# Load configuration
-config = load_config(args.config, args)
-
-# Configuration
-TASK_NAME_PREFIX = config["task_name_prefix"]
-TRAIN_BATCH_SIZE = config["train_batch_size"]
-VAL_BATCH_SIZE = config["val_batch_size"]
-NUM_WORKERS = config["num_workers"]
-EPOCHS = config["epochs"]
-LEARNING_RATE = config["learning_rate"]
-MODEL_NAME = config["model_name"]
-# MODEL_REVISION = config["model_revision"]
-EPOCHS_PER_EVAL = config["epochs_per_eval"]
-CHECKPOINT_DIR = config["checkpoint_dir"]
-LOAD_CHECKPOINT_FROM = config.get("load_checkpoint_from", None)
-TRAIN_SIZE = config.get("train_size", None)
-VAL_SIZE = config.get("val_size", None)
-NOTE = config.get("note", "")  # Get note from config, default to empty string
-
-# Override with command line arguments if provided
-if args.train_size is not None:
-    TRAIN_SIZE = args.train_size
-if args.val_size is not None:
-    VAL_SIZE = args.val_size
-if args.note is not None:
-    NOTE = args.note
-
-# Initialize wandb with config
-wandb_config = {
-    "task_name_prefix": TASK_NAME_PREFIX,
-    "train_batch_size": TRAIN_BATCH_SIZE,
-    "epochs": EPOCHS,
-    "learning_rate": LEARNING_RATE,
-    "model": MODEL_NAME,
-    # "model_revision": MODEL_REVISION,
-    "train_paths": config["train_paths"],
-    "eval_path": config["eval_path"],
-    "load_checkpoint_from": LOAD_CHECKPOINT_FROM,
-    "train_size": TRAIN_SIZE,
-    "val_size": VAL_SIZE,
-    "note": NOTE,  # Add note to wandb config
-}
-
-# Create a unique run name with timestamp
-timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-run_name = f"train_tool_{timestamp}"
-if NOTE:
-    run_name = f"{run_name}_{NOTE.replace(' ', '_')}"
-
-run = wandb.init(project="form-filler", name=run_name, config=wandb_config)
-
-disable_caching()
-
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-# Load model from checkpoint if specified, otherwise load from pretrained
-if LOAD_CHECKPOINT_FROM:
-    print(f"Loading model from checkpoint: {LOAD_CHECKPOINT_FROM}")
-    model_config = AutoConfig.from_pretrained(
-        "microsoft/Florence-2-large-ft",
-        trust_remote_code=True,
-    )
-    model = AutoModelForCausalLM.from_pretrained(
-        LOAD_CHECKPOINT_FROM, trust_remote_code=True, config=model_config
-    ).to(device)
-else:
-    model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, trust_remote_code=True).to(
-        device
-    )
-
-# Apply PEFT if configured
-if config.get("use_peft", False):
-    print("Applying PEFT configuration...")
-    peft_config = LoraConfig(**config["peft_config"])
-
-    # First prepare the model for k-bit training
-    model = prepare_model_for_kbit_training(model)
-
-    # Get PEFT model
-    model = get_peft_model(model, peft_config)
-
-    # Freeze all parameters except LoRA parameters
-    for name, param in model.named_parameters():
-        if "lora" not in name.lower():
-            param.requires_grad = False
-
-    # Print trainable parameters
-    model.print_trainable_parameters()
-
-    # Verify that only LoRA parameters are trainable
-    trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-    total_params = sum(p.numel() for p in model.parameters())
-    print(f"Trainable parameters: {trainable_params}")
-    print(f"Total parameters: {total_params}")
-    print(
-        f"Percentage of trainable parameters: {100 * trainable_params / total_params:.2f}%"
-    )
-
-processor = AutoProcessor.from_pretrained(MODEL_NAME, trust_remote_code=True)
-
-for param in model.vision_tower.parameters():
-    param.is_trainable = False
-
 
 class FormGymDataset(Dataset):
-
     def __init__(
         self, json_path: str, drop_duplicates: bool = False, max_size: int = None
     ):
@@ -272,8 +147,23 @@ class FormGymDataset(Dataset):
         return question, label, image, bbox, image_path
 
 
-# def parse_model_output(generated_text):
-#     return generated_text.split("<loc_")[1].split(">")[0].split("<")
+def load_config(config_path, override_args=None):
+    """Load configuration from YAML file and override with command line arguments"""
+    with open(config_path, "r") as f:
+        config = yaml.safe_load(f)
+
+    # Convert values to proper types based on argument parser types
+    for action in parser._actions:
+        if action.dest in config and action.type is not None:
+            config[action.dest] = action.type(config[action.dest])
+
+    if override_args:
+        # Update config with command line arguments
+        for key, value in vars(override_args).items():
+            if value is not None:  # Remove the key in config check to allow new keys
+                config[key] = value
+
+    return config
 
 
 def calculate_iou(bbox1, bbox2):
@@ -301,13 +191,21 @@ def calculate_iou(bbox1, bbox2):
     return iou
 
 
-def evaluate(model, val_loader, epoch, timestamp, CHECKPOINT_DIR):
-    """Evaluate model performance"""
-    val_accuracy, val_loss, predictions_df = metrics(model, val_loader, "val")
-    return val_accuracy, val_loss, predictions_df
+def collate_fn(batch, processor):
+    questions, answers, images, bboxes, image_paths = zip(*batch)
+    inputs = processor(
+        text=list(questions),
+        images=list(images),
+        return_tensors="pt",
+        padding=True,
+    ).to(device)
+    # Get image dimensions (width, height) for each image
+    widths = [img.shape[1] for img in images]
+    heights = [img.shape[0] for img in images]
+    return inputs, answers, widths, heights, bboxes, image_paths
 
 
-def metrics(model, data_loader, split_name):
+def metrics(model, data_loader, split_name, processor):
     def _failed_output(generated_text):
         print(f"Cannot parse generated text:\n{generated_text}")
 
@@ -440,44 +338,136 @@ def metrics(model, data_loader, split_name):
     return avg_iou, avg_loss, predictions_df
 
 
-def collate_fn(batch):
-    questions, answers, images, bboxes, image_paths = zip(*batch)
-    inputs = processor(
-        text=list(questions),
-        images=list(images),
-        return_tensors="pt",
-        padding=True,
-    ).to(device)
-    # Get image dimensions (width, height) for each image
-    widths = [img.shape[1] for img in images]
-    heights = [img.shape[0] for img in images]
-    return inputs, answers, widths, heights, bboxes, image_paths
+def evaluate(model, val_loader, epoch, timestamp, CHECKPOINT_DIR, processor):
+    """Evaluate model performance"""
+    val_accuracy, val_loss, predictions_df = metrics(
+        model, val_loader, "val", processor
+    )
+    return val_accuracy, val_loss, predictions_df
 
+
+# Main execution code starts here
+# Load configuration
+config = load_config(args.config, args)
+
+# Configuration
+TASK_NAME_PREFIX = config["task_name_prefix"]
+TRAIN_BATCH_SIZE = config["train_batch_size"]
+VAL_BATCH_SIZE = config["val_batch_size"]
+NUM_WORKERS = config["num_workers"]
+EPOCHS = config["epochs"]
+LEARNING_RATE = config["learning_rate"]
+MODEL_NAME = config["model_name"]
+# MODEL_REVISION = config["model_revision"]
+EPOCHS_PER_EVAL = config["epochs_per_eval"]
+CHECKPOINT_DIR = config["checkpoint_dir"]
+LOAD_CHECKPOINT_FROM = config.get("load_checkpoint_from", None)
+TRAIN_SIZE = config.get("train_size", None)
+VAL_SIZE = config.get("val_size", None)
+NOTE = config.get("note", "")  # Get note from config, default to empty string
+
+# Override with command line arguments if provided
+if args.train_size is not None:
+    TRAIN_SIZE = args.train_size
+if args.val_size is not None:
+    VAL_SIZE = args.val_size
+if args.note is not None:
+    NOTE = args.note
+
+# Initialize wandb with config
+wandb_config = {
+    "task_name_prefix": TASK_NAME_PREFIX,
+    "train_batch_size": TRAIN_BATCH_SIZE,
+    "epochs": EPOCHS,
+    "learning_rate": LEARNING_RATE,
+    "model": MODEL_NAME,
+    # "model_revision": MODEL_REVISION,
+    "train_paths": config["train_paths"],
+    "eval_path": config["eval_path"],
+    "load_checkpoint_from": LOAD_CHECKPOINT_FROM,
+    "train_size": TRAIN_SIZE,
+    "val_size": VAL_SIZE,
+    "note": NOTE,  # Add note to wandb config
+}
+
+# Create a unique run name with timestamp
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+run_name = f"train_tool_{timestamp}"
+if NOTE:
+    run_name = f"{run_name}_{NOTE.replace(' ', '_')}"
+
+run = wandb.init(project="form-filler", name=run_name, config=wandb_config)
+
+disable_caching()
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# Load model from checkpoint if specified, otherwise load from pretrained
+if LOAD_CHECKPOINT_FROM:
+    print(f"Loading model from checkpoint: {LOAD_CHECKPOINT_FROM}")
+    model_config = AutoConfig.from_pretrained(
+        "microsoft/Florence-2-large-ft",
+        trust_remote_code=True,
+    )
+    model = AutoModelForCausalLM.from_pretrained(
+        LOAD_CHECKPOINT_FROM, trust_remote_code=True, config=model_config
+    ).to(device)
+else:
+    model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, trust_remote_code=True).to(
+        device
+    )
+
+# Apply PEFT if configured
+if config.get("use_peft", False):
+    print("Applying PEFT configuration...")
+    peft_config = LoraConfig(**config["peft_config"])
+
+    # First prepare the model for k-bit training
+    model = prepare_model_for_kbit_training(model)
+
+    # Get PEFT model
+    model = get_peft_model(model, peft_config)
+
+    # Freeze all parameters except LoRA parameters
+    for name, param in model.named_parameters():
+        if "lora" not in name.lower():
+            param.requires_grad = False
+
+    # Print trainable parameters
+    model.print_trainable_parameters()
+
+    # Verify that only LoRA parameters are trainable
+    trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    total_params = sum(p.numel() for p in model.parameters())
+    print(f"Trainable parameters: {trainable_params}")
+    print(f"Total parameters: {total_params}")
+    print(
+        f"Percentage of trainable parameters: {100 * trainable_params / total_params:.2f}%"
+    )
+
+processor = AutoProcessor.from_pretrained(MODEL_NAME, trust_remote_code=True)
+
+for param in model.vision_tower.parameters():
+    param.is_trainable = False
 
 train_dataset = ConcatDataset(
     [FormGymDataset(path, max_size=TRAIN_SIZE) for path in config["train_paths"]]
 )
 val_dataset = FormGymDataset(config["eval_path"], max_size=VAL_SIZE)
 
-
 train_loader = DataLoader(
     train_dataset,
     batch_size=TRAIN_BATCH_SIZE,
-    collate_fn=collate_fn,
+    collate_fn=lambda batch: collate_fn(batch, processor),
     num_workers=NUM_WORKERS,
     shuffle=True,
 )
 val_loader = DataLoader(
     val_dataset,
     batch_size=VAL_BATCH_SIZE,
-    collate_fn=collate_fn,
+    collate_fn=lambda batch: collate_fn(batch, processor),
     num_workers=NUM_WORKERS,
 )
-
-# Debug: Run a single forward pass for debugging...
-# print("\nRunning single forward pass for debugging...")
-# metrics(model, val_loader, "val")
-
 
 optimizer = AdamW(model.parameters(), lr=LEARNING_RATE)
 num_training_steps = EPOCHS * len(train_loader)
@@ -488,7 +478,6 @@ lr_scheduler = get_scheduler(
     num_warmup_steps=0,
     num_training_steps=num_training_steps,
 )
-
 
 batch_no = -1
 val_accuracy, val_loss, predictions_df = None, None, None
@@ -537,7 +526,7 @@ for epoch in range(EPOCHS):
 
     if epoch % EPOCHS_PER_EVAL == 0:
         val_accuracy, val_loss, predictions_df = evaluate(
-            model, val_loader, epoch, timestamp, CHECKPOINT_DIR
+            model, val_loader, epoch, timestamp, CHECKPOINT_DIR, processor
         )
         # Save model checkpoint after evaluation
         checkpoint_path = os.path.join(
@@ -555,7 +544,7 @@ for epoch in range(EPOCHS):
 os.makedirs("tmp/tool", exist_ok=True)
 if predictions_df is None:
     val_accuracy, val_loss, predictions_df = evaluate(
-        model, val_loader, 0, timestamp, CHECKPOINT_DIR
+        model, val_loader, 0, timestamp, CHECKPOINT_DIR, processor
     )
 for index, row in predictions_df.iterrows():
     # Load the actual image file
