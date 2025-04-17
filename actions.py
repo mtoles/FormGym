@@ -243,7 +243,8 @@ def update_doc_state(doc_state, agent_generations: List[Dict], db=None):
     print("Updating doc state with agent generations")
     doc_state = deepcopy(doc_state)
     assert isinstance(agent_generations, list)
-    assert isinstance(agent_generations[0], dict)
+    if agent_generations:
+        assert isinstance(agent_generations[0], dict)
     feedbacks = []
     for ag in agent_generations:
         act_name = ag["action"]

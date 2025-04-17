@@ -27,6 +27,8 @@ def example_should_be_active(example):
 
 
 parser = argparse.ArgumentParser()
+parser.add_argument("--model_type", type=str, help="Specify model type, e.g., hf")
+parser.add_argument("--download_dir", type=str)
 parser.add_argument("--model_name", type=str)
 parser.add_argument("--doc_format", type=str)
 parser.add_argument("--task", type=str)
@@ -52,7 +54,9 @@ for i, fid in enumerate(args.file_ids):
     user_profile = user_features.UserProfile(i)
     nl_profile = "\n".join(user_profile.get_nl_profile())
     png_path = f"pngs/{fid}.png"
-    blank_img = Image.open(png_path)
+    print(f"Processing file: {png_path}")
+
+    blank_img = Image.open(png_path).convert("RGB")
     annot_path = f"annotations/{fid}.json"
     annots = annotations.read_annotations(annot_path)
     targets = annotations.read_targets(f"targets/{fid}_targets.json")["selected_ids"]
@@ -117,15 +121,20 @@ df = pd.DataFrame(all_files)
 
 # Create a model instance based on the model name.
 BATCH_SIZE = 2
-if args.model_name == "cheater":
+if args.model_type == "cheater":
     raise NotImplementedError
     model = models.CheaterModel()  # Instance now will use batched inputs
-elif args.model_name == "scripted":
+elif args.model_type == "scripted":
     model = models.ScriptedModel(batch_size=BATCH_SIZE, script_name=args.file_ids[0])
-elif args.model_name.lower().startswith("gpt"):
+elif args.model_type.lower().startswith("gpt"):
     model = models.GptModelE2E(model_name=args.model_name, draw_grid=False)
+elif args.model_type.lower().startswith("hf"):
+    model = models.HFE2EModel(
+        model_name=args.model_name,
+        download_dir=args.download_dir
+    )
 else:
-    raise ValueError(f"Unknown model name: {args.model_name}")
+    raise ValueError(f"Unknown model type: {args.model_type}")
 # Set batch size to 2 and process in batches
 
 # Main processing loop: continue while there are active examples to process
@@ -149,7 +158,8 @@ while not (active_df := df[df.active.apply(lambda x: x[-1])]).empty:
             example = batch.iloc[i]
             # Record the action taken
             example["actions"].append(acts)
-            
+            print(f"Processing example: {example['fid']}, Action: {acts}")
+
             # Update document state based on the action
             doc_state, feedback = actions.update_doc_state(
                 doc_state=example["doc_state"][-1],

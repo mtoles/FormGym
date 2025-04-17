@@ -10,14 +10,25 @@ from typing import List, Dict, Union
 from utils import *
 import re
 from pydantic import ValidationError
-
+from dataclasses import asdict
+from hfmodels import (
+    AriaModel,
+    LlavaModel,
+    MolmoModel,
+    QwenVLModel,
+    DeepseekVL2Model,
+    Gemma3Model,
+    MLLamaModel,
+)
+from vllm import LLM, EngineArgs, SamplingParams
+import time
+from prompt import parse_raw_output
+from json import JSONDecodeError
 
 memory = Memory(".joblib_cache", verbose=0)
 
 # TODO: need separate prompt for iterative and non-iterative
 e2e_prompt_template = """Complete the attached form based on the following user profile:
-        
-{user_profile}
 
 You have access to the following APIs:
 
@@ -186,6 +197,8 @@ def add_grid_overlay(img):
 
 
 def parse_and_reconstruct_fields(response_text):
+    # Regex that attempts to capture top-level { ... } blocks (no nested braces).
+    # If there's a missing '}', that chunk won't match and won't be parsed.
     pattern = r"(\{[^}]*\})"
     matches = re.findall(pattern, response_text)
 
@@ -195,15 +208,25 @@ def parse_and_reconstruct_fields(response_text):
         try:
             match_dict = json.loads(match)
             action_name = match_dict["action"]
+            
+            # Assume these are defined somewhere in your code:
+            #   ActionMeta.registry -> dict of valid actions
+            #   InvalidAction -> some fallback action class
+            #   Each action has a Schema for validation
             if action_name in ActionMeta.registry:
                 action = ActionMeta.registry[action_name]
             else:
                 action = InvalidAction
+            
+            # Validate against the schema
             action.Schema(**match_dict)
             passed_actions.append(match_dict)
-        except ValidationError as e:
-            print(f"Validation error for {match}: {e}")
+
+        except (JSONDecodeError, ValidationError) as e:
+            # Instead of crashing, just skip the broken chunk
+            print(f"Skipping invalid JSON block: {match}\nError: {e}")
             failed_actions.append(match)
+    
     return passed_actions
 
 
@@ -405,7 +428,7 @@ class GptModelE2E:
                 .choices[0]
                 .message.content
             )
-
+            
             tool_params = parse_and_reconstruct_fields(response)
             if f == FlowEnum.ITERATIVE.value:
                 tool_params = tool_params[:1]
@@ -463,3 +486,81 @@ def forward_gpt(model_name, prompt, base64_image):
     )
 
     return completion
+
+class HFE2EModel:
+    def __init__(self, model_name: str, download_dir: str, seed=None, draw_grid: bool = False):
+        model_registry = {
+            "aria": AriaModel,
+            "llava": LlavaModel,
+            "molmo": MolmoModel, 
+            "qwen_vl": QwenVLModel,
+            "deepseek_vl2": DeepseekVL2Model,
+            "gemma3": Gemma3Model,
+            "mllama": MLLamaModel,
+        }
+
+        if model_name not in model_registry:
+            raise ValueError(f"Unsupported model: {model_name}")
+
+        self.model = model_registry[model_name]()
+
+        engine_args_dict = asdict(self.model.engine_args)
+        engine_args_dict["download_dir"] = download_dir
+        engine_args_dict["seed"] = seed
+        # TODO - Argument for multiple GPUs
+        # engine_args_dict["tensor_parallel_size"] = 4
+
+        self.llm = LLM(**engine_args_dict)
+        
+        self.sampling_params = SamplingParams(
+            temperature=0.2,
+            max_tokens=64,
+            stop_token_ids=self.model.stop_token_ids,
+        )
+
+        self.model_name = model_name
+        self.draw_grid = draw_grid
+
+    def forward(self, nl_profile: List[str],
+        doc_image: List[Image.Image],
+        available_actions: List[str],
+        flow: List[str],
+    ):
+        base_prompts = []
+
+        for profile, f in zip(nl_profile, flow):
+            base_prompt = e2e_prompt_template.format(
+                user_profile=profile,
+                api_documentation=ActionMeta.all_documentation('\n\n'.join(available_actions)),
+                grid_subprompt=grid_subprompt if self.draw_grid else "",
+            )
+            base_prompts.append(base_prompt)
+
+        prompts = self.model.get_templated_prompts(base_prompts)
+
+        all_inputs = []
+        for img, prompt in zip(doc_image, prompts):
+            all_inputs.append(
+                {
+                    "prompt": prompt,
+                    "multi_modal_data": {"image": img},
+                }
+            )
+
+        start_time = time.time()
+        outputs = self.llm.generate(all_inputs, sampling_params=self.sampling_params)
+        elapsed_time = time.time() - start_time
+
+        parsed_outputs = []
+        for i, out in enumerate(outputs):
+            raw_text = out.outputs[0].text
+            print(f"Raw Outputs for input {i}:")
+            print(raw_text)
+            print("===="*20)
+            parsed_response = parse_and_reconstruct_fields(raw_text)
+            print(f"Parsed Outputs for input {i}:")
+            print(parsed_response)
+            print("===="*20)
+            parsed_outputs.append(parsed_response)
+
+        return parsed_outputs
