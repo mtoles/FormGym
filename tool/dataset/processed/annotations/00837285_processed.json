@@ -1,0 +1,105 @@
+{
+  "CLASS": [
+    "ACID",
+    "BASE",
+    "SALT",
+    "OTHER"
+  ],
+  "SOLUBILITY": [
+    "MEASURED",
+    "WATER",
+    "OTHER",
+    "ESTIMATED"
+  ],
+  "COMMENTS": [
+    "pH- The pH of a 50% concentration of A32 in a 52.6% dioxane/water solution was calculated to be 2.92 at 22\u00b0C according to the extra- polation procedures by Dr. P. D. Schickedantz, Lorillard Research Center Accession No. 1662, Reference OR 83- 125.",
+    "Solubility (See SOP for Biological Solutions)",
+    "Oral- 5g A32 forms a suspension with stirring in 10 ml 1% Tween 80 at room temperature. Reference OR 72- 151.",
+    "Acute Cardiovascular- Mix 2 mg A32 with 0.2 ml 80% propylene glycol and grind lightly. Add 0.8 ml saline solution. A32 is a suspension in this mixture at room temperature. Reference OR 72- 152."
+  ],
+  "SIGNATURE": "Johnson",
+  "DATE": "11/1381",
+  "AMOUNT": "g100ml",
+  "LRC COMPOUND CODE": "A32",
+  "MOLECULAR WEIGHT": "200. 29",
+  "CHEMICAL PURITY": "",
+  "ANALYTICAL METHOD(S)": "",
+  "STORAGE RECOMMENDATIONS": "NORMAL STORAGE",
+  "COMPOUND SENSITIVE TO": [
+    "AIR",
+    "HEAT",
+    "LIGHT",
+    "MOISTURE",
+    "OTHER"
+  ],
+  "LORILLARD RESEARCH CENTER": "Acute Cardiovascular- Mix 2 mg A32 with 0.2 ml 80% propylene glycol and grind lightly. Add 0.8 ml saline solution. A32 is a suspension in this mixture at room temperature. Reference OR 72- 152.",
+  "REACTIVITY": {
+    "1) WATER or BRINE:": [
+      "UNCHANGED",
+      "DECOMPOSITION",
+      "UNCHANGED",
+      "UNCHANGED",
+      "DECOMPOSITION"
+    ],
+    "2) 5% HCL": [
+      "UNCHANGED",
+      "DECOMPOSITION",
+      "UNCHANGED",
+      "DECOMPOSITION"
+    ],
+    "3) 5% NaOH:": [
+      "UNCHANGED",
+      "DECOMPOSITION",
+      "UNCHANGED",
+      "DECOMPOSITION"
+    ],
+    "4) ALCOHOLS:": [
+      "UNCHANCED",
+      "DECOMPOSITION",
+      "UNCHANGED",
+      "DECOMPOSITION"
+    ],
+    "5) OXYGEN:": [
+      "UNCHANGED",
+      "DECOMPOSITION",
+      "UNCHANGED",
+      "DECOMPOSITION"
+    ],
+    "6) LIGHT:": [
+      "UNCHANGED",
+      "DECOMPOSITION",
+      "UNCHANGED",
+      "DECOMPOSITION"
+    ]
+  },
+  "DESCRIPTION OF REACTIVITY": {
+    "WITHOUT HEATING": [
+      "UNCHANGED",
+      "UNCHANGED",
+      "UNCHANGED",
+      "UNCHANCED",
+      "UNCHANGED",
+      "UNCHANGED",
+      "DECOMPOSITION",
+      "DECOMPOSITION",
+      "DECOMPOSITION",
+      "DECOMPOSITION",
+      "DECOMPOSITION",
+      "DECOMPOSITION"
+    ],
+    "WITH HEATING (80C)": [
+      "UNCHANGED",
+      "UNCHANGED",
+      "UNCHANGED",
+      "UNCHANGED",
+      "UNCHANGED",
+      "UNCHANGED",
+      "DECOMPOSITION",
+      "DECOMPOSITION",
+      "DECOMPOSITION",
+      "DECOMPOSITION",
+      "DECOMPOSITION",
+      "DECOMPOSITION"
+    ]
+  }
+}
