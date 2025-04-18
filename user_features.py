@@ -84,6 +84,27 @@ class UserProfile:
             nl_profile.append(attr_class.nl_desc(getattr(self.features, name)))
         return nl_profile
 
+# metaclass
+# abstract class
+# rattan's abstract class rattans(options, nl_desc)
+# classes
+# rattans class                                         <- product
+
+
+
+class BaseUserAttr(metaclass=UserAttributeMeta):
+    pass
+
+
+
+class BaseUserDbAttr(metaclass=UserAttributeMeta):
+    form_name, cell_id = __name__.split("_")
+
+    @staticmethod
+    def nl_desc(option):
+        # form_name, cell_id = __class__.__name__.split("_")
+        return f"The user's value for form {__class__.form_name} in cell {__class__.cell_id} ({__class__.__doc__}) is: {option}"
+
 
 ### AUTO LOAN FEATURES ###
 
