@@ -570,6 +570,7 @@ for epoch in range(EPOCHS):
             print(f"Saving model checkpoint to {checkpoint_path}")
 
             # Save optimizer and scheduler states
+            model.save_pretrained(checkpoint_path)
             torch.save(
                 {
                     "optimizer_state_dict": optimizer.state_dict(),
@@ -580,7 +581,6 @@ for epoch in range(EPOCHS):
                 },
                 os.path.join(checkpoint_path, "training_states.pt"),
             )
-            model.save_pretrained(checkpoint_path)
             print(f"Model checkpoint saved successfully")
 
     avg_train_loss = train_loss / len(train_loader)
