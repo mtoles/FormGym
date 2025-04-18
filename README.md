@@ -1,6 +1,20 @@
 # form-filler
 
-First, preprocess all files with 
+# Tool Train Setup
+
+Download and add the FUNSD dataset to `tool/dataset/FUNSD`
+
+https://guillaumejaume.github.io/FUNSD/download/
+
+Preprocess with
+
+```
+python3 tool/process_annotations_and_images.py
+```
+
+# FormGym Eval Setup
+
+Preprocess all files with 
 
 ```
 python3 preprocess/preprocess.py

@@ -84,9 +84,22 @@ class UserProfile:
             nl_profile.append(attr_class.nl_desc(getattr(self.features, name)))
         return nl_profile
 
+# metaclass
+# abstract class
+# rattan's abstract class rattans(options, nl_desc)
+# classes
+# rattans class                                         <- product
+
+
 
 class BaseUserAttr(metaclass=UserAttributeMeta):
     pass
+
+class UserAttrFromDoc(metaclass=UserAttributeMeta):
+    def __init__(self, options, nl_desc, class_name):
+        self.__name__ = class_name
+        self.options = options # len(n users)
+        self.nl_desc = nl_desc
 
 
 class BaseUserDbAttr(metaclass=UserAttributeMeta):
