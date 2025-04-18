@@ -96,6 +96,11 @@ parser.add_argument(
     type=bool,
     help="Whether to use PEFT (overrides config)",
 )
+parser.add_argument(
+    "--max_iou_examples",
+    type=int,
+    help="Number of examples to use for IoU calculation (overrides config)",
+)
 args = parser.parse_args()
 
 
@@ -243,8 +248,10 @@ def calculate_loss(model, data_loader, processor):
     return avg_loss
 
 
-def calculate_iou_accuracy(model, data_loader, processor, max_examples=64):
+def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None):
     """Calculate IoU accuracy for the first max_examples examples"""
+    if max_iou_examples is None:
+        max_iou_examples = MAX_IOU_EXAMPLES
     model.eval()
     total_iou = 0
     num_samples = 0
@@ -259,7 +266,7 @@ def calculate_iou_accuracy(model, data_loader, processor, max_examples=64):
             gt_bboxes,
             image_paths,
         ) in enumerate(data_loader):
-            if num_samples >= max_examples:
+            if num_samples >= max_iou_examples:
                 break
 
             input_text = processor.batch_decode(
@@ -313,7 +320,7 @@ def calculate_iou_accuracy(model, data_loader, processor, max_examples=64):
             )
 
             for i, generated_text in enumerate(generated_texts):
-                if num_samples >= max_examples:
+                if num_samples >= max_iou_examples:
                     break
 
                 parsed_answer = processor.post_process_generation(
@@ -353,28 +360,6 @@ def calculate_iou_accuracy(model, data_loader, processor, max_examples=64):
     return avg_iou, predictions_data
 
 
-def metrics(model, data_loader, split_name, processor):
-    """Calculate both loss and IoU accuracy metrics"""
-    loss = calculate_loss(model, data_loader, processor)
-    iou, predictions_data = calculate_iou_accuracy(model, data_loader, processor)
-
-    print(f"Validation IoU: {iou}")
-    print(f"Validation Loss: {loss}")
-    wandb.log({f"accuracy/{split_name}_iou": iou, f"loss/{split_name}_loss": loss})
-
-    # Create and return DataFrame
-    predictions_df = pd.DataFrame(predictions_data)
-    return iou, loss, predictions_df
-
-
-def evaluate(model, val_loader, epoch, timestamp, CHECKPOINT_DIR, processor):
-    """Evaluate model performance"""
-    val_accuracy, val_loss, predictions_df = metrics(
-        model, val_loader, "val", processor
-    )
-    return val_accuracy, val_loss, predictions_df
-
-
 # Main execution code starts here
 # Load configuration
 config = load_config(args.config, args)
@@ -394,6 +379,9 @@ LOAD_CHECKPOINT_FROM = config.get("load_checkpoint_from", None)
 TRAIN_SIZE = config.get("train_size", None)
 VAL_SIZE = config.get("val_size", None)
 NOTE = config.get("note", "")  # Get note from config, default to empty string
+MAX_IOU_EXAMPLES = config.get(
+    "max_iou_examples", 64
+)  # Get max_iou_examples from config
 
 # Override with command line arguments if provided
 if args.train_size is not None:
@@ -402,6 +390,8 @@ if args.val_size is not None:
     VAL_SIZE = args.val_size
 if args.note is not None:
     NOTE = args.note
+if args.max_iou_examples is not None:
+    MAX_IOU_EXAMPLES = args.max_iou_examples
 
 # Initialize wandb with config
 wandb_config = {
@@ -441,6 +431,17 @@ if LOAD_CHECKPOINT_FROM:
     model = AutoModelForCausalLM.from_pretrained(
         LOAD_CHECKPOINT_FROM, trust_remote_code=True, config=model_config
     ).to(device)
+
+    # Load optimizer and scheduler states if they exist
+    states_path = os.path.join(LOAD_CHECKPOINT_FROM, "training_states.pt")
+    if os.path.exists(states_path):
+        print("Loading optimizer and scheduler states...")
+        checkpoint = torch.load(states_path)
+        optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
+        lr_scheduler.load_state_dict(checkpoint["scheduler_state_dict"])
+        batch_no = checkpoint["batch_no"]
+        total_batches = checkpoint["total_batches"]
+        print(f"Resuming from epoch {checkpoint['epoch']}, batch {batch_no}")
 else:
     model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, trust_remote_code=True).to(
         device
@@ -549,14 +550,16 @@ for epoch in range(EPOCHS):
         # Check if we should evaluate based on fractional epochs
         current_epoch_fraction = total_batches / batches_per_epoch
         if current_epoch_fraction % EPOCHS_PER_EVAL < 1.0 / batches_per_epoch:
-            val_accuracy, val_loss, predictions_df = evaluate(
-                model,
-                val_loader,
-                current_epoch_fraction,
-                timestamp,
-                CHECKPOINT_DIR,
-                processor,
-            )
+            val_loss = calculate_loss(model, val_loader, processor)
+            # val_accuracy, predictions_data = calculate_iou_accuracy(
+            #     model, val_loader, processor
+            # )
+            # predictions_df = pd.DataFrame(predictions_data)
+
+            # print(f"Validation IoU: {val_accuracy}")
+            print(f"Validation Loss: {val_loss}")
+            wandb.log({"accuracy/val_iou": val_accuracy, "loss/val_loss": val_loss})
+
             # Save model checkpoint after evaluation
             checkpoint_path = os.path.join(
                 CHECKPOINT_DIR, timestamp, f"model_epoch_{current_epoch_fraction:.2f}"
@@ -565,6 +568,18 @@ for epoch in range(EPOCHS):
                 checkpoint_path = f"{checkpoint_path}_{NOTE.replace(' ', '_')}"
             os.makedirs(os.path.dirname(checkpoint_path), exist_ok=True)
             print(f"Saving model checkpoint to {checkpoint_path}")
+
+            # Save optimizer and scheduler states
+            torch.save(
+                {
+                    "optimizer_state_dict": optimizer.state_dict(),
+                    "scheduler_state_dict": lr_scheduler.state_dict(),
+                    "epoch": epoch,
+                    "batch_no": batch_no,
+                    "total_batches": total_batches,
+                },
+                os.path.join(checkpoint_path, "training_states.pt"),
+            )
             model.save_pretrained(checkpoint_path)
             print(f"Model checkpoint saved successfully")
 
@@ -581,9 +596,11 @@ for epoch in range(EPOCHS):
 # visualize the model's predictions
 os.makedirs("tmp/tool", exist_ok=True)
 if predictions_df is None:
-    val_accuracy, val_loss, predictions_df = evaluate(
-        model, val_loader, 0, timestamp, CHECKPOINT_DIR, processor
+    val_loss = calculate_loss(model, val_loader, processor)
+    val_accuracy, predictions_data = calculate_iou_accuracy(
+        model, val_loader, processor
     )
+    predictions_df = pd.DataFrame(predictions_data)
 for index, row in predictions_df.iterrows():
     # Load the actual image file
     image = Image.open(row["image_path"]).convert("RGB")
@@ -607,11 +624,11 @@ for index, row in predictions_df.iterrows():
     output_path = f"tmp/tool/prediction_{index}.png"
     image.save(output_path)
 
-    # Log to wandb
-    wandb.log(
-        {
-            "visualization": wandb.Image(
-                image, caption=f"Prediction {index} (Green: GT, Red: Pred)"
-            )
-        }
-    )
+    # # Log to wandb
+    # wandb.log(
+    #     {
+    #         "visualization": wandb.Image(
+    #             image, caption=f"Prediction {index} (Green: GT, Red: Pred)"
+    #         )
+    #     }
+    # )

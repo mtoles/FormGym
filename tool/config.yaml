@@ -10,6 +10,7 @@ model_name: "microsoft/Florence-2-large-ft"
 # model_revision: "refs/pr/6" 
 epochs_per_eval: 0.2
 checkpoint_dir: "tool/checkpoints"
+max_iou_examples: 64
 
 # PEFT configuration
 use_peft: false
