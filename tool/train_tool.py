@@ -431,8 +431,47 @@ if LOAD_CHECKPOINT_FROM:
     model = AutoModelForCausalLM.from_pretrained(
         LOAD_CHECKPOINT_FROM, trust_remote_code=True, config=model_config
     ).to(device)
+else:
+    model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, trust_remote_code=True).to(
+        device
+    )
 
-    # Load optimizer and scheduler states if they exist
+processor = AutoProcessor.from_pretrained(MODEL_NAME, trust_remote_code=True)
+
+for param in model.vision_tower.parameters():
+    param.is_trainable = False
+
+train_dataset = ConcatDataset(
+    [FormGymDataset(path, max_size=TRAIN_SIZE) for path in config["train_paths"]]
+)
+val_dataset = FormGymDataset(config["eval_path"], max_size=VAL_SIZE)
+
+train_loader = DataLoader(
+    train_dataset,
+    batch_size=TRAIN_BATCH_SIZE,
+    collate_fn=lambda batch: collate_fn(batch, processor),
+    num_workers=NUM_WORKERS,
+    shuffle=True,
+)
+val_loader = DataLoader(
+    val_dataset,
+    batch_size=VAL_BATCH_SIZE,
+    collate_fn=lambda batch: collate_fn(batch, processor),
+    num_workers=NUM_WORKERS,
+)
+
+# Initialize optimizer and scheduler
+optimizer = AdamW(model.parameters(), lr=LEARNING_RATE)
+num_training_steps = EPOCHS * len(train_loader)
+lr_scheduler = get_scheduler(
+    name="linear",
+    optimizer=optimizer,
+    num_warmup_steps=int(0.05 * num_training_steps),
+    num_training_steps=num_training_steps,
+)
+
+# Load optimizer and scheduler states if they exist
+if LOAD_CHECKPOINT_FROM:
     states_path = os.path.join(LOAD_CHECKPOINT_FROM, "training_states.pt")
     if os.path.exists(states_path):
         print("Loading optimizer and scheduler states...")
@@ -442,10 +481,6 @@ if LOAD_CHECKPOINT_FROM:
         batch_no = checkpoint["batch_no"]
         total_batches = checkpoint["total_batches"]
         print(f"Resuming from epoch {checkpoint['epoch']}, batch {batch_no}")
-else:
-    model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, trust_remote_code=True).to(
-        device
-    )
 
 # Apply PEFT if configured
 if config.get("use_peft", False):
@@ -474,40 +509,6 @@ if config.get("use_peft", False):
     print(
         f"Percentage of trainable parameters: {100 * trainable_params / total_params:.2f}%"
     )
-
-processor = AutoProcessor.from_pretrained(MODEL_NAME, trust_remote_code=True)
-
-for param in model.vision_tower.parameters():
-    param.is_trainable = False
-
-train_dataset = ConcatDataset(
-    [FormGymDataset(path, max_size=TRAIN_SIZE) for path in config["train_paths"]]
-)
-val_dataset = FormGymDataset(config["eval_path"], max_size=VAL_SIZE)
-
-train_loader = DataLoader(
-    train_dataset,
-    batch_size=TRAIN_BATCH_SIZE,
-    collate_fn=lambda batch: collate_fn(batch, processor),
-    num_workers=NUM_WORKERS,
-    shuffle=True,
-)
-val_loader = DataLoader(
-    val_dataset,
-    batch_size=VAL_BATCH_SIZE,
-    collate_fn=lambda batch: collate_fn(batch, processor),
-    num_workers=NUM_WORKERS,
-)
-
-optimizer = AdamW(model.parameters(), lr=LEARNING_RATE)
-num_training_steps = EPOCHS * len(train_loader)
-
-lr_scheduler = get_scheduler(
-    name="linear",
-    optimizer=optimizer,
-    num_warmup_steps=int(0.05 * num_training_steps),
-    num_training_steps=num_training_steps,
-)
 
 batch_no = -1
 val_accuracy, val_loss, predictions_df = None, None, None
@@ -558,7 +559,8 @@ for epoch in range(EPOCHS):
 
             # print(f"Validation IoU: {val_accuracy}")
             print(f"Validation Loss: {val_loss}")
-            wandb.log({"accuracy/val_iou": val_accuracy, "loss/val_loss": val_loss})
+            # wandb.log({"accuracy/val_iou": val_accuracy, "loss/val_loss": val_loss})
+            wandb.log({"loss/val_loss": val_loss})
 
             # Save model checkpoint after evaluation
             checkpoint_path = os.path.join(
@@ -600,6 +602,8 @@ if predictions_df is None:
     val_accuracy, predictions_data = calculate_iou_accuracy(
         model, val_loader, processor
     )
+    wandb.log({"accuracy/val_iou": val_accuracy})
+    wandb.log({"loss/val_loss": val_loss})
     predictions_df = pd.DataFrame(predictions_data)
 for index, row in predictions_df.iterrows():
     # Load the actual image file
