@@ -101,6 +101,11 @@ parser.add_argument(
     type=int,
     help="Number of examples to use for IoU calculation (overrides config)",
 )
+parser.add_argument(
+    "--max_examples_per_image",
+    type=int,
+    help="Maximum number of examples to use per image (overrides config)",
+)
 args = parser.parse_args()
 
 
@@ -250,8 +255,8 @@ def calculate_loss(model, data_loader, processor):
 
 def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None):
     """Calculate IoU accuracy for the first max_examples examples"""
-    if max_iou_examples is None:
-        max_iou_examples = MAX_IOU_EXAMPLES
+    # if max_iou_examples is None:
+    #     max_iou_examples = MAX_IOU_EXAMPLES
     model.eval()
     total_iou = 0
     num_samples = 0
@@ -266,7 +271,7 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
             gt_bboxes,
             image_paths,
         ) in enumerate(data_loader):
-            if num_samples >= max_iou_examples:
+            if max_iou_examples is not None and num_samples >= max_iou_examples:
                 break
 
             input_text = processor.batch_decode(
@@ -320,8 +325,6 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
             )
 
             for i, generated_text in enumerate(generated_texts):
-                if num_samples >= max_iou_examples:
-                    break
 
                 parsed_answer = processor.post_process_generation(
                     generated_text,
@@ -380,8 +383,11 @@ TRAIN_SIZE = config.get("train_size", None)
 VAL_SIZE = config.get("val_size", None)
 NOTE = config.get("note", "")  # Get note from config, default to empty string
 MAX_IOU_EXAMPLES = config.get(
-    "max_iou_examples", 64
+    "max_iou_examples", None
 )  # Get max_iou_examples from config
+MAX_EXAMPLES_PER_IMAGE = config.get(
+    "max_examples_per_image"
+)  # Get max_examples_per_image from config
 
 # Override with command line arguments if provided
 if args.train_size is not None:
@@ -432,7 +438,55 @@ if LOAD_CHECKPOINT_FROM:
         LOAD_CHECKPOINT_FROM, trust_remote_code=True, config=model_config
     ).to(device)
 
+<<<<<<< Updated upstream
     # Load optimizer and scheduler states if they exist
+=======
+processor = AutoProcessor.from_pretrained(MODEL_NAME, trust_remote_code=True)
+
+for param in model.vision_tower.parameters():
+    param.is_trainable = False
+
+train_dataset = ConcatDataset(
+    [
+        FormGymDataset(
+            path, max_size=TRAIN_SIZE, max_examples_per_image=MAX_EXAMPLES_PER_IMAGE
+        )
+        for path in config["train_paths"]
+    ]
+)
+val_dataset = FormGymDataset(
+    config["eval_path"],
+    max_size=VAL_SIZE,
+    max_examples_per_image=MAX_EXAMPLES_PER_IMAGE,
+)
+
+train_loader = DataLoader(
+    train_dataset,
+    batch_size=TRAIN_BATCH_SIZE,
+    collate_fn=lambda batch: collate_fn(batch, processor),
+    num_workers=NUM_WORKERS,
+    shuffle=True,
+)
+val_loader = DataLoader(
+    val_dataset,
+    batch_size=VAL_BATCH_SIZE,
+    collate_fn=lambda batch: collate_fn(batch, processor),
+    num_workers=NUM_WORKERS,
+)
+
+# Initialize optimizer and scheduler
+optimizer = AdamW(model.parameters(), lr=LEARNING_RATE)
+num_training_steps = EPOCHS * len(train_loader)
+lr_scheduler = get_scheduler(
+    name="linear",
+    optimizer=optimizer,
+    num_warmup_steps=int(0.05 * num_training_steps),
+    num_training_steps=num_training_steps,
+)
+
+# Load optimizer and scheduler states if they exist
+if LOAD_CHECKPOINT_FROM:
+>>>>>>> Stashed changes
     states_path = os.path.join(LOAD_CHECKPOINT_FROM, "training_states.pt")
     if os.path.exists(states_path):
         print("Loading optimizer and scheduler states...")
