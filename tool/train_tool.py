@@ -464,7 +464,7 @@ train_dataset = ConcatDataset(
 val_dataset = FormGymDataset(
     config["eval_path"],
     max_size=VAL_SIZE,
-    max_examples_per_image=MAX_EXAMPLES_PER_IMAGE,
+    max_examples_per_image=10,
 )
 
 train_loader = DataLoader(
@@ -640,7 +640,14 @@ for index, row in predictions_df.iterrows():
     # Draw predicted box in red
     if row["predicted_bbox"] is not None:
         pred_bbox = row["predicted_bbox"]
-        draw.rectangle(pred_bbox, outline="red", width=2)
+        # ensure x_1 < x_2 and y_1 < y_2
+        ordered_pred_bbox = [
+            min(pred_bbox[0], pred_bbox[2]),
+            min(pred_bbox[1], pred_bbox[3]),
+            max(pred_bbox[0], pred_bbox[2]),
+            max(pred_bbox[1], pred_bbox[3]),
+        ]
+        draw.rectangle(ordered_pred_bbox, outline="red", width=2)
     else:
         # Draw text when predicted bbox is None
         draw.text((10, 10), "pred bbox is none", fill="red")
