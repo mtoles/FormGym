@@ -1,0 +1,78 @@
+{
+  "Date:": "",
+  "Description:": "Y- 1 Ultra 100' s vs. Winston Ultra 100' s",
+  "($)": "",
+  "Date": "5/ 3/ 90",
+  "cc:": [
+    "S. Willinger (3)",
+    "K. A. Hutchison S. A. Howard"
+  ],
+  "No.": "6",
+  "Requested By:": "W. T. Carpenter",
+  "Original Budgeted Amount": "23.3",
+  "(From Next Year's Budget": "",
+  "Project Type": [
+    "Product",
+    "Test"
+  ],
+  "(Product Test, A&U, etc.)": "",
+  "Sample Size": "400",
+  "Recommended Supplier": "Kapuler",
+  "Reason (s) for Recommendation": "Lowest project costs",
+  "Submitted by:": [
+    "",
+    "L. E. Gravely"
+  ],
+  "Approved By:": "",
+  "Budget Check:": [
+    "Howard",
+    ""
+  ],
+  "Original -": "Project File",
+  "Project No.": "1990- 488",
+  "Account Name": "BARCLAY",
+  "Budgeted:": {
+    "Yes": "x",
+    "No": ""
+  },
+  "PROJECTED:": {
+    "Internal Init. Date": "4/ ",
+    "Ext. Auth. Date Wave (s)": "12/ 90",
+    "Field Complete Wave (s)": "6/ 10/ 90",
+    "Final Report Due (Supplier Rpt.) Wave (s)": "7/ 9/ 90"
+  },
+  "Research Request Attached:": {
+    "Yes": "x",
+    "No": ""
+  },
+  "Competitive Proposals Obtained:": {
+    "Supplier": [
+      "Kapuler",
+      "Market Facts"
+    ],
+    "Cost": [
+      "$ 33,675 + 10% Est.",
+      "$ 35,000 + 10 % Est."
+    ],
+    "Est.": [
+      "$ 2000",
+      "$ 2000"
+    ],
+    "Total Cost": [
+      "$ 35,675",
+      "$ 37000"
+    ],
+    "Cost Per Interview": [
+      "$ 84.2",
+      "$ 87.5"
+    ]
+  },
+  "Summary of MRD Budget": {
+    "Total Area Budget:": "370,000.00",
+    "Current Bal. Available:": "199,900.00",
+    "This Change: (From Current Budget": "-35,675,00",
+    "This Amount": "-O-",
+    "New Balance": "164,225.00",
+    "Commited to Date: (Current Year)": "205,775.00"
+  }
+}

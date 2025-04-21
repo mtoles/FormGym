@@ -1,0 +1,110 @@
+{
+  "Weight": [
+    "1 .089",
+    "1 .106",
+    "1 .111",
+    "1 .132"
+  ],
+  "Draw": [
+    "0. .34",
+    "0 .37",
+    "0 .34",
+    "0\uf703 .37"
+  ],
+  "Tar": [
+    "39. .7",
+    "35 .6",
+    "37 .8",
+    "31 .0"
+  ],
+  "Nicotine": [
+    "4 .26",
+    "3 .83",
+    "3 .45",
+    "2 2.99"
+  ],
+  "Characteristic Tested": [
+    "Smoke Analysis",
+    "urn Test",
+    "Dynamic -Time in seconds",
+    "-% Burned Completely"
+  ],
+  "ction to Litmus": [
+    "Basic",
+    "Basic",
+    "Basic",
+    "Basic"
+  ],
+  "Static -Complete Cigar": [
+    "0",
+    "23",
+    "11",
+    "23"
+  ],
+  "-1 /2 Cigar": [
+    "5",
+    "0",
+    "5",
+    "0"
+  ],
+  "-1 /3 Cigar": [
+    "7",
+    "1",
+    "4",
+    "1"
+  ],
+  "-Went out immediately": [
+    "12",
+    "0",
+    "4",
+    "0"
+  ],
+  "BETWEEN THE ACTS 25 %% mm. Butt": {
+    "Present Sample": [
+      "1 .089",
+      "0. .34",
+      "39. .7",
+      "4 .26",
+      "Basic",
+      "0",
+      "5",
+      "7",
+      "12"
+    ],
+    "Mean of Last 12 Samples": [
+      "1 .106",
+      "0 .37",
+      "35 .6",
+      "3 .83",
+      "Basic",
+      "23",
+      "0",
+      "1",
+      "0"
+    ]
+  },
+  "MADISON 25 mm. Butt": {
+    "Present Sample": [
+      "1 .111",
+      "0 .34",
+      "37 .8",
+      "3 .45",
+      "Basic",
+      "11",
+      "5",
+      "4",
+      "4"
+    ],
+    "Mean of Last 12 Samples": [
+      "1 .132",
+      "0\uf703 .37",
+      "31 .0",
+      "2 2.99",
+      "Basic",
+      "23",
+      "0",
+      "1",
+      "0"
+    ]
+  }
+}

@@ -3,7 +3,7 @@
 
 output.png
 tool/checkpoints
-tool/dataset
+# tool/dataset
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
