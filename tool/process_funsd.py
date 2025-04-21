@@ -27,54 +27,54 @@ def process_annotation_and_image(file_path, input_images_dir, output_images_dir)
         if entry["label"] == "question" and entry.get("linking"):
             for link in entry["linking"]:
                 question_id, answer_id = link
-                if answer_id in id_to_entry:
-                    answer_entry = id_to_entry[answer_id]
+                # if answer_id in id_to_entry:
+                answer_entry = id_to_entry[answer_id]
 
-                    # Process the image
-                    input_image_path = os.path.join(input_images_dir, f"{form_id}.png")
-                    output_image_path = os.path.join(
-                        output_images_dir, f"processed_{form_id}_{counter}.png"
+                # Process the image
+                input_image_path = os.path.join(input_images_dir, f"{form_id}.png")
+                output_image_path = os.path.join(
+                    output_images_dir, f"processed_{form_id}_{counter}.png"
+                )
+
+                if os.path.exists(input_image_path):
+                    # Load and process image
+                    img = Image.open(input_image_path)
+                    img_array = np.array(img)
+
+                    # Convert bbox coordinates to integers
+                    x1, y1, x2, y2 = map(int, answer_entry["box"])
+
+                    # Ensure coordinates are within image bounds
+                    height, width = img_array.shape[:2]
+                    x1 = max(0, min(x1, width))
+                    y1 = max(0, min(y1, height))
+                    x2 = max(0, min(x2, width))
+                    y2 = max(0, min(y2, height))
+
+                    # Mask the answer region with white
+                    img_array[y1:y2, x1:x2] = 255
+
+                    # Save the processed image
+                    processed_img = Image.fromarray(img_array)
+                    processed_img.save(output_image_path)
+
+                    # Add the pair with image filename
+                    pairs.append(
+                        {
+                            "form_id": form_id,
+                            "question_text": entry["text"],
+                            "question_bbox": entry["box"],
+                            "answer_text": answer_entry["text"],
+                            "answer_bbox": answer_entry["box"],  # [x1 y1 x2 y2]
+                            "processed_image": f"processed_{form_id}_{counter}.png",
+                            "w": width,
+                            "h": height,
+                        }
                     )
 
-                    if os.path.exists(input_image_path):
-                        # Load and process image
-                        img = Image.open(input_image_path)
-                        img_array = np.array(img)
-
-                        # Convert bbox coordinates to integers
-                        x1, y1, x2, y2 = map(int, answer_entry["box"])
-
-                        # Ensure coordinates are within image bounds
-                        height, width = img_array.shape[:2]
-                        x1 = max(0, min(x1, width))
-                        y1 = max(0, min(y1, height))
-                        x2 = max(0, min(x2, width))
-                        y2 = max(0, min(y2, height))
-
-                        # Mask the answer region with white
-                        img_array[y1:y2, x1:x2] = 255
-
-                        # Save the processed image
-                        processed_img = Image.fromarray(img_array)
-                        processed_img.save(output_image_path)
-
-                        # Add the pair with image filename
-                        pairs.append(
-                            {
-                                "form_id": form_id,
-                                "question_text": entry["text"],
-                                "question_bbox": entry["box"],
-                                "answer_text": answer_entry["text"],
-                                "answer_bbox": answer_entry["box"],  # [x1 y1 x2 y2]
-                                "processed_image": f"processed_{form_id}_{counter}.png",
-                                "w": width,
-                                "h": height,
-                            }
-                        )
-
-                        counter += 1
-                    else:
-                        print(f"Warning: Image not found: {input_image_path}")
+                    counter += 1
+                    # else:
+                    #     print(f"Warning: Image not found: {input_image_path}")
 
     return pairs
 

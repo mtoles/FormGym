@@ -7,8 +7,8 @@ from transformers import (
     AutoModelForCausalLM,
     AutoProcessor,
     AdamW,
-    get_scheduler,
     AutoConfig,
+    get_scheduler,
 )
 import random
 import json
@@ -101,6 +101,11 @@ parser.add_argument(
     type=int,
     help="Number of examples to use for IoU calculation (overrides config)",
 )
+parser.add_argument(
+    "--max_examples_per_image",
+    type=int,
+    help="Maximum number of examples to use per image (overrides config)",
+)
 args = parser.parse_args()
 
 
@@ -119,17 +124,23 @@ class FormGymDataset(Dataset):
         image_groups = {}
         for example in raw_data:
             image_path = example["processed_image"]
-            if image_path not in image_groups:
-                image_groups[image_path] = []
-            image_groups[image_path].append(example)
+            image_prefix = "_".join(image_path.split("_")[:-1])
+            if image_prefix not in image_groups:
+                image_groups[image_prefix] = []
+            image_groups[image_prefix].append(example)
+
+        # Print number of examples per image
+        print("\nNumber of examples per image:")
+        for image_prefix, examples in image_groups.items():
+            print(f"{image_prefix}: {len(examples)} examples")
 
         # Keep at most max_examples_per_image examples per image
         self.data = []
-        for image_path, examples in image_groups.items():
+        for image_prefix, examples in image_groups.items():
             if max_examples_per_image is not None:
                 examples = examples[:max_examples_per_image]
             self.data.extend(examples)
-
+        print(f"Total examples reduced from {len(raw_data)} to {len(self.data)}")
         # Apply downsampling if max_size is specified
         if max_size is not None and max_size < len(self.data):
             self.data = random.sample(self.data, max_size)
@@ -250,8 +261,8 @@ def calculate_loss(model, data_loader, processor):
 
 def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None):
     """Calculate IoU accuracy for the first max_examples examples"""
-    if max_iou_examples is None:
-        max_iou_examples = MAX_IOU_EXAMPLES
+    # if max_iou_examples is None:
+    #     max_iou_examples = MAX_IOU_EXAMPLES
     model.eval()
     total_iou = 0
     num_samples = 0
@@ -266,7 +277,7 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
             gt_bboxes,
             image_paths,
         ) in enumerate(data_loader):
-            if num_samples >= max_iou_examples:
+            if max_iou_examples is not None and num_samples >= max_iou_examples:
                 break
 
             input_text = processor.batch_decode(
@@ -320,8 +331,6 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
             )
 
             for i, generated_text in enumerate(generated_texts):
-                if num_samples >= max_iou_examples:
-                    break
 
                 parsed_answer = processor.post_process_generation(
                     generated_text,
@@ -360,6 +369,29 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
     return avg_iou, predictions_data
 
 
+def manage_checkpoints(checkpoint_dir, max_checkpoints=4):
+    """Keep only the max_checkpoints most recent checkpoints in the directory."""
+    # Get all checkpoint directories
+    checkpoint_dirs = [
+        d
+        for d in os.listdir(checkpoint_dir)
+        if os.path.isdir(os.path.join(checkpoint_dir, d))
+    ]
+
+    # Sort by modification time (newest first)
+    checkpoint_dirs.sort(
+        key=lambda x: os.path.getmtime(os.path.join(checkpoint_dir, x)), reverse=True
+    )
+
+    # Delete older checkpoints
+    for old_checkpoint in checkpoint_dirs[max_checkpoints:]:
+        old_path = os.path.join(checkpoint_dir, old_checkpoint)
+        print(f"Deleting old checkpoint: {old_path}")
+        import shutil
+
+        shutil.rmtree(old_path)
+
+
 # Main execution code starts here
 # Load configuration
 config = load_config(args.config, args)
@@ -380,8 +412,11 @@ TRAIN_SIZE = config.get("train_size", None)
 VAL_SIZE = config.get("val_size", None)
 NOTE = config.get("note", "")  # Get note from config, default to empty string
 MAX_IOU_EXAMPLES = config.get(
-    "max_iou_examples", 64
+    "max_iou_examples", None
 )  # Get max_iou_examples from config
+MAX_EXAMPLES_PER_IMAGE = config.get(
+    "max_examples_per_image"
+)  # Get max_examples_per_image from config
 
 # Override with command line arguments if provided
 if args.train_size is not None:
@@ -393,29 +428,13 @@ if args.note is not None:
 if args.max_iou_examples is not None:
     MAX_IOU_EXAMPLES = args.max_iou_examples
 
-# Initialize wandb with config
-wandb_config = {
-    "task_name_prefix": TASK_NAME_PREFIX,
-    "train_batch_size": TRAIN_BATCH_SIZE,
-    "epochs": EPOCHS,
-    "learning_rate": LEARNING_RATE,
-    "model": MODEL_NAME,
-    # "model_revision": MODEL_REVISION,
-    "train_paths": config["train_paths"],
-    "eval_path": config["eval_path"],
-    "load_checkpoint_from": LOAD_CHECKPOINT_FROM,
-    "train_size": TRAIN_SIZE,
-    "val_size": VAL_SIZE,
-    "note": NOTE,  # Add note to wandb config
-}
-
 # Create a unique run name with timestamp
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 run_name = f"train_tool_{timestamp}"
 if NOTE:
     run_name = f"{run_name}_{NOTE.replace(' ', '_')}"
 
-run = wandb.init(project="form-filler", name=run_name, config=wandb_config)
+run = wandb.init(project="form-filler", name=run_name, config=config)
 
 disable_caching()
 
@@ -442,9 +461,18 @@ for param in model.vision_tower.parameters():
     param.is_trainable = False
 
 train_dataset = ConcatDataset(
-    [FormGymDataset(path, max_size=TRAIN_SIZE) for path in config["train_paths"]]
+    [
+        FormGymDataset(
+            path, max_size=TRAIN_SIZE, max_examples_per_image=MAX_EXAMPLES_PER_IMAGE
+        )
+        for path in config["train_paths"]
+    ]
 )
-val_dataset = FormGymDataset(config["eval_path"], max_size=VAL_SIZE)
+val_dataset = FormGymDataset(
+    config["eval_path"],
+    max_size=VAL_SIZE,
+    max_examples_per_image=10,
+)
 
 train_loader = DataLoader(
     train_dataset,
@@ -552,14 +580,14 @@ for epoch in range(EPOCHS):
         current_epoch_fraction = total_batches / batches_per_epoch
         if current_epoch_fraction % EPOCHS_PER_EVAL < 1.0 / batches_per_epoch:
             val_loss = calculate_loss(model, val_loader, processor)
-            # val_accuracy, predictions_data = calculate_iou_accuracy(
-            #     model, val_loader, processor
-            # )
-            # predictions_df = pd.DataFrame(predictions_data)
+            val_accuracy, predictions_data = calculate_iou_accuracy(
+                model, val_loader, processor
+            )
+            predictions_df = pd.DataFrame(predictions_data)
 
-            # print(f"Validation IoU: {val_accuracy}")
+            print(f"Validation IoU: {val_accuracy}")
             print(f"Validation Loss: {val_loss}")
-            # wandb.log({"accuracy/val_iou": val_accuracy, "loss/val_loss": val_loss})
+            wandb.log({"accuracy/val_iou": val_accuracy, "loss/val_loss": val_loss})
             wandb.log({"loss/val_loss": val_loss})
 
             # Save model checkpoint after evaluation
@@ -585,6 +613,9 @@ for epoch in range(EPOCHS):
             )
             print(f"Model checkpoint saved successfully")
 
+            # Manage checkpoints to keep only the 4 most recent ones
+            manage_checkpoints(os.path.join(CHECKPOINT_DIR, timestamp), max_checkpoints=4)
+
     avg_train_loss = train_loss / len(train_loader)
     print(f"Average Training Loss: {avg_train_loss}")
     wandb.log(
@@ -596,7 +627,7 @@ for epoch in range(EPOCHS):
     )
 
 # visualize the model's predictions
-os.makedirs("tmp/tool", exist_ok=True)
+os.makedirs(f"tmp/tool/{timestamp}", exist_ok=True)
 if predictions_df is None:
     val_loss = calculate_loss(model, val_loader, processor)
     val_accuracy, predictions_data = calculate_iou_accuracy(
@@ -619,7 +650,14 @@ for index, row in predictions_df.iterrows():
     # Draw predicted box in red
     if row["predicted_bbox"] is not None:
         pred_bbox = row["predicted_bbox"]
-        draw.rectangle(pred_bbox, outline="red", width=2)
+        # ensure x_1 < x_2 and y_1 < y_2
+        ordered_pred_bbox = [
+            min(pred_bbox[0], pred_bbox[2]),
+            min(pred_bbox[1], pred_bbox[3]),
+            max(pred_bbox[0], pred_bbox[2]),
+            max(pred_bbox[1], pred_bbox[3]),
+        ]
+        draw.rectangle(ordered_pred_bbox, outline="red", width=2)
     else:
         # Draw text when predicted bbox is None
         draw.text((10, 10), "pred bbox is none", fill="red")
