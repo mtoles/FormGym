@@ -369,6 +369,29 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
     return avg_iou, predictions_data
 
 
+def manage_checkpoints(checkpoint_dir, max_checkpoints=4):
+    """Keep only the max_checkpoints most recent checkpoints in the directory."""
+    # Get all checkpoint directories
+    checkpoint_dirs = [
+        d
+        for d in os.listdir(checkpoint_dir)
+        if os.path.isdir(os.path.join(checkpoint_dir, d))
+    ]
+
+    # Sort by modification time (newest first)
+    checkpoint_dirs.sort(
+        key=lambda x: os.path.getmtime(os.path.join(checkpoint_dir, x)), reverse=True
+    )
+
+    # Delete older checkpoints
+    for old_checkpoint in checkpoint_dirs[max_checkpoints:]:
+        old_path = os.path.join(checkpoint_dir, old_checkpoint)
+        print(f"Deleting old checkpoint: {old_path}")
+        import shutil
+
+        shutil.rmtree(old_path)
+
+
 # Main execution code starts here
 # Load configuration
 config = load_config(args.config, args)
@@ -405,29 +428,13 @@ if args.note is not None:
 if args.max_iou_examples is not None:
     MAX_IOU_EXAMPLES = args.max_iou_examples
 
-# Initialize wandb with config
-wandb_config = {
-    "task_name_prefix": TASK_NAME_PREFIX,
-    "train_batch_size": TRAIN_BATCH_SIZE,
-    "epochs": EPOCHS,
-    "learning_rate": LEARNING_RATE,
-    "model": MODEL_NAME,
-    # "model_revision": MODEL_REVISION,
-    "train_paths": config["train_paths"],
-    "eval_path": config["eval_path"],
-    "load_checkpoint_from": LOAD_CHECKPOINT_FROM,
-    "train_size": TRAIN_SIZE,
-    "val_size": VAL_SIZE,
-    "note": NOTE,  # Add note to wandb config
-}
-
 # Create a unique run name with timestamp
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 run_name = f"train_tool_{timestamp}"
 if NOTE:
     run_name = f"{run_name}_{NOTE.replace(' ', '_')}"
 
-run = wandb.init(project="form-filler", name=run_name, config=wandb_config)
+run = wandb.init(project="form-filler", name=run_name, config=config)
 
 disable_caching()
 
@@ -573,14 +580,14 @@ for epoch in range(EPOCHS):
         current_epoch_fraction = total_batches / batches_per_epoch
         if current_epoch_fraction % EPOCHS_PER_EVAL < 1.0 / batches_per_epoch:
             val_loss = calculate_loss(model, val_loader, processor)
-            # val_accuracy, predictions_data = calculate_iou_accuracy(
-            #     model, val_loader, processor
-            # )
-            # predictions_df = pd.DataFrame(predictions_data)
+            val_accuracy, predictions_data = calculate_iou_accuracy(
+                model, val_loader, processor
+            )
+            predictions_df = pd.DataFrame(predictions_data)
 
-            # print(f"Validation IoU: {val_accuracy}")
+            print(f"Validation IoU: {val_accuracy}")
             print(f"Validation Loss: {val_loss}")
-            # wandb.log({"accuracy/val_iou": val_accuracy, "loss/val_loss": val_loss})
+            wandb.log({"accuracy/val_iou": val_accuracy, "loss/val_loss": val_loss})
             wandb.log({"loss/val_loss": val_loss})
 
             # Save model checkpoint after evaluation
@@ -606,6 +613,9 @@ for epoch in range(EPOCHS):
             )
             print(f"Model checkpoint saved successfully")
 
+            # Manage checkpoints to keep only the 4 most recent ones
+            manage_checkpoints(os.path.join(CHECKPOINT_DIR, timestamp), max_checkpoints=4)
+
     avg_train_loss = train_loss / len(train_loader)
     print(f"Average Training Loss: {avg_train_loss}")
     wandb.log(
@@ -617,7 +627,7 @@ for epoch in range(EPOCHS):
     )
 
 # visualize the model's predictions
-os.makedirs("tmp/tool", exist_ok=True)
+os.makedirs(f"tmp/tool/{timestamp}", exist_ok=True)
 if predictions_df is None:
     val_loss = calculate_loss(model, val_loader, processor)
     val_accuracy, predictions_data = calculate_iou_accuracy(
