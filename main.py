@@ -156,6 +156,7 @@ while not (active_df := df[df.active.apply(lambda x: x[-1])]).empty:
         batch_model_outputs = model.forward(
             nl_profile=batch["nl_profile"].to_list(),
             doc_image=batch["img"].apply(lambda x: x[-1]).to_list(),
+            feedback=batch["feedback"].to_list(),
             available_actions=available_actions,
             flow=batch["flow"].to_list(),
         )

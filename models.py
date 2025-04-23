@@ -264,6 +264,7 @@ class CheaterModel:
         doc_image: Image.Image,
         available_actions: List[str],
         targets: List[str] = [],
+        feedback: List[List] = None,
     ) -> List[Dict]:
         """
         Give the model the ground truth annotated doc so it can cheat, for data validation
@@ -370,6 +371,7 @@ class ScriptedModel:
         doc_image: List[Image.Image],
         available_actions: List[str],
         targets: List[str] = [],
+        feedback: List[List] = None,
         **kwargs,
     ) -> List[Dict]:
         if self.count >= len(self.script):
@@ -401,6 +403,7 @@ class GptModelE2E:
         doc_image: List[Image.Image],
         available_actions: List[str],
         flow: List[str],
+        feedback: List[List] = None,
     ) -> List[Dict]:
         outputs = []
         for profile, image, f in zip(nl_profile, doc_image, flow):
@@ -530,6 +533,7 @@ class HFE2EModel:
         doc_image: List[Image.Image],
         available_actions: List[str],
         flow: List[str],
+        feedback: List[List] = None,
     ):
         base_prompts = []
 
