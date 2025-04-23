@@ -245,6 +245,7 @@ def calculate_loss(model, data_loader, processor):
                 text=answers,
                 return_tensors="pt",
                 padding=True,
+                padding_side="left",
                 return_token_type_ids=False,
             ).input_ids.to(device)
             loss_outputs = model(
@@ -559,6 +560,7 @@ for epoch in range(EPOCHS):
             text=answers,
             return_tensors="pt",
             padding=True,
+            padding_side="left",
             return_token_type_ids=False,
         ).input_ids.to(device)
         outputs = model(input_ids=input_ids, pixel_values=pixel_values, labels=labels)
@@ -617,7 +619,9 @@ for epoch in range(EPOCHS):
             print(f"Model checkpoint saved successfully")
 
             # Manage checkpoints to keep only the 4 most recent ones
-            manage_checkpoints(os.path.join(CHECKPOINT_DIR, timestamp), max_checkpoints=4)
+            manage_checkpoints(
+                os.path.join(CHECKPOINT_DIR, timestamp), max_checkpoints=4
+            )
 
     avg_train_loss = train_loss / len(train_loader)
     print(f"Average Training Loss: {avg_train_loss}")
