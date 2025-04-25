@@ -305,6 +305,10 @@ class ScriptedModel:
         scripts = {
             "xx_0_0": [
                 {
+                    "action": "FieldLocalizer",
+                    "value": "Bank Name",
+                },
+                {
                     "action": "PlaceText",
                     "cx": 551 / w,
                     "cy": 20 / h,

@@ -27,86 +27,8 @@ import pandas as pd  # Add pandas import
 import matplotlib.pyplot as plt
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 
-# Parse command line arguments
-parser = argparse.ArgumentParser(description="Train form filler model")
-parser.add_argument(
-    "--config",
-    type=str,
-    default="tool/config.yaml",
-    help="Path to configuration YAML file",
-)
-parser.add_argument(
-    "--train_paths",
-    type=list,
-    help="Path to training data JSON file (overrides config)",
-    nargs="+",
-)
-parser.add_argument(
-    "--eval_path",
-    type=str,
-    help="Path to evaluation data JSON file (overrides config)",
-)
-parser.add_argument(
-    "--epochs",
-    type=int,
-    help="Number of training epochs (overrides config)",
-)
-parser.add_argument(
-    "--learning_rate",
-    type=float,
-    help="Learning rate for training (overrides config)",
-)
-parser.add_argument(
-    "--train_batch_size",
-    type=int,
-    help="Training batch size (overrides config)",
-)
-parser.add_argument(
-    "--val_batch_size",
-    type=int,
-    help="Validation batch size (overrides config)",
-)
-parser.add_argument(
-    "--epochs_per_eval",
-    type=float,
-    help="Number of epochs between evaluations (overrides config)",
-)
-parser.add_argument(
-    "--load_checkpoint_from",
-    type=str,
-    help="Path to checkpoint to load from (overrides config)",
-)
-parser.add_argument(
-    "--train_size",
-    type=int,
-    help="Number of samples to use for training (overrides config)",
-)
-parser.add_argument(
-    "--val_size",
-    type=int,
-    help="Number of samples to use for validation (overrides config)",
-)
-parser.add_argument(
-    "--note",
-    type=str,
-    help="A note to be logged to wandb and included in save paths",
-)
-parser.add_argument(
-    "--use_peft",
-    type=bool,
-    help="Whether to use PEFT (overrides config)",
-)
-parser.add_argument(
-    "--max_iou_examples",
-    type=int,
-    help="Number of examples to use for IoU calculation (overrides config)",
-)
-parser.add_argument(
-    "--max_examples_per_image",
-    type=int,
-    help="Maximum number of examples to use per image (overrides config)",
-)
-args = parser.parse_args()
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 
 
 class FormGymDataset(Dataset):
@@ -167,13 +89,14 @@ class FormGymDataset(Dataset):
         return question, label, image, bbox, image_path
 
 
-def load_config(config_path, override_args=None):
+def load_config(config_path, actions, override_args=None):
     """Load configuration from YAML file and override with command line arguments"""
     with open(config_path, "r") as f:
         config = yaml.safe_load(f)
 
     # Convert values to proper types based on argument parser types
-    for action in parser._actions:
+    # for action in parser._actions:
+    for action in actions:
         if action.dest in config and action.type is not None:
             config[action.dest] = action.type(config[action.dest])
 
@@ -392,291 +315,382 @@ def manage_checkpoints(checkpoint_dir, max_checkpoints=4):
 
         shutil.rmtree(old_path)
 
-
-# Main execution code starts here
-# Load configuration
-config = load_config(args.config, args)
-
-# Configuration
-TASK_NAME_PREFIX = config["task_name_prefix"]
-TRAIN_BATCH_SIZE = config["train_batch_size"]
-VAL_BATCH_SIZE = config["val_batch_size"]
-NUM_WORKERS = config["num_workers"]
-EPOCHS = config["epochs"]
-LEARNING_RATE = config["learning_rate"]
-MODEL_NAME = config["model_name"]
-# MODEL_REVISION = config["model_revision"]
-EPOCHS_PER_EVAL = config["epochs_per_eval"]
-CHECKPOINT_DIR = config["checkpoint_dir"]
-LOAD_CHECKPOINT_FROM = config.get("load_checkpoint_from", None)
-TRAIN_SIZE = config.get("train_size", None)
-VAL_SIZE = config.get("val_size", None)
-NOTE = config.get("note", "")  # Get note from config, default to empty string
-MAX_IOU_EXAMPLES = config.get(
-    "max_iou_examples", None
-)  # Get max_iou_examples from config
-MAX_EXAMPLES_PER_IMAGE = config.get(
-    "max_examples_per_image"
-)  # Get max_examples_per_image from config
-
-# Override with command line arguments if provided
-if args.train_size is not None:
-    TRAIN_SIZE = args.train_size
-if args.val_size is not None:
-    VAL_SIZE = args.val_size
-if args.note is not None:
-    NOTE = args.note
-if args.max_iou_examples is not None:
-    MAX_IOU_EXAMPLES = args.max_iou_examples
-
-# Create a unique run name with timestamp
-timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-run_name = f"train_tool_{timestamp}"
-if NOTE:
-    run_name = f"{run_name}_{NOTE.replace(' ', '_')}"
-
-run = wandb.init(project="form-filler", name=run_name, config=config)
-
-disable_caching()
-
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-# Load model from checkpoint if specified, otherwise load from pretrained
-if LOAD_CHECKPOINT_FROM:
-    print(f"Loading model from checkpoint: {LOAD_CHECKPOINT_FROM}")
+def load_from_checkpoint(checkpoint_path, device):
     model_config = AutoConfig.from_pretrained(
-        "microsoft/Florence-2-large-ft",
-        trust_remote_code=True,
-    )
+            "microsoft/Florence-2-large-ft",
+            trust_remote_code=True,
+        )
     model = AutoModelForCausalLM.from_pretrained(
         LOAD_CHECKPOINT_FROM, trust_remote_code=True, config=model_config
     ).to(device)
-else:
-    model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, trust_remote_code=True).to(
-        device
+    processor = AutoProcessor.from_pretrained(
+        LOAD_CHECKPOINT_FROM, trust_remote_code=True
     )
+    return processor, model
 
-processor = AutoProcessor.from_pretrained(MODEL_NAME, trust_remote_code=True)
 
-for param in model.vision_tower.parameters():
-    param.is_trainable = False
+# Main execution code starts here
+# Load configuration
 
-train_dataset = ConcatDataset(
-    [
-        FormGymDataset(
-            path, max_size=TRAIN_SIZE, max_examples_per_image=MAX_EXAMPLES_PER_IMAGE
+
+def main():
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description="Train form filler model")
+    parser.add_argument(
+        "--config",
+        type=str,
+        default="tool/config.yaml",
+        help="Path to configuration YAML file",
+    )
+    parser.add_argument(
+        "--train_paths",
+        type=list,
+        help="Path to training data JSON file (overrides config)",
+        nargs="+",
+    )
+    parser.add_argument(
+        "--eval_path",
+        type=str,
+        help="Path to evaluation data JSON file (overrides config)",
+    )
+    parser.add_argument(
+        "--epochs",
+        type=int,
+        help="Number of training epochs (overrides config)",
+    )
+    parser.add_argument(
+        "--learning_rate",
+        type=float,
+        help="Learning rate for training (overrides config)",
+    )
+    parser.add_argument(
+        "--train_batch_size",
+        type=int,
+        help="Training batch size (overrides config)",
+    )
+    parser.add_argument(
+        "--val_batch_size",
+        type=int,
+        help="Validation batch size (overrides config)",
+    )
+    parser.add_argument(
+        "--epochs_per_eval",
+        type=float,
+        help="Number of epochs between evaluations (overrides config)",
+    )
+    parser.add_argument(
+        "--load_checkpoint_from",
+        type=str,
+        help="Path to checkpoint to load from (overrides config)",
+    )
+    parser.add_argument(
+        "--train_size",
+        type=int,
+        help="Number of samples to use for training (overrides config)",
+    )
+    parser.add_argument(
+        "--val_size",
+        type=int,
+        help="Number of samples to use for validation (overrides config)",
+    )
+    parser.add_argument(
+        "--note",
+        type=str,
+        help="A note to be logged to wandb and included in save paths",
+    )
+    parser.add_argument(
+        "--use_peft",
+        type=bool,
+        help="Whether to use PEFT (overrides config)",
+    )
+    parser.add_argument(
+        "--max_iou_examples",
+        type=int,
+        help="Number of examples to use for IoU calculation (overrides config)",
+    )
+    parser.add_argument(
+        "--max_examples_per_image",
+        type=int,
+        help="Maximum number of examples to use per image (overrides config)",
+    )
+    args = parser.parse_args()
+    config = load_config(args.config, args.actions)
+
+    # Configuration
+    TASK_NAME_PREFIX = config["task_name_prefix"]
+    TRAIN_BATCH_SIZE = config["train_batch_size"]
+    VAL_BATCH_SIZE = config["val_batch_size"]
+    NUM_WORKERS = config["num_workers"]
+    EPOCHS = config["epochs"]
+    LEARNING_RATE = config["learning_rate"]
+    MODEL_NAME = config["model_name"]
+    # MODEL_REVISION = config["model_revision"]
+    EPOCHS_PER_EVAL = config["epochs_per_eval"]
+    CHECKPOINT_DIR = config["checkpoint_dir"]
+    LOAD_CHECKPOINT_FROM = config.get("load_checkpoint_from", None)
+    TRAIN_SIZE = config.get("train_size", None)
+    VAL_SIZE = config.get("val_size", None)
+    NOTE = config.get("note", "")  # Get note from config, default to empty string
+    MAX_IOU_EXAMPLES = config.get(
+        "max_iou_examples", None
+    )  # Get max_iou_examples from config
+    MAX_EXAMPLES_PER_IMAGE = config.get(
+        "max_examples_per_image"
+    )  # Get max_examples_per_image from config
+    # Override with command line arguments if provided
+    if args.train_size is not None:
+        TRAIN_SIZE = args.train_size
+    if args.val_size is not None:
+        VAL_SIZE = args.val_size
+    if args.note is not None:
+        NOTE = args.note
+    if args.max_iou_examples is not None:
+        MAX_IOU_EXAMPLES = args.max_iou_examples
+
+    # Create a unique run name with timestamp
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    run_name = f"train_tool_{timestamp}"
+    if NOTE:
+        run_name = f"{run_name}_{NOTE.replace(' ', '_')}"
+
+    run = wandb.init(project="form-filler", name=run_name, config=config)
+
+    disable_caching()
+
+
+    # Load model from checkpoint if specified, otherwise load from pretrained
+    if LOAD_CHECKPOINT_FROM:
+        processor, model = load_from_checkpoint(LOAD_CHECKPOINT_FROM)
+        print(f"Loading model from checkpoint: {LOAD_CHECKPOINT_FROM}")
+        
+    else:
+        model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, trust_remote_code=True).to(
+            device
         )
-        for path in config["train_paths"]
-    ]
-)
+        processor = AutoProcessor.from_pretrained(MODEL_NAME, trust_remote_code=True)
 
+    for param in model.vision_tower.parameters():
+        param.is_trainable = False
 
-val_dataset = FormGymDataset(
-    config["eval_path"],
-    max_size=VAL_SIZE,
-    max_examples_per_image=10,
-)
-
-train_loader = DataLoader(
-    train_dataset,
-    batch_size=TRAIN_BATCH_SIZE,
-    collate_fn=lambda batch: collate_fn(batch, processor),
-    num_workers=NUM_WORKERS,
-    shuffle=True,
-)
-val_loader = DataLoader(
-    val_dataset,
-    batch_size=VAL_BATCH_SIZE,
-    collate_fn=lambda batch: collate_fn(batch, processor),
-    num_workers=NUM_WORKERS,
-)
-
-# Initialize optimizer and scheduler
-optimizer = AdamW(model.parameters(), lr=LEARNING_RATE)
-num_training_steps = EPOCHS * len(train_loader)
-lr_scheduler = get_scheduler(
-    name="linear",
-    optimizer=optimizer,
-    num_warmup_steps=int(0.05 * num_training_steps),
-    num_training_steps=num_training_steps,
-)
-
-# Load optimizer and scheduler states if they exist
-if LOAD_CHECKPOINT_FROM:
-    states_path = os.path.join(LOAD_CHECKPOINT_FROM, "training_states.pt")
-    if os.path.exists(states_path):
-        print("Loading optimizer and scheduler states...")
-        checkpoint = torch.load(states_path)
-        optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
-        lr_scheduler.load_state_dict(checkpoint["scheduler_state_dict"])
-        batch_no = checkpoint["batch_no"]
-        total_batches = checkpoint["total_batches"]
-        print(f"Resuming from epoch {checkpoint['epoch']}, batch {batch_no}")
-
-# Apply PEFT if configured
-if config.get("use_peft", False):
-    print("Applying PEFT configuration...")
-    peft_config = LoraConfig(**config["peft_config"])
-
-    # First prepare the model for k-bit training
-    model = prepare_model_for_kbit_training(model)
-
-    # Get PEFT model
-    model = get_peft_model(model, peft_config)
-
-    # Freeze all parameters except LoRA parameters
-    for name, param in model.named_parameters():
-        if "lora" not in name.lower():
-            param.requires_grad = False
-
-    # Print trainable parameters
-    model.print_trainable_parameters()
-
-    # Verify that only LoRA parameters are trainable
-    trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-    total_params = sum(p.numel() for p in model.parameters())
-    print(f"Trainable parameters: {trainable_params}")
-    print(f"Total parameters: {total_params}")
-    print(
-        f"Percentage of trainable parameters: {100 * trainable_params / total_params:.2f}%"
+    train_dataset = ConcatDataset(
+        [
+            FormGymDataset(
+                path, max_size=TRAIN_SIZE, max_examples_per_image=MAX_EXAMPLES_PER_IMAGE
+            )
+            for path in config["train_paths"]
+        ]
     )
 
-batch_no = -1
-val_accuracy, val_loss, predictions_df = None, None, None
-total_batches = 0
-batches_per_epoch = len(train_loader)
-for epoch in range(EPOCHS):
-    model.train()
-    train_loss = 0
-    for inputs, answers, widths, heights, bboxes, image_paths in tqdm(
-        train_loader, desc=f"Training Epoch {epoch + 1}/{EPOCHS}"
-    ):
-        batch_no += 1
-        total_batches += 1
-        input_ids = inputs["input_ids"]
-        pixel_values = inputs["pixel_values"]
-        labels = processor.tokenizer(
-            text=answers,
-            return_tensors="pt",
-            padding=True,
-            padding_side="left",
-            return_token_type_ids=False,
-        ).input_ids.to(device)
-        outputs = model(input_ids=input_ids, pixel_values=pixel_values, labels=labels)
-        loss = outputs.loss
-        loss.backward()
-        optimizer.step()
-        lr_scheduler.step()
-        optimizer.zero_grad()
-        train_loss += loss.item()
 
-        # Log batch-level metrics
+    val_dataset = FormGymDataset(
+        config["eval_path"],
+        max_size=VAL_SIZE,
+        max_examples_per_image=10,
+    )
+
+    train_loader = DataLoader(
+        train_dataset,
+        batch_size=TRAIN_BATCH_SIZE,
+        collate_fn=lambda batch: collate_fn(batch, processor),
+        num_workers=NUM_WORKERS,
+        shuffle=True,
+    )
+    val_loader = DataLoader(
+        val_dataset,
+        batch_size=VAL_BATCH_SIZE,
+        collate_fn=lambda batch: collate_fn(batch, processor),
+        num_workers=NUM_WORKERS,
+    )
+
+    # Initialize optimizer and scheduler
+    optimizer = AdamW(model.parameters(), lr=LEARNING_RATE)
+    num_training_steps = EPOCHS * len(train_loader)
+    lr_scheduler = get_scheduler(
+        name="linear",
+        optimizer=optimizer,
+        num_warmup_steps=int(0.05 * num_training_steps),
+        num_training_steps=num_training_steps,
+    )
+
+    # Load optimizer and scheduler states if they exist
+    if LOAD_CHECKPOINT_FROM:
+        states_path = os.path.join(LOAD_CHECKPOINT_FROM, "training_states.pt")
+        if os.path.exists(states_path):
+            print("Loading optimizer and scheduler states...")
+            checkpoint = torch.load(states_path)
+            optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
+            lr_scheduler.load_state_dict(checkpoint["scheduler_state_dict"])
+            batch_no = checkpoint["batch_no"]
+            total_batches = checkpoint["total_batches"]
+            print(f"Resuming from epoch {checkpoint['epoch']}, batch {batch_no}")
+
+    # Apply PEFT if configured
+    if config.get("use_peft", False):
+        print("Applying PEFT configuration...")
+        peft_config = LoraConfig(**config["peft_config"])
+
+        # First prepare the model for k-bit training
+        model = prepare_model_for_kbit_training(model)
+
+        # Get PEFT model
+        model = get_peft_model(model, peft_config)
+
+        # Freeze all parameters except LoRA parameters
+        for name, param in model.named_parameters():
+            if "lora" not in name.lower():
+                param.requires_grad = False
+
+        # Print trainable parameters
+        model.print_trainable_parameters()
+
+        # Verify that only LoRA parameters are trainable
+        trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+        total_params = sum(p.numel() for p in model.parameters())
+        print(f"Trainable parameters: {trainable_params}")
+        print(f"Total parameters: {total_params}")
+        print(
+            f"Percentage of trainable parameters: {100 * trainable_params / total_params:.2f}%"
+        )
+
+    batch_no = -1
+    val_accuracy, val_loss, predictions_df = None, None, None
+    total_batches = 0
+    batches_per_epoch = len(train_loader)
+    for epoch in range(EPOCHS):
+        model.train()
+        train_loss = 0
+        for inputs, answers, widths, heights, bboxes, image_paths in tqdm(
+            train_loader, desc=f"Training Epoch {epoch + 1}/{EPOCHS}"
+        ):
+            batch_no += 1
+            total_batches += 1
+            input_ids = inputs["input_ids"]
+            pixel_values = inputs["pixel_values"]
+            labels = processor.tokenizer(
+                text=answers,
+                return_tensors="pt",
+                padding=True,
+                padding_side="left",
+                return_token_type_ids=False,
+            ).input_ids.to(device)
+            outputs = model(input_ids=input_ids, pixel_values=pixel_values, labels=labels)
+            loss = outputs.loss
+            loss.backward()
+            optimizer.step()
+            lr_scheduler.step()
+            optimizer.zero_grad()
+            train_loss += loss.item()
+
+            # Log batch-level metrics
+            wandb.log(
+                {
+                    "loss/train_loss": loss.item(),
+                    "config/learning_rate": lr_scheduler.get_last_lr()[0],
+                    "config/epoch": epoch,
+                    "config/batch": batch_no,
+                }
+            )
+
+            # Evaluate every N batches
+            if batch_no % int(EPOCHS_PER_EVAL * batches_per_epoch) == 0:
+                val_loss = calculate_loss(model, val_loader, processor)
+                val_accuracy, predictions_data = calculate_iou_accuracy(
+                    model, val_loader, processor
+                )
+                predictions_df = pd.DataFrame(predictions_data)
+
+                print(f"Validation IoU: {val_accuracy}")
+                print(f"Validation Loss: {val_loss}")
+                wandb.log({"accuracy/val_iou": val_accuracy, "loss/val_loss": val_loss})
+                wandb.log({"loss/val_loss": val_loss})
+
+                # Save model checkpoint after evaluation
+                current_epoch_fraction = total_batches / batches_per_epoch
+                checkpoint_path = os.path.join(
+                    CHECKPOINT_DIR, timestamp, f"model_epoch_{current_epoch_fraction:.2f}"
+                )
+                if NOTE:
+                    checkpoint_path = f"{checkpoint_path}_{NOTE.replace(' ', '_')}"
+                os.makedirs(os.path.dirname(checkpoint_path), exist_ok=True)
+                print(f"Saving model checkpoint to {checkpoint_path}")
+
+                # Save optimizer and scheduler states
+                model.save_pretrained(checkpoint_path)
+                torch.save(
+                    {
+                        "optimizer_state_dict": optimizer.state_dict(),
+                        "scheduler_state_dict": lr_scheduler.state_dict(),
+                        "epoch": epoch,
+                        "batch_no": batch_no,
+                        "total_batches": total_batches,
+                    },
+                    os.path.join(checkpoint_path, "training_states.pt"),
+                )
+                print(f"Model checkpoint saved successfully")
+
+                # Manage checkpoints to keep only the 4 most recent ones
+                manage_checkpoints(
+                    os.path.join(CHECKPOINT_DIR, timestamp), max_checkpoints=4
+                )
+
+        avg_train_loss = train_loss / len(train_loader)
+        print(f"Average Training Loss: {avg_train_loss}")
         wandb.log(
             {
-                "loss/train_loss": loss.item(),
+                "loss/train_loss": avg_train_loss,
                 "config/learning_rate": lr_scheduler.get_last_lr()[0],
                 "config/epoch": epoch,
-                "config/batch": batch_no,
             }
         )
 
-        # Evaluate every N batches
-        if batch_no % int(EPOCHS_PER_EVAL * batches_per_epoch) == 0:
-            val_loss = calculate_loss(model, val_loader, processor)
-            val_accuracy, predictions_data = calculate_iou_accuracy(
-                model, val_loader, processor
-            )
-            predictions_df = pd.DataFrame(predictions_data)
+    # visualize the model's predictions
+    os.makedirs(f"tmp/tool/{timestamp}", exist_ok=True)
+    if predictions_df is None:
+        val_loss = calculate_loss(model, val_loader, processor)
+        val_accuracy, predictions_data = calculate_iou_accuracy(
+            model, val_loader, processor
+        )
+        wandb.log({"accuracy/val_iou": val_accuracy})
+        wandb.log({"loss/val_loss": val_loss})
+        predictions_df = pd.DataFrame(predictions_data)
+    for index, row in predictions_df.iterrows():
+        # Load the actual image file
+        image = Image.open(row["image_path"]).convert("RGB")
+        draw = ImageDraw.Draw(image)
 
-            print(f"Validation IoU: {val_accuracy}")
-            print(f"Validation Loss: {val_loss}")
-            wandb.log({"accuracy/val_iou": val_accuracy, "loss/val_loss": val_loss})
-            wandb.log({"loss/val_loss": val_loss})
+        # Draw ground truth box in green
+        gt_bbox = row["ground_truth_bbox"]
+        draw.rectangle(gt_bbox, outline="green", width=2)
+        label = row.answer.split("<")[0]
+        draw.text(gt_bbox[:2], label, fill="green")
 
-            # Save model checkpoint after evaluation
-            current_epoch_fraction = total_batches / batches_per_epoch
-            checkpoint_path = os.path.join(
-                CHECKPOINT_DIR, timestamp, f"model_epoch_{current_epoch_fraction:.2f}"
-            )
-            if NOTE:
-                checkpoint_path = f"{checkpoint_path}_{NOTE.replace(' ', '_')}"
-            os.makedirs(os.path.dirname(checkpoint_path), exist_ok=True)
-            print(f"Saving model checkpoint to {checkpoint_path}")
+        # Draw predicted box in red
+        if row["predicted_bbox"] is not None:
+            pred_bbox = row["predicted_bbox"]
+            # ensure x_1 < x_2 and y_1 < y_2
+            ordered_pred_bbox = [
+                min(pred_bbox[0], pred_bbox[2]),
+                min(pred_bbox[1], pred_bbox[3]),
+                max(pred_bbox[0], pred_bbox[2]),
+                max(pred_bbox[1], pred_bbox[3]),
+            ]
+            draw.rectangle(ordered_pred_bbox, outline="red", width=2)
+        else:
+            # Draw text when predicted bbox is None
+            draw.text((10, 10), "pred bbox is none", fill="red")
 
-            # Save optimizer and scheduler states
-            model.save_pretrained(checkpoint_path)
-            torch.save(
-                {
-                    "optimizer_state_dict": optimizer.state_dict(),
-                    "scheduler_state_dict": lr_scheduler.state_dict(),
-                    "epoch": epoch,
-                    "batch_no": batch_no,
-                    "total_batches": total_batches,
-                },
-                os.path.join(checkpoint_path, "training_states.pt"),
-            )
-            print(f"Model checkpoint saved successfully")
+        # Save the image
+        output_path = f"tmp/tool/prediction_{index}.png"
+        image.save(output_path)
 
-            # Manage checkpoints to keep only the 4 most recent ones
-            manage_checkpoints(
-                os.path.join(CHECKPOINT_DIR, timestamp), max_checkpoints=4
-            )
+        # # Log to wandb
+        # wandb.log(
+        #     {
+        #         "visualization": wandb.Image(
+        #             image, caption=f"Prediction {index} (Green: GT, Red: Pred)"
+        #         )
+        #     }
+        # )
 
-    avg_train_loss = train_loss / len(train_loader)
-    print(f"Average Training Loss: {avg_train_loss}")
-    wandb.log(
-        {
-            "loss/train_loss": avg_train_loss,
-            "config/learning_rate": lr_scheduler.get_last_lr()[0],
-            "config/epoch": epoch,
-        }
-    )
-
-# visualize the model's predictions
-os.makedirs(f"tmp/tool/{timestamp}", exist_ok=True)
-if predictions_df is None:
-    val_loss = calculate_loss(model, val_loader, processor)
-    val_accuracy, predictions_data = calculate_iou_accuracy(
-        model, val_loader, processor
-    )
-    wandb.log({"accuracy/val_iou": val_accuracy})
-    wandb.log({"loss/val_loss": val_loss})
-    predictions_df = pd.DataFrame(predictions_data)
-for index, row in predictions_df.iterrows():
-    # Load the actual image file
-    image = Image.open(row["image_path"]).convert("RGB")
-    draw = ImageDraw.Draw(image)
-
-    # Draw ground truth box in green
-    gt_bbox = row["ground_truth_bbox"]
-    draw.rectangle(gt_bbox, outline="green", width=2)
-    label = row.answer.split("<")[0]
-    draw.text(gt_bbox[:2], label, fill="green")
-
-    # Draw predicted box in red
-    if row["predicted_bbox"] is not None:
-        pred_bbox = row["predicted_bbox"]
-        # ensure x_1 < x_2 and y_1 < y_2
-        ordered_pred_bbox = [
-            min(pred_bbox[0], pred_bbox[2]),
-            min(pred_bbox[1], pred_bbox[3]),
-            max(pred_bbox[0], pred_bbox[2]),
-            max(pred_bbox[1], pred_bbox[3]),
-        ]
-        draw.rectangle(ordered_pred_bbox, outline="red", width=2)
-    else:
-        # Draw text when predicted bbox is None
-        draw.text((10, 10), "pred bbox is none", fill="red")
-
-    # Save the image
-    output_path = f"tmp/tool/prediction_{index}.png"
-    image.save(output_path)
-
-    # # Log to wandb
-    # wandb.log(
-    #     {
-    #         "visualization": wandb.Image(
-    #             image, caption=f"Prediction {index} (Green: GT, Red: Pred)"
-    #         )
-    #     }
-    # )
+if __name__ == "__main__":
+    main()

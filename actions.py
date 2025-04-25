@@ -8,8 +8,11 @@ from copy import deepcopy
 from pydantic import BaseModel
 from enum import Enum
 from utils import *
-
-
+from transformers import AutoProcessor, AutoModelForCausalLM
+import torch
+from pathlib import Path
+import yaml
+from tool.train_tool import load_from_checkpoint, TASK_NAME_PREFIX
 class ActionMeta(type):
     registry = {}
 
@@ -221,6 +224,32 @@ class InvalidAction(BaseAction):
 
     def act(doc_state, **kwargs):
         feedback = "Action: 'InvalidAction'\nDocument returned unchanged."
+        return doc_state, feedback
+
+class FieldLocalizerTool(BaseAction):
+    documentation = """
+    Given a string of question in a document, image, or pdf, return the center of the textbox, line, or cell related to the question.
+    """
+    PROD_TOOL_CHECKPOINT_PATH = "tool/prod_tool_checkpoint"
+    processor, model = load_from_checkpoint(PROD_TOOL_CHECKPOINT_PATH)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    @classmethod
+    def act(cls, doc_state, question: str, **kwargs):
+        img = kwargs["image"]
+        w = img.width
+        h = img.height
+        inputs = cls.processor(images=img, return_tensors="pt").to(cls.device)
+        outputs = cls.model.generate(**inputs, max_new_tokens=100)
+        generated_text = cls.processor.decode(outputs[0], skip_special_tokens=False)
+        parsed_answer = cls.processor.post_process_generation(
+                    generated_text,
+                    task=TASK_NAME_PREFIX,
+                    image_size=(w, h),
+                )
+        pred_bboxes = parsed_answer[TASK_NAME_PREFIX]["bboxes"]
+        feedback = f"Action: 'FieldLocalizer'\nPredicted bbox for {question}: {pred_bboxes}"
+        
         return doc_state, feedback
 
 
