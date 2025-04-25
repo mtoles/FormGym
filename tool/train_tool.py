@@ -471,7 +471,6 @@ train_dataset = ConcatDataset(
 )
 
 
-
 val_dataset = FormGymDataset(
     config["eval_path"],
     max_size=VAL_SIZE,
@@ -581,9 +580,8 @@ for epoch in range(EPOCHS):
             }
         )
 
-        # Check if we should evaluate based on fractional epochs
-        current_epoch_fraction = total_batches / batches_per_epoch
-        if current_epoch_fraction % EPOCHS_PER_EVAL < 1.0 / batches_per_epoch:
+        # Evaluate every N batches
+        if batch_no % int(EPOCHS_PER_EVAL * batches_per_epoch) == 0:
             val_loss = calculate_loss(model, val_loader, processor)
             val_accuracy, predictions_data = calculate_iou_accuracy(
                 model, val_loader, processor
@@ -596,6 +594,7 @@ for epoch in range(EPOCHS):
             wandb.log({"loss/val_loss": val_loss})
 
             # Save model checkpoint after evaluation
+            current_epoch_fraction = total_batches / batches_per_epoch
             checkpoint_path = os.path.join(
                 CHECKPOINT_DIR, timestamp, f"model_epoch_{current_epoch_fraction:.2f}"
             )
