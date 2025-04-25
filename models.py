@@ -72,7 +72,8 @@ def visualize_preds(doc_state, fields, img):
 
     # Calculate absolute coordinates.
 
-    img = get_image_of_state(doc_state=doc_state, blank_img=img)
+    # img = get_image_of_state(doc_state=doc_state, blank_img=img)
+    current_img = doc_state.get_image_of_state().convert("RGBA")
 
     # Draw correct text boxes in green and incorrect text boxes in red
 
@@ -87,57 +88,57 @@ def visualize_preds(doc_state, fields, img):
         )
     # Save the image.
     # Combine the overlay with the base image
-    result = Image.alpha_composite(img, overlay)
+    result = Image.alpha_composite(current_img, overlay)
 
     result.save("output.png")
 
 
-def get_image_of_state(
-    doc_state, blank_img: Image.Image, save_path: str = None
-) -> Image.Image:
-    new_img = blank_img.copy()
-    text_draw = ImageDraw.Draw(new_img)
-    preds = doc_state.marks
-    width, height = new_img.size
+# def get_image_of_state(
+#     doc_state, blank_img: Image.Image, save_path: str = None
+# ) -> Image.Image:
+#     new_img = blank_img.copy()
+#     text_draw = ImageDraw.Draw(new_img)
+#     preds = doc_state.marks
+#     width, height = new_img.size
 
-    color_map = {
-        CreatorEnum.PREFILLED.value: "blue",
-        CreatorEnum.AGENT.value: "green",
-    }
-    for pred in preds:
-        x = pred["cx"] * width
-        y = pred["cy"] * height
+#     color_map = {
+#         CreatorEnum.PREFILLED.value: "blue",
+#         CreatorEnum.AGENT.value: "green",
+#     }
+#     for pred in preds:
+#         x = pred["cx"] * width
+#         y = pred["cy"] * height
 
-        # Load Times New Roman font, size 10.
-        # try:
-        #     pass
-        # except IOError:
-        #     font = ImageFont.load_default()
+#         # Load Times New Roman font, size 10.
+#         # try:
+#         #     pass
+#         # except IOError:
+#         #     font = ImageFont.load_default()
 
-        field_name = pred["field_name"] if "field_name" in pred else ""
-        text = str(pred["value"])
+#         field_name = pred["field_name"] if "field_name" in pred else ""
+#         text = str(pred["value"])
 
-        # Draw the text in blue.
+#         # Draw the text in blue.
 
-        text_draw.text(
-            (x, y), text, fill=color_map[pred["creator"]], font=FILLER_FONT, anchor="mm"
-        )
+#         text_draw.text(
+#             (x, y), text, fill=color_map[pred["creator"]], font=FILLER_FONT, anchor="mm"
+#         )
 
-        # Draw a rectangle based on the bbox
-        bbox = pred["bbox"]
-        text_draw.rectangle(
-            (
-                bbox["x"] * width,
-                bbox["y"] * height,
-                (bbox["x"] + bbox["width"]) * width,
-                (bbox["y"] + bbox["height"]) * height,
-            ),
-            outline=(0, 0, 255),
-        )
-    # save the image
-    if save_path:
-        new_img.save(save_path)
-    return new_img  # drawn on
+#         # Draw a rectangle based on the bbox
+#         bbox = pred["bbox"]
+#         text_draw.rectangle(
+#             (
+#                 bbox["x"] * width,
+#                 bbox["y"] * height,
+#                 (bbox["x"] + bbox["width"]) * width,
+#                 (bbox["y"] + bbox["height"]) * height,
+#             ),
+#             outline=(0, 0, 255),
+#         )
+#     # save the image
+#     if save_path:
+#         new_img.save(save_path)
+#     return new_img  # drawn on
 
 
 def add_grid_overlay(img):
@@ -309,6 +310,22 @@ class ScriptedModel:
                     "value": "Bank Name",
                 },
                 {
+                    "action": "FieldLocalizer",
+                    "value": "Bank Account Number",
+                },
+                {
+                    "action": "FieldLocalizer",
+                    "value": "Single",
+                },
+                {
+                    "action": "FieldLocalizer",
+                    "value": "Married",
+                },
+                {
+                    "action": "FieldLocalizer",
+                    "value": "Initial",
+                },
+                {
                     "action": "PlaceText",
                     "cx": 551 / w,
                     "cy": 20 / h,
@@ -363,6 +380,24 @@ class ScriptedModel:
                     "action": "QuerySql",
                     "query": "SELECT * FROM features WHERE key = 'CROI_4435'",
                 }
+            ],
+            "al_2_0": [
+                {
+                    "action": "FieldLocalizer",
+                    "value": "Last Name",
+                },
+                {
+                    "action": "FieldLocalizer",
+                    "value": "Cell Phone Number",
+                },
+                {
+                    "action": "FieldLocalizer",
+                    "value": "Gross Income",
+                },
+                {
+                    "action": "FieldLocalizer",
+                    "value": "Present Employer",
+                },
             ],
         }
         self.script = scripts[script_name]

@@ -61,7 +61,7 @@ for i, fid in enumerate(args.file_ids):
     annot_path = f"annotations/{fid}.json"
     annots = annotations.read_annotations(annot_path)
     targets = annotations.read_targets(f"targets/{fid}_targets.json")["selected_ids"]
-    doc_state = DocState(annots, blank_img.width, blank_img.height)
+    doc_state = DocState(annots, blank_img=blank_img)
     db = SqlDb(user_profile=user_profile)
 
     action_count = 0
@@ -181,11 +181,12 @@ while not (active_df := df[df.active.apply(lambda x: x[-1])]).empty:
             
             # Generate and save visualization of the updated document state
             example["img"].append(
-                models.get_image_of_state(
-                    doc_state=doc_state,
-                    blank_img=example["blank_img"],
-                    save_path=f"tmp/{example['fid']}-{len(example['doc_state'])}.png",
-                )
+                # models.get_image_of_state(
+                #     doc_state=doc_state,
+                #     blank_img=example["blank_img"],
+                #     save_path=f"tmp/{example['fid']}-{len(example['doc_state'])}.png",
+                # )
+                doc_state.get_image_of_state(save_path=f"tmp/{example['fid']}-{len(example['doc_state'])}.png")
             )
             
             # Update whether this example should continue being processed

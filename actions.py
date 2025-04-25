@@ -12,7 +12,10 @@ from transformers import AutoProcessor, AutoModelForCausalLM
 import torch
 from pathlib import Path
 import yaml
-from tool.train_tool import load_from_checkpoint, TASK_NAME_PREFIX
+from tool.train_tool import load_from_checkpoint, TEXT_INPUT_PROMPT_TEMPLATE, TASK_NAME_PREFIX
+from utils import *
+
+
 class ActionMeta(type):
     registry = {}
 
@@ -75,7 +78,7 @@ class PlaceText(BaseAction):
             "value": value,
             "creator": "agent",
         }
-        
+
         mark["bbox"] = get_text_bbox(
             text=value,
             doc_width=doc_state.w,
@@ -117,7 +120,7 @@ class DeleteText(BaseAction):
         if not doc_state.marks:
             feedback = "Action: 'DeleteText'\nNo marks to delete."
             return doc_state, feedback
-        
+
         for mark in doc_state.marks:
             if (
                 (cx >= mark["bbox"]["x"])
@@ -155,7 +158,7 @@ class SignOrInitial(BaseAction):
             "value": value,
             "creator": "agent",
         }
-        
+
         mark["bbox"] = get_text_bbox(
             text=value,
             doc_width=doc_state.w,
@@ -192,7 +195,9 @@ class QuerySql(BaseAction):
         assert db is not None
         try:
             output = db.query(query)
-            feedback = f"Action: 'QuerySql'\nQuery executed successfully. Output: {output}"
+            feedback = (
+                f"Action: 'QuerySql'\nQuery executed successfully. Output: {output}"
+            )
         except Exception as e:
             feedback = f"Action: 'QuerySql'\nError executing query: {str(e)}"
             print(feedback)
@@ -226,30 +231,53 @@ class InvalidAction(BaseAction):
         feedback = "Action: 'InvalidAction'\nDocument returned unchanged."
         return doc_state, feedback
 
-class FieldLocalizerTool(BaseAction):
+
+class FieldLocalizer(BaseAction):
     documentation = """
     Given a string of question in a document, image, or pdf, return the center of the textbox, line, or cell related to the question.
+    Args:
+        value: The string of question in a document, image, or pdf
+
+    Example input:
+        {"action": "FieldLocalizer", "value": "First Name"}
     """
     PROD_TOOL_CHECKPOINT_PATH = "tool/prod_tool_checkpoint"
-    processor, model = load_from_checkpoint(PROD_TOOL_CHECKPOINT_PATH)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    processor, model = load_from_checkpoint(PROD_TOOL_CHECKPOINT_PATH, device)
 
     @classmethod
-    def act(cls, doc_state, question: str, **kwargs):
-        img = kwargs["image"]
+    def act(cls, doc_state, value: str, **kwargs):
+        img = doc_state.get_image_of_state()
         w = img.width
         h = img.height
-        inputs = cls.processor(images=img, return_tensors="pt").to(cls.device)
-        outputs = cls.model.generate(**inputs, max_new_tokens=100)
-        generated_text = cls.processor.decode(outputs[0], skip_special_tokens=False)
-        parsed_answer = cls.processor.post_process_generation(
-                    generated_text,
-                    task=TASK_NAME_PREFIX,
-                    image_size=(w, h),
-                )
+        prompt = TEXT_INPUT_PROMPT_TEMPLATE.format(target=value)
+        inputs = cls.processor(text=prompt, images=img, return_tensors="pt").to(cls.device)
+        generated_ids = cls.model.generate(
+            input_ids=inputs["input_ids"],
+            pixel_values=inputs["pixel_values"],
+            max_new_tokens=4096,
+            num_beams=3,
+            do_sample=False
+        )
+        generated_text = cls.processor.batch_decode(generated_ids, skip_special_tokens=False)[0]
+
+        parsed_answer = cls.processor.post_process_generation(generated_text, task=TASK_NAME_PREFIX, image_size=(img.width, img.height))
+
+        # outputs = cls.model.generate(**inputs, max_new_tokens=100)
+        # generated_text = cls.processor.decode(outputs[0], skip_special_tokens=False)
+        # parsed_answer = cls.processor.post_process_generation(
+        #     generated_text,
+        #     task=TASK_NAME_PREFIX,
+        #     image_size=(w, h),
+        # )
         pred_bboxes = parsed_answer[TASK_NAME_PREFIX]["bboxes"]
-        feedback = f"Action: 'FieldLocalizer'\nPredicted bbox for {question}: {pred_bboxes}"
-        
+        feedback = str(pred_bboxes)
+        # feedback = (
+        #     f"Action: 'FieldLocalizer'\nPredicted bbox for {value}: {pred_bboxes}"
+        # )
+        # print()
+        # print(feedback)
+        # print(generated_text)
         return doc_state, feedback
 
 

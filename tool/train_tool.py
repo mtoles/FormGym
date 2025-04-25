@@ -27,6 +27,8 @@ import pandas as pd  # Add pandas import
 import matplotlib.pyplot as plt
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 
+TASK_NAME_PREFIX = "<OPEN_VOCABULARY_DETECTION>" #config["task_name_prefix"]
+TEXT_INPUT_PROMPT_TEMPLATE = TASK_NAME_PREFIX + "text entry field corresponding to {target}"
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
@@ -79,7 +81,7 @@ class FormGymDataset(Dataset):
         y1 = str(int(bbox[1] / h * 1000))
         x2 = str(int(bbox[2] / w * 1000))
         y2 = str(int(bbox[3] / h * 1000))
-        question = f"{TASK_NAME_PREFIX}text entry field corresponding to {example['question_text']}"
+        question = TEXT_INPUT_PROMPT_TEMPLATE.format(target=example["question_text"])
         image_path = os.path.join(self.image_dir, f"{example['processed_image']}")
         image = Image.open(image_path).convert("RGB")
         image = np.array(image)
@@ -321,12 +323,13 @@ def load_from_checkpoint(checkpoint_path, device):
             trust_remote_code=True,
         )
     model = AutoModelForCausalLM.from_pretrained(
-        LOAD_CHECKPOINT_FROM, trust_remote_code=True, config=model_config
+        checkpoint_path, trust_remote_code=True, config=model_config
     ).to(device)
     processor = AutoProcessor.from_pretrained(
-        LOAD_CHECKPOINT_FROM, trust_remote_code=True
+        "microsoft/Florence-2-large-ft", trust_remote_code=True
     )
     return processor, model
+
 
 
 # Main execution code starts here
@@ -417,7 +420,6 @@ def main():
     config = load_config(args.config, args.actions)
 
     # Configuration
-    TASK_NAME_PREFIX = config["task_name_prefix"]
     TRAIN_BATCH_SIZE = config["train_batch_size"]
     VAL_BATCH_SIZE = config["val_batch_size"]
     NUM_WORKERS = config["num_workers"]

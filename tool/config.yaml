@@ -1,5 +1,5 @@
 # Training configuration
-task_name_prefix: "<OPEN_VOCABULARY_DETECTION>"
+# task_name_prefix: "<OPEN_VOCABULARY_DETECTION>"
 train_batch_size: 8
 val_batch_size: 64
 num_workers: 0
