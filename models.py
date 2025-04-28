@@ -25,6 +25,7 @@ import time
 from prompt import parse_raw_output
 from json import JSONDecodeError
 import textwrap
+from anthropic import Anthropic
 
 memory = Memory(".joblib_cache", verbose=0)
 
@@ -50,8 +51,6 @@ def get_e2e_prompt(
 
     {api_documentation}
 
-    {generation_instructions}
-
     You know the following information about the user:
 
     {user_profile}
@@ -64,21 +63,25 @@ def get_e2e_prompt(
     {grid_subprompt}
     {suggest_localizer_str}
 
-    
     {feedback_str}
 
+    {generation_instructions}
     Return a form-filling API call as a JSON list of dictionaries.
     
     """
     generation_instructions = {
         FlowEnum.ONESHOT.value: "Generate a sequence of actions that will completely fill out the form.",
-        FlowEnum.ITERATIVE.value: "Generate a the next action in the sequence of actions that will completely fill out the form.",
+        FlowEnum.ITERATIVE.value: "Generate a the next action in the sequence of actions that will completely fill out the form. Generate EXACTLY ONE action.",
     }[task]
     feedback_str = (
         "So far, you have received the following feedback on your previous actions:\n"
         + "\n".join([f"Feedback {i+1}: {f}" for i, f in enumerate(feedback)])
     )
-    suggest_localizer_str = "It is recommended that you call the localizer for each field before attempting to fill it." if suggest_localizer else ""
+    suggest_localizer_str = (
+        "It is recommended that you call the localizer for each field before attempting to fill it."
+        if suggest_localizer
+        else ""
+    )
     return textwrap.dedent(
         e2e_prompt_template_content.format(
             user_profile=user_profile,
@@ -133,8 +136,6 @@ def visualize_preds(doc_state, fields, img):
     result = Image.alpha_composite(current_img, overlay)
 
     result.save("output.png")
-
-
 
 
 def add_grid_overlay(img):
@@ -223,10 +224,12 @@ def parse_and_reconstruct_fields(response_text):
             # Instead of crashing, just skip the broken chunk
 
             print(f"Skipping invalid JSON block: {match}\nError: {e}")
-            passed_actions.append({
-                "action": "InvalidAction",
-                "value": response_text,
-            })
+            passed_actions.append(
+                {
+                    "action": "InvalidAction",
+                    "value": response_text,
+                }
+            )
 
     return passed_actions
 
@@ -488,6 +491,87 @@ def forward_gpt(model_name, prompt, base64_image):
     return completion
 
 
+@memory.cache
+def forward_anthropic(model_name, prompt, base64_image):
+    print("calling anthropic uncached...")
+    client = Anthropic()
+    message = client.messages.create(
+        model=model_name,
+        max_tokens=1024,
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": prompt,
+                    },
+                    {
+                        "type": "image",
+                        "source": {
+                            "type": "base64",
+                            "media_type": "image/png",
+                            "data": base64_image,
+                        },
+                    },
+                ],
+            }
+        ],
+    )
+    return message
+
+
+class AnthropicModelE2E:
+    def __init__(self, model_name: str, draw_grid: bool = False):
+        self.model_name = model_name
+        self.draw_grid = draw_grid
+
+    def forward(
+        self,
+        nl_profile: List[str],
+        doc_image: List[Image.Image],
+        available_actions: List[str],
+        flow: List[str],
+        feedback: List[List] = None,
+        suggest_localizer: bool = False,
+    ) -> List[Dict]:
+        outputs = []
+        for profile, image, f in zip(nl_profile, doc_image, flow):
+            prompt = get_e2e_prompt(
+                user_profile=profile,
+                api_documentation=ActionMeta.all_documentation(
+                    "\n\n".join(available_actions)
+                ),
+                grid_subprompt=grid_subprompt_content if self.draw_grid else "",
+                task=f,
+                feedback=feedback,
+                suggest_localizer=suggest_localizer,
+            )
+
+            if self.draw_grid:
+                image = add_grid_overlay(image)
+
+            buffer = io.BytesIO()
+            image.save(buffer, format="PNG")
+            image_b64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
+
+            response = (
+                forward_anthropic(
+                    self.model_name,
+                    prompt,
+                    image_b64,
+                )
+                .content[0]
+                .text
+            )
+            print(response)
+            tool_params = parse_and_reconstruct_fields(response)
+            if f == FlowEnum.ITERATIVE.value:
+                tool_params = tool_params[:1]
+            outputs.append(tool_params)
+        return outputs
+
+
 class HFE2EModel:
     def __init__(
         self, model_name: str, download_dir: str, seed=None, draw_grid: bool = False
@@ -500,6 +584,7 @@ class HFE2EModel:
             "deepseek_vl2": DeepseekVL2Model,
             "gemma3": Gemma3Model,
             "mllama": MLLamaModel,
+            "claude": AnthropicModelE2E,
         }
 
         if model_name not in model_registry:

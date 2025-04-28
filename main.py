@@ -170,6 +170,8 @@ if __name__ == "__main__":
         model = models.HFE2EModel(
             model_name=args.model_name, download_dir=args.download_dir
         )
+    elif args.model_type.lower().startswith("anthropic"):
+        model = models.AnthropicModelE2E(model_name=args.model_name, draw_grid=False)
     else:
         raise ValueError(f"Unknown model type: {args.model_type}")
     # Set batch size to 2 and process in batches
