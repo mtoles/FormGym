@@ -208,7 +208,7 @@ def parse_and_reconstruct_fields(response_text):
         try:
             match_dict = json.loads(match)
             action_name = match_dict["action"]
-            
+
             # Assume these are defined somewhere in your code:
             #   ActionMeta.registry -> dict of valid actions
             #   InvalidAction -> some fallback action class
@@ -217,7 +217,7 @@ def parse_and_reconstruct_fields(response_text):
                 action = ActionMeta.registry[action_name]
             else:
                 action = InvalidAction
-            
+
             # Validate against the schema
             action.Schema(**match_dict)
             passed_actions.append(match_dict)
@@ -226,7 +226,7 @@ def parse_and_reconstruct_fields(response_text):
             # Instead of crashing, just skip the broken chunk
             print(f"Skipping invalid JSON block: {match}\nError: {e}")
             failed_actions.append(match)
-    
+
     return passed_actions
 
 
@@ -264,6 +264,7 @@ class CheaterModel:
         doc_image: Image.Image,
         available_actions: List[str],
         targets: List[str] = [],
+        feedback: List[List] = None,
     ) -> List[Dict]:
         """
         Give the model the ground truth annotated doc so it can cheat, for data validation
@@ -366,10 +367,11 @@ class ScriptedModel:
     # @add_bbox
     def forward(
         self,
-        nl_profile: str,
-        doc_image: Image.Image,
+        nl_profile: List[str],
+        doc_image: List[Image.Image],
         available_actions: List[str],
         targets: List[str] = [],
+        feedback: List[List] = None,
         **kwargs,
     ) -> List[Dict]:
         if self.count >= len(self.script):
@@ -386,7 +388,7 @@ class ScriptedModel:
         pred = self.script[self.count]
         self.count += 1
 
-        return [[pred] for _ in range(self.batch_size)]
+        return [[pred] for _ in range(min(self.batch_size, len(doc_image)))]
 
 
 class GptModelE2E:
@@ -401,14 +403,15 @@ class GptModelE2E:
         doc_image: List[Image.Image],
         available_actions: List[str],
         flow: List[str],
+        feedback: List[List] = None,
     ) -> List[Dict]:
         outputs = []
-        for profile, image, f in zip(
-            nl_profile, doc_image, flow
-        ):
+        for profile, image, f in zip(nl_profile, doc_image, flow):
             prompt = e2e_prompt_template.format(
                 user_profile=profile,
-                api_documentation=ActionMeta.all_documentation('\n\n'.join(available_actions)),
+                api_documentation=ActionMeta.all_documentation(
+                    "\n\n".join(available_actions)
+                ),
                 grid_subprompt=grid_subprompt if self.draw_grid else "",
             )
 
@@ -428,7 +431,7 @@ class GptModelE2E:
                 .choices[0]
                 .message.content
             )
-            
+
             tool_params = parse_and_reconstruct_fields(response)
             if f == FlowEnum.ITERATIVE.value:
                 tool_params = tool_params[:1]
@@ -487,12 +490,15 @@ def forward_gpt(model_name, prompt, base64_image):
 
     return completion
 
+
 class HFE2EModel:
-    def __init__(self, model_name: str, download_dir: str, seed=None, draw_grid: bool = False):
+    def __init__(
+        self, model_name: str, download_dir: str, seed=None, draw_grid: bool = False
+    ):
         model_registry = {
             "aria": AriaModel,
             "llava": LlavaModel,
-            "molmo": MolmoModel, 
+            "molmo": MolmoModel,
             "qwen_vl": QwenVLModel,
             "deepseek_vl2": DeepseekVL2Model,
             "gemma3": Gemma3Model,
@@ -511,7 +517,7 @@ class HFE2EModel:
         # engine_args_dict["tensor_parallel_size"] = 4
 
         self.llm = LLM(**engine_args_dict)
-        
+
         self.sampling_params = SamplingParams(
             temperature=0.2,
             max_tokens=64,
@@ -521,17 +527,22 @@ class HFE2EModel:
         self.model_name = model_name
         self.draw_grid = draw_grid
 
-    def forward(self, nl_profile: List[str],
+    def forward(
+        self,
+        nl_profile: List[str],
         doc_image: List[Image.Image],
         available_actions: List[str],
         flow: List[str],
+        feedback: List[List] = None,
     ):
         base_prompts = []
 
         for profile, f in zip(nl_profile, flow):
             base_prompt = e2e_prompt_template.format(
                 user_profile=profile,
-                api_documentation=ActionMeta.all_documentation('\n\n'.join(available_actions)),
+                api_documentation=ActionMeta.all_documentation(
+                    "\n\n".join(available_actions)
+                ),
                 grid_subprompt=grid_subprompt if self.draw_grid else "",
             )
             base_prompts.append(base_prompt)
@@ -556,11 +567,11 @@ class HFE2EModel:
             raw_text = out.outputs[0].text
             print(f"Raw Outputs for input {i}:")
             print(raw_text)
-            print("===="*20)
+            print("====" * 20)
             parsed_response = parse_and_reconstruct_fields(raw_text)
             print(f"Parsed Outputs for input {i}:")
             print(parsed_response)
-            print("===="*20)
+            print("====" * 20)
             parsed_outputs.append(parsed_response)
 
         return parsed_outputs
