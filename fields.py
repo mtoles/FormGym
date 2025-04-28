@@ -4,6 +4,8 @@ File defining fields APPEARING in a form
 Types of fields:
 - Text
 - Checkbox
+
+NOTE TO EDITORS: 
 """
 
 from typing import List

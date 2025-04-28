@@ -13,6 +13,26 @@ import argparse
 from copy import deepcopy
 from PIL import Image
 import pandas as pd
+import inspect
+import re
+
+def get_relevant_user_features(doc_state: DocState) -> set:
+    def _get_referenced_features(src_code: str) -> set:
+        feat_pattern = r"feat\.([A-Za-z0-9_]+)"
+        feat_matches = re.findall(feat_pattern, src_code)
+        other_pattern = r"user_profile\.features\.([A-Za-z0-9_]+)"
+        other_matches = re.findall(other_pattern, src_code)
+        return set(feat_matches + other_matches)
+
+    referenced_features = set()
+    for field in doc_state.fields:
+        field_cls = field["field"]
+        src_code = inspect.getsource(field_cls)
+        referenced_features_in_field = _get_referenced_features(src_code)
+        assert referenced_features_in_field, f"No features referenced in {field_cls}"
+        referenced_features.update(referenced_features_in_field)
+
+    return referenced_features
 
 
 def example_should_be_active(example):
@@ -24,6 +44,7 @@ def example_should_be_active(example):
     if len(example["doc_state"]) >= example["max_actions"]:
         return False
     return True
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -38,6 +59,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("--k_missing_fields", type=int, default=1)
     parser.add_argument("--max_actions_multiplier", type=int, default=2)
+    parser.add_argument("--suggest_localizer", type=bool, default=False)
     args = parser.parse_args()
 
     # Validate the task argument
@@ -52,16 +74,21 @@ if __name__ == "__main__":
     # Prepare list to collect per-file data for batch processing
     all_files = []
     for i, fid in enumerate(args.file_ids):
-        user_profile = user_features.UserProfile(i)
-        nl_profile = "\n".join(user_profile.get_nl_profile())
         png_path = f"pngs/{fid}.png"
         print(f"Processing file: {png_path}")
 
         blank_img = Image.open(png_path).convert("RGB")
         annot_path = f"annotations/{fid}.json"
         annots = annotations.read_annotations(annot_path)
-        targets = annotations.read_targets(f"targets/{fid}_targets.json")["selected_ids"]
+        targets = annotations.read_targets(f"targets/{fid}_targets.json")[
+            "selected_ids"
+        ]
         doc_state = DocState(annots, blank_img=blank_img)
+
+        relevant_user_features = get_relevant_user_features(doc_state)
+        user_profile = user_features.UserProfile(i, relevant_user_features)
+        nl_profile = "\n".join(user_profile.get_nl_profile())
+
         db = SqlDb(user_profile=user_profile)
 
         action_count = 0
@@ -76,12 +103,13 @@ if __name__ == "__main__":
                 doc_state=doc_state, user_profile=user_profile
             )
             # available_actions = ["PlaceText", "DeleteText", "SignOrInitial", "Terminate"]
-            available_actions = list(actions.ActionMeta.registry.keys())
+            available_actions = list(set(actions.ActionMeta.registry.keys()) - {"InvalidAction"})
             cheater_gens = cheater_model.forward(
                 nl_profile=nl_profile,
                 doc_image=blank_img,
                 available_actions=available_actions,
                 targets=targets,
+                suggest_localizer=False, # irrelevant
             )
             # cheater_gens["bbox"] = get_text_bbox()
             doc_state, feedback = actions.update_doc_state(
@@ -99,7 +127,7 @@ if __name__ == "__main__":
             # target_fields = new_doc_state.pop_target_fields(targets=targets)
             doc_state = new_doc_state
 
-            # 
+            #
         else:
             raise ValueError(f"Invalid task specified: {args.task}")
 
@@ -133,13 +161,14 @@ if __name__ == "__main__":
         raise NotImplementedError
         model = models.CheaterModel()  # Instance now will use batched inputs
     elif args.model_type == "scripted":
-        model = models.ScriptedModel(batch_size=BATCH_SIZE, script_name=args.file_ids[0])
+        model = models.ScriptedModel(
+            batch_size=BATCH_SIZE, script_name=args.file_ids[0]
+        )
     elif args.model_type.lower().startswith("gpt"):
         model = models.GptModelE2E(model_name=args.model_name, draw_grid=False)
     elif args.model_type.lower().startswith("hf"):
         model = models.HFE2EModel(
-            model_name=args.model_name,
-            download_dir=args.download_dir
+            model_name=args.model_name, download_dir=args.download_dir
         )
     else:
         raise ValueError(f"Unknown model type: {args.model_type}")
@@ -160,6 +189,7 @@ if __name__ == "__main__":
                 feedback=batch["feedback"].to_list(),
                 available_actions=available_actions,
                 flow=batch["flow"].to_list(),
+                suggest_localizer=args.suggest_localizer, # irrelevant
             )
 
             # Process each example in the batch
@@ -179,7 +209,7 @@ if __name__ == "__main__":
                 # Update example state with new document state and feedback
                 example["doc_state"].append(doc_state)
                 example["feedback"].append(feedback)
-                
+
                 # Generate and save visualization of the updated document state
                 example["img"].append(
                     # models.get_image_of_state(
@@ -187,9 +217,11 @@ if __name__ == "__main__":
                     #     blank_img=example["blank_img"],
                     #     save_path=f"tmp/{example['fid']}-{len(example['doc_state'])}.png",
                     # )
-                    doc_state.get_image_of_state(save_path=f"tmp/{example['fid']}-{len(example['doc_state'])}.png")
+                    doc_state.get_image_of_state(
+                        save_path=f"tmp/{example['fid']}-{len(example['doc_state'])}.png"
+                    )
                 )
-                
+
                 # Update whether this example should continue being processed
                 example["active"].append(example_should_be_active(example=example))
                 print
@@ -202,7 +234,7 @@ if __name__ == "__main__":
         # overall_acc = sum([f["correct"] for f in result.fields]) / len(result.fields)
 
         correct_count = 0
-        total_count = 0 
+        total_count = 0
         for field in result.fields:
             if field["prefilled"]:
                 continue

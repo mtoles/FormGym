@@ -5,7 +5,9 @@ import sqlite3
 class SqlDb:
     def __init__(self, user_profile: UserProfile):
         db_content = {}
-        for name, attr_class in UserAttributeMeta.registry.items():
+        # for name, attr_class in UserAttributeMeta.registry.items():
+        for name in user_profile.relevant_features:
+            attr_class = UserAttributeMeta.registry[name]
             if issubclass(attr_class, BaseUserDbAttr):
                 db_content[name] = getattr(user_profile.features, name)
 

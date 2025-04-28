@@ -25,7 +25,7 @@ class ActionMeta(type):
 
     def __new__(cls, name, bases, attrs):
         new_p_attr = super().__new__(cls, name, bases, attrs)
-        if name not in ["BaseAction", "InvalidAction"]:
+        if name not in ["BaseAction"]:
             # check for duplicates
             assert name not in cls.registry, f"User attribute {name} already exists"
             cls.registry[name] = new_p_attr

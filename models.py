@@ -35,7 +35,12 @@ grid_subprompt_content = "\nTo assist you, the image has been overlaid with a 10
 
 
 def get_e2e_prompt(
-    user_profile: str, api_documentation: str, grid_subprompt: str, feedback: List[str], task: str
+    user_profile: str,
+    api_documentation: str,
+    grid_subprompt: str,
+    feedback: List[str],
+    task: str,
+    suggest_localizer: bool,
 ) -> str:
     """Generates the prompt for the end-to-end form filling task."""
 
@@ -55,24 +60,34 @@ def get_e2e_prompt(
     If you do not know value for a field, fill it with "[UNK]".
     Fill checkboxes with a single "x".
     Format all dates as "MM/DD/YYYY", including leading zeros.
+
     {grid_subprompt}
+    {suggest_localizer_str}
 
     {feedback}
 
     Return a form-filling API call as a JSON list of dictionaries.
+    
     """
     generation_instructions = {
         FlowEnum.ONESHOT.value: "Generate a sequence of actions that will completely fill out the form.",
         FlowEnum.ITERATIVE.value: "Generate a the next action in the sequence of actions that will completely fill out the form.",
     }[task]
-    feedback_str = "So far, you have received the following feedback on your previous actions:\n" + "\n".join([f"Feedback {i+1}: {f}" for i, f in enumerate(feedback)])
-    return textwrap.dedent(e2e_prompt_template_content.format(
-        user_profile=user_profile,
-        api_documentation=api_documentation,
-        grid_subprompt=grid_subprompt,
-        generation_instructions=generation_instructions,
-        feedback=feedback_str,
-    ))
+    feedback_str = (
+        "So far, you have received the following feedback on your previous actions:\n"
+        + "\n".join([f"Feedback {i+1}: {f}" for i, f in enumerate(feedback)])
+    )
+    suggest_localizer_str = "It is recommended that you call the localizer for each field before attempting to fill it." if suggest_localizer else ""
+    return textwrap.dedent(
+        e2e_prompt_template_content.format(
+            user_profile=user_profile,
+            api_documentation=api_documentation,
+            grid_subprompt=grid_subprompt,
+            generation_instructions=generation_instructions,
+            feedback=feedback_str,
+            suggest_localizer_str=suggest_localizer_str,
+        )
+    )
 
 
 def visualize_preds(doc_state, fields, img):
@@ -119,52 +134,6 @@ def visualize_preds(doc_state, fields, img):
     result.save("output.png")
 
 
-# def get_image_of_state(
-#     doc_state, blank_img: Image.Image, save_path: str = None
-# ) -> Image.Image:
-#     new_img = blank_img.copy()
-#     text_draw = ImageDraw.Draw(new_img)
-#     preds = doc_state.marks
-#     width, height = new_img.size
-
-#     color_map = {
-#         CreatorEnum.PREFILLED.value: "blue",
-#         CreatorEnum.AGENT.value: "green",
-#     }
-#     for pred in preds:
-#         x = pred["cx"] * width
-#         y = pred["cy"] * height
-
-#         # Load Times New Roman font, size 10.
-#         # try:
-#         #     pass
-#         # except IOError:
-#         #     font = ImageFont.load_default()
-
-#         field_name = pred["field_name"] if "field_name" in pred else ""
-#         text = str(pred["value"])
-
-#         # Draw the text in blue.
-
-#         text_draw.text(
-#             (x, y), text, fill=color_map[pred["creator"]], font=FILLER_FONT, anchor="mm"
-#         )
-
-#         # Draw a rectangle based on the bbox
-#         bbox = pred["bbox"]
-#         text_draw.rectangle(
-#             (
-#                 bbox["x"] * width,
-#                 bbox["y"] * height,
-#                 (bbox["x"] + bbox["width"]) * width,
-#                 (bbox["y"] + bbox["height"]) * height,
-#             ),
-#             outline=(0, 0, 255),
-#         )
-#     # save the image
-#     if save_path:
-#         new_img.save(save_path)
-#     return new_img  # drawn on
 
 
 def add_grid_overlay(img):
@@ -230,7 +199,7 @@ def parse_and_reconstruct_fields(response_text):
     matches = re.findall(pattern, response_text)
 
     passed_actions = []
-    failed_actions = []
+    # failed_actions = []
     for match in matches:
         try:
             match_dict = json.loads(match)
@@ -243,7 +212,7 @@ def parse_and_reconstruct_fields(response_text):
             if action_name in ActionMeta.registry:
                 action = ActionMeta.registry[action_name]
             else:
-                action = InvalidAction
+                raise ValueError(f"Invalid action: {action_name}")
 
             # Validate against the schema
             action.Schema(**match_dict)
@@ -251,32 +220,14 @@ def parse_and_reconstruct_fields(response_text):
 
         except (JSONDecodeError, ValidationError) as e:
             # Instead of crashing, just skip the broken chunk
+
             print(f"Skipping invalid JSON block: {match}\nError: {e}")
-            failed_actions.append(match)
+            passed_actions.append({
+                "action": "InvalidAction",
+                "value": response_text,
+            })
 
     return passed_actions
-
-
-# def add_bbox(forward_fn):
-#     def wrapper(
-#         self,
-#         nl_profile: str,
-#         doc_image: Image.Image,
-#         available_actions: List[str],
-#         targets: List[str] = [],
-#     ):
-#         result = forward_fn(self, nl_profile, doc_image, available_actions, targets)
-#         for i, r in enumerate(result):
-#             r["bbox"] = get_text_bbox(
-#                 text=r["value"],
-#                 doc_width=doc_image.width,
-#                 doc_height=doc_image.height,
-#                 cx=r["cx"],
-#                 cy=r["cy"],
-#             )
-#         return result
-
-#     return wrapper
 
 
 class CheaterModel:
@@ -292,6 +243,7 @@ class CheaterModel:
         available_actions: List[str],
         targets: List[str] = [],
         feedback: List[List] = None,
+        suggest_localizer: bool = False,
     ) -> List[Dict]:
         """
         Give the model the ground truth annotated doc so it can cheat, for data validation
@@ -437,6 +389,7 @@ class ScriptedModel:
         available_actions: List[str],
         targets: List[str] = [],
         feedback: List[List] = None,
+        suggest_localizer: bool = False,
         **kwargs,
     ) -> List[Dict]:
         if self.count >= len(self.script):
@@ -469,6 +422,7 @@ class GptModelE2E:
         available_actions: List[str],
         flow: List[str],
         feedback: List[List] = None,
+        suggest_localizer: bool = False,
     ) -> List[Dict]:
         outputs = []
         for profile, image, f in zip(nl_profile, doc_image, flow):
@@ -480,6 +434,7 @@ class GptModelE2E:
                 grid_subprompt=grid_subprompt_content if self.draw_grid else "",
                 task=f,
                 feedback=feedback,
+                suggest_localizer=suggest_localizer,
             )
 
             if self.draw_grid:
@@ -527,32 +482,6 @@ def forward_gpt(model_name, prompt, base64_image):
                 ],
             }
         ],
-        # functions=[
-        #     {
-        #         "name": "extract_image_info",
-        #         "description": "Writes a string `value` to the location (x, y) on the form.",
-        #         "parameters": {
-        #             "type": "object",
-        #             "properties": {
-        #                 "result": {
-        #                     "type": "array",
-        #                     "items": {
-        #                         "type": "object",
-        #                         "properties": {
-        #                             "action": {"type": "string"},
-        #                             "x": {"type": "integer"},
-        #                             "y": {"type": "integer"},
-        #                             "value": {"type": "string"},
-        #                         },
-        #                         "required": ["x", "y", "value"],
-        #                     },
-        #                 }
-        #             },
-        #             "required": ["result"],
-        #         },
-        #     }
-        # ],
-        # function_call={"name": "extract_image_info"},
     )
 
     return completion
@@ -601,6 +530,7 @@ class HFE2EModel:
         available_actions: List[str],
         flow: List[str],
         feedback: List[List] = None,
+        suggest_localizer: bool = False,
     ):
         base_prompts = []
 
@@ -613,6 +543,7 @@ class HFE2EModel:
                 grid_subprompt=grid_subprompt_content if self.draw_grid else "",
                 task=f,
                 feedback=feedback,
+                suggest_localizer=suggest_localizer,
             )
             base_prompts.append(base_prompt)
 
