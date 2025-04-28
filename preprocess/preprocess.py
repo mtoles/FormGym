@@ -34,7 +34,7 @@ for root, _, files in os.walk(pdf_dir):
 
 
 random.seed(0)
-k = 2  # adjust as needed
+k = 99999999  # adjust as needed
 
 annotations_dir = "annotations"
 for file_name in os.listdir(annotations_dir):

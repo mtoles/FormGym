@@ -64,7 +64,8 @@ def get_e2e_prompt(
     {grid_subprompt}
     {suggest_localizer_str}
 
-    {feedback}
+    
+    {feedback_str}
 
     Return a form-filling API call as a JSON list of dictionaries.
     
@@ -84,7 +85,7 @@ def get_e2e_prompt(
             api_documentation=api_documentation,
             grid_subprompt=grid_subprompt,
             generation_instructions=generation_instructions,
-            feedback=feedback_str,
+            feedback_str=feedback_str,
             suggest_localizer_str=suggest_localizer_str,
         )
     )

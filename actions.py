@@ -139,6 +139,10 @@ class DeleteText(BaseAction):
         print(f"Marks deleted: {deleted_marks}")
         feedback = f"Action: 'DeleteText'\nMarks deleted: {deleted_marks}"
         return doc_state, feedback
+    class Schema(BaseModel):
+        action: Literal["DeleteText"]
+        cx: float
+        cy: float 
 
 
 class SignOrInitial(BaseAction):
