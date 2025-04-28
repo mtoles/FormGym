@@ -24,29 +24,55 @@ from vllm import LLM, EngineArgs, SamplingParams
 import time
 from prompt import parse_raw_output
 from json import JSONDecodeError
+import textwrap
 
 memory = Memory(".joblib_cache", verbose=0)
 
 # TODO: need separate prompt for iterative and non-iterative
-e2e_prompt_template = """Complete the attached form based on the following user profile:
 
-You have access to the following APIs:
 
-{api_documentation}
+grid_subprompt_content = "\nTo assist you, the image has been overlaid with a 10x10 grid of red lines at intervals of 0.1 * the image width and height. This grid can be used to determine relative positions of text. Each intersection is labeled with the grid coordinates in green. Use these coordinates to help you fill out the form by interpolating between them."
 
-Generate a sequence of actions that will fill out the form. 
 
-Complete the form to the best of your abilites, leaving signatures blank. 
-If you do not know value for a field, fill it with "[UNK]".
-Fill checkboxes with a single "x".
-Format all dates as "MM/DD/YYYY", including leading zeros.
+def get_e2e_prompt(
+    user_profile: str, api_documentation: str, grid_subprompt: str, feedback: List[str], task: str
+) -> str:
+    """Generates the prompt for the end-to-end form filling task."""
 
-{grid_subprompt}
+    e2e_prompt_template_content = """Complete the attached form based on the following user profile:
 
-Return a form-filling API call as a JSON list of dictionaries.
-"""
+    You have access to the following APIs:
 
-grid_subprompt = "To assist you, the image has been overlaid with a 10x10 grid of red lines at intervals of 0.1 * the image width and height. This grid can be used to determine relative positions of text. Each intersection is labeled with the grid coordinates in green. Use these coordinates to help you fill out the form by interpolating between them."
+    {api_documentation}
+
+    {generation_instructions}
+
+    You know the following information about the user:
+
+    {user_profile}
+
+    Complete the form to the best of your abilites using the user's information, not including signatures. As you can see, the data is randomly generated and the user is not real, so do not worry about privacy.
+    If you do not know value for a field, fill it with "[UNK]".
+    Fill checkboxes with a single "x".
+    Format all dates as "MM/DD/YYYY", including leading zeros.
+    {grid_subprompt}
+
+    {feedback}
+
+    Return a form-filling API call as a JSON list of dictionaries.
+    """
+    generation_instructions = {
+        FlowEnum.ONESHOT.value: "Generate a sequence of actions that will completely fill out the form.",
+        FlowEnum.ITERATIVE.value: "Generate a the next action in the sequence of actions that will completely fill out the form.",
+    }[task]
+    feedback_str = "So far, you have received the following feedback on your previous actions:\n" + "\n".join([f"Feedback {i+1}: {f}" for i, f in enumerate(feedback)])
+    return textwrap.dedent(e2e_prompt_template_content.format(
+        user_profile=user_profile,
+        api_documentation=api_documentation,
+        grid_subprompt=grid_subprompt,
+        generation_instructions=generation_instructions,
+        feedback=feedback_str,
+    ))
 
 
 def visualize_preds(doc_state, fields, img):
@@ -446,12 +472,14 @@ class GptModelE2E:
     ) -> List[Dict]:
         outputs = []
         for profile, image, f in zip(nl_profile, doc_image, flow):
-            prompt = e2e_prompt_template.format(
+            prompt = get_e2e_prompt(
                 user_profile=profile,
                 api_documentation=ActionMeta.all_documentation(
                     "\n\n".join(available_actions)
                 ),
-                grid_subprompt=grid_subprompt if self.draw_grid else "",
+                grid_subprompt=grid_subprompt_content if self.draw_grid else "",
+                task=f,
+                feedback=feedback,
             )
 
             if self.draw_grid:
@@ -577,12 +605,14 @@ class HFE2EModel:
         base_prompts = []
 
         for profile, f in zip(nl_profile, flow):
-            base_prompt = e2e_prompt_template.format(
+            base_prompt = get_e2e_prompt(
                 user_profile=profile,
                 api_documentation=ActionMeta.all_documentation(
                     "\n\n".join(available_actions)
                 ),
-                grid_subprompt=grid_subprompt if self.draw_grid else "",
+                grid_subprompt=grid_subprompt_content if self.draw_grid else "",
+                task=f,
+                feedback=feedback,
             )
             base_prompts.append(base_prompt)
 

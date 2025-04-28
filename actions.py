@@ -12,7 +12,11 @@ from transformers import AutoProcessor, AutoModelForCausalLM
 import torch
 from pathlib import Path
 import yaml
-from tool.train_tool import load_from_checkpoint, TEXT_INPUT_PROMPT_TEMPLATE, TASK_NAME_PREFIX
+from tool.train_tool import (
+    load_from_checkpoint,
+    TEXT_INPUT_PROMPT_TEMPLATE,
+    TASK_NAME_PREFIX,
+)
 from utils import *
 
 
@@ -251,17 +255,23 @@ class FieldLocalizer(BaseAction):
         w = img.width
         h = img.height
         prompt = TEXT_INPUT_PROMPT_TEMPLATE.format(target=value)
-        inputs = cls.processor(text=prompt, images=img, return_tensors="pt").to(cls.device)
+        inputs = cls.processor(text=prompt, images=img, return_tensors="pt").to(
+            cls.device
+        )
         generated_ids = cls.model.generate(
             input_ids=inputs["input_ids"],
             pixel_values=inputs["pixel_values"],
             max_new_tokens=4096,
             num_beams=3,
-            do_sample=False
+            do_sample=False,
         )
-        generated_text = cls.processor.batch_decode(generated_ids, skip_special_tokens=False)[0]
+        generated_text = cls.processor.batch_decode(
+            generated_ids, skip_special_tokens=False
+        )[0]
 
-        parsed_answer = cls.processor.post_process_generation(generated_text, task=TASK_NAME_PREFIX, image_size=(img.width, img.height))
+        parsed_answer = cls.processor.post_process_generation(
+            generated_text, task=TASK_NAME_PREFIX, image_size=(img.width, img.height)
+        )
 
         # outputs = cls.model.generate(**inputs, max_new_tokens=100)
         # generated_text = cls.processor.decode(outputs[0], skip_special_tokens=False)
@@ -270,8 +280,22 @@ class FieldLocalizer(BaseAction):
         #     task=TASK_NAME_PREFIX,
         #     image_size=(w, h),
         # )
-        pred_bboxes = parsed_answer[TASK_NAME_PREFIX]["bboxes"]
-        feedback = str(pred_bboxes)
+        pred_bboxes = parsed_answer[TASK_NAME_PREFIX]["bboxes"][0]
+        int_bboxes = [int(b) for b in pred_bboxes]
+        # feedback = str(int_bboxes)
+        # feedback = str(
+        #     {
+        #         "x1": int_bboxes[0] / w,
+        #         "y1": int_bboxes[1] / h,
+        #         "x2": int_bboxes[2] / w,
+        #         "y2": int_bboxes[3] / h,
+        #     }
+        # )
+        x1 = int_bboxes[0] / w
+        y1 = int_bboxes[1] / h
+        x2 = int_bboxes[2] / w
+        y2 = int_bboxes[3] / h
+        feedback = f"Action: 'FieldLocalizer'\nPredicted bbox for {value}: x1: {x1:.3f}, y1: {y1:.3f}, x2: {x2:.3f}, y2: {y2:.3f}"
         # feedback = (
         #     f"Action: 'FieldLocalizer'\nPredicted bbox for {value}: {pred_bboxes}"
         # )
