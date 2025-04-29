@@ -1,0 +1,44 @@
+{
+  "TO:": "SAM ZOLOT",
+  "FROM:": "W. R. KNIGHT - MCA",
+  "DIV. NAME/ NO:": "ST. LOUIS, MO",
+  "DATE TO CORP:": "7/11/97",
+  "NAME OF EVENT:": "Lorillard Metro Golf Outing 1997",
+  "*DATE OF EVENT:": "September 10, 1997 Marcus Hellenic Spirit Charities Golf Classic September 18, 1997",
+  "SAMPLES/ ITEMS REQUIRED:": "SAMPLE 10'S (400 PACKS PER CASE)",
+  "QUANTITY REQUIRED": [
+    "400",
+    "400",
+    "400",
+    "400"
+  ],
+  "#CASES": {
+    "NEWPORTKS K.S.": "1",
+    "KENT II K.S.": "",
+    "KENT III 100": "1",
+    "TRUE K.S.": "",
+    "KENT K.S.": "1",
+    "KENT 100": "",
+    "KENT GL LTS K.S.": "",
+    "KENT GL 100": "",
+    "NEWPORT 100'S": "",
+    "NEWPORT LTS. KS.": "",
+    "NEWPORT LTS. 100": ""
+  },
+  "ITEMS": {
+    "BASEBALL CAP": "400",
+    "WATER BOTTLES": [
+      "29-980-7",
+      "29-980-7",
+      "400",
+      "400"
+    ],
+    "Any Other Items Available": "400"
+  },
+  "SHIP TO:": {
+    "CUSTOMER SHIPPING NUMBER": "198-820-0003"
+  },
+  "NYO ONLY:": {
+    "DATE FORWARDED TO PROMOTION SERVICES:": "7/11/97"
+  }
+}

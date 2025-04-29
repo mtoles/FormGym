@@ -1,11126 +1,11262 @@
-from fields import BaseStringField, BaseNumericField, BaseCheckboxField
-import user_features
+import user_profile_attributes
+from typing import List
+from abc import ABC, abstractmethod
 
-class FieldBanners(BaseStringField):
+def numerize(s):
+    ls = list(s)
+    valid = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]
+    return str([x for x in ls if x in valid])
+
+
+def remove_punctuation(s):
+    # replace punctuation with space
+    s = "".join(
+        " " if c in "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c" else c
+        for c in s
+    )
+    # replace all whitespace with spaces
+    s = " ".join(s.split())
+    return s
+
+
+def concat_agent_generations(agent_generations):
+    return " ".join(
+        [
+            x["value"]
+            for x in sorted(
+                agent_generations, key=lambda item: (item["cy"], item["cx"])
+            )
+        ]
+    )
+
+
+def get_inputs_inside_field(field, agent_generations):
+    return [
+        ag
+        for ag in agent_generations
+        if (
+            ag["cx"] >= field.x
+            and ag["cx"] <= field.x + field.w
+            and ag["cy"] >= field.y
+            and ag["cy"] <= field.y + field.h
+        )
+    ]
+
+
+class FormFieldMeta(type):
+    """
+    Metaclass for possible form fields
+    """
+
+    registry = {}
+
+    def __new__(cls, name, bases, attrs):
+        new_p_attr = super().__new__(cls, name, bases, attrs)
+        base_classes = ["FormBaseField", "FormBaseNumericField", "FormBaseStringField", "FormBaseCheckboxField", "FormAnnotatedField", "FormSignOrInitial", "FormSignature", "FormInitials"]
+        if name not in base_classes:
+            # check for duplicates
+            assert name not in cls.registry, f"Form field {name} already exists"
+            cls.registry[name] = new_p_attr
+        return new_p_attr
+
+
+class FormBaseField(metaclass=FormFieldMeta):
+    def __init__(self, x, y, w, h):
+        self.x = x
+        self.y = y
+        self.w = w
+        self.h = h
+
+    @abstractmethod
+    def is_correct(self, agent_generation, user_profile):
+        raise NotImplementedError
+
+    @classmethod
+    @abstractmethod
+    def get_profile_info(cls, user_profile):
+        raise NotImplementedError
+
+
+class FormBaseNumericField(FormBaseField):
+    # def is_correct(self, agent_generation, user_profile):
+    def is_correct(self, agent_generation, user_profile):
+        agent_generations_inside = get_inputs_inside_field(self, agent_generation)
+        concatted_input = concat_agent_generations(agent_generations_inside)
+        profile_info = self.get_profile_info(user_profile)
+        return numerize(profile_info) == numerize(concatted_input)
+
+
+class FormBaseStringField(FormBaseField):
+    # def is_correct(self, agent_generation, user_profile):
+    def is_correct(self, agent_generation, user_profile):
+        agent_generations_inside = get_inputs_inside_field(self, agent_generation)
+        concatted_input = concat_agent_generations(agent_generations_inside)
+        profile_info = self.get_profile_info(user_profile)
+        return remove_punctuation(profile_info) == remove_punctuation(concatted_input)
+
+
+class FormBaseCheckboxField(FormBaseField):
+    # def is_correct(self, agent_generation, user_profile):
+    def is_correct(self, agent_generation, user_profile):
+        agent_generations_inside = get_inputs_inside_field(self, agent_generation)
+        concatted_input = concat_agent_generations(agent_generations_inside)
+        profile_info = self.get_profile_info(user_profile)
+        assert isinstance(profile_info, bool)
+        if profile_info:
+            return concatted_input == "x"
+        else:
+            return concatted_input == ""
+
+
+class FormAnnotatedField(FormBaseField):
+    pass
+
+
+class FormSignOrInitial(FormBaseField):
+    def is_correct(self, agent_generation, user_profile):
+        agent_generations_inside = get_inputs_inside_field(self, agent_generation)
+        if len(agent_generations_inside) != 1:
+            return False
+        agent_gen = agent_generations_inside[0]
+        if agent_gen["action"] != "Sign":
+            return False
+        signature_val = agent_gen["value"]
+        profile_info = self.get_profile_info(user_profile)
+        return profile_info == signature_val
+
+
+class FormSignature(FormSignOrInitial):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.FirstName + " " + user_profile.features.LastName
+
+
+class FormInitials(FormSignOrInitial):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.FirstName[0] + user_profile.features.LastName[0]
+
+
+class FieldBanners(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldBanners
 
-class FieldCalls(BaseStringField):
+class FieldCalls(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldCalls
 
-class FieldCases(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.FieldCases
-
-class FieldCasesKent100(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.FieldCasesKent100
-
-class FieldCasesKentGl100(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.FieldCasesKentGl100
-
-class FieldCasesKentGlLtsKS(BaseStringField):
+class FieldCasesKentGlLtsKS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldCasesKentGlLtsKS
 
-class FieldCasesKentIii100(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.FieldCasesKentIii100
-
-class FieldCasesKentIiiKS(BaseStringField):
+class FieldCasesKentIiiKS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldCasesKentIiiKS
 
-class FieldCasesKentKS(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.FieldCasesKentKS
-
-class FieldCasesNewport100S(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.FieldCasesNewport100S
-
-class FieldCasesNewportKS(BaseStringField):
+class FieldCasesNewportKS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldCasesNewportKS
 
-class FieldCasesNewportLtsKS(BaseStringField):
+class FieldCasesNewportLtsKS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldCasesNewportLtsKS
 
-class FieldCasesNewportLts100(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.FieldCasesNewportLts100
-
-class FieldCasesTrueKS(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.FieldCasesTrueKS
-
-class FieldDisplaysPlaced(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.FieldDisplaysPlaced
-
-class FieldDisplaysPlacedCounter(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.FieldDisplaysPlacedCounter
-
-class FieldDisplaysPlacedFloor(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.FieldDisplaysPlacedFloor
-
-class FieldDisplaysPlacedPosters(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.FieldDisplaysPlacedPosters
-
-class FieldOfStoresSupplied(BaseStringField):
+class FieldOfStoresSupplied(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldOfStoresSupplied
 
-class FieldOpenEnds(BaseStringField):
+class FieldOpenEnds(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldOpenEnds
 
-class FieldReps(BaseStringField):
+class FieldReps(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldReps
 
-class FieldCasesKentIiKS(BaseStringField):
+class FieldCases(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.FieldCases
+
+class FieldCasesKent100(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.FieldCasesKent100
+
+class FieldCasesKentGl100(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.FieldCasesKentGl100
+
+class FieldCasesKentIiKS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldCasesKentIiKS
 
-class FieldCasesNewportLtsKs(BaseStringField):
+class FieldCasesKentIii100(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.FieldCasesKentIii100
+
+class FieldCasesKentKS(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.FieldCasesKentKS
+
+class FieldCasesNewport100S(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.FieldCasesNewport100S
+
+class FieldCasesNewportLts100(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.FieldCasesNewportLts100
+
+class FieldCasesNewportLtsKs(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldCasesNewportLtsKs
 
-class FieldCasesNewportksKS(BaseStringField):
+class FieldCasesNewportksKS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldCasesNewportksKS
 
-class FieldItemsDealsReceived(BaseStringField):
+class FieldCasesTrueKS(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.FieldCasesTrueKS
+
+class FieldDisplaysPlaced(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.FieldDisplaysPlaced
+
+class FieldDisplaysPlacedCounter(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.FieldDisplaysPlacedCounter
+
+class FieldDisplaysPlacedFloor(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.FieldDisplaysPlacedFloor
+
+class FieldDisplaysPlacedPosters(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.FieldDisplaysPlacedPosters
+
+class FieldItemsDealsReceived(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldItemsDealsReceived
 
-class Field(BaseStringField):
+class Field(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field
 
-class Field150OffCartonCoupon(BaseStringField):
+class Field150OffCartonCoupon(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field150OffCartonCoupon
 
-class FieldMoistureInTobacco(BaseStringField):
+class FieldMoistureInTobacco(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldMoistureInTobacco
 
-class FieldMoistureInTow(BaseStringField):
+class FieldMoistureInTow(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldMoistureInTow
 
-class FieldOfDistributionAchievedInRetailOutlets(BaseStringField):
+class FieldOfDistributionAchievedInRetailOutlets(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldOfDistributionAchievedInRetailOutlets
 
-class FieldOfDistributionAchievedInRetailOutletsAnnualCalls(BaseStringField):
+class FieldOfDistributionAchievedInRetailOutletsAnnualCalls(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldOfDistributionAchievedInRetailOutletsAnnualCalls
 
-class FieldOfDistributionAchievedInRetailOutletsClassifiedCalls(BaseStringField):
+class FieldOfDistributionAchievedInRetailOutletsClassifiedCalls(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldOfDistributionAchievedInRetailOutletsClassifiedCalls
 
-class FieldOfRetailCalls(BaseStringField):
+class FieldOfRetailCalls(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldOfRetailCalls
 
-class FieldPlasticizer(BaseStringField):
+class FieldPlasticizer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldPlasticizer
 
-class FieldSolution(BaseStringField):
+class FieldSolution(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldSolution
 
-class Field59(BaseStringField):
+class Field59(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field59
 
-class Field6HardPack(BaseStringField):
+class Field6HardPack(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field6HardPack
 
-class FieldBy(BaseStringField):
+class FieldBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldBy
 
-class FieldCurrent(BaseStringField):
+class FieldCurrent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldCurrent
 
-class FieldDate(BaseStringField):
+class FieldDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldDate
 
-class FieldFromCurrentBudget(BaseStringField):
+class FieldFromCurrentBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldFromCurrentBudget
 
-class FieldFromNextYearSBudget(BaseStringField):
+class FieldFromNextYearSBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldFromNextYearSBudget
 
-class FieldGiveReasonsBelow(BaseStringField):
+class FieldGiveReasonsBelow(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldGiveReasonsBelow
 
-class FieldIncludingThisCoverSheet(BaseStringField):
+class FieldIncludingThisCoverSheet(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldIncludingThisCoverSheet
 
-class FieldOnlyPartialRegionContinueWithDivisionSScope(BaseStringField):
+class FieldOnlyPartialRegionContinueWithDivisionSScope(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldOnlyPartialRegionContinueWithDivisionSScope
 
-class FieldProductTestAUEtc(BaseStringField):
+class FieldProductTestAUEtc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldProductTestAUEtc
 
-class FieldRecordsRetention(BaseStringField):
+class FieldRecordsRetention(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldRecordsRetention
 
-class FieldS(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.FieldS
-
-class FieldContD(BaseStringField):
+class FieldContD(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldContD
 
-class FieldPlease(BaseStringField):
+class FieldPlease(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldPlease
 
-class FieldPleaseSpecify(BaseStringField):
+class FieldPleaseSpecify(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldPleaseSpecify
 
-class FieldTo(BaseStringField):
+class FieldS(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.FieldS
+
+class FieldTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldTo
 
-class FieldAdvertisingCreativeTitle(BaseStringField):
+class FieldAdvertisingCreativeTitle(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldAdvertisingCreativeTitle
 
-class FieldDirectorGLLittell(BaseStringField):
+class FieldDirectorGLLittell(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldDirectorGLLittell
 
-class FieldExplanationOfChange(BaseStringField):
+class FieldExplanationOfChange(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldExplanationOfChange
 
-class FieldRevisedCompletionDate(BaseStringField):
+class FieldRevisedCompletionDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldRevisedCompletionDate
 
-class FieldSpaceColor(BaseStringField):
+class FieldSpaceColor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldSpaceColor
 
-class FieldSrManagerBJPowell(BaseStringField):
+class FieldSrManagerBJPowell(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldSrManagerBJPowell
 
-class FieldSrVpTWRobertson(BaseStringField):
+class FieldSrVpTWRobertson(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldSrVpTWRobertson
 
-class FieldDateOfEvent(BaseStringField):
+class FieldDateOfEvent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldDateOfEvent
 
-class FieldExplain(BaseStringField):
+class FieldExplain(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldExplain
 
-class FieldIssueFrequencyYear(BaseStringField):
+class FieldIssueFrequencyYear(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldIssueFrequencyYear
 
-class Field10ContingencyFinalReportInc(BaseStringField):
+class Field10ContingencyFinalReportInc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field10ContingencyFinalReportInc
 
-class Field10ContingencyFinalReportIncNo(BaseStringField):
+class Field10ContingencyFinalReportIncNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field10ContingencyFinalReportIncNo
 
-class Field10ContingencyFinalReportIncYes(BaseStringField):
+class Field10ContingencyFinalReportIncYes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field10ContingencyFinalReportIncYes
 
-class FieldDateInitiated(BaseStringField):
+class FieldDateInitiated(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldDateInitiated
 
-class FieldBrandSApplicable(BaseStringField):
+class FieldBrandSApplicable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldBrandSApplicable
 
-class FieldCirculation(BaseStringField):
+class FieldCirculation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldCirculation
 
-class FieldCouponExpirationDate(BaseStringField):
+class FieldCouponExpirationDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldCouponExpirationDate
 
-class FieldCouponIssueDate(BaseStringField):
+class FieldCouponIssueDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldCouponIssueDate
 
-class FieldCouponValue(BaseStringField):
+class FieldCouponValue(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldCouponValue
 
-class FieldGeographicalAreaS(BaseStringField):
+class FieldGeographicalAreaS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldGeographicalAreaS
 
-class FieldMediaName(BaseStringField):
+class FieldMediaName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldMediaName
 
-class FieldMediaType(BaseStringField):
+class FieldMediaType(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldMediaType
 
-class FieldPackAndOrCarton(BaseStringField):
+class FieldPackAndOrCarton(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldPackAndOrCarton
 
-class FieldSignatureOfInitiator(BaseStringField):
+class FieldSignatureOfInitiator(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldSignatureOfInitiator
 
-class FieldSpeaker(BaseStringField):
+class FieldSpeaker(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldSpeaker
 
-class Field12Cigar(BaseStringField):
+class Field12Cigar(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field12Cigar
 
-class Field13Cigar(BaseStringField):
+class Field13Cigar(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field13Cigar
 
-class FieldDec(BaseStringField):
+class FieldDec(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldDec
 
-class FieldJun(BaseStringField):
+class FieldJun(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldJun
 
-class FieldMar(BaseStringField):
+class FieldMar(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldMar
 
-class FieldSep(BaseStringField):
+class FieldSep(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldSep
 
-class FieldWentOutImmediately(BaseStringField):
+class FieldWentOutImmediately(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldWentOutImmediately
 
-class Field1(BaseStringField):
+class Field1(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1
 
-class Field1680(BaseStringField):
+class Field1680(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1680
 
-class Field1Enhancement(BaseStringField):
+class Field1Enhancement(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1Enhancement
 
-class Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimant(BaseStringField):
+class Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimant(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimant
 
-class Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantAddress(BaseStringField):
+class Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantAddress(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantAddress
 
-class Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantCity(BaseStringField):
+class Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantCity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantCity
 
-class Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantName(BaseStringField):
+class Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantName
 
-class Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantState(BaseStringField):
+class Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantState(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantState
 
-class Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantTelephone(BaseStringField):
+class Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantTelephone(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantTelephone
 
-class Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantZipCode(BaseStringField):
+class Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantZipCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantZipCode
 
-class Field1ProductivityImprovement(BaseStringField):
+class Field1ProductivityImprovement(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1ProductivityImprovement
 
-class Field1StatesAndCitiesSelectedToReceiveProduct(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProduct(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProduct
 
-class Field1StatesAndCitiesSelectedToReceiveProductChicagoIll(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductChicagoIll(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductChicagoIll
 
-class Field1StatesAndCitiesSelectedToReceiveProductNycNY(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductNycNY(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductNycNY
 
-class Field1StatesAndCitiesSelectedToReceiveProductAlabama(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductAlabama(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductAlabama
 
-class Field1StatesAndCitiesSelectedToReceiveProductAlaska(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductAlaska(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductAlaska
 
-class Field1StatesAndCitiesSelectedToReceiveProductArizona(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductArizona(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductArizona
 
-class Field1StatesAndCitiesSelectedToReceiveProductArkansas(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductArkansas(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductArkansas
 
-class Field1StatesAndCitiesSelectedToReceiveProductCalifornia(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductCalifornia(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductCalifornia
 
-class Field1StatesAndCitiesSelectedToReceiveProductColorada(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductColorada(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductColorada
 
-class Field1StatesAndCitiesSelectedToReceiveProductConnecticut(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductConnecticut(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductConnecticut
 
-class Field1StatesAndCitiesSelectedToReceiveProductDC(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductDC(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductDC
 
-class Field1StatesAndCitiesSelectedToReceiveProductDelaware(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductDelaware(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductDelaware
 
-class Field1StatesAndCitiesSelectedToReceiveProductFlorida(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductFlorida(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductFlorida
 
-class Field1StatesAndCitiesSelectedToReceiveProductGeorgia(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductGeorgia(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductGeorgia
 
-class Field1StatesAndCitiesSelectedToReceiveProductHawaii(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductHawaii(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductHawaii
 
-class Field1StatesAndCitiesSelectedToReceiveProductIdaho(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductIdaho(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductIdaho
 
-class Field1StatesAndCitiesSelectedToReceiveProductIllinois(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductIllinois(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductIllinois
 
-class Field1StatesAndCitiesSelectedToReceiveProductIndiana(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductIndiana(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductIndiana
 
-class Field1StatesAndCitiesSelectedToReceiveProductIowa(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductIowa(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductIowa
 
-class Field1StatesAndCitiesSelectedToReceiveProductKansas(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductKansas(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductKansas
 
-class Field1StatesAndCitiesSelectedToReceiveProductKentucky(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductKentucky(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductKentucky
 
-class Field1StatesAndCitiesSelectedToReceiveProductLouisiana(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductLouisiana(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductLouisiana
 
-class Field1StatesAndCitiesSelectedToReceiveProductMaine(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductMaine(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductMaine
 
-class Field1StatesAndCitiesSelectedToReceiveProductMaryland(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductMaryland(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductMaryland
 
-class Field1StatesAndCitiesSelectedToReceiveProductMassachusetts(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductMassachusetts(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductMassachusetts
 
-class Field1StatesAndCitiesSelectedToReceiveProductMichigan(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductMichigan(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductMichigan
 
-class Field1StatesAndCitiesSelectedToReceiveProductMinnesota(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductMinnesota(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductMinnesota
 
-class Field1StatesAndCitiesSelectedToReceiveProductMississippi(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductMississippi(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductMississippi
 
-class Field1StatesAndCitiesSelectedToReceiveProductMissouri(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductMissouri(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductMissouri
 
-class Field1StatesAndCitiesSelectedToReceiveProductMontana(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductMontana(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductMontana
 
-class Field1StatesAndCitiesSelectedToReceiveProductNebraska(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductNebraska(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductNebraska
 
-class Field1StatesAndCitiesSelectedToReceiveProductNevada(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductNevada(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductNevada
 
-class Field1StatesAndCitiesSelectedToReceiveProductNewHampshire(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductNewHampshire(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductNewHampshire
 
-class Field1StatesAndCitiesSelectedToReceiveProductNewJersey(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductNewJersey(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductNewJersey
 
-class Field1StatesAndCitiesSelectedToReceiveProductNewMexico(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductNewMexico(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductNewMexico
 
-class Field1StatesAndCitiesSelectedToReceiveProductNewYork(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductNewYork(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductNewYork
 
-class Field1StatesAndCitiesSelectedToReceiveProductNorthCarolina(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductNorthCarolina(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductNorthCarolina
 
-class Field1StatesAndCitiesSelectedToReceiveProductNorthDakota(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductNorthDakota(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductNorthDakota
 
-class Field1StatesAndCitiesSelectedToReceiveProductOhio(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductOhio(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductOhio
 
-class Field1StatesAndCitiesSelectedToReceiveProductOklahoma(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductOklahoma(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductOklahoma
 
-class Field1StatesAndCitiesSelectedToReceiveProductOregon(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductOregon(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductOregon
 
-class Field1StatesAndCitiesSelectedToReceiveProductPennsylVania(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductPennsylVania(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductPennsylVania
 
-class Field1StatesAndCitiesSelectedToReceiveProductRhodeIsland(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductRhodeIsland(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductRhodeIsland
 
-class Field1StatesAndCitiesSelectedToReceiveProductSouthCarolina(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductSouthCarolina(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductSouthCarolina
 
-class Field1StatesAndCitiesSelectedToReceiveProductSouthDakota(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductSouthDakota(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductSouthDakota
 
-class Field1StatesAndCitiesSelectedToReceiveProductTennessee(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductTennessee(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductTennessee
 
-class Field1StatesAndCitiesSelectedToReceiveProductTexas(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductTexas(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductTexas
 
-class Field1StatesAndCitiesSelectedToReceiveProductUtah(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductUtah(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductUtah
 
-class Field1StatesAndCitiesSelectedToReceiveProductVermont(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductVermont(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductVermont
 
-class Field1StatesAndCitiesSelectedToReceiveProductVirginia(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductVirginia(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductVirginia
 
-class Field1StatesAndCitiesSelectedToReceiveProductWashington(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductWashington(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductWashington
 
-class Field1StatesAndCitiesSelectedToReceiveProductWestVirginia(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductWestVirginia(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductWestVirginia
 
-class Field1StatesAndCitiesSelectedToReceiveProductWisconsin(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductWisconsin(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductWisconsin
 
-class Field1StatesAndCitiesSelectedToReceiveProductWyoming(BaseStringField):
+class Field1StatesAndCitiesSelectedToReceiveProductWyoming(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1StatesAndCitiesSelectedToReceiveProductWyoming
 
-class Field10(BaseStringField):
+class Field10(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field10
 
-class Field100S(BaseStringField):
+class Field100S(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field100S
 
-class Field100000(BaseStringField):
+class Field100000(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field100000
 
-class Field12Yr(BaseStringField):
+class Field12Yr(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field12Yr
 
-class Field1976(BaseStringField):
+class Field1976(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1976
 
-class Field1987(BaseStringField):
+class Field1987(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1987
 
-class Field198(BaseStringField):
+class Field198(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field198
 
-class Field1990Cost(BaseStringField):
+class Field1990Cost(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field1990Cost
 
-class Field2(BaseStringField):
+class Field2(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2
 
-class Field2Aminoanthhacene(BaseStringField):
+class Field2Aminoanthhacene(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2Aminoanthhacene
 
-class Field2Aminoanthracene(BaseStringField):
+class Field2Aminoanthracene(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2Aminoanthracene
 
-class Field2EstimatedTestProductQuantitiesPerMarket(BaseStringField):
+class Field2EstimatedTestProductQuantitiesPerMarket(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2EstimatedTestProductQuantitiesPerMarket
 
-class Field2EstimatedTestProductQuantitiesPerMarket4S5S20SEtc(BaseStringField):
+class Field2EstimatedTestProductQuantitiesPerMarket4S5S20SEtc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2EstimatedTestProductQuantitiesPerMarket4S5S20SEtc
 
-class Field2EstimatedTestProductQuantitiesPerMarketCode(BaseStringField):
+class Field2EstimatedTestProductQuantitiesPerMarketCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2EstimatedTestProductQuantitiesPerMarketCode
 
-class Field2EstimatedTestProductQuantitiesPerMarketProductCode(BaseStringField):
+class Field2EstimatedTestProductQuantitiesPerMarketProductCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2EstimatedTestProductQuantitiesPerMarketProductCode
 
-class Field2EstimatedTestProductQuantitiesPerMarketQuantity(BaseStringField):
+class Field2EstimatedTestProductQuantitiesPerMarketQuantity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2EstimatedTestProductQuantitiesPerMarketQuantity
 
-class Field2Maintenance(BaseStringField):
+class Field2Maintenance(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2Maintenance
 
-class Field2NamesOfFirstNamedPlaintiffAndFirstNamedDefendantOnTheCaptionOfTheComplaint(BaseStringField):
+class Field2NamesOfFirstNamedPlaintiffAndFirstNamedDefendantOnTheCaptionOfTheComplaint(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2NamesOfFirstNamedPlaintiffAndFirstNamedDefendantOnTheCaptionOfTheComplaint
 
-class Field2NamesOfFirstNamedPlaintiffAndFirstNamedDefendantOnTheCaptionOfTheComplaintDefendant(BaseStringField):
+class Field2NamesOfFirstNamedPlaintiffAndFirstNamedDefendantOnTheCaptionOfTheComplaintDefendant(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2NamesOfFirstNamedPlaintiffAndFirstNamedDefendantOnTheCaptionOfTheComplaintDefendant
 
-class Field2NamesOfFirstNamedPlaintiffAndFirstNamedDefendantOnTheCaptionOfTheComplaintPlaintiff(BaseStringField):
+class Field2NamesOfFirstNamedPlaintiffAndFirstNamedDefendantOnTheCaptionOfTheComplaintPlaintiff(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2NamesOfFirstNamedPlaintiffAndFirstNamedDefendantOnTheCaptionOfTheComplaintPlaintiff
 
-class Field2ReturnOnInvestment(BaseStringField):
+class Field2ReturnOnInvestment(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2ReturnOnInvestment
 
-class Field202851A1B1Im(BaseStringField):
+class Field202851A1B1Im(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field202851A1B1Im
 
-class Field2134(BaseStringField):
+class Field2134(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2134
 
-class Field213496(BaseStringField):
+class Field213496(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field213496
 
-class Field2134Bright(BaseStringField):
+class Field2134Bright(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2134Bright
 
-class Field2134Kl(BaseStringField):
+class Field2134Kl(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2134Kl
 
-class Field25Yr(BaseStringField):
+class Field25Yr(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field25Yr
 
-class Field2AEstimatedTotalsByProductAllMarketsCombined(BaseStringField):
+class Field2AEstimatedTotalsByProductAllMarketsCombined(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2AEstimatedTotalsByProductAllMarketsCombined
 
-class Field2AEstimatedTotalsByProductAllMarketsCombined4S5S20SEtc(BaseStringField):
+class Field2AEstimatedTotalsByProductAllMarketsCombined4S5S20SEtc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2AEstimatedTotalsByProductAllMarketsCombined4S5S20SEtc
 
-class Field2AEstimatedTotalsByProductAllMarketsCombinedQuantity(BaseStringField):
+class Field2AEstimatedTotalsByProductAllMarketsCombinedQuantity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field2AEstimatedTotalsByProductAllMarketsCombinedQuantity
 
-class Field3(BaseStringField):
+class Field3(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field3
 
-class Field3CustomerImpact(BaseStringField):
+class Field3CustomerImpact(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field3CustomerImpact
 
-class Field3DateOfClaimantSBirth(BaseStringField):
+class Field3DateOfClaimantSBirth(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field3DateOfClaimantSBirth
 
-class Field3SpecialProcessing(BaseStringField):
+class Field3SpecialProcessing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field3SpecialProcessing
 
-class Field30SheetPosters(BaseStringField):
+class Field30SheetPosters(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field30SheetPosters
 
-class Field35Over(BaseStringField):
+class Field35Over(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field35Over
 
-class Field35Under(BaseStringField):
+class Field35Under(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field35Under
 
-class Field35(BaseStringField):
+class Field35(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field35
 
-class Field35109(BaseStringField):
+class Field35109(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field35109
 
-class Field35Bright(BaseStringField):
+class Field35Bright(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field35Bright
 
-class Field35Kl(BaseStringField):
+class Field35Kl(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field35Kl
 
-class Field36Over(BaseStringField):
+class Field36Over(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field36Over
 
-class Field4(BaseStringField):
+class Field4(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field4
 
-class Field4AdHoc(BaseStringField):
+class Field4AdHoc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field4AdHoc
 
-class Field4CaseInvolvesCheckAppropriateBoxes(BaseStringField):
+class Field4CaseInvolvesCheckAppropriateBoxes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field4CaseInvolvesCheckAppropriateBoxes
 
-class Field4CaseInvolvesCheckAppropriateBoxesAInjury(BaseStringField):
+class Field4CaseInvolvesCheckAppropriateBoxesAInjury(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field4CaseInvolvesCheckAppropriateBoxesAInjury
 
-class Field4CaseInvolvesCheckAppropriateBoxesBWrongfulDeath(BaseStringField):
+class Field4CaseInvolvesCheckAppropriateBoxesBWrongfulDeath(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field4CaseInvolvesCheckAppropriateBoxesBWrongfulDeath
 
-class Field4CaseInvolvesCheckAppropriateBoxesCConsortium(BaseStringField):
+class Field4CaseInvolvesCheckAppropriateBoxesCConsortium(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field4CaseInvolvesCheckAppropriateBoxesCConsortium
 
-class Field4GovernmentRequirement(BaseStringField):
+class Field4GovernmentRequirement(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field4GovernmentRequirement
 
-class Field5(BaseStringField):
+class Field5(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field5
 
-class Field5BusinessChange(BaseStringField):
+class Field5BusinessChange(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field5BusinessChange
 
-class Field5Emergency(BaseStringField):
+class Field5Emergency(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field5Emergency
 
-class Field5SpecifyTheNatureOrTypeOfAsbestosRelatedInjuryAllegedByTheClaimantEQAsbestosisLungCancerAdenocarcinomaLungCancerMesotheliomaPleuralThickeningFibrosisEtc(BaseStringField):
+class Field5SpecifyTheNatureOrTypeOfAsbestosRelatedInjuryAllegedByTheClaimantEQAsbestosisLungCancerAdenocarcinomaLungCancerMesotheliomaPleuralThickeningFibrosisEtc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field5SpecifyTheNatureOrTypeOfAsbestosRelatedInjuryAllegedByTheClaimantEQAsbestosisLungCancerAdenocarcinomaLungCancerMesotheliomaPleuralThickeningFibrosisEtc
 
-class Field5TypesOfLocalGovernmentalUnitAflected(BaseStringField):
+class Field5TypesOfLocalGovernmentalUnitAflected(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field5TypesOfLocalGovernmentalUnitAflected
 
-class Field5TypesOfLocalGovernmentalUnitAflectedCities(BaseStringField):
+class Field5TypesOfLocalGovernmentalUnitAflectedCities(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field5TypesOfLocalGovernmentalUnitAflectedCities
 
-class Field5TypesOfLocalGovernmentalUnitAflectedOthers(BaseStringField):
+class Field5TypesOfLocalGovernmentalUnitAflectedOthers(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field5TypesOfLocalGovernmentalUnitAflectedOthers
 
-class Field5TypesOfLocalGovernmentalUnitAflectedVillages(BaseStringField):
+class Field5TypesOfLocalGovernmentalUnitAflectedVillages(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field5TypesOfLocalGovernmentalUnitAflectedVillages
 
-class Field50Yr(BaseStringField):
+class Field50Yr(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field50Yr
 
-class Field530(BaseStringField):
+class Field530(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field530
 
-class Field6(BaseStringField):
+class Field6(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field6
 
-class Field6SystemError(BaseStringField):
+class Field6SystemError(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field6SystemError
 
-class Field6Yr(BaseStringField):
+class Field6Yr(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field6Yr
 
-class Field7(BaseStringField):
+class Field7(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field7
 
-class Field7ProceduralError(BaseStringField):
+class Field7ProceduralError(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Field7ProceduralError
 
-class FieldBeginner(BaseStringField):
+class FieldBeginner(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldBeginner
 
-class FieldExcellent(BaseStringField):
+class FieldExcellent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldExcellent
 
-class FieldFair(BaseStringField):
+class FieldFair(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldFair
 
-class FieldGood(BaseStringField):
+class FieldGood(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldGood
 
-class A(BaseStringField):
+class A(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.A
 
-class ADM(BaseStringField):
+class ADM(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ADM
 
-class AJMellman(BaseStringField):
+class AJMellman(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AJMellman
 
-class AcceptRejectAsPer58185C(BaseStringField):
+class AcceptRejectAsPer58185C(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AcceptRejectAsPer58185C
 
-class Accepted(BaseStringField):
+class Accepted(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Accepted
 
-class AcceptedSymposium(BaseStringField):
+class AcceptedSymposium(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AcceptedSymposium
 
-class AccountName(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.AccountName
-
-class AccountNo(BaseStringField):
+class AccountNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AccountNo
 
-class AccountingChargeNo(BaseStringField):
+class AccountingChargeNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AccountingChargeNo
 
-class AccountingDistribution(BaseStringField):
+class AccountingDistribution(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AccountingDistribution
 
-class AccountingDistributionFeb(BaseStringField):
+class AccountingDistributionFeb(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AccountingDistributionFeb
 
-class AccountingDistributionJan(BaseStringField):
+class AccountingDistributionJan(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AccountingDistributionJan
 
-class AccountingDistributionMar(BaseStringField):
+class AccountingDistributionMar(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AccountingDistributionMar
 
-class AcctNo(BaseStringField):
+class AcctNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AcctNo
 
-class AcuteCadcovascular(BaseStringField):
+class AcuteCadcovascular(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AcuteCadcovascular
 
-class AcuteCardiovascular(BaseStringField):
+class AcuteCardiovascular(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AcuteCardiovascular
 
-class Address(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Address
-
-class AdjustedTotalCostOfProject(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.AdjustedTotalCostOfProject
-
-class AdminCtrMgmtCtrPurchaseOrderNo(BaseStringField):
+class AdminCtrMgmtCtrPurchaseOrderNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AdminCtrMgmtCtrPurchaseOrderNo
 
-class AdminCtrMgmtCtrAsRequired(BaseStringField):
+class AdminCtrMgmtCtrAsRequired(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AdminCtrMgmtCtrAsRequired
 
-class AdvertisingCreativeTheme(BaseStringField):
+class AdvertisingCreativeTheme(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AdvertisingCreativeTheme
 
-class Affiliation(BaseStringField):
+class Affiliation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Affiliation
 
-class Affillation(BaseStringField):
+class Affillation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Affillation
 
-class Aftertaste(BaseStringField):
+class Aftertaste(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Aftertaste
 
-class Age(BaseStringField):
+class Age(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Age
 
-class Age2534(BaseStringField):
+class Age2534(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Age2534
 
-class Age3544(BaseStringField):
+class Age3544(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Age3544
 
-class Age45Over(BaseStringField):
+class Age45Over(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Age45Over
 
-class AgeUnder25(BaseStringField):
+class AgeUnder25(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AgeUnder25
 
-class Agency(BaseStringField):
+class Agency(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Agency
 
-class Age1625(BaseStringField):
+class Age1625(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Age1625
 
-class Age2635(BaseStringField):
+class Age2635(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Age2635
 
-class Age3645(BaseStringField):
+class Age3645(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Age3645
 
-class Age46Over(BaseStringField):
+class Age46Over(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Age46Over
 
-class AirTime(BaseStringField):
+class AirTime(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AirTime
 
-class Albert(BaseStringField):
+class Albert(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Albert
 
-class Alternatives(BaseStringField):
+class Alternatives(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Alternatives
 
-class Ame(BaseStringField):
+class Ame(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ame
 
-class Amount(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Amount
-
-class AmountOfChangeIncreaseCircleOne(BaseStringField):
+class AmountOfChangeIncreaseCircleOne(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AmountOfChangeIncreaseCircleOne
 
-class AmtMenthol7More(BaseStringField):
+class AmtMenthol7More(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AmtMenthol7More
 
-class Analytical(BaseStringField):
+class Analytical(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Analytical
 
-class AnalyticalMethodS(BaseStringField):
+class AnalyticalMethodS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AnalyticalMethodS
 
-class AnalyticalRequirements(BaseStringField):
+class AnalyticalRequirements(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AnalyticalRequirements
 
-class AnalyticalRequirementsCodeAssigned(BaseStringField):
+class AnalyticalRequirementsCodeAssigned(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AnalyticalRequirementsCodeAssigned
 
-class AnalyticalRequirementsEstRedemption(BaseStringField):
+class AnalyticalRequirementsEstRedemption(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AnalyticalRequirementsEstRedemption
 
-class AnalyticalRequirementsForControlUseOnly(BaseStringField):
+class AnalyticalRequirementsForControlUseOnly(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AnalyticalRequirementsForControlUseOnly
 
-class AnalyticalRequirementsJobNumber(BaseStringField):
+class AnalyticalRequirementsJobNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AnalyticalRequirementsJobNumber
 
-class Annuals(BaseStringField):
+class Annuals(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Annuals
 
-class Approval(BaseStringField):
+class Approval(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Approval
 
-class ApprovalRouting(BaseStringField):
+class ApprovalRouting(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalRouting
 
-class Approvals(BaseStringField):
+class Approvals(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Approvals
 
-class ApprovalsDate(BaseStringField):
+class ApprovalsDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsDate
 
-class ApprovalsDirIntAdmin(BaseStringField):
+class ApprovalsDirIntAdmin(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsDirIntAdmin
 
-class ApprovalsGroupProdDir(BaseStringField):
+class ApprovalsGroupProdDir(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsGroupProdDir
 
-class ApprovalsRegionalDirVp(BaseStringField):
+class ApprovalsRegionalDirVp(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsRegionalDirVp
 
-class ApprovalsSeniorVpIntL(BaseStringField):
+class ApprovalsSeniorVpIntL(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsSeniorVpIntL
 
-class ApprovalsVpIntLMarketing(BaseStringField):
+class ApprovalsVpIntLMarketing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsVpIntLMarketing
 
-class ApprovalsVpIntLPlanning(BaseStringField):
+class ApprovalsVpIntLPlanning(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsVpIntLPlanning
 
-class ApprovalsAccounting(BaseStringField):
+class ApprovalsAccounting(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsAccounting
 
-class ApprovalsAgency(BaseStringField):
+class ApprovalsAgency(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsAgency
 
-class ApprovalsAuthorizationNo(BaseStringField):
+class ApprovalsAuthorizationNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsAuthorizationNo
 
-class ApprovalsBudgetAllocation(BaseStringField):
+class ApprovalsBudgetAllocation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsBudgetAllocation
 
-class ApprovalsChairmanCeo(BaseStringField):
+class ApprovalsChairmanCeo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsChairmanCeo
 
-class ApprovalsExecutive(BaseStringField):
+class ApprovalsExecutive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsExecutive
 
-class ApprovalsForecasting(BaseStringField):
+class ApprovalsForecasting(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsForecasting
 
-class ApprovalsMarketing(BaseStringField):
+class ApprovalsMarketing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsMarketing
 
-class ApprovalsMedia(BaseStringField):
+class ApprovalsMedia(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsMedia
 
-class ApprovalsPresident(BaseStringField):
+class ApprovalsPresident(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsPresident
 
-class ApprovalsProduct(BaseStringField):
+class ApprovalsProduct(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsProduct
 
-class ApprovalsSales(BaseStringField):
+class ApprovalsSales(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsSales
 
-class ApprovalsVPMarketing(BaseStringField):
+class ApprovalsVPMarketing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalsVPMarketing
 
-class ApproveInIts(BaseStringField):
+class ApproveInIts(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApproveInIts
 
-class Approved(BaseStringField):
+class Approved(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Approved
 
-class ApprovedBy(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.ApprovedBy
-
-class ApproximateOfRetailCallsSecuredByGlass(BaseStringField):
+class ApproximateOfRetailCallsSecuredByGlass(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApproximateOfRetailCallsSecuredByGlass
 
-class Apr(BaseStringField):
+class Apr(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Apr
 
-class Aptertaste7Pleasant(BaseStringField):
+class Aptertaste7Pleasant(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Aptertaste7Pleasant
 
-class AreaRegionDivision(BaseStringField):
+class AreaRegionDivision(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AreaRegionDivision
 
-class AreaRegion(BaseStringField):
+class AreaRegion(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AreaRegion
 
-class ArtWork(BaseStringField):
+class ArtWork(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ArtWork
 
-class AssayResult(BaseStringField):
+class AssayResult(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AssayResult
 
-class At919AtTheGreensboroBranchAsSoonAsPossible(BaseStringField):
+class At919AtTheGreensboroBranchAsSoonAsPossible(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.At919AtTheGreensboroBranchAsSoonAsPossible
 
-class AtTheTimeOfReproductionTheFollowingNotattonsWereMade(BaseStringField):
+class AtTheTimeOfReproductionTheFollowingNotattonsWereMade(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AtTheTimeOfReproductionTheFollowingNotattonsWereMade
 
-class AttachmentsCheckIfIncluded(BaseStringField):
+class AttachmentsCheckIfIncluded(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AttachmentsCheckIfIncluded
 
-class AttachmentsCheckIfIncludedBlendFormulae(BaseStringField):
+class AttachmentsCheckIfIncludedBlendFormulae(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AttachmentsCheckIfIncludedBlendFormulae
 
-class AttachmentsCheckIfIncludedCasingFlavoringFormulae(BaseStringField):
+class AttachmentsCheckIfIncludedCasingFlavoringFormulae(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AttachmentsCheckIfIncludedCasingFlavoringFormulae
 
-class AttachmentsCheckIfIncludedCostAnalysis(BaseStringField):
+class AttachmentsCheckIfIncludedCostAnalysis(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AttachmentsCheckIfIncludedCostAnalysis
 
-class AttachmentsCheckIfIncludedInitialProductionRequirement(BaseStringField):
+class AttachmentsCheckIfIncludedInitialProductionRequirement(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AttachmentsCheckIfIncludedInitialProductionRequirement
 
-class AttachmentsCheckIfIncludedPackagingArtStat(BaseStringField):
+class AttachmentsCheckIfIncludedPackagingArtStat(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AttachmentsCheckIfIncludedPackagingArtStat
 
-class AttachmentsCheckIfIncludedProcessingDetail(BaseStringField):
+class AttachmentsCheckIfIncludedProcessingDetail(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AttachmentsCheckIfIncludedProcessingDetail
 
-class AttachmentsCheckIfIncludedProductSpecificationList(BaseStringField):
+class AttachmentsCheckIfIncludedProductSpecificationList(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AttachmentsCheckIfIncludedProductSpecificationList
 
-class AttachmentsCheckIfIncludedRationale(BaseStringField):
+class AttachmentsCheckIfIncludedRationale(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AttachmentsCheckIfIncludedRationale
 
-class AttachmentsCheckIfIncludedSpecChangeDetail(BaseStringField):
+class AttachmentsCheckIfIncludedSpecChangeDetail(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AttachmentsCheckIfIncludedSpecChangeDetail
 
-class Attributes(BaseStringField):
+class Attributes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Attributes
 
-class AttributesViceroy(BaseStringField):
+class AttributesViceroy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AttributesViceroy
 
-class AuthorizationNo(BaseStringField):
+class AuthorizationNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AuthorizationNo
 
-class AuthorizedCost(BaseStringField):
+class AuthorizedCost(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AuthorizedCost
 
-class Authors(BaseStringField):
+class Authors(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Authors
 
-class AverageDailyEffectiveCirculation(BaseStringField):
+class AverageDailyEffectiveCirculation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AverageDailyEffectiveCirculation
 
-class AverageWeightRangeGm(BaseStringField):
+class AverageWeightRangeGm(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AverageWeightRangeGm
 
-class AvgRate(BaseStringField):
+class AvgRate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AvgRate
 
-class AcceptedBy(BaseStringField):
+class AcceptedBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AcceptedBy
 
-class Account(BaseStringField):
+class Account(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Account
 
-class AccountCode(BaseStringField):
+class AccountCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AccountCode
 
-class AccountExecutive(BaseStringField):
+class AccountExecutive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AccountExecutive
 
-class AccountMonth(BaseStringField):
+class AccountMonth(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AccountMonth
 
-class AccountNumber(BaseStringField):
+class AccountName(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.AccountName
+
+class AccountNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AccountNumber
 
-class AccountingFile(BaseStringField):
+class AccountingFile(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AccountingFile
 
-class AcctName(BaseStringField):
+class AcctName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AcctName
 
-class AdditionalSpray(BaseStringField):
+class AdditionalSpray(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AdditionalSpray
 
-class AddressPostalRequirementsBarcodesDocumentStorageAndBatchNumbersToBeSuppliedBy(BaseStringField):
+class Address(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Address
+
+class AddressPostalRequirementsBarcodesDocumentStorageAndBatchNumbersToBeSuppliedBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AddressPostalRequirementsBarcodesDocumentStorageAndBatchNumbersToBeSuppliedBy
 
-class AdhesiveCode(BaseStringField):
+class AdhesiveCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AdhesiveCode
 
-class Adhesive(BaseStringField):
+class Adhesive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Adhesive
 
-class AdhesiveSupplierS(BaseStringField):
+class AdhesiveSupplierS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AdhesiveSupplierS
 
-class AdhesiveSupplierCodeNoS(BaseStringField):
+class AdhesiveSupplierCodeNoS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AdhesiveSupplierCodeNoS
 
-class AdhesiveType(BaseStringField):
+class AdhesiveType(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AdhesiveType
 
-class AdjustedTotalCostOfProtect(BaseStringField):
+class AdjustedTotalCostOfProject(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.AdjustedTotalCostOfProject
+
+class AdjustedTotalCostOfProtect(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AdjustedTotalCostOfProtect
 
-class Adjustment(BaseStringField):
+class Adjustment(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Adjustment
 
-class AdvanceRegistrationFeePriorToAugust10(BaseStringField):
+class AdvanceRegistrationFeePriorToAugust10(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AdvanceRegistrationFeePriorToAugust10
 
-class AffectedCh20Appropriations(BaseStringField):
+class AffectedCh20Appropriations(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AffectedCh20Appropriations
 
-class AlertNumber(BaseStringField):
+class AlertNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AlertNumber
 
-class AllowableSubstitutions(BaseStringField):
+class AllowableSubstitutions(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AllowableSubstitutions
 
-class AmendmentAttachAdditionalSheetsAsNecessary(BaseStringField):
+class AmendmentAttachAdditionalSheetsAsNecessary(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AmendmentAttachAdditionalSheetsAsNecessary
 
-class AmendmentNoIfApplicable(BaseStringField):
+class AmendmentNoIfApplicable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AmendmentNoIfApplicable
 
-class AmountEarnedButNotReceived(BaseStringField):
+class Amount(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Amount
+
+class AmountEarnedButNotReceived(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AmountEarnedButNotReceived
 
-class AmtOfChange(BaseStringField):
+class AmtOfChange(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AmtOfChange
 
-class AmtOfChangeDecrease(BaseStringField):
+class AmtOfChangeDecrease(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AmtOfChangeDecrease
 
-class AmtOfChangeIncrease(BaseStringField):
+class AmtOfChangeIncrease(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AmtOfChangeIncrease
 
-class Analyst(BaseStringField):
+class Analyst(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Analyst
 
-class AnySpecialDietaryMealAndYouOrYourGuestWouldPrefer(BaseStringField):
+class AnySpecialDietaryMealAndYouOrYourGuestWouldPrefer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AnySpecialDietaryMealAndYouOrYourGuestWouldPrefer
 
-class AppearanceOrAnswerDues(BaseStringField):
+class AppearanceOrAnswerDues(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AppearanceOrAnswerDues
 
-class ApplicationPattern(BaseStringField):
+class ApplicationPattern(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApplicationPattern
 
-class ApplicationPatternOverall(BaseStringField):
+class ApplicationPatternOverall(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApplicationPatternOverall
 
-class ApplicationPatternSkip(BaseStringField):
+class ApplicationPatternSkip(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApplicationPatternSkip
 
-class ApplicationTippingCartonEndFlapsEtc(BaseStringField):
+class ApplicationTippingCartonEndFlapsEtc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApplicationTippingCartonEndFlapsEtc
 
-class ApprovalSignatureDate(BaseStringField):
+class ApprovalSignatureDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovalSignatureDate
 
-class ApprovedByDirectorForecastingMktTo250000(BaseStringField):
+class ApprovedByDirectorForecastingMktTo250000(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovedByDirectorForecastingMktTo250000
 
-class ApprovedByGroupManager(BaseStringField):
+class ApprovedBy(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.ApprovedBy
+
+class ApprovedByGroupManager(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovedByGroupManager
 
-class ApprovedByGroupProductManager(BaseStringField):
+class ApprovedByGroupProductManager(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovedByGroupProductManager
 
-class ApprovedByMpio(BaseStringField):
+class ApprovedByMpio(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovedByMpio
 
-class ApprovedByProductManager(BaseStringField):
+class ApprovedByProductManager(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ApprovedByProductManager
 
-class AreaCode(BaseStringField):
+class AreaCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AreaCode
 
-class ArrivalDateAndTimeIncludeAirlineAndFlightNo(BaseStringField):
+class ArrivalDateAndTimeIncludeAirlineAndFlightNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ArrivalDateAndTimeIncludeAirlineAndFlightNo
 
-class Asst(BaseStringField):
+class Asst(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Asst
 
-class AsumptionsUsedInArrivingAtFiscalEstimate(BaseStringField):
+class AsumptionsUsedInArrivingAtFiscalEstimate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AsumptionsUsedInArrivingAtFiscalEstimate
 
-class Attendees(BaseStringField):
+class Attendees(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Attendees
 
-class AttendeesCustomersAttended(BaseStringField):
+class AttendeesCustomersAttended(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AttendeesCustomersAttended
 
-class AttendeesCustomersInvited(BaseStringField):
+class AttendeesCustomersInvited(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AttendeesCustomersInvited
 
-class AttendeesLorillardPersonnel(BaseStringField):
+class AttendeesLorillardPersonnel(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AttendeesLorillardPersonnel
 
-class Attention(BaseStringField):
+class Attention(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Attention
 
-class Attn(BaseStringField):
+class Attn(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Attn
 
-class AudienceConcentration(BaseStringField):
+class AudienceConcentration(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AudienceConcentration
 
-class Aug(BaseStringField):
+class Aug(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Aug
 
-class AuthNo(BaseStringField):
+class AuthNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AuthNo
 
-class AuthorizedSignature(BaseStringField):
+class AuthorizedSignature(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AuthorizedSignature
 
-class AuthorizedBy(BaseStringField):
+class AuthorizedBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AuthorizedBy
 
-class AuthorizedTo(BaseStringField):
+class AuthorizedTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AuthorizedTo
 
-class Average(BaseStringField):
+class Average(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Average
 
-class AverageCouponBuydownValueOnTargetedBrandsDoralBasicMonarchCambridgeGpc(BaseStringField):
+class AverageCouponBuydownValueOnTargetedBrandsDoralBasicMonarchCambridgeGpc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AverageCouponBuydownValueOnTargetedBrandsDoralBasicMonarchCambridgeGpc
 
-class AverageCouponBuydownValueOnTargetedBrandsDoralBasicMonarchCambridgeGpcCartons(BaseStringField):
+class AverageCouponBuydownValueOnTargetedBrandsDoralBasicMonarchCambridgeGpcCartons(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AverageCouponBuydownValueOnTargetedBrandsDoralBasicMonarchCambridgeGpcCartons
 
-class AverageCouponBuydownValueOnTargetedBrandsDoralBasicMonarchCambridgeGpcPacks(BaseStringField):
+class AverageCouponBuydownValueOnTargetedBrandsDoralBasicMonarchCambridgeGpcPacks(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AverageCouponBuydownValueOnTargetedBrandsDoralBasicMonarchCambridgeGpcPacks
 
-class BWApprovals(BaseStringField):
+class BWApprovals(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BWApprovals
 
-class BWApprovalsDate(BaseStringField):
+class BWApprovalsDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BWApprovalsDate
 
-class BWApprovalsDepartment(BaseStringField):
+class BWApprovalsDepartment(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BWApprovalsDepartment
 
-class BWApprovalsSignature(BaseStringField):
+class BWApprovalsSignature(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BWApprovalsSignature
 
-class BWOriginator(BaseStringField):
+class BWOriginator(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BWOriginator
 
-class B(BaseStringField):
+class B(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.B
 
-class BackCigarettes(BaseStringField):
+class BackCigarettes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BackCigarettes
 
-class BackCigarettesComments(BaseStringField):
+class BackCigarettesComments(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BackCigarettesComments
 
-class BackCigarettesCratering(BaseStringField):
+class BackCigarettesCratering(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BackCigarettesCratering
 
-class BackCigarettesHoleDepth(BaseStringField):
+class BackCigarettesHoleDepth(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BackCigarettesHoleDepth
 
-class BackCigarettesScorching(BaseStringField):
+class BackCigarettesScorching(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BackCigarettesScorching
 
-class Basic(BaseStringField):
+class Basic(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Basic
 
-class BatesNumberNotUsed(BaseStringField):
+class BatesNumberNotUsed(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BatesNumberNotUsed
 
-class Beatty(BaseStringField):
+class Beatty(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Beatty
 
-class BetweenTheActs25MmButt(BaseStringField):
+class BetweenTheActs25MmButt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BetweenTheActs25MmButt
 
-class BetweenTheActs25MmButtMeanOfLast12Samples(BaseStringField):
+class BetweenTheActs25MmButtMeanOfLast12Samples(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BetweenTheActs25MmButtMeanOfLast12Samples
 
-class BetweenTheActs25MmButtPresentSample(BaseStringField):
+class BetweenTheActs25MmButtPresentSample(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BetweenTheActs25MmButtPresentSample
 
-class Blend(BaseStringField):
+class Blend(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Blend
 
-class BoldSubHead(BaseStringField):
+class BoldSubHead(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BoldSubHead
 
-class BookletCoupon(BaseStringField):
+class BookletCoupon(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BookletCoupon
 
-class Box80S(BaseStringField):
+class Box80S(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Box80S
 
-class Branch(BaseStringField):
+class Branch(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Branch
 
-class Brand(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Brand
-
-class BrandSPromoted(BaseStringField):
+class BrandSPromoted(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BrandSPromoted
 
-class BrandName(BaseStringField):
+class BrandName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BrandName
 
-class BrandSmoked(BaseStringField):
+class BrandSmoked(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BrandSmoked
 
-class BrandSmokedAllOtherSmokers(BaseStringField):
+class BrandSmokedAllOtherSmokers(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BrandSmokedAllOtherSmokers
 
-class BrandSmokedTestBrandSmokers(BaseStringField):
+class BrandSmokedTestBrandSmokers(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BrandSmokedTestBrandSmokers
 
-class BrandSmoker(BaseStringField):
+class BrandSmoker(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BrandSmoker
 
-class BrandSmokerAllOtherSmokers(BaseStringField):
+class BrandSmokerAllOtherSmokers(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BrandSmokerAllOtherSmokers
 
-class BrandSmokerTestBrandSmokers(BaseStringField):
+class BrandSmokerTestBrandSmokers(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BrandSmokerTestBrandSmokers
 
-class BrandProjectName(BaseStringField):
+class BrandProjectName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BrandProjectName
 
-class Brands(BaseStringField):
+class Brands(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Brands
 
-class BrandsSApplicable(BaseStringField):
+class BrandsSApplicable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BrandsSApplicable
 
-class BrcCodesW81CartonOrderForm(BaseStringField):
+class BrcCodesW81CartonOrderForm(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BrcCodesW81CartonOrderForm
 
-class BudgetNo(BaseStringField):
+class BudgetNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BudgetNo
 
-class BudgetYear19(BaseStringField):
+class BudgetYear19(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BudgetYear19
 
-class Buyer(BaseStringField):
+class Buyer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Buyer
 
-class BwitSuggestion(BaseStringField):
+class BwitSuggestion(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BwitSuggestion
 
-class By(BaseStringField):
+class By(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.By
 
-class BackgroundProblemDefinition(BaseStringField):
+class BackgroundProblemDefinition(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BackgroundProblemDefinition
 
-class BalanceToSpend(BaseStringField):
+class BalanceToSpend(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BalanceToSpend
 
-class BalanceToSpendCapital(BaseStringField):
+class BalanceToSpendCapital(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BalanceToSpendCapital
 
-class BalanceToSpendExpense(BaseStringField):
+class BalanceToSpendExpense(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BalanceToSpendExpense
 
-class BaleNo(BaseStringField):
+class BaleNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BaleNo
 
-class BatchNumber(BaseStringField):
+class BatchNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BatchNumber
 
-class BatchSize(BaseStringField):
+class BatchSize(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BatchSize
 
-class BeforeMeANotaryPublicPersonallyAppeared(BaseStringField):
+class BeforeMeANotaryPublicPersonallyAppeared(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BeforeMeANotaryPublicPersonallyAppeared
 
-class Binding(BaseStringField):
+class Binding(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Binding
 
-class BrandStyle(BaseStringField):
+class Brand(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Brand
+
+class BrandStyle(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BrandStyle
 
-class BrandSApplicable(BaseStringField):
+class BrandSApplicable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BrandSApplicable
 
-class BrandS(BaseStringField):
+class BrandS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BrandS
 
-class BriefDescription(BaseStringField):
+class BriefDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BriefDescription
 
-class BriefNumber(BaseStringField):
+class BriefNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BriefNumber
 
-class Bright(BaseStringField):
+class Bright(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Bright
 
-class BrightKsWhiteTipping(BaseStringField):
+class BrightKsWhiteTipping(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BrightKsWhiteTipping
 
-class BudgetCheck(BaseStringField):
+class BudgetCheck(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BudgetCheck
 
-class BudgetCode(BaseStringField):
+class BudgetCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BudgetCode
 
-class Budgeted(BaseStringField):
+class Budgeted(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Budgeted
 
-class BudgetedNo(BaseStringField):
+class BudgetedNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BudgetedNo
 
-class BudgetedYes(BaseStringField):
+class BudgetedYes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BudgetedYes
 
-class BusinessTelephone(BaseStringField):
+class BusinessTelephone(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BusinessTelephone
 
-class BusinessUnit(BaseStringField):
+class BusinessUnit(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BusinessUnit
 
-class ByCity(BaseStringField):
+class ByCity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ByCity
 
-class ByCityBQuilla(BaseStringField):
+class ByCityBQuilla(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ByCityBQuilla
 
-class ByCityBogot(BaseStringField):
+class ByCityBogot(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ByCityBogot
 
-class ByCityMedellin(BaseStringField):
+class ByCityMedellin(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ByCityMedellin
 
-class C(BaseStringField):
+class C(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.C
 
-class Cable(BaseStringField):
+class Cable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Cable
 
-class CanTimeBeSparedForCompletion(BaseStringField):
+class CanTimeBeSparedForCompletion(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CanTimeBeSparedForCompletion
 
-class Capital(BaseStringField):
+class Capital(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Capital
 
-class Capri(BaseStringField):
+class Capri(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Capri
 
-class CarcinogenOsha(BaseStringField):
+class CarcinogenOsha(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CarcinogenOsha
 
-class CarcinogenOther(BaseStringField):
+class CarcinogenOther(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CarcinogenOther
 
-class CarryoverTo1988(BaseStringField):
+class CarryoverTo1988(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CarryoverTo1988
 
-class Cartons(BaseStringField):
+class Cartons(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Cartons
 
-class Casing(BaseStringField):
+class Casing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Casing
 
-class Cc(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Cc
-
-class Cf(BaseStringField):
+class Cf(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Cf
 
-class ChainAcceptance(BaseStringField):
+class ChainAcceptance(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChainAcceptance
 
-class ChainAcceptanceExcellent(BaseStringField):
+class ChainAcceptanceExcellent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChainAcceptanceExcellent
 
-class ChainAcceptanceFair(BaseStringField):
+class ChainAcceptanceFair(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChainAcceptanceFair
 
-class ChainAcceptanceGood(BaseStringField):
+class ChainAcceptanceGood(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChainAcceptanceGood
 
-class ChainAcceptancePoor(BaseStringField):
+class ChainAcceptancePoor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChainAcceptancePoor
 
-class Chargeback(BaseStringField):
+class Chargeback(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Chargeback
 
-class ChemicalDescription(BaseStringField):
+class ChemicalDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemicalDescription
 
-class ChemicalDescriptionCas(BaseStringField):
+class ChemicalDescriptionCas(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemicalDescriptionCas
 
-class ChemicalDescriptionChemicalFormula(BaseStringField):
+class ChemicalDescriptionChemicalFormula(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemicalDescriptionChemicalFormula
 
-class ChemicalDescriptionDescription(BaseStringField):
+class ChemicalDescriptionDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemicalDescriptionDescription
 
-class ChemicalDescriptionManufacturer(BaseStringField):
+class ChemicalDescriptionManufacturer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemicalDescriptionManufacturer
 
-class ChemicalDescriptionMsdsOnFileCircleOne(BaseStringField):
+class ChemicalDescriptionMsdsOnFileCircleOne(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemicalDescriptionMsdsOnFileCircleOne
 
-class ChemicalDescriptionPercentActivesNonWater(BaseStringField):
+class ChemicalDescriptionPercentActivesNonWater(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemicalDescriptionPercentActivesNonWater
 
-class ChemicalDescriptionPhone(BaseStringField):
+class ChemicalDescriptionPhone(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemicalDescriptionPhone
 
-class ChemicalDescriptionProductChemicalName(BaseStringField):
+class ChemicalDescriptionProductChemicalName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemicalDescriptionProductChemicalName
 
-class ChemicalDescriptionProductClassificationCircleDne(BaseStringField):
+class ChemicalDescriptionProductClassificationCircleDne(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemicalDescriptionProductClassificationCircleDne
 
-class ChemicalPurity(BaseStringField):
+class ChemicalPurity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemicalPurity
 
-class ChemicalUsage(BaseStringField):
+class ChemicalUsage(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemicalUsage
 
-class ChemicalUsage1993AnnualUsageLbs(BaseStringField):
+class ChemicalUsage1993AnnualUsageLbs(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemicalUsage1993AnnualUsageLbs
 
-class ChemicalUsage1993AvgMonthlyUsageLbs(BaseStringField):
+class ChemicalUsage1993AvgMonthlyUsageLbs(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemicalUsage1993AvgMonthlyUsageLbs
 
-class ChemicalUsageApplicationCircleOneAndBrieflyDescribe(BaseStringField):
+class ChemicalUsageApplicationCircleOneAndBrieflyDescribe(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemicalUsageApplicationCircleOneAndBrieflyDescribe
 
-class CigaretteReportForm(BaseStringField):
+class CigaretteReportForm(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportForm
 
-class CigaretteReportFormTar(BaseStringField):
+class CigaretteReportFormTar(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormTar
 
-class CigaretteReportForm1YearCovered(BaseStringField):
+class CigaretteReportForm1YearCovered(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportForm1YearCovered
 
-class CigaretteReportForm10VarietyUnitSales(BaseStringField):
+class CigaretteReportForm10VarietyUnitSales(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportForm10VarietyUnitSales
 
-class CigaretteReportForm11VarietyDollarSales(BaseStringField):
+class CigaretteReportForm11VarietyDollarSales(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportForm11VarietyDollarSales
 
-class CigaretteReportForm12FirstSalesDate(BaseStringField):
+class CigaretteReportForm12FirstSalesDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportForm12FirstSalesDate
 
-class CigaretteReportForm2BrandFamilyName(BaseStringField):
+class CigaretteReportForm2BrandFamilyName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportForm2BrandFamilyName
 
-class CigaretteReportForm3VarietyDescription(BaseStringField):
+class CigaretteReportForm3VarietyDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportForm3VarietyDescription
 
-class CigaretteReportForm4ProductLength(BaseStringField):
+class CigaretteReportForm4ProductLength(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportForm4ProductLength
 
-class CigaretteReportForm5Filter(BaseStringField):
+class CigaretteReportForm5Filter(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportForm5Filter
 
-class CigaretteReportForm7Menthol(BaseStringField):
+class CigaretteReportForm7Menthol(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportForm7Menthol
 
-class CigaretteReportForm8PackSizeSold(BaseStringField):
+class CigaretteReportForm8PackSizeSold(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportForm8PackSizeSold
 
-class CigaretteReportForm9Tar(BaseStringField):
+class CigaretteReportForm9Tar(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportForm9Tar
 
-class CigaretteReportFormBrandFamilyName(BaseStringField):
+class CigaretteReportFormBrandFamilyName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormBrandFamilyName
 
-class CigaretteReportFormFilter(BaseStringField):
+class CigaretteReportFormFilter(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormFilter
 
-class CigaretteReportFormFirstSalesDate(BaseStringField):
+class CigaretteReportFormFirstSalesDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormFirstSalesDate
 
-class CigaretteReportFormHardPack(BaseStringField):
+class CigaretteReportFormHardPack(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormHardPack
 
-class CigaretteReportFormLastSalesDate(BaseStringField):
+class CigaretteReportFormLastSalesDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormLastSalesDate
 
-class CigaretteReportFormMenthol(BaseStringField):
+class CigaretteReportFormMenthol(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormMenthol
 
-class CigaretteReportFormNicotine(BaseStringField):
+class CigaretteReportFormNicotine(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormNicotine
 
-class CigaretteReportFormNonfilter(BaseStringField):
+class CigaretteReportFormNonfilter(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormNonfilter
 
-class CigaretteReportFormNonmenthol(BaseStringField):
+class CigaretteReportFormNonmenthol(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormNonmenthol
 
-class CigaretteReportFormPackSizeSold(BaseStringField):
+class CigaretteReportFormPackSizeSold(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormPackSizeSold
 
-class CigaretteReportFormProductLength(BaseStringField):
+class CigaretteReportFormProductLength(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormProductLength
 
-class CigaretteReportFormSoftPack(BaseStringField):
+class CigaretteReportFormSoftPack(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormSoftPack
 
-class CigaretteReportFormVarietyDescription(BaseStringField):
+class CigaretteReportFormVarietyDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormVarietyDescription
 
-class CigaretteReportFormVarietyDollarSales(BaseStringField):
+class CigaretteReportFormVarietyDollarSales(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormVarietyDollarSales
 
-class CigaretteReportFormVarietyUnitSales(BaseStringField):
+class CigaretteReportFormVarietyUnitSales(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormVarietyUnitSales
 
-class CigaretteReportFormYearCovered(BaseStringField):
+class CigaretteReportFormYearCovered(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteReportFormYearCovered
 
-class Cigarettes(BaseStringField):
+class Cigarettes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Cigarettes
 
-class Cigarettes627647(BaseStringField):
+class Cigarettes627647(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Cigarettes627647
 
-class Cigarettes647627(BaseStringField):
+class Cigarettes647627(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Cigarettes647627
 
-class Circulation(BaseStringField):
+class Circulation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Circulation
 
-class City(BaseStringField):
+class City(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.City
 
-class CityState(BaseStringField):
+class CityState(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CityState
 
-class CityStateZip(BaseStringField):
+class CityStateZip(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CityStateZip
 
-class Class(BaseStringField):
+class Class(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Class
 
-class Client(BaseStringField):
+class Client(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Client
 
-class ClubCashCarryEtc(BaseStringField):
+class ClubCashCarryEtc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ClubCashCarryEtc
 
-class Code(BaseStringField):
+class Code(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Code
 
-class CommentOnPlant(BaseStringField):
+class CommentOnPlant(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CommentOnPlant
 
-class Comments(BaseStringField):
+class Comments(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Comments
 
-class CommentsByManagerOrDirector(BaseStringField):
+class CommentsByManagerOrDirector(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CommentsByManagerOrDirector
 
-class Commitments(BaseStringField):
+class Commitments(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Commitments
 
-class Committed(BaseStringField):
+class Committed(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Committed
 
-class Company(BaseStringField):
+class Company(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Company
 
-class CompetitiveActivitiesAndPromotions(BaseStringField):
+class CompetitiveActivitiesAndPromotions(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveActivitiesAndPromotions
 
-class CompetitiveActivitiesAndPromotionsBrandSPromoted(BaseStringField):
+class CompetitiveActivitiesAndPromotionsBrandSPromoted(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveActivitiesAndPromotionsBrandSPromoted
 
-class CompetitiveActivitiesAndPromotionsCc(BaseStringField):
+class CompetitiveActivitiesAndPromotionsCc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveActivitiesAndPromotionsCc
 
-class CompetitiveActivitiesAndPromotionsDate(BaseStringField):
+class CompetitiveActivitiesAndPromotionsDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveActivitiesAndPromotionsDate
 
-class CompetitiveActivitiesAndPromotionsHowWidespread(BaseStringField):
+class CompetitiveActivitiesAndPromotionsHowWidespread(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveActivitiesAndPromotionsHowWidespread
 
-class CompetitiveActivitiesAndPromotionsManufacturer(BaseStringField):
+class CompetitiveActivitiesAndPromotionsManufacturer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveActivitiesAndPromotionsManufacturer
 
-class CompetitiveActivitiesAndPromotionsOtherComments(BaseStringField):
+class CompetitiveActivitiesAndPromotionsOtherComments(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveActivitiesAndPromotionsOtherComments
 
-class CompetitiveActivitiesAndPromotionsReportedBy(BaseStringField):
+class CompetitiveActivitiesAndPromotionsReportedBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveActivitiesAndPromotionsReportedBy
 
-class CompetitiveActivitiesAndPromotionsSourceOfInformation(BaseStringField):
+class CompetitiveActivitiesAndPromotionsSourceOfInformation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveActivitiesAndPromotionsSourceOfInformation
 
-class CompetitiveActivitiesAndPromotionsTypeOfPromotion(BaseStringField):
+class CompetitiveActivitiesAndPromotionsTypeOfPromotion(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveActivitiesAndPromotionsTypeOfPromotion
 
-class CompetitivePromotionalActivity(BaseStringField):
+class CompetitivePromotionalActivity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitivePromotionalActivity
 
-class CompleteEitherAOrBBelow(BaseStringField):
+class CompleteEitherAOrBBelow(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompleteEitherAOrBBelow
 
-class Completion(BaseStringField):
+class Completion(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Completion
 
-class Compound(BaseStringField):
+class Compound(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Compound
 
-class CompoundUsPlate(BaseStringField):
+class CompoundUsPlate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompoundUsPlate
 
-class CompoundCode(BaseStringField):
+class CompoundCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompoundCode
 
-class CompoundName(BaseStringField):
+class CompoundName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompoundName
 
-class CompoundSensitive(BaseStringField):
+class CompoundSensitive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompoundSensitive
 
-class CompoundSensitiveTo(BaseStringField):
+class CompoundSensitiveTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompoundSensitiveTo
 
-class CompoundSensitiveAir(BaseStringField):
+class CompoundSensitiveAir(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompoundSensitiveAir
 
-class CompoundSensitiveHeat(BaseStringField):
+class CompoundSensitiveHeat(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompoundSensitiveHeat
 
-class CompoundSensitiveMoisture(BaseStringField):
+class CompoundSensitiveMoisture(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompoundSensitiveMoisture
 
-class CompoundSensitiveOther(BaseStringField):
+class CompoundSensitiveOther(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompoundSensitiveOther
 
-class CompoundVehicle(BaseStringField):
+class CompoundVehicle(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompoundVehicle
 
-class CompoundVehicleOther(BaseStringField):
+class CompoundVehicleOther(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompoundVehicleOther
 
-class CompoundVehicleMethylCellulose(BaseStringField):
+class CompoundVehicleMethylCellulose(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompoundVehicleMethylCellulose
 
-class CompoundVehicleCornOil(BaseStringField):
+class CompoundVehicleCornOil(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompoundVehicleCornOil
 
-class CompoundVehicleSaline(BaseStringField):
+class CompoundVehicleSaline(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompoundVehicleSaline
 
-class CompoundPlates(BaseStringField):
+class CompoundPlates(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompoundPlates
 
-class Concentration1Mgimit(BaseStringField):
+class Concentration1Mgimit(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Concentration1Mgimit
 
-class ConcentrationMgMl(BaseStringField):
+class ConcentrationMgMl(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConcentrationMgMl
 
-class Conclusion(BaseStringField):
+class Conclusion(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Conclusion
 
-class Confidential(BaseStringField):
+class Confidential(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Confidential
 
-class ConsumerAcceptance(BaseStringField):
+class ConsumerAcceptance(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConsumerAcceptance
 
-class ConsumerAcceptanceExcellent(BaseStringField):
+class ConsumerAcceptanceExcellent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConsumerAcceptanceExcellent
 
-class ConsumerAcceptanceFair(BaseStringField):
+class ConsumerAcceptanceFair(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConsumerAcceptanceFair
 
-class ConsumerAcceptanceGood(BaseStringField):
+class ConsumerAcceptanceGood(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConsumerAcceptanceGood
 
-class ConsumerAcceptancePoor(BaseStringField):
+class ConsumerAcceptancePoor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConsumerAcceptancePoor
 
-class ConsumerOffer(BaseStringField):
+class ConsumerOffer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConsumerOffer
 
-class Contingency(BaseStringField):
+class Contingency(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Contingency
 
-class Contract(BaseStringField):
+class Contract(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Contract
 
-class ControlAfvertantsPerPlate005MlSolvent(BaseStringField):
+class ControlAfvertantsPerPlate005MlSolvent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ControlAfvertantsPerPlate005MlSolvent
 
-class ControlRevertantsPerPlateToonMiSolventi(BaseStringField):
+class ControlRevertantsPerPlateToonMiSolventi(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ControlRevertantsPerPlateToonMiSolventi
 
-class CostOrRetailPricing(BaseStringField):
+class CostOrRetailPricing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CostOrRetailPricing
 
-class CostSummary(BaseStringField):
+class CostSummary(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CostSummary
 
-class CostSummaryEstAnnualProductCostChange(BaseStringField):
+class CostSummaryEstAnnualProductCostChange(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CostSummaryEstAnnualProductCostChange
 
-class CostSummaryObsoleteMaterialCost(BaseStringField):
+class CostSummaryObsoleteMaterialCost(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CostSummaryObsoleteMaterialCost
 
-class CostSummarySpecialEquipmentMaterialCost(BaseStringField):
+class CostSummarySpecialEquipmentMaterialCost(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CostSummarySpecialEquipmentMaterialCost
 
-class Country(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Country
-
-class CouponExpirationDate(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.CouponExpirationDate
-
-class CouponIssueDate(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.CouponIssueDate
-
-class CouponValue(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.CouponValue
-
-class Cqa(BaseStringField):
+class Cqa(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Cqa
 
-class Cumulative(BaseStringField):
+class Cumulative(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Cumulative
 
-class CurrentBalAvailable(BaseStringField):
+class CurrentBalAvailable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CurrentBalAvailable
 
-class CustomerShippingNumber(BaseStringField):
+class CustomerShippingNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CustomerShippingNumber
 
-class CapitalBudget(BaseStringField):
+class CapitalBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CapitalBudget
 
-class CharNo(BaseStringField):
+class CharNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CharNo
 
-class CharacteristicTested(BaseStringField):
+class CharacteristicTested(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CharacteristicTested
 
-class ChargeCode(BaseStringField):
+class ChargeCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChargeCode
 
-class ChargeToSection(BaseStringField):
+class ChargeToSection(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChargeToSection
 
-class CheckColumnsBelowOnlyIfBillMakesARectAppropriationOrAffectASumSufficientAppropriation(BaseStringField):
+class CheckColumnsBelowOnlyIfBillMakesARectAppropriationOrAffectASumSufficientAppropriation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CheckColumnsBelowOnlyIfBillMakesARectAppropriationOrAffectASumSufficientAppropriation
 
-class ChemAbstr(BaseStringField):
+class ChemAbstr(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ChemAbstr
 
-class Chicago(BaseStringField):
+class Chicago(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Chicago
 
-class Cicarettes(BaseStringField):
+class Cicarettes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Cicarettes
 
-class CicarettesAirDilution(BaseStringField):
+class CicarettesAirDilution(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CicarettesAirDilution
 
-class CicarettesCircumference(BaseStringField):
+class CicarettesCircumference(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CicarettesCircumference
 
-class CicarettesGlueRoller(BaseStringField):
+class CicarettesGlueRoller(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CicarettesGlueRoller
 
-class CicarettesLength(BaseStringField):
+class CicarettesLength(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CicarettesLength
 
-class CicarettesMaker(BaseStringField):
+class CicarettesMaker(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CicarettesMaker
 
-class CicarettesPaper(BaseStringField):
+class CicarettesPaper(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CicarettesPaper
 
-class CicarettesTipPaper(BaseStringField):
+class CicarettesTipPaper(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CicarettesTipPaper
 
-class CicarettesTipPaperPor(BaseStringField):
+class CicarettesTipPaperPor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CicarettesTipPaperPor
 
-class CicarettesWeight(BaseStringField):
+class CicarettesWeight(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CicarettesWeight
 
-class Cigarette(BaseStringField):
+class Cigarette(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Cigarette
 
-class CigaretteDescription(BaseStringField):
+class CigaretteDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigaretteDescription
 
-class CigarettesBrand(BaseStringField):
+class CigarettesBrand(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigarettesBrand
 
-class CigarettesCircumference(BaseStringField):
+class CigarettesCircumference(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigarettesCircumference
 
-class CigarettesDraw(BaseStringField):
+class CigarettesDraw(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigarettesDraw
 
-class CigarettesFilterLength(BaseStringField):
+class CigarettesFilterLength(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigarettesFilterLength
 
-class CigarettesFirmness(BaseStringField):
+class CigarettesFirmness(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigarettesFirmness
 
-class CigarettesLength(BaseStringField):
+class CigarettesLength(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigarettesLength
 
-class CigarettesPaper(BaseStringField):
+class CigarettesPaper(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigarettesPaper
 
-class CigarettesPrint(BaseStringField):
+class CigarettesPrint(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigarettesPrint
 
-class CigarettesTippingPaper(BaseStringField):
+class CigarettesTippingPaper(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigarettesTippingPaper
 
-class CigarettesWeight(BaseStringField):
+class CigarettesWeight(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigarettesWeight
 
-class CigarettesMaker(BaseStringField):
+class CigarettesMaker(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CigarettesMaker
 
-class CircOfRod(BaseStringField):
+class CircOfRod(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CircOfRod
 
-class CirculationQuantity(BaseStringField):
+class CirculationQuantity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CirculationQuantity
 
-class Circunference(BaseStringField):
+class Circunference(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Circunference
 
-class CityTown(BaseStringField):
+class CityTown(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CityTown
 
-class ClientContact(BaseStringField):
+class ClientContact(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ClientContact
 
-class ClientGroup(BaseStringField):
+class ClientGroup(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ClientGroup
 
-class ClientName(BaseStringField):
+class ClientName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ClientName
 
-class ClientStudyNo(BaseStringField):
+class ClientStudyNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ClientStudyNo
 
-class Color(BaseStringField):
+class Color(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Color
 
-class ColumnInches(BaseStringField):
+class ColumnInches(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ColumnInches
 
-class CombWrap(BaseStringField):
+class CombWrap(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CombWrap
 
-class CombWrapPor(BaseStringField):
+class CombWrapPor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CombWrapPor
 
-class Commercial(BaseStringField):
+class Commercial(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Commercial
 
-class CommittedToDate(BaseStringField):
+class CommittedToDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CommittedToDate
 
-class CommittedToDateCurrentYear(BaseStringField):
+class CommittedToDateCurrentYear(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CommittedToDateCurrentYear
 
-class CommitteeMeeting(BaseStringField):
+class CommitteeMeeting(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CommitteeMeeting
 
-class CompensationReceivedLobbying(BaseStringField):
+class CompensationReceivedLobbying(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompensationReceivedLobbying
 
-class Competitive(BaseStringField):
+class Competitive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Competitive
 
-class CompetitiveProposalsObtained(BaseStringField):
+class CompetitiveProposalsObtained(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveProposalsObtained
 
-class CompetitiveProposalsObtainedCost(BaseStringField):
+class CompetitiveProposalsObtainedCost(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveProposalsObtainedCost
 
-class CompetitiveProposalsObtainedCostPerInterview(BaseStringField):
+class CompetitiveProposalsObtainedCostPerInterview(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveProposalsObtainedCostPerInterview
 
-class CompetitiveProposalsObtainedEst(BaseStringField):
+class CompetitiveProposalsObtainedEst(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveProposalsObtainedEst
 
-class CompetitiveProposalsObtainedEstTravel(BaseStringField):
+class CompetitiveProposalsObtainedEstTravel(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveProposalsObtainedEstTravel
 
-class CompetitiveProposalsObtainedSupplier(BaseStringField):
+class CompetitiveProposalsObtainedSupplier(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveProposalsObtainedSupplier
 
-class CompetitiveProposalsObtainedTotalCost(BaseStringField):
+class CompetitiveProposalsObtainedTotalCost(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveProposalsObtainedTotalCost
 
-class Competitive25PgWSorbitol647627(BaseStringField):
+class Competitive25PgWSorbitol647627(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Competitive25PgWSorbitol647627
 
-class CompetitiveCurrentViceroy84647647(BaseStringField):
+class CompetitiveCurrentViceroy84647647(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitiveCurrentViceroy84647647
 
-class CompetitorsBrandsMild7LightsSmokers(BaseStringField):
+class CompetitorsBrandsMild7LightsSmokers(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompetitorsBrandsMild7LightsSmokers
 
-class CompleteWeight(BaseStringField):
+class CompleteWeight(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompleteWeight
 
-class CompletionDate(BaseStringField):
+class CompletionDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CompletionDate
 
-class Con(BaseStringField):
+class Con(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Con
 
-class Confirmation(BaseStringField):
+class Confirmation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Confirmation
 
-class ConfirmationName(BaseStringField):
+class ConfirmationName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConfirmationName
 
-class ConfirmationNo(BaseStringField):
+class ConfirmationNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConfirmationNo
 
-class ConfirmationYes(BaseStringField):
+class ConfirmationYes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConfirmationYes
 
-class ConsiderationDeferredUntil(BaseStringField):
+class ConsiderationDeferredUntil(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConsiderationDeferredUntil
 
-class ConsumerSegmentS(BaseStringField):
+class ConsumerSegmentS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConsumerSegmentS
 
-class ConsumerSegmentSBySel(BaseStringField):
+class ConsumerSegmentSBySel(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConsumerSegmentSBySel
 
-class ConsumerSegmentSByAge(BaseStringField):
+class ConsumerSegmentSByAge(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConsumerSegmentSByAge
 
-class ConsumerSegmentSFemale(BaseStringField):
+class ConsumerSegmentSFemale(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConsumerSegmentSFemale
 
-class ConsumerSegmentSMale(BaseStringField):
+class ConsumerSegmentSMale(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ConsumerSegmentSMale
 
-class ContactNameTelephone(BaseStringField):
+class ContactNameTelephone(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ContactNameTelephone
 
-class Contact(BaseStringField):
+class Contact(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Contact
 
-class ContractNo(BaseStringField):
+class ContractNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ContractNo
 
-class ContractSubject(BaseStringField):
+class ContractSubject(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ContractSubject
 
-class ContractualOrAgreedFee(BaseStringField):
+class ContractualOrAgreedFee(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ContractualOrAgreedFee
 
-class Contribution(BaseStringField):
+class Contribution(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Contribution
 
-class Copies(BaseStringField):
+class Copies(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Copies
 
-class CopiesToTheFollowing(BaseStringField):
+class CopiesToTheFollowing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CopiesToTheFollowing
 
-class CopiesTo(BaseStringField):
+class CopiesTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CopiesTo
 
-class Cost(BaseStringField):
+class Cost(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Cost
 
-class CostEstimate(BaseStringField):
+class CostEstimate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CostEstimate
 
-class CostPerInterview(BaseStringField):
+class CostPerInterview(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CostPerInterview
 
-class CountyOf(BaseStringField):
+class Country(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Country
+
+class CountyOf(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CountyOf
 
-class Court(BaseStringField):
+class CouponExpirationDate(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CouponExpirationDate
+
+class CouponIssueDate(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CouponIssueDate
+
+class CouponValue(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CouponValue
+
+class Court(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Court
 
-class CurrentBalanceAvailable(BaseStringField):
+class CurrentBalanceAvailable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CurrentBalanceAvailable
 
-class CurrentBudget(BaseStringField):
+class CurrentBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CurrentBudget
 
-class CurrentYearCost(BaseStringField):
+class CurrentYearCost(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CurrentYearCost
 
-class Customer(BaseStringField):
+class Customer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Customer
 
-class D(BaseStringField):
+class D(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.D
 
-class DM(BaseStringField):
+class DM(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DM
 
-class DEC(BaseStringField):
+class DEC(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DEC
 
-class DailyEffectiveCirculation(BaseStringField):
+class DailyEffectiveCirculation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DailyEffectiveCirculation
 
-class Date(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Date
-
-class DateComplete(BaseStringField):
+class DateComplete(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateComplete
 
-class DateForwardedPromotionServices(BaseStringField):
+class DateForwardedPromotionServices(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateForwardedPromotionServices
 
-class DateInitiated(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.DateInitiated
-
-class DateIssued(BaseStringField):
+class DateIssued(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateIssued
 
-class DateOfReport(BaseStringField):
+class DateOfReport(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateOfReport
 
-class DateOfRequisition(BaseStringField):
+class DateOfRequisition(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateOfRequisition
 
-class DatePostersReceivedFromLithographer(BaseStringField):
+class DatePostersReceivedFromLithographer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DatePostersReceivedFromLithographer
 
-class DatePostingCompleted(BaseStringField):
+class DatePostingCompleted(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DatePostingCompleted
 
-class DateReceived(BaseStringField):
+class DateReceived(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateReceived
 
-class DateRequested(BaseStringField):
+class DateRequested(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateRequested
 
-class DateShipped(BaseStringField):
+class DateShipped(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateShipped
 
-class DateSubmittedAndDeptManager(BaseStringField):
+class DateSubmittedAndDeptManager(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateSubmittedAndDeptManager
 
-class DateToCorp(BaseStringField):
+class DateToCorp(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateToCorp
 
-class DateToNyo(BaseStringField):
+class DateToNyo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateToNyo
 
-class DateWanted(BaseStringField):
+class DateWanted(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateWanted
 
-class Dates(BaseStringField):
+class Dates(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Dates
 
-class Ddress(BaseStringField):
+class Ddress(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ddress
 
-class DeFullfillmentVendor(BaseStringField):
+class DeFullfillmentVendor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DeFullfillmentVendor
 
-class DeadlineForBidReceipt(BaseStringField):
+class DeadlineForBidReceipt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DeadlineForBidReceipt
 
-class Dec1987Accrual(BaseStringField):
+class Dec1987Accrual(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Dec1987Accrual
 
-class DeliveryDate(BaseStringField):
+class DeliveryDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DeliveryDate
 
-class DepartmentCharged(BaseStringField):
+class DepartmentCharged(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DepartmentCharged
 
-class Department(BaseStringField):
+class Department(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Department
 
-class DeptNo(BaseStringField):
+class DeptNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DeptNo
 
-class Description(BaseStringField):
+class Description(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Description
 
-class DescriptionOfReactivity(BaseStringField):
+class DescriptionOfReactivity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DescriptionOfReactivity
 
-class DescriptionOfReactivityWithHeating80c(BaseStringField):
+class DescriptionOfReactivityWithHeating80c(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DescriptionOfReactivityWithHeating80c
 
-class DescriptionOfReactivityWithoutHeating(BaseStringField):
+class DescriptionOfReactivityWithoutHeating(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DescriptionOfReactivityWithoutHeating
 
-class Design(BaseStringField):
+class Design(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Design
 
-class DesignNo(BaseStringField):
+class DesignNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DesignNo
 
-class DesignOnDisplay(BaseStringField):
+class DesignOnDisplay(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DesignOnDisplay
 
-class Dessicator(BaseStringField):
+class Dessicator(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Dessicator
 
-class DirOfLifeSciencesHealthServicesCompoundPrepToxScientificResTox(BaseStringField):
+class DirOfLifeSciencesHealthServicesCompoundPrepToxScientificResTox(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DirOfLifeSciencesHealthServicesCompoundPrepToxScientificResTox
 
-class DirectAccountAndChainVoidsUseXToIndicateAVoid(BaseStringField):
+class DirectAccountAndChainVoidsUseXToIndicateAVoid(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DirectAccountAndChainVoidsUseXToIndicateAVoid
 
-class DirectAccountAndChainVoidsUseXToIndicateAVoid100S(BaseStringField):
+class DirectAccountAndChainVoidsUseXToIndicateAVoid100S(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DirectAccountAndChainVoidsUseXToIndicateAVoid100S
 
-class DirectAccountAndChainVoidsUseXToIndicateAVoidAccount(BaseStringField):
+class DirectAccountAndChainVoidsUseXToIndicateAVoidAccount(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DirectAccountAndChainVoidsUseXToIndicateAVoidAccount
 
-class DirectAccountAndChainVoidsUseXToIndicateAVoidLts100S(BaseStringField):
+class DirectAccountAndChainVoidsUseXToIndicateAVoidLts100S(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DirectAccountAndChainVoidsUseXToIndicateAVoidLts100S
 
-class DirectAccountAndChainVoidsUseXToIndicateAVoidNoStores(BaseStringField):
+class DirectAccountAndChainVoidsUseXToIndicateAVoidNoStores(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DirectAccountAndChainVoidsUseXToIndicateAVoidNoStores
 
-class DirectorOfRaQa(BaseStringField):
+class DirectorOfRaQa(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DirectorOfRaQa
 
-class DirectorOfResearch(BaseStringField):
+class DirectorOfResearch(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DirectorOfResearch
 
-class DisplayAgreement(BaseStringField):
+class DisplayAgreement(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DisplayAgreement
 
-class DisplayBrands(BaseStringField):
+class DisplayBrands(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DisplayBrands
 
-class DisplayMaterial(BaseStringField):
+class DisplayMaterial(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DisplayMaterial
 
-class Distribution(BaseStringField):
+class Distribution(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Distribution
 
-class DivNameNo(BaseStringField):
+class DivNameNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DivNameNo
 
-class Division(BaseStringField):
+class Division(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Division
 
-class DivisionName(BaseStringField):
+class DivisionName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DivisionName
 
-class DivisionFull(BaseStringField):
+class DivisionFull(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DivisionFull
 
-class DivisionPartial(BaseStringField):
+class DivisionPartial(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DivisionPartial
 
-class DoesWorkMeritPublication(BaseStringField):
+class DoesWorkMeritPublication(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DoesWorkMeritPublication
 
-class Domestic(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Domestic
-
-class Doral(BaseStringField):
+class Doral(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Doral
 
-class DosageMgKgBodyWeight(BaseStringField):
+class DosageMgKgBodyWeight(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DosageMgKgBodyWeight
 
-class DatasetName(BaseStringField):
+class DatasetName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DatasetName
 
-class DateS(BaseStringField):
+class Date(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Date
+
+class DateS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateS
 
-class DateMade(BaseStringField):
+class DateInitiated(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.DateInitiated
+
+class DateMade(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateMade
 
-class DateRecD(BaseStringField):
+class DateRecD(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateRecD
 
-class DateRequired(BaseStringField):
+class DateRequired(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateRequired
 
-class DateRouted(BaseStringField):
+class DateRouted(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateRouted
 
-class DateSent(BaseStringField):
+class DateSent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateSent
 
-class DateSubmitted(BaseStringField):
+class DateSubmitted(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateSubmitted
 
-class DateAndHourOfService(BaseStringField):
+class DateAndHourOfService(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateAndHourOfService
 
-class DateOfFinalReportReviewCompletedDate(BaseStringField):
+class DateOfFinalReportReviewCompletedDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateOfFinalReportReviewCompletedDate
 
-class DateOfRequest(BaseStringField):
+class DateOfRequest(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DateOfRequest
 
-class DatesOfContact(BaseStringField):
+class DatesOfContact(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DatesOfContact
 
-class DeadlineForResponse(BaseStringField):
+class DeadlineForResponse(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DeadlineForResponse
 
-class Dec(BaseStringField):
+class Dec(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Dec
 
-class DecisionOfCommitteeOnPresentRequest(BaseStringField):
+class DecisionOfCommitteeOnPresentRequest(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DecisionOfCommitteeOnPresentRequest
 
-class DeclinedSendLetter(BaseStringField):
+class DeclinedSendLetter(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DeclinedSendLetter
 
-class Decrease(BaseStringField):
+class Decrease(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Decrease
 
-class DeliveryRollerOverTape(BaseStringField):
+class DeliveryRollerOverTape(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DeliveryRollerOverTape
 
-class DeptCodeNo(BaseStringField):
+class DeptCodeNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DeptCodeNo
 
-class DescribePossibleSolutionsAndBenefits(BaseStringField):
+class DescribePossibleSolutionsAndBenefits(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DescribePossibleSolutionsAndBenefits
 
-class DescriptionOfChangeOrder(BaseStringField):
+class DescriptionOfChangeOrder(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DescriptionOfChangeOrder
 
-class DescriptionCapriExpansion(BaseStringField):
+class DescriptionCapriExpansion(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DescriptionCapriExpansion
 
-class Dimension(BaseStringField):
+class Dimension(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Dimension
 
-class DirectAccount(BaseStringField):
+class DirectAccount(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DirectAccount
 
-class DirectionalDifference(BaseStringField):
+class DirectionalDifference(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DirectionalDifference
 
-class Director(BaseStringField):
+class Director(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Director
 
-class DistAsgmtCF(BaseStringField):
+class DistAsgmtCF(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DistAsgmtCF
 
-class DistanceFromYourHomeToAirport(BaseStringField):
+class DistanceFromYourHomeToAirport(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DistanceFromYourHomeToAirport
 
-class DistributionDropDate(BaseStringField):
+class DistributionDropDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DistributionDropDate
 
-class DistributorNo(BaseStringField):
+class DistributorNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DistributorNo
 
-class DivisionSToBeContacted(BaseStringField):
+class DivisionSToBeContacted(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DivisionSToBeContacted
 
-class DivisionMgr(BaseStringField):
+class DivisionMgr(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DivisionMgr
 
-class DoYouPreferAirlineSeatsInSmokingOrNonSmokingSection(BaseStringField):
+class DoYouPreferAirlineSeatsInSmokingOrNonSmokingSection(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DoYouPreferAirlineSeatsInSmokingOrNonSmokingSection
 
-class DocumentS(BaseStringField):
+class DocumentS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DocumentS
 
-class Draw(BaseStringField):
+class Domestic(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Domestic
+
+class Draw(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Draw
 
-class DryWeight(BaseStringField):
+class DryWeight(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DryWeight
 
-class DryWtWithAdhesive(BaseStringField):
+class DryWtWithAdhesive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DryWtWithAdhesive
 
-class DueThe1StMondayOfTheMonthDuringTheLegislativeSessionToReportThePreviousMonthsActivity(BaseStringField):
+class DueThe1StMondayOfTheMonthDuringTheLegislativeSessionToReportThePreviousMonthsActivity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DueThe1StMondayOfTheMonthDuringTheLegislativeSessionToReportThePreviousMonthsActivity
 
-class DuringThisReportingPeriodHaveYouMadeAnyExpenditureOrIncurredAnyObligationOf2500OrMorePerOccurenceToPromoteOrOpposeAnyLegislationIncludingButNotLimitedMailingsMealsPrintOrBroadcastAdvertisementsOrGiftsYesOrNo(BaseStringField):
+class DuringThisReportingPeriodHaveYouMadeAnyExpenditureOrIncurredAnyObligationOf2500OrMorePerOccurenceToPromoteOrOpposeAnyLegislationIncludingButNotLimitedMailingsMealsPrintOrBroadcastAdvertisementsOrGiftsYesOrNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DuringThisReportingPeriodHaveYouMadeAnyExpenditureOrIncurredAnyObligationOf2500OrMorePerOccurenceToPromoteOrOpposeAnyLegislationIncludingButNotLimitedMailingsMealsPrintOrBroadcastAdvertisementsOrGiftsYesOrNo
 
-class E(BaseStringField):
+class E(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.E
 
-class EaseOfDraw17Easier(BaseStringField):
+class EaseOfDraw17Easier(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EaseOfDraw17Easier
 
-class EffectivenessOfAdvertising(BaseStringField):
+class EffectivenessOfAdvertising(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EffectivenessOfAdvertising
 
-class EffectivenessOf(BaseStringField):
+class EffectivenessOf(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EffectivenessOf
 
-class EfficiencyRating(BaseStringField):
+class EfficiencyRating(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EfficiencyRating
 
-class EfficiencyRatingExcellent(BaseStringField):
+class EfficiencyRatingExcellent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EfficiencyRatingExcellent
 
-class EfficiencyRatingFair(BaseStringField):
+class EfficiencyRatingFair(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EfficiencyRatingFair
 
-class EfficiencyRatingGood(BaseStringField):
+class EfficiencyRatingGood(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EfficiencyRatingGood
 
-class EfficiencyRatingPoor(BaseStringField):
+class EfficiencyRatingPoor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EfficiencyRatingPoor
 
-class Elt(BaseStringField):
+class Elt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Elt
 
-class Endorsements(BaseStringField):
+class Endorsements(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Endorsements
 
-class Epb(BaseStringField):
+class Epb(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Epb
 
-class EstimateOfTimeNeededToCompleteWork(BaseStringField):
+class EstimateOfTimeNeededToCompleteWork(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimateOfTimeNeededToCompleteWork
 
-class EstimateOfTimeNeededToPrepareManuscriptForPresentation(BaseStringField):
+class EstimateOfTimeNeededToPrepareManuscriptForPresentation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimateOfTimeNeededToPrepareManuscriptForPresentation
 
-class EstimateOfTimeNeededToPrepareManuscriptForPublication(BaseStringField):
+class EstimateOfTimeNeededToPrepareManuscriptForPublication(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimateOfTimeNeededToPrepareManuscriptForPublication
 
-class EstimatedPaybackPeriod(BaseStringField):
+class EstimatedPaybackPeriod(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimatedPaybackPeriod
 
-class EstimatedTargetDateOriginalComments(BaseStringField):
+class EstimatedTargetDateOriginalComments(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimatedTargetDateOriginalComments
 
-class EstimatedToxicityClass(BaseStringField):
+class EstimatedToxicityClass(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimatedToxicityClass
 
-class Expense(BaseStringField):
+class Expense(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Expense
 
-class ExperimentalProcedures(BaseStringField):
+class ExperimentalProcedures(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ExperimentalProcedures
 
-class Explosive(BaseStringField):
+class Explosive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Explosive
 
-class ExtentOfDistribution(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.ExtentOfDistribution
-
-class ExtraCopiesTo(BaseStringField):
+class ExtraCopiesTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ExtraCopiesTo
 
-class EnclosedAreCopiesOfLegalProcesServedUponTheStatutoryAgentOfTheAboveCompanyAsFollows(BaseStringField):
+class EnclosedAreCopiesOfLegalProcesServedUponTheStatutoryAgentOfTheAboveCompanyAsFollows(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EnclosedAreCopiesOfLegalProcesServedUponTheStatutoryAgentOfTheAboveCompanyAsFollows
 
-class EstMonthlyOngoing(BaseStringField):
+class EstMonthlyOngoing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstMonthlyOngoing
 
-class EstTravel(BaseStringField):
+class EstTravel(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstTravel
 
-class EstimateCost(BaseStringField):
+class EstimateCost(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimateCost
 
-class EstimateCostCapital(BaseStringField):
+class EstimateCostCapital(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimateCostCapital
 
-class EstimateCostExpense(BaseStringField):
+class EstimateCostExpense(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimateCostExpense
 
-class EstimateCostTotal(BaseStringField):
+class EstimateCostTotal(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimateCostTotal
 
-class EstimateNo(BaseStringField):
+class EstimateNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimateNo
 
-class EstimatedAttendance(BaseStringField):
+class EstimatedAttendance(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimatedAttendance
 
-class EstimatedFreightCharges(BaseStringField):
+class EstimatedFreightCharges(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimatedFreightCharges
 
-class EstimatedManHoursForCompletion(BaseStringField):
+class EstimatedManHoursForCompletion(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimatedManHoursForCompletion
 
-class EstimatedResponders(BaseStringField):
+class EstimatedResponders(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimatedResponders
 
-class EstimatedResponse(BaseStringField):
+class EstimatedResponse(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimatedResponse
 
-class EstimatedCostOfTheStudyWillBe(BaseStringField):
+class EstimatedCostOfTheStudyWillBe(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EstimatedCostOfTheStudyWillBe
 
-class Excellent(BaseStringField):
+class Excellent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Excellent
 
-class ExclusiveAdvertisingFor(BaseStringField):
+class ExclusiveAdvertisingFor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ExclusiveAdvertisingFor
 
-class ExpirationDate(BaseStringField):
+class ExpirationDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ExpirationDate
 
-class Export(BaseStringField):
+class Export(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Export
 
-class ExtAuthoDate(BaseStringField):
+class ExtAuthoDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ExtAuthoDate
 
-class ExtraBanquetTickets4000(BaseStringField):
+class ExtentOfDistribution(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.ExtentOfDistribution
+
+class ExtraBanquetTickets4000(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ExtraBanquetTickets4000
 
-class FPMDeliveryRoller(BaseStringField):
+class FPMDeliveryRoller(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FPMDeliveryRoller
 
-class FPMNo1Roller(BaseStringField):
+class FPMNo1Roller(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FPMNo1Roller
 
-class FPMNo2Roller(BaseStringField):
+class FPMNo2Roller(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FPMNo2Roller
 
-class Fax(BaseStringField):
+class Fax(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Fax
 
-class FaxMumber(BaseStringField):
+class FaxMumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FaxMumber
 
-class FaxNumbers(BaseStringField):
+class FaxNumbers(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FaxNumbers
 
-class FdcRepresentatives(BaseStringField):
+class FdcRepresentatives(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FdcRepresentatives
 
-class Female(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Female
-
-class FileFileType(BaseStringField):
+class FileFileType(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FileFileType
 
-class FinalFlavor(BaseStringField):
+class FinalFlavor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FinalFlavor
 
-class FirmName(BaseStringField):
+class FirmName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FirmName
 
-class FiscalEstimateAdMba23Rev1180(BaseStringField):
+class FiscalEstimateAdMba23Rev1180(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FiscalEstimateAdMba23Rev1180
 
-class FixedDistribution(BaseStringField):
+class FixedDistribution(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FixedDistribution
 
-class Flammable(BaseStringField):
+class Flammable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Flammable
 
-class Fo(BaseStringField):
+class Fo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Fo
 
-class FoaControlUseOnly(BaseStringField):
+class FoaControlUseOnly(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FoaControlUseOnly
 
-class FoaControlUseOnlyCodeAssigned(BaseStringField):
+class FoaControlUseOnlyCodeAssigned(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FoaControlUseOnlyCodeAssigned
 
-class FoaControlUseOnlyEstRedemption(BaseStringField):
+class FoaControlUseOnlyEstRedemption(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FoaControlUseOnlyEstRedemption
 
-class FoaControlUseOnlyJoeNumber(BaseStringField):
+class FoaControlUseOnlyJoeNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FoaControlUseOnlyJoeNumber
 
-class FollowDepartmentAndCompanySafetyManuals(BaseStringField):
+class FollowDepartmentAndCompanySafetyManuals(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FollowDepartmentAndCompanySafetyManuals
 
-class FollowUpDate(BaseStringField):
+class FollowUpDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FollowUpDate
 
-class For(BaseStringField):
+class For(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.For
 
-class ForControlUseOnly(BaseStringField):
+class ForControlUseOnly(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ForControlUseOnly
 
-class ForControlUseOnlyCodeAssigned(BaseStringField):
+class ForControlUseOnlyCodeAssigned(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ForControlUseOnlyCodeAssigned
 
-class ForControlUseOnlyJobNumber(BaseStringField):
+class ForControlUseOnlyJobNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ForControlUseOnlyJobNumber
 
-class ForPurchasingDepartmentUseOnly(BaseStringField):
+class ForPurchasingDepartmentUseOnly(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ForPurchasingDepartmentUseOnly
 
-class Freezer(BaseStringField):
+class Freezer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Freezer
 
-class From(BaseStringField):
+class From(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.From
 
-class FrontCigarettes(BaseStringField):
+class FrontCigarettes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FrontCigarettes
 
-class FrontCigarettesComments(BaseStringField):
+class FrontCigarettesComments(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FrontCigarettesComments
 
-class FrontCigarettesCratering(BaseStringField):
+class FrontCigarettesCratering(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FrontCigarettesCratering
 
-class FrontCigarettesHoleDepth(BaseStringField):
+class FrontCigarettesHoleDepth(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FrontCigarettesHoleDepth
 
-class FrontCigarettesScorching(BaseStringField):
+class FrontCigarettesScorching(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FrontCigarettesScorching
 
-class FsMarketing(BaseStringField):
+class FsMarketing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FsMarketing
 
-class Full(BaseStringField):
+class Full(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Full
 
-class FullInspection(BaseStringField):
+class FullInspection(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FullInspection
 
-class Funding(BaseStringField):
+class Funding(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Funding
 
-class Facility(BaseStringField):
+class Facility(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Facility
 
-class Fair(BaseStringField):
+class Fair(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Fair
 
-class FaxNumber(BaseStringField):
+class FaxNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FaxNumber
 
-class FaxNo(BaseStringField):
+class FaxNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FaxNo
 
-class Feb(BaseStringField):
+class Feb(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Feb
 
-class Female106(BaseStringField):
+class Female(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Female
+
+class Female106(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Female106
 
-class FemaleBright(BaseStringField):
+class FemaleBright(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FemaleBright
 
-class FemaleKl(BaseStringField):
+class FemaleKl(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FemaleKl
 
-class FieldComplete(BaseStringField):
+class FieldComplete(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldComplete
 
-class FieldStart(BaseStringField):
+class FieldStart(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldStart
 
-class FieldworkSchedule(BaseStringField):
+class FieldworkSchedule(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldworkSchedule
 
-class FilmCleared(BaseStringField):
+class FilmCleared(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FilmCleared
 
-class FilmSEnclosed(BaseStringField):
+class FilmSEnclosed(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FilmSEnclosed
 
-class Filter(BaseStringField):
+class Filter(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Filter
 
-class Filters(BaseStringField):
+class Filters(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Filters
 
-class FiltersCircumference(BaseStringField):
+class FiltersCircumference(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FiltersCircumference
 
-class FiltersKind(BaseStringField):
+class FiltersKind(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FiltersKind
 
-class FiltersPlasticizer(BaseStringField):
+class FiltersPlasticizer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FiltersPlasticizer
 
-class FiltersPlugWrap(BaseStringField):
+class FiltersPlugWrap(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FiltersPlugWrap
 
-class FiltersPressureDrop(BaseStringField):
+class FiltersPressureDrop(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FiltersPressureDrop
 
-class FiltersProcess(BaseStringField):
+class FiltersProcess(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FiltersProcess
 
-class FiltersRodLength(BaseStringField):
+class FiltersRodLength(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FiltersRodLength
 
-class FiltersWeight(BaseStringField):
+class FiltersWeight(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FiltersWeight
 
-class FinalReportDue(BaseStringField):
+class FinalReportDue(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FinalReportDue
 
-class FinalReportDueSupplierRpt(BaseStringField):
+class FinalReportDueSupplierRpt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FinalReportDueSupplierRpt
 
-class FinalRptDue(BaseStringField):
+class FinalRptDue(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FinalRptDue
 
-class FinalSupplierReportDue(BaseStringField):
+class FinalSupplierReportDue(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FinalSupplierReportDue
 
-class FinalApprovalIsOfCourseDependentUponTimeAndPlacementOfTheCommercialS(BaseStringField):
+class FinalApprovalIsOfCourseDependentUponTimeAndPlacementOfTheCommercialS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FinalApprovalIsOfCourseDependentUponTimeAndPlacementOfTheCommercialS
 
-class FinalistName(BaseStringField):
+class FinalistName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FinalistName
 
-class FirmnessOfRod(BaseStringField):
+class FirmnessOfRod(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FirmnessOfRod
 
-class First(BaseStringField):
+class First(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.First
 
-class FiscalEffect(BaseStringField):
+class FiscalEffect(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FiscalEffect
 
-class FollowingPhysicalVisualPropertiesOutOfSpecifications(BaseStringField):
+class FollowingPhysicalVisualPropertiesOutOfSpecifications(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FollowingPhysicalVisualPropertiesOutOfSpecifications
 
-class ForAmericanBrandsInc(BaseStringField):
+class ForAmericanBrandsInc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ForAmericanBrandsInc
 
-class FormulaNo(BaseStringField):
+class FormulaNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FormulaNo
 
-class FromNewspaper(BaseStringField):
+class FromNewspaper(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FromNewspaper
 
-class FromNicotineMgCigt(BaseStringField):
+class FromNicotineMgCigt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FromNicotineMgCigt
 
-class FromTarMgCigt(BaseStringField):
+class FromTarMgCigt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FromTarMgCigt
 
-class FullfillmentDataEntryAt(BaseStringField):
+class FullfillmentDataEntryAt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FullfillmentDataEntryAt
 
-class FundSourceAffected(BaseStringField):
+class FundSourceAffected(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FundSourceAffected
 
-class FurtherInformationPleaseAttachAnyRelevantMaterialsPosAdvertisingBrochuresEtc(BaseStringField):
+class FurtherInformationPleaseAttachAnyRelevantMaterialsPosAdvertisingBrochuresEtc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FurtherInformationPleaseAttachAnyRelevantMaterialsPosAdvertisingBrochuresEtc
 
-class GPC(BaseStringField):
+class GPC(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GPC
 
-class GLCode(BaseStringField):
+class GLCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GLCode
 
-class GeneralInformation(BaseStringField):
+class GeneralInformation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GeneralInformation
 
-class GeneralInformationEventDates(BaseStringField):
+class GeneralInformationEventDates(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GeneralInformationEventDates
 
-class GeneralInformationEventLocation(BaseStringField):
+class GeneralInformationEventLocation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GeneralInformationEventLocation
 
-class GeneralInformationEventName(BaseStringField):
+class GeneralInformationEventName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GeneralInformationEventName
 
-class GeneralProjectDescription(BaseStringField):
+class GeneralProjectDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GeneralProjectDescription
 
-class GeneralExport(BaseStringField):
+class GeneralExport(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GeneralExport
 
-class GeogfiaphicalAreaS(BaseStringField):
+class GeogfiaphicalAreaS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GeogfiaphicalAreaS
 
-class GeographicalAreaS(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.GeographicalAreaS
-
-class Geography(BaseStringField):
+class Geography(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Geography
 
-class GolfTournament(BaseStringField):
+class GolfTournament(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GolfTournament
 
-class GroupNo(BaseStringField):
+class GroupNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GroupNo
 
-class GeneralManager(BaseStringField):
+class GeneralManager(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GeneralManager
 
-class GeneticAssayNo(BaseStringField):
+class GeneticAssayNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GeneticAssayNo
 
-class GluePreeArea(BaseStringField):
+class GeographicalAreaS(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.GeographicalAreaS
+
+class GluePreeArea(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GluePreeArea
 
-class GroupProduct(BaseStringField):
+class GroupProduct(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GroupProduct
 
-class Harshness(BaseStringField):
+class Harshness(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Harshness
 
-class HasWorkBeenReportedInManuscript(BaseStringField):
+class HasWorkBeenReportedInManuscript(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HasWorkBeenReportedInManuscript
 
-class HazardousCompound(BaseStringField):
+class HazardousCompound(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HazardousCompound
 
-class HazardousCompoundCarcinogenOsha(BaseStringField):
+class HazardousCompoundCarcinogenOsha(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HazardousCompoundCarcinogenOsha
 
-class HazardousCompoundCarcinogenOther(BaseStringField):
+class HazardousCompoundCarcinogenOther(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HazardousCompoundCarcinogenOther
 
-class HazardousCompoundExplosive(BaseStringField):
+class HazardousCompoundExplosive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HazardousCompoundExplosive
 
-class HazardousCompoundFlammable(BaseStringField):
+class HazardousCompoundFlammable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HazardousCompoundFlammable
 
-class HazardousCompoundRadioactive(BaseStringField):
+class HazardousCompoundRadioactive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HazardousCompoundRadioactive
 
-class Headline(BaseStringField):
+class Headline(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Headline
 
-class HkTrial(BaseStringField):
+class HkTrial(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HkTrial
 
-class Hours(BaseStringField):
+class Hours(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Hours
 
-class HoursMondayFriday(BaseStringField):
+class HoursMondayFriday(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HoursMondayFriday
 
-class HoursSaturdaySunday(BaseStringField):
+class HoursSaturdaySunday(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HoursSaturdaySunday
 
-class HowWidespread(BaseStringField):
+class HowWidespread(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HowWidespread
 
-class HaveYouContactedYourManagerSupervisor(BaseStringField):
+class HaveYouContactedYourManagerSupervisor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HaveYouContactedYourManagerSupervisor
 
-class HaveYouContactedYourManagerSupervisorNo(BaseStringField):
+class HaveYouContactedYourManagerSupervisorNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HaveYouContactedYourManagerSupervisorNo
 
-class HaveYouContactedYourManagerSupervisorYes(BaseStringField):
+class HaveYouContactedYourManagerSupervisorYes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HaveYouContactedYourManagerSupervisorYes
 
-class HaveYouPaidAnyTypeOfCompensationOrIncurredAnyObligationForPaymentToTheAboveNamed(BaseStringField):
+class HaveYouPaidAnyTypeOfCompensationOrIncurredAnyObligationForPaymentToTheAboveNamed(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HaveYouPaidAnyTypeOfCompensationOrIncurredAnyObligationForPaymentToTheAboveNamed
 
-class HomeAddress(BaseStringField):
+class HomeAddress(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HomeAddress
 
-class HomeTelephone(BaseStringField):
+class HomeTelephone(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HomeTelephone
 
-class HotelMotelReservationsNeeded(BaseStringField):
+class HotelMotelReservationsNeeded(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HotelMotelReservationsNeeded
 
-class HousekeepingCleaning(BaseStringField):
+class HousekeepingCleaning(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.HousekeepingCleaning
 
-class IWillParticipateInTheGolfTournament(BaseStringField):
+class IWillParticipateInTheGolfTournament(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IWillParticipateInTheGolfTournament
 
-class IWillParticipateInTheTennisTournamentIWouldClassifyMyselfAsPleaseCheckAppropriateBox(BaseStringField):
+class IWillParticipateInTheTennisTournamentIWouldClassifyMyselfAsPleaseCheckAppropriateBox(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IWillParticipateInTheTennisTournamentIWouldClassifyMyselfAsPleaseCheckAppropriateBox
 
-class Id(BaseStringField):
+class Id(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Id
 
-class IfNoExplain(BaseStringField):
+class IfNoExplain(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IfNoExplain
 
-class IfSoGiveDateAndTitle(BaseStringField):
+class IfSoGiveDateAndTitle(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IfSoGiveDateAndTitle
 
-class IfYesCanItBeImproved(BaseStringField):
+class IfYesCanItBeImproved(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IfYesCanItBeImproved
 
-class IfYouDoNotReceiveAnyOfThePagesPleaseCall(BaseStringField):
+class IfYouDoNotReceiveAnyOfThePagesPleaseCall(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IfYouDoNotReceiveAnyOfThePagesPleaseCall
 
-class IfYouHaveAnyQuestionsPleaseContactTheFollowingPerson(BaseStringField):
+class IfYouHaveAnyQuestionsPleaseContactTheFollowingPerson(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IfYouHaveAnyQuestionsPleaseContactTheFollowingPerson
 
-class Ii(BaseStringField):
+class Ii(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ii
 
-class IiiSupplementalLiteratureSearchChemicalAbstractsVol23Vol65ArctanderSPerfumeAndFlavorMaterialsOfNaturalOrigin1960GuentherSMonographsOnFragranceRawMaterials1979TobaccoAbstractsUSDispensatory23RdEdition1943(BaseStringField):
+class IiiSupplementalLiteratureSearchChemicalAbstractsVol23Vol65ArctanderSPerfumeAndFlavorMaterialsOfNaturalOrigin1960GuentherSMonographsOnFragranceRawMaterials1979TobaccoAbstractsUSDispensatory23RdEdition1943(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IiiSupplementalLiteratureSearchChemicalAbstractsVol23Vol65ArctanderSPerfumeAndFlavorMaterialsOfNaturalOrigin1960GuentherSMonographsOnFragranceRawMaterials1979TobaccoAbstractsUSDispensatory23RdEdition1943
 
-class Illustration(BaseStringField):
+class Illustration(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Illustration
 
-class In(BaseStringField):
+class In(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.In
 
-class InTestimonyWhereofIHaveSetMyHandAndSealTheDayAndYearAforesaid(BaseStringField):
+class InTestimonyWhereofIHaveSetMyHandAndSealTheDayAndYearAforesaid(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InTestimonyWhereofIHaveSetMyHandAndSealTheDayAndYearAforesaid
 
-class InalTitleOfSymposium(BaseStringField):
+class InalTitleOfSymposium(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InalTitleOfSymposium
 
-class InbifoInstitutFRBiologischeForschungGmbh(BaseStringField):
+class InbifoInstitutFRBiologischeForschungGmbh(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InbifoInstitutFRBiologischeForschungGmbh
 
-class IndLorVolume(BaseStringField):
+class IndLorVolume(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IndLorVolume
 
-class IndVolume(BaseStringField):
+class IndVolume(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IndVolume
 
-class IndependentAcceptance(BaseStringField):
+class IndependentAcceptance(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IndependentAcceptance
 
-class IndependentAcceptanceExcellent(BaseStringField):
+class IndependentAcceptanceExcellent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IndependentAcceptanceExcellent
 
-class IndependentAcceptanceFair(BaseStringField):
+class IndependentAcceptanceFair(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IndependentAcceptanceFair
 
-class IndependentAcceptanceGood(BaseStringField):
+class IndependentAcceptanceGood(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IndependentAcceptanceGood
 
-class IndependentAcceptancePoor(BaseStringField):
+class IndependentAcceptancePoor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IndependentAcceptancePoor
 
-class InitialMaterialsRequired(BaseStringField):
+class InitialMaterialsRequired(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InitialMaterialsRequired
 
-class InitialMaterialsRequiredCartons(BaseStringField):
+class InitialMaterialsRequiredCartons(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InitialMaterialsRequiredCartons
 
-class InitialMaterialsRequiredCases(BaseStringField):
+class InitialMaterialsRequiredCases(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InitialMaterialsRequiredCases
 
-class InitialMaterialsRequiredDollarCost(BaseStringField):
+class InitialMaterialsRequiredDollarCost(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InitialMaterialsRequiredDollarCost
 
-class InitialMaterialsRequiredPackFlatsLabels(BaseStringField):
+class InitialMaterialsRequiredPackFlatsLabels(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InitialMaterialsRequiredPackFlatsLabels
 
-class InitialMaterialsRequiredQtyInUnits(BaseStringField):
+class InitialMaterialsRequiredQtyInUnits(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InitialMaterialsRequiredQtyInUnits
 
-class Initiated(BaseStringField):
+class Initiated(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Initiated
 
-class InspectionBy(BaseStringField):
+class InspectionBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InspectionBy
 
-class Instructions(BaseStringField):
+class Instructions(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Instructions
 
-class InventoryDepletionDate(BaseStringField):
+class InventoryDepletionDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InventoryDepletionDate
 
-class InvestigatorS(BaseStringField):
+class InvestigatorS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InvestigatorS
 
-class IssueFrequencyYear(BaseStringField):
+class IssueFrequencyYear(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IssueFrequencyYear
 
-class Issue(BaseStringField):
+class Issue(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Issue
 
-class IssuedBy(BaseStringField):
+class IssuedBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IssuedBy
 
-class Item(BaseStringField):
+class Item(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Item
 
-class ItemBrand(BaseStringField):
+class ItemBrand(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ItemBrand
 
-class Items(BaseStringField):
+class Items(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Items
 
-class ItemsAnyOtherItemsAvailable(BaseStringField):
+class ItemsAnyOtherItemsAvailable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ItemsAnyOtherItemsAvailable
 
-class ItemsBannerS4X8(BaseStringField):
+class ItemsBannerS4X8(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ItemsBannerS4X8
 
-class ItemsBaseballCap(BaseStringField):
+class ItemsBaseballCap(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ItemsBaseballCap
 
-class ItemsGeneralMarket(BaseStringField):
+class ItemsGeneralMarket(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ItemsGeneralMarket
 
-class ItemsSpanishLanguage(BaseStringField):
+class ItemsSpanishLanguage(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ItemsSpanishLanguage
 
-class ItemsUrban(BaseStringField):
+class ItemsUrban(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ItemsUrban
 
-class ItemsWaterBottles(BaseStringField):
+class ItemsWaterBottles(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ItemsWaterBottles
 
-class IfAMaterialOrDimensionalChangeAlsoInvolved(BaseStringField):
+class IfAMaterialOrDimensionalChangeAlsoInvolved(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IfAMaterialOrDimensionalChangeAlsoInvolved
 
-class IfAnyAddressesOrTelephoneNumbersHaveChangedSinceTheLastReportingPeriodPleaseCheckHereAndNoteTheChangeInTheSpaceProvidedAtTheEndOfThisForm(BaseStringField):
+class IfAnyAddressesOrTelephoneNumbersHaveChangedSinceTheLastReportingPeriodPleaseCheckHereAndNoteTheChangeInTheSpaceProvidedAtTheEndOfThisForm(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IfAnyAddressesOrTelephoneNumbersHaveChangedSinceTheLastReportingPeriodPleaseCheckHereAndNoteTheChangeInTheSpaceProvidedAtTheEndOfThisForm
 
-class IfThereIsATransmissionProblemPleaseCall(BaseStringField):
+class IfThereIsATransmissionProblemPleaseCall(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IfThereIsATransmissionProblemPleaseCall
 
-class IfYesSupplyDetails(BaseStringField):
+class IfYesSupplyDetails(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IfYesSupplyDetails
 
-class IfYesPleaseCompleteTheFollowing(BaseStringField):
+class IfYesPleaseCompleteTheFollowing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IfYesPleaseCompleteTheFollowing
 
-class Implement(BaseStringField):
+class Implement(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Implement
 
-class ImplementNo(BaseStringField):
+class ImplementNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ImplementNo
 
-class ImplementPending(BaseStringField):
+class ImplementPending(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ImplementPending
 
-class ImplementYes(BaseStringField):
+class ImplementYes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ImplementYes
 
-class Incidence(BaseStringField):
+class Incidence(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Incidence
 
-class IncreaseCostsMayBePossibleToAbsorb(BaseStringField):
+class IncreaseCostsMayBePossibleToAbsorb(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IncreaseCostsMayBePossibleToAbsorb
 
-class InformationAndHearsayFromOutsideContacts(BaseStringField):
+class InformationAndHearsayFromOutsideContacts(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InformationAndHearsayFromOutsideContacts
 
-class InitiationDate(BaseStringField):
+class InitiationDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InitiationDate
 
-class Inorganic(BaseStringField):
+class Inorganic(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Inorganic
 
-class Institution(BaseStringField):
+class Institution(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Institution
 
-class Insurance(BaseStringField):
+class Insurance(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Insurance
 
-class IntInitDate(BaseStringField):
+class IntInitDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IntInitDate
 
-class InternalInitDate(BaseStringField):
+class InternalInitDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InternalInitDate
 
-class InterviewLength(BaseStringField):
+class InterviewLength(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InterviewLength
 
-class InterviewsDividedAmong3Gorups(BaseStringField):
+class InterviewsDividedAmong3Gorups(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InterviewsDividedAmong3Gorups
 
-class Invitations(BaseStringField):
+class Invitations(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Invitations
 
-class InvitationsRequested(BaseStringField):
+class InvitationsRequested(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InvitationsRequested
 
-class InvitationsDateNotified(BaseStringField):
+class InvitationsDateNotified(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InvitationsDateNotified
 
-class InvitationsDateOrdered(BaseStringField):
+class InvitationsDateOrdered(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InvitationsDateOrdered
 
-class InviteesComments(BaseStringField):
+class InviteesComments(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.InviteesComments
 
-class IsThisACorporation(BaseStringField):
+class IsThisACorporation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.IsThisACorporation
 
-class Jan(BaseStringField):
+class Jan(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Jan
 
-class JobNo(BaseStringField):
+class JobNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JobNo
 
-class Job(BaseStringField):
+class Job(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Job
 
-class Jul(BaseStringField):
+class Jul(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Jul
 
-class JimmyHBellBScScientist(BaseStringField):
+class JimmyHBellBScScientist(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JimmyHBellBScScientist
 
-class Jun(BaseStringField):
+class Jun(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Jun
 
-class KS(BaseStringField):
+class KS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.KS
 
-class Kool(BaseStringField):
+class Kool(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Kool
 
-class KoolLights(BaseStringField):
+class KoolLights(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.KoolLights
 
-class KoolLightsKsWhiteTipPingMasked(BaseStringField):
+class KoolLightsKsWhiteTipPingMasked(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.KoolLightsKsWhiteTipPingMasked
 
-class KeyCriteriaForAnalysis(BaseStringField):
+class KeyCriteriaForAnalysis(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.KeyCriteriaForAnalysis
 
-class Keywords1993(BaseStringField):
+class Keywords1993(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Keywords1993
 
-class Kind(BaseStringField):
+class Kind(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Kind
 
-class LAngeles(BaseStringField):
+class LAngeles(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LAngeles
 
-class LRGravely(BaseStringField):
+class LRGravely(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LRGravely
 
-class LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCratering(BaseStringField):
+class LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCratering(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCratering
 
-class LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringBrand(BaseStringField):
+class LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringBrand(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringBrand
 
-class LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringModules(BaseStringField):
+class LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringModules(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringModules
 
-class LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringPower(BaseStringField):
+class LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringPower(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringPower
 
-class LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringPulse(BaseStringField):
+class LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringPulse(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringPulse
 
-class LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringShiftDate(BaseStringField):
+class LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringShiftDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringShiftDate
 
-class Ld5095ConfidenceLimits(BaseStringField):
+class Ld5095ConfidenceLimits(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ld5095ConfidenceLimits
 
-class Ld5095Confidence(BaseStringField):
+class Ld5095Confidence(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ld5095Confidence
 
-class LeadIn(BaseStringField):
+class LeadIn(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LeadIn
 
-class LhNumberS(BaseStringField):
+class LhNumberS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LhNumberS
 
-class ListPrice(BaseStringField):
+class ListPrice(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ListPrice
 
-class ListTheInformationBelowAsItPertainsToTheUrbanCenterPortionOfYourAssignmentOnly(BaseStringField):
+class ListTheInformationBelowAsItPertainsToTheUrbanCenterPortionOfYourAssignmentOnly(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ListTheInformationBelowAsItPertainsToTheUrbanCenterPortionOfYourAssignmentOnly
 
-class LiteratureSurveyed(BaseStringField):
+class LiteratureSurveyed(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LiteratureSurveyed
 
-class LocalApproval(BaseStringField):
+class LocalApproval(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LocalApproval
 
-class LocalPOreleaseNo(BaseStringField):
+class LocalPOreleaseNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LocalPOreleaseNo
 
-class Location(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Location
-
-class Lorillard(BaseStringField):
+class Lorillard(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Lorillard
 
-class LorillardCompoundCode(BaseStringField):
+class LorillardCompoundCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LorillardCompoundCode
 
-class LorillardCompoundCodeNumber(BaseStringField):
+class LorillardCompoundCodeNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LorillardCompoundCodeNumber
 
-class LorillardNo(BaseStringField):
+class LorillardNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LorillardNo
 
-class LorillardResearchCenter(BaseStringField):
+class LorillardResearchCenter(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LorillardResearchCenter
 
-class Lot(BaseStringField):
+class Lot(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Lot
 
-class LotNo(BaseStringField):
+class LotNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LotNo
 
-class LotNoS(BaseStringField):
+class LotNoS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LotNoS
 
-class LotNumber(BaseStringField):
+class LotNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LotNumber
 
-class Louisville(BaseStringField):
+class Louisville(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Louisville
 
-class LrbOrBillNoHanAuNo(BaseStringField):
+class LrbOrBillNoHanAuNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LrbOrBillNoHanAuNo
 
-class LrcCompoundCode(BaseStringField):
+class LrcCompoundCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LrcCompoundCode
 
-class LrcFileNumber(BaseStringField):
+class LrcFileNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LrcFileNumber
 
-class Lt100S(BaseStringField):
+class Lt100S(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Lt100S
 
-class LtBox80S(BaseStringField):
+class LtBox80S(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LtBox80S
 
-class LtKS(BaseStringField):
+class LtKS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LtKS
 
-class LaboratoryAnalysis(BaseStringField):
+class LaboratoryAnalysis(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LaboratoryAnalysis
 
-class Last(BaseStringField):
+class Last(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Last
 
-class LateRegistrationFeeAfterAugust(BaseStringField):
+class LateRegistrationFeeAfterAugust(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LateRegistrationFeeAfterAugust
 
-class Law(BaseStringField):
+class Law(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Law
 
-class LegalApproval(BaseStringField):
+class LegalApproval(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LegalApproval
 
-class LegalApprovalRecommendedRequired(BaseStringField):
+class LegalApprovalRecommendedRequired(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LegalApprovalRecommendedRequired
 
-class LegalApprovalRecommendedRequiredNo(BaseStringField):
+class LegalApprovalRecommendedRequiredNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LegalApprovalRecommendedRequiredNo
 
-class LegalApprovalRecommendedRequiredYes(BaseStringField):
+class LegalApprovalRecommendedRequiredYes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LegalApprovalRecommendedRequiredYes
 
-class Length(BaseStringField):
+class Length(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Length
 
-class LengthInt(BaseStringField):
+class LengthInt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LengthInt
 
-class LengthOfCigarettes(BaseStringField):
+class LengthOfCigarettes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LengthOfCigarettes
 
-class LengthOfRod(BaseStringField):
+class LengthOfRod(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LengthOfRod
 
-class LicenseeRefNo(BaseStringField):
+class LicenseeRefNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LicenseeRefNo
 
-class LobbyistName(BaseStringField):
+class LobbyistName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LobbyistName
 
-class LocalPurchasing(BaseStringField):
+class LocalPurchasing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LocalPurchasing
 
-class Local(BaseStringField):
+class Local(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Local
 
-class LocalDecreasCorts(BaseStringField):
+class LocalDecreasCorts(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LocalDecreasCorts
 
-class LocalMandatory(BaseStringField):
+class LocalMandatory(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LocalMandatory
 
-class LocalPermane(BaseStringField):
+class LocalPermane(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LocalPermane
 
-class LocalIncreaseCosts(BaseStringField):
+class LocalIncreaseCosts(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LocalIncreaseCosts
 
-class LocalNoOcaGOvernmentCost(BaseStringField):
+class LocalNoOcaGOvernmentCost(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LocalNoOcaGOvernmentCost
 
-class LocalPermissive(BaseStringField):
+class LocalPermissive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LocalPermissive
 
-class LongRangeFiscalImplications(BaseStringField):
+class Location(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Location
+
+class LongRangeFiscalImplications(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LongRangeFiscalImplications
 
-class LotOrSample(BaseStringField):
+class LotOrSample(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LotOrSample
 
-class MBDavis(BaseStringField):
+class MBDavis(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MBDavis
 
-class Macon(BaseStringField):
+class Macon(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Macon
 
-class Madison25MmButt(BaseStringField):
+class Madison25MmButt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Madison25MmButt
 
-class Madison25MmButtMeanOfLast12Samples(BaseStringField):
+class Madison25MmButtMeanOfLast12Samples(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Madison25MmButtMeanOfLast12Samples
 
-class Madison25MmButtPresentSample(BaseStringField):
+class Madison25MmButtPresentSample(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Madison25MmButtPresentSample
 
-class MajorMktAndMktResearchSteps(BaseStringField):
+class MajorMktAndMktResearchSteps(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MajorMktAndMktResearchSteps
 
-class MajorMktAndMktResearchStepsInHomePlacement(BaseStringField):
+class MajorMktAndMktResearchStepsInHomePlacement(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MajorMktAndMktResearchStepsInHomePlacement
 
-class Male(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Male
-
-class Manufacturer(BaseStringField):
+class Manufacturer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Manufacturer
 
-class Manufacturers(BaseStringField):
+class Manufacturers(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Manufacturers
 
-class Market(BaseStringField):
+class Market(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Market
 
-class MarketS(BaseStringField):
+class MarketS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MarketS
 
-class Marketing(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Marketing
-
-class MaterialNo(BaseStringField):
+class MaterialNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MaterialNo
 
-class MaverickHarleyB1G1F(BaseStringField):
+class MaverickHarleyB1G1F(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MaverickHarleyB1G1F
 
-class MechanicalProduction(BaseStringField):
+class MechanicalProduction(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MechanicalProduction
 
-class Media(BaseStringField):
+class Media(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Media
 
-class MediaMagazines(BaseStringField):
+class MediaMagazines(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MediaMagazines
 
-class MediaNewspaper(BaseStringField):
+class MediaNewspaper(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MediaNewspaper
 
-class Medium(BaseStringField):
+class Medium(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Medium
 
-class Ment(BaseStringField):
+class Ment(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ment
 
-class Menthol(BaseStringField):
+class Menthol(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Menthol
 
-class MentholFlavor(BaseStringField):
+class MentholFlavor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MentholFlavor
 
-class MentholTaste7Better(BaseStringField):
+class MentholTaste7Better(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MentholTaste7Better
 
-class Merchandise(BaseStringField):
+class Merchandise(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Merchandise
 
-class MerchandiseOrderThroughYourSupplier(BaseStringField):
+class MerchandiseOrderThroughYourSupplier(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MerchandiseOrderThroughYourSupplier
 
-class MerchandiseWillBeArbitrarilyShippedToStore(BaseStringField):
+class MerchandiseWillBeArbitrarilyShippedToStore(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MerchandiseWillBeArbitrarilyShippedToStore
 
-class MethodOfPreparation(BaseStringField):
+class MethodOfPreparation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MethodOfPreparation
 
-class MilitaryExport(BaseStringField):
+class MilitaryExport(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MilitaryExport
 
-class Moist(BaseStringField):
+class Moist(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Moist
 
-class MolecularWeight(BaseStringField):
+class MolecularWeight(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MolecularWeight
 
-class MrPersonnel(BaseStringField):
+class MrPersonnel(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MrPersonnel
 
-class Mrd(BaseStringField):
+class Mrd(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Mrd
 
-class MyCommissionExpires(BaseStringField):
+class MyCommissionExpires(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MyCommissionExpires
 
-class Macket(BaseStringField):
+class Macket(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Macket
 
-class Magazine(BaseStringField):
+class Magazine(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Magazine
 
-class MaiCheckTo(BaseStringField):
+class MaiCheckTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MaiCheckTo
 
-class MailTo(BaseStringField):
+class MailTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MailTo
 
-class Maildate(BaseStringField):
+class Maildate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Maildate
 
-class MailfileCells(BaseStringField):
+class MailfileCells(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MailfileCells
 
-class MailfileDescription(BaseStringField):
+class MailfileDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MailfileDescription
 
-class MailfileId(BaseStringField):
+class MailfileId(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MailfileId
 
-class MajorAirportNearestYourHome(BaseStringField):
+class MajorAirportNearestYourHome(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MajorAirportNearestYourHome
 
-class MakerNo(BaseStringField):
+class MakerNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MakerNo
 
-class Male99(BaseStringField):
+class Male(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Male
+
+class Male99(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Male99
 
-class Manager(BaseStringField):
+class Manager(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Manager
 
-class ManagerComments(BaseStringField):
+class ManagerComments(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ManagerComments
 
-class ManufacturerBrand(BaseStringField):
+class ManufacturerBrand(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ManufacturerBrand
 
-class Mar(BaseStringField):
+class Mar(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Mar
 
-class MarginalDifference(BaseStringField):
+class MarginalDifference(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MarginalDifference
 
-class MarketSZoneS(BaseStringField):
+class MarketSZoneS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MarketSZoneS
 
-class MarketingResearch(BaseStringField):
+class Marketing(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Marketing
+
+class MarketingResearch(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MarketingResearch
 
-class MarketingAndOrResearchObjectives(BaseStringField):
+class MarketingAndOrResearchObjectives(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MarketingAndOrResearchObjectives
 
-class MaterialTested(BaseStringField):
+class MaterialTested(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MaterialTested
 
-class May(BaseStringField):
+class May(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.May
 
-class MeanDrawOfRod(BaseStringField):
+class MeanDrawOfRod(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MeanDrawOfRod
 
-class MediaName(BaseStringField):
+class MediaName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MediaName
 
-class MediaType(BaseStringField):
+class MediaType(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MediaType
 
-class Message(BaseStringField):
+class Message(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Message
 
-class Method(BaseStringField):
+class Method(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Method
 
-class MethodOfShipment(BaseStringField):
+class MethodOfShipment(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MethodOfShipment
 
-class MethodOfTravel(BaseStringField):
+class MethodOfTravel(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MethodOfTravel
 
-class MethodOfTravelAir(BaseStringField):
+class MethodOfTravelAir(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MethodOfTravelAir
 
-class MethodOfTravelAuto(BaseStringField):
+class MethodOfTravelAuto(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MethodOfTravelAuto
 
-class MethodOfTravelOther(BaseStringField):
+class MethodOfTravelOther(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MethodOfTravelOther
 
-class MethodOfTravelTrain(BaseStringField):
+class MethodOfTravelTrain(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MethodOfTravelTrain
 
-class Mgr(BaseStringField):
+class Mgr(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Mgr
 
-class Middle(BaseStringField):
+class Middle(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Middle
 
-class Military(BaseStringField):
+class Military(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Military
 
-class Mo(BaseStringField):
+class Mo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Mo
 
-class ModeratorsFee(BaseStringField):
+class ModeratorsFee(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ModeratorsFee
 
-class MondayYN(BaseStringField):
+class MondayYN(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MondayYN
 
-class MyHandicapIs(BaseStringField):
+class MyHandicapIs(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MyHandicapIs
 
-class NWKremer(BaseStringField):
+class NWKremer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NWKremer
 
-class Name(BaseStringField):
+class Name(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Name
 
-class NameOfAccount(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.NameOfAccount
-
-class NameOfEvent(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.NameOfEvent
-
-class NameOrInitials(BaseStringField):
+class NameOrInitials(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NameOrInitials
 
-class NamesOfOtherPersonsCollaboratingInWork(BaseStringField):
+class NamesOfOtherPersonsCollaboratingInWork(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NamesOfOtherPersonsCollaboratingInWork
 
-class NatureOfWork(BaseStringField):
+class NatureOfWork(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NatureOfWork
 
-class NewBalance(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.NewBalance
-
-class NewCompetitiveProducts(BaseStringField):
+class NewCompetitiveProducts(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewCompetitiveProducts
 
-class NewCompetitiveProductsBrandName(BaseStringField):
+class NewCompetitiveProductsBrandName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewCompetitiveProductsBrandName
 
-class NewCompetitiveProductsDate(BaseStringField):
+class NewCompetitiveProductsDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewCompetitiveProductsDate
 
-class NewCompetitiveProductsExtentOfDistribution(BaseStringField):
+class NewCompetitiveProductsExtentOfDistribution(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewCompetitiveProductsExtentOfDistribution
 
-class NewCompetitiveProductsListPrice(BaseStringField):
+class NewCompetitiveProductsListPrice(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewCompetitiveProductsListPrice
 
-class NewCompetitiveProductsManufacturer(BaseStringField):
+class NewCompetitiveProductsManufacturer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewCompetitiveProductsManufacturer
 
-class NewCompetitiveProductsOtherInformation(BaseStringField):
+class NewCompetitiveProductsOtherInformation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewCompetitiveProductsOtherInformation
 
-class NewCompetitiveProductsReportedBy(BaseStringField):
+class NewCompetitiveProductsReportedBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewCompetitiveProductsReportedBy
 
-class NewCompetitiveProductsSizeOrSizes(BaseStringField):
+class NewCompetitiveProductsSizeOrSizes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewCompetitiveProductsSizeOrSizes
 
-class NewCompetitiveProductsTime(BaseStringField):
+class NewCompetitiveProductsTime(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewCompetitiveProductsTime
 
-class NewCompetitiveProductsTypeOfProduct(BaseStringField):
+class NewCompetitiveProductsTypeOfProduct(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewCompetitiveProductsTypeOfProduct
 
-class NewCompetitiveProductsCc(BaseStringField):
+class NewCompetitiveProductsCc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewCompetitiveProductsCc
 
-class NewItem(BaseStringField):
+class NewItem(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewItem
 
-class NewItemBrandS(BaseStringField):
+class NewItemBrandS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewItemBrandS
 
-class NewItemDescription(BaseStringField):
+class NewItemDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewItemDescription
 
-class NewItemMaterialNo(BaseStringField):
+class NewItemMaterialNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewItemMaterialNo
 
-class NewItemNo(BaseStringField):
+class NewItemNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewItemNo
 
-class NewItemUpcNo(BaseStringField):
+class NewItemUpcNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewItemUpcNo
 
-class NgDocumentsWereFoundWithinTheOriginal(BaseStringField):
+class NgDocumentsWereFoundWithinTheOriginal(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NgDocumentsWereFoundWithinTheOriginal
 
-class Nic(BaseStringField):
+class Nic(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Nic
 
-class Nicotine(BaseStringField):
+class Nicotine(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Nicotine
 
-class No(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.No
-
-class NoOfRotaries(BaseStringField):
+class NoOfRotaries(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NoOfRotaries
 
-class NoCartons(BaseStringField):
+class NoCartons(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NoCartons
 
-class NoOfStores(BaseStringField):
+class NoOfStores(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NoOfStores
 
-class NotApproved(BaseStringField):
+class NotApproved(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NotApproved
 
-class Note(BaseStringField):
+class Note(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Note
 
-class NotebookPage(BaseStringField):
+class NotebookPage(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NotebookPage
 
-class Notes(BaseStringField):
+class Notes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Notes
 
-class NumberOfCartons(BaseStringField):
+class NumberOfCartons(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NumberOfCartons
 
-class NumberOfCigarettesSmoked(BaseStringField):
+class NumberOfCigarettesSmoked(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NumberOfCigarettesSmoked
 
-class NumberOfFollowingPages(BaseStringField):
+class NumberOfFollowingPages(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NumberOfFollowingPages
 
-class NumberOfPagesIncludingCoverSheet(BaseStringField):
+class NumberOfPagesIncludingCoverSheet(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NumberOfPagesIncludingCoverSheet
 
-class NumberOfPanels(BaseStringField):
+class NumberOfPanels(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NumberOfPanels
 
-class NumberOfPanelsIlluminated(BaseStringField):
+class NumberOfPanelsIlluminated(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NumberOfPanelsIlluminated
 
-class NumberOfPanelsRegular(BaseStringField):
+class NumberOfPanelsRegular(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NumberOfPanelsRegular
 
-class NumberOfPanelsTotal(BaseStringField):
+class NumberOfPanelsTotal(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NumberOfPanelsTotal
 
-class NumberOfSamplingPersonnel(BaseStringField):
+class NumberOfSamplingPersonnel(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NumberOfSamplingPersonnel
 
-class NumberOfSupervisors(BaseStringField):
+class NumberOfSupervisors(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NumberOfSupervisors
 
-class NumberViewed(BaseStringField):
+class NumberViewed(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NumberViewed
 
-class Number(BaseStringField):
+class Number(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Number
 
-class Numbers(BaseStringField):
+class Numbers(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Numbers
 
-class NyoOnly(BaseStringField):
+class NyoOnly(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NyoOnly
 
-class NyoOnlyDateForwardedToPromotionServices(BaseStringField):
+class NyoOnlyDateForwardedToPromotionServices(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NyoOnlyDateForwardedToPromotionServices
 
-class NysawmdInc211East43rdStreetNewYorkNy100174707(BaseStringField):
+class NysawmdInc211East43rdStreetNewYorkNy100174707(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NysawmdInc211East43rdStreetNewYorkNy100174707
 
-class NamePhoneExt(BaseStringField):
+class NamePhoneExt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NamePhoneExt
 
-class NameOfGuests(BaseStringField):
+class NameOfAccount(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.NameOfAccount
+
+class NameOfEvent(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.NameOfEvent
+
+class NameOfGuests(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NameOfGuests
 
-class NameOfSpouseParticipatingInTheGuestPrograms(BaseStringField):
+class NameOfSpouseParticipatingInTheGuestPrograms(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NameOfSpouseParticipatingInTheGuestPrograms
 
-class NatureOfAction(BaseStringField):
+class NatureOfAction(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NatureOfAction
 
-class NewspaperDate(BaseStringField):
+class NewBalance(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.NewBalance
+
+class NewspaperDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NewspaperDate
 
-class NoPreference(BaseStringField):
+class No(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.No
+
+class NoPreference(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NoPreference
 
-class No1RollerOverTape(BaseStringField):
+class No1RollerOverTape(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.No1RollerOverTape
 
-class NoOfCartons(BaseStringField):
+class NoOfCartons(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NoOfCartons
 
-class Nov(BaseStringField):
+class Nov(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Nov
 
-class NumberOfStores(BaseStringField):
+class NumberOfStores(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.NumberOfStores
 
-class OOrganizerIfApplicable(BaseStringField):
+class OOrganizerIfApplicable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OOrganizerIfApplicable
 
-class Objective(BaseStringField):
+class Objective(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Objective
 
-class Oct(BaseStringField):
+class Oct(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Oct
 
-class Of(BaseStringField):
+class Of(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Of
 
-class Operator(BaseStringField):
+class Operator(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Operator
 
-class Option(BaseStringField):
+class Option(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Option
 
-class Or(BaseStringField):
+class Or(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Or
 
-class Oral(BaseStringField):
+class Oral(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Oral
 
-class OrderNo(BaseStringField):
+class OrderNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OrderNo
 
-class OrientationMeeting(BaseStringField):
+class OrientationMeeting(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OrientationMeeting
 
-class OrientationMeetingDate(BaseStringField):
+class OrientationMeetingDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OrientationMeetingDate
 
-class OrientationMeetingPlace(BaseStringField):
+class OrientationMeetingPlace(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OrientationMeetingPlace
 
-class OrientationMeetingTime(BaseStringField):
+class OrientationMeetingTime(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OrientationMeetingTime
 
-class Original(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Original
-
-class OriginalCompletionDate(BaseStringField):
+class OriginalCompletionDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OriginalCompletionDate
 
-class OriginalCompletionDate1St(BaseStringField):
+class OriginalCompletionDate1St(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OriginalCompletionDate1St
 
-class OriginalCompletionDate79(BaseStringField):
+class OriginalCompletionDate79(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OriginalCompletionDate79
 
-class OriginalCompletionDateQtr(BaseStringField):
+class OriginalCompletionDateQtr(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OriginalCompletionDateQtr
 
-class OriginalSignedProjectSheetsToPso(BaseStringField):
+class OriginalSignedProjectSheetsToPso(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OriginalSignedProjectSheetsToPso
 
-class Originator(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Originator
-
-class Other(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Other
-
-class OtherComments(BaseStringField):
+class OtherComments(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OtherComments
 
-class OtherInformation(BaseStringField):
+class OtherInformation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OtherInformation
 
-class OtherInformationDateRequested(BaseStringField):
+class OtherInformationDateRequested(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OtherInformationDateRequested
 
-class OtherInformationDeadlineForBidReceipt(BaseStringField):
+class OtherInformationDeadlineForBidReceipt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OtherInformationDeadlineForBidReceipt
 
-class OtherPersonnelAssigned(BaseStringField):
+class OtherPersonnelAssigned(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OtherPersonnelAssigned
 
-class OttApprovals(BaseStringField):
+class OttApprovals(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OttApprovals
 
-class OttApprovalsDate(BaseStringField):
+class OttApprovalsDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OttApprovalsDate
 
-class OttApprovalsDepartment(BaseStringField):
+class OttApprovalsDepartment(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OttApprovalsDepartment
 
-class OttApprovalsSignature(BaseStringField):
+class OttApprovalsSignature(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OttApprovalsSignature
 
-class OurFaxNumberIs(BaseStringField):
+class OurFaxNumberIs(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OurFaxNumberIs
 
-class Overall(BaseStringField):
+class Overall(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Overall
 
-class OfferDescription(BaseStringField):
+class OfferDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OfferDescription
 
-class OnWhomProcessWasServed(BaseStringField):
+class OnWhomProcessWasServed(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OnWhomProcessWasServed
 
-class OperatorInitials(BaseStringField):
+class OperatorInitials(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OperatorInitials
 
-class OrganizationEmployerName(BaseStringField):
+class OrganizationEmployerName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OrganizationEmployerName
 
-class OriginalBudgetedAmount(BaseStringField):
+class Original(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Original
+
+class OriginalBudgetedAmount(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OriginalBudgetedAmount
 
-class OriginalRequestMadeBy(BaseStringField):
+class OriginalRequestMadeBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OriginalRequestMadeBy
 
-class OtherSpecifications(BaseStringField):
+class Originator(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Originator
+
+class Other(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Other
+
+class OtherSpecifications(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OtherSpecifications
 
-class OwnBrandDunhillSmokers(BaseStringField):
+class OwnBrandDunhillSmokers(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OwnBrandDunhillSmokers
 
-class POBox(BaseStringField):
+class POBox(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.POBox
 
-class PS(BaseStringField):
+class PS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PS
 
-class PackAndOrCartocarton(BaseStringField):
+class PackAndOrCartocarton(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PackAndOrCartocarton
 
-class PackAndOrCarton(BaseStringField):
+class PackAndOrCarton(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PackAndOrCarton
 
-class Packing(BaseStringField):
+class Packing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Packing
 
-class PackingBox80SWhereAvailable(BaseStringField):
+class PackingBox80SWhereAvailable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PackingBox80SWhereAvailable
 
-class PackingFilter100S(BaseStringField):
+class PackingFilter100S(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PackingFilter100S
 
-class PackingFilterKS(BaseStringField):
+class PackingFilterKS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PackingFilterKS
 
-class Packs(BaseStringField):
+class Packs(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Packs
 
-class Page(BaseStringField):
+class Page(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Page
 
-class PageNumberSWereMissingInTheOriginal(BaseStringField):
+class PageNumberSWereMissingInTheOriginal(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PageNumberSWereMissingInTheOriginal
 
-class PageS(BaseStringField):
+class PageS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PageS
 
-class Paid1987(BaseStringField):
+class Paid1987(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Paid1987
 
-class PaidOutOf1987Budget(BaseStringField):
+class PaidOutOf1987Budget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PaidOutOf1987Budget
 
-class PaidOutOf1989Budget(BaseStringField):
+class PaidOutOf1989Budget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PaidOutOf1989Budget
 
-class PaidOutOf1989BudgetDec(BaseStringField):
+class PaidOutOf1989BudgetDec(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PaidOutOf1989BudgetDec
 
-class PaidOutOf1989BudgetFeb(BaseStringField):
+class PaidOutOf1989BudgetFeb(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PaidOutOf1989BudgetFeb
 
-class Partial(BaseStringField):
+class Partial(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Partial
 
-class Payroll(BaseStringField):
+class Payroll(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Payroll
 
-class Pdc(BaseStringField):
+class Pdc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Pdc
 
-class PerformingDepartments(BaseStringField):
+class PerformingDepartments(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PerformingDepartments
 
-class PeriodFrom(BaseStringField):
+class PeriodFrom(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PeriodFrom
 
-class Permanent(BaseStringField):
+class Permanent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Permanent
 
-class Petersburg(BaseStringField):
+class Petersburg(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Petersburg
 
-class PhCalculated50(BaseStringField):
+class PhCalculated50(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhCalculated50
 
-class Ph(BaseStringField):
+class Ph(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ph
 
-class PhysicalAppearance(BaseStringField):
+class PhysicalAppearance(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalAppearance
 
-class PhysicalDescription(BaseStringField):
+class PhysicalDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalDescription
 
-class PhysicalDescriptionColor(BaseStringField):
+class PhysicalDescriptionColor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalDescriptionColor
 
-class PhysicalDescriptionLiquid(BaseStringField):
+class PhysicalDescriptionLiquid(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalDescriptionLiquid
 
-class PhysicalDescriptionPressurized(BaseStringField):
+class PhysicalDescriptionPressurized(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalDescriptionPressurized
 
-class PhysicalDescriptionSolid(BaseStringField):
+class PhysicalDescriptionSolid(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalDescriptionSolid
 
-class PhysicalState(BaseStringField):
+class PhysicalState(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalState
 
-class Place(BaseStringField):
+class Place(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Place
 
-class PlantAverage(BaseStringField):
+class PlantAverage(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PlantAverage
 
-class PlantOperator(BaseStringField):
+class PlantOperator(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PlantOperator
 
-class PleaseDeliverTransmissionTo(BaseStringField):
+class PleaseDeliverTransmissionTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseDeliverTransmissionTo
 
-class PleaseDeliverTransmissionToFaxPhoneNumber(BaseStringField):
+class PleaseDeliverTransmissionToFaxPhoneNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseDeliverTransmissionToFaxPhoneNumber
 
-class PleaseDeliverTransmissionToName(BaseStringField):
+class PleaseDeliverTransmissionToName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseDeliverTransmissionToName
 
-class PleaseDeliverTransmissionToOffice(BaseStringField):
+class PleaseDeliverTransmissionToOffice(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseDeliverTransmissionToOffice
 
-class PleaseNotifyThisDepartmentOfAnyChangesInTheCodeNumberS(BaseStringField):
+class PleaseNotifyThisDepartmentOfAnyChangesInTheCodeNumberS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseNotifyThisDepartmentOfAnyChangesInTheCodeNumberS
 
-class PleaseTransmitThisDocumentTo(BaseStringField):
+class PleaseTransmitThisDocumentTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseTransmitThisDocumentTo
 
-class PleaseTransmitThisDocumentToFaxPhoneNumber(BaseStringField):
+class PleaseTransmitThisDocumentToFaxPhoneNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseTransmitThisDocumentToFaxPhoneNumber
 
-class PleaseTransmitThisDocumentToName(BaseStringField):
+class PleaseTransmitThisDocumentToName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseTransmitThisDocumentToName
 
-class PleaseTransmitThisDocumentToOffice(BaseStringField):
+class PleaseTransmitThisDocumentToOffice(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseTransmitThisDocumentToOffice
 
-class Pm6(BaseStringField):
+class Pm6(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Pm6
 
-class Pm6Base(BaseStringField):
+class Pm6Base(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Pm6Base
 
-class Pm6Scores(BaseStringField):
+class Pm6Scores(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Pm6Scores
 
-class Pm6Score(BaseStringField):
+class Pm6Score(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Pm6Score
 
-class Population(BaseStringField):
+class Population(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Population
 
-class PopulationComposition(BaseStringField):
+class PopulationComposition(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PopulationComposition
 
-class PopulationCompositionBlack(BaseStringField):
+class PopulationCompositionBlack(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PopulationCompositionBlack
 
-class PopulationCompositionHispanic(BaseStringField):
+class PopulationCompositionHispanic(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PopulationCompositionHispanic
 
-class PopulationCompositionOther(BaseStringField):
+class PopulationCompositionOther(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PopulationCompositionOther
 
-class PopulationCompositionTotal(BaseStringField):
+class PopulationCompositionTotal(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PopulationCompositionTotal
 
-class PopulationCompositionWhite(BaseStringField):
+class PopulationCompositionWhite(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PopulationCompositionWhite
 
-class PosterDesign(BaseStringField):
+class PosterDesign(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PosterDesign
 
-class PostiveControlUgPlate(BaseStringField):
+class PostiveControlUgPlate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PostiveControlUgPlate
 
-class PpsProgram(BaseStringField):
+class PpsProgram(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PpsProgram
 
-class PreSell(BaseStringField):
+class PreSell(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PreSell
 
-class PredominantBuydownValueOfTargetedBrandsDoralGPCBasic(BaseStringField):
+class PredominantBuydownValueOfTargetedBrandsDoralGPCBasic(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PredominantBuydownValueOfTargetedBrandsDoralGPCBasic
 
-class Preference(BaseStringField):
+class Preference(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Preference
 
-class PresentForm(BaseStringField):
+class PresentForm(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PresentForm
 
-class PresentStatusOfWorkCiteProgressReportsWhereAppropriate(BaseStringField):
+class PresentStatusOfWorkCiteProgressReportsWhereAppropriate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PresentStatusOfWorkCiteProgressReportsWhereAppropriate
 
-class Present(BaseStringField):
+class Present(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Present
 
-class PressQuery(BaseStringField):
+class PressQuery(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PressQuery
 
-class PressQueryDate(BaseStringField):
+class PressQueryDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PressQueryDate
 
-class PressQueryDescribeTheStorylineListTheQuestionsAndProposedAnswersAndSummarizeHandlingIncludingClearances(BaseStringField):
+class PressQueryDescribeTheStorylineListTheQuestionsAndProposedAnswersAndSummarizeHandlingIncludingClearances(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PressQueryDescribeTheStorylineListTheQuestionsAndProposedAnswersAndSummarizeHandlingIncludingClearances
 
-class PressQueryPublication(BaseStringField):
+class PressQueryPublication(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PressQueryPublication
 
-class PressQueryReceivedBy(BaseStringField):
+class PressQueryReceivedBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PressQueryReceivedBy
 
-class PressQueryReporterEditor(BaseStringField):
+class PressQueryReporterEditor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PressQueryReporterEditor
 
-class PressQueryTime(BaseStringField):
+class PressQueryTime(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PressQueryTime
 
-class Pressurized(BaseStringField):
+class Pressurized(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Pressurized
 
-class Previous(BaseStringField):
+class Previous(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Previous
 
-class Price(BaseStringField):
+class Price(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Price
 
-class PrimaryClassOfTrade(BaseStringField):
+class PrimaryClassOfTrade(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PrimaryClassOfTrade
 
-class PrimaryDistributionChannelEGJobberSubJobberMembership(BaseStringField):
+class PrimaryDistributionChannelEGJobberSubJobberMembership(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PrimaryDistributionChannelEGJobberSubJobberMembership
 
-class Priority(BaseStringField):
+class Priority(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Priority
 
-class PriorityDefer(BaseStringField):
+class PriorityDefer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PriorityDefer
 
-class PriorityHigh(BaseStringField):
+class PriorityHigh(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PriorityHigh
 
-class PriorityImmediate(BaseStringField):
+class PriorityImmediate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PriorityImmediate
 
-class PriorityLow(BaseStringField):
+class PriorityLow(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PriorityLow
 
-class PriorityMedium(BaseStringField):
+class PriorityMedium(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PriorityMedium
 
-class ProblemDefinition(BaseStringField):
+class ProblemDefinition(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProblemDefinition
 
-class ProblemDefinitionDescriptionOfRequest(BaseStringField):
+class ProblemDefinitionDescriptionOfRequest(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProblemDefinitionDescriptionOfRequest
 
-class ProblemDefinitionReasonForRequest(BaseStringField):
+class ProblemDefinitionReasonForRequest(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProblemDefinitionReasonForRequest
 
-class ProblemDefinitionRequestAuthorizedBy(BaseStringField):
+class ProblemDefinitionRequestAuthorizedBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProblemDefinitionRequestAuthorizedBy
 
-class Product(BaseStringField):
+class Product(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Product
 
-class ProductCade639(BaseStringField):
+class ProductCade639(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProductCade639
 
-class ProductCode519(BaseStringField):
+class ProductCode519(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProductCode519
 
-class ProductCode327(BaseStringField):
+class ProductCode327(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProductCode327
 
-class ProductCode462(BaseStringField):
+class ProductCode462(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProductCode462
 
-class ProductCode741(BaseStringField):
+class ProductCode741(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProductCode741
 
-class ProductCode753(BaseStringField):
+class ProductCode753(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProductCode753
 
-class ProductCode934(BaseStringField):
+class ProductCode934(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProductCode934
 
-class ProfitImprovement(BaseStringField):
+class ProfitImprovement(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProfitImprovement
 
-class Program(BaseStringField):
+class Program(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Program
 
-class Projeci(BaseStringField):
+class Projeci(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Projeci
 
-class Project(BaseStringField):
+class Project(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Project
 
-class ProjectCode(BaseStringField):
+class ProjectCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectCode
 
-class ProjectCoordinator(BaseStringField):
+class ProjectCoordinator(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectCoordinator
 
-class ProjectDescription(BaseStringField):
+class ProjectDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectDescription
 
-class ProjectLeader(BaseStringField):
+class ProjectLeader(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectLeader
 
-class ProjectName(BaseStringField):
+class ProjectName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectName
 
-class ProjectNo(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.ProjectNo
-
-class ProjectNumber(BaseStringField):
+class ProjectNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectNumber
 
-class ProjectObjective(BaseStringField):
+class ProjectObjective(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectObjective
 
-class ProjectOriginatedBy(BaseStringField):
+class ProjectOriginatedBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectOriginatedBy
 
-class ProjectSheetNo(BaseStringField):
+class ProjectSheetNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectSheetNo
 
-class ProjectTitle(BaseStringField):
+class ProjectTitle(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectTitle
 
-class ProjectedCurrentYearExpenses19(BaseStringField):
+class ProjectedCurrentYearExpenses19(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectedCurrentYearExpenses19
 
-class ProjectedCurrentYearExpenses19Actual8Months(BaseStringField):
+class ProjectedCurrentYearExpenses19Actual8Months(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectedCurrentYearExpenses19Actual8Months
 
-class ProjectedCurrentYearExpenses19Projected4Months(BaseStringField):
+class ProjectedCurrentYearExpenses19Projected4Months(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectedCurrentYearExpenses19Projected4Months
 
-class ProjectedCurrentYearExpenses19TotalYear(BaseStringField):
+class ProjectedCurrentYearExpenses19TotalYear(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectedCurrentYearExpenses19TotalYear
 
-class Projected(BaseStringField):
+class Projected(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Projected
 
-class ProjectedExtAuthDate(BaseStringField):
+class ProjectedExtAuthDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectedExtAuthDate
 
-class ProjectedExtAuthDateWaveS(BaseStringField):
+class ProjectedExtAuthDateWaveS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectedExtAuthDateWaveS
 
-class ProjectedFieldComplete(BaseStringField):
+class ProjectedFieldComplete(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectedFieldComplete
 
-class ProjectedFieldCompleteWaveS(BaseStringField):
+class ProjectedFieldCompleteWaveS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectedFieldCompleteWaveS
 
-class ProjectedFieldStart(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.ProjectedFieldStart
-
-class ProjectedFinalReportDue(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.ProjectedFinalReportDue
-
-class ProjectedFinalReportDueSupplierRpt(BaseStringField):
+class ProjectedFinalReportDueSupplierRpt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectedFinalReportDueSupplierRpt
 
-class ProjectedFinalReportDueSupplierRptWaveS(BaseStringField):
+class ProjectedFinalReportDueSupplierRptWaveS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectedFinalReportDueSupplierRptWaveS
 
-class ProjectedInternalInitDate(BaseStringField):
+class ProjectedInternalInitDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectedInternalInitDate
 
-class Promo(BaseStringField):
+class Promo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Promo
 
-class PromotionalImpact(BaseStringField):
+class PromotionalImpact(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PromotionalImpact
 
-class PromotionalImpact500OffCarton(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.PromotionalImpact500OffCarton
-
-class PromotionalImpact50OffPack(BaseStringField):
+class PromotionalImpact50OffPack(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PromotionalImpact50OffPack
 
-class PromotionalImpact20CentsOffPackCouponSticker(BaseStringField):
+class PromotionalImpact500OffCarton(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.PromotionalImpact500OffCarton
+
+class PromotionalImpact20CentsOffPackCouponSticker(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PromotionalImpact20CentsOffPackCouponSticker
 
-class PromotionalImpactSalesForce20S(BaseStringField):
+class PromotionalImpactSalesForce20S(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PromotionalImpactSalesForce20S
 
-class PromotionalPeriod(BaseStringField):
+class PromotionalPeriod(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PromotionalPeriod
 
-class ProtectivePrecautionsRequired(BaseStringField):
+class ProtectivePrecautionsRequired(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProtectivePrecautionsRequired
 
-class ProvedRecall(BaseStringField):
+class ProvedRecall(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProvedRecall
 
-class ProvedRecallBase(BaseStringField):
+class ProvedRecallBase(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProvedRecallBase
 
-class ProvedRecallScore(BaseStringField):
+class ProvedRecallScore(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProvedRecallScore
 
-class Publication(BaseStringField):
+class Publication(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Publication
 
-class Purchasing(BaseStringField):
+class Purchasing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Purchasing
 
-class PackingAndDistribution(BaseStringField):
+class PackingAndDistribution(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PackingAndDistribution
 
-class PaperAndMaterials(BaseStringField):
+class PaperAndMaterials(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PaperAndMaterials
 
-class PartOfFinalReportToBeAmendedExactLocation(BaseStringField):
+class PartOfFinalReportToBeAmendedExactLocation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PartOfFinalReportToBeAmendedExactLocation
 
-class PartOfSalaryReceivedForLobbying(BaseStringField):
+class PartOfSalaryReceivedForLobbying(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PartOfSalaryReceivedForLobbying
 
-class Pay(BaseStringField):
+class Pay(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Pay
 
-class PayMethod(BaseStringField):
+class PayMethod(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PayMethod
 
-class PayTerms(BaseStringField):
+class PayTerms(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PayTerms
 
-class PayTo(BaseStringField):
+class PayTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PayTo
 
-class Payment(BaseStringField):
+class Payment(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Payment
 
-class Per(BaseStringField):
+class Per(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Per
 
-class Permit(BaseStringField):
+class Permit(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Permit
 
-class PhoneNumber(BaseStringField):
+class PhoneNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhoneNumber
 
-class PhysicalCharacteristics(BaseStringField):
+class PhysicalCharacteristics(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalCharacteristics
 
-class PhysicalCharacteristicsCigaretteCircumference(BaseStringField):
+class PhysicalCharacteristicsCigaretteCircumference(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalCharacteristicsCigaretteCircumference
 
-class PhysicalCharacteristicsFilterPlugLength(BaseStringField):
+class PhysicalCharacteristicsFilterPlugLength(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalCharacteristicsFilterPlugLength
 
-class PhysicalCharacteristicsFilterPlugPressureDropEncap(BaseStringField):
+class PhysicalCharacteristicsFilterPlugPressureDropEncap(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalCharacteristicsFilterPlugPressureDropEncap
 
-class PhysicalCharacteristicsFilterPlugPressureDropUnencap(BaseStringField):
+class PhysicalCharacteristicsFilterPlugPressureDropUnencap(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalCharacteristicsFilterPlugPressureDropUnencap
 
-class PhysicalCharacteristicsFilterVentilationRate(BaseStringField):
+class PhysicalCharacteristicsFilterVentilationRate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalCharacteristicsFilterVentilationRate
 
-class PhysicalCharacteristicsMoistureContentPacking(BaseStringField):
+class PhysicalCharacteristicsMoistureContentPacking(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalCharacteristicsMoistureContentPacking
 
-class PhysicalCharacteristicsMoistureContentExCatcher(BaseStringField):
+class PhysicalCharacteristicsMoistureContentExCatcher(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalCharacteristicsMoistureContentExCatcher
 
-class PhysicalCharacteristicsOverallCigaretteLength(BaseStringField):
+class PhysicalCharacteristicsOverallCigaretteLength(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalCharacteristicsOverallCigaretteLength
 
-class PhysicalCharacteristicsPrintPositionFromFilterEnd(BaseStringField):
+class PhysicalCharacteristicsPrintPositionFromFilterEnd(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalCharacteristicsPrintPositionFromFilterEnd
 
-class PhysicalCharacteristicsTippingLength(BaseStringField):
+class PhysicalCharacteristicsTippingLength(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalCharacteristicsTippingLength
 
-class PhysicalCharacteristicsTobaccoRodLength(BaseStringField):
+class PhysicalCharacteristicsTobaccoRodLength(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalCharacteristicsTobaccoRodLength
 
-class PhysicalCharacteristicsTotalPressureDropEncap(BaseStringField):
+class PhysicalCharacteristicsTotalPressureDropEncap(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalCharacteristicsTotalPressureDropEncap
 
-class PhysicalCharacteristicsTotalPressureDropUnencap(BaseStringField):
+class PhysicalCharacteristicsTotalPressureDropUnencap(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PhysicalCharacteristicsTotalPressureDropUnencap
 
-class PlaceOfManufacture(BaseStringField):
+class PlaceOfManufacture(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PlaceOfManufacture
 
-class PlaintiffSAttorneyS(BaseStringField):
+class PlaintiffSAttorneyS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PlaintiffSAttorneyS
 
-class PlantManagerPostingSupt(BaseStringField):
+class PlantManagerPostingSupt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PlantManagerPostingSupt
 
-class Plast(BaseStringField):
+class Plast(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Plast
 
-class PleaseDeliverAsSoonPossibleTo(BaseStringField):
+class PleaseDeliverAsSoonPossibleTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseDeliverAsSoonPossibleTo
 
-class PleaseDeliverAsSoonPossibleToCompany(BaseStringField):
+class PleaseDeliverAsSoonPossibleToCompany(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseDeliverAsSoonPossibleToCompany
 
-class PleaseDeliverAsSoonPossibleToFax(BaseStringField):
+class PleaseDeliverAsSoonPossibleToFax(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseDeliverAsSoonPossibleToFax
 
-class PleaseDeliverAsSoonPossibleToNo(BaseStringField):
+class PleaseDeliverAsSoonPossibleToNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseDeliverAsSoonPossibleToNo
 
-class PleaseDeliverAsSoonPossibleToPhoneNo(BaseStringField):
+class PleaseDeliverAsSoonPossibleToPhoneNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseDeliverAsSoonPossibleToPhoneNo
 
-class PleaseDeliverAsSoonPossibleToRecipient(BaseStringField):
+class PleaseDeliverAsSoonPossibleToRecipient(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseDeliverAsSoonPossibleToRecipient
 
-class PleaseShipTo(BaseStringField):
+class PleaseShipTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseShipTo
 
-class PleaseCompleteTheFollowingIfCheckedNoForCorporationAbove(BaseStringField):
+class PleaseCompleteTheFollowingIfCheckedNoForCorporationAbove(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseCompleteTheFollowingIfCheckedNoForCorporationAbove
 
-class PleaseIndicateTheCapacityInWhichYouAreExecutingThisDocument(BaseStringField):
+class PleaseIndicateTheCapacityInWhichYouAreExecutingThisDocument(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseIndicateTheCapacityInWhichYouAreExecutingThisDocument
 
-class PleaseMakeTheNecessaryFieldTripArrangementsFor(BaseStringField):
+class PleaseMakeTheNecessaryFieldTripArrangementsFor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleaseMakeTheNecessaryFieldTripArrangementsFor
 
-class PleasePlaceTheFollowingOrderForKoolAndOrGpcGolfBagsForMySection(BaseStringField):
+class PleasePlaceTheFollowingOrderForKoolAndOrGpcGolfBagsForMySection(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PleasePlaceTheFollowingOrderForKoolAndOrGpcGolfBagsForMySection
 
-class PlugWrap(BaseStringField):
+class PlugWrap(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PlugWrap
 
-class PlugWrapPor(BaseStringField):
+class PlugWrapPor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PlugWrapPor
 
-class Position(BaseStringField):
+class Position(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Position
 
-class Positioning(BaseStringField):
+class Positioning(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Positioning
 
-class PreparationAndComposition(BaseStringField):
+class PreparationAndComposition(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PreparationAndComposition
 
-class PreparedBy(BaseStringField):
+class PreparedBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PreparedBy
 
-class President(BaseStringField):
+class President(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.President
 
-class PressureDrop(BaseStringField):
+class PressureDrop(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PressureDrop
 
-class PressureOnAirJet(BaseStringField):
+class PressureOnAirJet(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PressureOnAirJet
 
-class PrevOrRecommendedSupplier(BaseStringField):
+class PrevOrRecommendedSupplier(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PrevOrRecommendedSupplier
 
-class PreviousCommitmentsThisProject(BaseStringField):
+class PreviousCommitmentsThisProject(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PreviousCommitmentsThisProject
 
-class PricesAndSchedule(BaseStringField):
+class PricesAndSchedule(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PricesAndSchedule
 
-class ProcessAndColors(BaseStringField):
+class ProcessAndColors(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProcessAndColors
 
-class ProducionProcess(BaseStringField):
+class ProducionProcess(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProducionProcess
 
-class ProductManager(BaseStringField):
+class ProductManager(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProductManager
 
-class ProductionSupervisedBy(BaseStringField):
+class ProductionSupervisedBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProductionSupervisedBy
 
-class Products(BaseStringField):
+class Products(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Products
 
-class ProgramBudgetCode(BaseStringField):
+class ProgramBudgetCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProgramBudgetCode
 
-class ProgramGroup(BaseStringField):
+class ProgramGroup(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProgramGroup
 
-class ProiectedExternalAuthorizationDate(BaseStringField):
+class ProiectedExternalAuthorizationDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProiectedExternalAuthorizationDate
 
-class ProjectNameDescription(BaseStringField):
+class ProjectNameDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectNameDescription
 
-class ProjectType(BaseStringField):
+class ProjectNo(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.ProjectNo
+
+class ProjectType(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectType
 
-class ProjectTypeProductTestAUEtc(BaseStringField):
+class ProjectTypeProductTestAUEtc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectTypeProductTestAUEtc
 
-class ProjectedInitiationDate(BaseStringField):
+class ProjectedFieldStart(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.ProjectedFieldStart
+
+class ProjectedFinalReportDue(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.ProjectedFinalReportDue
+
+class ProjectedInitiationDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProjectedInitiationDate
 
-class PromoDates(BaseStringField):
+class PromoDates(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PromoDates
 
-class PromotionCode(BaseStringField):
+class PromotionCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PromotionCode
 
-class PromotionName(BaseStringField):
+class PromotionName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PromotionName
 
-class PromotionNumber(BaseStringField):
+class PromotionNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PromotionNumber
 
-class PromotionQuantity(BaseStringField):
+class PromotionQuantity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PromotionQuantity
 
-class PromotionQuantityDisplays8(BaseStringField):
+class PromotionQuantityDisplays8(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PromotionQuantityDisplays8
 
-class PromotionQuantityFloor40(BaseStringField):
+class PromotionQuantityFloor40(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PromotionQuantityFloor40
 
-class PromotionQuantityMugs(BaseStringField):
+class PromotionQuantityMugs(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PromotionQuantityMugs
 
-class PromotionQuantityPosters(BaseStringField):
+class PromotionQuantityPosters(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PromotionQuantityPosters
 
-class ProposalNo(BaseStringField):
+class ProposalNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ProposalNo
 
-class PumpPressCardRoller(BaseStringField):
+class PumpPressCardRoller(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PumpPressCardRoller
 
-class Purpose(BaseStringField):
+class Purpose(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Purpose
 
-class PurposeOfSample(BaseStringField):
+class PurposeOfSample(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PurposeOfSample
 
-class PurposeOfTrip(BaseStringField):
+class PurposeOfTrip(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PurposeOfTrip
 
-class PurposeCompanyImprovementsAdministrativeRequirements(BaseStringField):
+class PurposeCompanyImprovementsAdministrativeRequirements(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PurposeCompanyImprovementsAdministrativeRequirements
 
-class PurposeComplianceWithOutsideRequirements(BaseStringField):
+class PurposeComplianceWithOutsideRequirements(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PurposeComplianceWithOutsideRequirements
 
-class PurposeCostReduction(BaseStringField):
+class PurposeCostReduction(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PurposeCostReduction
 
-class PurposeExpansionOfExistingBusiness(BaseStringField):
+class PurposeExpansionOfExistingBusiness(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PurposeExpansionOfExistingBusiness
 
-class PurposeMaintenanceOfExistingBusiness(BaseStringField):
+class PurposeMaintenanceOfExistingBusiness(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PurposeMaintenanceOfExistingBusiness
 
-class PurposeNewProducts(BaseStringField):
+class PurposeNewProducts(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PurposeNewProducts
 
-class PurposeQualityImprovement(BaseStringField):
+class PurposeQualityImprovement(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PurposeQualityImprovement
 
-class QipLog1(BaseStringField):
+class QipLog1(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QipLog1
 
-class Qned(BaseStringField):
+class Qned(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Qned
 
-class QualityAssuranceAssoc(BaseStringField):
+class QualityAssuranceAssoc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QualityAssuranceAssoc
 
-class Quantities(BaseStringField):
+class Quantities(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Quantities
 
-class Quantity(BaseStringField):
+class Quantity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Quantity
 
-class QuantityRequired(BaseStringField):
+class QuantityRequired(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QuantityRequired
 
-class Qty(BaseStringField):
+class Qty(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Qty
 
-class QualitativeResearchProductTestAUEtc(BaseStringField):
+class QualitativeResearchProductTestAUEtc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QualitativeResearchProductTestAUEtc
 
-class QualitativeResearchProductTestAUEtcRecommendedSupplier(BaseStringField):
+class QualitativeResearchProductTestAUEtcRecommendedSupplier(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QualitativeResearchProductTestAUEtcRecommendedSupplier
 
-class QualityControl(BaseStringField):
+class QualityControl(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QualityControl
 
-class QualityOfBloom(BaseStringField):
+class QualityOfBloom(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QualityOfBloom
 
-class QualityOfHospitalityTent(BaseStringField):
+class QualityOfHospitalityTent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QualityOfHospitalityTent
 
-class QualityOfHospitalityTentCleanliness(BaseStringField):
+class QualityOfHospitalityTentCleanliness(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QualityOfHospitalityTentCleanliness
 
-class QualityOfHospitalityTentFood(BaseStringField):
+class QualityOfHospitalityTentFood(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QualityOfHospitalityTentFood
 
-class QualityOfHospitalityTentService(BaseStringField):
+class QualityOfHospitalityTentService(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QualityOfHospitalityTentService
 
-class QuanOfTraysProduced(BaseStringField):
+class QuanOfTraysProduced(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QuanOfTraysProduced
 
-class QuantitiesAndDescription(BaseStringField):
+class QuantitiesAndDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QuantitiesAndDescription
 
-class QuantityReceived(BaseStringField):
+class QuantityReceived(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QuantityReceived
 
-class QuantityCartonsOf200Each(BaseStringField):
+class QuantityCartonsOf200Each(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QuantityCartonsOf200Each
 
-class QuotationTo(BaseStringField):
+class QuotationTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.QuotationTo
 
-class RDComments(BaseStringField):
+class RDComments(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RDComments
 
-class RDGroup(BaseStringField):
+class RDGroup(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RDGroup
 
-class Radioactive(BaseStringField):
+class Radioactive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Radioactive
 
-class RdEProcess(BaseStringField):
+class RdEProcess(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RdEProcess
 
-class RdEProduct(BaseStringField):
+class RdEProduct(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RdEProduct
 
-class Re(BaseStringField):
+class Re(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Re
 
-class Reactivity(BaseStringField):
+class Reactivity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Reactivity
 
-class Reactivity1WaterOrBrine(BaseStringField):
+class Reactivity1WaterOrBrine(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Reactivity1WaterOrBrine
 
-class Reactivity25Hcl(BaseStringField):
+class Reactivity25Hcl(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Reactivity25Hcl
 
-class Reactivity35Naoh(BaseStringField):
+class Reactivity35Naoh(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Reactivity35Naoh
 
-class Reactivity4Alcohols(BaseStringField):
+class Reactivity4Alcohols(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Reactivity4Alcohols
 
-class Reactivity5Oxygen(BaseStringField):
+class Reactivity5Oxygen(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Reactivity5Oxygen
 
-class Reactivity6Light(BaseStringField):
+class Reactivity6Light(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Reactivity6Light
 
-class ReasonCode(BaseStringField):
+class ReasonCode(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReasonCode
 
-class ReasonCode1ProductivityImprovement(BaseStringField):
+class ReasonCode1ProductivityImprovement(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReasonCode1ProductivityImprovement
 
-class ReasonCode2ReturnOnInvestment(BaseStringField):
+class ReasonCode2ReturnOnInvestment(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReasonCode2ReturnOnInvestment
 
-class ReasonCode3CustomerImpact(BaseStringField):
+class ReasonCode3CustomerImpact(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReasonCode3CustomerImpact
 
-class ReasonCode4GovernmentRequirement(BaseStringField):
+class ReasonCode4GovernmentRequirement(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReasonCode4GovernmentRequirement
 
-class ReasonCode5BusinessChange(BaseStringField):
+class ReasonCode5BusinessChange(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReasonCode5BusinessChange
 
-class ReasonCode6SystemError(BaseStringField):
+class ReasonCode6SystemError(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReasonCode6SystemError
 
-class ReasonCode7ProceduralError(BaseStringField):
+class ReasonCode7ProceduralError(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReasonCode7ProceduralError
 
-class Reasons(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Reasons
-
-class Recasing(BaseStringField):
+class Recasing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Recasing
 
-class ReceiptDateS(BaseStringField):
+class ReceiptDateS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReceiptDateS
 
-class Received(BaseStringField):
+class Received(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Received
 
-class ReceivedAndForwardedOn(BaseStringField):
+class ReceivedAndForwardedOn(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReceivedAndForwardedOn
 
-class Recommendation(BaseStringField):
+class Recommendation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Recommendation
 
-class ReducedToMaterial(BaseStringField):
+class ReducedToMaterial(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReducedToMaterial
 
-class Reference(BaseStringField):
+class Reference(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Reference
 
-class ReferenceForCalculation(BaseStringField):
+class ReferenceForCalculation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReferenceForCalculation
 
-class Region(BaseStringField):
+class Region(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Region
 
-class RegionFull(BaseStringField):
+class RegionFull(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RegionFull
 
-class RegionPartial(BaseStringField):
+class RegionPartial(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RegionPartial
 
-class RegistryNumberIfApplicable(BaseStringField):
+class RegistryNumberIfApplicable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RegistryNumberIfApplicable
 
-class RegulatoryAffairs(BaseStringField):
+class RegulatoryAffairs(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RegulatoryAffairs
 
-class RegulatoryStatus(BaseStringField):
+class RegulatoryStatus(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RegulatoryStatus
 
-class Rejected(BaseStringField):
+class Rejected(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Rejected
 
-class ReleasedToAcctg(BaseStringField):
+class ReleasedToAcctg(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReleasedToAcctg
 
-class Remarks(BaseStringField):
+class Remarks(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Remarks
 
-class RemarksTheseCostsWillIncludeButAreNotExclusiveToTheTheFollowingMaterials(BaseStringField):
+class RemarksTheseCostsWillIncludeButAreNotExclusiveToTheTheFollowingMaterials(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RemarksTheseCostsWillIncludeButAreNotExclusiveToTheTheFollowingMaterials
 
-class RemarksToCoverTheCostOfCollateralMerchandisingMaterialsToBeUsedIn1991InConnectionWithTheMerchandisingAndPromotionOfBullDurham(BaseStringField):
+class RemarksToCoverTheCostOfCollateralMerchandisingMaterialsToBeUsedIn1991InConnectionWithTheMerchandisingAndPromotionOfBullDurham(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RemarksToCoverTheCostOfCollateralMerchandisingMaterialsToBeUsedIn1991InConnectionWithTheMerchandisingAndPromotionOfBullDurham
 
-class ReportableExpenditures(BaseStringField):
+class ReportableExpenditures(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpenditures
 
-class ReportableExpendituresInThousands(BaseStringField):
+class ReportableExpendituresInThousands(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpendituresInThousands
 
-class ReportableExpendituresInThousandsCatExpenses(BaseStringField):
+class ReportableExpendituresInThousandsCatExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpendituresInThousandsCatExpenses
 
-class ReportableExpendituresInThousandsCatCExpenses(BaseStringField):
+class ReportableExpendituresInThousandsCatCExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpendituresInThousandsCatCExpenses
 
-class ReportableExpendituresInThousandsCatDExpenses(BaseStringField):
+class ReportableExpendituresInThousandsCatDExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpendituresInThousandsCatDExpenses
 
-class ReportableExpendituresInThousandsCatFExpenses(BaseStringField):
+class ReportableExpendituresInThousandsCatFExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpendituresInThousandsCatFExpenses
 
-class ReportableExpendituresInThousandsCatGExpenses(BaseStringField):
+class ReportableExpendituresInThousandsCatGExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpendituresInThousandsCatGExpenses
 
-class ReportableExpendituresInThousandsCatJExpenses(BaseStringField):
+class ReportableExpendituresInThousandsCatJExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpendituresInThousandsCatJExpenses
 
-class ReportableExpendituresInThousandsCatKExpenses(BaseStringField):
+class ReportableExpendituresInThousandsCatKExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpendituresInThousandsCatKExpenses
 
-class ReportableExpendituresInThousandsCatLExpenses(BaseStringField):
+class ReportableExpendituresInThousandsCatLExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpendituresInThousandsCatLExpenses
 
-class ReportableExpendituresInThousandsCatMExpenses(BaseStringField):
+class ReportableExpendituresInThousandsCatMExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpendituresInThousandsCatMExpenses
 
-class ReportableExpendituresInThousandsCatEExpenses(BaseStringField):
+class ReportableExpendituresInThousandsCatEExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpendituresInThousandsCatEExpenses
 
-class ReportableExpendituresInThousandsCatHExpenses(BaseStringField):
+class ReportableExpendituresInThousandsCatHExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpendituresInThousandsCatHExpenses
 
-class ReportableExpendituresInThousandsCatIExpenses(BaseStringField):
+class ReportableExpendituresInThousandsCatIExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpendituresInThousandsCatIExpenses
 
-class ReportableExpendituresInThousandsCatAExpenses(BaseStringField):
+class ReportableExpendituresInThousandsCatAExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpendituresInThousandsCatAExpenses
 
-class ReportableExpendituresInThousandsTotalReportableExpendituresForVarietyi(BaseStringField):
+class ReportableExpendituresInThousandsTotalReportableExpendituresForVarietyi(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpendituresInThousandsTotalReportableExpendituresForVarietyi
 
-class ReportableExpenditures13CatAExpenses(BaseStringField):
+class ReportableExpenditures13CatAExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpenditures13CatAExpenses
 
-class ReportableExpenditures14CatBExpenses(BaseStringField):
+class ReportableExpenditures14CatBExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpenditures14CatBExpenses
 
-class ReportableExpenditures15CatCExpenses(BaseStringField):
+class ReportableExpenditures15CatCExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpenditures15CatCExpenses
 
-class ReportableExpenditures16CatDExpenses(BaseStringField):
+class ReportableExpenditures16CatDExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpenditures16CatDExpenses
 
-class ReportableExpenditures17CatEExpenses(BaseStringField):
+class ReportableExpenditures17CatEExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpenditures17CatEExpenses
 
-class ReportableExpenditures18CatFExpenses(BaseStringField):
+class ReportableExpenditures18CatFExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpenditures18CatFExpenses
 
-class ReportableExpenditures19CatGExpenses(BaseStringField):
+class ReportableExpenditures19CatGExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpenditures19CatGExpenses
 
-class ReportableExpenditures20CatHExpenses(BaseStringField):
+class ReportableExpenditures20CatHExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpenditures20CatHExpenses
 
-class ReportableExpenditures21CatIExpenses(BaseStringField):
+class ReportableExpenditures21CatIExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpenditures21CatIExpenses
 
-class ReportableExpenditures22CatJExpenses(BaseStringField):
+class ReportableExpenditures22CatJExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpenditures22CatJExpenses
 
-class ReportableExpenditures23CatKExpenses(BaseStringField):
+class ReportableExpenditures23CatKExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpenditures23CatKExpenses
 
-class ReportableExpenditures24CatLExpenses(BaseStringField):
+class ReportableExpenditures24CatLExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpenditures24CatLExpenses
 
-class ReportableExpenditures25CatMExpenses(BaseStringField):
+class ReportableExpenditures25CatMExpenses(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpenditures25CatMExpenses
 
-class ReportableExpenditures26TotalReportableExpendituresForVariety(BaseStringField):
+class ReportableExpenditures26TotalReportableExpendituresForVariety(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportableExpenditures26TotalReportableExpendituresForVariety
 
-class Reported(BaseStringField):
+class Reported(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Reported
 
-class ReportedBy(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.ReportedBy
-
-class RequestAuthorizedBy(BaseStringField):
+class RequestAuthorizedBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RequestAuthorizedBy
 
-class RequestNo(BaseStringField):
+class RequestNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RequestNo
 
-class RequestType(BaseStringField):
+class RequestType(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RequestType
 
-class RequestType1Enhancement(BaseStringField):
+class RequestType1Enhancement(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RequestType1Enhancement
 
-class RequestType2Maintenance(BaseStringField):
+class RequestType2Maintenance(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RequestType2Maintenance
 
-class RequestType3SpecialProcessing(BaseStringField):
+class RequestType3SpecialProcessing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RequestType3SpecialProcessing
 
-class RequestType4AdHoc(BaseStringField):
+class RequestType4AdHoc(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RequestType4AdHoc
 
-class RequestType5Emergency(BaseStringField):
+class RequestType5Emergency(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RequestType5Emergency
 
-class RequestedImplementationDate(BaseStringField):
+class RequestedImplementationDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RequestedImplementationDate
 
-class RequirementsMp(BaseStringField):
+class RequirementsMp(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RequirementsMp
 
-class Requirements(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Requirements
-
-class RequisitionNo(BaseStringField):
+class RequisitionNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RequisitionNo
 
-class Requisitioner(BaseStringField):
+class Requisitioner(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Requisitioner
 
-class RespondHere(BaseStringField):
+class RespondHere(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RespondHere
 
-class ResultsNoDeadNoTested(BaseStringField):
+class ResultsNoDeadNoTested(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResultsNoDeadNoTested
 
-class ResultsNoTested(BaseStringField):
+class ResultsNoTested(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResultsNoTested
 
-class RetailCallFrequency(BaseStringField):
+class RetailCallFrequency(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RetailCallFrequency
 
-class ReturnTo(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.ReturnTo
-
-class ReversionRateTestReversantsControlRevertantsPerPlate(BaseStringField):
+class ReversionRateTestReversantsControlRevertantsPerPlate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReversionRateTestReversantsControlRevertantsPerPlate
 
-class ReversionRateTestRevertantsControlRevertantsPerPlate(BaseStringField):
+class ReversionRateTestRevertantsControlRevertantsPerPlate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReversionRateTestRevertantsControlRevertantsPerPlate
 
-class ReviewCompleted(BaseStringField):
+class ReviewCompleted(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReviewCompleted
 
-class ReviewRouting(BaseStringField):
+class ReviewRouting(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReviewRouting
 
-class Reviewed(BaseStringField):
+class Reviewed(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Reviewed
 
-class RevisedContractTotals(BaseStringField):
+class RevisedContractTotals(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RevisedContractTotals
 
-class RevisedTargetDate(BaseStringField):
+class RevisedTargetDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RevisedTargetDate
 
-class Revision(BaseStringField):
+class Revision(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Revision
 
-class Revisions(BaseStringField):
+class Revisions(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Revisions
 
-class RevisionsApproved(BaseStringField):
+class RevisionsApproved(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RevisionsApproved
 
-class RevisionsToShellOtherThanTermCompensationOrJob(BaseStringField):
+class RevisionsToShellOtherThanTermCompensationOrJob(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RevisionsToShellOtherThanTermCompensationOrJob
 
-class RincipalOrganizerWhoWillReceiveCorrespondence(BaseStringField):
+class RincipalOrganizerWhoWillReceiveCorrespondence(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RincipalOrganizerWhoWillReceiveCorrespondence
 
-class RoomTemperature(BaseStringField):
+class RoomTemperature(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RoomTemperature
 
-class RouteOfCompoundAdministration(BaseStringField):
+class RouteOfCompoundAdministration(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RouteOfCompoundAdministration
 
-class RaceDayInfo(BaseStringField):
+class RaceDayInfo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RaceDayInfo
 
-class RaceDayInfoEventAttendance(BaseStringField):
+class RaceDayInfoEventAttendance(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RaceDayInfoEventAttendance
 
-class RaceDayInfoHospitalityTentAttendance(BaseStringField):
+class RaceDayInfoHospitalityTentAttendance(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RaceDayInfoHospitalityTentAttendance
 
-class ReasonSForRecommendation(BaseStringField):
+class ReasonSForRecommendation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReasonSForRecommendation
 
-class ReasonForTheAmendment(BaseStringField):
+class ReasonForTheAmendment(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReasonForTheAmendment
 
-class Reason(BaseStringField):
+class Reason(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Reason
 
-class RecD(BaseStringField):
+class Reasons(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Reasons
+
+class RecD(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RecD
 
-class RecearchEngineer(BaseStringField):
+class RecearchEngineer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RecearchEngineer
 
-class ReceivedByRegulatoryAffatrs(BaseStringField):
+class ReceivedByRegulatoryAffatrs(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReceivedByRegulatoryAffatrs
 
-class RecentActionsRegardingAboveSolicitor(BaseStringField):
+class RecentActionsRegardingAboveSolicitor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RecentActionsRegardingAboveSolicitor
 
-class RecommemdedSupplier(BaseStringField):
+class RecommemdedSupplier(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RecommemdedSupplier
 
-class RecommendedBrandSAndPromotionalActivity(BaseStringField):
+class RecommendedBrandSAndPromotionalActivity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RecommendedBrandSAndPromotionalActivity
 
-class RecommendedSupplier(BaseStringField):
+class RecommendedSupplier(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RecommendedSupplier
 
-class Ref(BaseStringField):
+class Ref(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ref
 
-class RefPaper(BaseStringField):
+class RefPaper(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RefPaper
 
-class ReferentBrand(BaseStringField):
+class ReferentBrand(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReferentBrand
 
-class ReferentBrandS(BaseStringField):
+class ReferentBrandS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReferentBrandS
 
-class RegistrationNo(BaseStringField):
+class RegistrationNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RegistrationNo
 
-class RegistryOfTheToxicEffectsOfChemicals(BaseStringField):
+class RegistryOfTheToxicEffectsOfChemicals(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RegistryOfTheToxicEffectsOfChemicals
 
-class ReimbursementsForExpensesPleaseItemize(BaseStringField):
+class ReimbursementsForExpensesPleaseItemize(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReimbursementsForExpensesPleaseItemize
 
-class RelationshipToFinalist(BaseStringField):
+class RelationshipToFinalist(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RelationshipToFinalist
 
-class Replaces(BaseStringField):
+class Replaces(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Replaces
 
-class Report(BaseStringField):
+class Report(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Report
 
-class ReportingPeriod(BaseStringField):
+class ReportedBy(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.ReportedBy
+
+class ReportingPeriod(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportingPeriod
 
-class ReportingSchedule(BaseStringField):
+class ReportingSchedule(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportingSchedule
 
-class Reports(BaseStringField):
+class Reports(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Reports
 
-class ReportsCopiesTo(BaseStringField):
+class ReportsCopiesTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportsCopiesTo
 
-class ReportsOriginalTo(BaseStringField):
+class ReportsOriginalTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportsOriginalTo
 
-class ReportsWrittenBy(BaseStringField):
+class ReportsWrittenBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReportsWrittenBy
 
-class Requested(BaseStringField):
+class Requested(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Requested
 
-class RequestedBy(BaseStringField):
+class RequestedBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RequestedBy
 
-class RequirementsLaboratory(BaseStringField):
+class Requirements(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Requirements
+
+class RequirementsLaboratory(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RequirementsLaboratory
 
-class RequirementsOthers(BaseStringField):
+class RequirementsOthers(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RequirementsOthers
 
-class RequirementsOther(BaseStringField):
+class RequirementsOther(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RequirementsOther
 
-class Res(BaseStringField):
+class Res(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Res
 
-class ResearchDesign(BaseStringField):
+class ResearchDesign(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResearchDesign
 
-class ResearchDesignNCellsElegibilityDesignKeyBannerBreaksMethodologyCities(BaseStringField):
+class ResearchDesignNCellsElegibilityDesignKeyBannerBreaksMethodologyCities(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResearchDesignNCellsElegibilityDesignKeyBannerBreaksMethodologyCities
 
-class ResearchFirm(BaseStringField):
+class ResearchFirm(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResearchFirm
 
-class ResearchLiaison(BaseStringField):
+class ResearchLiaison(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResearchLiaison
 
-class ResearchLimitations(BaseStringField):
+class ResearchLimitations(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResearchLimitations
 
-class ResearchReqAttached(BaseStringField):
+class ResearchReqAttached(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResearchReqAttached
 
-class ResearchReqAttachedNo(BaseStringField):
+class ResearchReqAttachedNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResearchReqAttachedNo
 
-class ResearchReqAttachedYes(BaseStringField):
+class ResearchReqAttachedYes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResearchReqAttachedYes
 
-class ResearchRequestAttached(BaseStringField):
+class ResearchRequestAttached(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResearchRequestAttached
 
-class ResearchRequestAttachedNo(BaseStringField):
+class ResearchRequestAttachedNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResearchRequestAttachedNo
 
-class ResearchRequestAttachedYes(BaseStringField):
+class ResearchRequestAttachedYes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResearchRequestAttachedYes
 
-class ReservationsMadeAt(BaseStringField):
+class ReservationsMadeAt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReservationsMadeAt
 
-class RespondentIncidence(BaseStringField):
+class RespondentIncidence(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RespondentIncidence
 
-class ResponderDate(BaseStringField):
+class ResponderDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResponderDate
 
-class ResponseCodeAssigned(BaseStringField):
+class ResponseCodeAssigned(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResponseCodeAssigned
 
-class Responsibility(BaseStringField):
+class Responsibility(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Responsibility
 
-class ResponsibilityFilterProduction(BaseStringField):
+class ResponsibilityFilterProduction(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResponsibilityFilterProduction
 
-class ResponsibilityMakingPacking(BaseStringField):
+class ResponsibilityMakingPacking(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResponsibilityMakingPacking
 
-class ResponsibilityShipping(BaseStringField):
+class ResponsibilityShipping(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResponsibilityShipping
 
-class ResponsibilityTobaccoBlend(BaseStringField):
+class ResponsibilityTobaccoBlend(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResponsibilityTobaccoBlend
 
-class ResponsibilitySampleRequisitionForm020206(BaseStringField):
+class ResponsibilitySampleRequisitionForm020206(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResponsibilitySampleRequisitionForm020206
 
-class ResponsibilitySampleRequistion(BaseStringField):
+class ResponsibilitySampleRequistion(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ResponsibilitySampleRequistion
 
-class Retainer(BaseStringField):
+class Retainer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Retainer
 
-class ReturnThisFormTo(BaseStringField):
+class ReturnTo(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.ReturnTo
+
+class ReturnThisFormTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ReturnThisFormTo
 
-class RevisedBudget(BaseStringField):
+class RevisedBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RevisedBudget
 
-class RevisedCostsIfAny(BaseStringField):
+class RevisedCostsIfAny(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RevisedCostsIfAny
 
-class RevisedFrom(BaseStringField):
+class RevisedFrom(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RevisedFrom
 
-class RevisionDate(BaseStringField):
+class RevisionDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RevisionDate
 
-class Rod(BaseStringField):
+class Rod(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Rod
 
-class RodsPerMin(BaseStringField):
+class RodsPerMin(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.RodsPerMin
 
-class Room(BaseStringField):
+class Room(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Room
 
-class STyphimurium(BaseStringField):
+class STyphimurium(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.STyphimurium
 
-class SPV(BaseStringField):
+class SPV(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SPV
 
-class Sales(BaseStringField):
+class Sales(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Sales
 
-class SalesObjective(BaseStringField):
+class SalesObjective(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SalesObjective
 
-class SampleWeight(BaseStringField):
+class SampleWeight(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SampleWeight
 
-class Sample(BaseStringField):
+class Sample(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Sample
 
-class SamplesItemsRequired(BaseStringField):
+class SamplesItemsRequired(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SamplesItemsRequired
 
-class SamplingDates(BaseStringField):
+class SamplingDates(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SamplingDates
 
-class SamplingHours(BaseStringField):
+class SamplingHours(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SamplingHours
 
-class Satisfying7More(BaseStringField):
+class Satisfying7More(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Satisfying7More
 
-class Schedule(BaseStringField):
+class Schedule(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Schedule
 
-class ScheduleDateOrInventoryDepletion(BaseStringField):
+class ScheduleDateOrInventoryDepletion(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ScheduleDateOrInventoryDepletion
 
-class ScheduledPostingDate(BaseStringField):
+class ScheduledPostingDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ScheduledPostingDate
 
-class ScientificJournalOfChoice(BaseStringField):
+class ScientificJournalOfChoice(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ScientificJournalOfChoice
 
-class ScientificMetingOfChoice(BaseStringField):
+class ScientificMetingOfChoice(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ScientificMetingOfChoice
 
-class Scope(BaseStringField):
+class Scope(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Scope
 
-class ScopeArea(BaseStringField):
+class ScopeArea(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ScopeArea
 
-class ScopeDivision(BaseStringField):
+class ScopeDivision(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ScopeDivision
 
-class ScopeOther(BaseStringField):
+class ScopeOther(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ScopeOther
 
-class ScopeRegion(BaseStringField):
+class ScopeRegion(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ScopeRegion
 
-class SecondaryClassOfTrade(BaseStringField):
+class SecondaryClassOfTrade(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SecondaryClassOfTrade
 
-class SectionOne(BaseStringField):
+class SectionOne(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SectionOne
 
-class SectionTwo(BaseStringField):
+class SectionTwo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SectionTwo
 
-class SectionS(BaseStringField):
+class SectionS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SectionS
 
-class SectionsRevised(BaseStringField):
+class SectionsRevised(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SectionsRevised
 
-class Sensitive(BaseStringField):
+class Sensitive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Sensitive
 
-class Sex(BaseStringField):
+class Sex(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Sex
 
-class SexFemale(BaseStringField):
+class SexFemale(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SexFemale
 
-class SexMale(BaseStringField):
+class SexMale(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SexMale
 
-class ShipTo(BaseStringField):
+class ShipTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ShipTo
 
-class ShipToDeptBranch(BaseStringField):
+class ShipToDeptBranch(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ShipToDeptBranch
 
-class ShipToCustomerShippingNumber(BaseStringField):
+class ShipToCustomerShippingNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ShipToCustomerShippingNumber
 
-class ShipmentToArriveNotLaterThan(BaseStringField):
+class ShipmentToArriveNotLaterThan(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ShipmentToArriveNotLaterThan
 
-class Shipment(BaseStringField):
+class Shipment(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Shipment
 
-class ShippedTo(BaseStringField):
+class ShippedTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ShippedTo
 
-class ShippedVia(BaseStringField):
+class ShippedVia(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ShippedVia
 
-class ShouldPromotionBeRepeated(BaseStringField):
+class ShouldPromotionBeRepeated(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ShouldPromotionBeRepeated
 
-class ShouldPromotionBeRepeatedNo(BaseStringField):
+class ShouldPromotionBeRepeatedNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ShouldPromotionBeRepeatedNo
 
-class ShouldPromotionBeRepeatedYes(BaseStringField):
+class ShouldPromotionBeRepeatedYes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ShouldPromotionBeRepeatedYes
 
-class Signature(BaseStringField):
+class Signature(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Signature
 
-class SignatureS(BaseStringField):
+class SignatureS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SignatureS
 
-class SignatureOfInitiator(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.SignatureOfInitiator
-
-class Signatures(BaseStringField):
+class Signatures(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Signatures
 
-class SignaturesGroupProductDirector(BaseStringField):
+class SignaturesGroupProductDirector(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SignaturesGroupProductDirector
 
-class SignaturesMerchandisingManager(BaseStringField):
+class SignaturesMerchandisingManager(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SignaturesMerchandisingManager
 
-class SignaturesPurchasingDepartment(BaseStringField):
+class SignaturesPurchasingDepartment(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SignaturesPurchasingDepartment
 
-class SignaturesRequestingManager(BaseStringField):
+class SignaturesRequestingManager(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SignaturesRequestingManager
 
-class SignaturesReturnTo(BaseStringField):
+class SignaturesReturnTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SignaturesReturnTo
 
-class Signed(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Signed
-
-class Size(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Size
-
-class SizeOrSizes(BaseStringField):
+class SizeOrSizes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SizeOrSizes
 
-class SizeShowing(BaseStringField):
+class SizeShowing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SizeShowing
 
-class Smoker(BaseStringField):
+class Smoker(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Smoker
 
-class Smoothness75Moother(BaseStringField):
+class Smoothness75Moother(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Smoothness75Moother
 
-class Solubility(BaseStringField):
+class Solubility(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Solubility
 
-class Solvent(BaseStringField):
+class Solvent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Solvent
 
-class Source(BaseStringField):
+class Source(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Source
 
-class SourceOfBusiness(BaseStringField):
+class SourceOfBusiness(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SourceOfBusiness
 
-class SourceOfBusinessMajorCompetitiveBrands(BaseStringField):
+class SourceOfBusinessMajorCompetitiveBrands(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SourceOfBusinessMajorCompetitiveBrands
 
-class SourceOfBusinessTargetAudience(BaseStringField):
+class SourceOfBusinessTargetAudience(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SourceOfBusinessTargetAudience
 
-class SourceOfInformation(BaseStringField):
+class SourceOfInformation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SourceOfInformation
 
-class Space(BaseStringField):
+class Space(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Space
 
-class SpaceColor(BaseStringField):
+class SpaceColor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SpaceColor
 
-class SpaceColorMagazines(BaseStringField):
+class SpaceColorMagazines(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SpaceColorMagazines
 
-class SpaceColorNewspapers(BaseStringField):
+class SpaceColorNewspapers(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SpaceColorNewspapers
 
-class SpecialEventRequestForm(BaseStringField):
+class SpecialEventRequestForm(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SpecialEventRequestForm
 
-class SpecialEventRequestFormDateOfEvent(BaseStringField):
+class SpecialEventRequestFormDateOfEvent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SpecialEventRequestFormDateOfEvent
 
-class SpecialEventRequestFormNameOfEvent(BaseStringField):
+class SpecialEventRequestFormNameOfEvent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SpecialEventRequestFormNameOfEvent
 
-class SpecialEventRequestFormSamplesItemsRequired(BaseStringField):
+class SpecialEventRequestFormSamplesItemsRequired(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SpecialEventRequestFormSamplesItemsRequired
 
-class SpecialInstructionsWhileDosing(BaseStringField):
+class SpecialInstructionsWhileDosing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SpecialInstructionsWhileDosing
 
-class SpecialSampleManufacture(BaseStringField):
+class SpecialSampleManufacture(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SpecialSampleManufacture
 
-class SpecificationChangeNumber8479(BaseStringField):
+class SpecificationChangeNumber8479(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SpecificationChangeNumber8479
 
-class Specifics(BaseStringField):
+class Specifics(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Specifics
 
-class SpotCheck(BaseStringField):
+class SpotCheck(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SpotCheck
 
-class Sprouge(BaseStringField):
+class Sprouge(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Sprouge
 
-class SqInchesFeet(BaseStringField):
+class SqInchesFeet(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SqInchesFeet
 
-class Sqc21(BaseStringField):
+class Sqc21(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Sqc21
 
-class Ss(BaseStringField):
+class Ss(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ss
 
-class StateTaxStatus(BaseStringField):
+class StateTaxStatus(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StateTaxStatus
 
-class Stationary(BaseStringField):
+class Stationary(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Stationary
 
-class Stations(BaseStringField):
+class Stations(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Stations
 
-class StorageConditions(BaseStringField):
+class StorageConditions(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StorageConditions
 
-class StorageRecommendations(BaseStringField):
+class StorageRecommendations(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StorageRecommendations
 
-class StoreInDark(BaseStringField):
+class StoreInDark(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StoreInDark
 
-class StoresParticipating(BaseStringField):
+class StoresParticipating(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StoresParticipating
 
-class StrainOfMice(BaseStringField):
+class StrainOfMice(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StrainOfMice
 
-class Strength(BaseStringField):
+class Strength(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Strength
 
-class Strength7Stronger(BaseStringField):
+class Strength7Stronger(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Strength7Stronger
 
-class Structure(BaseStringField):
+class Structure(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Structure
 
-class StudyDirector(BaseStringField):
+class StudyDirector(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StudyDirector
 
-class StudyTitleProposalNumber(BaseStringField):
+class StudyTitleProposalNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StudyTitleProposalNumber
 
-class SubjectToTheFollowingSuggestedRevisionsItemizeBelow(BaseStringField):
+class SubjectToTheFollowingSuggestedRevisionsItemizeBelow(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubjectToTheFollowingSuggestedRevisionsItemizeBelow
 
-class Subject(BaseStringField):
+class Subject(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Subject
 
-class SubmissionDate(BaseStringField):
+class SubmissionDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDate
 
-class SubmissionDateDec26(BaseStringField):
+class SubmissionDateDec26(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateDec26
 
-class SubmissionDateJan23(BaseStringField):
+class SubmissionDateJan23(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateJan23
 
-class SubmissionDateJan231995(BaseStringField):
+class SubmissionDateJan231995(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateJan231995
 
-class SubmissionDateOct3(BaseStringField):
+class SubmissionDateOct3(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateOct3
 
-class SubmissionDateOct31(BaseStringField):
+class SubmissionDateOct31(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateOct31
 
-class SubmissionDateAug10(BaseStringField):
+class SubmissionDateAug10(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateAug10
 
-class SubmissionDateAug26(BaseStringField):
+class SubmissionDateAug26(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateAug26
 
-class SubmissionDateDec8(BaseStringField):
+class SubmissionDateDec8(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateDec8
 
-class SubmissionDateFeb23(BaseStringField):
+class SubmissionDateFeb23(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateFeb23
 
-class SubmissionDateJan19(BaseStringField):
+class SubmissionDateJan19(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateJan19
 
-class SubmissionDateJun24(BaseStringField):
+class SubmissionDateJun24(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateJun24
 
-class SubmissionDateJune29(BaseStringField):
+class SubmissionDateJune29(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateJune29
 
-class SubmissionDateMay27(BaseStringField):
+class SubmissionDateMay27(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateMay27
 
-class SubmissionDateNov9(BaseStringField):
+class SubmissionDateNov9(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateNov9
 
-class SubmissionDateOct07(BaseStringField):
+class SubmissionDateOct07(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateOct07
 
-class SubmissionDateSept21(BaseStringField):
+class SubmissionDateSept21(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmissionDateSept21
 
-class SubmittedBy(BaseStringField):
+class SubmittedBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmittedBy
 
-class SubmitterSSs(BaseStringField):
+class SubmitterSSs(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SubmitterSSs
 
-class SuggestionDescribeCurrentSituationAndIdea(BaseStringField):
+class SuggestionDescribeCurrentSituationAndIdea(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SuggestionDescribeCurrentSituationAndIdea
 
-class Summary(BaseStringField):
+class Summary(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Summary
 
-class SupervisorInformation(BaseStringField):
+class SupervisorInformation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SupervisorInformation
 
-class SupervisorInformationBeeperNumber(BaseStringField):
+class SupervisorInformationBeeperNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SupervisorInformationBeeperNumber
 
-class SupervisorInformationNameOfAllwaysSupervisor(BaseStringField):
+class SupervisorInformationNameOfAllwaysSupervisor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SupervisorInformationNameOfAllwaysSupervisor
 
-class SupervisorInformationPhoneNumber(BaseStringField):
+class SupervisorInformationPhoneNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SupervisorInformationPhoneNumber
 
-class SuppliedUntil(BaseStringField):
+class SuppliedUntil(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SuppliedUntil
 
-class Supplier(BaseStringField):
+class Supplier(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Supplier
 
-class SuppliersBeingConsidered(BaseStringField):
+class SuppliersBeingConsidered(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SuppliersBeingConsidered
 
-class SalesAnalysis(BaseStringField):
+class SalesAnalysis(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SalesAnalysis
 
-class SalesPersonnelToBeContacted(BaseStringField):
+class SalesPersonnelToBeContacted(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SalesPersonnelToBeContacted
 
-class SalesPersonnelToBeWorkedWith(BaseStringField):
+class SalesPersonnelToBeWorkedWith(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SalesPersonnelToBeWorkedWith
 
-class SalesRepresentative(BaseStringField):
+class SalesRepresentative(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SalesRepresentative
 
-class SampleDescription(BaseStringField):
+class SampleDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SampleDescription
 
-class SampleDisposition(BaseStringField):
+class SampleDisposition(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SampleDisposition
 
-class SampleNo(BaseStringField):
+class SampleNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SampleNo
 
-class SampleSize(BaseStringField):
+class SampleSize(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SampleSize
 
-class SampleSpecificationsWrittenBy(BaseStringField):
+class SampleSpecificationsWrittenBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SampleSpecificationsWrittenBy
 
-class ScreenerQuestionnaire(BaseStringField):
+class ScreenerQuestionnaire(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ScreenerQuestionnaire
 
-class ScriptSAndOrStoryBoardSCleared(BaseStringField):
+class ScriptSAndOrStoryBoardSCleared(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ScriptSAndOrStoryBoardSCleared
 
-class ScriptSAndOrStoryBoardSClearedEcu(BaseStringField):
+class ScriptSAndOrStoryBoardSClearedEcu(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ScriptSAndOrStoryBoardSClearedEcu
 
-class ScriptSAndOrStoryBoardSClearedPhoneBooth(BaseStringField):
+class ScriptSAndOrStoryBoardSClearedPhoneBooth(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ScriptSAndOrStoryBoardSClearedPhoneBooth
 
-class SectionA(BaseStringField):
+class SectionA(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SectionA
 
-class SectionB(BaseStringField):
+class SectionB(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SectionB
 
-class SectionIiiA2NdParagraphTheFirstSentenceIsToBeChangedToReadAsFollows(BaseStringField):
+class SectionIiiA2NdParagraphTheFirstSentenceIsToBeChangedToReadAsFollows(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SectionIiiA2NdParagraphTheFirstSentenceIsToBeChangedToReadAsFollows
 
-class SectionNumber(BaseStringField):
+class SectionNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SectionNumber
 
-class SectionSalesManagerSName(BaseStringField):
+class SectionSalesManagerSName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SectionSalesManagerSName
 
-class Seeds(BaseStringField):
+class Seeds(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Seeds
 
-class SeniorVpMarketingTo1000000(BaseStringField):
+class SeniorVpMarketingTo1000000(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SeniorVpMarketingTo1000000
 
-class Sep(BaseStringField):
+class Sep(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Sep
 
-class SeparatePay(BaseStringField):
+class SeparatePay(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SeparatePay
 
-class Served(BaseStringField):
+class Served(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Served
 
-class SignPrintNamesSeeInstructionsOnBack(BaseStringField):
+class SignPrintNamesSeeInstructionsOnBack(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SignPrintNamesSeeInstructionsOnBack
 
-class SignatureEmployerOrDesignee(BaseStringField):
+class SignatureEmployerOrDesignee(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SignatureEmployerOrDesignee
 
-class SignatureOfHetailPurchaser(BaseStringField):
+class SignatureOfHetailPurchaser(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SignatureOfHetailPurchaser
 
-class SignificantDifference(BaseStringField):
+class SignatureOfInitiator(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SignatureOfInitiator
+
+class Signed(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Signed
+
+class SignificantDifference(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SignificantDifference
 
-class Sizes(BaseStringField):
+class Size(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Size
+
+class Sizes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Sizes
 
-class SmokingResults(BaseStringField):
+class SmokingResults(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SmokingResults
 
-class SolidsComposit(BaseStringField):
+class SolidsComposit(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SolidsComposit
 
-class SourceOfBusinessLocalPremiumKsSmokers(BaseStringField):
+class SourceOfBusinessLocalPremiumKsSmokers(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SourceOfBusinessLocalPremiumKsSmokers
 
-class SourceOfBusinessThis(BaseStringField):
+class SourceOfBusinessThis(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SourceOfBusinessThis
 
-class SpecialInstructionsComments(BaseStringField):
+class SpecialInstructionsComments(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SpecialInstructionsComments
 
-class SpecialRequirements(BaseStringField):
+class SpecialRequirements(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SpecialRequirements
 
-class Species(BaseStringField):
+class Species(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Species
 
-class SpentPriorTo(BaseStringField):
+class SpentPriorTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SpentPriorTo
 
-class StandardGradeMark(BaseStringField):
+class StandardGradeMark(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StandardGradeMark
 
-class Start(BaseStringField):
+class Start(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Start
 
-class StartPleteFr(BaseStringField):
+class StartPleteFr(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StartPleteFr
 
-class State(BaseStringField):
+class State(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.State
 
-class StateOf(BaseStringField):
+class StateOf(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StateOf
 
-class StateCreateNewAppropriation(BaseStringField):
+class StateCreateNewAppropriation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StateCreateNewAppropriation
 
-class StateDecreaseExistingAppropriation(BaseStringField):
+class StateDecreaseExistingAppropriation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StateDecreaseExistingAppropriation
 
-class StateDecreaseExistingRevenues(BaseStringField):
+class StateDecreaseExistingRevenues(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StateDecreaseExistingRevenues
 
-class StateIncreaseExistingAppropriation(BaseStringField):
+class StateIncreaseExistingAppropriation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StateIncreaseExistingAppropriation
 
-class StateIncreaseExistingRevenues(BaseStringField):
+class StateIncreaseExistingRevenues(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StateIncreaseExistingRevenues
 
-class StateNoStateFiscalEffect(BaseStringField):
+class StateNoStateFiscalEffect(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StateNoStateFiscalEffect
 
-class StaticCompleteCigar(BaseStringField):
+class StaticCompleteCigar(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StaticCompleteCigar
 
-class Status(BaseStringField):
+class Status(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Status
 
-class Status1993(BaseStringField):
+class Status1993(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Status1993
 
-class StatusApproved(BaseStringField):
+class StatusApproved(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StatusApproved
 
-class StatusProposed(BaseStringField):
+class StatusProposed(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StatusProposed
 
-class Street(BaseStringField):
+class Street(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Street
 
-class Streptozotocin(BaseStringField):
+class Streptozotocin(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Streptozotocin
 
-class Strokes(BaseStringField):
+class Strokes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Strokes
 
-class StudyName(BaseStringField):
+class StudyName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StudyName
 
-class StudyNumber(BaseStringField):
+class StudyNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StudyNumber
 
-class StudyTitle(BaseStringField):
+class StudyTitle(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.StudyTitle
 
-class Style(BaseStringField):
+class Style(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Style
 
-class Submission(BaseStringField):
+class Submission(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Submission
 
-class SuggestedSolutionsS(BaseStringField):
+class SuggestedSolutionsS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SuggestedSolutionsS
 
-class Suggestion(BaseStringField):
+class Suggestion(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Suggestion
 
-class SuggestionsRecommendations(BaseStringField):
+class SuggestionsRecommendations(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SuggestionsRecommendations
 
-class SumaryOfImrdBudget(BaseStringField):
+class SumaryOfImrdBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SumaryOfImrdBudget
 
-class SumaryOfImrdBudgetCommittedToDateCurrentYear(BaseStringField):
+class SumaryOfImrdBudgetCommittedToDateCurrentYear(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SumaryOfImrdBudgetCommittedToDateCurrentYear
 
-class SumaryOfImrdBudgetCurrentBalAvailable(BaseStringField):
+class SumaryOfImrdBudgetCurrentBalAvailable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SumaryOfImrdBudgetCurrentBalAvailable
 
-class SumaryOfImrdBudgetNewBalance(BaseStringField):
+class SumaryOfImrdBudgetNewBalance(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SumaryOfImrdBudgetNewBalance
 
-class SumaryOfImrdBudgetThisAmountFromNextYearSBudget(BaseStringField):
+class SumaryOfImrdBudgetThisAmountFromNextYearSBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SumaryOfImrdBudgetThisAmountFromNextYearSBudget
 
-class SumaryOfImrdBudgetThisChangeFromCurrentBudget(BaseStringField):
+class SumaryOfImrdBudgetThisChangeFromCurrentBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SumaryOfImrdBudgetThisChangeFromCurrentBudget
 
-class SumaryOfImrdBudgetTotalAreaBudget(BaseStringField):
+class SumaryOfImrdBudgetTotalAreaBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SumaryOfImrdBudgetTotalAreaBudget
 
-class SummaryOfMrdBudget(BaseStringField):
+class SummaryOfMrdBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SummaryOfMrdBudget
 
-class SummaryOfMrdBudgetCommitedToDateCurrentYear(BaseStringField):
+class SummaryOfMrdBudgetCommitedToDateCurrentYear(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SummaryOfMrdBudgetCommitedToDateCurrentYear
 
-class SummaryOfMrdBudgetCurrentBalAvailable(BaseStringField):
+class SummaryOfMrdBudgetCurrentBalAvailable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SummaryOfMrdBudgetCurrentBalAvailable
 
-class SummaryOfMrdBudgetNewBalance(BaseStringField):
+class SummaryOfMrdBudgetNewBalance(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SummaryOfMrdBudgetNewBalance
 
-class SummaryOfMrdBudgetThisAmount(BaseStringField):
+class SummaryOfMrdBudgetThisAmount(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SummaryOfMrdBudgetThisAmount
 
-class SummaryOfMrdBudgetThisChangeFromCurrentBudget(BaseStringField):
+class SummaryOfMrdBudgetThisChangeFromCurrentBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SummaryOfMrdBudgetThisChangeFromCurrentBudget
 
-class SummaryOfMrdBudgetTotalAreaBudget(BaseStringField):
+class SummaryOfMrdBudgetTotalAreaBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SummaryOfMrdBudgetTotalAreaBudget
 
-class SummaryOfResearchBudget(BaseStringField):
+class SummaryOfResearchBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SummaryOfResearchBudget
 
-class SummaryOfResearchBudgetCurrentBalAvailable(BaseStringField):
+class SummaryOfResearchBudgetCurrentBalAvailable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SummaryOfResearchBudgetCurrentBalAvailable
 
-class SummaryOfResearchBudgetCurrentBalanceAvailable(BaseStringField):
+class SummaryOfResearchBudgetCurrentBalanceAvailable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SummaryOfResearchBudgetCurrentBalanceAvailable
 
-class SummaryOfResearchBudgetThisAmount(BaseStringField):
+class SummaryOfResearchBudgetThisAmount(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SummaryOfResearchBudgetThisAmount
 
-class SummaryOfResearchBudgetThisChangeFromCurrentBudget(BaseStringField):
+class SummaryOfResearchBudgetThisChangeFromCurrentBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SummaryOfResearchBudgetThisChangeFromCurrentBudget
 
-class SummaryOfResearchBudgetTotalAreaBudget(BaseStringField):
+class SummaryOfResearchBudgetTotalAreaBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SummaryOfResearchBudgetTotalAreaBudget
 
-class SupervisorManager(BaseStringField):
+class SupervisorManager(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SupervisorManager
 
-class SupplierRabidResearch(BaseStringField):
+class SupplierRabidResearch(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SupplierRabidResearch
 
-class Suppression(BaseStringField):
+class Suppression(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Suppression
 
-class SwornToAndSubscribedBeforeMeThis(BaseStringField):
+class SwornToAndSubscribedBeforeMeThis(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.SwornToAndSubscribedBeforeMeThis
 
-class System(BaseStringField):
+class System(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.System
 
-class T(BaseStringField):
+class T(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.T
 
-class TN(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.TN
-
-class TCodesNa(BaseStringField):
+class TCodesNa(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TCodesNa
 
-class Ta100(BaseStringField):
+class TN(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.TN
+
+class Ta100(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ta100
 
-class Ta10059(BaseStringField):
+class Ta10059(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ta10059
 
-class Ta1535(BaseStringField):
+class Ta1535(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ta1535
 
-class Ta153559(BaseStringField):
+class Ta153559(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ta153559
 
-class Ta15359(BaseStringField):
+class Ta15359(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ta15359
 
-class Ta98(BaseStringField):
+class Ta98(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ta98
 
-class Ta9859(BaseStringField):
+class Ta9859(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Ta9859
 
-class Tar(BaseStringField):
+class Tar(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Tar
 
-class Target(BaseStringField):
+class Target(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Target
 
-class TargetDate(BaseStringField):
+class TargetDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TargetDate
 
-class TelNo(BaseStringField):
+class TelNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TelNo
 
-class Tel(BaseStringField):
+class Tel(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Tel
 
-class TelecopierTransmittalCoverSheet(BaseStringField):
+class TelecopierTransmittalCoverSheet(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TelecopierTransmittalCoverSheet
 
-class TelecopierTransmittalCoverSheetDate(BaseStringField):
+class TelecopierTransmittalCoverSheetDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TelecopierTransmittalCoverSheetDate
 
-class TelecopierTransmittalCoverSheetFrom(BaseStringField):
+class TelecopierTransmittalCoverSheetFrom(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TelecopierTransmittalCoverSheetFrom
 
-class TelecopierTransmittalCoverSheetPages(BaseStringField):
+class TelecopierTransmittalCoverSheetPages(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TelecopierTransmittalCoverSheetPages
 
-class TelecopierTransmittalCoverSheetRe(BaseStringField):
+class TelecopierTransmittalCoverSheetRe(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TelecopierTransmittalCoverSheetRe
 
-class TelecopierTransmittalCoverSheetTo(BaseStringField):
+class TelecopierTransmittalCoverSheetTo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TelecopierTransmittalCoverSheetTo
 
-class Telefax(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Telefax
-
-class TelefaxMessageNo(BaseStringField):
+class TelefaxMessageNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TelefaxMessageNo
 
-class Telephone(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Telephone
-
-class Telex(BaseStringField):
+class Telex(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Telex
 
-class TennisTournament(BaseStringField):
+class TennisTournament(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TennisTournament
 
-class Terms(BaseStringField):
+class Terms(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Terms
 
-class TermsFOB(BaseStringField):
+class TermsFOB(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TermsFOB
 
-class TermsNet(BaseStringField):
+class TermsNet(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TermsNet
 
-class TermsVia(BaseStringField):
+class TermsVia(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TermsVia
 
-class TestDates(BaseStringField):
+class TestDates(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TestDates
 
-class TestMaterialS(BaseStringField):
+class TestMaterialS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TestMaterialS
 
-class Tested(BaseStringField):
+class Tested(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Tested
 
-class TextOver500PrizesToBeAwarded(BaseStringField):
+class TextOver500PrizesToBeAwarded(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TextOver500PrizesToBeAwarded
 
-class TheFollowingInformationMustBeFurnished(BaseStringField):
+class TheFollowingInformationMustBeFurnished(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TheFollowingInformationMustBeFurnished
 
-class TheFollowingInformationMustBeFurnishedDate(BaseStringField):
+class TheFollowingInformationMustBeFurnishedDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TheFollowingInformationMustBeFurnishedDate
 
-class TheFollowingInformationMustBeFurnishedSignature(BaseStringField):
+class TheFollowingInformationMustBeFurnishedSignature(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TheFollowingInformationMustBeFurnishedSignature
 
-class TheFollowingInformationMustBeFurnished1FullName(BaseStringField):
+class TheFollowingInformationMustBeFurnished1FullName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TheFollowingInformationMustBeFurnished1FullName
 
-class TheFollowingInformationMustBeFurnished2ResidenceAddress(BaseStringField):
+class TheFollowingInformationMustBeFurnished2ResidenceAddress(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TheFollowingInformationMustBeFurnished2ResidenceAddress
 
-class TheFollowingInformationMustBeFurnished3BusinessAddress(BaseStringField):
+class TheFollowingInformationMustBeFurnished3BusinessAddress(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TheFollowingInformationMustBeFurnished3BusinessAddress
 
-class TheFollowingInformationMustBeFurnished4Occupation(BaseStringField):
+class TheFollowingInformationMustBeFurnished4Occupation(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TheFollowingInformationMustBeFurnished4Occupation
 
-class This(BaseStringField):
+class This(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.This
 
-class ThisAmount(BaseStringField):
+class ThisAmount(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ThisAmount
 
-class ThisChangeFromCurrentBudget(BaseStringField):
+class ThisChangeFromCurrentBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ThisChangeFromCurrentBudget
 
-class ThisDocumentIsFrom(BaseStringField):
+class ThisDocumentIsFrom(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ThisDocumentIsFrom
 
-class ThisDocumentIsFromComments(BaseStringField):
+class ThisDocumentIsFromComments(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ThisDocumentIsFromComments
 
-class ThisDocumentIsFromFaxPhoneNumber(BaseStringField):
+class ThisDocumentIsFromFaxPhoneNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ThisDocumentIsFromFaxPhoneNumber
 
-class ThisDocumentIsFromFaxTelephoneNumber(BaseStringField):
+class ThisDocumentIsFromFaxTelephoneNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ThisDocumentIsFromFaxTelephoneNumber
 
-class ThisDocumentIsFromName(BaseStringField):
+class ThisDocumentIsFromName(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ThisDocumentIsFromName
 
-class ThisDocumentIsFromOffice(BaseStringField):
+class ThisDocumentIsFromOffice(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ThisDocumentIsFromOffice
 
-class Time(BaseStringField):
+class Time(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Time
 
-class Timetable(BaseStringField):
+class Timetable(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Timetable
 
-class TimetableInMarketArrivalDate(BaseStringField):
+class TimetableInMarketArrivalDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TimetableInMarketArrivalDate
 
-class TimetableLaunchDate(BaseStringField):
+class TimetableLaunchDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TimetableLaunchDate
 
-class TimetableManufacturing(BaseStringField):
+class TimetableManufacturing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TimetableManufacturing
 
-class TimetableProductSpecsDate(BaseStringField):
+class TimetableProductSpecsDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TimetableProductSpecsDate
 
-class TimetableShipping(BaseStringField):
+class TimetableShipping(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TimetableShipping
 
-class TimetableStartManufactureDate(BaseStringField):
+class TimetableStartManufactureDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TimetableStartManufactureDate
 
-class Title(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Title
-
-class To(BaseStringField):
+class To(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.To
 
-class Total(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Total
-
-class TotalOfIndependentNewport1ClubOutlets(BaseStringField):
+class TotalOfIndependentNewport1ClubOutlets(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalOfIndependentNewport1ClubOutlets
 
-class TotalOfIndependentSpecialEmphasisOutlets(BaseStringField):
+class TotalOfIndependentSpecialEmphasisOutlets(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalOfIndependentSpecialEmphasisOutlets
 
-class TotalOfNumberOneClubOutletsWithDistribution(BaseStringField):
+class TotalOfNumberOneClubOutletsWithDistribution(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalOfNumberOneClubOutletsWithDistribution
 
-class TotalOfSpEmphasisOutleisWithDistribution(BaseStringField):
+class TotalOfSpEmphasisOutleisWithDistribution(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalOfSpEmphasisOutleisWithDistribution
 
-class TotalAreaBudget(BaseStringField):
+class TotalAreaBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalAreaBudget
 
-class TotalBudget(BaseStringField):
+class TotalBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalBudget
 
-class TotalPages(BaseStringField):
+class TotalPages(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalPages
 
-class Totals(BaseStringField):
+class Total(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Total
+
+class Totals(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Totals
 
-class ToxicitySurvival(BaseStringField):
+class ToxicitySurvival(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ToxicitySurvival
 
-class ToxicitySurvival100(BaseStringField):
+class ToxicitySurvival100(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ToxicitySurvival100
 
-class ToxicitySurvival50(BaseStringField):
+class ToxicitySurvival50(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ToxicitySurvival50
 
-class ToxicitySurvival80(BaseStringField):
+class ToxicitySurvival80(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ToxicitySurvival80
 
-class Transfer(BaseStringField):
+class Transfer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Transfer
 
-class TrimSize(BaseStringField):
+class TrimSize(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TrimSize
 
-class True(BaseStringField):
+class FieldTrue(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.True
+        return user_profile.features.FieldTrue
 
-class TrueCoreAreas(BaseStringField):
+class TrueCoreAreas(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TrueCoreAreas
 
-class Type(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.Type
-
-class TypeChange(BaseStringField):
+class TypeChange(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeChange
 
-class TypeDisplay(BaseStringField):
+class TypeDisplay(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeDisplay
 
-class TypeDisplayCounter(BaseStringField):
+class TypeDisplayCounter(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeDisplayCounter
 
-class TypeDisplayFloor(BaseStringField):
+class TypeDisplayFloor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeDisplayFloor
 
-class TypeDisplayPoster(BaseStringField):
+class TypeDisplayPoster(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeDisplayPoster
 
-class TypeOfProduct(BaseStringField):
+class TypeOfProduct(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfProduct
 
-class TypeOfPromotion(BaseStringField):
+class TypeOfPromotion(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfPromotion
 
-class TypeOfSpecificationChangeCheckAllThatApply(BaseStringField):
+class TypeOfSpecificationChangeCheckAllThatApply(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfSpecificationChangeCheckAllThatApply
 
-class TypeOfSpecificationChangeCheckAllThatApplyCigaretteDesignPermanent(BaseStringField):
+class TypeOfSpecificationChangeCheckAllThatApplyCigaretteDesignPermanent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfSpecificationChangeCheckAllThatApplyCigaretteDesignPermanent
 
-class TypeOfSpecificationChangeCheckAllThatApplyCigaretteDesignTrial(BaseStringField):
+class TypeOfSpecificationChangeCheckAllThatApplyCigaretteDesignTrial(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfSpecificationChangeCheckAllThatApplyCigaretteDesignTrial
 
-class TypeOfSpecificationChangeCheckAllThatApplyDiscontinueProduct(BaseStringField):
+class TypeOfSpecificationChangeCheckAllThatApplyDiscontinueProduct(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfSpecificationChangeCheckAllThatApplyDiscontinueProduct
 
-class TypeOfSpecificationChangeCheckAllThatApplyEquivalentAdditive(BaseStringField):
+class TypeOfSpecificationChangeCheckAllThatApplyEquivalentAdditive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfSpecificationChangeCheckAllThatApplyEquivalentAdditive
 
-class TypeOfSpecificationChangeCheckAllThatApplyEquivalentFilterPaperTipping(BaseStringField):
+class TypeOfSpecificationChangeCheckAllThatApplyEquivalentFilterPaperTipping(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfSpecificationChangeCheckAllThatApplyEquivalentFilterPaperTipping
 
-class TypeOfSpecificationChangeCheckAllThatApplyEquivalentPackagingMaterial(BaseStringField):
+class TypeOfSpecificationChangeCheckAllThatApplyEquivalentPackagingMaterial(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfSpecificationChangeCheckAllThatApplyEquivalentPackagingMaterial
 
-class TypeOfSpecificationChangeCheckAllThatApplyNewProduct(BaseStringField):
+class TypeOfSpecificationChangeCheckAllThatApplyNewProduct(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfSpecificationChangeCheckAllThatApplyNewProduct
 
-class TypeOfSpecificationChangeCheckAllThatApplyPackagingPermanent(BaseStringField):
+class TypeOfSpecificationChangeCheckAllThatApplyPackagingPermanent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfSpecificationChangeCheckAllThatApplyPackagingPermanent
 
-class TypeOfSpecificationChangeCheckAllThatApplyPackagingTemporary(BaseStringField):
+class TypeOfSpecificationChangeCheckAllThatApplyPackagingTemporary(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfSpecificationChangeCheckAllThatApplyPackagingTemporary
 
-class TypeOfSpecificationChangeCheckAllThatApplyProcessing(BaseStringField):
+class TypeOfSpecificationChangeCheckAllThatApplyProcessing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfSpecificationChangeCheckAllThatApplyProcessing
 
-class TypeOfSpecificationChangeCheckAllThatApplyTarAdjustment1Mg(BaseStringField):
+class TypeOfSpecificationChangeCheckAllThatApplyTarAdjustment1Mg(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfSpecificationChangeCheckAllThatApplyTarAdjustment1Mg
 
-class TypeBiological(BaseStringField):
+class TypeBiological(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeBiological
 
-class TypeChemical(BaseStringField):
+class TypeChemical(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeChemical
 
-class TypeCombined(BaseStringField):
+class TypeCombined(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeCombined
 
-class TapeSpeed(BaseStringField):
+class TapeSpeed(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TapeSpeed
 
-class TarNumber(BaseStringField):
+class TarNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TarNumber
 
-class Tars(BaseStringField):
+class Tars(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Tars
 
-class TaxStatusPaidOrFree(BaseStringField):
+class TaxStatusPaidOrFree(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TaxStatusPaidOrFree
 
-class Technician(BaseStringField):
+class Technician(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Technician
 
-class TestArticle(BaseStringField):
+class Telefax(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Telefax
+
+class Telephone(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Telephone
+
+class TestArticle(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TestArticle
 
-class TestPeriod(BaseStringField):
+class TestPeriod(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TestPeriod
 
-class Tester(BaseStringField):
+class Tester(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Tester
 
-class TheFollowingDocumentIncludingCoverPageIs(BaseStringField):
+class TheFollowingDocumentIncludingCoverPageIs(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TheFollowingDocumentIncludingCoverPageIs
 
-class ThisAmountFromNextYearSBudget(BaseStringField):
+class ThisAmountFromNextYearSBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ThisAmountFromNextYearSBudget
 
-class ThisChange(BaseStringField):
+class ThisChange(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ThisChange
 
-class ThisProjectIs(BaseStringField):
+class ThisProjectIs(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ThisProjectIs
 
-class ThisFormWasPlacedBeforeBatesId(BaseStringField):
+class ThisFormWasPlacedBeforeBatesId(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ThisFormWasPlacedBeforeBatesId
 
-class TippingPaper(BaseStringField):
+class TippingPaper(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TippingPaper
 
-class TippingPaperBobbinWidth(BaseStringField):
+class TippingPaperBobbinWidth(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TippingPaperBobbinWidth
 
-class TippingPaperColor(BaseStringField):
+class TippingPaperColor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TippingPaperColor
 
-class TippingPaperDobbinLength(BaseStringField):
+class TippingPaperDobbinLength(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TippingPaperDobbinLength
 
-class TippingPaperPerforationTypeNoOfLines(BaseStringField):
+class TippingPaperPerforationTypeNoOfLines(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TippingPaperPerforationTypeNoOfLines
 
-class TippingPaperPerforationTypeAndNoOfLines(BaseStringField):
+class TippingPaperPerforationTypeAndNoOfLines(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TippingPaperPerforationTypeAndNoOfLines
 
-class TippingPaperPorosity(BaseStringField):
+class TippingPaperPorosity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TippingPaperPorosity
 
-class TippingPaperPrintDescription(BaseStringField):
+class TippingPaperPrintDescription(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TippingPaperPrintDescription
 
-class TippingPaperRobbinLength(BaseStringField):
+class TippingPaperRobbinLength(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TippingPaperRobbinLength
 
-class TippingPaperSubstance(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.TippingPaperSubstance
-
-class TippingPaperSupplierCodeNoS(BaseStringField):
+class TippingPaperSupplierCodeNoS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TippingPaperSupplierCodeNoS
 
-class TippingPaperSupplierS(BaseStringField):
+class TippingPaperSupplierS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TippingPaperSupplierS
 
-class TippingAndTippingApplication(BaseStringField):
+class TippingPaperSubstance(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.TippingPaperSubstance
+
+class TippingAndTippingApplication(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TippingAndTippingApplication
 
-class TitleOfAction(BaseStringField):
+class Title(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Title
+
+class TitleOfAction(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TitleOfAction
 
-class ToBeDeductedFrom1998Budget(BaseStringField):
+class ToBeDeductedFrom1998Budget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ToBeDeductedFrom1998Budget
 
-class ToBeDeductedFrom1999Budget(BaseStringField):
+class ToBeDeductedFrom1999Budget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ToBeDeductedFrom1999Budget
 
-class ToSampleStock(BaseStringField):
+class ToSampleStock(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ToSampleStock
 
-class ToSampleStockMR(BaseStringField):
+class ToSampleStockMR(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ToSampleStockMR
 
-class ToSampleStockRD(BaseStringField):
+class ToSampleStockRD(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ToSampleStockRD
 
-class ToNicotineMgCigt(BaseStringField):
+class ToNicotineMgCigt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ToNicotineMgCigt
 
-class ToTarMgCigt(BaseStringField):
+class ToTarMgCigt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ToTarMgCigt
 
-class TobaccoNumber(BaseStringField):
+class TobaccoNumber(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TobaccoNumber
 
-class TobaccoUsed(BaseStringField):
+class TobaccoUsed(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TobaccoUsed
 
-class TodaySDate(BaseStringField):
+class TodaySDate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TodaySDate
 
-class Topic(BaseStringField):
+class Topic(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Topic
 
-class Total205(BaseStringField):
+class Total205(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Total205
 
-class TotalAreaAuthorized(BaseStringField):
+class TotalAreaAuthorized(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalAreaAuthorized
 
-class TotalAuthorizedProjectAmount(BaseStringField):
+class TotalAuthorizedProjectAmount(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalAuthorizedProjectAmount
 
-class TotalContractCost(BaseStringField):
+class TotalContractCost(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalContractCost
 
-class TotalCost(BaseStringField):
+class TotalCost(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalCost
 
-class TotalDenierAsMarked(BaseStringField):
+class TotalDenierAsMarked(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalDenierAsMarked
 
-class TotalDenierAsTested(BaseStringField):
+class TotalDenierAsTested(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalDenierAsTested
 
-class TotalSample(BaseStringField):
+class TotalSample(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalSample
 
-class TotalSolids(BaseStringField):
+class TotalSolids(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalSolids
 
-class TotalVOCS(BaseStringField):
+class TotalVOCS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalVOCS
 
-class TotalNumberOfPagesIncludingThisPage(BaseStringField):
+class TotalNumberOfPagesIncludingThisPage(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalNumberOfPagesIncludingThisPage
 
-class TotalBright(BaseStringField):
+class TotalBright(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalBright
 
-class TotalKl(BaseStringField):
+class TotalKl(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TotalKl
 
-class Toxline(BaseStringField):
+class Toxline(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Toxline
 
-class TradeRegister(BaseStringField):
+class TradeRegister(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TradeRegister
 
-class TuesdayYN(BaseStringField):
+class TuesdayYN(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TuesdayYN
 
-class TypeOfAd(BaseStringField):
+class Type(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Type
+
+class TypeOfAd(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfAd
 
-class TypeOfCigarette(BaseStringField):
+class TypeOfCigarette(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfCigarette
 
-class TypeOfEvent(BaseStringField):
+class TypeOfEvent(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfEvent
 
-class TypeOfMaker(BaseStringField):
+class TypeOfMaker(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfMaker
 
-class TypeOfRod(BaseStringField):
+class TypeOfRod(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfRod
 
-class TypeOfTipper(BaseStringField):
+class TypeOfTipper(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfTipper
 
-class TypeOfProductSizeSListPrice(BaseStringField):
+class TypeOfProductSizeSListPrice(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TypeOfProductSizeSListPrice
 
-class TPic(BaseStringField):
+class TPic(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TPic
 
-class Unit(BaseStringField):
+class Unit(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Unit
 
-class UnitPrice(BaseStringField):
+class UnitPrice(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.UnitPrice
 
-class Units(BaseStringField):
+class Units(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Units
 
-class UpcNo(BaseStringField):
+class UpcNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.UpcNo
 
-class Use(BaseStringField):
+class Use(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Use
 
-class Under35(BaseStringField):
+class Under35(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Under35
 
-class Under3535Over(BaseStringField):
+class Under3535Over(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Under3535Over
 
-class Up(BaseStringField):
+class Up(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Up
 
-class Vendor(BaseStringField):
+class Vendor(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Vendor
 
-class Via(BaseStringField):
+class Via(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Via
 
-class ViaCertifiedMail(BaseStringField):
+class ViaCertifiedMail(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ViaCertifiedMail
 
-class ViaCertifiedAirMail(BaseStringField):
+class ViaCertifiedAirMail(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ViaCertifiedAirMail
 
-class Viceroy(BaseStringField):
+class Viceroy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Viceroy
 
-class Volume(BaseStringField):
+class Volume(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Volume
 
-class VsCurrentYearIncrDecr(BaseStringField):
+class VsCurrentYearIncrDecr(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.VsCurrentYearIncrDecr
 
-class Verification(BaseStringField):
+class Verification(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Verification
 
-class VickiClark(BaseStringField):
+class VickiClark(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.VickiClark
 
-class VoucherApproval(BaseStringField):
+class VoucherApproval(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.VoucherApproval
 
-class Warning(BaseStringField):
+class Warning(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Warning
 
-class WereQuantitiesAppropriate(BaseStringField):
+class WereQuantitiesAppropriate(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WereQuantitiesAppropriate
 
-class WereQuantitiesAppropriateNo(BaseStringField):
+class WereQuantitiesAppropriateNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WereQuantitiesAppropriateNo
 
-class WereQuantitiesAppropriateYes(BaseStringField):
+class WereQuantitiesAppropriateYes(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WereQuantitiesAppropriateYes
 
-class WinstonSalem(BaseStringField):
+class WinstonSalem(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WinstonSalem
 
-class WorkRequestedBy(BaseStringField):
+class WorkRequestedBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WorkRequestedBy
 
-class Writer(BaseStringField):
+class Writer(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Writer
 
-class WaterTreatment(BaseStringField):
+class WaterTreatment(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WaterTreatment
 
-class Wave(BaseStringField):
+class Wave(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Wave
 
-class WaveS(BaseStringField):
+class WaveS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WaveS
 
-class WavesS(BaseStringField):
+class WavesS(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WavesS
 
-class WeHerebyCertifyChargesShownAboveOnDatesPerAttachedBillAreTrueAndCorrectAsBilledToTheAccountInUpperRightHandCornerOfTheAffidavitAndAreExclusive(BaseStringField):
+class WeHerebyCertifyChargesShownAboveOnDatesPerAttachedBillAreTrueAndCorrectAsBilledToTheAccountInUpperRightHandCornerOfTheAffidavitAndAreExclusive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WeHerebyCertifyChargesShownAboveOnDatesPerAttachedBillAreTrueAndCorrectAsBilledToTheAccountInUpperRightHandCornerOfTheAffidavitAndAreExclusive
 
-class WeekOf(BaseStringField):
+class WeekOf(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WeekOf
 
-class Weight(BaseStringField):
+class Weight(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Weight
 
-class Weights(BaseStringField):
+class Weights(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Weights
 
-class WeightsNetNetTobacco(BaseStringField):
+class WeightsNetNetTobacco(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WeightsNetNetTobacco
 
-class WeightsNetTobRodDensity(BaseStringField):
+class WeightsNetTobRodDensity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WeightsNetTobRodDensity
 
-class WeightsTobaccoRodDensity(BaseStringField):
+class WeightsTobaccoRodDensity(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WeightsTobaccoRodDensity
 
-class WeightsTotalCigaretteWeight(BaseStringField):
+class WeightsTotalCigaretteWeight(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WeightsTotalCigaretteWeight
 
-class WeightsTotalCigtWt(BaseStringField):
+class WeightsTotalCigtWt(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WeightsTotalCigtWt
 
-class WetWeight(BaseStringField):
+class WetWeight(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WetWeight
 
-class WidthOfBand(BaseStringField):
+class WidthOfBand(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WidthOfBand
 
-class WithinAgencySBudget(BaseStringField):
+class WithinAgencySBudget(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WithinAgencySBudget
 
-class Wrapping(BaseStringField):
+class Wrapping(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Wrapping
 
-class WrappingCartons(BaseStringField):
+class WrappingCartons(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WrappingCartons
 
-class WrappingClosures(BaseStringField):
+class WrappingClosures(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WrappingClosures
 
-class WrappingLabels(BaseStringField):
+class WrappingLabels(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WrappingLabels
 
-class WrappingMarkings(BaseStringField):
+class WrappingMarkings(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WrappingMarkings
 
-class WrappingTearTape(BaseStringField):
+class WrappingTearTape(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WrappingTearTape
 
-class Wrappings(BaseStringField):
+class Wrappings(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Wrappings
 
-class WrappingsCartons(BaseStringField):
+class WrappingsCartons(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WrappingsCartons
 
-class WrappingsClosures(BaseStringField):
+class WrappingsClosures(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WrappingsClosures
 
-class WrappingsLabels(BaseStringField):
+class WrappingsLabels(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WrappingsLabels
 
-class WrappingsMarkings(BaseStringField):
+class WrappingsMarkings(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WrappingsMarkings
 
-class WrappingsTearTape(BaseStringField):
+class WrappingsTearTape(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WrappingsTearTape
 
-class WrittenBy(BaseStringField):
+class WrittenBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WrittenBy
 
-class WtOfCigarettes4Oz(BaseStringField):
+class WtOfCigarettes4Oz(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WtOfCigarettes4Oz
 
-class Yea(BaseStringField):
+class Yea(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Yea
 
-class Year(BaseStringField):
+class Year(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Year
 
-class YearFive(BaseStringField):
+class YearFive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.YearFive
 
-class YearFour(BaseStringField):
+class YearFour(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.YearFour
 
-class YearOne(BaseStringField):
+class YearOne(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.YearOne
 
-class YearThree(BaseStringField):
+class YearThree(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.YearThree
 
-class Yr(BaseStringField):
+class Yr(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Yr
 
-class ZipCode(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return user_profile.features.ZipCode
-
-class Zip(BaseStringField):
+class Zip(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Zip
 
-class Advertisements(BaseStringField):
+class ZipCode(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.ZipCode
+
+class Advertisements(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Advertisements
 
-class apping(BaseStringField):
+class apping(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.apping
 
-class AppingCartons(BaseStringField):
+class AppingCartons(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AppingCartons
 
-class AppingClosures(BaseStringField):
+class AppingClosures(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AppingClosures
 
-class AppingLabels(BaseStringField):
+class AppingLabels(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AppingLabels
 
-class AppingMarkings(BaseStringField):
+class AppingMarkings(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AppingMarkings
 
-class AppingTearRape(BaseStringField):
+class AppingTearRape(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AppingTearRape
 
-class AsFollows(BaseStringField):
+class AsFollows(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.AsFollows
 
-class BpMp(BaseStringField):
+class BpMp(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.BpMp
 
-class by(BaseStringField):
+class by(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.by
 
-class CheckApplicableBoxEs(BaseStringField):
+class Cc(FormBaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Cc
+
+class CheckApplicableBoxEs(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CheckApplicableBoxEs
 
-class CtionToLitmus(BaseStringField):
+class CtionToLitmus(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CtionToLitmus
 
-class DayOf(BaseStringField):
+class DayOf(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DayOf
 
-class Dimensions(BaseStringField):
+class Dimensions(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Dimensions
 
-class Explain(BaseStringField):
+class Explain(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.Explain
 
-class GinalRequestMadeBy(BaseStringField):
+class GinalRequestMadeBy(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.GinalRequestMadeBy
 
-class LobbyistForLobbyingYesOrNo(BaseStringField):
+class LobbyistForLobbyingYesOrNo(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.LobbyistForLobbyingYesOrNo
 
-class MmHg(BaseStringField):
+class MmHg(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.MmHg
 
-class OfTheAbovementionedNewspaperAndThatDisplayAdsForTheAboveAccountWereMadeThroughTheAforesaidNewspaperDuring(BaseStringField):
+class OfTheAbovementionedNewspaperAndThatDisplayAdsForTheAboveAccountWereMadeThroughTheAforesaidNewspaperDuring(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.OfTheAbovementionedNewspaperAndThatDisplayAdsForTheAboveAccountWereMadeThroughTheAforesaidNewspaperDuring
 
-class on(BaseStringField):
+class on(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.on
 
-class pH(BaseStringField):
+class pH(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.pH
 
-class PagesLong(BaseStringField):
+class PagesLong(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PagesLong
 
-class resider(BaseStringField):
+class resider(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.resider
 
-class TheMonthOf(BaseStringField):
+class TheMonthOf(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TheMonthOf
 
-class ToBePerformedInAcuteDermalToxicologyBuilding18(BaseStringField):
+class ToBePerformedInAcuteDermalToxicologyBuilding18(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.ToBePerformedInAcuteDermalToxicologyBuilding18
 
-class WeightedAsFollows(BaseStringField):
+class WeightedAsFollows(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WeightedAsFollows
 
-class WhoBeingDulySwornSaysThatHeSheIs(BaseStringField):
+class WhoBeingDulySwornSaysThatHeSheIs(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.WhoBeingDulySwornSaysThatHeSheIs
 
-class YesPleaseDetailIncludingTheNamesOfThePersonsReceivingAndInWhoseBehalfSuchExpendituresHaveBeenMadeTheAmountDatePlaceAndReasonForTheExpenditure(BaseStringField):
+class YesPleaseDetailIncludingTheNamesOfThePersonsReceivingAndInWhoseBehalfSuchExpendituresHaveBeenMadeTheAmountDatePlaceAndReasonForTheExpenditure(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.YesPleaseDetailIncludingTheNamesOfThePersonsReceivingAndInWhoseBehalfSuchExpendituresHaveBeenMadeTheAmountDatePlaceAndReasonForTheExpenditure
 
-class FieldCorrected(BaseStringField):
+class FieldCorrected(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldCorrected
 
-class FieldDecreaseRevenues(BaseStringField):
+class FieldDecreaseRevenues(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldDecreaseRevenues
 
-class FieldIncreaseRevenues(BaseStringField):
+class FieldIncreaseRevenues(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldIncreaseRevenues
 
-class FieldMandatory(BaseStringField):
+class FieldMandatory(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldMandatory
 
-class FieldMembership(BaseStringField):
+class FieldMembership(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldMembership
 
-class FieldPurchasing(BaseStringField):
+class FieldPurchasing(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldPurchasing
 
-class FieldPermissive(BaseStringField):
+class FieldPermissive(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldPermissive
 
-class FieldStationary(BaseStringField):
+class FieldStationary(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldStationary
 
-class FieldSupplemental(BaseStringField):
+class FieldSupplemental(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldSupplemental
 
-class FieldUpdated(BaseStringField):
+class FieldUpdated(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldUpdated
 
-class FieldCombined(BaseStringField):
+class FieldCombined(FormBaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.FieldCombined
 
-class SolventDmsc(BaseCheckboxField):
+class RouteOfCompoundAdministrationP(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.Solvent
-            == user_features.SolventEnum.Dmsc.value
+            user_profile.features.RouteOfCompoundAdministration
+            == user_profile_attributes.RouteOfCompoundAdministrationEnum.P.value
         )
 
-class SolventOmso(BaseCheckboxField):
+class RouteOfCompoundAdministrationPO(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.Solvent
-            == user_features.SolventEnum.Omso.value
+            user_profile.features.RouteOfCompoundAdministration
+            == user_profile_attributes.RouteOfCompoundAdministrationEnum.PO.value
         )
 
-class SolventOther(BaseCheckboxField):
+class RouteOfCompoundAdministrationIP(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.Solvent
-            == user_features.SolventEnum.FieldOther.value
+            user_profile.features.RouteOfCompoundAdministration
+            == user_profile_attributes.RouteOfCompoundAdministrationEnum.FieldIP.value
         )
 
-class SolventWater(BaseCheckboxField):
+class RouteOfCompoundAdministrationIV(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.Solvent
-            == user_features.SolventEnum.FieldWater.value
+            user_profile.features.RouteOfCompoundAdministration
+            == user_profile_attributes.RouteOfCompoundAdministrationEnum.FieldIV.value
         )
 
-class PermanentBulletin(BaseCheckboxField):
+class RouteOfCompoundAdministrationInhalation(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.Permanent
-            == user_features.PermanentEnum.Bulletin.value
+            user_profile.features.RouteOfCompoundAdministration
+            == user_profile_attributes.RouteOfCompoundAdministrationEnum.FieldInhalation.value
         )
 
-class PermanentRotary(BaseCheckboxField):
+class Compound5MethylCelulose(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.Permanent
-            == user_features.PermanentEnum.Rotary.value
+            user_profile.features.Compound
+            == user_profile_attributes.CompoundEnum.Field5MethylCelulose.value
         )
 
-class PermanentWall(BaseCheckboxField):
+class CompoundCornOil(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.Permanent
-            == user_features.PermanentEnum.Wall.value
+            user_profile.features.Compound
+            == user_profile_attributes.CompoundEnum.FieldCornOil.value
         )
 
-class StateTaxStatusNotToBeChargedBySupplier(BaseCheckboxField):
+class CompoundOther(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.Compound
+            == user_profile_attributes.CompoundEnum.FieldOther.value
+        )
+
+class CompoundSaline(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.Compound
+            == user_profile_attributes.CompoundEnum.FieldSaline.value
+        )
+
+class StateTaxStatusNotToBeChargedBySupplier(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.StateTaxStatus
-            == user_features.StateTaxStatusEnum.NotToBeChargedBySupplier.value
+            == user_profile_attributes.StateTaxStatusEnum.NotToBeChargedBySupplier.value
         )
 
-class StateTaxStatusToBeCharged(BaseCheckboxField):
+class StateTaxStatusToBeCharged(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.StateTaxStatus
-            == user_features.StateTaxStatusEnum.FieldToBeCharged.value
+            == user_profile_attributes.StateTaxStatusEnum.FieldToBeCharged.value
         )
 
-class SubmissionDateFeb17(BaseCheckboxField):
+class SolventDmsc(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.SubmissionDate
-            == user_features.SubmissionDateEnum.Feb17.value
+            user_profile.features.Solvent
+            == user_profile_attributes.SolventEnum.Dmsc.value
         )
 
-class SubmissionDateJuly6(BaseCheckboxField):
+class SolventOmso(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.SubmissionDate
-            == user_features.SubmissionDateEnum.July6.value
+            user_profile.features.Solvent
+            == user_profile_attributes.SolventEnum.Omso.value
         )
 
-class SubmissionDateMar16(BaseCheckboxField):
+class SolventOther(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.SubmissionDate
-            == user_features.SubmissionDateEnum.Mar16.value
+            user_profile.features.Solvent
+            == user_profile_attributes.SolventEnum.FieldOther.value
         )
 
-class SubmissionDateMay11(BaseCheckboxField):
+class SolventWater(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.SubmissionDate
-            == user_features.SubmissionDateEnum.May11.value
+            user_profile.features.Solvent
+            == user_profile_attributes.SolventEnum.FieldWater.value
         )
 
-class SpecificsOfBooth(BaseCheckboxField):
+class EstimatedCostOfTheStudyWillBeDecreased(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.Specifics
-            == user_features.SpecificsEnum.FieldOfBooth.value
+            user_profile.features.EstimatedCostOfTheStudyWillBe
+            == user_profile_attributes.EstimatedCostOfTheStudyWillBeEnum.decreased.value
         )
 
-class SpecificsOfBoothS(BaseCheckboxField):
+class EstimatedCostOfTheStudyWillBeIncreased(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.Specifics
-            == user_features.SpecificsEnum.FieldOfBoothS.value
+            user_profile.features.EstimatedCostOfTheStudyWillBe
+            == user_profile_attributes.EstimatedCostOfTheStudyWillBeEnum.increased.value
         )
 
-class SpecificsPremiumsOnly(BaseCheckboxField):
+class EstimatedCostOfTheStudyWillBeNotAffected(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.Specifics
-            == user_features.SpecificsEnum.PremiumsOnly.value
+            user_profile.features.EstimatedCostOfTheStudyWillBe
+            == user_profile_attributes.EstimatedCostOfTheStudyWillBeEnum.NotAffected.value
         )
 
-class SpecificsMusicVan(BaseCheckboxField):
+class StorageConditionsDessicator(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.Specifics
-            == user_features.SpecificsEnum.FieldMusicVan.value
+            user_profile.features.StorageConditions
+            == user_profile_attributes.StorageConditionsEnum.Dessicator.value
         )
 
-class SpecificsRacingCar(BaseCheckboxField):
+class StorageConditionsFreezer(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.Specifics
-            == user_features.SpecificsEnum.FieldRacingCar.value
+            user_profile.features.StorageConditions
+            == user_profile_attributes.StorageConditionsEnum.Freezer.value
         )
 
-class SpecificsSamplingPremiums(BaseCheckboxField):
+class StorageConditionsOther(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.Specifics
-            == user_features.SpecificsEnum.FieldSamplingPremiums.value
+            user_profile.features.StorageConditions
+            == user_profile_attributes.StorageConditionsEnum.Other.value
         )
 
-class SpecificsSignage(BaseCheckboxField):
+class StorageConditionsRefrigerator8C(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.Specifics
-            == user_features.SpecificsEnum.FieldSignage.value
+            user_profile.features.StorageConditions
+            == user_profile_attributes.StorageConditionsEnum.Refrigerator8C.value
         )
 
-class TypeChangeOfficial(BaseCheckboxField):
+class StorageConditionsRoomTemperature(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.StorageConditions
+            == user_profile_attributes.StorageConditionsEnum.RoomTemperature.value
+        )
+
+class StorageConditionsSpecialInstructionsWhileDosing(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.StorageConditions
+            == user_profile_attributes.StorageConditionsEnum.SpecialInstructionsWhileDosing.value
+        )
+
+class StorageConditionsStoreInDark(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.StorageConditions
+            == user_profile_attributes.StorageConditionsEnum.StoreInDark.value
+        )
+
+class PermanentBulletin(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.Permanent
+            == user_profile_attributes.PermanentEnum.Bulletin.value
+        )
+
+class PermanentRotary(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.Permanent
+            == user_profile_attributes.PermanentEnum.Rotary.value
+        )
+
+class PermanentWall(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.Permanent
+            == user_profile_attributes.PermanentEnum.Wall.value
+        )
+
+class WithinAgencySBudgetYes(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.WithinAgencySBudget
+            == user_profile_attributes.WithinAgencySBudgetEnum.Yes.value
+        )
+
+class WithinAgencySBudgetDecreaseCosts(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.WithinAgencySBudget
+            == user_profile_attributes.WithinAgencySBudgetEnum.FieldDecreaseCosts.value
+        )
+
+class WithinAgencySBudgetNo(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.WithinAgencySBudget
+            == user_profile_attributes.WithinAgencySBudgetEnum.FieldNo.value
+        )
+
+class FundSourceAffectedGpr(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.FundSourceAffected
+            == user_profile_attributes.FundSourceAffectedEnum.Gpr.value
+        )
+
+class FundSourceAffectedPro(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.FundSourceAffected
+            == user_profile_attributes.FundSourceAffectedEnum.Pro.value
+        )
+
+class FundSourceAffectedFed(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.FundSourceAffected
+            == user_profile_attributes.FundSourceAffectedEnum.FieldFed.value
+        )
+
+class FundSourceAffectedPrs(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.FundSourceAffected
+            == user_profile_attributes.FundSourceAffectedEnum.FieldPrs.value
+        )
+
+class FundSourceAffectedSeg(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.FundSourceAffected
+            == user_profile_attributes.FundSourceAffectedEnum.FieldSeg.value
+        )
+
+class FundSourceAffectedSegS(FormBaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.FundSourceAffected
+            == user_profile_attributes.FundSourceAffectedEnum.FieldSegS.value
+        )
+
+class TypeChangeOfficial(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.TypeChange
-            == user_features.TypeChangeEnum.Official.value
+            == user_profile_attributes.TypeChangeEnum.Official.value
         )
 
-class TypeChangeTemporary(BaseCheckboxField):
+class TypeChangeTemporary(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.TypeChange
-            == user_features.TypeChangeEnum.FieldTemporary.value
+            == user_profile_attributes.TypeChangeEnum.FieldTemporary.value
         )
 
-class IfAMaterialOrDimensionalChangeAlsoInvolvedNo(BaseCheckboxField):
+class IfAMaterialOrDimensionalChangeAlsoInvolvedNo(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.IfAMaterialOrDimensionalChangeAlsoInvolved
-            == user_features.IfAMaterialOrDimensionalChangeAlsoInvolvedEnum.No.value
+            == user_profile_attributes.IfAMaterialOrDimensionalChangeAlsoInvolvedEnum.No.value
         )
 
-class IfAMaterialOrDimensionalChangeAlsoInvolvedYes(BaseCheckboxField):
+class IfAMaterialOrDimensionalChangeAlsoInvolvedYes(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.IfAMaterialOrDimensionalChangeAlsoInvolved
-            == user_features.IfAMaterialOrDimensionalChangeAlsoInvolvedEnum.FieldYes.value
+            == user_profile_attributes.IfAMaterialOrDimensionalChangeAlsoInvolvedEnum.FieldYes.value
         )
 
-class RouteOfCompoundAdministrationP(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.RouteOfCompoundAdministration
-            == user_features.RouteOfCompoundAdministrationEnum.P.value
-        )
-
-class RouteOfCompoundAdministrationPO(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.RouteOfCompoundAdministration
-            == user_features.RouteOfCompoundAdministrationEnum.PO.value
-        )
-
-class RouteOfCompoundAdministrationIV(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.RouteOfCompoundAdministration
-            == user_features.RouteOfCompoundAdministrationEnum.FieldIV.value
-        )
-
-class RouteOfCompoundAdministrationIP(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.RouteOfCompoundAdministration
-            == user_features.RouteOfCompoundAdministrationEnum.FieldIP.value
-        )
-
-class RouteOfCompoundAdministrationInhalation(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.RouteOfCompoundAdministration
-            == user_features.RouteOfCompoundAdministrationEnum.FieldInhalation.value
-        )
-
-class Compound5MethylCelulose(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.Compound
-            == user_features.CompoundEnum.Field5MethylCelulose.value
-        )
-
-class CompoundCornOil(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.Compound
-            == user_features.CompoundEnum.FieldCornOil.value
-        )
-
-class CompoundOther(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.Compound
-            == user_features.CompoundEnum.FieldOther.value
-        )
-
-class CompoundSaline(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.Compound
-            == user_features.CompoundEnum.FieldSaline.value
-        )
-
-class SubmissionDateAug11(BaseCheckboxField):
+class SubmissionDateAug11(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.SubmissionDate
-            == user_features.SubmissionDateEnum.Aug11.value
+            == user_profile_attributes.SubmissionDateEnum.Aug11.value
         )
 
-class SubmissionDateJun30(BaseCheckboxField):
+class SubmissionDateJun30(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.SubmissionDate
-            == user_features.SubmissionDateEnum.Jun30.value
+            == user_profile_attributes.SubmissionDateEnum.Jun30.value
         )
 
-class SubmissionDateMay19(BaseCheckboxField):
+class SubmissionDateMay19(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.SubmissionDate
-            == user_features.SubmissionDateEnum.May19.value
+            == user_profile_attributes.SubmissionDateEnum.May19.value
         )
 
-class SubmissionDateSep22(BaseCheckboxField):
+class SubmissionDateSep22(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.SubmissionDate
-            == user_features.SubmissionDateEnum.Sep22.value
+            == user_profile_attributes.SubmissionDateEnum.Sep22.value
         )
 
-class WithinAgencySBudgetYes(BaseCheckboxField):
+class SubmissionDateFeb17(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.WithinAgencySBudget
-            == user_features.WithinAgencySBudgetEnum.Yes.value
+            user_profile.features.SubmissionDate
+            == user_profile_attributes.SubmissionDateEnum.Feb17.value
         )
 
-class WithinAgencySBudgetDecreaseCosts(BaseCheckboxField):
+class SubmissionDateJuly6(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.WithinAgencySBudget
-            == user_features.WithinAgencySBudgetEnum.FieldDecreaseCosts.value
+            user_profile.features.SubmissionDate
+            == user_profile_attributes.SubmissionDateEnum.July6.value
         )
 
-class WithinAgencySBudgetNo(BaseCheckboxField):
+class SubmissionDateMar16(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.WithinAgencySBudget
-            == user_features.WithinAgencySBudgetEnum.FieldNo.value
+            user_profile.features.SubmissionDate
+            == user_profile_attributes.SubmissionDateEnum.Mar16.value
         )
 
-class FundSourceAffectedGpr(BaseCheckboxField):
+class SubmissionDateMay11(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.FundSourceAffected
-            == user_features.FundSourceAffectedEnum.Gpr.value
+            user_profile.features.SubmissionDate
+            == user_profile_attributes.SubmissionDateEnum.May11.value
         )
 
-class FundSourceAffectedPro(BaseCheckboxField):
+class SpecificsOfBooth(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.FundSourceAffected
-            == user_features.FundSourceAffectedEnum.Pro.value
+            user_profile.features.Specifics
+            == user_profile_attributes.SpecificsEnum.FieldOfBooth.value
         )
 
-class FundSourceAffectedFed(BaseCheckboxField):
+class SpecificsOfBoothS(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.FundSourceAffected
-            == user_features.FundSourceAffectedEnum.FieldFed.value
+            user_profile.features.Specifics
+            == user_profile_attributes.SpecificsEnum.FieldOfBoothS.value
         )
 
-class FundSourceAffectedPrs(BaseCheckboxField):
+class SpecificsPremiumsOnly(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.FundSourceAffected
-            == user_features.FundSourceAffectedEnum.FieldPrs.value
+            user_profile.features.Specifics
+            == user_profile_attributes.SpecificsEnum.PremiumsOnly.value
         )
 
-class FundSourceAffectedSeg(BaseCheckboxField):
+class SpecificsMusicVan(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.FundSourceAffected
-            == user_features.FundSourceAffectedEnum.FieldSeg.value
+            user_profile.features.Specifics
+            == user_profile_attributes.SpecificsEnum.FieldMusicVan.value
         )
 
-class FundSourceAffectedSegS(BaseCheckboxField):
+class SpecificsRacingCar(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.FundSourceAffected
-            == user_features.FundSourceAffectedEnum.FieldSegS.value
+            user_profile.features.Specifics
+            == user_profile_attributes.SpecificsEnum.FieldRacingCar.value
         )
 
-class EstimatedCostOfTheStudyWillBeDecreased(BaseCheckboxField):
+class SpecificsSamplingPremiums(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.EstimatedCostOfTheStudyWillBe
-            == user_features.EstimatedCostOfTheStudyWillBeEnum.decreased.value
+            user_profile.features.Specifics
+            == user_profile_attributes.SpecificsEnum.FieldSamplingPremiums.value
         )
 
-class EstimatedCostOfTheStudyWillBeIncreased(BaseCheckboxField):
+class SpecificsSignage(FormBaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.EstimatedCostOfTheStudyWillBe
-            == user_features.EstimatedCostOfTheStudyWillBeEnum.increased.value
-        )
-
-class EstimatedCostOfTheStudyWillBeNotAffected(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.EstimatedCostOfTheStudyWillBe
-            == user_features.EstimatedCostOfTheStudyWillBeEnum.NotAffected.value
-        )
-
-class StorageConditionsDessicator(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.StorageConditions
-            == user_features.StorageConditionsEnum.Dessicator.value
-        )
-
-class StorageConditionsFreezer(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.StorageConditions
-            == user_features.StorageConditionsEnum.Freezer.value
-        )
-
-class StorageConditionsOther(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.StorageConditions
-            == user_features.StorageConditionsEnum.Other.value
-        )
-
-class StorageConditionsRefrigerator8C(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.StorageConditions
-            == user_features.StorageConditionsEnum.Refrigerator8C.value
-        )
-
-class StorageConditionsRoomTemperature(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.StorageConditions
-            == user_features.StorageConditionsEnum.RoomTemperature.value
-        )
-
-class StorageConditionsSpecialInstructionsWhileDosing(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.StorageConditions
-            == user_features.StorageConditionsEnum.SpecialInstructionsWhileDosing.value
-        )
-
-class StorageConditionsStoreInDark(BaseCheckboxField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.StorageConditions
-            == user_features.StorageConditionsEnum.StoreInDark.value
+            user_profile.features.Specifics
+            == user_profile_attributes.SpecificsEnum.FieldSignage.value
         )
 

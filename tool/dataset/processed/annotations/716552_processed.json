@@ -1,0 +1,43 @@
+{
+  "DESIGN": "",
+  "USE:": [
+    "CUSTOMER SPEC.",
+    "(GRAVURE)"
+  ],
+  "DOMESTIC": "\u2611",
+  "\u2610": "",
+  "BRANCH": "",
+  "LOUISVILLE": "10/ 30/ 81",
+  "PETERSBURG": "",
+  "MACON": "",
+  "DESCRIPTION": "VICEROY Rich Lights 100' s 20' s Label",
+  "COMMENTS:": "Material # 50 -034 A has been assigned to the VICEROY Rich Lights 100' s 20' s Label with new bottom panel. Bottom now incorporates shield. On both side and bottom panels, \"VICEROY\" and \"Rich Lights\" have been inverted. Cartons and labels must change design simultaneously. The current design cannot be used in production after 10/ 30/ 81.",
+  "QNED:": "S. T. BEASLEY (MRS )/ jlf",
+  "DATE:": "9/ 17/ 8181",
+  "MILITARY \u2610 EXPORT": "",
+  "GENERAL \u2610 EXPORT": "",
+  "If yes supply details": "",
+  "WINSTON SALEM": "",
+  "SCHEDULE: DATE OR INVENTORY DEPLETION": "1010/ 30/ 8181",
+  "DELIVERY DATE": "10/ 16/ 81",
+  "DESIGN NO.": "15",
+  "UPC NO.": "272972",
+  "MATERIAL NO": "50- 034",
+  "INVENTORY DEPLETION DATE": "10/ 30/ 81",
+  "Copies to:": "J. F. Banks C. Lamb C. L. Domeck Webb L. C. Lanham Branch QC Branch Supply",
+  "NEW ITEM": {
+    "DESCRIPTION": "VICEROY Rich Lights 100' s 20' s Label",
+    "BRAND (S)": "VICEROY Rich Lights",
+    "NO": "B1 -257",
+    "UPC NO": "272972",
+    "MATERIAL NO.": "50 -034A"
+  },
+  "TYPE CHANGE:": {
+    "OFFICIAL": "\u2611",
+    "\u2610 TEMPORARY": ""
+  },
+  "If a material or dimensional change also involved?": {
+    "\u2610 YES": "",
+    "NO": "\u2611"
+  }
+}

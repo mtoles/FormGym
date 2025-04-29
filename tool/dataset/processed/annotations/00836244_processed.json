@@ -1,0 +1,74 @@
+{
+  "COMPOUND": "2, 4- Dihydroxypyridine",
+  "SOURCE:": "Lorillard - Organic Chemistry",
+  "INVESTIGATOR(S)": "H. S. Tong & A. A. Poole",
+  "SIGNATURE(S)": "",
+  "LORILLARD": "OR61 -2",
+  "NO": "",
+  "REPORTED:": "10 /10 /80",
+  "LOT": "",
+  "NO.": "",
+  "CONCLUSION": "This compound is judged non mutagenic in this test system.",
+  "TESTED": "9 /10 /80 -10 /10 /80",
+  "DATE RECEIVED": "9 /3 /80",
+  "NOTEBOOK PAGE": "BIO7 -24",
+  "TOXICITY (% SURVIVAL)": [
+    "50",
+    "80",
+    "100"
+  ],
+  "CONCENTRATION 1mgimit": ".5",
+  "S. TYPHIMURIUM": "",
+  "CONTROL AFVERTANTS PER PLATE (0.05 ml SOLVENT)": [
+    "4 .67",
+    "8 .00",
+    "123 .00",
+    "135 .33",
+    "3 .33.33",
+    "16 .00"
+  ],
+  "(-) ": "",
+  "(+) ": "",
+  "COMPOUND (US plate)": [
+    "500",
+    "250",
+    "125"
+  ],
+  "REVERSION RATE (TEST REVERSANTS/CONTROL REVERTANTS PER PLATE": [
+    ".92",
+    "1. 00",
+    ".79",
+    ".83",
+    ".97",
+    ".88",
+    ".97",
+    ".92",
+    ".90",
+    ".96",
+    ".92",
+    ".85"
+  ],
+  "POSTIVE CONTROL (ug plate)": "",
+  "2- AMINOANTHHACENE": [
+    "4",
+    "2"
+  ],
+  "Copies to the following:": "Dr. H. J. Minnemeyer Ms. L. B. Gray",
+  "TA98": {
+    "(-) ": "3 .33.33",
+    "(+) ": "16 .00"
+  },
+  "TA100": {
+    "": "123 .00",
+    "(+) ": "135 .33"
+  },
+  "TA1535": {
+    "(-) 9": "4 .67",
+    "(+) ": "8 .00"
+  },
+  "SOLVENT": {
+    "DMSC": "\u2611",
+    "\u2610 WATER": "",
+    "\u2610 OTHER": ""
+  }
+}
