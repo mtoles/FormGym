@@ -139,10 +139,11 @@ class DeleteText(BaseAction):
         print(f"Marks deleted: {deleted_marks}")
         feedback = f"Action: 'DeleteText'\nMarks deleted: {deleted_marks}"
         return doc_state, feedback
+
     class Schema(BaseModel):
         action: Literal["DeleteText"]
         cx: float
-        cy: float 
+        cy: float
 
 
 class SignOrInitial(BaseAction):
@@ -265,7 +266,7 @@ class FieldLocalizer(BaseAction):
         generated_ids = cls.model.generate(
             input_ids=inputs["input_ids"],
             pixel_values=inputs["pixel_values"],
-            max_new_tokens=4096,
+            max_new_tokens=512,
             num_beams=3,
             do_sample=False,
         )
@@ -284,29 +285,27 @@ class FieldLocalizer(BaseAction):
         #     task=TASK_NAME_PREFIX,
         #     image_size=(w, h),
         # )
-        pred_bboxes = parsed_answer[TASK_NAME_PREFIX]["bboxes"][0]
-        int_bboxes = [int(b) for b in pred_bboxes]
-        # feedback = str(int_bboxes)
-        # feedback = str(
-        #     {
-        #         "x1": int_bboxes[0] / w,
-        #         "y1": int_bboxes[1] / h,
-        #         "x2": int_bboxes[2] / w,
-        #         "y2": int_bboxes[3] / h,
-        #     }
-        # )
-        x1 = int_bboxes[0] / w
-        y1 = int_bboxes[1] / h
-        x2 = int_bboxes[2] / w
-        y2 = int_bboxes[3] / h
-        feedback = f"Action: 'FieldLocalizer'\nPredicted bbox for {value}: x1: {x1:.3f}, y1: {y1:.3f}, x2: {x2:.3f}, y2: {y2:.3f}"
-        # feedback = (
-        #     f"Action: 'FieldLocalizer'\nPredicted bbox for {value}: {pred_bboxes}"
-        # )
-        # print()
-        # print(feedback)
-        # print(generated_text)
-        return doc_state, feedback
+        pred_bboxes = parsed_answer[TASK_NAME_PREFIX]["bboxes"]
+        if len(pred_bboxes) == 0:
+            feedback = f"Action: 'FieldLocalizer'\nNo bbox found for {value}"
+            return doc_state, feedback
+        else:
+            all_bboxes = []
+            for bbox in pred_bboxes:
+                bbox = [int(b) for b in bbox]
+                x1 = bbox[0] / w
+                y1 = bbox[1] / h
+                x2 = bbox[2] / w
+                y2 = bbox[3] / h
+                all_bboxes.append(
+                    f"x1: {x1:.3f}, y1: {y1:.3f}, x2: {x2:.3f}, y2: {y2:.3f}"
+                )
+
+            feedback = (
+                f"Action: 'FieldLocalizer'\nPredicted bboxes for {value}:\n"
+                + "\n".join(all_bboxes)
+            )
+            return doc_state, feedback
 
 
 ### Actions for editable pdfs and websites
