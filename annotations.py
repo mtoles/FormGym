@@ -26,6 +26,7 @@ def read_annotations(filename):
                         "h": annotation["bounding_box"]["h"] / doc_height,
                     },
                     "field": getattr(fields, annotation["name"]),
+                    "prefilled": False,# whether to count the field in evaluation
                 }
             )
         except AttributeError:

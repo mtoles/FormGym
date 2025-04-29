@@ -46,6 +46,7 @@ try:
 except ValueError:
     raise ValueError(f"Invalid task specified: {args.task}")
 
+BATCH_SIZE = min(2, len(args.file_ids))
 # set up the db
 
 # Prepare list to collect per-file data for batch processing
@@ -85,12 +86,19 @@ for i, fid in enumerate(args.file_ids):
         doc_state, feedback = actions.update_doc_state(
             doc_state=doc_state, agent_generations=cheater_gens
         )
+        # set the prefilled fields to true
+        for field in doc_state.fields:
+            if field["id"] not in targets:
+                field["prefilled"] = True
+
         new_doc_state = deepcopy(doc_state)
         for j in range(len(new_doc_state.marks)):
             new_doc_state.marks[j]["creator"] = CreatorEnum.PREFILLED.value
         # new_doc_state.pop_last_k_fields(k=args.k_missing_fields)
         # target_fields = new_doc_state.pop_target_fields(targets=targets)
         doc_state = new_doc_state
+
+        # 
     else:
         raise ValueError(f"Invalid task specified: {args.task}")
 
@@ -120,7 +128,6 @@ for i, fid in enumerate(args.file_ids):
 df = pd.DataFrame(all_files)
 
 # Create a model instance based on the model name.
-BATCH_SIZE = 2
 if args.model_type == "cheater":
     raise NotImplementedError
     model = models.CheaterModel()  # Instance now will use batched inputs
@@ -149,6 +156,7 @@ while not (active_df := df[df.active.apply(lambda x: x[-1])]).empty:
         batch_model_outputs = model.forward(
             nl_profile=batch["nl_profile"].to_list(),
             doc_image=batch["img"].apply(lambda x: x[-1]).to_list(),
+            feedback=batch["feedback"].to_list(),
             available_actions=available_actions,
             flow=batch["flow"].to_list(),
         )
@@ -189,7 +197,17 @@ for example in df.iloc:
     doc_state = example["doc_state"][-1]
     user_profile = example["user_profile"]
     result = ImagePdfFill().eval(user_profile=user_profile, doc_state=doc_state)
-    overall_acc = sum([f["correct"] for f in result.fields]) / len(result.fields)
+    # overall_acc = sum([f["correct"] for f in result.fields]) / len(result.fields)
+
+    correct_count = 0
+    total_count = 0 
+    for field in result.fields:
+        if field["prefilled"]:
+            continue
+        total_count += 1
+        if field["correct"]:
+            correct_count += 1
+    overall_acc = correct_count / total_count
     models.visualize_preds(
         doc_state=doc_state,
         fields=result.fields,
