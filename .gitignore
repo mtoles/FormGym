@@ -4,6 +4,8 @@
 output.png
 tool/checkpoints
 tool/dataset
+wandb
+test.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
