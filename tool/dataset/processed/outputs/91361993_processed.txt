@@ -1,0 +1,25 @@
+Form: 91361993_processed
+==================================================
+
+NewCompetitiveProductsBrandName_91361993_processed: CARDINAL CIGARETTES (11 PACKINGS)
+
+NewCompetitiveProductsCc_91361993_processed: 
+
+NewCompetitiveProductsDate_91361993_processed: 10 /5 /92
+
+NewCompetitiveProductsExtentOfDistribution_91361993_processed: 
+
+NewCompetitiveProductsListPrice_91361993_processed: 
+
+NewCompetitiveProductsManufacturer_91361993_processed: R. J. REYNOLDS
+
+NewCompetitiveProductsOtherInformation_91361993_processed: SEE ATTACHMENT
+
+NewCompetitiveProductsReportedBy_91361993_processed: C. M. WIECHMANN, D. M. , LUBBOCK, TX
+
+NewCompetitiveProductsSizeOrSizes_91361993_processed: 
+
+NewCompetitiveProductsTime_91361993_processed: 
+
+NewCompetitiveProductsTypeOfProduct_91361993_processed: 
+

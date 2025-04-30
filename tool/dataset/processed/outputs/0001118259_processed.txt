@@ -1,0 +1,9 @@
+Form: 0001118259_processed
+==================================================
+
+AllowableSubstitutions_0001118259_processed: RPCFS or RPCFS-O  RPCBS OT RPCBS- O WCC MC -4 -S MC -4 -PH MC -4 -RC MC -4 -W MC -1 C Stem RRXF or RRXF -O RRXM -B RRXM -T RRBF or RRBF -O RRB -B RRB -L RRB -T
+
+RevisionDate_0001118259_processed: 
+
+StandardGradeMark_0001118259_processed: PCFS Flue cured fines PCBS Burley fines MC- 4 Manufacturing fines MC -6 Stem Meal MC -7 Winnowers RXF Fine flue cured stem RBF Fine Burely stem
+

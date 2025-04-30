@@ -1,0 +1,41 @@
+Form: 71190280_processed
+==================================================
+
+BWApprovalsDate_71190280_processed: 
+
+BWApprovalsDepartment_71190280_processed: 
+
+BWApprovalsSignature_71190280_processed: 
+
+Brand_71190280_processed: KOOL Natural
+
+DateComplete_71190280_processed: 
+
+Date_71190280_processed: 10/22/98
+
+Description_71190280_processed: Passport Winter Program Ad- EMRO
+
+FieldDate_71190280_processed: 
+
+JobNo_71190280_processed: 7848
+
+LegalApproval_71190280_processed: 
+
+OttApprovalsDate_71190280_processed: 10/22/98 10/22/98
+
+OttApprovalsDepartment_71190280_processed: production AE
+
+OttApprovalsSignature_71190280_processed: LKelly 
+
+RevisionsApproved_71190280_processed: 
+
+Revisions_71190280_processed: 
+
+SqInchesFeet_71190280_processed: 7.96875 sq inches
+
+TN_71190280_processed: 8'
+
+TrimSize_71190280_processed: 33/16"WX21/2"H
+
+Warning_71190280_processed: Exhibt 1(a) Statement A
+

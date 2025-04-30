@@ -1,0 +1,97 @@
+Form: 0011906503_processed
+==================================================
+
+ApprovedBy_0011906503_processed: 
+
+Apr_0011906503_processed: 
+
+BalanceToSpendCapital_0011906503_processed: 
+
+BalanceToSpendExpense_0011906503_processed: 
+
+CapitalBudget_0011906503_processed: 
+
+Capital_0011906503_processed: 
+
+Completion_0011906503_processed: 11 88
+
+DateSubmitted_0011906503_processed: 
+
+EstimateCostCapital_0011906503_processed: 80
+
+EstimateCostExpense_0011906503_processed: 0
+
+EstimateCostTotal_0011906503_processed: 80
+
+Expense_0011906503_processed: 
+
+Field1_0011906503_processed: 
+
+Field2_0011906503_processed: 
+
+Field3_0011906503_processed: 
+
+Field4_0011906503_processed: 
+
+Field5_0011906503_processed: 
+
+Field6_0011906503_processed: 
+
+Field7_0011906503_processed: 
+
+FieldDec_0011906503_processed: 
+
+FieldJun_0011906503_processed: 
+
+FieldMar_0011906503_processed: 
+
+FieldSep_0011906503_processed: 
+
+Jan_0011906503_processed: 
+
+Jul_0011906503_processed: 
+
+Mo_0011906503_processed: 7
+
+Oct_0011906503_processed: 
+
+ProjectDescription_0011906503_processed: The Cigarette Test Station (CTS400) combines many of the stand- alone instruments that R&D currently uses to measure cigarette weight, pressure drop, ventilation, and hardness into one compact module. The CTS400 has the additional measurement of cigarette hardness in comparison with the CTS300. With this added, measurement R&D will be able to replace the Firmness Integrator that measures cigarette firmness in addition to other measurements that are mentioned above. The Firmness Integrator is no longer manufactured and parts are becoming difficult to obtain. Lastly, purchase of this instrument would provide similar capability as the Macon Plant and help facilitate comparisions between laboratories.
+
+ProposalNo_0011906503_processed: 
+
+PurposeCompanyImprovementsAdministrativeRequirements_0011906503_processed: 
+
+PurposeComplianceWithOutsideRequirements_0011906503_processed: 
+
+PurposeCostReduction_0011906503_processed: 
+
+PurposeExpansionOfExistingBusiness_0011906503_processed: 
+
+PurposeMaintenanceOfExistingBusiness_0011906503_processed: 
+
+PurposeNewProducts_0011906503_processed: 
+
+PurposeQualityImprovement_0011906503_processed: 
+
+SpentPriorTo_0011906503_processed: 1989
+
+Start_0011906503_processed: 7 88
+
+StatusApproved_0011906503_processed: 
+
+StatusProposed_0011906503_processed: x
+
+Submission_0011906503_processed: 88
+
+SubmittedBy_0011906503_processed: W. O. Crain
+
+ThisProjectIs_0011906503_processed: 
+
+Title_0011906503_processed: CICARETTE TEST STATION (CT5400)
+
+Total_0011906503_processed: 
+
+Year_0011906503_processed: 1990 1991 1992 1993 Beyond 1993
+
+Yr_0011906503_processed: 88
+

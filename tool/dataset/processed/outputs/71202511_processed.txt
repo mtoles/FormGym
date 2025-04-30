@@ -1,0 +1,71 @@
+Form: 71202511_processed
+==================================================
+
+AcctName_71202511_processed: 
+
+ApprovedBy_71202511_processed: Senior VP Marketing (to $ 1,000,000)
+
+BudgetedNo_71202511_processed: 
+
+BudgetedYes_71202511_processed: X
+
+Cc_71202511_processed: MaDonna Sliker
+
+CompetitiveProposalsObtained_71202511_processed: 
+
+CostPerInterview_71202511_processed: 
+
+Cost_71202511_processed: $ 55,500
+
+Date_71202511_processed: 
+
+Description_71202511_processed: KOOL Natural Lights Packaging - Round I
+
+EstTravel_71202511_processed: 3,000
+
+FieldComplete_71202511_processed: w /o 3/ 23 /98
+
+FieldS_71202511_processed: 
+
+FinalSupplierReportDue_71202511_processed: w/ o 4/ 6/ 98
+
+No_71202511_processed: 1998 -18D
+
+OriginalBudgetedAmount_71202511_processed: 
+
+Original_71202511_processed: Project File
+
+ProiectedExternalAuthorizationDate_71202511_processed: 2 /26 /98
+
+ProjectNo_71202511_processed: 1998 -18D
+
+ProjectTypeProductTestAUEtc_71202511_processed: Qualatative
+
+ReasonSForRecommendation_71202511_processed: Rabid was selected due to the critical timing of the project and the lack of availability of other suppliers
+
+RecommendedSupplier_71202511_processed: Rabid was selected due to the critical timing of the project and the lack of availability of other suppliers
+
+RequestedBy_71202511_processed: Nick Wilkerson
+
+ResearchReqAttachedNo_71202511_processed: 
+
+ResearchReqAttachedYes_71202511_processed: X
+
+SampleSize_71202511_processed: 12 groups
+
+SubmittedBy_71202511_processed: naid
+
+SupplierRabidResearch_71202511_processed: 
+
+ToBeDeductedFrom1998Budget_71202511_processed: $ 58,500
+
+ToBeDeductedFrom1999Budget_71202511_processed: $
+
+TotalAuthorizedProjectAmount_71202511_processed: $ 58,500
+
+TotalCost_71202511_processed: 58,500
+
+WaveS_71202511_processed: 
+
+Wave_71202511_processed: 
+

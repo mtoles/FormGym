@@ -1,0 +1,21 @@
+Form: 91914407_processed
+==================================================
+
+Cc_91914407_processed: R. E. KLEIN
+
+Date_91914407_processed: 6- 29- 94
+
+PleaseDeliverTransmissionToFaxPhoneNumber_91914407_processed: 
+
+PleaseDeliverTransmissionToName_91914407_processed: Mr. Al Giacoio
+
+PleaseDeliverTransmissionToOffice_91914407_processed: 
+
+ThisDocumentIsFromComments_91914407_processed: The attached was obtained from Mackoul Dist.
+
+ThisDocumentIsFromFaxTelephoneNumber_91914407_processed: (904) 464- 0744
+
+ThisDocumentIsFromName_91914407_processed: Fred Paternostro
+
+TotalPages_91914407_processed: 14
+

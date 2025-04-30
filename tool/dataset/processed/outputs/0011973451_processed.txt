@@ -1,0 +1,61 @@
+Form: 0011973451_processed
+==================================================
+
+ApprovalsDate_0011973451_processed: 
+
+ApprovalsDirIntAdmin_0011973451_processed: 
+
+ApprovalsGroupProdDir_0011973451_processed: 
+
+ApprovalsRegionalDirVp_0011973451_processed: 
+
+ApprovalsSeniorVpIntL_0011973451_processed: 
+
+ApprovalsVpIntLMarketing_0011973451_processed: 
+
+ApprovalsVpIntLPlanning_0011973451_processed: 
+
+BrandProjectName_0011973451_processed: RICHLAND Kings (Soft Pack) -Duty Free (Phoenix)
+
+CostOrRetailPricing_0011973451_processed: TBD
+
+Date_0011973451_processed: 6/ 24/ 94
+
+EstMonthlyOngoing_0011973451_processed: TBD
+
+InitialMaterialsRequiredCartons_0011973451_processed: On Hand
+
+InitialMaterialsRequiredCases_0011973451_processed: 500
+
+InitialMaterialsRequiredDollarCost_0011973451_processed: $250
+
+InitialMaterialsRequiredPackFlatsLabels_0011973451_processed: On Hand
+
+InitialMaterialsRequiredQtyInUnits_0011973451_processed: ['On Hand', 'On Hand', '500']
+
+MarketS_0011973451_processed: World- wide Duty Free
+
+Objective_0011973451_processed: Generate incremental volume for B& W by providing a low price brand to various international duty- free markets.
+
+SourceOfBusinessMajorCompetitiveBrands_0011973451_processed: TBD
+
+SourceOfBusinessTargetAudience_0011973451_processed: Value- conscious Smokers
+
+Start_0011973451_processed: 
+
+TimetableInMarketArrivalDate_0011973451_processed: 
+
+TimetableLaunchDate_0011973451_processed: 
+
+TimetableManufacturing_0011973451_processed: 
+
+TimetableProductSpecsDate_0011973451_processed: 
+
+TimetableShipping_0011973451_processed: 
+
+TimetableStartManufactureDate_0011973451_processed: 
+
+Up_0011973451_processed: 
+
+Volume_0011973451_processed: TBD
+

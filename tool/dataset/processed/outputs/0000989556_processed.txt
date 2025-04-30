@@ -1,0 +1,91 @@
+Form: 0000989556_processed
+==================================================
+
+AdhesiveSupplierCodeNoS_0000989556_processed: T.K. 9220
+
+AdhesiveSupplierS_0000989556_processed: Swift
+
+AdhesiveType_0000989556_processed: Printed Imitation cork
+
+ApplicationPatternOverall_0000989556_processed: x
+
+ApplicationPatternSkip_0000989556_processed: 
+
+ApprovedBy_0000989556_processed: Director of Technical Operations, Brown & Williamson International Tobacco
+
+Brand_0000989556_processed: PHOENIX
+
+Company_0000989556_processed: B. A. T. CYPRUS
+
+Country_0000989556_processed: CYPRUS
+
+Date_0000989556_processed: May 1, 1985
+
+Dimension_0000989556_processed: mm x mm
+
+GluePreeArea_0000989556_processed: N/A
+
+LicenseeRefNo_0000989556_processed: 
+
+Macket_0000989556_processed: 
+
+PhysicalCharacteristicsCigaretteCircumference_0000989556_processed: 24.75 mm
+
+PhysicalCharacteristicsFilterPlugLength_0000989556_processed: 20 mm
+
+PhysicalCharacteristicsFilterPlugPressureDropEncap_0000989556_processed: 56 mm
+
+PhysicalCharacteristicsFilterPlugPressureDropUnencap_0000989556_processed: 56 mm
+
+PhysicalCharacteristicsFilterVentilationRate_0000989556_processed: Nil %
+
+PhysicalCharacteristicsMoistureContentExCatcher_0000989556_processed: 13.5 %
+
+PhysicalCharacteristicsOverallCigaretteLength_0000989556_processed: 84 mm
+
+PhysicalCharacteristicsPrintPositionFromFilterEnd_0000989556_processed: 27 mm
+
+PhysicalCharacteristicsTippingLength_0000989556_processed: 25 mm
+
+PhysicalCharacteristicsTobaccoRodLength_0000989556_processed: 64 mm
+
+PhysicalCharacteristicsTotalPressureDropEncap_0000989556_processed: 110 mm
+
+PhysicalCharacteristicsTotalPressureDropUnencap_0000989556_processed: 90 mm
+
+PlaceOfManufacture_0000989556_processed: NICOSIA
+
+Positioning_0000989556_processed: mm from mouth end
+
+PreparedBy_0000989556_processed: M. HAMERTON / enm
+
+Replaces_0000989556_processed: New
+
+Style_0000989556_processed: HLB- KS
+
+TippingAndTippingApplication_0000989556_processed: 
+
+TippingPaperBobbinWidth_0000989556_processed: 50 mm mm
+
+TippingPaperColor_0000989556_processed: Imitation Cork
+
+TippingPaperPerforationTypeAndNoOfLines_0000989556_processed: None
+
+TippingPaperPorosity_0000989556_processed: (coresta)
+
+TippingPaperPrintDescription_0000989556_processed: Brown on yellow
+
+TippingPaperRobbinLength_0000989556_processed: 2700 m
+
+TippingPaperSubstance_0000989556_processed: 36 gm/ m2
+
+TippingPaperSupplierCodeNoS_0000989556_processed: E.30639
+
+TippingPaperSupplierS_0000989556_processed: Ecusta
+
+WeightsNetNetTobacco_0000989556_processed: 749 mg
+
+WeightsNetTobRodDensity_0000989556_processed: 245 mg/cc
+
+WeightsTotalCigtWt_0000989556_processed: 974 mg
+

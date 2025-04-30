@@ -1,0 +1,19 @@
+Form: 0060308251_processed
+==================================================
+
+BrandStyle_0060308251_processed: CARLTON 100's FMSP
+
+Date_0060308251_processed: 7/ 24/ 90
+
+FromNicotineMgCigt_0060308251_processed: 0 .3
+
+FromTarMgCigt_0060308251_processed: 3
+
+Note_0060308251_processed: Use Separate Form For Each Change
+
+Signature_0060308251_processed: 
+
+ToNicotineMgCigt_0060308251_processed: 0 .2
+
+ToTarMgCigt_0060308251_processed: 2
+

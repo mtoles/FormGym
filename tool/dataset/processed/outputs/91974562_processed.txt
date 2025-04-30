@@ -1,0 +1,43 @@
+Form: 91974562_processed
+==================================================
+
+AdvertisingCreativeTheme_91974562_processed: 
+
+AnalyticalRequirementsCodeAssigned_91974562_processed: 00862
+
+AnalyticalRequirementsEstRedemption_91974562_processed: 890
+
+AnalyticalRequirementsForControlUseOnly_91974562_processed: 
+
+AnalyticalRequirementsJobNumber_91974562_processed: 490
+
+BrandsSApplicable_91974562_processed: KENT
+
+Cc_91974562_processed: D. WEST, L. GIORDANO, V. LINDSLEY, A. SADOVNICK S. RAPISARLDI B. DAVIN. A. Pasheluk
+
+Circulation_91974562_processed: 
+
+CouponExpirationDate_91974562_processed: 12/ 17/ 95
+
+CouponIssueDate_91974562_processed: 10/ 13/ 95
+
+CouponValue_91974562_processed: $2 off 3 Pcks or Crtn
+
+DateInitiated_91974562_processed: 6/ 8/ 95
+
+From_91974562_processed: THOM SMITH
+
+GeographicalAreaS_91974562_processed: Regions 11, 17, 21
+
+IssueFrequencyYear_91974562_processed: 1
+
+Media_91974562_processed: DIRECT MAIL
+
+PackAndOrCarton_91974562_processed: PACK OR CARTON
+
+SignatureOfInitiator_91974562_processed: 
+
+SpaceColor_91974562_processed: 
+
+To_91974562_processed: VINCE LOSITO
+

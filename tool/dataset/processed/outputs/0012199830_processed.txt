@@ -1,0 +1,17 @@
+Form: 0012199830_processed
+==================================================
+
+Customer_0012199830_processed: B&W
+
+FormulaNo_0012199830_processed: SKGC-4518 
+
+Received_0012199830_processed: DEC 1 1 1989
+
+SolidsComposit_0012199830_processed: Lecithin (Food Grade) Epoxidized Soy Bean Oil Cellulose Nitrate Wet w /2 Propanol Pigment, Yellow 34 Pigment, Blue 15: 4 Ester of Modified Tricyclic Carboxylic Acid Jonrez IM824
+
+Technician_0012199830_processed: DLR 12/ 5/ 89
+
+TotalSolids_0012199830_processed: Solvent Composit to % V. O. C. s Toluene Isopropyl Acetate N- Propyl Acetate
+
+TotalVOCS_0012199830_processed: 100. 00%
+

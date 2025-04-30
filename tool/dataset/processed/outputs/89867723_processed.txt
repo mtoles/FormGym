@@ -1,0 +1,53 @@
+Form: 89867723_processed
+==================================================
+
+Agency_89867723_processed: 816. 00
+
+ApprovedBy_89867723_processed:   
+
+CostEstimate_89867723_processed: $ 6.816
+
+Date_89867723_processed: April 27, 1981
+
+Director_89867723_processed: 
+
+Facility_89867723_processed: 1. 500. 00
+
+Field10ContingencyFinalReportIncNo_89867723_processed: 
+
+Field10ContingencyFinalReportIncYes_89867723_processed: X
+
+FieldBanners_89867723_processed: 
+
+FieldOpenEnds_89867723_processed: 
+
+GroupProduct_89867723_processed: 
+
+Incidence_89867723_processed: 
+
+Job_89867723_processed: 5546/ 1481
+
+KeyCriteriaForAnalysis_89867723_processed: 
+
+LengthInt_89867723_processed: 
+
+Manager_89867723_processed: 
+
+MarketingResearch_89867723_processed: 
+
+ModeratorsFee_89867723_processed: $ 4. 500. 00
+
+PreparedBy_89867723_processed: 
+
+ProductManager_89867723_processed: 
+
+Product_89867723_processed: New Products
+
+ProjectTitle_89867723_processed: No Side Stream Smoke Focus Groups
+
+ResearchDesignNCellsElegibilityDesignKeyBannerBreaksMethodologyCities_89867723_processed: 
+
+ResearchFirm_89867723_processed: Ruth Manko Assoc.
+
+ResearchLimitations_89867723_processed: 
+

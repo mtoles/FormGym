@@ -1,0 +1,59 @@
+Form: 92091873_processed
+==================================================
+
+AttendeesCustomersAttended_92091873_processed: 35
+
+AttendeesCustomersInvited_92091873_processed: 40
+
+AttendeesLorillardPersonnel_92091873_processed: 10
+
+Cc_92091873_processed: R. P. Bonomo
+
+DateRecD_92091873_processed: 9/ 6/ 95
+
+DateS_92091873_processed: September 10, 1995
+
+DateSubmitted_92091873_processed: September 26 1995 (submit by 30 days after event)
+
+Date_92091873_processed: 6/ 12/ 95
+
+DivisionMgr_92091873_processed: T. L. Roberts
+
+Division_92091873_processed: San Jose/ 933
+
+FieldDisplaysPlacedCounter_92091873_processed: 15
+
+FieldDisplaysPlacedFloor_92091873_processed: 9
+
+FieldDisplaysPlacedPosters_92091873_processed: 100
+
+InvitationsDateNotified_92091873_processed: 9/ 5/ 95
+
+InvitationsDateOrdered_92091873_processed: Unknown
+
+InvitationsRequested_92091873_processed: 50
+
+InviteesComments_92091873_processed: "Thank You very much for the tickets, we had a great time" Rogers Liquor, Marina California. "We really appreciate Lorillard thinking us." Shiffert's Wholesale, Visalia, California. "Thank you so much for the invitations... We had a great time." Mission Trail Oil Company (Rotten Robbie Stores) San Jose California. "The races were great the Newport Hospitality area was terrific". Coremark, Sacramento, California.
+
+Location_92091873_processed: Leguna Seca, Monterey, Ca
+
+PromotionQuantityDisplays8_92091873_processed: 40
+
+PromotionQuantityFloor40_92091873_processed: 20
+
+PromotionQuantityMugs_92091873_processed: 720
+
+PromotionQuantityPosters_92091873_processed: 100
+
+QualityOfHospitalityTentCleanliness_92091873_processed: X
+
+QualityOfHospitalityTentFood_92091873_processed: X
+
+QualityOfHospitalityTentService_92091873_processed: X
+
+RaceDayInfo_92091873_processed: Event Attendance 100, 000 Hospitality Tent Attendance 35- 40
+
+RecD_92091873_processed: 6/ 12/ 95
+
+SuggestionsRecommendations_92091873_processed: Perhaps the tickets could be sent but a little sooner This year the tickets arrived on Thursday and the race was Sunday. This made it difficult to get the tickets to customers on tine.
+

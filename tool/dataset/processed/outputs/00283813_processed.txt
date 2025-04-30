@@ -1,0 +1,73 @@
+Form: 00283813_processed
+==================================================
+
+Blend_00283813_processed: 
+
+Casing_00283813_processed: 
+
+CigarettesBrand_00283813_processed: OLD GOLD STRAIGHT
+
+CigarettesCircumference_00283813_processed: 25. 3 mm.
+
+CigarettesDraw_00283813_processed: OLD GOLD STRAIGHT
+
+CigarettesFilterLength_00283813_processed: 
+
+CigarettesFirmness_00283813_processed: OLD GOLD STRAIGHT
+
+CigarettesLength_00283813_processed: 85 mm.
+
+CigarettesPaper_00283813_processed: Ecusta 556
+
+CigarettesPrint_00283813_processed: OLD GOLD STRAIGHT
+
+CigarettesTippingPaper_00283813_processed: 
+
+CigarettesWeight_00283813_processed: OLD GOLD STRAIGHT
+
+Date_00283813_processed: 7/ 16/ 68
+
+FinalFlavor_00283813_processed: 
+
+LaboratoryAnalysis_00283813_processed: Tars and Nicotine, Taste Panel, Burning Time, Gas Phase Analysis, Benzo (A) Pyrene Analyses
+
+MentholFlavor_00283813_processed: 
+
+OriginalRequestMadeBy_00283813_processed: Mr. C. L. Tucker, Jr.
+
+Recasing_00283813_processed: 
+
+ReportsCopiesTo_00283813_processed: Dr. A. W. Spears
+
+ReportsOriginalTo_00283813_processed: Mr. C. L. Tucker, Jr.
+
+ReportsWrittenBy_00283813_processed: John H. M. Bohlken
+
+RequirementsLaboratory_00283813_processed: One Tray
+
+RequirementsOthers_00283813_processed: 
+
+ResponsibilityFilterProduction_00283813_processed: 
+
+ResponsibilityMakingPacking_00283813_processed: Product Development, John H. M. Bohlker
+
+ResponsibilityShipping_00283813_processed: 
+
+ResponsibilityTobaccoBlend_00283813_processed: Manufacturing - A. Kraus
+
+SampleNo_00283813_processed: 5031
+
+SampleSpecificationsWrittenBy_00283813_processed: John H. M. Bohlken
+
+WrappingsCartons_00283813_processed: OLD GOLD STRAIGHT
+
+WrappingsClosures_00283813_processed: Standard Blue
+
+WrappingsLabels_00283813_processed: OLD GOLD STRAIGHT
+
+WrappingsMarkings_00283813_processed: Sample number on each pack and carton
+
+WrappingsTearTape_00283813_processed: Gold
+
+on_00283813_processed: 7/ 10/ 68
+

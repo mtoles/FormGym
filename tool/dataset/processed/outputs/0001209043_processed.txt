@@ -1,0 +1,57 @@
+Form: 0001209043_processed
+==================================================
+
+Age2534_0001209043_processed: 
+
+Age3544_0001209043_processed: 
+
+Age45Over_0001209043_processed: 
+
+AgeUnder25_0001209043_processed: 
+
+BrandSmokedAllOtherSmokers_0001209043_processed: ['30', '(125)']
+
+BrandSmokedTestBrandSmokers_0001209043_processed: ['33', '(42)']
+
+Brand_0001209043_processed: SALEM (RJR)
+
+Code_0001209043_processed: 
+
+Comments_0001209043_processed: Tested among a half sample of smokers. Sub- group scores subject to wide variation because of small sample size and should be averaged across several ads for meaningful infor- mation.
+
+DateSent_0001209043_processed: 4/19/74
+
+Field35Over_0001209043_processed: 0.0 (55) 29 (86)
+
+FieldDate_0001209043_processed: WEEK OF MARCH 25, 1974
+
+Location_0001209043_processed: CHICAGO, DALLAS/ FORT WORTH, INDIANAPOLIS, LOS ANGELES MEMPHIS, PHILADELPHIA, PITTSBURGH
+
+Magazine_0001209043_processed: TIME
+
+Overall_0001209043_processed: 1.0 (.97) 31 (167)
+
+Pm6Base_0001209043_processed: ['(.97)', '(51)', '(46)', '(42)', '(55)']
+
+Pm6Score_0001209043_processed: ['1.0', '2.0', '0.0', '2.4', '0.0']
+
+Project_0001209043_processed: 74- 80
+
+ProvedRecallBase_0001209043_processed: ['(167)', '(83)', '(84)', '(81)', '(86)', '(42)', '(125)']
+
+ProvedRecallScore_0001209043_processed: ['31', '31', '31', '33', '29', '33', '30']
+
+SampleDescription_0001209043_processed: MALE AND FEMALE MENTHOL SMOKERS
+
+SexFemale_0001209043_processed: ['0.0', '(46)', '31', '(84)']
+
+SexMale_0001209043_processed: ['2.0', '(51)', '31', '(83)']
+
+Size_0001209043_processed: FULL PAGE
+
+Title_0001209043_processed: "HEAD IN WATER"
+
+TotalSample_0001209043_processed: 214
+
+Under35_0001209043_processed: 2.4 (42) 33 (81)
+

@@ -1,0 +1,27 @@
+Form: 660978_processed
+==================================================
+
+Cc_660978_processed: R. Schoenfein S. Dammers P. Hendricks
+
+Client_660978_processed: Brown & Williamson
+
+Confidential_660978_processed: 
+
+DateOfReport_660978_processed: 2/ 17/ 82
+
+Date_660978_processed: 1/ 19/ 82
+
+No_660978_processed: 482 -2 R1
+
+Ph_660978_processed: mg
+
+Place_660978_processed: Telephone
+
+Present_660978_processed: (For the client) T. Parrack
+
+Product_660978_processed: Viceroy
+
+Summary_660978_processed: 
+
+WrittenBy_660978_processed: P. Hendricks
+

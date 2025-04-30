@@ -1,0 +1,33 @@
+Form: 91856041_6049_processed
+==================================================
+
+CheckApplicableBoxEs_91856041_6049_processed: 
+
+GeneralInformationEventDates_91856041_6049_processed: June 3, 1995
+
+GeneralInformationEventLocation_91856041_6049_processed: 42nd- 57th Street, New York NY
+
+GeneralInformationEventName_91856041_6049_processed: The USO Spring Festival
+
+HoursMondayFriday_91856041_6049_processed: 
+
+HoursSaturdaySunday_91856041_6049_processed: llam- 6pm
+
+SpecificsMusicVan_91856041_6049_processed: False
+
+SpecificsOfBoothS_91856041_6049_processed: True
+
+SpecificsPremiumsOnly_91856041_6049_processed: False
+
+SpecificsRacingCar_91856041_6049_processed: False
+
+SpecificsSamplingPremiums_91856041_6049_processed: False
+
+SpecificsSignage_91856041_6049_processed: False
+
+SupervisorInformationBeeperNumber_91856041_6049_processed: (201) 698- 780
+
+SupervisorInformationNameOfAllwaysSupervisor_91856041_6049_processed: Jerome Curry
+
+SupervisorInformationPhoneNumber_91856041_6049_processed: (201) 923-9208 
+

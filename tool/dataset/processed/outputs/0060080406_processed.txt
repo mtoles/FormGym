@@ -1,0 +1,49 @@
+Form: 0060080406_processed
+==================================================
+
+AccountCode_0060080406_processed: 10- 320
+
+AccountingDistributionFeb_0060080406_processed: $ 10.000.
+
+AccountingDistributionJan_0060080406_processed: $ 10.000.
+
+AccountingDistributionMar_0060080406_processed: $ 15,000.
+
+ApprovalsAgency_0060080406_processed: 
+
+ApprovalsChairmanCeo_0060080406_processed: 
+
+ApprovalsForecasting_0060080406_processed: 
+
+ApprovalsMarketing_0060080406_processed: 
+
+ApprovalsPresident_0060080406_processed: 
+
+ApprovalsSales_0060080406_processed: 
+
+ApprovalsVPMarketing_0060080406_processed: 
+
+AuthNo_0060080406_processed: 5060
+
+Brand_0060080406_processed: BULL DURHAM Filter Box BULL DURHAM Lights BOX
+
+BudgetCode_0060080406_processed: 
+
+Date_0060080406_processed: 
+
+Description_0060080406_processed: COLLATERAL MERCHANDISING MATERIALS
+
+JobNo_0060080406_processed: 
+
+Medium_0060080406_processed: 
+
+Originator_0060080406_processed: 
+
+RemarksTheseCostsWillIncludeButAreNotExclusiveToTheTheFollowingMaterials_0060080406_processed: 
+
+RemarksToCoverTheCostOfCollateralMerchandisingMaterialsToBeUsedIn1991InConnectionWithTheMerchandisingAndPromotionOfBullDurham_0060080406_processed: 
+
+Sales_0060080406_processed: 
+
+Totals_0060080406_processed: 
+

@@ -1,0 +1,37 @@
+Form: 91315069_91315070_processed
+==================================================
+
+DirectAccountAndChainVoidsUseXToIndicateAVoid100S_91315069_91315070_processed: 
+
+DirectAccountAndChainVoidsUseXToIndicateAVoidAccount_91315069_91315070_processed: 
+
+DirectAccountAndChainVoidsUseXToIndicateAVoidLts100S_91315069_91315070_processed: 
+
+DirectAccountAndChainVoidsUseXToIndicateAVoidNoStores_91315069_91315070_processed: 
+
+Distribution_91315069_91315070_processed: EFFECTIVENESS OF PRE- SELL (REPORT ON OCT. 3 ONLY).
+
+FieldOfDistributionAchievedInRetailOutletsAnnualCalls_91315069_91315070_processed: 
+
+FieldOfDistributionAchievedInRetailOutletsClassifiedCalls_91315069_91315070_processed: 
+
+From_91315069_91315070_processed: 
+
+PromotionalImpact500OffCarton_91315069_91315070_processed: 
+
+PromotionalImpact50OffPack_91315069_91315070_processed: 
+
+PromotionalImpactSalesForce20S_91315069_91315070_processed: 
+
+Subject_91315069_91315070_processed: HARLEY- DAVIDSON 100'S CIGARETTES PROGRESS REPORT
+
+SubmissionDateDec26_91315069_91315070_processed: 
+
+SubmissionDateJan23_91315069_91315070_processed: 
+
+SubmissionDateOct31_91315069_91315070_processed: 
+
+SubmissionDateOct3_91315069_91315070_processed: 
+
+To_91315069_91315070_processed: R. H. ORCUTT
+

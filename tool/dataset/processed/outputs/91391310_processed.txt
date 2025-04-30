@@ -1,0 +1,43 @@
+Form: 91391310_processed
+==================================================
+
+AdvertisingCreativeTheme_91391310_processed: 
+
+AnalyticalRequirementsCodeAssigned_91391310_processed: 8470
+
+AnalyticalRequirementsEstRedemption_91391310_processed: 80%
+
+AnalyticalRequirementsForControlUseOnly_91391310_processed: 
+
+AnalyticalRequirementsJobNumber_91391310_processed: 916
+
+BrandsSApplicable_91391310_processed: HARLEY- DAVIDSON
+
+Cc_91391310_processed: T. BAYLIES, L. GIORDANO V. LINDSLEY, J. SCHNEFF, S. RAPISARLDI, N, DISCENZA E LUNDBERG
+
+Circulation_91391310_processed: 2,852,100 - 47.200
+
+CouponExpirationDate_91391310_processed: 6/30/94
+
+CouponIssueDate_91391310_processed: 10/11/93
+
+CouponValue_91391310_processed: $.50
+
+DateInitiated_91391310_processed: 8/06/93
+
+From_91391310_processed: M. BORSINI
+
+GeographicalAreaS_91391310_processed: NATIONAL
+
+IssueFrequencyYear_91391310_processed: OCR-DEC
+
+Media_91391310_processed: COUPON
+
+PackAndOrCarton_91391310_processed: PACK
+
+SignatureOfInitiator_91391310_processed: Marine B
+
+SpaceColor_91391310_processed: 
+
+To_91391310_processed: VINCE LOSITO
+

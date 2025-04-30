@@ -1,0 +1,29 @@
+Form: 80707440_7443_processed
+==================================================
+
+Alternatives_80707440_7443_processed: Los Angeles Football Fans Chicago Football Fans
+
+BoldSubHead_80707440_7443_processed: 1st Prize $ 5,000 2nd Prize 2,000 3rd Prize 1,000 4th Prizes 500 fans will receive copies of "The Golden Anniversary of Pro- Football"
+
+Client_80707440_7443_processed: LORILLARD CORPORATION
+
+Date_80707440_7443_processed: 8/ 8/ 69
+
+Headline_80707440_7443_processed: Pick The Winners And Win Up $ 5 ,000
+
+Illustration_80707440_7443_processed: Line Drawings of Football Scenes
+
+Issue_80707440_7443_processed: August 19, 1969
+
+JobNo_80707440_7443_processed: 
+
+LeadIn_80707440_7443_processed: New York Football Fans
+
+Product_80707440_7443_processed: Kent, Newport, True and Old Gold
+
+Publication_80707440_7443_processed: Daily Newspapers
+
+Space_80707440_7443_processed: 1000 lines B&W 1750 lines 2- color
+
+TextOver500PrizesToBeAwarded_80707440_7443_processed: Now you can win up $ 5,000 for simply picking the winners of the games listed below. Just check the box next to the team you think will win. Allow for the point spread in your selections. (For example, if a team is quoted as +7 pts. this means they must win the game by at least 7 points.) Prizes will be awarded by random drawings to those who have the greatest official number of winning selections. Full details are in the Rules.
+

@@ -1,0 +1,51 @@
+Form: 82254638_processed
+==================================================
+
+DateToCorp_82254638_processed: 7/11/97
+
+DivNameNo_82254638_processed: ST. LOUIS, MO
+
+FieldCasesKent100_82254638_processed: 
+
+FieldCasesKentGl100_82254638_processed: 
+
+FieldCasesKentGlLtsKS_82254638_processed: 
+
+FieldCasesKentIiKS_82254638_processed: 
+
+FieldCasesKentIii100_82254638_processed: 1
+
+FieldCasesKentKS_82254638_processed: 1
+
+FieldCasesNewport100S_82254638_processed: 
+
+FieldCasesNewportLts100_82254638_processed: 
+
+FieldCasesNewportLtsKs_82254638_processed: 
+
+FieldCasesNewportksKS_82254638_processed: 1
+
+FieldCasesTrueKS_82254638_processed: 
+
+FieldDateOfEvent_82254638_processed: September 10, 1997 Marcus Hellenic Spirit Charities Golf Classic September 18, 1997
+
+From_82254638_processed: W. R. KNIGHT - MCA
+
+ItemsAnyOtherItemsAvailable_82254638_processed: 400
+
+ItemsBaseballCap_82254638_processed: 400
+
+ItemsWaterBottles_82254638_processed: ['29-980-7', '29-980-7', '400', '400']
+
+NameOfEvent_82254638_processed: Lorillard Metro Golf Outing 1997
+
+NyoOnlyDateForwardedToPromotionServices_82254638_processed: 7/11/97
+
+QuantityRequired_82254638_processed: 400 400 400 400
+
+SamplesItemsRequired_82254638_processed: SAMPLE 10'S (400 PACKS PER CASE)
+
+ShipToCustomerShippingNumber_82254638_processed: 198-820-0003
+
+To_82254638_processed: SAM ZOLOT
+

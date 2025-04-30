@@ -1,0 +1,23 @@
+Form: 00851879_processed
+==================================================
+
+AuthorizedBy_00851879_processed: Dr. Connie Stone
+
+AuthorizedTo_00851879_processed: Mr. Charles Burns
+
+Date_00851879_processed: 5-13-81
+
+DescriptionOfChangeOrder_00851879_processed: 
+
+EstimatedCostOfTheStudyWillBeDecreased_00851879_processed: False
+
+EstimatedCostOfTheStudyWillBeIncreased_00851879_processed: True
+
+EstimatedCostOfTheStudyWillBeNotAffected_00851879_processed: False
+
+Method_00851879_processed: Verbal Phone (Means of communication)
+
+SectionIiiA2NdParagraphTheFirstSentenceIsToBeChangedToReadAsFollows_00851879_processed: 
+
+Subject_00851879_processed: Change in the time of the Pre- dose Biomicroscopic Examination
+

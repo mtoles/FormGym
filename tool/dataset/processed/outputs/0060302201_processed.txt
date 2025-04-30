@@ -1,0 +1,35 @@
+Form: 0060302201_processed
+==================================================
+
+CanTimeBeSparedForCompletion_0060302201_processed: 
+
+CommentsByManagerOrDirector_0060302201_processed: 
+
+Comments_0060302201_processed: none
+
+Division_0060302201_processed: Analytical- Radiochemistry
+
+DoesWorkMeritPublication_0060302201_processed: 
+
+EstimateOfTimeNeededToCompleteWork_0060302201_processed: approximately one month
+
+EstimateOfTimeNeededToPrepareManuscriptForPresentation_0060302201_processed: several weeks after completion
+
+EstimateOfTimeNeededToPrepareManuscriptForPublication_0060302201_processed: several weeks after completion of work
+
+HasWorkBeenReportedInManuscript_0060302201_processed: yes
+
+IfSoGiveDateAndTitle_0060302201_processed: MBTH- reagent for analysis of aliphatic aldehydes 7 / 5 / 67
+
+Name_0060302201_processed: Ronald. W Davis
+
+NamesOfOtherPersonsCollaboratingInWork_0060302201_processed: L. W. McDowell
+
+NatureOfWork_0060302201_processed: Total aldehyde analysis in cigarette mainstream 
+
+PresentStatusOfWorkCiteProgressReportsWhereAppropriate_0060302201_processed: Techniques worked out and reported for pure aldehyde samples; must be adapted for cigarette mainstream smoke by further laboratory work
+
+ScientificJournalOfChoice_0060302201_processed: Tobacco Science
+
+ScientificMetingOfChoice_0060302201_processed: none as yet
+

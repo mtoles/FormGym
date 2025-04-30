@@ -1,0 +1,85 @@
+Form: 71341634_processed
+==================================================
+
+AccountMonth_71341634_processed: Pay Handling
+
+AccountName_71341634_processed: 
+
+Account_71341634_processed: 
+
+Address_71341634_processed: 395 DYSTER POINT BLVD SUITE 415 S. SAN FRANCISCO
+
+Amount_71341634_processed: 
+
+Attention_71341634_processed: DAVID DRESSER
+
+AvgRate_71341634_processed: $2 84 $2 00
+
+BusinessUnit_71341634_processed: 
+
+CharNo_71341634_processed: 
+
+ChargeToSection_71341634_processed: PER ATTACHED
+
+City_71341634_processed: 
+
+Date_71341634_processed: Check#
+
+Department_71341634_processed: 
+
+Description_71341634_processed: 
+
+DistAsgmtCF_71341634_processed: 39A00A
+
+Distribution_71341634_processed: Fax to Field Payments at (502) 588- 7826
+
+DistributorNo_71341634_processed: 20182
+
+FieldRecordsRetention_71341634_processed: 30 days)
+
+Id_71341634_processed: 
+
+IsThisACorporation_71341634_processed: Yes X No
+
+MaiCheckTo_71341634_processed: 
+
+PayMethod_71341634_processed: Check
+
+PayTerms_71341634_processed: 00000
+
+PayTo_71341634_processed: COREMARK NTERNATIONAL
+
+PleaseCompleteTheFollowingIfCheckedNoForCorporationAbove_71341634_processed: 
+
+PreparedBy_71341634_processed: 
+
+Product_71341634_processed: 
+
+PromoDates_71341634_processed: March 15- 19, 1999
+
+PromotionCode_71341634_processed: 725 725
+
+PromotionName_71341634_processed: GPC BUYDOWN PROGRAMS SEE ATTACHED Section 18 Narl Chain Walgreens
+
+PromotionNumber_71341634_processed: 288 296
+
+Quantity_71341634_processed: 50, 759 6. 382
+
+Ref_71341634_processed: 
+
+RequestedBy_71341634_processed: Robert 
+
+SeparatePay_71341634_processed: Y
+
+State_71341634_processed: 
+
+Units_71341634_processed: CTNS CTNS
+
+Vendor_71341634_processed: Check Date
+
+Verification_71341634_processed: 
+
+VoucherApproval_71341634_processed: 
+
+ZipCode_71341634_processed: 
+

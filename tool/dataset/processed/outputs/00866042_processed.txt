@@ -1,0 +1,67 @@
+Form: 00866042_processed
+==================================================
+
+DateIssued_00866042_processed: Oct. 11, 1983
+
+DirOfLifeSciencesHealthServicesCompoundPrepToxScientificResTox_00866042_processed: 
+
+ExperimentalProcedures_00866042_processed: to performed in Acure/Dermal Toxicology, building 18.
+
+FixedDistribution_00866042_processed: 
+
+FollowDepartmentAndCompanySafetyManuals_00866042_processed: ☑
+
+HazardousCompoundCarcinogenOsha_00866042_processed: 
+
+HazardousCompoundCarcinogenOther_00866042_processed: 
+
+HazardousCompoundExplosive_00866042_processed: 
+
+HazardousCompoundFlammable_00866042_processed: 
+
+HazardousCompoundRadioactive_00866042_processed: 
+
+LhNumberS_00866042_processed: 20.845
+
+LotNoS_00866042_processed: 
+
+OriginalSignedProjectSheetsToPso_00866042_processed: 
+
+PerformingDepartments_00866042_processed: 
+
+PhysicalDescriptionLiquid_00866042_processed: X
+
+PhysicalDescriptionSolid_00866042_processed: 
+
+Pressurized_00866042_processed: 
+
+ProjectCoordinator_00866042_processed: 
+
+ProjectNo_00866042_processed: 642-138
+
+ProjectSheetNo_00866042_processed: 1
+
+ProtectivePrecautionsRequired_00866042_processed: 
+
+ReceiptDateS_00866042_processed: 9/28/83
+
+Signature_00866042_processed: D.
+
+StorageConditionsDessicator_00866042_processed: False
+
+StorageConditionsFreezer_00866042_processed: False
+
+StorageConditionsOther_00866042_processed: False
+
+StorageConditionsRefrigerator8C_00866042_processed: True
+
+StorageConditionsRoomTemperature_00866042_processed: False
+
+StorageConditionsSpecialInstructionsWhileDosing_00866042_processed: False
+
+StorageConditionsStoreInDark_00866042_processed: False
+
+StudyTitleProposalNumber_00866042_processed: 
+
+TestMaterialS_00866042_processed: B166
+

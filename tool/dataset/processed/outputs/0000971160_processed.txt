@@ -1,0 +1,23 @@
+Form: 0000971160_processed
+==================================================
+
+Date_0000971160_processed: 9/ 3/ 92
+
+Field_0000971160_processed: 
+
+HaveYouContactedYourManagerSupervisorNo_0000971160_processed: 
+
+HaveYouContactedYourManagerSupervisorYes_0000971160_processed: 
+
+ManagerComments_0000971160_processed: Manager, please contact suggester and forward comments to the Quality Council.
+
+NamePhoneExt_0000971160_processed: M. Hamann P. Harper, P. Martinez
+
+RDGroup_0000971160_processed: Licensee
+
+SuggestedSolutionsS_0000971160_processed: Delete coal retention from the list of standard analyses performed on licensee submitted product samples. Special requests for coal retention testing could still be submitted on an exception basis.
+
+Suggestion_0000971160_processed: Discontinue coal retention analyses on licensee submitted product samples (Note : Coal Retention testing is not performed by most licensees. Other B&W physical measurements as ends stability and inspection for soft spots in ciparettes are thought to be sufficient measures to assure cigarette physical integrity. The proposed action will increase laboratory productivity . )
+
+SupervisorManager_0000971160_processed: J. S. Wigand
+

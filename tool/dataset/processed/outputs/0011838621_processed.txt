@@ -1,0 +1,61 @@
+Form: 0011838621_processed
+==================================================
+
+AccountName_0011838621_processed: International.
+
+AdjustedTotalCostOfProject_0011838621_processed: $ 47.711.47 .08
+
+AmtOfChange_0011838621_processed: Increase X
+
+ApprovedBy_0011838621_processed: 
+
+Cc_0011838621_processed: MRA File N. W. Kremer MRA File N. W. Kremer
+
+Date_0011838621_processed: 6/ 21/ 90
+
+Decrease_0011838621_processed: 
+
+Description_0011838621_processed: Hong Kong: Cigarette Market Monitor
+
+Field1990Cost_0011838621_processed: $ 0.00 .08 .08
+
+MBDavis_0011838621_processed: 
+
+NWKremer_0011838621_processed: 
+
+No_0011838621_processed: 27
+
+Original_0011838621_processed: Project File
+
+PreviousCommitmentsThisProject_0011838621_processed: $ 43.335.00 $ 0.00
+
+ProjectNo_0011838621_processed: 1989- 29
+
+ProjectedExtAuthDateWaveS_0011838621_processed: 
+
+ProjectedFieldCompleteWaveS_0011838621_processed: 
+
+ProjectedFinalReportDueSupplierRptWaveS_0011838621_processed: 
+
+ProjectedInternalInitDate_0011838621_processed: 
+
+Reasons_0011838621_processed: Original MRA did not include cost for the first month of the study (see L. Lee memo of September 11, 1989)
+
+SubmittedBy_0011838621_processed: MD Davis
+
+SumaryOfImrdBudgetCommittedToDateCurrentYear_0011838621_processed: 1.471.873.85
+
+SumaryOfImrdBudgetCurrentBalAvailable_0011838621_processed: 1.488.126.23
+
+SumaryOfImrdBudgetNewBalance_0011838621_processed: 1.488.126.15
+
+SumaryOfImrdBudgetThisAmountFromNextYearSBudget_0011838621_processed: 
+
+SumaryOfImrdBudgetThisChangeFromCurrentBudget_0011838621_processed: .08
+
+SumaryOfImrdBudgetTotalAreaBudget_0011838621_processed: $ 2.960.000.00
+
+Supplier_0011838621_processed: MDR. HK
+
+TotalCost_0011838621_processed: $ 43.335.00 $ 4.376.47 $ 47.711.47
+

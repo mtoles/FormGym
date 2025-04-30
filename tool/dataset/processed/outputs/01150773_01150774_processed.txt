@@ -1,0 +1,23 @@
+Form: 01150773_01150774_processed
+==================================================
+
+Cable_01150773_01150774_processed: COVLING
+
+Date_01150773_01150774_processed: January 15, 1997
+
+From_01150773_01150774_processed: David H. Remes
+
+IfThereIsATransmissionProblemPleaseCall_01150773_01150774_processed: 
+
+Message_01150773_01150774_processed: 
+
+Room_01150773_01150774_processed: 803E
+
+Telefax_01150773_01150774_processed: (202) 662-6291
+
+Telephone_01150773_01150774_processed: 32 512 7890
+
+Telex_01150773_01150774_processed: 89- 193 COVLING WSH
+
+To_01150773_01150774_processed: Mark Berlind
+

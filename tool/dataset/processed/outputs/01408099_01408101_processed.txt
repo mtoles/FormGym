@@ -1,0 +1,75 @@
+Form: 01408099_01408101_processed
+==================================================
+
+A_01408099_01408101_processed: 
+
+B_01408099_01408101_processed: 
+
+Brand_01408099_01408101_processed: 
+
+Comments_01408099_01408101_processed: 
+
+Company_01408099_01408101_processed: 
+
+Date_01408099_01408101_processed: March 1, 1978
+
+EstimatedPaybackPeriod_01408099_01408101_processed: 
+
+EstimatedTargetDateOriginalComments_01408099_01408101_processed: 
+
+FieldBy_01408099_01408101_processed: 
+
+FieldExplanationOfChange_01408099_01408101_processed: 
+
+FieldRevisedCompletionDate_01408099_01408101_processed: 
+
+GeneralProjectDescription_01408099_01408101_processed: True 100's, Regular and Menthol tar characteristics as current True 100's product and, 2) Taste characterist- reduction to the range of 8- 10mg tar. Variations to be: 1) Same taste ics similar to True King Size, 5mg. tar product.
+
+MajorMktAndMktResearchStepsInHomePlacement_01408099_01408101_processed: 
+
+Market_01408099_01408101_processed: 
+
+Marketing_01408099_01408101_processed: 
+
+Of_01408099_01408101_processed: 
+
+Or_01408099_01408101_processed: 
+
+OriginalCompletionDate1St_01408099_01408101_processed: 
+
+OriginalCompletionDate79_01408099_01408101_processed: 
+
+OriginalCompletionDateQtr_01408099_01408101_processed: 
+
+ProjectLeader_01408099_01408101_processed: Williams/ Giordano
+
+ProjectName_01408099_01408101_processed: True 100's (R&M)
+
+Project_01408099_01408101_processed: 306
+
+RevisedTargetDate_01408099_01408101_processed: 
+
+Revision_01408099_01408101_processed: 
+
+SalesObjective_01408099_01408101_processed: 
+
+SectionsRevised_01408099_01408101_processed: 
+
+Size_01408099_01408101_processed: 
+
+Target_01408099_01408101_processed: 
+
+TotalBudget_01408099_01408101_processed: 
+
+Units_01408099_01408101_processed: 
+
+YearFive_01408099_01408101_processed: 
+
+YearFour_01408099_01408101_processed: 
+
+YearOne_01408099_01408101_processed: 
+
+YearThree_01408099_01408101_processed: 
+
+Year_01408099_01408101_processed: 
+

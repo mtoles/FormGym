@@ -1,0 +1,39 @@
+Form: 0011505151_processed
+==================================================
+
+AuthorizedCost_0011505151_processed: 70,825 + +10 % (TOTAL 1987) +7.075 (2 -23 -88 77,900 TOTAL
+
+Capri_0011505151_processed: 
+
+CarryoverTo1988_0011505151_processed: 14,165
+
+Cumulative_0011505151_processed: 77.900
+
+Dec1987Accrual_0011505151_processed: 9,442
+
+Description_0011505151_processed: CAPRI EXPANSION A&U - CALIFORNIA - WAVE 4.
+
+ExtAuthoDate_0011505151_processed: 11- 16- 87
+
+FieldComplete_0011505151_processed: 12- -7 -87
+
+FinalRptDue_0011505151_processed: 1- 11- 88
+
+IntInitDate_0011505151_processed: 
+
+MrPersonnel_0011505151_processed: B. R. Pellett
+
+Paid1987_0011505151_processed: 47,218
+
+PaidOutOf1989BudgetDec_0011505151_processed: 
+
+PaidOutOf1989BudgetFeb_0011505151_processed: 
+
+ProjectNo_0011505151_processed: 1987- 115- CA
+
+ReleasedToAcctg_0011505151_processed: 2- 25- 88
+
+Supplier_0011505151_processed: Kapuler Marketing Research
+
+Yea_0011505151_processed: 9.442
+

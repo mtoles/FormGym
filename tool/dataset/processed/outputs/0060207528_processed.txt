@@ -1,0 +1,41 @@
+Form: 0060207528_processed
+==================================================
+
+BrandName_0060207528_processed: PALL MALL RED LIGHTS
+
+Client_0060207528_processed: THE AMERICAN TOBACCO COMPANY
+
+Contract_0060207528_processed: A- 530- 1059
+
+DEC_0060207528_processed: 534.1
+
+DatePostersReceivedFromLithographer_0060207528_processed: 6/ 27/ 89
+
+DatePostingCompleted_0060207528_processed: 7/ 21/ 89
+
+Date_0060207528_processed: 2/ 25/ 89
+
+Market_0060207528_processed: Akron OH.
+
+NumberOfPanelsIlluminated_0060207528_processed: 45
+
+NumberOfPanelsRegular_0060207528_processed: 9
+
+NumberOfPanelsTotal_0060207528_processed: 54
+
+PlantAverage_0060207528_processed: 
+
+PlantManagerPostingSupt_0060207528_processed: 
+
+PlantOperator_0060207528_processed: Patrick Media Group, Inc
+
+PosterDesign_0060207528_processed: THE TASTE BREAKS THROUGH
+
+SPV_0060207528_processed: 
+
+ScheduledPostingDate_0060207528_processed: 7/ 16/ 89
+
+Signature_0060207528_processed: 
+
+SizeShowing_0060207528_processed: F 75 GRP
+

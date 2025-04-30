@@ -1,0 +1,49 @@
+Form: 0001477983_processed
+==================================================
+
+Accepted_0001477983_processed: 
+
+AmountEarnedButNotReceived_0001477983_processed: $
+
+CompensationReceivedLobbying_0001477983_processed: $
+
+ContractualOrAgreedFee_0001477983_processed: $
+
+DueThe1StMondayOfTheMonthDuringTheLegislativeSessionToReportThePreviousMonthsActivity_0001477983_processed: 
+
+DuringThisReportingPeriodHaveYouMadeAnyExpenditureOrIncurredAnyObligationOf2500OrMorePerOccurenceToPromoteOrOpposeAnyLegislationIncludingButNotLimitedMailingsMealsPrintOrBroadcastAdvertisementsOrGiftsYesOrNo_0001477983_processed: 
+
+Explain_0001477983_processed: 
+
+FieldPlease_0001477983_processed: 
+
+HaveYouPaidAnyTypeOfCompensationOrIncurredAnyObligationForPaymentToTheAboveNamed_0001477983_processed: 
+
+IfAnyAddressesOrTelephoneNumbersHaveChangedSinceTheLastReportingPeriodPleaseCheckHereAndNoteTheChangeInTheSpaceProvidedAtTheEndOfThisForm_0001477983_processed: 
+
+IfYesPleaseCompleteTheFollowing_0001477983_processed: 
+
+LobbyistForLobbyingYesOrNo_0001477983_processed: No.
+
+LobbyistName_0001477983_processed: Peter J. McGinn
+
+OrganizationEmployerName_0001477983_processed: R. J. Reynolds Tobacco
+
+Other_0001477983_processed: 
+
+PartOfSalaryReceivedForLobbying_0001477983_processed: $
+
+PleaseIndicateTheCapacityInWhichYouAreExecutingThisDocument_0001477983_processed: 
+
+ReimbursementsForExpensesPleaseItemize_0001477983_processed: 
+
+ReportingPeriod_0001477983_processed: Month of May
+
+Retainer_0001477983_processed: $
+
+Reviewed_0001477983_processed: 
+
+SignatureEmployerOrDesignee_0001477983_processed:  
+
+YesPleaseDetailIncludingTheNamesOfThePersonsReceivingAndInWhoseBehalfSuchExpendituresHaveBeenMadeTheAmountDatePlaceAndReasonForTheExpenditure_0001477983_processed: 
+

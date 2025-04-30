@@ -1,0 +1,27 @@
+Form: 0011859695_processed
+==================================================
+
+Address_0011859695_processed: 575 Lexington Avenue, New York, New York 10022
+
+Agency_0011859695_processed: SSC&B, Inc
+
+Cf_0011859695_processed: cb
+
+Client_0011859695_processed: American Tobacco Company
+
+Contact_0011859695_processed: Larry Odum
+
+Date_0011859695_processed: September 25, 1969
+
+FilmCleared_0011859695_processed: VIDEO TAPE APPROVAL "Presenter/ Girl Rev" AT-M B-T-64 :60 "Pall Mall Filter Tip" AT-P/ F-T-317 :30 TAPE WILL FOLLOW AS SOON AS I RECEIVE IT FROM THE TAPE LIBRARY.
+
+FilmSEnclosed_0011859695_processed: 
+
+FinalApprovalIsOfCourseDependentUponTimeAndPlacementOfTheCommercialS_0011859695_processed: 
+
+PleaseNotifyThisDepartmentOfAnyChangesInTheCodeNumberS_0011859695_processed: 
+
+Product_0011859695_processed: Pall Mail Filter tip
+
+Received_0011859695_processed: SEP 30 
+

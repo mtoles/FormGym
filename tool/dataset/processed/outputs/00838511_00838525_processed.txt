@@ -1,0 +1,17 @@
+Form: 00838511_00838525_processed
+==================================================
+
+Comments_00838511_00838525_processed: This carbocyclic keto alcohol was placed in estimated toxicity class II due to the direct attachment of the ketone to the cyclic nucleus.
+
+CompoundName_00838511_00838525_processed: 2-Hydroxycyclododecanone
+
+Date_00838511_00838525_processed: 12- 4- 80
+
+EstimatedToxicityClass_00838511_00838525_processed: II
+
+LorillardCompoundCodeNumber_00838511_00838525_processed: A41
+
+Name_00838511_00838525_processed: Paul Schickedantz, Jack Reid
+
+Structure_00838511_00838525_processed: OH O
+

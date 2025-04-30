@@ -1,0 +1,73 @@
+Form: 80310840a_processed
+==================================================
+
+ApprovedByGroupManager_80310840a_processed: 
+
+ApprovedByGroupProductManager_80310840a_processed: 
+
+ApprovedByMpio_80310840a_processed: 
+
+ApprovedByProductManager_80310840a_processed: 
+
+Apr_80310840a_processed: 
+
+Aug_80310840a_processed: 
+
+CostEstimate_80310840a_processed: $100 600
+
+Dec_80310840a_processed: 
+
+Director_80310840a_processed: 
+
+Feb_80310840a_processed: 
+
+FieldworkSchedule_80310840a_processed: Start Field w/o 11 /13 /95
+
+InterviewLength_80310840a_processed: 
+
+InterviewsDividedAmong3Gorups_80310840a_processed: 
+
+Jan_80310840a_processed: 
+
+Job_80310840a_processed: 5543/295
+
+Jul_80310840a_processed: 
+
+Jun_80310840a_processed: 
+
+Mar_80310840a_processed: 
+
+MarketingAndOrResearchObjectives_80310840a_processed: Determine the level of interest and conversion opportunities among pompotitive smokers. receiving a Direct Mail offer for Newport Lights. Provide insight into the reasons for offer acceptance or rejection of offer and examine consumer perceptions about Newport Lights.
+
+May_80310840a_processed: 
+
+Nov_80310840a_processed: 
+
+Oct_80310840a_processed: 
+
+PreparedBy_80310840a_processed: S. R. Benson 
+
+ProjectTitle_80310840a_processed: Direct Mail Conversion Research Newport Lights
+
+Reason_80310840a_processed: Lower Incidence
+
+ReportingSchedule_80310840a_processed: Topline w/o 12 /18 /95 Final Report 12/ 31/ 95
+
+ResearchDesign_80310840a_processed: Group 1= Best redeeming customers (2+ paid coupons): n= 750 Group 2= Paid redeoming customers 1 paid coupon) n= 750 Group 3= Non- redeeming customers (no redemption) n= 750 The total sample size is 2,250. All smokers 21+ years of age.
+
+ResearchFirm_80310840a_processed: A & G Research
+
+RespondentIncidence_80310840a_processed: 38% revised from 70%
+
+RevisedCostsIfAny_80310840a_processed: 
+
+RevisedFrom_80310840a_processed: $76 600
+
+Revision_80310840a_processed: ☑
+
+SalesAnalysis_80310840a_processed: 
+
+ScreenerQuestionnaire_80310840a_processed: 5 minutes 10 minutes
+
+Sep_80310840a_processed: 
+

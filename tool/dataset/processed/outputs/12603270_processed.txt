@@ -1,0 +1,51 @@
+Form: 12603270_processed
+==================================================
+
+AccountName_12603270_processed: PRODUCT TESTING
+
+AdjustedTotalCostOfProtect_12603270_processed: $ -0-
+
+AmtOfChange_12603270_processed: Increase Decrease X
+
+ApprovedBy_12603270_processed: 
+
+BrandName_12603270_processed: RICHLAND 100's
+
+Cc_12603270_processed: Research Group Manager Bonnie Fuller V. Hansberry (If International)
+
+CommittedToDate_12603270_processed: 3,357,545
+
+CurrentBalanceAvailable_12603270_processed: 252,955
+
+Date_12603270_processed: June 21, 1985
+
+Description_12603270_processed: Amelia 100's Candidates: (NM-FT and NM- Lights)
+
+FieldComplete_12603270_processed: 
+
+FieldFromNextYearSBudget_12603270_processed: 
+
+FinalReportDue_12603270_processed: 
+
+NewBalance_12603270_processed: 311.455
+
+Original_12603270_processed: Project File S. Willinger 
+
+ProjectNo_12603270_processed: 1985-39NP
+
+ProjectedFieldStart_12603270_processed: CANCELLED
+
+Reasons_12603270_processed: 
+
+SubmittedBy_12603270_processed: 
+
+SummaryOfResearchBudget_12603270_processed: 
+
+Supplier_12603270_processed: Market Facts. Inc.
+
+ThisAmount_12603270_processed: 0
+
+ThisChangeFromCurrentBudget_12603270_processed: +58,500
+
+TotalAreaBudget_12603270_processed: 3,669,000
+

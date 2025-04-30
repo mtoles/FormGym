@@ -1,0 +1,43 @@
+Form: 0060024314_processed
+==================================================
+
+ChemicalDescriptionCas_0060024314_processed: 108 -05 -4
+
+ChemicalDescriptionChemicalFormula_0060024314_processed: Vinyl Acetate
+
+ChemicalDescriptionDescription_0060024314_processed: Liquid Adhesive
+
+ChemicalDescriptionManufacturer_0060024314_processed: H. B. Fuller Company
+
+ChemicalDescriptionMsdsOnFileCircleOne_0060024314_processed: Yes
+
+ChemicalDescriptionPercentActivesNonWater_0060024314_processed: .5%
+
+ChemicalDescriptionPhone_0060024314_processed: 
+
+ChemicalDescriptionProductChemicalName_0060024314_processed: Fuller G2315 DC
+
+ChemicalDescriptionProductClassificationCircleDne_0060024314_processed: Organic
+
+ChemicalUsage1993AnnualUsageLbs_0060024314_processed: 74880
+
+ChemicalUsage1993AvgMonthlyUsageLbs_0060024314_processed: 6240
+
+ChemicalUsageApplicationCircleOneAndBrieflyDescribe_0060024314_processed: 
+
+Facility_0060024314_processed: The American Tobacco Company
+
+HousekeepingCleaning_0060024314_processed: 
+
+Inorganic_0060024314_processed: 
+
+No_0060024314_processed: 
+
+Other_0060024314_processed: 
+
+Permit_0060024314_processed: 0001
+
+ProducionProcess_0060024314_processed: label adhesive
+
+WaterTreatment_0060024314_processed: 
+

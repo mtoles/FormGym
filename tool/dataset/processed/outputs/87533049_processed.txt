@@ -1,0 +1,45 @@
+Form: 87533049_processed
+==================================================
+
+Analytical_87533049_processed: Break - out separately byl packing as indicated
+
+BrandSApplicable_87533049_processed: TRUE
+
+Cc_87533049_processed: R. G. Ryan 
+
+Circulation_87533049_processed: 1. 213, 400
+
+CouponExpirationDate_87533049_processed: 6 / 30 / 91
+
+CouponIssueDate_87533049_processed: 10 / 90
+
+CouponValue_87533049_processed: $2.00
+
+DateInitiated_87533049_processed: May 3, 1990
+
+FieldAdvertisingCreativeTitle_87533049_processed: True Filter King Carton
+
+FieldIssueFrequencyYear_87533049_processed: N/A
+
+FieldSpaceColor_87533049_processed: N/A
+
+ForControlUseOnlyCodeAssigned_87533049_processed: 530430
+
+ForControlUseOnlyJobNumber_87533049_processed: 1112
+
+From_87533049_processed: J. La Valle
+
+GeographicalAreaS_87533049_processed: National
+
+MediaName_87533049_processed: N/A
+
+MediaType_87533049_processed: ON - Carton Instant Redeemable
+
+PackAndOrCarton_87533049_processed: Carton
+
+Requirements_87533049_processed: Break - out separately byl packing as indicated
+
+SignatureOfInitiator_87533049_processed: 
+
+To_87533049_processed: S. A. Rapisarldi
+

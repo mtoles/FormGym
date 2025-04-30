@@ -1,0 +1,43 @@
+Form: 91939637_processed
+==================================================
+
+AuthorizedBy_91939637_processed: 
+
+ConsumerOffer_91939637_processed: $3 Off Store Redeemable Carton Coupon
+
+Date_91939637_processed: 
+
+DisplayAgreement_91939637_processed: Lorillard Representative will supply all display materials and assemble display. Display containing deals will be placed on a self- service basis for a two- week period.
+
+DisplayBrands_91939637_processed: TRUE
+
+FieldTrue_91939637_processed: 
+
+From_91939637_processed: 
+
+MerchandiseOrderThroughYourSupplier_91939637_processed: 
+
+MerchandiseWillBeArbitrarilyShippedToStore_91939637_processed: 
+
+NoCartons_91939637_processed: 
+
+NumberOfCartons_91939637_processed: 
+
+PackingBox80SWhereAvailable_91939637_processed: 
+
+PackingFilter100S_91939637_processed: 
+
+PackingFilterKS_91939637_processed: 
+
+PromotionalPeriod_91939637_processed: May- June 1992
+
+StoresParticipating_91939637_processed: 
+
+To_91939637_processed: 
+
+TypeDisplayCounter_91939637_processed: 
+
+TypeDisplayFloor_91939637_processed: 
+
+TypeDisplayPoster_91939637_processed: 
+

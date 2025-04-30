@@ -1,0 +1,37 @@
+Form: 71366499_processed
+==================================================
+
+BWApprovalsDate_71366499_processed: 
+
+BWApprovalsDepartment_71366499_processed: 
+
+BWApprovalsSignature_71366499_processed: 
+
+Brand_71366499_processed: BKOOL
+
+DateComplete_71366499_processed: 
+
+Date_71366499_processed: 12/ 15/ 97
+
+Description_71366499_processed: CMS Amerada Hess Dispenser Sign
+
+JobNo_71366499_processed: 7559
+
+OttApprovalsDate_71366499_processed: 
+
+OttApprovalsDepartment_71366499_processed: 
+
+OttApprovalsSignature_71366499_processed: 
+
+RevisionsApproved_71366499_processed: 
+
+Revisions_71366499_processed: 
+
+SqInchesFeet_71366499_processed: 261 sq
+
+TN_71366499_processed: NA
+
+TrimSize_71366499_processed: 14 1/2 X 18"
+
+Warning_71366499_processed: 3A 14 1/2" X 8" - 116 sq."
+

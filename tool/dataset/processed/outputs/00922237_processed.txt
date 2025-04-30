@@ -1,0 +1,45 @@
+Form: 00922237_processed
+==================================================
+
+AcctNo_00922237_processed: 4111
+
+ApprovedBy_00922237_processed: H.J. Minnemeyer
+
+Attn_00922237_processed: Dr. Harry Minnemeyer
+
+BudgetNo_00922237_processed: 
+
+Code_00922237_processed: 
+
+DateWanted_00922237_processed: As required
+
+Date_00922237_processed: 
+
+DeptNo_00922237_processed: 9590
+
+Description_00922237_processed: This is your authorization to provide the "1601.013: The Effect of Inhalation of Reference and Test (D3 and D4) Cigarette Smoke on Two Cytogenetic Endpoints in Mice: Chromosome Aberrations and Sister Chromatid Exchange" test for a fixed price of $19,750 Tests will be performed in accordance with the December 21, 1981 formal agreement between Microbiological Associates and Lorillard. All work is to be coordinated with our Dr. Harry Minnemeyer (919) 373-6603
+
+FollowUpDate_00922237_processed: 
+
+IssuedBy_00922237_processed: 00922237
+
+OrderNo_00922237_processed: 
+
+PrevOrRecommendedSupplier_00922237_processed: 
+
+Purchasing_00922237_processed: 
+
+Quantity_00922237_processed: 
+
+RequisitionNo_00922237_processed: 
+
+ShipToDeptBranch_00922237_processed: Lorillard Research Center
+
+Stationary_00922237_processed: 
+
+Terms_00922237_processed: 15 Net F.O.S N/A VIA N/A
+
+UnitPrice_00922237_processed: 
+
+Vendor_00922237_processed: Microbiological Associates 5221 River Rd., Bethesda MD 20816
+

@@ -1,0 +1,47 @@
+Form: 92081358_1359_processed
+==================================================
+
+Annuals_92081358_1359_processed: 57 19%
+
+ApproximateOfRetailCallsSecuredByGlass_92081358_1359_processed: 45% (136 calls)
+
+ClubCashCarryEtc_92081358_1359_processed: *Jobber/ Membership
+
+Division_92081358_1359_processed: Chicago South
+
+Field12Yr_92081358_1359_processed: 162 53%
+
+Field25Yr_92081358_1359_processed: 8 3%
+
+Field50Yr_92081358_1359_processed: 0 0%
+
+Field6Yr_92081358_1359_processed: 76 25%
+
+FieldCalls_92081358_1359_processed: 0 8 162 76 57 303
+
+FieldOfRetailCalls_92081358_1359_processed: 247- classifIed 57- annual
+
+Field_92081358_1359_processed: 0% 3% 53% 25% 19% 100%
+
+ListTheInformationBelowAsItPertainsToTheUrbanCenterPortionOfYourAssignmentOnly_92081358_1359_processed: 
+
+PopulationCompositionBlack_92081358_1359_processed: 80%
+
+PopulationCompositionHispanic_92081358_1359_processed: 5%
+
+PopulationCompositionOther_92081358_1359_processed: 5%
+
+PopulationCompositionTotal_92081358_1359_processed: 100%
+
+PopulationCompositionWhite_92081358_1359_processed: 10%
+
+PrimaryClassOfTrade_92081358_1359_processed: Convenience/ Grocery
+
+PrimaryDistributionChannelEGJobberSubJobberMembership_92081358_1359_processed: *Jobber/ Membership
+
+RetailCallFrequency_92081358_1359_processed: 
+
+SecondaryClassOfTrade_92081358_1359_processed: Liquor
+
+Total_92081358_1359_processed: 303 100%
+

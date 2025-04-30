@@ -1,0 +1,41 @@
+Form: 0001123541_processed
+==================================================
+
+ApprovalSignatureDate_0001123541_processed: 
+
+DateRecD_0001123541_processed: 6/ 21/ 93
+
+Date_0001123541_processed: June 21, 1993
+
+Department_0001123541_processed: R&D Library
+
+DescribePossibleSolutionsAndBenefits_0001123541_processed: 1. Drop the category specifications altogether. 2. Use moregeneral categories. hote: I have passed this to Scott Appleton for the task force to use in streamlining the records management program.
+
+ImplementNo_0001123541_processed: 
+
+ImplementPending_0001123541_processed: 
+
+ImplementYes_0001123541_processed: 
+
+Keywords1993_0001123541_processed: 
+
+ProfitImprovement_0001123541_processed: (If Applicable)
+
+QipLog1_0001123541_processed: 93- 0301
+
+RespondHere_0001123541_processed: 
+
+ResponderDate_0001123541_processed: 
+
+SignPrintNamesSeeInstructionsOnBack_0001123541_processed: 
+
+Status1993_0001123541_processed: 
+
+SubmittedBy_0001123541_processed: Carol S. Lincoln
+
+SubmitterSSs_0001123541_processed: 407- 64- 3484
+
+SuggestionDescribeCurrentSituationAndIdea_0001123541_processed: The current system of managing records is too complex. The trend seems to be increasingly specific, when we should be getting more general. Right now, people must work to understand the system. We must spend too much time adninistering the system, labeling and cleaning our files. Complying is a real burden, both for the individual and for the records coordinators.
+
+Type_0001123541_processed: EQPR
+

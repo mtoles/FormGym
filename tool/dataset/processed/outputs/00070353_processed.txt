@@ -1,0 +1,23 @@
+Form: 00070353_processed
+==================================================
+
+ApproveInIts_00070353_processed: 
+
+Authors_00070353_processed: Andrew G. Kallianos, Richard K. Means, James D. Mold
+
+Date_00070353_processed: March 18, 1968
+
+FieldGiveReasonsBelow_00070353_processed: APPROVE TENTATIVELY
+
+PresentForm_00070353_processed: 
+
+Recommendation_00070353_processed: x
+
+RegistrationNo_00070353_processed: 533
+
+ReviewCompleted_00070353_processed: 3/ 29/ 68
+
+SubjectToTheFollowingSuggestedRevisionsItemizeBelow_00070353_processed: 
+
+Title_00070353_processed: "Effect of Nitrates in Tobacco on the Catechol Yield in Cigarette Smoke"
+

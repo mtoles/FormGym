@@ -1,0 +1,83 @@
+Form: 71108371_processed
+==================================================
+
+DateRequired_71108371_processed: 4/20/98
+
+DateSubmitted_71108371_processed: 4/17/98
+
+Department_71108371_processed: BD & SS
+
+Field1Enhancement_71108371_processed: 
+
+Field1ProductivityImprovement_71108371_processed: 
+
+Field2Maintenance_71108371_processed: 
+
+Field2ReturnOnInvestment_71108371_processed: 
+
+Field3CustomerImpact_71108371_processed: 
+
+Field3SpecialProcessing_71108371_processed: 
+
+Field4AdHoc_71108371_processed: 
+
+Field4GovernmentRequirement_71108371_processed: 
+
+Field5BusinessChange_71108371_processed: 
+
+Field5Emergency_71108371_processed: 
+
+Field6SystemError_71108371_processed: 
+
+Field7ProceduralError_71108371_processed: 
+
+PhoneNumber_71108371_processed: 7970
+
+PriorityDefer_71108371_processed: 
+
+PriorityHigh_71108371_processed: X
+
+PriorityImmediate_71108371_processed: 
+
+PriorityLow_71108371_processed: 
+
+PriorityMedium_71108371_processed: 
+
+ProblemDefinitionDescriptionOfRequest_71108371_processed: Please run job FRMRXUM2 for GPC, Misty, and Kool against file b:\common\khutchi\r892unm.lst. Please place output in the same directory.
+
+ProblemDefinitionReasonForRequest_71108371_processed: Calculation of 1997 STR volumes for these brands for allocation of Period 2A budgets.
+
+ProblemDefinitionRequestAuthorizedBy_71108371_processed: Karl Hutchison
+
+ProjectNumber_71108371_processed: (assigned by MIS)
+
+ReasonCode1ProductivityImprovement_71108371_processed: x
+
+ReasonCode2ReturnOnInvestment_71108371_processed: 
+
+ReasonCode3CustomerImpact_71108371_processed: 
+
+ReasonCode4GovernmentRequirement_71108371_processed: 
+
+ReasonCode5BusinessChange_71108371_processed: 
+
+ReasonCode6SystemError_71108371_processed: 
+
+ReasonCode7ProceduralError_71108371_processed: 
+
+RequestAuthorizedBy_71108371_processed: MUST BE AUTHORIZED BY THE DEPARTMENT DIRECTOR OR THE DESIGNATED SYSTEM OWNER BEFORE SUBMISSION TO THE MIS CLIENT SYSTEMS MANAGER.
+
+RequestType1Enhancement_71108371_processed: 
+
+RequestType2Maintenance_71108371_processed: 
+
+RequestType3SpecialProcessing_71108371_processed: x
+
+RequestType4AdHoc_71108371_processed: 
+
+RequestType5Emergency_71108371_processed: 
+
+RequestedBy_71108371_processed: Karl Hutchison
+
+System_71108371_processed: 
+

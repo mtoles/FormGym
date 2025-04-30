@@ -1,0 +1,61 @@
+Form: 0012529284_processed
+==================================================
+
+AccountName_0012529284_processed: 
+
+AdjustedTotalCostOfProject_0012529284_processed: $ 212, 475 + 10%
+
+AmtOfChangeDecrease_0012529284_processed: 
+
+AmtOfChangeIncrease_0012529284_processed: 
+
+ApprovedBy_0012529284_processed: 
+
+BudgetCheck_0012529284_processed: 
+
+Cc_0012529284_processed: S. Willinger (3) G. D. Raphael V. Hansberry (If Int.)
+
+CommittedToDate_0012529284_processed: 1, 652, 955. 53
+
+Date_0012529284_processed: 12- -4 -87
+
+Description_0012529284_processed: CAPRI A&U EXPANSION - CALIFORNIA: WAVE 2 (87 -113) , WAVE 3 (87 –114) AND WAVE 4 (87 -115) .
+
+Field1987_0012529284_processed:  (886, 220. 53) +14, 165. 00
+
+FieldFromNextYearSBudget_0012529284_processed: 
+
+NewBalance_0012529284_processed: (872, 055. 53)
+
+No_0012529284_processed: C -5-51
+
+Original_0012529284_processed: Project File
+
+PreviousCommitmentsThisProject_0012529284_processed: $ 212, 475 + 10%
+
+ProjectNo_0012529284_processed: 1987 -113 /114 /115 -CA
+
+ProjectedExtAuthDate_0012529284_processed: 
+
+ProjectedFieldComplete_0012529284_processed: 
+
+ProjectedFinalReportDueSupplierRpt_0012529284_processed: 
+
+ProjectedInternalInitDate_0012529284_processed: 
+
+Reasons_0012529284_processed: Adjustment due to timing of projects falling into 1988.
+
+StartPleteFr_0012529284_processed: 87 -113 (70, 825) 9 /23 10 /11 11 /16 87 -114 (70. 825) 10 /13 10 /29 12 /7 87 -115 (70, 825 11 /16 12 /7 1 /11
+
+SubmittedBy_0012529284_processed: S. L. Willinger
+
+SummaryOfResearchBudgetCurrentBalanceAvailable_0012529284_processed: (886, 220. 53)
+
+SummaryOfResearchBudgetThisAmount_0012529284_processed: -14, 165. 00
+
+SummaryOfResearchBudgetThisChangeFromCurrentBudget_0012529284_processed: +14, 165. 00
+
+SummaryOfResearchBudgetTotalAreaBudget_0012529284_processed: 
+
+Supplier_0012529284_processed: Kapuler Marketing Research
+

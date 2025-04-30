@@ -1,0 +1,27 @@
+Form: 0011899960_processed
+==================================================
+
+Attention_0011899960_processed: DR. HUGHES, MESSRS. ALAR, SANDEFUR, BLOTT, BUTLER, MIDDLETON, CHRISTENSEN, PEPPLES, SACHS FREEDMAN
+
+Copies_0011899960_processed: T. HUMBER, M. BATEMAN
+
+DeadlineForResponse_0011899960_processed: Already handled
+
+Department_0011899960_processed: CORPORATE AFFAIRS
+
+PressQueryDate_0011899960_processed: 7/ 9/ 84
+
+PressQueryDescribeTheStorylineListTheQuestionsAndProposedAnswersAndSummarizeHandlingIncludingClearances_0011899960_processed: 
+
+PressQueryPublication_0011899960_processed: ADWEEK - Midwest
+
+PressQueryReceivedBy_0011899960_processed: Mark Ahearn
+
+PressQueryReporterEditor_0011899960_processed: Fran Brock (312) 467- 6500
+
+PressQueryTime_0011899960_processed: 1: 45 P. M.
+
+Received_0011899960_processed: JUL 10 1984 JOHN ALAR
+
+Subject_0011899960_processed: L&M Lawsuit
+

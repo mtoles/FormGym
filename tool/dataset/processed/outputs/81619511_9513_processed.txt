@@ -1,0 +1,39 @@
+Form: 81619511_9513_processed
+==================================================
+
+DivisionFull_81619511_9513_processed: 
+
+DivisionName_81619511_9513_processed: 
+
+DivisionPartial_81619511_9513_processed: 
+
+FieldOnlyPartialRegionContinueWithDivisionSScope_81619511_9513_processed: 
+
+FieldReps_81619511_9513_processed: 
+
+From_81619511_9513_processed: C.J. Leiker
+
+IndLorVolume_81619511_9513_processed: 139/ 27 202/ 22 126/ 26 176/ 13 98/ 17
+
+IndVolume_81619511_9513_processed: 
+
+NameOfAccount_81619511_9513_processed: _7-Eleven 
+
+NoOfStores_81619511_9513_processed: 25
+
+RegionFull_81619511_9513_processed: x
+
+RegionPartial_81619511_9513_processed: 
+
+Subject_81619511_9513_processed: MAVERICK SPECIALS MENTHOL- PROGRESS REPORT
+
+SubmissionDateAug11_81619511_9513_processed: False
+
+SubmissionDateJun30_81619511_9513_processed: False
+
+SubmissionDateMay19_81619511_9513_processed: False
+
+SubmissionDateSep22_81619511_9513_processed: True
+
+To_81619511_9513_processed: S.P. Zolot
+

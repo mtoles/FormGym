@@ -1,0 +1,31 @@
+Form: 0060173256_processed
+==================================================
+
+AccountingFile_0060173256_processed: 
+
+Adjustment_0060173256_processed: $ 0.00
+
+Amount_0060173256_processed: 31,000.00 (31,000.00)
+
+ApprovedBy_0060173256_processed: 
+
+Brands_0060173256_processed: Private Stock Carlton
+
+ChargeCode_0060173256_processed: CAR- MMT- DSP PRV- MMT- DSP
+
+CurrentBudget_0060173256_processed: $ 7,569,000.00
+
+Date_0060173256_processed: 
+
+Description_0060173256_processed: Displays
+
+Distribution_0060173256_processed: 
+
+OfferDescription_0060173256_processed: Displays
+
+PreparedBy_0060173256_processed: 
+
+ProjectNo_0060173256_processed: S0002 Supp 2
+
+RevisedBudget_0060173256_processed: $ 7,569,000.00
+

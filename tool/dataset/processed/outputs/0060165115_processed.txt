@@ -1,0 +1,29 @@
+Form: 0060165115_processed
+==================================================
+
+Address_0060165115_processed: Philip Morris Europe Fabriques de Tabac Reunies S. A. CH- 2003 Neuchatel
+
+Date_0060165115_processed: 28 Apr. 98
+
+FaxNo_0060165115_processed: 0041- 32- 888 5776
+
+From_0060165115_processed: Dr. Wolf Reininghaus
+
+GeneralManager_0060165115_processed: Dr. Wolf Reninghaus
+
+InbifoInstitutFRBiologischeForschungGmbh_0060165115_processed: 
+
+NumberOfFollowingPages_0060165115_processed: 21 
+
+Re_0060165115_processed: TPM/ Nocotine ratio
+
+TelefaxMessageNo_0060165115_processed: 2463
+
+Telefax_0060165115_processed: (0 22 03) 303 -362
+
+Telephone_0060165115_processed: (0 22 03) 303 -1
+
+To_0060165115_processed: Dr. Don Leyden, Dept. Scientific Affairs
+
+TradeRegister_0060165115_processed: Cologne HRB 367
+

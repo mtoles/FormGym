@@ -1,0 +1,105 @@
+Form: 11508234_processed
+==================================================
+
+AcctName_11508234_processed: 
+
+Analyst_11508234_processed: 
+
+ApprovedByDirectorForecastingMktTo250000_11508234_processed: 
+
+Asst_11508234_processed: 
+
+BudgetCheck_11508234_processed: Musiclask
+
+BudgetedNo_11508234_processed: X
+
+BudgetedYes_11508234_processed: 
+
+Cc_11508234_processed: H. Williams
+
+CommittedToDateCurrentYear_11508234_processed: 146,925
+
+CompetitiveProposalsObtained_11508234_processed: Only two bidders because third supplier has not yet signed B & W contract.
+
+Con_11508234_processed: 
+
+CostPerInterview_11508234_processed: 
+
+Cost_11508234_processed: 27,000 29,216
+
+CurrentBalanceAvailable_11508234_processed: 382,575
+
+Date_11508234_processed: 
+
+Description_11508234_processed: LUCKY STRIKE QUALITATIVE ADVERTISING RESEARCH - GATEWAY CITIES
+
+EstTravel_11508234_processed: 2,500 2,500
+
+Field100000_11508234_processed: 
+
+FieldComplete_11508234_processed: 
+
+FieldFromCurrentBudget_11508234_processed: 
+
+FieldStart_11508234_processed: 
+
+FieldTo_11508234_processed: 
+
+Field_11508234_processed: 
+
+FinalReportDueSupplierRpt_11508234_processed: 
+
+InternalInitDate_11508234_processed: 3/ 1/ 95
+
+Mgr_11508234_processed: 
+
+NewBalance_11508234_processed: 353,075
+
+No_11508234_processed: 1995- 48D
+
+OriginalBudgetedAmount_11508234_processed: 
+
+Original_11508234_processed: Project File
+
+ProjectNo_11508234_processed: 
+
+ProjectType_11508234_processed: 
+
+Projected_11508234_processed: 
+
+QualitativeResearchProductTestAUEtcRecommendedSupplier_11508234_processed: Analytic Insight, Inc.
+
+ReasonSForRecommendation_11508234_processed: Lowest Bid
+
+RequestedBy_11508234_processed: A. A. Strobel
+
+Res_11508234_processed: 
+
+ResearchReqAttachedNo_11508234_processed: 
+
+ResearchReqAttachedYes_11508234_processed: X
+
+SampleSize_11508234_processed: 
+
+SeniorVpMarketingTo1000000_11508234_processed: 
+
+SubmittedBy_11508234_processed: Lumea
+
+SummaryOfMrdBudget_11508234_processed: 1995
+
+Supplier_11508234_processed: Analytic Insight, Inc. Goldfarb Consultants
+
+ThisAmountFromNextYearSBudget_11508234_processed: 0
+
+ThisChange_11508234_processed: 29,500
+
+TotalAreaAuthorized_11508234_processed: 500,000
+
+TotalCost_11508234_processed: 29,500 31,716
+
+VickiClark_11508234_processed: 
+
+WaveS_11508234_processed: 3/ 31/ 95
+
+WavesS_11508234_processed: 3/ 25/ 95
+

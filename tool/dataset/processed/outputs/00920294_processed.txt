@@ -1,0 +1,37 @@
+Form: 00920294_processed
+==================================================
+
+AlertNumber_00920294_processed: 970220
+
+BrcCodesW81CartonOrderForm_00920294_processed: 
+
+DatasetName_00920294_processed: 
+
+Date_00920294_processed: 3/ 7/ 97
+
+From_00920294_processed: Drew Huyett
+
+Maildate_00920294_processed: 3/ 17/ 97
+
+MailfileCells_00920294_processed: HD home delivery SP sneak preview
+
+MailfileDescription_00920294_processed: Mail Order- Indy Responders
+
+MailfileId_00920294_processed: 3,
+
+ProgramGroup_00920294_processed: 102- Eclipse
+
+Program_00920294_processed: 700418
+
+Quantity_00920294_processed: 273
+
+Seeds_00920294_processed: 25
+
+Suppression_00920294_processed: 5
+
+System_00920294_processed: Corp/ Multibrand
+
+TCodesNa_00920294_processed: 
+
+To_00920294_processed: RJR IR - Suz /Art
+

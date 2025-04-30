@@ -1,0 +1,57 @@
+Form: 0060029036_processed
+==================================================
+
+ApprovalRouting_0060029036_processed: 
+
+BrandS_0060029036_processed: Camel/ Winston
+
+BriefDescription_0060029036_processed: 2 Joe's Place Exhibits for use at Winston Cup, Winston Drag and Camel Super Bike Events.
+
+Company_0060029036_processed: SPEVCO, INC.
+
+ContractNo_0060029036_processed: 4011 00 00
+
+ContractSubject_0060029036_processed: Joe's Place Exhibits
+
+CurrentYearCost_0060029036_processed: 1994-1995
+
+DateRouted_0060029036_processed: January 11, 1994
+
+Date_0060029036_processed: 
+
+FieldDirectorGLLittell_0060029036_processed: 
+
+FieldSrManagerBJPowell_0060029036_processed: 
+
+FieldSrVpTWRobertson_0060029036_processed: 
+
+FsMarketing_0060029036_processed: 
+
+GLCode_0060029036_processed: 
+
+Insurance_0060029036_processed: 
+
+Law_0060029036_processed: 
+
+Manager_0060029036_processed: John Powell B J. Powell 1-11-94
+
+Name_0060029036_processed: Michael Wright John Powell
+
+Originator_0060029036_processed: Michael Wright
+
+PageS_0060029036_processed: SME
+
+ProgramBudgetCode_0060029036_processed: 
+
+ReturnTo_0060029036_processed: MARY SEAGRAVES Ext 1485
+
+ReviewRouting_0060029036_processed: 
+
+RevisionsToShellOtherThanTermCompensationOrJob_0060029036_processed: 
+
+SectionS_0060029036_processed: 13 Plaza
+
+Signature_0060029036_processed: 
+
+TotalContractCost_0060029036_processed: $ 1,340,000.00
+

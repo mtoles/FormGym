@@ -1,0 +1,27 @@
+Form: 0071032790_processed
+==================================================
+
+ApprovedBy_0071032790_processed: R. S. Sprinkle, III
+
+Cc_0071032790_processed: BMC/RMI/EPB JEM/DEC PRC/DRB
+
+Date_0071032790_processed: September 16, 1980
+
+Epb_0071032790_processed: ODL
+
+Objective_0071032790_processed: 
+
+OtherPersonnelAssigned_0071032790_processed: J. E. Mann, Jr. D. E. Cawthon
+
+ProjectCode_0071032790_processed: BTF
+
+ProjectLeader_0071032790_processed: E. P. Barbee
+
+ProjectName_0071032790_processed: -
+
+Project_0071032790_processed: To develop cigarette Cigarette to utilize a filter tip with longitudinal grooves from the mouth end to the tobacco end in con- junction with perforated tipping paper.
+
+To_0071032790_processed: Files
+
+WorkRequestedBy_0071032790_processed: R. S. Sprinkle, III
+

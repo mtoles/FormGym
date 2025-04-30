@@ -1,0 +1,57 @@
+Form: 0060077689_processed
+==================================================
+
+AccountingChargeNo_0060077689_processed: Adv. Expense
+
+AdminCtrMgmtCtrAsRequired_0060077689_processed: 
+
+AdminCtrMgmtCtrPurchaseOrderNo_0060077689_processed: M14789
+
+Attn_0060077689_processed: Mr. Steven Katz Route 4 and Adams Station North Brunswick, NJ 08901- 0623
+
+AuthorizationNo_0060077689_processed: 
+
+BudgetNo_0060077689_processed: 
+
+Buyer_0060077689_processed: M. Stock/ smm 
+
+By_0060077689_processed: 
+
+DateOfRequisition_0060077689_processed: January 3, 1995
+
+Date_0060077689_processed: January 3, 1995
+
+DepartmentCharged_0060077689_processed: Brand Operations
+
+Description_0060077689_processed: CARLTON "Free" Carton" Direct Mail Piece This Purchase order is to cover all costs incurred to- date listed below. 42,000 lbs. of 80 lb Sterling C/ 2/ S - 36- 1/ 2" roll 31,000 lbs. of 80 lb. Sterling C/ 2/ S - 26- 1/ 2" roll Prep. (line negatives, paper prints, camera/ stripping) Federal Express charges ALL MATERIALS HAVE BEEN CANCELLED.
+
+ExtraCopiesTo_0060077689_processed: D. Barcia
+
+Fo_0060077689_processed: 
+
+LocalApproval_0060077689_processed: 
+
+LocalPOreleaseNo_0060077689_processed: 
+
+Location_0060077689_processed: STAMFORD, CT
+
+Other_0060077689_processed: 
+
+Price_0060077689_processed: $20, 580. 00 $15, 190. 00 $431 .25 $48 .75
+
+Quantity_0060077689_processed: 
+
+Requisitioner_0060077689_processed: Mr. G. Schumacher
+
+ShipTo_0060077689_processed: NO SHIPPING REQUIRED
+
+ShipmentToArriveNotLaterThan_0060077689_processed: NO SHIPPING REQUIRED.
+
+StateTaxStatusNotToBeChargedBySupplier_0060077689_processed: True
+
+StateTaxStatusToBeCharged_0060077689_processed: False
+
+Supplier_0060077689_processed: WEBCRAFT TECHNOLOGIES INC
+
+Terms_0060077689_processed: NET 30 Days
+

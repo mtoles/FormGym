@@ -1,0 +1,67 @@
+Form: 0012529295_processed
+==================================================
+
+AccountName_0012529295_processed: CAPRI
+
+ApprovedBy_0012529295_processed: 
+
+BudgetCheck_0012529295_processed: K. F. Lyle
+
+Cc_0012529295_processed: S. Willinger (3) G. D. Raphael V. Hansberry (If Int.)
+
+CommittedToDateCurrentYear_0012529295_processed: 1, 233, 308. 08
+
+CompetitiveProposalsObtainedCostPerInterview_0012529295_processed: ['$47 .22', '$74 .67']
+
+CompetitiveProposalsObtainedCost_0012529295_processed: ['$70 70,825 +/ - 10%', '$112, 000 +/ - 10%']
+
+CompetitiveProposalsObtainedEstTravel_0012529295_processed: ['-0-', '-O-']
+
+CompetitiveProposalsObtainedSupplier_0012529295_processed: ['Kapuler Market Research', 'Market Facts, Inc.']
+
+CompetitiveProposalsObtainedTotalCost_0012529295_processed: ['$70 ,825 + - 10%', '$112 000 +/ - 10%']
+
+Date_0012529295_processed: 10/ /9 87
+
+DescriptionCapriExpansion_0012529295_processed: California- A&U Wave II
+
+Field_0012529295_processed: 
+
+NewBalance_0012529295_processed: (452 ,408, 08)
+
+No_0012529295_processed: C- 40
+
+Original_0012529295_processed: Project File
+
+ProjectNo_0012529295_processed: 1987- 113CA
+
+ProjectedFieldComplete_0012529295_processed: 10/ 11/ 87
+
+ProjectedFieldStart_0012529295_processed: 9/ 23/ 87*
+
+ProjectedFinalReportDue_0012529295_processed: 11/ 16/ 87
+
+ProjectedInitiationDate_0012529295_processed: 8/ 3/ 87
+
+ReasonSForRecommendation_0012529295_processed: Low bidder.
+
+RecommemdedSupplier_0012529295_processed: Kapuler Marketing Research
+
+RequestedBy_0012529295_processed: S. H. Trebilcock
+
+ResearchRequestAttachedNo_0012529295_processed: 
+
+ResearchRequestAttachedYes_0012529295_processed: x
+
+SampleSize_0012529295_processed: 1. 500
+
+SubmittedBy_0012529295_processed: L J L. J. Spurtier
+
+SummaryOfResearchBudgetCurrentBalAvailable_0012529295_processed: (381, 583. 08)
+
+SummaryOfResearchBudgetThisChangeFromCurrentBudget_0012529295_processed: -70, 825. 00
+
+SummaryOfResearchBudgetTotalAreaBudget_0012529295_processed: 780, 900. 00
+
+ThisAmountFromNextYearSBudget_0012529295_processed: 
+

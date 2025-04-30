@@ -1,0 +1,17 @@
+Form: 0060136394_processed
+==================================================
+
+Client_0060136394_processed: THE AMERICAN TOBACCO COMPANY (LUCKY STRIKE)
+
+Date_0060136394_processed: APRIL 1,1957
+
+Program_0060136394_processed: 1/2 HOUR PROGRAMES
+
+RevisedContractTotals_0060136394_processed: 24 @ $ 150.00 TIME 24 @ $ 125.00 NET TALENT
+
+Signed_0060136394_processed: HOPE MARTINEZ
+
+Stations_0060136394_processed: WHAS LOUISVILLE, KENTUCKY
+
+Total_0060136394_processed: $ 6.600.00
+

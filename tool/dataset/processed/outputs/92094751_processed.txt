@@ -1,0 +1,71 @@
+Form: 92094751_processed
+==================================================
+
+AreaRegionDivision_92094751_processed: 03/ 07/ 415415 & 418418
+
+ChainAcceptanceExcellent_92094751_processed: 
+
+ChainAcceptanceFair_92094751_processed: 
+
+ChainAcceptanceGood_92094751_processed: 
+
+ChainAcceptancePoor_92094751_processed: 
+
+Comments_92094751_processed: Premiums packaged to large to store on a van. Could not get enough on a van to sell all day. Retailers only accepted small quantities of deals. Consumers perceived value and not meet expectations.
+
+ConsumerAcceptanceExcellent_92094751_processed: 
+
+ConsumerAcceptanceFair_92094751_processed: 
+
+ConsumerAcceptanceGood_92094751_processed: 
+
+ConsumerAcceptancePoor_92094751_processed: x
+
+Date_92094751_processed: 9/ 8 /95
+
+EfficiencyRatingExcellent_92094751_processed: 
+
+EfficiencyRatingFair_92094751_processed: 
+
+EfficiencyRatingGood_92094751_processed: 
+
+EfficiencyRatingPoor_92094751_processed: x
+
+FieldExplain_92094751_processed: Chain stores will not accept multiple Newport Promotions (Tier system) at the same time.
+
+FieldItemsDealsReceived_92094751_processed: 22, 320 (Indy East & West) NO SHOW SAMPLES
+
+IfNoExplain_92094751_processed: This model/ type of sunglass was not received well at consumer/ retail level.
+
+IfYesCanItBeImproved_92094751_processed: Velcro on strap did not hold. Two right sides of velcro on same glass did not adhere.
+
+IndependentAcceptanceExcellent_92094751_processed: 
+
+IndependentAcceptanceFair_92094751_processed: 
+
+IndependentAcceptanceGood_92094751_processed: 
+
+IndependentAcceptancePoor_92094751_processed: x
+
+ItemBrand_92094751_processed: Newport Sunglasses
+
+Promo_92094751_processed: 28
+
+PromotionalPeriod_92094751_processed: June /July 1995
+
+ScopeArea_92094751_processed: 
+
+ScopeDivision_92094751_processed: 
+
+ScopeOther_92094751_processed: x
+
+ScopeRegion_92094751_processed: 
+
+ShouldPromotionBeRepeatedNo_92094751_processed: x
+
+ShouldPromotionBeRepeatedYes_92094751_processed: 
+
+WereQuantitiesAppropriateNo_92094751_processed: 
+
+WereQuantitiesAppropriateYes_92094751_processed: X
+

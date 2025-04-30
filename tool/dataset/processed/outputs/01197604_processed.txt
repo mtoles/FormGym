@@ -1,0 +1,31 @@
+Form: 01197604_processed
+==================================================
+
+BatchNumber_01197604_processed: II
+
+DateShipped_01197604_processed: November 2, 1965
+
+Description_01197604_processed: OLD GOLD Straights + 3% KNO3
+
+MethodOfPreparation_01197604_processed: Water removed by co- distillation with acetone under vacum at 45 C.
+
+NumberOfCigarettesSmoked_01197604_processed: 
+
+Remarks_01197604_processed: Moisture content of tar .48% as determined by near infrared spectroscopy
+
+RequirementsMp_01197604_processed: 150 gm
+
+SampleWeight_01197604_processed: 300 mm. tar, 100 mm acetone
+
+ShippedTo_01197604_processed: Dr. Dietrich Hoffman The Kettering New York, New York
+
+ShippedVia_01197604_processed: Railway Express
+
+Smoker_01197604_processed: 100 unit
+
+SuppliedUntil_01197604_processed: February, 136
+
+TarNumber_01197604_processed: 195
+
+TobaccoNumber_01197604_processed: Sample No. 1166, RD 308
+

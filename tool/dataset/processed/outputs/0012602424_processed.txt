@@ -1,0 +1,85 @@
+Form: 0012602424_processed
+==================================================
+
+AJMellman_0012602424_processed: 
+
+A_0012602424_processed: 
+
+AccountName_0012602424_processed: New Products
+
+AdjustedTotalCostOfProject_0012602424_processed: 221, 000
+
+Albert_0012602424_processed: 
+
+AmountOfChangeIncreaseCircleOne_0012602424_processed: +1 ,000 (0 .5% CHANGE)
+
+ApprovedBy_0012602424_processed: 
+
+AuthorizationNo_0012602424_processed: NP -75
+
+B_0012602424_processed: 
+
+Beatty_0012602424_processed: 
+
+Cc_0012602424_processed: S. WILLINGER (3) ☑ RESEARCH GROUP MANAGER
+
+Commitments_0012602424_processed: 
+
+Committed_0012602424_processed: 
+
+CurrentBalAvailable_0012602424_processed: 17 195. 66
+
+D_0012602424_processed: 
+
+Date_0012602424_processed: 11/ 28/ 84
+
+E_0012602424_processed: 
+
+FieldCurrent_0012602424_processed: 
+
+FieldFromNextYearSBudget_0012602424_processed: 
+
+Field_0012602424_processed: 
+
+LRGravely_0012602424_processed: 
+
+NewBalance_0012602424_processed: 16, 395. 66
+
+Original_0012602424_processed: - PROJECT FILE
+
+Previous_0012602424_processed: 
+
+Projeci_0012602424_processed: 
+
+ProjectName_0012602424_processed: GEMINI AWARENESS ATTITUDE & USAGE MONITOR. - PORTLAND
+
+ProjectNo_0012602424_processed: 1984- 175NP
+
+ProjectedFieldComplete_0012602424_processed: Dec. 1984
+
+ProjectedFieldStart_0012602424_processed: Aug. 1984
+
+ProjectedFinalReportDue_0012602424_processed: Jan. 1985
+
+Reasons_0012602424_processed: REVISED COST DUE TO A QUESTION ADDED TO THE SECOND WAVE AND CHANGES MADE IN WORDING OF OTHER QUESTIONS. THIS COVERS THE COST OF ADDITIONAL TELEPHONE INTERVIEW LENGTH, CODING OF THE OPEN- END, PROGRAMING CHANGES, TABULATION AND ANALYSIS.
+
+Sprouge_0012602424_processed: 
+
+SubmittedBy_0012602424_processed: 
+
+Supplier_0012602424_processed: BURKE MARKETING RESEARCH
+
+T_0012602424_processed: 
+
+ThisAmount_0012602424_processed: 200. 00
+
+ThisChangeFromCurrentBudget_0012602424_processed: -800. 00
+
+This_0012602424_processed: 
+
+To_0012602424_processed: 
+
+TotalAreaBudget_0012602424_processed: 1984 (REV) 3, 488, 000. 00
+
+Year_0012602424_processed: 
+

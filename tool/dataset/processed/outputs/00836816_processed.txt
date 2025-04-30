@@ -1,0 +1,31 @@
+Form: 00836816_processed
+==================================================
+
+AcuteCardiovascular_00836816_processed: (See SOP for Determination of Solubility of Materials for Acute Cardiovascular and Respiratory Effects Study in Beagle Dogs) Reference OR 100- 32 .2 mg A30 soluble in .5 mL 10 % propylene glycol solution at 38 C. Add A30 to warm (38 C) propylene glycol; add warm water to make 10 % propylene glycol solution.
+
+CompoundSensitiveAir_00836816_processed: 
+
+CompoundSensitiveHeat_00836816_processed: 
+
+CompoundSensitiveMoisture_00836816_processed: 
+
+CompoundSensitiveOther_00836816_processed: 
+
+Date_00836816_processed: 8/ 10/ 82
+
+LotNumber_00836816_processed: 
+
+LrcFileNumber_00836816_processed: A30
+
+Oral_00836816_processed: Reference OR 100- 32 . 5g A30 soluble in .5 mL corn oil at room temperature.
+
+PhysicalState_00836816_processed: Clear Colorless liquid
+
+Signature_00836816_processed: 
+
+Solubility_00836816_processed: (See SOE for Biological Solutions)
+
+StorageRecommendations_00836816_processed: Refrig erate in amber bottle at no more than 8 C.
+
+pH_00836816_processed: The pH of a 50 % concentration of A30 in (52.6% dioxane/ water was calculated to be 8.13 at 24 C according to the extrapolation procedures by Dr. P. D. Schickedantz, Lorillard Research Center Accession Number 1662, Reference OR 83- 81.
+

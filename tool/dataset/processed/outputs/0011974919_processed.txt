@@ -1,0 +1,39 @@
+Form: 0011974919_processed
+==================================================
+
+AddressPostalRequirementsBarcodesDocumentStorageAndBatchNumbersToBeSuppliedBy_0011974919_processed: 
+
+Brand_0011974919_processed: Eclipse
+
+C_0011974919_processed: Suzi Hicks RJR- IR Karen Giddens Drew Huyett Jackson Roper Debbie Lockery Vanessa Oakley Melissa Andrews - TBM Tammi LaManna - M/ B
+
+CirculationQuantity_0011974919_processed: 300
+
+Date_0011974919_processed: September 10, 1996
+
+DeFullfillmentVendor_0011974919_processed: APAC
+
+Description_0011974919_processed: Record of confirmation calls for sneak preview appointments
+
+DistributionDropDate_0011974919_processed: 10/ 03/ 96
+
+EstimatedResponders_0011974919_processed: 300
+
+EstimatedResponse_0011974919_processed: 100.00 %
+
+ExpirationDate_0011974919_processed: 
+
+From_0011974919_processed: Joyce Bagby
+
+FullfillmentDataEntryAt_0011974919_processed: APAC
+
+PpsProgram_0011974919_processed: 602399
+
+RequestedBy_0011974919_processed: 
+
+ResponseCodeAssigned_0011974919_processed: W25
+
+Title_0011974919_processed: Sneak Preview Confirmation Call- Charlotte Tests
+
+To_0011974919_processed: Joe Leinster
+

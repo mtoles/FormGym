@@ -1,0 +1,33 @@
+Form: 71601299_processed
+==================================================
+
+BackgroundProblemDefinition_71601299_processed: 1999 showed that imported cigarettes are recovering from the 1997 / 1998 economic crisis and we forecasted continuos growth over the company's plan period. BAT objective is to substantially increase its market share with growth coming primarily from its first priority brand: Dunhill Lights To achieve growth we consider fundamental to have a superior product in terms of acceptability among potential source of business as well as for our current franchise
+
+ClientContact_71601299_processed: Alberto Marcheggiano Kyu Yeon Hwang
+
+ClientGroup_71601299_processed: BAT Korea
+
+CompetitorsBrandsMild7LightsSmokers_71601299_processed: 150 Males, 25 ~ 39 years old, ABC+ who live
+
+Date_71601299_processed: 15. 03. 2000
+
+FieldS_71601299_processed: 
+
+MarketSZoneS_71601299_processed: South Korea
+
+Number_71601299_processed: to be assigned by Brown & Williamson USA
+
+OwnBrandDunhillSmokers_71601299_processed: 150 Males, 25 ~ 39 years old, ABC+ who live Seoul/ Pusan
+
+ProjectNameDescription_71601299_processed: Dunhill Lights, CPT
+
+Project_71601299_processed: 
+
+ReferentBrand_71601299_processed: Dunhill Lights Kent Super Lights Mild 7 This
+
+ResearchLiaison_71601299_processed: Subi. Jeong
+
+SourceOfBusinessLocalPremiumKsSmokers_71601299_processed: 250 Males (100 smokers, 25 ~ 29 years old, 150 smokers, 30 ~ 39 years old ABC+ who are not rejectors of imported cigarette and live in Seoul/ Pusan
+
+SourceOfBusinessThis_71601299_processed: 250 Males, (100 smokers 25 ~ 29 years old, 150 smokers, 30 ~ 39 years old) ABC+ who are not rejectors of imported cigarette and live in Seoul/ Pusan
+

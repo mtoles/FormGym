@@ -1,0 +1,57 @@
+Form: 81749056_9057_processed
+==================================================
+
+AreaRegion_81749056_9057_processed: 1/ 20
+
+Basic_81749056_9057_processed: 20 $ 2.00
+
+Box80S_81749056_9057_processed: 
+
+Cartons_81749056_9057_processed: 3.00 $ 2.00 $ 3.00
+
+Doral_81749056_9057_processed: 30 3.00
+
+Field100S_81749056_9057_processed: 
+
+FieldOfStoresSupplied_81749056_9057_processed: 
+
+Field_81749056_9057_processed: 36% 34% 36% 35%
+
+From_81749056_9057_processed: S. P. McBride
+
+GPC_81749056_9057_processed: 30 $ 3.00
+
+KS_81749056_9057_processed: 
+
+Lt100S_81749056_9057_processed: 
+
+LtBox80S_81749056_9057_processed: 
+
+LtKS_81749056_9057_processed: 
+
+NameOfAccount_81749056_9057_processed: None
+
+Packing_81749056_9057_processed: BOX 80's LT. BOX 80's 100's LT. 100's K. S. LT. K. S.
+
+Packs_81749056_9057_processed: 30 20 30
+
+PredominantBuydownValueOfTargetedBrandsDoralGPCBasic_81749056_9057_processed: 
+
+Subject_81749056_9057_processed: MAVERICK SPECIALS NON- MENTHOL- EXPANSION PROGRESS REPORT
+
+SubmissionDateDec8_81749056_9057_processed: X
+
+SubmissionDateFeb23_81749056_9057_processed: 
+
+SubmissionDateJan19_81749056_9057_processed: 
+
+To_81749056_9057_processed: S. P. ZOLOT
+
+TotalOfIndependentNewport1ClubOutlets_81749056_9057_processed: 1,020
+
+TotalOfIndependentSpecialEmphasisOutlets_81749056_9057_processed: 2.471
+
+TotalOfNumberOneClubOutletsWithDistribution_81749056_9057_processed: 365 346 371 355
+
+TotalOfSpEmphasisOutleisWithDistribution_81749056_9057_processed: 542 475 479 451
+

@@ -1,0 +1,47 @@
+Form: 0001476912_processed
+==================================================
+
+Age1625_0001476912_processed: 0.0
+
+Age2635_0001476912_processed: 0.0
+
+Age3645_0001476912_processed: 0.0
+
+Age46Over_0001476912_processed: 9.3
+
+Brand_0001476912_processed: RALEIGH (BELAIR portion not tested)
+
+Chicago_0001476912_processed: 8/8
+
+City_0001476912_processed: Los  Chicago 0.0 3.3
+
+Code_0001476912_processed: BW- RT- 69-
+
+Comments_0001476912_processed: This commercial was tested in color.
+
+Commercial_0001476912_processed: LAKE- NEW PACK: 40 (with BELAIR Badmin- ton: 20)
+
+Field35Under_0001476912_processed: 0.0
+
+Field36Over_0001476912_processed: 5.0
+
+LAngeles_0001476912_processed: 8/5 and 6
+
+Overall_0001476912_processed: 1.7
+
+Pm6Base_0001476912_processed: (234)
+
+Pm6Scores_0001476912_processed: 0.0 3.3 0.0 3.3 0.0 0.0 0.0 9.3 0.0 5.0
+
+Project_0001476912_processed: 1969- 105
+
+Sample_0001476912_processed: 336
+
+SexFemale_0001476912_processed: 3.3
+
+SexMale_0001476912_processed: 0.0
+
+Supplier_0001476912_processed: AUDIENCE STUDIES
+
+TestDates_0001476912_processed: 8/5 and 6 8/8
+

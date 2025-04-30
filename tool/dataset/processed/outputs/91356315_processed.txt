@@ -1,0 +1,21 @@
+Form: 91356315_processed
+==================================================
+
+CompetitiveActivitiesAndPromotionsBrandSPromoted_91356315_processed: MARLBORO CIGARETTES
+
+CompetitiveActivitiesAndPromotionsCc_91356315_processed: ['A. H. TISCH', 'M. A. PETERSON', 'R. H. ORCUTT', 'M. L. ORLOWSKY', 'L. GORDON', 'J. P. MASTANDREA', 'G. R. TELFORD', 'N. P. RUFFALO', 'R. G. RYAN', 'P. J. McCANN', 'P. J. McCANN', 'T. L. ACHEY', 'A. J. GIACOIO', 'J. J. TATULLI', 'L. H. LAKERSH', 'J. R. SLATER', 'S. T. JONES', 'R. S. GOLDBRENNER', 'S. F. SMITH']
+
+CompetitiveActivitiesAndPromotionsDate_91356315_processed: 4/ 26/ 91
+
+CompetitiveActivitiesAndPromotionsHowWidespread_91356315_processed: 
+
+CompetitiveActivitiesAndPromotionsManufacturer_91356315_processed: PHILIP MORRIS
+
+CompetitiveActivitiesAndPromotionsOtherComments_91356315_processed: 
+
+CompetitiveActivitiesAndPromotionsReportedBy_91356315_processed: VAL THURMAN, DIVISION MANAGER, LOUISVILLE, KY
+
+CompetitiveActivitiesAndPromotionsSourceOfInformation_91356315_processed: SHORT STOP FOOD MARTS. LOUISVILLE, KY
+
+CompetitiveActivitiesAndPromotionsTypeOfPromotion_91356315_processed: CARTON PROMOTION SWEEPSTAKES (SEE ATTACHMENTS)
+

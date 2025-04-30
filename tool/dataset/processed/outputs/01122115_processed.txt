@@ -1,0 +1,101 @@
+Form: 01122115_processed
+==================================================
+
+BaleNo_01122115_processed: 
+
+CircOfRod_01122115_processed: 24
+
+Color_01122115_processed: White
+
+CompleteWeight_01122115_processed: 99 .2 gms.
+
+CopiesTo_01122115_processed: Dr. C. O. Jensen Mr. R. A. Wagner Mr. J. Berner Dr. A. W. Spears
+
+DateMade_01122115_processed: 11 /3 /61
+
+Date_01122115_processed: 11 /2 /61
+
+DeliveryRollerOverTape_01122115_processed: .844
+
+Draw_01122115_processed: .922 1 .059 .54 .20 20 .2 7 .6 62 .4 1 .07 .41 61 .7
+
+DryWeight_01122115_processed: 86 .9 gms
+
+DryWtWithAdhesive_01122115_processed: 93 .3 gms.
+
+FPMDeliveryRoller_01122115_processed: 337 .5
+
+FPMNo1Roller_01122115_processed: 477 .5
+
+FPMNo2Roller_01122115_processed: 362 .5
+
+FieldMoistureInTobacco_01122115_processed: 
+
+FieldMoistureInTow_01122115_processed: 
+
+FieldPlasticizer_01122115_processed: 6 .0
+
+FirmnessOfRod_01122115_processed: Good
+
+LengthOfCigarettes_01122115_processed: 85
+
+LengthOfRod_01122115_processed: 120 mm.
+
+MakerNo_01122115_processed: Research Division
+
+MeanDrawOfRod_01122115_processed: 0 .12 (new scale)
+
+Nicotine_01122115_processed: .922 1 .059 .54 .20 20 .2 7 .6 62 .4 1 .07 .41 61 .7
+
+No1RollerOverTape_01122115_processed: 1 .194
+
+PressureOnAirJet_01122115_processed: 16 psig
+
+ProductionSupervisedBy_01122115_processed: 
+
+PumpPressCardRoller_01122115_processed: 120 psig
+
+QualityOfBloom_01122115_processed: Good
+
+QuanOfTraysProduced_01122115_processed: 3
+
+Re_01122115_processed: -339
+
+RecearchEngineer_01122115_processed: Benner
+
+RefPaper_01122115_processed: #450
+
+Remarks_01122115_processed: * Special Plasticizer - 1 part LG- 168 - 15 parts Estrobond "B" Union Carbide LG- 168 additive .38% Sample repeated as RE- 341 because 2. 1/ 58 ,000 tow was used instead of 2. 1/ 42 ,000 tow.
+
+RodsPerMin_01122115_processed: 1067
+
+SmokingResults_01122115_processed: .922 1 .059 .54 .20 20 .2 7 .6 62 .4 1 .07 .41 61 .7
+
+Sqc21_01122115_processed: (Revised 5/ 9/ 61)
+
+Supplier_01122115_processed: T. E.
+
+TapeSpeed_01122115_processed: 400 F. P. M.
+
+Tars_01122115_processed: .922 1 .059 .54 .20 20 .2 7 .6 62 .4 1 .07 .41 61 .7
+
+TobaccoUsed_01122115_processed: SPRING
+
+TotalDenierAsMarked_01122115_processed: 58 ,000
+
+TotalDenierAsTested_01122115_processed: 
+
+TypeOfMaker_01122115_processed: AMF
+
+TypeOfRod_01122115_processed: "D"
+
+TypeOfTipper_01122115_processed: Hauni
+
+Weight_01122115_processed: .922 1 .059 .54 .20 20 .2 7 .6 62 .4 1 .07 .41 61 .7
+
+WetWeight_01122115_processed: 99 .2 gms.
+
+WidthOfBand_01122115_processed: Good
+
+WtOfCigarettes4Oz_01122115_processed: 
+

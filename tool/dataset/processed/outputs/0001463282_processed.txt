@@ -1,0 +1,79 @@
+Form: 0001463282_processed
+==================================================
+
+AccountName_0001463282_processed: BARCLAY
+
+ApprovedBy_0001463282_processed: 
+
+BudgetCheck_0001463282_processed: Howard 
+
+BudgetedNo_0001463282_processed: 
+
+BudgetedYes_0001463282_processed: x
+
+Cc_0001463282_processed: S. Willinger (3) K. A. Hutchison S. A. Howard
+
+CompetitiveProposalsObtainedCostPerInterview_0001463282_processed: ['$ 84.2', '$ 87.5']
+
+CompetitiveProposalsObtainedCost_0001463282_processed: ['$ 33,675 + 10% Est.', '$ 35,000 + 10 % Est.']
+
+CompetitiveProposalsObtainedEst_0001463282_processed: ['$ 2000', '$ 2000']
+
+CompetitiveProposalsObtainedSupplier_0001463282_processed: ['Kapuler', 'Market Facts']
+
+CompetitiveProposalsObtainedTotalCost_0001463282_processed: ['$ 35,675', '$ 37000']
+
+Date_0001463282_processed: 
+
+Description_0001463282_processed: Y- 1 Ultra 100' s vs. Winston Ultra 100' s
+
+FieldFromNextYearSBudget_0001463282_processed: 
+
+FieldProductTestAUEtc_0001463282_processed: 
+
+Field_0001463282_processed: 
+
+No_0001463282_processed: 6
+
+OriginalBudgetedAmount_0001463282_processed: 23.3
+
+Original_0001463282_processed: Project File
+
+ProjectNo_0001463282_processed: 1990- 488
+
+ProjectType_0001463282_processed: Product Test
+
+ProjectedExtAuthDateWaveS_0001463282_processed: 12/ 90
+
+ProjectedFieldCompleteWaveS_0001463282_processed: 6/ 10/ 90
+
+ProjectedFinalReportDueSupplierRptWaveS_0001463282_processed: 7/ 9/ 90
+
+ProjectedInternalInitDate_0001463282_processed: 4/ 
+
+ReasonSForRecommendation_0001463282_processed: Lowest project costs
+
+RecommendedSupplier_0001463282_processed: Kapuler
+
+RequestedBy_0001463282_processed: W. T. Carpenter
+
+ResearchRequestAttachedNo_0001463282_processed: 
+
+ResearchRequestAttachedYes_0001463282_processed: x
+
+SampleSize_0001463282_processed: 400
+
+SubmittedBy_0001463282_processed:  L. E. Gravely
+
+SummaryOfMrdBudgetCommitedToDateCurrentYear_0001463282_processed: 205,775.00
+
+SummaryOfMrdBudgetCurrentBalAvailable_0001463282_processed: 199,900.00
+
+SummaryOfMrdBudgetNewBalance_0001463282_processed: 164,225.00
+
+SummaryOfMrdBudgetThisAmount_0001463282_processed: -O-
+
+SummaryOfMrdBudgetThisChangeFromCurrentBudget_0001463282_processed: -35,675,00
+
+SummaryOfMrdBudgetTotalAreaBudget_0001463282_processed: 370,000.00
+

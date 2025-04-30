@@ -1,0 +1,65 @@
+Form: 00860012_00860014_processed
+==================================================
+
+CarcinogenOsha_00860012_00860014_processed: 
+
+CarcinogenOther_00860012_00860014_processed: 
+
+DateIssued_00860012_00860014_processed: December 13, 1983
+
+Dessicator_00860012_00860014_processed: 
+
+ExperimentalProcedures_00860012_00860014_processed: This project sheet is issued to correct Project Sheet which was issued on December 6, 1983 to Project Sheet No 3 instead of 2. Material Safety Data Sheet is attached to Project Sheet 1.
+
+Explosive_00860012_00860014_processed: 
+
+Flammable_00860012_00860014_processed: 
+
+FollowDepartmentAndCompanySafetyManuals_00860012_00860014_processed: 
+
+Freezer_00860012_00860014_processed: 
+
+LhNumberS_00860012_00860014_processed: 21 017
+
+LotNoS_00860012_00860014_processed: 
+
+Other_00860012_00860014_processed: 
+
+PerformingDepartments_00860012_00860014_processed: Acute/ Dermal Toxicology
+
+PhysicalDescriptionColor_00860012_00860014_processed: Brown
+
+PhysicalDescriptionLiquid_00860012_00860014_processed: 
+
+PhysicalDescriptionPressurized_00860012_00860014_processed: 
+
+PhysicalDescriptionSolid_00860012_00860014_processed: X
+
+ProjectCoordinator_00860012_00860014_processed: 
+
+ProjectNo_00860012_00860014_processed: 642 149
+
+ProjectSheetNo_00860012_00860014_processed: 4
+
+ProtectivePrecautionsRequired_00860012_00860014_processed: 
+
+Radioactive_00860012_00860014_processed: 
+
+ReceiptDateS_00860012_00860014_processed: 11 18 83
+
+RoomTemperature_00860012_00860014_processed: 
+
+Signature_00860012_00860014_processed: 
+
+SpecialInstructionsWhileDosing_00860012_00860014_processed: 
+
+StorageConditions_00860012_00860014_processed: ☑ REFRIGERATOR 8 C
+
+StoreInDark_00860012_00860014_processed: 
+
+StudyTitleProposalNumber_00860012_00860014_processed: 
+
+TestMaterialS_00860012_00860014_processed: 
+
+ToBePerformedInAcuteDermalToxicologyBuilding18_00860012_00860014_processed: 
+

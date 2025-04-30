@@ -1,0 +1,39 @@
+Form: 00851772_1780_processed
+==================================================
+
+Compound_00851772_1780_processed: Valerian Fluid Extract
+
+Date_00851772_1780_processed: May 27, 1982
+
+Dates_00851772_1780_processed: 
+
+FieldCombined_00851772_1780_processed: 
+
+FieldContD_00851772_1780_processed: 
+
+Ii_00851772_1780_processed: 
+
+IiiSupplementalLiteratureSearchChemicalAbstractsVol23Vol65ArctanderSPerfumeAndFlavorMaterialsOfNaturalOrigin1960GuentherSMonographsOnFragranceRawMaterials1979TobaccoAbstractsUSDispensatory23RdEdition1943_00851772_1780_processed: 
+
+JimmyHBellBScScientist_00851772_1780_processed: 
+
+LiteratureSurveyed_00851772_1780_processed: 
+
+LorillardCompoundCode_00851772_1780_processed: B73
+
+Name_00851772_1780_processed: 
+
+RegistryNumberIfApplicable_00851772_1780_processed: N/A
+
+RegistryOfTheToxicEffectsOfChemicals_00851772_1780_processed: 
+
+Reviewed_00851772_1780_processed: 1974- Jan. 1982 to Dec. 1981 1929-1966 1957- Dec. 1981
+
+Toxline_00851772_1780_processed: 
+
+TypeBiological_00851772_1780_processed: 
+
+TypeChemical_00851772_1780_processed: 
+
+TypeCombined_00851772_1780_processed: 
+

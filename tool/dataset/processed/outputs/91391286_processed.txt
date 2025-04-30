@@ -1,0 +1,43 @@
+Form: 91391286_processed
+==================================================
+
+AdvertisingCreativeTheme_91391286_processed: BLUE SKY
+
+AnalyticalRequirementsCodeAssigned_91391286_processed: 8482
+
+AnalyticalRequirementsEstRedemption_91391286_processed: 1.54
+
+AnalyticalRequirementsForControlUseOnly_91391286_processed: 93- 056
+
+AnalyticalRequirementsJobNumber_91391286_processed: 9076
+
+BrandsSApplicable_91391286_processed: HARLEY- DAVIDSON
+
+Cc_91391286_processed: T. BAYLIES, L GIORDANO, V. LINDSLEY, M. MCGLYNN, S RAPISARLDI,
+
+Circulation_91391286_processed: 25,461
+
+CouponExpirationDate_91391286_processed: 11/30/93
+
+CouponIssueDate_91391286_processed: 5/19/93
+
+CouponValue_91391286_processed: $ .75 OFF 1 PACK
+
+DateInitiated_91391286_processed: 2/3/93
+
+From_91391286_processed: THOM SMITH
+
+GeographicalAreaS_91391286_processed: TOTAL HOUSTON, GALVESTON, MINNEAPOLIS, ST. PAUL, DULUTH
+
+IssueFrequencyYear_91391286_processed: 1
+
+Media_91391286_processed: MAGAZINE- HOT ROD
+
+PackAndOrCartocarton_91391286_processed: PACK
+
+SignatureOfInitiator_91391286_processed: 
+
+SpaceColor_91391286_processed: FULL PAGE
+
+To_91391286_processed: VINCE LOSITO
+

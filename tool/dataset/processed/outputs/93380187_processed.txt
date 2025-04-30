@@ -1,0 +1,47 @@
+Form: 93380187_processed
+==================================================
+
+AnalyticalRequirements_93380187_processed: 
+
+Cc_93380187_processed: S. A. RAPISARLDI J BAYLIES K. P. AUGUSTYN M. McGLYNN
+
+FieldAdvertisingCreativeTitle_93380187_processed: 
+
+FieldBrandSApplicable_93380187_processed: TRUE
+
+FieldCirculation_93380187_processed: 560,000
+
+FieldCouponExpirationDate_93380187_processed: 8 /31 /92
+
+FieldCouponIssueDate_93380187_processed: MAY 1992
+
+FieldCouponValue_93380187_processed: 50c
+
+FieldDateInitiated_93380187_processed: JANUARY 8, 1992
+
+FieldGeographicalAreaS_93380187_processed: TRUE CORE MARKETS *
+
+FieldIssueFrequencyYear_93380187_processed: 
+
+FieldMediaName_93380187_processed: 
+
+FieldMediaType_93380187_processed: SALES FORCE APPLIED - IRC
+
+FieldPackAndOrCarton_93380187_processed: PACK
+
+FieldSignatureOfInitiator_93380187_processed: Michell 
+
+FieldSpaceColor_93380187_processed: 
+
+FoaControlUseOnlyCodeAssigned_93380187_processed: 57288
+
+FoaControlUseOnlyEstRedemption_93380187_processed: 80 %
+
+FoaControlUseOnlyJoeNumber_93380187_processed: 1143
+
+From_93380187_processed: MICHELLE LEPRE
+
+To_93380187_processed: V. M. LOSITO
+
+TrueCoreAreas_93380187_processed: TOTAL NEW YORK TOTAL BOSTON NEW HAVEN HARTFORD TOTAL SAN FRANCISCO SYRACUSE ROCHESTER TOTAL PHILADELPHIA TOTAL CHICAGO BUFFALO ALBANY TOTAL NEW JERSEY PROVIDENCE CAMDEN CONCORD SPRINGFIELD BALTIMORE PORTLAND, ME TOTAL DETROIT TOTAL WASHINGTON WILMINGTON REGION 15 x SAN BERNADINO
+

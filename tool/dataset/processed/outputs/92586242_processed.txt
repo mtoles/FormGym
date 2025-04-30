@@ -1,0 +1,35 @@
+Form: 92586242_processed
+==================================================
+
+CheckApplicableBoxEs_92586242_processed: 
+
+FieldS_92586242_processed: 
+
+GeneralInformationEventDates_92586242_processed: June 4, 1995
+
+GeneralInformationEventLocation_92586242_processed: 68th -86th Street New York, NY
+
+GeneralInformationEventName_92586242_processed: Upper Madisor Avenue Festival
+
+HoursMondayFriday_92586242_processed: 
+
+HoursSaturdaySunday_92586242_processed: 11 am - 6 pm
+
+SpecificsMusicVan_92586242_processed: False
+
+SpecificsOfBooth_92586242_processed: True
+
+SpecificsPremiumsOnly_92586242_processed: False
+
+SpecificsRacingCar_92586242_processed: False
+
+SpecificsSamplingPremiums_92586242_processed: False
+
+SpecificsSignage_92586242_processed: False
+
+SupervisorInformationBeeperNumber_92586242_processed: (201) 698 1780
+
+SupervisorInformationNameOfAllwaysSupervisor_92586242_processed: Jerome Curry
+
+SupervisorInformationPhoneNumber_92586242_processed: (201) 923 -9208
+

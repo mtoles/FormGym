@@ -1,0 +1,31 @@
+Form: 00865872_processed
+==================================================
+
+AcuteCadcovascular_00865872_processed: (See SOP for Determination of Solubility of Materials for Acute Cardiovascular and Respiratory Effects Study Beagle Dogs) B164 is insoluble according to this procedure
+
+Compound_00865872_processed: [] HEAT [MOISTURE] [] OTHER
+
+Date_00865872_processed: 8/22/83
+
+LotNumber_00865872_processed: 
+
+LrcFileNumber_00865872_processed: B164
+
+Oral_00865872_processed: 
+
+PhysicalState_00865872_processed: Brownish- gray powder
+
+Reference_00865872_processed: BC20- 48
+
+Sensitive_00865872_processed: [] Air
+
+Signature_00865872_processed: 
+
+Solubility_00865872_processed: (See SOP FOX Biological Solutions) B164 forms a suspension in corn oil at 0.5g/ 1.5 ml Triple dosing is required
+
+StorageRecommendations_00865872_processed: Refrigerate in amber glass bottle at no more than 8°C
+
+To_00865872_processed: 
+
+pH_00865872_processed: The pH of a 50% concentration of B164 in water was calculated to be 4.82 at 25°C according to the extrapolation procedures by Dr. P. D. Schickedantz, Lorillard Research Center Accession Number 1662.
+

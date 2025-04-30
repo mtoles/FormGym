@@ -1,0 +1,35 @@
+Form: 0060000813_processed
+==================================================
+
+BackCigarettesComments_0060000813_processed: 
+
+BackCigarettesCratering_0060000813_processed: 
+
+BackCigarettesHoleDepth_0060000813_processed: 
+
+BackCigarettesScorching_0060000813_processed: 
+
+DateReceived_0060000813_processed: 1 /25 /91
+
+FrontCigarettesComments_0060000813_processed: 
+
+FrontCigarettesCratering_0060000813_processed: 
+
+FrontCigarettesHoleDepth_0060000813_processed: 
+
+FrontCigarettesScorching_0060000813_processed: 
+
+LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringBrand_0060000813_processed: ["CARLTON Filter 100's - 4 Mg Laser", 'Mfg. for Taiwan']
+
+LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringModules_0060000813_processed: 412
+
+LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringPower_0060000813_processed: 
+
+LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringPulse_0060000813_processed: 
+
+LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringShiftDate_0060000813_processed: 
+
+PS_0060000813_processed: 73 -91
+
+WeekOf_0060000813_processed: 
+

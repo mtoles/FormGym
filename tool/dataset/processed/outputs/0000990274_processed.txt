@@ -1,0 +1,27 @@
+Form: 0000990274_processed
+==================================================
+
+By_0000990274_processed: 
+
+Completion_0000990274_processed: 
+
+Country_0000990274_processed: BELGIUM
+
+Date_0000990274_processed: 
+
+Initiated_0000990274_processed: P. H. HARPER PHH
+
+NatureOfWork_0000990274_processed: Advise if locally obtained Yucatan Honey (sample enclosed) is an acceptable substitute for HALWAY.
+
+Notes_0000990274_processed: a) Nature of work should be specified in exact terms. b) R & D should advise if completion date cannot be met. c) Two copies of this form to be sent to R & D by initiator and R & D is to return to T. O. one completed copy.
+
+Product_0000990274_processed: LUCKY STRIKE Filter and VICEROY
+
+RDComments_0000990274_processed: Target the P A 29Mar 84
+
+Received_0000990274_processed: APR 2 1984 P. H. H.
+
+RequestNo_0000990274_processed: 25- 84
+
+TargetDate_0000990274_processed: April 13, 1984
+
