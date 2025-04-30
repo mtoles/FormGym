@@ -1,43 +1,35 @@
 Form: 0060024314_processed
 ==================================================
 
-ChemicalDescriptionCas_0060024314_processed: 108 -05 -4
+chemicaldescription_0060024314_processed:
+  CAS#: 108 -05 -4
+  CHEMICAL FORMULA:: Vinyl Acetate
+  DESCRIPTION:: Liquid Adhesive
+  MANUFACTURER:: H. B. Fuller Company
+  MSDS ON FILE? (Circle One):: Yes
+  PERCENT ACTIVES (Non -water):: .5%
+  PHONE: 
+  PRODUCT (CHEMICAL) NAME:: Fuller G2315 DC
+  PRODUCT CLASSIFICATION (Circle Dne):: Organic
 
-ChemicalDescriptionChemicalFormula_0060024314_processed: Vinyl Acetate
+chemicalusage_0060024314_processed:
+  1993 ANNUAL USAGE (LBS.):: 74880
+  1993 AVG. MONTHLY USAGE (LBS.): 6240
+  APPLICATION (Circle One and Briefly Describe):: 
 
-ChemicalDescriptionDescription_0060024314_processed: Liquid Adhesive
+facility_0060024314_processed: The American Tobacco Company
 
-ChemicalDescriptionManufacturer_0060024314_processed: H. B. Fuller Company
+housekeepingcleaning_0060024314_processed: 
 
-ChemicalDescriptionMsdsOnFileCircleOne_0060024314_processed: Yes
+inorganic_0060024314_processed: 
 
-ChemicalDescriptionPercentActivesNonWater_0060024314_processed: .5%
+no_0060024314_processed: 
 
-ChemicalDescriptionPhone_0060024314_processed: 
+other_0060024314_processed: 
 
-ChemicalDescriptionProductChemicalName_0060024314_processed: Fuller G2315 DC
+permit_0060024314_processed: 0001
 
-ChemicalDescriptionProductClassificationCircleDne_0060024314_processed: Organic
+producionprocess_0060024314_processed: label adhesive
 
-ChemicalUsage1993AnnualUsageLbs_0060024314_processed: 74880
-
-ChemicalUsage1993AvgMonthlyUsageLbs_0060024314_processed: 6240
-
-ChemicalUsageApplicationCircleOneAndBrieflyDescribe_0060024314_processed: 
-
-Facility_0060024314_processed: The American Tobacco Company
-
-HousekeepingCleaning_0060024314_processed: 
-
-Inorganic_0060024314_processed: 
-
-No_0060024314_processed: 
-
-Other_0060024314_processed: 
-
-Permit_0060024314_processed: 0001
-
-ProducionProcess_0060024314_processed: label adhesive
-
-WaterTreatment_0060024314_processed: 
+watertreatment_0060024314_processed: 
 

@@ -1,85 +1,84 @@
 Form: 0012602424_processed
 ==================================================
 
-AJMellman_0012602424_processed: 
+Date1_0012602424_processed: 11/ 28/ 84
 
-A_0012602424_processed: 
+Date2_0012602424_processed: 12 -11
 
-AccountName_0012602424_processed: New Products
+a_0012602424_processed: 
 
-AdjustedTotalCostOfProject_0012602424_processed: 221, 000
+accountname_0012602424_processed: New Products
 
-Albert_0012602424_processed: 
+adjustedtotalcostofproject_0012602424_processed: 221, 000
 
-AmountOfChangeIncreaseCircleOne_0012602424_processed: +1 ,000 (0 .5% CHANGE)
+ajmellman_0012602424_processed: 
 
-ApprovedBy_0012602424_processed: 
+albert_0012602424_processed: 
 
-AuthorizationNo_0012602424_processed: NP -75
+amountofchangeincreasecircleone_0012602424_processed: +1 ,000 (0 .5% CHANGE)
 
-B_0012602424_processed: 
+approvedby_0012602424_processed: 
 
-Beatty_0012602424_processed: 
+authorizationno_0012602424_processed: NP -75
 
-Cc_0012602424_processed: S. WILLINGER (3) ☑ RESEARCH GROUP MANAGER
+b_0012602424_processed: 
 
-Commitments_0012602424_processed: 
+beatty_0012602424_processed: 
 
-Committed_0012602424_processed: 
+cc_0012602424_processed: S. WILLINGER (3) ☑ RESEARCH GROUP MANAGER
 
-CurrentBalAvailable_0012602424_processed: 17 195. 66
+commitments_0012602424_processed: 
 
-D_0012602424_processed: 
+committed_0012602424_processed: 
 
-Date_0012602424_processed: 11/ 28/ 84
+current_0012602424_processed: 
 
-E_0012602424_processed: 
+currentbalavailable_0012602424_processed: 17 195. 66
 
-FieldCurrent_0012602424_processed: 
+d_0012602424_processed: 
 
-FieldFromNextYearSBudget_0012602424_processed: 
+e_0012602424_processed: 
 
-Field_0012602424_processed: 
+fromnextyearsbudget_0012602424_processed: 
 
-LRGravely_0012602424_processed: 
+lrgravely_0012602424_processed: 
 
-NewBalance_0012602424_processed: 16, 395. 66
+newbalance_0012602424_processed: 16, 395. 66
 
-Original_0012602424_processed: - PROJECT FILE
+original_0012602424_processed: - PROJECT FILE
 
-Previous_0012602424_processed: 
+previous_0012602424_processed: 
 
-Projeci_0012602424_processed: 
+projeci_0012602424_processed: 
 
-ProjectName_0012602424_processed: GEMINI AWARENESS ATTITUDE & USAGE MONITOR. - PORTLAND
+projected_0012602424_processed:
+  Field Complete: Dec. 1984
+  Field Start: Aug. 1984
+  Final Report Due: Jan. 1985
 
-ProjectNo_0012602424_processed: 1984- 175NP
+projectname_0012602424_processed: GEMINI AWARENESS ATTITUDE & USAGE MONITOR. - PORTLAND
 
-ProjectedFieldComplete_0012602424_processed: Dec. 1984
+projectno_0012602424_processed: 1984- 175NP
 
-ProjectedFieldStart_0012602424_processed: Aug. 1984
+reasons_0012602424_processed: REVISED COST DUE TO A QUESTION ADDED TO THE SECOND WAVE AND CHANGES MADE IN WORDING OF OTHER QUESTIONS. THIS COVERS THE COST OF ADDITIONAL TELEPHONE INTERVIEW LENGTH, CODING OF THE OPEN- END, PROGRAMING CHANGES, TABULATION AND ANALYSIS.
 
-ProjectedFinalReportDue_0012602424_processed: Jan. 1985
+sprouge_0012602424_processed: 
 
-Reasons_0012602424_processed: REVISED COST DUE TO A QUESTION ADDED TO THE SECOND WAVE AND CHANGES MADE IN WORDING OF OTHER QUESTIONS. THIS COVERS THE COST OF ADDITIONAL TELEPHONE INTERVIEW LENGTH, CODING OF THE OPEN- END, PROGRAMING CHANGES, TABULATION AND ANALYSIS.
+submittedby_0012602424_processed: 
 
-Sprouge_0012602424_processed: 
+supplier_0012602424_processed: BURKE MARKETING RESEARCH
 
-SubmittedBy_0012602424_processed: 
+t_0012602424_processed: 
 
-Supplier_0012602424_processed: BURKE MARKETING RESEARCH
+this_0012602424_processed: 
 
-T_0012602424_processed: 
+thisamount_0012602424_processed: 200. 00
 
-ThisAmount_0012602424_processed: 200. 00
+thischangefromcurrentbudget_0012602424_processed: -800. 00
 
-ThisChangeFromCurrentBudget_0012602424_processed: -800. 00
+to_0012602424_processed: 
 
-This_0012602424_processed: 
+totalareabudget_0012602424_processed: 1984 (REV) 3, 488, 000. 00
 
-To_0012602424_processed: 
-
-TotalAreaBudget_0012602424_processed: 1984 (REV) 3, 488, 000. 00
-
-Year_0012602424_processed: 
+year_0012602424_processed: 
 

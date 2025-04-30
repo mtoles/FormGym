@@ -1,47 +1,47 @@
 Form: 0012947358_processed
 ==================================================
 
-AppearanceOrAnswerDues_0012947358_processed: Within 20 days after service, exclusive of day of service.
+Fieldfor_0012947358_processed: THE AMERICAN TOBACCO COMPANY
 
-By_0012947358_processed: THE CORPORATION TRUST COMPANY
+Fieldfrom_0012947358_processed: C T Corporation System
 
-Court_0012947358_processed: Circuit Court, Dade County, Florida. No. 69 -1351
+Fieldin_0012947358_processed: FLORIDA
 
-DateAndHourOfService_0012947358_processed: January 27, 1969 9: 00 a. m.
+appearanceoranswerdues_0012947358_processed: Within 20 days after service, exclusive of day of service.
 
-Date_0012947358_processed: 1- -27 -69
+by_0012947358_processed: THE CORPORATION TRUST COMPANY
 
-DocumentS_0012947358_processed: 
+court_0012947358_processed: Circuit Court, Dade County, Florida. No. 69 -1351
 
-EnclosedAreCopiesOfLegalProcesServedUponTheStatutoryAgentOfTheAboveCompanyAsFollows_0012947358_processed: 
+date_0012947358_processed: 1- -27 -69
 
-For_0012947358_processed: THE AMERICAN TOBACCO COMPANY
+dateandhourofservice_0012947358_processed: January 27, 1969 9: 00 a. m.
 
-From_0012947358_processed: C T Corporation System
+documents_0012947358_processed: 
 
-In_0012947358_processed: FLORIDA
+enclosedarecopiesoflegalprocesserveduponthestatutoryagentoftheabovecompanyasfollows_0012947358_processed: 
 
-NatureOfAction_0012947358_processed: Strike" cigarettes manufactured by defendant, wherein plaintiff alleges breach of was- anties, seeks damages in excess of $5, 000 and demands trial by jury.
+natureofaction_0012947358_processed: Strike" cigarettes manufactured by defendant, wherein plaintiff alleges breach of was- anties, seeks damages in excess of $5, 000 and demands trial by jury.
 
-OnWhomProcessWasServed_0012947358_processed: Phyllis G. Jonnings, Asst. Socy,. The Corporation Company, Jacksonville, Florida
+onwhomprocesswasserved_0012947358_processed: Phyllis G. Jonnings, Asst. Socy,. The Corporation Company, Jacksonville, Florida
 
-Per_0012947358_processed: V. Colvellm Asst. Secy. 277 Park Avenue
+per_0012947358_processed: V. Colvellm Asst. Secy. 277 Park Avenue
 
-PlaintiffSAttorneyS_0012947358_processed: Max A. Goldfarb 414 Biscayne Building Miami, Florida
+plaintiffsattorneys_0012947358_processed: Max A. Goldfarb 414 Biscayne Building Miami, Florida
 
-Re_0012947358_processed: PROCESS SERVED
+re_0012947358_processed: PROCESS SERVED
 
-ReceivedAndForwardedOn_0012947358_processed: 1 29/29/ 69 (Date)
+receivedandforwardedon_0012947358_processed: 1 29/29/ 69 (Date)
 
-Remarks_0012947358_processed: 
+remarks_0012947358_processed: 
 
-Served_0012947358_processed: Summons and Complaint
+served_0012947358_processed: Summons and Complaint
 
-TitleOfAction_0012947358_processed: Reuben Sunstein, Plaintiff, v. The American Tobacco Company, a New Jorsey corporation, Defendant.
+titleofaction_0012947358_processed: Reuben Sunstein, Plaintiff, v. The American Tobacco Company, a New Jorsey corporation, Defendant.
 
-To_0012947358_processed: The Corporation Trust Company
+to_0012947358_processed: The Corporation Trust Company
 
-ViaCertifiedAirMail_0012947358_processed: (X)
-
-ViaCertifiedMail_0012947358_processed: 
+via_0012947358_processed:
+  () Certified Mail: 
+  Certified Air Mail: (X)
 

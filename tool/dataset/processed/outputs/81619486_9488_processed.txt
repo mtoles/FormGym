@@ -1,41 +1,39 @@
 Form: 81619486_9488_processed
 ==================================================
 
-Distribution_81619486_9488_processed: 
+Fieldfrom_81619486_9488_processed: R. W. Richardson
 
-DivisionName_81619486_9488_processed: 
+distribution_81619486_9488_processed: 
 
-Division_81619486_9488_processed: 
+division_81619486_9488_processed: 
 
-FieldReps_81619486_9488_processed: 7
+divisionname_81619486_9488_processed: 
 
-From_81619486_9488_processed: R. W. Richardson
+full_81619486_9488_processed: X
 
-Full_81619486_9488_processed: X
+geography_81619486_9488_processed: 
 
-Geography_81619486_9488_processed: 
+indlorvolume_81619486_9488_processed: 
 
-IndLorVolume_81619486_9488_processed: 
+nameofaccount_81619486_9488_processed: 
 
-NameOfAccount_81619486_9488_processed: 
+numberofstores_81619486_9488_processed: 
 
-NumberOfStores_81619486_9488_processed: 
+partial_81619486_9488_processed: 
 
-Partial_81619486_9488_processed: 
+region_81619486_9488_processed:
+  FULL: 
+  PARTIAL: 
 
-RegionFull_81619486_9488_processed: 
+reps_81619486_9488_processed: 7
 
-RegionPartial_81619486_9488_processed: 
+subject_81619486_9488_processed: MAVERICK SPECIALS EXPANSION MARKETS PROGRESS REPORT
 
-Subject_81619486_9488_processed: MAVERICK SPECIALS EXPANSION MARKETS PROGRESS REPORT
+submissiondate_81619486_9488_processed:
+  AUG 10: x
+  JUNE 29: 
+  NOV 9: 
+  SEPT 21: 
 
-SubmissionDateAug10_81619486_9488_processed: x
-
-SubmissionDateJune29_81619486_9488_processed: 
-
-SubmissionDateNov9_81619486_9488_processed: 
-
-SubmissionDateSept21_81619486_9488_processed: 
-
-To_81619486_9488_processed: S. P. ZOLOT
+to_81619486_9488_processed: S. P. ZOLOT
 

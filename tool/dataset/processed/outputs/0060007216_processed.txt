@@ -1,25 +1,25 @@
 Form: 0060007216_processed
 ==================================================
 
-ApprovedBy_0060007216_processed: R. S. Sprinkle III
+approvedby_0060007216_processed: R. S. Sprinkle III
 
-Cc_0060007216_processed: RSS RDC PHL PRC BMC Records Project Leader Other Personnel Assigned
+cc_0060007216_processed: RSS RDC PHL PRC BMC Records Project Leader Other Personnel Assigned
 
-Cigarette_0060007216_processed: 84 x 24.9 mm circum- ference.
+cigarette_0060007216_processed: 84 x 24.9 mm circum- ference.
 
-Date_0060007216_processed: April 30, 1985
+date_0060007216_processed: April 30, 1985
 
-Dimensions_0060007216_processed: 
+dimensions_0060007216_processed: 
 
-OtherPersonnelAssigned_0060007216_processed: E. P. Barbee
+otherpersonnelassigned_0060007216_processed: E. P. Barbee
 
-ProjectCode_0060007216_processed: PMRM
+projectcode_0060007216_processed: PMRM
 
-ProjectLeader_0060007216_processed: J. F. Anders
+projectleader_0060007216_processed: J. F. Anders
 
-ProjectName_0060007216_processed: PALL MALL Regular Menthol
+projectname_0060007216_processed: PALL MALL Regular Menthol
 
-ProjectObjective_0060007216_processed: To develop a nonfilter menthol cigarette delivering 21- 24 mg "tar" as a menthol companion to PALL MALL Famous Cigarettes.
+projectobjective_0060007216_processed: To develop a nonfilter menthol cigarette delivering 21- 24 mg "tar" as a menthol companion to PALL MALL Famous Cigarettes.
 
-WorkRequestedBy_0060007216_processed: R. S. Sprinkle, III
+workrequestedby_0060007216_processed: R. S. Sprinkle, III
 

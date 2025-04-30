@@ -1,37 +1,35 @@
 Form: 71366499_processed
 ==================================================
 
-BWApprovalsDate_71366499_processed: 
+brand_71366499_processed: BKOOL
 
-BWApprovalsDepartment_71366499_processed: 
+bwapprovals_71366499_processed:
+  Date: 
+  Department: 
+  Signature: 
 
-BWApprovalsSignature_71366499_processed: 
+date_71366499_processed: 12/ 15/ 97
 
-Brand_71366499_processed: BKOOL
+datecomplete_71366499_processed: 
 
-DateComplete_71366499_processed: 
+description_71366499_processed: CMS Amerada Hess Dispenser Sign
 
-Date_71366499_processed: 12/ 15/ 97
+jobno_71366499_processed: 7559
 
-Description_71366499_processed: CMS Amerada Hess Dispenser Sign
+ottapprovals_71366499_processed:
+  Date: 
+  Department: 
+  Signature: 
 
-JobNo_71366499_processed: 7559
+revisions_71366499_processed: 
 
-OttApprovalsDate_71366499_processed: 
+revisionsapproved_71366499_processed: 
 
-OttApprovalsDepartment_71366499_processed: 
+sqinchesfeet_71366499_processed: 261 sq
 
-OttApprovalsSignature_71366499_processed: 
+tn_71366499_processed: NA
 
-RevisionsApproved_71366499_processed: 
+trimsize_71366499_processed: 14 1/2 X 18"
 
-Revisions_71366499_processed: 
-
-SqInchesFeet_71366499_processed: 261 sq
-
-TN_71366499_processed: NA
-
-TrimSize_71366499_processed: 14 1/2 X 18"
-
-Warning_71366499_processed: 3A 14 1/2" X 8" - 116 sq."
+warning_71366499_processed: 3A 14 1/2" X 8" - 116 sq."
 

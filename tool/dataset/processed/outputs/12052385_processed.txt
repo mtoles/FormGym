@@ -1,21 +1,21 @@
 Form: 12052385_processed
 ==================================================
 
-AuthorizedCost_12052385_processed: 12, 500 (10- 15- 87)
+authorizedcost_12052385_processed: 12, 500 (10- 15- 87)
 
-Cumulative_12052385_processed: 
+cumulative_12052385_processed: 
 
-Description_12052385_processed: KMDP ANALYSIS UTILIZING BLACK SWITCHING STUDY DATA
+description_12052385_processed: KMDP ANALYSIS UTILIZING BLACK SWITCHING STUDY DATA
 
-Kool_12052385_processed: 0595- 529- 1510 -0
+kool_12052385_processed: 0595- 529- 1510 -0
 
-MrPersonnel_12052385_processed: C. B. Pugh
+mrpersonnel_12052385_processed: C. B. Pugh
 
-PaidOutOf1987Budget_12052385_processed: JAN
+paidoutof1987budget_12052385_processed: JAN
 
-ProjectNo_12052385_processed: 
+projectno_12052385_processed: 
 
-ReleasedToAcctg_12052385_processed: 
+releasedtoacctg_12052385_processed: 
 
-Supplier_12052385_processed: Market Facts
+supplier_12052385_processed: Market Facts
 

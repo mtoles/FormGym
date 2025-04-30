@@ -1,33 +1,33 @@
 Form: 0060214859_processed
 ==================================================
 
-Accepted_0060214859_processed: 
+accepted_0060214859_processed: 
 
-By_0060214859_processed: 
+by_0060214859_processed: 
 
-Comments_0060214859_processed: 
+comments_0060214859_processed: 
 
-DateReceived_0060214859_processed: 11- 6- 86
+date_0060214859_processed: 10- NOV- 1986
 
-Date_0060214859_processed: 10- NOV- 1986
+datereceived_0060214859_processed: 11- 6- 86
 
-Distribution_0060214859_processed: Mr. Lucien L. Bass, III Dr. L. H. O' Conner Mr. L. W. Peterson Mr. W. B. Scantland Ms. R. deLacy Mr. M. D. Shannon Mr. R. L. McGee
+distribution_0060214859_processed: Mr. Lucien L. Bass, III Dr. L. H. O' Conner Mr. L. W. Peterson Mr. W. B. Scantland Ms. R. deLacy Mr. M. D. Shannon Mr. R. L. McGee
 
-FollowingPhysicalVisualPropertiesOutOfSpecifications_0060214859_processed: WEIGHT OUT OF SPECIFICATIONS ON ROLLS 34 & 35. WT. AV. ROLL 34 (183. 04) ; WT. AV. ROLL 35 (183. 44) : SPECS. 190 -210 GMS/ SQM. LOI OUT DE SPEC. ON ROLL 34 (AV 2. 49%) SPECIFICATIONS (2.6 6- 3. 1% .
+followingphysicalvisualpropertiesoutofspecifications_0060214859_processed: WEIGHT OUT OF SPECIFICATIONS ON ROLLS 34 & 35. WT. AV. ROLL 34 (183. 04) ; WT. AV. ROLL 35 (183. 44) : SPECS. 190 -210 GMS/ SQM. LOI OUT DE SPEC. ON ROLL 34 (AV 2. 49%) SPECIFICATIONS (2.6 6- 3. 1% .
 
-LotOrSample_0060214859_processed: ROLL 34 & 35
+lotorsample_0060214859_processed: ROLL 34 & 35
 
-MaterialTested_0060214859_processed: P- 830 GLASS FIBER
+materialtested_0060214859_processed: P- 830 GLASS FIBER
 
-No_0060214859_processed: 436
+no_0060214859_processed: 436
 
-QuantityReceived_0060214859_processed: 2 ROLLS
+quantityreceived_0060214859_processed: 2 ROLLS
 
-Rejected_0060214859_processed: XX
+rejected_0060214859_processed: XX
 
-Report_0060214859_processed: 517
+report_0060214859_processed: 517
 
-Supplier_0060214859_processed: OWENS CORNING
+supplier_0060214859_processed: OWENS CORNING
 
-Telephone_0060214859_processed: 6926
+telephone_0060214859_processed: 6926
 

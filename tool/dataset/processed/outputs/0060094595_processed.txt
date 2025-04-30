@@ -1,31 +1,31 @@
 Form: 0060094595_processed
 ==================================================
 
-BetweenTheActs25MmButtMeanOfLast12Samples_0060094595_processed: ['1 .106', '0 .37', '35 .6', '3 .83', 'Basic', '23', '0', '1', '0']
-
-BetweenTheActs25MmButtPresentSample_0060094595_processed: ['1 .089', '0. .34', '39. .7', '4 .26', 'Basic', '0', '5', '7', '12']
-
-CharacteristicTested_0060094595_processed: Smoke Analysis urn Test Dynamic -Time in seconds -% Burned Completely
-
-CtionToLitmus_0060094595_processed: Basic Basic Basic Basic
-
-Draw_0060094595_processed: 0. .34 0 .37 0 .34 0 .37
-
 Field12Cigar_0060094595_processed: 5 0 5 0
 
 Field13Cigar_0060094595_processed: 7 1 4 1
 
-FieldWentOutImmediately_0060094595_processed: 12 0 4 0
+betweentheacts25mmbutt_0060094595_processed:
+  Mean of Last 12 Samples: ['1 .106', '0 .37', '35 .6', '3 .83', 'Basic', '23', '0', '1', '0']
+  Present Sample: ['1 .089', '0. .34', '39. .7', '4 .26', 'Basic', '0', '5', '7', '12']
 
-Madison25MmButtMeanOfLast12Samples_0060094595_processed: ['1 .132', '0\uf703 .37', '31 .0', '2 2.99', 'Basic', '23', '0', '1', '0']
+characteristictested_0060094595_processed: Smoke Analysis urn Test Dynamic -Time in seconds -% Burned Completely
 
-Madison25MmButtPresentSample_0060094595_processed: ['1 .111', '0 .34', '37 .8', '3 .45', 'Basic', '11', '5', '4', '4']
+ctiontolitmus_0060094595_processed: Basic Basic Basic Basic
 
-Nicotine_0060094595_processed: 4 .26 3 .83 3 .45 2 2.99
+draw_0060094595_processed: 0. .34 0 .37 0 .34 0 .37
 
-StaticCompleteCigar_0060094595_processed: 0 23 11 23
+madison25mmbutt_0060094595_processed:
+  Mean of Last 12 Samples: ['1 .132', '0\uf703 .37', '31 .0', '2 2.99', 'Basic', '23', '0', '1', '0']
+  Present Sample: ['1 .111', '0 .34', '37 .8', '3 .45', 'Basic', '11', '5', '4', '4']
 
-Tar_0060094595_processed: 39. .7 35 .6 37 .8 31 .0
+nicotine_0060094595_processed: 4 .26 3 .83 3 .45 2 2.99
 
-Weight_0060094595_processed: 1 .089 1 .106 1 .111 1 .132
+staticcompletecigar_0060094595_processed: 0 23 11 23
+
+tar_0060094595_processed: 39. .7 35 .6 37 .8 31 .0
+
+weight_0060094595_processed: 1 .089 1 .106 1 .111 1 .132
+
+wentoutimmediately_0060094595_processed: 12 0 4 0
 

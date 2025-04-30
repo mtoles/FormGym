@@ -1,35 +1,33 @@
 Form: 92586242_processed
 ==================================================
 
-CheckApplicableBoxEs_92586242_processed: 
+SpecificsMusicvan_92586242_processed: False
 
-FieldS_92586242_processed: 
+SpecificsOfbooth_92586242_processed: True
 
-GeneralInformationEventDates_92586242_processed: June 4, 1995
+SpecificsPremiumsonly_92586242_processed: False
 
-GeneralInformationEventLocation_92586242_processed: 68th -86th Street New York, NY
+SpecificsRacingcar_92586242_processed: False
 
-GeneralInformationEventName_92586242_processed: Upper Madisor Avenue Festival
-
-HoursMondayFriday_92586242_processed: 
-
-HoursSaturdaySunday_92586242_processed: 11 am - 6 pm
-
-SpecificsMusicVan_92586242_processed: False
-
-SpecificsOfBooth_92586242_processed: True
-
-SpecificsPremiumsOnly_92586242_processed: False
-
-SpecificsRacingCar_92586242_processed: False
-
-SpecificsSamplingPremiums_92586242_processed: False
+SpecificsSamplingpremiums_92586242_processed: False
 
 SpecificsSignage_92586242_processed: False
 
-SupervisorInformationBeeperNumber_92586242_processed: (201) 698 1780
+checkapplicableboxes_92586242_processed: 
 
-SupervisorInformationNameOfAllwaysSupervisor_92586242_processed: Jerome Curry
+generalinformation_92586242_processed:
+  EVENT DATES:: June 4, 1995
+  EVENT LOCATION:: 68th -86th Street New York, NY
+  EVENT NAME:: Upper Madisor Avenue Festival
 
-SupervisorInformationPhoneNumber_92586242_processed: (201) 923 -9208
+hours_92586242_processed:
+  MONDAY- FRIDAY: 
+  SATURDAY- SUNDAY: 11 am - 6 pm
+
+s_92586242_processed: 
+
+supervisorinformation_92586242_processed:
+  BEEPER NUMBER:: (201) 698 1780
+  NAME OF ALLWAYS SUPERVISOR: Jerome Curry
+  PHONE NUMBER: (201) 923 -9208
 

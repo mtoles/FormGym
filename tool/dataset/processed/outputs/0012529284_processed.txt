@@ -1,61 +1,59 @@
 Form: 0012529284_processed
 ==================================================
 
-AccountName_0012529284_processed: 
+Date1_0012529284_processed: 12- -4 -87
 
-AdjustedTotalCostOfProject_0012529284_processed: $ 212, 475 + 10%
-
-AmtOfChangeDecrease_0012529284_processed: 
-
-AmtOfChangeIncrease_0012529284_processed: 
-
-ApprovedBy_0012529284_processed: 
-
-BudgetCheck_0012529284_processed: 
-
-Cc_0012529284_processed: S. Willinger (3) G. D. Raphael V. Hansberry (If Int.)
-
-CommittedToDate_0012529284_processed: 1, 652, 955. 53
-
-Date_0012529284_processed: 12- -4 -87
-
-Description_0012529284_processed: CAPRI A&U EXPANSION - CALIFORNIA: WAVE 2 (87 -113) , WAVE 3 (87 –114) AND WAVE 4 (87 -115) .
+Date2_0012529284_processed: 12 -4 -87
 
 Field1987_0012529284_processed:  (886, 220. 53) +14, 165. 00
 
-FieldFromNextYearSBudget_0012529284_processed: 
+accountname_0012529284_processed: 
 
-NewBalance_0012529284_processed: (872, 055. 53)
+adjustedtotalcostofproject_0012529284_processed: $ 212, 475 + 10%
 
-No_0012529284_processed: C -5-51
+amtofchange_0012529284_processed:
+  Decrease: 
+  Increase: 
 
-Original_0012529284_processed: Project File
+approvedby_0012529284_processed: 
 
-PreviousCommitmentsThisProject_0012529284_processed: $ 212, 475 + 10%
+budgetcheck_0012529284_processed: 
 
-ProjectNo_0012529284_processed: 1987 -113 /114 /115 -CA
+cc_0012529284_processed: S. Willinger (3) G. D. Raphael V. Hansberry (If Int.)
 
-ProjectedExtAuthDate_0012529284_processed: 
+committedtodate_0012529284_processed: 1, 652, 955. 53
 
-ProjectedFieldComplete_0012529284_processed: 
+description_0012529284_processed: CAPRI A&U EXPANSION - CALIFORNIA: WAVE 2 (87 -113) , WAVE 3 (87 –114) AND WAVE 4 (87 -115) .
 
-ProjectedFinalReportDueSupplierRpt_0012529284_processed: 
+fromnextyearsbudget_0012529284_processed: 
 
-ProjectedInternalInitDate_0012529284_processed: 
+newbalance_0012529284_processed: (872, 055. 53)
 
-Reasons_0012529284_processed: Adjustment due to timing of projects falling into 1988.
+no_0012529284_processed: C -5-51
 
-StartPleteFr_0012529284_processed: 87 -113 (70, 825) 9 /23 10 /11 11 /16 87 -114 (70. 825) 10 /13 10 /29 12 /7 87 -115 (70, 825 11 /16 12 /7 1 /11
+original_0012529284_processed: Project File
 
-SubmittedBy_0012529284_processed: S. L. Willinger
+previouscommitmentsthisproject_0012529284_processed: $ 212, 475 + 10%
 
-SummaryOfResearchBudgetCurrentBalanceAvailable_0012529284_processed: (886, 220. 53)
+projected_0012529284_processed:
+  Ext. Auth. Date: 
+  Field Complete: 
+  Final Report Due (Supplier Rpt.): 
+  Internal Init. Date: 
 
-SummaryOfResearchBudgetThisAmount_0012529284_processed: -14, 165. 00
+projectno_0012529284_processed: 1987 -113 /114 /115 -CA
 
-SummaryOfResearchBudgetThisChangeFromCurrentBudget_0012529284_processed: +14, 165. 00
+reasons_0012529284_processed: Adjustment due to timing of projects falling into 1988.
 
-SummaryOfResearchBudgetTotalAreaBudget_0012529284_processed: 
+startpletefr_0012529284_processed: 87 -113 (70, 825) 9 /23 10 /11 11 /16 87 -114 (70. 825) 10 /13 10 /29 12 /7 87 -115 (70, 825 11 /16 12 /7 1 /11
 
-Supplier_0012529284_processed: Kapuler Marketing Research
+submittedby_0012529284_processed: S. L. Willinger
+
+summaryofresearchbudget_0012529284_processed:
+  Current Balance Available:: (886, 220. 53)
+  This Amount: -14, 165. 00
+  This Change: (From Current Budget): +14, 165. 00
+  Total Area Budget:: 
+
+supplier_0012529284_processed: Kapuler Marketing Research
 

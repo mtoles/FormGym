@@ -1,23 +1,23 @@
 Form: 01150773_01150774_processed
 ==================================================
 
-Cable_01150773_01150774_processed: COVLING
+Fieldfrom_01150773_01150774_processed: David H. Remes
 
-Date_01150773_01150774_processed: January 15, 1997
+cable_01150773_01150774_processed: COVLING
 
-From_01150773_01150774_processed: David H. Remes
+date_01150773_01150774_processed: January 15, 1997
 
-IfThereIsATransmissionProblemPleaseCall_01150773_01150774_processed: 
+ifthereisatransmissionproblempleasecall_01150773_01150774_processed: 
 
-Message_01150773_01150774_processed: 
+message_01150773_01150774_processed: 
 
-Room_01150773_01150774_processed: 803E
+room_01150773_01150774_processed: 803E
 
-Telefax_01150773_01150774_processed: (202) 662-6291
+telefax_01150773_01150774_processed: (202) 662-6291
 
-Telephone_01150773_01150774_processed: 32 512 7890
+telephone_01150773_01150774_processed: 32 512 7890
 
-Telex_01150773_01150774_processed: 89- 193 COVLING WSH
+telex_01150773_01150774_processed: 89- 193 COVLING WSH
 
-To_01150773_01150774_processed: Mark Berlind
+to_01150773_01150774_processed: Mark Berlind
 

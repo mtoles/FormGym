@@ -1,57 +1,57 @@
 Form: 0060077689_processed
 ==================================================
 
-AccountingChargeNo_0060077689_processed: Adv. Expense
+StatetaxstatusNottobechargedbysupplier_0060077689_processed: True
 
-AdminCtrMgmtCtrAsRequired_0060077689_processed: 
+StatetaxstatusTobecharged_0060077689_processed: False
 
-AdminCtrMgmtCtrPurchaseOrderNo_0060077689_processed: M14789
+accountingchargeno_0060077689_processed: Adv. Expense
 
-Attn_0060077689_processed: Mr. Steven Katz Route 4 and Adams Station North Brunswick, NJ 08901- 0623
+adminctrmgmtctrasrequired_0060077689_processed: 
 
-AuthorizationNo_0060077689_processed: 
+adminctrmgmtctrpurchaseorderno_0060077689_processed: M14789
 
-BudgetNo_0060077689_processed: 
+attn_0060077689_processed: Mr. Steven Katz Route 4 and Adams Station North Brunswick, NJ 08901- 0623
 
-Buyer_0060077689_processed: M. Stock/ smm 
+authorizationno_0060077689_processed: 
 
-By_0060077689_processed: 
+budgetno_0060077689_processed: 
 
-DateOfRequisition_0060077689_processed: January 3, 1995
+buyer_0060077689_processed: M. Stock/ smm 
 
-Date_0060077689_processed: January 3, 1995
+by_0060077689_processed: 
 
-DepartmentCharged_0060077689_processed: Brand Operations
+date_0060077689_processed: January 3, 1995
 
-Description_0060077689_processed: CARLTON "Free" Carton" Direct Mail Piece This Purchase order is to cover all costs incurred to- date listed below. 42,000 lbs. of 80 lb Sterling C/ 2/ S - 36- 1/ 2" roll 31,000 lbs. of 80 lb. Sterling C/ 2/ S - 26- 1/ 2" roll Prep. (line negatives, paper prints, camera/ stripping) Federal Express charges ALL MATERIALS HAVE BEEN CANCELLED.
+dateofrequisition_0060077689_processed: January 3, 1995
 
-ExtraCopiesTo_0060077689_processed: D. Barcia
+departmentcharged_0060077689_processed: Brand Operations
 
-Fo_0060077689_processed: 
+description_0060077689_processed: CARLTON "Free" Carton" Direct Mail Piece This Purchase order is to cover all costs incurred to- date listed below. 42,000 lbs. of 80 lb Sterling C/ 2/ S - 36- 1/ 2" roll 31,000 lbs. of 80 lb. Sterling C/ 2/ S - 26- 1/ 2" roll Prep. (line negatives, paper prints, camera/ stripping) Federal Express charges ALL MATERIALS HAVE BEEN CANCELLED.
 
-LocalApproval_0060077689_processed: 
+extracopiesto_0060077689_processed: D. Barcia
 
-LocalPOreleaseNo_0060077689_processed: 
+fo_0060077689_processed: 
 
-Location_0060077689_processed: STAMFORD, CT
+localapproval_0060077689_processed: 
 
-Other_0060077689_processed: 
+localporeleaseno_0060077689_processed: 
 
-Price_0060077689_processed: $20, 580. 00 $15, 190. 00 $431 .25 $48 .75
+location_0060077689_processed: STAMFORD, CT
 
-Quantity_0060077689_processed: 
+other_0060077689_processed: 
 
-Requisitioner_0060077689_processed: Mr. G. Schumacher
+price_0060077689_processed: $20, 580. 00 $15, 190. 00 $431 .25 $48 .75
 
-ShipTo_0060077689_processed: NO SHIPPING REQUIRED
+quantity_0060077689_processed: 
 
-ShipmentToArriveNotLaterThan_0060077689_processed: NO SHIPPING REQUIRED.
+requisitioner_0060077689_processed: Mr. G. Schumacher
 
-StateTaxStatusNotToBeChargedBySupplier_0060077689_processed: True
+shipmenttoarrivenotlaterthan_0060077689_processed: NO SHIPPING REQUIRED.
 
-StateTaxStatusToBeCharged_0060077689_processed: False
+shipto_0060077689_processed: NO SHIPPING REQUIRED
 
-Supplier_0060077689_processed: WEBCRAFT TECHNOLOGIES INC
+supplier_0060077689_processed: WEBCRAFT TECHNOLOGIES INC
 
-Terms_0060077689_processed: NET 30 Days
+terms_0060077689_processed: NET 30 Days
 

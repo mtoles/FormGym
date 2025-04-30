@@ -1,57 +1,54 @@
 Form: 81749056_9057_processed
 ==================================================
 
-AreaRegion_81749056_9057_processed: 1/ 20
-
-Basic_81749056_9057_processed: 20 $ 2.00
-
-Box80S_81749056_9057_processed: 
-
-Cartons_81749056_9057_processed: 3.00 $ 2.00 $ 3.00
-
-Doral_81749056_9057_processed: 30 3.00
-
 Field100S_81749056_9057_processed: 
 
-FieldOfStoresSupplied_81749056_9057_processed: 
+Fieldfrom_81749056_9057_processed: S. P. McBride
 
-Field_81749056_9057_processed: 36% 34% 36% 35%
+arearegion_81749056_9057_processed: 1/ 20
 
-From_81749056_9057_processed: S. P. McBride
+basic_81749056_9057_processed: 20 $ 2.00
 
-GPC_81749056_9057_processed: 30 $ 3.00
+box80s_81749056_9057_processed: 
 
-KS_81749056_9057_processed: 
+cartons_81749056_9057_processed: 3.00 $ 2.00 $ 3.00
 
-Lt100S_81749056_9057_processed: 
+doral_81749056_9057_processed: 30 3.00
 
-LtBox80S_81749056_9057_processed: 
+gpc_81749056_9057_processed: 30 $ 3.00
 
-LtKS_81749056_9057_processed: 
+ks_81749056_9057_processed: 
 
-NameOfAccount_81749056_9057_processed: None
+lt100s_81749056_9057_processed: 
 
-Packing_81749056_9057_processed: BOX 80's LT. BOX 80's 100's LT. 100's K. S. LT. K. S.
+ltbox80s_81749056_9057_processed: 
 
-Packs_81749056_9057_processed: 30 20 30
+ltks_81749056_9057_processed: 
 
-PredominantBuydownValueOfTargetedBrandsDoralGPCBasic_81749056_9057_processed: 
+nameofaccount_81749056_9057_processed: None
 
-Subject_81749056_9057_processed: MAVERICK SPECIALS NON- MENTHOL- EXPANSION PROGRESS REPORT
+ofstoressupplied_81749056_9057_processed: 
 
-SubmissionDateDec8_81749056_9057_processed: X
+packing_81749056_9057_processed: BOX 80's LT. BOX 80's 100's LT. 100's K. S. LT. K. S.
 
-SubmissionDateFeb23_81749056_9057_processed: 
+packs_81749056_9057_processed: 30 20 30
 
-SubmissionDateJan19_81749056_9057_processed: 
+predominantbuydownvalueoftargetedbrandsdoralgpcbasic_81749056_9057_processed: 
 
-To_81749056_9057_processed: S. P. ZOLOT
+subject_81749056_9057_processed: MAVERICK SPECIALS NON- MENTHOL- EXPANSION PROGRESS REPORT
 
-TotalOfIndependentNewport1ClubOutlets_81749056_9057_processed: 1,020
+submissiondate_81749056_9057_processed:
+  DEC 8: X
+  FEB 23: 
+  JAN 19: 
 
-TotalOfIndependentSpecialEmphasisOutlets_81749056_9057_processed: 2.471
+to_81749056_9057_processed: S. P. ZOLOT
 
-TotalOfNumberOneClubOutletsWithDistribution_81749056_9057_processed: 365 346 371 355
+totalofindependentnewport1cluboutlets_81749056_9057_processed: 1,020
 
-TotalOfSpEmphasisOutleisWithDistribution_81749056_9057_processed: 542 475 479 451
+totalofindependentspecialemphasisoutlets_81749056_9057_processed: 2.471
+
+totalofnumberonecluboutletswithdistribution_81749056_9057_processed: 365 346 371 355
+
+totalofspemphasisoutleiswithdistribution_81749056_9057_processed: 542 475 479 451
 

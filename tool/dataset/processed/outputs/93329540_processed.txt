@@ -1,25 +1,25 @@
 Form: 93329540_processed
 ==================================================
 
-BrandName_93329540_processed: SPECIAL 10' s
+brandname_93329540_processed: SPECIAL 10' s
 
-Cc_93329540_processed: A. H. Tisch R. H. Orcutt M. A. Peterson M. L. Orlowsky L. Gordon G. Telford V. Norman A. W. Spears A. J. Giacoio N. P. Ruffalo T. L. Achey R. B. Spell P. J. McCann J. J. Tatulli L. H. Kersh J. R. Slater A. Pasheluk R. S. Goldbrenner N. Simeonidis S. F. Smith K. P. Augustyn V. D. Lindsley R. C. Bondy R. D. Hammer
+cc_93329540_processed: A. H. Tisch R. H. Orcutt M. A. Peterson M. L. Orlowsky L. Gordon G. Telford V. Norman A. W. Spears A. J. Giacoio N. P. Ruffalo T. L. Achey R. B. Spell P. J. McCann J. J. Tatulli L. H. Kersh J. R. Slater A. Pasheluk R. S. Goldbrenner N. Simeonidis S. F. Smith K. P. Augustyn V. D. Lindsley R. C. Bondy R. D. Hammer
 
-Date_93329540_processed: 8/ 13/ 93
+date_93329540_processed: 8/ 13/ 93
 
-ExtentOfDistribution_93329540_processed: 
+extentofdistribution_93329540_processed: 
 
-ListPrice_93329540_processed: 
+listprice_93329540_processed: 
 
-Manufacturer_93329540_processed: AMERICAN TOBACCO COMPANY
+manufacturer_93329540_processed: AMERICAN TOBACCO COMPANY
 
-OtherInformation_93329540_processed: SEE ATTACHED COPY OF CIRCULAR NO. 4848
+otherinformation_93329540_processed: SEE ATTACHED COPY OF CIRCULAR NO. 4848
 
-ReportedBy_93329540_processed: A. REID, DIVISION MANAGER, SAN FRANCISCO, CA
+reportedby_93329540_processed: A. REID, DIVISION MANAGER, SAN FRANCISCO, CA
 
-SizeOrSizes_93329540_processed: 
+sizeorsizes_93329540_processed: 
 
-Time_93329540_processed: 
+time_93329540_processed: 
 
-TypeOfProduct_93329540_processed: 
+typeofproduct_93329540_processed: 
 

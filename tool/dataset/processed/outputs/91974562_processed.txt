@@ -1,43 +1,41 @@
 Form: 91974562_processed
 ==================================================
 
-AdvertisingCreativeTheme_91974562_processed: 
+Fieldfrom_91974562_processed: THOM SMITH
 
-AnalyticalRequirementsCodeAssigned_91974562_processed: 00862
+advertisingcreativetheme_91974562_processed: 
 
-AnalyticalRequirementsEstRedemption_91974562_processed: 890
+analyticalrequirements_91974562_processed:
+  CODE ASSIGNED:: 00862
+  EST. REDEMPTION:: 890
+  FOR CONTROL USE ONLY:: 
+  JOB NUMBER:: 490
 
-AnalyticalRequirementsForControlUseOnly_91974562_processed: 
+brandssapplicable_91974562_processed: KENT
 
-AnalyticalRequirementsJobNumber_91974562_processed: 490
+cc_91974562_processed: D. WEST, L. GIORDANO, V. LINDSLEY, A. SADOVNICK S. RAPISARLDI B. DAVIN. A. Pasheluk
 
-BrandsSApplicable_91974562_processed: KENT
+circulation_91974562_processed: 
 
-Cc_91974562_processed: D. WEST, L. GIORDANO, V. LINDSLEY, A. SADOVNICK S. RAPISARLDI B. DAVIN. A. Pasheluk
+couponexpirationdate_91974562_processed: 12/ 17/ 95
 
-Circulation_91974562_processed: 
+couponissuedate_91974562_processed: 10/ 13/ 95
 
-CouponExpirationDate_91974562_processed: 12/ 17/ 95
+couponvalue_91974562_processed: $2 off 3 Pcks or Crtn
 
-CouponIssueDate_91974562_processed: 10/ 13/ 95
+dateinitiated_91974562_processed: 6/ 8/ 95
 
-CouponValue_91974562_processed: $2 off 3 Pcks or Crtn
+geographicalareas_91974562_processed: Regions 11, 17, 21
 
-DateInitiated_91974562_processed: 6/ 8/ 95
+issuefrequencyyear_91974562_processed: 1
 
-From_91974562_processed: THOM SMITH
+media_91974562_processed: DIRECT MAIL
 
-GeographicalAreaS_91974562_processed: Regions 11, 17, 21
+packandorcarton_91974562_processed: PACK OR CARTON
 
-IssueFrequencyYear_91974562_processed: 1
+signatureofinitiator_91974562_processed: 
 
-Media_91974562_processed: DIRECT MAIL
+spacecolor_91974562_processed: 
 
-PackAndOrCarton_91974562_processed: PACK OR CARTON
-
-SignatureOfInitiator_91974562_processed: 
-
-SpaceColor_91974562_processed: 
-
-To_91974562_processed: VINCE LOSITO
+to_91974562_processed: VINCE LOSITO
 

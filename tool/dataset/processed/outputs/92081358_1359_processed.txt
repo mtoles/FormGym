@@ -1,14 +1,6 @@
 Form: 92081358_1359_processed
 ==================================================
 
-Annuals_92081358_1359_processed: 57 19%
-
-ApproximateOfRetailCallsSecuredByGlass_92081358_1359_processed: 45% (136 calls)
-
-ClubCashCarryEtc_92081358_1359_processed: *Jobber/ Membership
-
-Division_92081358_1359_processed: Chicago South
-
 Field12Yr_92081358_1359_processed: 162 53%
 
 Field25Yr_92081358_1359_processed: 8 3%
@@ -17,31 +9,34 @@ Field50Yr_92081358_1359_processed: 0 0%
 
 Field6Yr_92081358_1359_processed: 76 25%
 
-FieldCalls_92081358_1359_processed: 0 8 162 76 57 303
+annuals_92081358_1359_processed: 57 19%
 
-FieldOfRetailCalls_92081358_1359_processed: 247- classifIed 57- annual
+approximateofretailcallssecuredbyglass_92081358_1359_processed: 45% (136 calls)
 
-Field_92081358_1359_processed: 0% 3% 53% 25% 19% 100%
+calls_92081358_1359_processed: 0 8 162 76 57 303
 
-ListTheInformationBelowAsItPertainsToTheUrbanCenterPortionOfYourAssignmentOnly_92081358_1359_processed: 
+clubcashcarryetc_92081358_1359_processed: *Jobber/ Membership
 
-PopulationCompositionBlack_92081358_1359_processed: 80%
+division_92081358_1359_processed: Chicago South
 
-PopulationCompositionHispanic_92081358_1359_processed: 5%
+listtheinformationbelowasitpertainstotheurbancenterportionofyourassignmentonly_92081358_1359_processed: 
 
-PopulationCompositionOther_92081358_1359_processed: 5%
+ofretailcalls_92081358_1359_processed: 247- classifIed 57- annual
 
-PopulationCompositionTotal_92081358_1359_processed: 100%
+populationcomposition_92081358_1359_processed:
+  % BLACK =: 80%
+  % HISPANIC =: 5%
+  % OTHER : 5%
+  % TOTAL =: 100%
+  % WHITE =: 10%
 
-PopulationCompositionWhite_92081358_1359_processed: 10%
+primaryclassoftrade_92081358_1359_processed: Convenience/ Grocery
 
-PrimaryClassOfTrade_92081358_1359_processed: Convenience/ Grocery
+primarydistributionchannelegjobbersubjobbermembership_92081358_1359_processed: *Jobber/ Membership
 
-PrimaryDistributionChannelEGJobberSubJobberMembership_92081358_1359_processed: *Jobber/ Membership
+retailcallfrequency_92081358_1359_processed: 
 
-RetailCallFrequency_92081358_1359_processed: 
+secondaryclassoftrade_92081358_1359_processed: Liquor
 
-SecondaryClassOfTrade_92081358_1359_processed: Liquor
-
-Total_92081358_1359_processed: 303 100%
+total_92081358_1359_processed: 303 100%
 

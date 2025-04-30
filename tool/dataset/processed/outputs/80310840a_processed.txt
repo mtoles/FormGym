@@ -1,73 +1,71 @@
 Form: 80310840a_processed
 ==================================================
 
-ApprovedByGroupManager_80310840a_processed: 
+approvedby_80310840a_processed:
+  Group Manager: 
+  Group Product Manager: 
+  MPIO: 
+  Product Manager: 
 
-ApprovedByGroupProductManager_80310840a_processed: 
+apr_80310840a_processed: 
 
-ApprovedByMpio_80310840a_processed: 
+aug_80310840a_processed: 
 
-ApprovedByProductManager_80310840a_processed: 
+costestimate_80310840a_processed: $100 600
 
-Apr_80310840a_processed: 
+dec_80310840a_processed: 
 
-Aug_80310840a_processed: 
+director_80310840a_processed: 
 
-CostEstimate_80310840a_processed: $100 600
+feb_80310840a_processed: 
 
-Dec_80310840a_processed: 
+fieldworkschedule_80310840a_processed: Start Field w/o 11 /13 /95
 
-Director_80310840a_processed: 
+interviewlength_80310840a_processed: 
 
-Feb_80310840a_processed: 
+interviewsdividedamong3gorups_80310840a_processed: 
 
-FieldworkSchedule_80310840a_processed: Start Field w/o 11 /13 /95
+jan_80310840a_processed: 
 
-InterviewLength_80310840a_processed: 
+job_80310840a_processed: 5543/295
 
-InterviewsDividedAmong3Gorups_80310840a_processed: 
+jul_80310840a_processed: 
 
-Jan_80310840a_processed: 
+jun_80310840a_processed: 
 
-Job_80310840a_processed: 5543/295
+mar_80310840a_processed: 
 
-Jul_80310840a_processed: 
+marketingandorresearchobjectives_80310840a_processed: Determine the level of interest and conversion opportunities among pompotitive smokers. receiving a Direct Mail offer for Newport Lights. Provide insight into the reasons for offer acceptance or rejection of offer and examine consumer perceptions about Newport Lights.
 
-Jun_80310840a_processed: 
+may_80310840a_processed: 
 
-Mar_80310840a_processed: 
+nov_80310840a_processed: 
 
-MarketingAndOrResearchObjectives_80310840a_processed: Determine the level of interest and conversion opportunities among pompotitive smokers. receiving a Direct Mail offer for Newport Lights. Provide insight into the reasons for offer acceptance or rejection of offer and examine consumer perceptions about Newport Lights.
+oct_80310840a_processed: 
 
-May_80310840a_processed: 
+preparedby_80310840a_processed: S. R. Benson 
 
-Nov_80310840a_processed: 
+projecttitle_80310840a_processed: Direct Mail Conversion Research Newport Lights
 
-Oct_80310840a_processed: 
+reason_80310840a_processed: Lower Incidence
 
-PreparedBy_80310840a_processed: S. R. Benson 
+reportingschedule_80310840a_processed: Topline w/o 12 /18 /95 Final Report 12/ 31/ 95
 
-ProjectTitle_80310840a_processed: Direct Mail Conversion Research Newport Lights
+researchdesign_80310840a_processed: Group 1= Best redeeming customers (2+ paid coupons): n= 750 Group 2= Paid redeoming customers 1 paid coupon) n= 750 Group 3= Non- redeeming customers (no redemption) n= 750 The total sample size is 2,250. All smokers 21+ years of age.
 
-Reason_80310840a_processed: Lower Incidence
+researchfirm_80310840a_processed: A & G Research
 
-ReportingSchedule_80310840a_processed: Topline w/o 12 /18 /95 Final Report 12/ 31/ 95
+respondentincidence_80310840a_processed: 38% revised from 70%
 
-ResearchDesign_80310840a_processed: Group 1= Best redeeming customers (2+ paid coupons): n= 750 Group 2= Paid redeoming customers 1 paid coupon) n= 750 Group 3= Non- redeeming customers (no redemption) n= 750 The total sample size is 2,250. All smokers 21+ years of age.
+revisedcostsifany_80310840a_processed: 
 
-ResearchFirm_80310840a_processed: A & G Research
+revisedfrom_80310840a_processed: $76 600
 
-RespondentIncidence_80310840a_processed: 38% revised from 70%
+revision_80310840a_processed: ☑
 
-RevisedCostsIfAny_80310840a_processed: 
+salesanalysis_80310840a_processed: 
 
-RevisedFrom_80310840a_processed: $76 600
+screenerquestionnaire_80310840a_processed: 5 minutes 10 minutes
 
-Revision_80310840a_processed: ☑
-
-SalesAnalysis_80310840a_processed: 
-
-ScreenerQuestionnaire_80310840a_processed: 5 minutes 10 minutes
-
-Sep_80310840a_processed: 
+sep_80310840a_processed: 
 

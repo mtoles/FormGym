@@ -1,85 +1,69 @@
 Form: 0012178355_processed
 ==================================================
 
-Approval_0012178355_processed: 
+approval_0012178355_processed: 
 
-AttachmentsCheckIfIncludedBlendFormulae_0012178355_processed: 
+attachmentscheckifincluded_0012178355_processed:
+  Blend Formulae: 
+  Casing Flavoring Formulae: 
+  Cost Analysis: 
+  Initial Production Requirement: 
+  Packaging Art Stat.: 
+  Processing Detail: X
+  Product Specification List: X
+  Rationale: 
+  Spec. Change Detail: 
 
-AttachmentsCheckIfIncludedCasingFlavoringFormulae_0012178355_processed: 
+brand_0012178355_processed: ELI CUTTER KS
 
-AttachmentsCheckIfIncludedCostAnalysis_0012178355_processed: 
+contract_0012178355_processed: 
 
-AttachmentsCheckIfIncludedInitialProductionRequirement_0012178355_processed: 
+costsummary_0012178355_processed:
+  Est. Annual Product Cost Change: 
+  Obsolete Material Cost: 
+  Special Equipment/ Material Cost: 
 
-AttachmentsCheckIfIncludedPackagingArtStat_0012178355_processed: 
+cqa_0012178355_processed: 
 
-AttachmentsCheckIfIncludedProcessingDetail_0012178355_processed: X
+date_0012178355_processed: 
 
-AttachmentsCheckIfIncludedProductSpecificationList_0012178355_processed: X
+description_0012178355_processed: ELI CUTTER KS, for test market, using AMELIA "B" Blend (XLF -680G)
 
-AttachmentsCheckIfIncludedRationale_0012178355_processed: 
+domestic_0012178355_processed: X
 
-AttachmentsCheckIfIncludedSpecChangeDetail_0012178355_processed: 
+elt_0012178355_processed: 
 
-Brand_0012178355_processed: ELI CUTTER KS
+endorsements_0012178355_processed: 
 
-Contract_0012178355_processed: 
+export_0012178355_processed: 
 
-CostSummaryEstAnnualProductCostChange_0012178355_processed: 
+marketing_0012178355_processed: 
 
-CostSummaryObsoleteMaterialCost_0012178355_processed: 
+military_0012178355_processed: 
 
-CostSummarySpecialEquipmentMaterialCost_0012178355_processed: 
+preparedby_0012178355_processed: D. M. Frank
 
-Cqa_0012178355_processed: 
+president_0012178355_processed: 
 
-Date_0012178355_processed: 
+rdeprocess_0012178355_processed: 
 
-Description_0012178355_processed: ELI CUTTER KS, for test market, using AMELIA "B" Blend (XLF -680G)
+rdeproduct_0012178355_processed: 
 
-Domestic_0012178355_processed: X
+requestedimplementationdate_0012178355_processed: 9 /17 /84
 
-Elt_0012178355_processed: 
+specificationchangenumber8479_0012178355_processed: 
 
-Endorsements_0012178355_processed: 
-
-Export_0012178355_processed: 
-
-Marketing_0012178355_processed: 
-
-Military_0012178355_processed: 
-
-PreparedBy_0012178355_processed: D. M. Frank
-
-President_0012178355_processed: 
-
-RdEProcess_0012178355_processed: 
-
-RdEProduct_0012178355_processed: 
-
-RequestedImplementationDate_0012178355_processed: 9 /17 /84
-
-SpecificationChangeNumber8479_0012178355_processed: 
-
-TypeOfSpecificationChangeCheckAllThatApplyCigaretteDesignPermanent_0012178355_processed: 
-
-TypeOfSpecificationChangeCheckAllThatApplyCigaretteDesignTrial_0012178355_processed: 
-
-TypeOfSpecificationChangeCheckAllThatApplyDiscontinueProduct_0012178355_processed: 
-
-TypeOfSpecificationChangeCheckAllThatApplyEquivalentAdditive_0012178355_processed: 
-
-TypeOfSpecificationChangeCheckAllThatApplyEquivalentFilterPaperTipping_0012178355_processed: 
-
-TypeOfSpecificationChangeCheckAllThatApplyEquivalentPackagingMaterial_0012178355_processed: 
-
-TypeOfSpecificationChangeCheckAllThatApplyNewProduct_0012178355_processed: X
-
-TypeOfSpecificationChangeCheckAllThatApplyPackagingPermanent_0012178355_processed: 
-
-TypeOfSpecificationChangeCheckAllThatApplyPackagingTemporary_0012178355_processed: 
-
-TypeOfSpecificationChangeCheckAllThatApplyProcessing_0012178355_processed: 
-
-TypeOfSpecificationChangeCheckAllThatApplyTarAdjustment1Mg_0012178355_processed: 
+typeofspecificationchangecheckallthatapply_0012178355_processed:
+  Cigarette Design, Permanent: 
+  Cigarette Design, Trial: 
+  Discontinue Product: 
+  Equivalent Additive: 
+  Equivalent Filter/ Paper/ /Tipping: 
+  Equivalent Packaging Material: 
+  New Product: X
+  Packaging, Permanent: 
+  Packaging, Temporary: 
+  Processing: 
+  Tar Adjustment < 1 mg: 
+  Tar Adjustment > 1 mg: 
 

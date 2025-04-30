@@ -1,65 +1,40 @@
 Form: 0060308461_processed
 ==================================================
 
-CigaretteReportForm10VarietyUnitSales_0060308461_processed: 238,282
+Field6Hardpack_0060308461_processed: X
 
-CigaretteReportForm11VarietyDollarSales_0060308461_processed: 6,117,778
+cigarettereportform_0060308461_processed:
+  (1) YEAR COVERED:: 1985
+  (10) VARIETY UNIT SALES:: 238,282
+  (11) VARIETY DOLLAR SALES:: 6,117,778
+  (12) FIRST SALES DATE:: 
+  (2) BRAND FAMILY NAME:: LUCKY STRIKE
+  (3) VARIETY DESCRIPTION: Low tar, king size, filter, hard pack
+  (4) PRODUCT LENGTH:: King
+  (5) FILTER:: X
+  (7) MENTHOL:: 
+  (8) PACK SIZE SOLD:: 20's
+  (9) "TAR":: 11 mg
+  LAST SALES DATE:: 
+  NONFILTER:: (check one)
+  NONMENTHOL:: X (check one)
+  SOFT PACK:: (check one)
 
-CigaretteReportForm12FirstSalesDate_0060308461_processed: 
+nicotine_0060308461_processed: 0.8 mg (Jan. '85 Report)
 
-CigaretteReportForm1YearCovered_0060308461_processed: 1985
-
-CigaretteReportForm2BrandFamilyName_0060308461_processed: LUCKY STRIKE
-
-CigaretteReportForm3VarietyDescription_0060308461_processed: Low tar, king size, filter, hard pack
-
-CigaretteReportForm4ProductLength_0060308461_processed: King
-
-CigaretteReportForm5Filter_0060308461_processed: X
-
-CigaretteReportForm7Menthol_0060308461_processed: 
-
-CigaretteReportForm8PackSizeSold_0060308461_processed: 20's
-
-CigaretteReportForm9Tar_0060308461_processed: 11 mg
-
-CigaretteReportFormLastSalesDate_0060308461_processed: 
-
-CigaretteReportFormNonfilter_0060308461_processed: (check one)
-
-CigaretteReportFormNonmenthol_0060308461_processed: X (check one)
-
-CigaretteReportFormSoftPack_0060308461_processed: (check one)
-
-Field6HardPack_0060308461_processed: X
-
-Nicotine_0060308461_processed: 0.8 mg (Jan. '85 Report)
-
-ReportableExpenditures13CatAExpenses_0060308461_processed: 2,303
-
-ReportableExpenditures14CatBExpenses_0060308461_processed: 3,890
-
-ReportableExpenditures15CatCExpenses_0060308461_processed: 741
-
-ReportableExpenditures16CatDExpenses_0060308461_processed: 71,445
-
-ReportableExpenditures17CatEExpenses_0060308461_processed: -
-
-ReportableExpenditures18CatFExpenses_0060308461_processed: 193
-
-ReportableExpenditures19CatGExpenses_0060308461_processed: 12,787
-
-ReportableExpenditures20CatHExpenses_0060308461_processed: 95,614
-
-ReportableExpenditures21CatIExpenses_0060308461_processed: 291,095
-
-ReportableExpenditures22CatJExpenses_0060308461_processed: 155,718
-
-ReportableExpenditures23CatKExpenses_0060308461_processed: 476,722
-
-ReportableExpenditures24CatLExpenses_0060308461_processed: 85,208
-
-ReportableExpenditures25CatMExpenses_0060308461_processed: 26,055
-
-ReportableExpenditures26TotalReportableExpendituresForVariety_0060308461_processed: 1,221,771
+reportableexpenditures_0060308461_processed:
+  (13) CAT- A- EXPENSES:: 2,303
+  (14) CAT- B- EXPENSES:: 3,890
+  (15) CAT- C- EXPENSES:: 741
+  (16) CAT- D- EXPENSES:: 71,445
+  (17) CAT- E- EXPENSES: -
+  (18) CAT- F- EXPENSES:: 193
+  (19) CAT- G- EXPENSES:: 12,787
+  (20) CAT- H- EXPENSES:: 95,614
+  (21) CAT- I- EXPENSES:: 291,095
+  (22) CAT- J- EXPENSES:: 155,718
+  (23) CAT- K- EXPENSES:: 476,722
+  (24) CAT- L- EXPENSES:: 85,208
+  (25) CAT- M- EXPENSES:: 26,055
+  (26) TOTAL REPORTABLE EXPENDITURES FOR VARIETY:: 1,221,771
 

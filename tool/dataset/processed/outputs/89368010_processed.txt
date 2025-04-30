@@ -1,35 +1,35 @@
 Form: 89368010_processed
 ==================================================
 
-AcceptRejectAsPer58185C_89368010_processed: Accept Accept Accept   
+acceptrejectasper58185c_89368010_processed: Accept Accept Accept   
 
-AmendmentAttachAdditionalSheetsAsNecessary_89368010_processed: The report of the results of A 14 Day Repeated Dose Assay for Reference Cigarette Smoke in Mice (I- 1725.001- M1 is attached.
+amendmentattachadditionalsheetsasnecessary_89368010_processed: The report of the results of A 14 Day Repeated Dose Assay for Reference Cigarette Smoke in Mice (I- 1725.001- M1 is attached.
 
-Approvals_89368010_processed: 03 June 1982 3 June 1982 3 June 1982
+approvals_89368010_processed: 03 June 1982 3 June 1982 3 June 1982
 
-DateOfFinalReportReviewCompletedDate_89368010_processed: 27 April 1982
+date_89368010_processed: 16/3/82
 
-Date_89368010_processed: 16/3/82
+dateoffinalreportreviewcompleteddate_89368010_processed: 27 April 1982
 
-DirectorOfRaQa_89368010_processed: 
+directorofraqa_89368010_processed: 
 
-DirectorOfResearch_89368010_processed: 
+directorofresearch_89368010_processed: 
 
-InitiationDate_89368010_processed: 25 March 1982
+initiationdate_89368010_processed: 25 March 1982
 
-PartOfFinalReportToBeAmendedExactLocation_89368010_processed: The attached is an addition to the I- 1725.001 Final Report
+partoffinalreporttobeamendedexactlocation_89368010_processed: The attached is an addition to the I- 1725.001 Final Report
 
-QualityAssuranceAssoc_89368010_processed: 
+qualityassuranceassoc_89368010_processed: 
 
-ReasonForTheAmendment_89368010_processed: Survival after repeated doses over a 14 day period may not be accurately predicted from survival after a single day's exposure.
+reasonfortheamendment_89368010_processed: Survival after repeated doses over a 14 day period may not be accurately predicted from survival after a single day's exposure.
 
-ReceivedByRegulatoryAffatrs_89368010_processed: 
+receivedbyregulatoryaffatrs_89368010_processed: 
 
-RegulatoryAffairs_89368010_processed: 
+regulatoryaffairs_89368010_processed: 
 
-StudyDirector_89368010_processed: 
+studydirector_89368010_processed: 
 
-StudyName_89368010_processed: Acute Toxicity of Reference Cigarette Smoke lafter Inhalation in Mice.
+studyname_89368010_processed: Acute Toxicity of Reference Cigarette Smoke lafter Inhalation in Mice.
 
-StudyNumber_89368010_processed: I- 1725.001
+studynumber_89368010_processed: I- 1725.001
 

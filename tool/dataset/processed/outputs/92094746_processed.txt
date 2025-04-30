@@ -1,71 +1,61 @@
 Form: 92094746_processed
 ==================================================
 
-AreaRegionDivision_92094746_processed: 2 13
+arearegiondivision_92094746_processed: 2 13
 
-ChainAcceptanceExcellent_92094746_processed: 
+chainacceptance_92094746_processed:
+  EXCELLENT: 
+  FAIR: 
+  GOOD: 
+  POOR: 
 
-ChainAcceptanceFair_92094746_processed: 
+comments_92094746_processed: This item was perceived by retailers and consumers as a low quality item. Several Sales Reps reported that on occasion our consumers would pass up the deal or leave the glasses in the store.
 
-ChainAcceptanceGood_92094746_processed: 
+consumeracceptance_92094746_processed:
+  EXCELLENT: 
+  FAIR: x
+  GOOD: 
+  POOR: 
 
-ChainAcceptancePoor_92094746_processed: 
+date_92094746_processed: 9 /8 /95
 
-Comments_92094746_processed: This item was perceived by retailers and consumers as a low quality item. Several Sales Reps reported that on occasion our consumers would pass up the deal or leave the glasses in the store.
+efficiencyrating_92094746_processed:
+  EXCELLENT: 
+  FAIR: x
+  GOOD: 
+  POOR: 
 
-ConsumerAcceptanceExcellent_92094746_processed: 
+explain_92094746_processed: Special Emphasis Calls
 
-ConsumerAcceptanceFair_92094746_processed: x
+ifnoexplain_92094746_processed: 
 
-ConsumerAcceptanceGood_92094746_processed: 
+ifyescanitbeimproved_92094746_processed: The Promotion can be improved by upgrading the quality of the sunglasses
 
-ConsumerAcceptancePoor_92094746_processed: 
+independentacceptance_92094746_processed:
+  EXCELLENT: 
+  FAIR: x
+  GOOD: 
+  POOR: 
 
-Date_92094746_processed: 9 /8 /95
+itembrand_92094746_processed: Sunglasses / Newport
 
-EfficiencyRatingExcellent_92094746_processed: 
+itemsdealsreceived_92094746_processed: 28728
 
-EfficiencyRatingFair_92094746_processed: x
+promo_92094746_processed: 28
 
-EfficiencyRatingGood_92094746_processed: 
+promotionalperiod_92094746_processed: June/ July
 
-EfficiencyRatingPoor_92094746_processed: 
+scope_92094746_processed:
+  AREA: 
+  DIVISION: 
+  OTHER*: x
+  REGION: 
 
-FieldExplain_92094746_processed: Special Emphasis Calls
+shouldpromotionberepeated_92094746_processed:
+  NO: 
+  YES: x
 
-FieldItemsDealsReceived_92094746_processed: 28728
-
-IfNoExplain_92094746_processed: 
-
-IfYesCanItBeImproved_92094746_processed: The Promotion can be improved by upgrading the quality of the sunglasses
-
-IndependentAcceptanceExcellent_92094746_processed: 
-
-IndependentAcceptanceFair_92094746_processed: x
-
-IndependentAcceptanceGood_92094746_processed: 
-
-IndependentAcceptancePoor_92094746_processed: 
-
-ItemBrand_92094746_processed: Sunglasses / Newport
-
-Promo_92094746_processed: 28
-
-PromotionalPeriod_92094746_processed: June/ July
-
-ScopeArea_92094746_processed: 
-
-ScopeDivision_92094746_processed: 
-
-ScopeOther_92094746_processed: x
-
-ScopeRegion_92094746_processed: 
-
-ShouldPromotionBeRepeatedNo_92094746_processed: 
-
-ShouldPromotionBeRepeatedYes_92094746_processed: x
-
-WereQuantitiesAppropriateNo_92094746_processed: 
-
-WereQuantitiesAppropriateYes_92094746_processed: x
+werequantitiesappropriate_92094746_processed:
+  NO*: 
+  YES: x
 

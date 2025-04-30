@@ -1,45 +1,41 @@
 Form: 00837285_processed
 ==================================================
 
-Amount_00837285_processed: g100ml
+Fieldclass_00837285_processed: ACID BASE SALT OTHER
 
-AnalyticalMethodS_00837285_processed: 
+amount_00837285_processed: g100ml
 
-ChemicalPurity_00837285_processed: 
+analyticalmethods_00837285_processed: 
 
-Class_00837285_processed: ACID BASE SALT OTHER
+chemicalpurity_00837285_processed: 
 
-Comments_00837285_processed: pH- The pH of a 50% concentration of A32 in a 52.6% dioxane/water solution was calculated to be 2.92 at 22°C according to the extra- polation procedures by Dr. P. D. Schickedantz, Lorillard Research Center Accession No. 1662, Reference OR 83- 125. Solubility (See SOP for Biological Solutions) Oral- 5g A32 forms a suspension with stirring in 10 ml 1% Tween 80 at room temperature. Reference OR 72- 151. Acute Cardiovascular- Mix 2 mg A32 with 0.2 ml 80% propylene glycol and grind lightly. Add 0.8 ml saline solution. A32 is a suspension in this mixture at room temperature. Reference OR 72- 152.
+comments_00837285_processed: pH- The pH of a 50% concentration of A32 in a 52.6% dioxane/water solution was calculated to be 2.92 at 22°C according to the extra- polation procedures by Dr. P. D. Schickedantz, Lorillard Research Center Accession No. 1662, Reference OR 83- 125. Solubility (See SOP for Biological Solutions) Oral- 5g A32 forms a suspension with stirring in 10 ml 1% Tween 80 at room temperature. Reference OR 72- 151. Acute Cardiovascular- Mix 2 mg A32 with 0.2 ml 80% propylene glycol and grind lightly. Add 0.8 ml saline solution. A32 is a suspension in this mixture at room temperature. Reference OR 72- 152.
 
-CompoundSensitiveTo_00837285_processed: AIR HEAT LIGHT MOISTURE OTHER
+compoundsensitiveto_00837285_processed: AIR HEAT LIGHT MOISTURE OTHER
 
-Date_00837285_processed: 11/1381
+date_00837285_processed: 11/1381
 
-DescriptionOfReactivityWithHeating80c_00837285_processed: ['UNCHANGED', 'UNCHANGED', 'UNCHANGED', 'UNCHANGED', 'UNCHANGED', 'UNCHANGED', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION']
+descriptionofreactivity_00837285_processed:
+  WITH HEATING (80C): ['UNCHANGED', 'UNCHANGED', 'UNCHANGED', 'UNCHANGED', 'UNCHANGED', 'UNCHANGED', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION']
+  WITHOUT HEATING: ['UNCHANGED', 'UNCHANGED', 'UNCHANGED', 'UNCHANCED', 'UNCHANGED', 'UNCHANGED', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION']
 
-DescriptionOfReactivityWithoutHeating_00837285_processed: ['UNCHANGED', 'UNCHANGED', 'UNCHANGED', 'UNCHANCED', 'UNCHANGED', 'UNCHANGED', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION', 'DECOMPOSITION']
+lorillardresearchcenter_00837285_processed: Acute Cardiovascular- Mix 2 mg A32 with 0.2 ml 80% propylene glycol and grind lightly. Add 0.8 ml saline solution. A32 is a suspension in this mixture at room temperature. Reference OR 72- 152.
 
-LorillardResearchCenter_00837285_processed: Acute Cardiovascular- Mix 2 mg A32 with 0.2 ml 80% propylene glycol and grind lightly. Add 0.8 ml saline solution. A32 is a suspension in this mixture at room temperature. Reference OR 72- 152.
+lrccompoundcode_00837285_processed: A32
 
-LrcCompoundCode_00837285_processed: A32
+molecularweight_00837285_processed: 200. 29
 
-MolecularWeight_00837285_processed: 200. 29
+reactivity_00837285_processed:
+  1) WATER or BRINE:: ['UNCHANGED', 'DECOMPOSITION', 'UNCHANGED', 'UNCHANGED', 'DECOMPOSITION']
+  2) 5% HCL: ['UNCHANGED', 'DECOMPOSITION', 'UNCHANGED', 'DECOMPOSITION']
+  3) 5% NaOH:: ['UNCHANGED', 'DECOMPOSITION', 'UNCHANGED', 'DECOMPOSITION']
+  4) ALCOHOLS:: ['UNCHANCED', 'DECOMPOSITION', 'UNCHANGED', 'DECOMPOSITION']
+  5) OXYGEN:: ['UNCHANGED', 'DECOMPOSITION', 'UNCHANGED', 'DECOMPOSITION']
+  6) LIGHT:: ['UNCHANGED', 'DECOMPOSITION', 'UNCHANGED', 'DECOMPOSITION']
 
-Reactivity1WaterOrBrine_00837285_processed: ['UNCHANGED', 'DECOMPOSITION', 'UNCHANGED', 'UNCHANGED', 'DECOMPOSITION']
+signature_00837285_processed: Johnson
 
-Reactivity25Hcl_00837285_processed: ['UNCHANGED', 'DECOMPOSITION', 'UNCHANGED', 'DECOMPOSITION']
+solubility_00837285_processed: MEASURED WATER OTHER ESTIMATED
 
-Reactivity35Naoh_00837285_processed: ['UNCHANGED', 'DECOMPOSITION', 'UNCHANGED', 'DECOMPOSITION']
-
-Reactivity4Alcohols_00837285_processed: ['UNCHANCED', 'DECOMPOSITION', 'UNCHANGED', 'DECOMPOSITION']
-
-Reactivity5Oxygen_00837285_processed: ['UNCHANGED', 'DECOMPOSITION', 'UNCHANGED', 'DECOMPOSITION']
-
-Reactivity6Light_00837285_processed: ['UNCHANGED', 'DECOMPOSITION', 'UNCHANGED', 'DECOMPOSITION']
-
-Signature_00837285_processed: Johnson
-
-Solubility_00837285_processed: MEASURED WATER OTHER ESTIMATED
-
-StorageRecommendations_00837285_processed: NORMAL STORAGE
+storagerecommendations_00837285_processed: NORMAL STORAGE
 

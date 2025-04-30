@@ -1,47 +1,46 @@
 Form: 93380187_processed
 ==================================================
 
-AnalyticalRequirements_93380187_processed: 
+Fieldfrom_93380187_processed: MICHELLE LEPRE
 
-Cc_93380187_processed: S. A. RAPISARLDI J BAYLIES K. P. AUGUSTYN M. McGLYNN
+advertisingcreativetitle_93380187_processed: 
 
-FieldAdvertisingCreativeTitle_93380187_processed: 
+analyticalrequirements_93380187_processed: 
 
-FieldBrandSApplicable_93380187_processed: TRUE
+brandsapplicable_93380187_processed: TRUE
 
-FieldCirculation_93380187_processed: 560,000
+cc_93380187_processed: S. A. RAPISARLDI J BAYLIES K. P. AUGUSTYN M. McGLYNN
 
-FieldCouponExpirationDate_93380187_processed: 8 /31 /92
+circulation_93380187_processed: 560,000
 
-FieldCouponIssueDate_93380187_processed: MAY 1992
+couponexpirationdate_93380187_processed: 8 /31 /92
 
-FieldCouponValue_93380187_processed: 50c
+couponissuedate_93380187_processed: MAY 1992
 
-FieldDateInitiated_93380187_processed: JANUARY 8, 1992
+couponvalue_93380187_processed: 50c
 
-FieldGeographicalAreaS_93380187_processed: TRUE CORE MARKETS *
+dateinitiated_93380187_processed: JANUARY 8, 1992
 
-FieldIssueFrequencyYear_93380187_processed: 
+foacontroluseonly_93380187_processed:
+  CODE ASSIGNED:: 57288
+  EST. REDEMPTION:: 80 %
+  JOE NUMBER:: 1143
 
-FieldMediaName_93380187_processed: 
+geographicalareas_93380187_processed: TRUE CORE MARKETS *
 
-FieldMediaType_93380187_processed: SALES FORCE APPLIED - IRC
+issuefrequencyyear_93380187_processed: 
 
-FieldPackAndOrCarton_93380187_processed: PACK
+medianame_93380187_processed: 
 
-FieldSignatureOfInitiator_93380187_processed: Michell 
+mediatype_93380187_processed: SALES FORCE APPLIED - IRC
 
-FieldSpaceColor_93380187_processed: 
+packandorcarton_93380187_processed: PACK
 
-FoaControlUseOnlyCodeAssigned_93380187_processed: 57288
+signatureofinitiator_93380187_processed: Michell 
 
-FoaControlUseOnlyEstRedemption_93380187_processed: 80 %
+spacecolor_93380187_processed: 
 
-FoaControlUseOnlyJoeNumber_93380187_processed: 1143
+to_93380187_processed: V. M. LOSITO
 
-From_93380187_processed: MICHELLE LEPRE
-
-To_93380187_processed: V. M. LOSITO
-
-TrueCoreAreas_93380187_processed: TOTAL NEW YORK TOTAL BOSTON NEW HAVEN HARTFORD TOTAL SAN FRANCISCO SYRACUSE ROCHESTER TOTAL PHILADELPHIA TOTAL CHICAGO BUFFALO ALBANY TOTAL NEW JERSEY PROVIDENCE CAMDEN CONCORD SPRINGFIELD BALTIMORE PORTLAND, ME TOTAL DETROIT TOTAL WASHINGTON WILMINGTON REGION 15 x SAN BERNADINO
+truecoreareas_93380187_processed: TOTAL NEW YORK TOTAL BOSTON NEW HAVEN HARTFORD TOTAL SAN FRANCISCO SYRACUSE ROCHESTER TOTAL PHILADELPHIA TOTAL CHICAGO BUFFALO ALBANY TOTAL NEW JERSEY PROVIDENCE CAMDEN CONCORD SPRINGFIELD BALTIMORE PORTLAND, ME TOTAL DETROIT TOTAL WASHINGTON WILMINGTON REGION 15 x SAN BERNADINO
 

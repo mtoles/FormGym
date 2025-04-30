@@ -1,41 +1,40 @@
 Form: 0060207528_processed
 ==================================================
 
-BrandName_0060207528_processed: PALL MALL RED LIGHTS
+brandname_0060207528_processed: PALL MALL RED LIGHTS
 
-Client_0060207528_processed: THE AMERICAN TOBACCO COMPANY
+client_0060207528_processed: THE AMERICAN TOBACCO COMPANY
 
-Contract_0060207528_processed: A- 530- 1059
+contract_0060207528_processed: A- 530- 1059
 
-DEC_0060207528_processed: 534.1
+date_0060207528_processed: 2/ 25/ 89
 
-DatePostersReceivedFromLithographer_0060207528_processed: 6/ 27/ 89
+datepostersreceivedfromlithographer_0060207528_processed: 6/ 27/ 89
 
-DatePostingCompleted_0060207528_processed: 7/ 21/ 89
+datepostingcompleted_0060207528_processed: 7/ 21/ 89
 
-Date_0060207528_processed: 2/ 25/ 89
+dec_0060207528_processed: 534.1
 
-Market_0060207528_processed: Akron OH.
+market_0060207528_processed: Akron OH.
 
-NumberOfPanelsIlluminated_0060207528_processed: 45
+numberofpanels_0060207528_processed:
+  ILLUMINATED: 45
+  REGULAR: 9
+  TOTAL: 54
 
-NumberOfPanelsRegular_0060207528_processed: 9
+plantaverage_0060207528_processed: 
 
-NumberOfPanelsTotal_0060207528_processed: 54
+plantmanagerpostingsupt_0060207528_processed: 
 
-PlantAverage_0060207528_processed: 
+plantoperator_0060207528_processed: Patrick Media Group, Inc
 
-PlantManagerPostingSupt_0060207528_processed: 
+posterdesign_0060207528_processed: THE TASTE BREAKS THROUGH
 
-PlantOperator_0060207528_processed: Patrick Media Group, Inc
+scheduledpostingdate_0060207528_processed: 7/ 16/ 89
 
-PosterDesign_0060207528_processed: THE TASTE BREAKS THROUGH
+signature_0060207528_processed: 
 
-SPV_0060207528_processed: 
+sizeshowing_0060207528_processed: F 75 GRP
 
-ScheduledPostingDate_0060207528_processed: 7/ 16/ 89
-
-Signature_0060207528_processed: 
-
-SizeShowing_0060207528_processed: F 75 GRP
+spv_0060207528_processed: 
 

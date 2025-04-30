@@ -1,61 +1,55 @@
 Form: 93213298_processed
 ==================================================
 
-AttendeesCustomersAttended_93213298_processed: 8
+attendees_93213298_processed:
+  # Customers Attended: 8
+  # Customers Invited: 8
+  # Lorillard Personnel: 2
 
-AttendeesCustomersInvited_93213298_processed: 8
+average_93213298_processed: 
 
-AttendeesLorillardPersonnel_93213298_processed: 2
+daterecd_93213298_processed: 05/ 01/ 95
 
-Average_93213298_processed: 
+dates_93213298_processed: June 11, 1995
 
-DateRecD_93213298_processed: 05/ 01/ 95
+datesubmitted_93213298_processed: July 6, 1995
 
-DateS_93213298_processed: June 11, 1995
+displaysplaced_93213298_processed:
+  Counter: 0
+  Floor: 0
+  Posters: 0
 
-DateSubmitted_93213298_processed: July 6, 1995
+division_93213298_processed: Detroit - MCA
 
-DivisionMgr_93213298_processed: R. L. Lavoie
+divisionmgr_93213298_processed: R. L. Lavoie
 
-Division_93213298_processed: Detroit - MCA
+excellent_93213298_processed: 
 
-Excellent_93213298_processed: 
+fair_93213298_processed: 
 
-Fair_93213298_processed: 
+invitations_93213298_processed:
+  # Requested: 10
+  Date Notified: 
+  Date Ordered: 
 
-FieldDisplaysPlacedCounter_93213298_processed: 0
+inviteescomments_93213298_processed: Invitees stated the Newport hospitality tent was very difficult to locate. Also, the Indy Lights Paddock area was not clearly identified Most Invitees were looking for the hospitality tent in a separate identified area away from the Paddock Brea and the Newport car transporter.
 
-FieldDisplaysPlacedFloor_93213298_processed: 0
+location_93213298_processed: DETROIT GRAND PRIX
 
-FieldDisplaysPlacedPosters_93213298_processed: 0
+promotionquantity_93213298_processed:
+  Displays (8): 0
+  Floor (40): 0
+  Mugs: 0
+  Posters: 0
 
-InvitationsDateNotified_93213298_processed: 
+qualityofhospitalitytent_93213298_processed:
+  Cleanliness: X
+  Food: X
+  Service: X
 
-InvitationsDateOrdered_93213298_processed: 
+racedayinfo_93213298_processed:
+  Event Attendance: 10
+  Hospitality Tent Attendance: 10
 
-InvitationsRequested_93213298_processed: 10
-
-InviteesComments_93213298_processed: Invitees stated the Newport hospitality tent was very difficult to locate. Also, the Indy Lights Paddock area was not clearly identified Most Invitees were looking for the hospitality tent in a separate identified area away from the Paddock Brea and the Newport car transporter.
-
-Location_93213298_processed: DETROIT GRAND PRIX
-
-PromotionQuantityDisplays8_93213298_processed: 0
-
-PromotionQuantityFloor40_93213298_processed: 0
-
-PromotionQuantityMugs_93213298_processed: 0
-
-PromotionQuantityPosters_93213298_processed: 0
-
-QualityOfHospitalityTentCleanliness_93213298_processed: X
-
-QualityOfHospitalityTentFood_93213298_processed: X
-
-QualityOfHospitalityTentService_93213298_processed: X
-
-RaceDayInfoEventAttendance_93213298_processed: 10
-
-RaceDayInfoHospitalityTentAttendance_93213298_processed: 10
-
-SuggestionsRecommendations_93213298_processed: In the future, please specify where the Newport hospitality area will be located - at the Newport car trans- porter site or in a separate area . Specific directions will be needed.
+suggestionsrecommendations_93213298_processed: In the future, please specify where the Newport hospitality area will be located - at the Newport car trans- porter site or in a separate area . Specific directions will be needed.
 

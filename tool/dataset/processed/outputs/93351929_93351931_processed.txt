@@ -1,47 +1,45 @@
 Form: 93351929_93351931_processed
 ==================================================
 
-AdvertisingCreativeTheme_93351929_93351931_processed: Rebecca
+Fieldfrom_93351929_93351931_processed: JESSICA ARATO
 
-AnalyticalRequirementsCodeAssigned_93351929_93351931_processed: 221782
+advertisingcreativetheme_93351929_93351931_processed: Rebecca
 
-AnalyticalRequirementsEstRedemption_93351929_93351931_processed: 3 %
+analyticalrequirements_93351929_93351931_processed:
+  CODE ASSIGNED:: 221782
+  EST. REDEMPTION:: 3 %
+  FOR CONTROL USE ONLY:: 
+  JOB NUMBER:: 414
 
-AnalyticalRequirementsForControlUseOnly_93351929_93351931_processed: 
+brandssapplicable_93351929_93351931_processed: All Kent Family Packings
 
-AnalyticalRequirementsJobNumber_93351929_93351931_processed: 414
+cc_93351929_93351931_processed: K. AUGUSTYN. L. GIORDANO, M. McGLYNN, S. RAPISARLDI
 
-BrandsSApplicable_93351929_93351931_processed: All Kent Family Packings
+circulation_93351929_93351931_processed: 1, 221, 000
 
-Cc_93351929_93351931_processed: K. AUGUSTYN. L. GIORDANO, M. McGLYNN, S. RAPISARLDI
+couponexpirationdate_93351929_93351931_processed: December 31, 1992
 
-Circulation_93351929_93351931_processed: 1, 221, 000
+couponissuedate_93351929_93351931_processed: September 1, 1992
 
-CouponExpirationDate_93351929_93351931_processed: December 31, 1992
+couponvalue_93351929_93351931_processed: Free Pack
 
-CouponIssueDate_93351929_93351931_processed: September 1, 1992
+dateinitiated_93351929_93351931_processed: May 14, 1992
 
-CouponValue_93351929_93351931_processed: Free Pack
+geogfiaphicalareas_93351929_93351931_processed: Tier 
 
-DateInitiated_93351929_93351931_processed: May 14, 1992
+issuefrequencyyear_93351929_93351931_processed: September
 
-From_93351929_93351931_processed: JESSICA ARATO
+media_93351929_93351931_processed:
+  Magazines:: ['People, Rolling Stone, Cosmopolitan,', 'Mademoiselle, New York Magazine']
+  Newspaper:: Village Voice
 
-GeogfiaphicalAreaS_93351929_93351931_processed: Tier 
+packandorcarton_93351929_93351931_processed: Pack
 
-IssueFrequencyYear_93351929_93351931_processed: September
+signatureofinitiator_93351929_93351931_processed: 
 
-MediaMagazines_93351929_93351931_processed: ['People, Rolling Stone, Cosmopolitan,', 'Mademoiselle, New York Magazine']
+spacecolor_93351929_93351931_processed:
+  Magazines:: P 4/ C;
+  Newspapers:: 1/ 2 B/ W
 
-MediaNewspaper_93351929_93351931_processed: Village Voice
-
-PackAndOrCarton_93351929_93351931_processed: Pack
-
-SignatureOfInitiator_93351929_93351931_processed: 
-
-SpaceColorMagazines_93351929_93351931_processed: P 4/ C;
-
-SpaceColorNewspapers_93351929_93351931_processed: 1/ 2 B/ W
-
-To_93351929_93351931_processed: VINCE LOSITO
+to_93351929_93351931_processed: VINCE LOSITO
 

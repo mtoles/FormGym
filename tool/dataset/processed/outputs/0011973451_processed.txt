@@ -1,61 +1,49 @@
 Form: 0011973451_processed
 ==================================================
 
-ApprovalsDate_0011973451_processed: 
+approvals_0011973451_processed:
+  Date: 
+  Dir. Int' Admin: 
+  Group Prod Dir: 
+  Regional Dir/ VP: 
+  Senior VP Int'l: 
+  VP Int'l Marketing: 
+  VP Int'l Planning: 
 
-ApprovalsDirIntAdmin_0011973451_processed: 
+brandprojectname_0011973451_processed: RICHLAND Kings (Soft Pack) -Duty Free (Phoenix)
 
-ApprovalsGroupProdDir_0011973451_processed: 
+costorretailpricing_0011973451_processed: TBD
 
-ApprovalsRegionalDirVp_0011973451_processed: 
+date_0011973451_processed: 6/ 24/ 94
 
-ApprovalsSeniorVpIntL_0011973451_processed: 
+estmonthlyongoing_0011973451_processed: TBD
 
-ApprovalsVpIntLMarketing_0011973451_processed: 
+initialmaterialsrequired_0011973451_processed:
+  Cartons:: On Hand
+  Cases:: 500
+  Dollar Cost: $250
+  Pack Flats Labels:: On Hand
+  Qty In Units: ['On Hand', 'On Hand', '500']
 
-ApprovalsVpIntLPlanning_0011973451_processed: 
+markets_0011973451_processed: World- wide Duty Free
 
-BrandProjectName_0011973451_processed: RICHLAND Kings (Soft Pack) -Duty Free (Phoenix)
+objective_0011973451_processed: Generate incremental volume for B& W by providing a low price brand to various international duty- free markets.
 
-CostOrRetailPricing_0011973451_processed: TBD
+sourceofbusiness_0011973451_processed:
+  Major Competitive Brands:: TBD
+  Target Audience:: Value- conscious Smokers
 
-Date_0011973451_processed: 6/ 24/ 94
+start_0011973451_processed: 
 
-EstMonthlyOngoing_0011973451_processed: TBD
+timetable_0011973451_processed:
+  In- Market Arrival Date:: 
+  Launch Date:: 
+  Manufacturing:: 
+  Product Specs Date:: 
+  Shipping:: 
+  Start Manufacture Date:: 
 
-InitialMaterialsRequiredCartons_0011973451_processed: On Hand
+up_0011973451_processed: 
 
-InitialMaterialsRequiredCases_0011973451_processed: 500
-
-InitialMaterialsRequiredDollarCost_0011973451_processed: $250
-
-InitialMaterialsRequiredPackFlatsLabels_0011973451_processed: On Hand
-
-InitialMaterialsRequiredQtyInUnits_0011973451_processed: ['On Hand', 'On Hand', '500']
-
-MarketS_0011973451_processed: World- wide Duty Free
-
-Objective_0011973451_processed: Generate incremental volume for B& W by providing a low price brand to various international duty- free markets.
-
-SourceOfBusinessMajorCompetitiveBrands_0011973451_processed: TBD
-
-SourceOfBusinessTargetAudience_0011973451_processed: Value- conscious Smokers
-
-Start_0011973451_processed: 
-
-TimetableInMarketArrivalDate_0011973451_processed: 
-
-TimetableLaunchDate_0011973451_processed: 
-
-TimetableManufacturing_0011973451_processed: 
-
-TimetableProductSpecsDate_0011973451_processed: 
-
-TimetableShipping_0011973451_processed: 
-
-TimetableStartManufactureDate_0011973451_processed: 
-
-Up_0011973451_processed: 
-
-Volume_0011973451_processed: TBD
+volume_0011973451_processed: TBD
 

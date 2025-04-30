@@ -1,19 +1,19 @@
 Form: 93455715_processed
 ==================================================
 
-Cc_93455715_processed: Mr. J. R. Ave Mr. R. H. Orcutt Mr. M. A. Peterson Mr. T. H. Mau Ms. S. Ridgway Mr. J. P. Mastandrea Mr. L. Gordon Mr. G. R. Telford Dr. S. T. Jones Mr. C. Toti Mr. N. P. Ruffalo Mr. T. L. Achey P. J. McCann Mr. A. J. Giacoio Mr. L. H. Kersh Mr. R. G. Ryan Mr. P. A. Lawless Mr. J. E. Daghlian Mr. R. S. Goldbrenner Ms. E. R. Harrow Ms. S. F. Smith
+cc_93455715_processed: Mr. J. R. Ave Mr. R. H. Orcutt Mr. M. A. Peterson Mr. T. H. Mau Ms. S. Ridgway Mr. J. P. Mastandrea Mr. L. Gordon Mr. G. R. Telford Dr. S. T. Jones Mr. C. Toti Mr. N. P. Ruffalo Mr. T. L. Achey P. J. McCann Mr. A. J. Giacoio Mr. L. H. Kersh Mr. R. G. Ryan Mr. P. A. Lawless Mr. J. E. Daghlian Mr. R. S. Goldbrenner Ms. E. R. Harrow Ms. S. F. Smith
 
-Date_93455715_processed: 4/7/88
+date_93455715_processed: 4/7/88
 
-HowWidespread_93455715_processed: 
+howwidespread_93455715_processed: 
 
-Manufacturers_93455715_processed: R. J. REYNOLDS AND PHILIP MORRIS
+manufacturers_93455715_processed: R. J. REYNOLDS AND PHILIP MORRIS
 
-OtherComments_93455715_processed: 
+othercomments_93455715_processed: 
 
-ReportedBy_93455715_processed: R. E. Klein, Regional Sales Manager, Cleveland, OH
+reportedby_93455715_processed: R. E. Klein, Regional Sales Manager, Cleveland, OH
 
-SourceOfInformation_93455715_processed: Best Cigarette Co., Mentor, OH
+sourceofinformation_93455715_processed: Best Cigarette Co., Mentor, OH
 
-TypeOfPromotion_93455715_processed: SEE ATTACHED CORRESPONDENCE REGARDING: - R. J. REYNOLDS SPRING DIRECT ACCOUNT INCENTIVE PROGRAM - Philip Morris- SPECIAL PROMOTIONS ON MAKLBORO AND CAMBRIDGE CIGARETTES
+typeofpromotion_93455715_processed: SEE ATTACHED CORRESPONDENCE REGARDING: - R. J. REYNOLDS SPRING DIRECT ACCOUNT INCENTIVE PROGRAM - Philip Morris- SPECIAL PROMOTIONS ON MAKLBORO AND CAMBRIDGE CIGARETTES
 

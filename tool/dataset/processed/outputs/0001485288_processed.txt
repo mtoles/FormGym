@@ -1,37 +1,37 @@
 Form: 0001485288_processed
 ==================================================
 
-AccountNumber_0001485288_processed: 22 244 00
+accountnumber_0001485288_processed: 22 244 00
 
-CigaretteDescription_0001485288_processed: KS 1 mg grooved product using 4. 3/ 37 filter material. Cigarette code 244131
+cigarettedescription_0001485288_processed: KS 1 mg grooved product using 4. 3/ 37 filter material. Cigarette code 244131
 
-CompletionDate_0001485288_processed: 6/ 25/ 81
+completiondate_0001485288_processed: 6/ 25/ 81
 
-CopiesTo_0001485288_processed: Factory Cost Dept. Writer Development Center Sue Livesay
+copiesto_0001485288_processed: Factory Cost Dept. Writer Development Center Sue Livesay
 
-DateOfRequest_0001485288_processed: 6/ 25/ 81
+dateofrequest_0001485288_processed: 6/ 25/ 81
 
-MethodOfShipment_0001485288_processed: 
+methodofshipment_0001485288_processed: 
 
-QuantityCartonsOf200Each_0001485288_processed: 20
+quantitycartonsof200each_0001485288_processed: 20
 
-ReducedToMaterial_0001485288_processed: 
+reducedtomaterial_0001485288_processed: 
 
-SampleDisposition_0001485288_processed: 
+sampledisposition_0001485288_processed: 
 
-Shipment_0001485288_processed: 
+shipment_0001485288_processed: 
 
-Signed_0001485288_processed: B. D. WINGLER
+signed_0001485288_processed: B. D. WINGLER
 
-SpecialInstructionsComments_0001485288_processed: 
+specialinstructionscomments_0001485288_processed: 
 
-SpecialSampleManufacture_0001485288_processed: ☑
+specialsamplemanufacture_0001485288_processed: ☑
 
-TaxStatusPaidOrFree_0001485288_processed: Free
+taxstatuspaidorfree_0001485288_processed: Free
 
-ToSampleStockMR_0001485288_processed: 
+tosamplestock_0001485288_processed:
+  M. R.: 
+  R & D: ['20', 'Free']
 
-ToSampleStockRD_0001485288_processed: ['20', 'Free']
-
-Transfer_0001485288_processed: 
+transfer_0001485288_processed: 
 

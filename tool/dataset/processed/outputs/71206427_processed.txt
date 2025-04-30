@@ -1,29 +1,26 @@
 Form: 71206427_processed
 ==================================================
 
-Brand_71206427_processed: General Merchandising Nonspecific
+brand_71206427_processed: General Merchandising Nonspecific
 
-Date_71206427_processed: June 1, 1990
+date_71206427_processed: June 1, 1990
 
-Funding_71206427_processed: 1990 Customized Merchandising Services ESPNS
+funding_71206427_processed: 1990 Customized Merchandising Services ESPNS
 
-Item_71206427_processed: Package Fixture Circle-K Convenient Stores
+item_71206427_processed: Package Fixture Circle-K Convenient Stores
 
-Of_71206427_processed: 
+of_71206427_processed: 
 
-Project_71206427_processed: See Attached
+project_71206427_processed: See Attached
 
-SignaturesGroupProductDirector_71206427_processed: 
+signatures_71206427_processed:
+  GROUP PRODUCT DIRECTOR: 
+  MERCHANDISING MANAGER: 
+  PURCHASING DEPARTMENT: 
+  REQUESTING MANAGER: 
+  RETURN TO:: REQUESTING MANAGER
 
-SignaturesMerchandisingManager_71206427_processed: 
+summary_71206427_processed: 
 
-SignaturesPurchasingDepartment_71206427_processed: 
-
-SignaturesRequestingManager_71206427_processed: 
-
-SignaturesReturnTo_71206427_processed: REQUESTING MANAGER
-
-Summary_71206427_processed: 
-
-SuppliersBeingConsidered_71206427_processed: Chicago Show Display Equation Chicago Display Robert Nielson & Associates
+suppliersbeingconsidered_71206427_processed: Chicago Show Display Equation Chicago Display Robert Nielson & Associates
 

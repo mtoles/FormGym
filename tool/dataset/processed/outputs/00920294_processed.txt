@@ -1,37 +1,37 @@
 Form: 00920294_processed
 ==================================================
 
-AlertNumber_00920294_processed: 970220
+Fieldfrom_00920294_processed: Drew Huyett
 
-BrcCodesW81CartonOrderForm_00920294_processed: 
+alertnumber_00920294_processed: 970220
 
-DatasetName_00920294_processed: 
+brccodesw81cartonorderform_00920294_processed: 
 
-Date_00920294_processed: 3/ 7/ 97
+datasetname_00920294_processed: 
 
-From_00920294_processed: Drew Huyett
+date_00920294_processed: 3/ 7/ 97
 
-Maildate_00920294_processed: 3/ 17/ 97
+maildate_00920294_processed: 3/ 17/ 97
 
-MailfileCells_00920294_processed: HD home delivery SP sneak preview
+mailfilecells_00920294_processed: HD home delivery SP sneak preview
 
-MailfileDescription_00920294_processed: Mail Order- Indy Responders
+mailfiledescription_00920294_processed: Mail Order- Indy Responders
 
-MailfileId_00920294_processed: 3,
+mailfileid_00920294_processed: 3,
 
-ProgramGroup_00920294_processed: 102- Eclipse
+program_00920294_processed: 700418
 
-Program_00920294_processed: 700418
+programgroup_00920294_processed: 102- Eclipse
 
-Quantity_00920294_processed: 273
+quantity_00920294_processed: 273
 
-Seeds_00920294_processed: 25
+seeds_00920294_processed: 25
 
-Suppression_00920294_processed: 5
+suppression_00920294_processed: 5
 
-System_00920294_processed: Corp/ Multibrand
+system_00920294_processed: Corp/ Multibrand
 
-TCodesNa_00920294_processed: 
+tcodesna_00920294_processed: 
 
-To_00920294_processed: RJR IR - Suz /Art
+to_00920294_processed: RJR IR - Suz /Art
 

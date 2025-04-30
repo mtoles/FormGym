@@ -1,39 +1,36 @@
 Form: 00851772_1780_processed
 ==================================================
 
-Compound_00851772_1780_processed: Valerian Fluid Extract
+compound_00851772_1780_processed: Valerian Fluid Extract
 
-Date_00851772_1780_processed: May 27, 1982
+contd_00851772_1780_processed: 
 
-Dates_00851772_1780_processed: 
+date_00851772_1780_processed: May 27, 1982
 
-FieldCombined_00851772_1780_processed: 
+dates_00851772_1780_processed: 
 
-FieldContD_00851772_1780_processed: 
+ii_00851772_1780_processed: 
 
-Ii_00851772_1780_processed: 
+iiisupplementalliteraturesearchchemicalabstractsvol23vol65arctandersperfumeandflavormaterialsofnaturalorigin1960guenthersmonographsonfragrancerawmaterials1979tobaccoabstractsusdispensatory23rdedition1943_00851772_1780_processed: 
 
-IiiSupplementalLiteratureSearchChemicalAbstractsVol23Vol65ArctanderSPerfumeAndFlavorMaterialsOfNaturalOrigin1960GuentherSMonographsOnFragranceRawMaterials1979TobaccoAbstractsUSDispensatory23RdEdition1943_00851772_1780_processed: 
+jimmyhbellbscscientist_00851772_1780_processed: 
 
-JimmyHBellBScScientist_00851772_1780_processed: 
+literaturesurveyed_00851772_1780_processed: 
 
-LiteratureSurveyed_00851772_1780_processed: 
+lorillardcompoundcode_00851772_1780_processed: B73
 
-LorillardCompoundCode_00851772_1780_processed: B73
+name_00851772_1780_processed: 
 
-Name_00851772_1780_processed: 
+registrynumberifapplicable_00851772_1780_processed: N/A
 
-RegistryNumberIfApplicable_00851772_1780_processed: N/A
+registryofthetoxiceffectsofchemicals_00851772_1780_processed: 
 
-RegistryOfTheToxicEffectsOfChemicals_00851772_1780_processed: 
+reviewed_00851772_1780_processed: 1974- Jan. 1982 to Dec. 1981 1929-1966 1957- Dec. 1981
 
-Reviewed_00851772_1780_processed: 1974- Jan. 1982 to Dec. 1981 1929-1966 1957- Dec. 1981
+toxline_00851772_1780_processed: 
 
-Toxline_00851772_1780_processed: 
-
-TypeBiological_00851772_1780_processed: 
-
-TypeChemical_00851772_1780_processed: 
-
-TypeCombined_00851772_1780_processed: 
+type_00851772_1780_processed:
+  BIOLOGICAL ☐: 
+  CHEMICAL ☐: 
+  COMBINED: 
 

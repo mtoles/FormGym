@@ -1,25 +1,25 @@
 Form: 81310636_processed
 ==================================================
 
-AssayResult_81310636_processed: M. Lymph: negative with S9 activation, positive without S9 activation; Rerun: negative without S9 activation, border- line positive with S9 activation -Technical problems with the
+assayresult_81310636_processed: M. Lymph: negative with S9 activation, positive without S9 activation; Rerun: negative without S9 activation, border- line positive with S9 activation -Technical problems with the
 
-BpMp_81310636_processed: N/ A
+bpmp_81310636_processed: N/ A
 
-C_81310636_processed: 
+c_81310636_processed: 
 
-ChemAbstr_81310636_processed: N/ A
+chemabstr_81310636_processed: N/ A
 
-CompoundCode_81310636_processed: B83
+compoundcode_81310636_processed: B83
 
-CompoundName_81310636_processed: Proprietary Mixture
+compoundname_81310636_processed: Proprietary Mixture
 
-GeneticAssayNo_81310636_processed: 6692
+geneticassayno_81310636_processed: 6692
 
-MmHg_81310636_processed: 
+mmhg_81310636_processed: 
 
-PhCalculated50_81310636_processed: 5. 26
+phcalculated50_81310636_processed: 5. 26
 
-PhysicalAppearance_81310636_processed: Yellow liquid
+physicalappearance_81310636_processed: Yellow liquid
 
-RegulatoryStatus_81310636_processed: N/ A
+regulatorystatus_81310636_processed: N/ A
 

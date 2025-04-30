@@ -1,19 +1,19 @@
 Form: 0013255595_processed
 ==================================================
 
-Approvals_0013255595_processed: Division Head Bill Kloepfer Sam Chilcote
+approvals_0013255595_processed: Division Head Bill Kloepfer Sam Chilcote
 
-Date_0013255595_processed: 
+date_0013255595_processed: 
 
-LegalApprovalRecommendedRequiredNo_0013255595_processed: 
+legalapprovalrecommendedrequired_0013255595_processed:
+  NO: 
+  YES: 
 
-LegalApprovalRecommendedRequiredYes_0013255595_processed: 
+nameorinitials_0013255595_processed: 
 
-NameOrInitials_0013255595_processed: 
+other_0013255595_processed: 
 
-Other_0013255595_processed: 
+subject_0013255595_processed: 
 
-Subject_0013255595_processed: 
-
-Writer_0013255595_processed: 
+writer_0013255595_processed: 
 

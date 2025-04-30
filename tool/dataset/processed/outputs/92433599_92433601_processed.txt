@@ -1,29 +1,24 @@
 Form: 92433599_92433601_processed
 ==================================================
 
-Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantAddress_92433599_92433601_processed: 999 Grant Avenue, P. O. Box 2109
+Field1Nameaddressandtelephonenumberoflawfirmrepresentingclaimant_92433599_92433601_processed:
+  Address: 999 Grant Avenue, P. O. Box 2109
+  City: Novato
+  Name: BRAYTON, GISVOLD. & HARLEY
+  State: CA
+  Telephone: (415) 898- 1555
+  Zip Code: 94948
 
-Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantCity_92433599_92433601_processed: Novato
+Field2Namesoffirstnamedplaintiffandfirstnameddefendantonthecaptionofthecomplaint_92433599_92433601_processed:
+  Defendant: ABEX CORPORATION, et al.
+  Plaintiff: CHARLES WOODWARD
 
-Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantName_92433599_92433601_processed: BRAYTON, GISVOLD. & HARLEY
+Field3Dateofclaimantsbirth_92433599_92433601_processed: June 19, 1921
 
-Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantState_92433599_92433601_processed: CA
+Field4Caseinvolvescheckappropriateboxes_92433599_92433601_processed:
+  (a) Injury: X
+  (b) Wrongful death: 
+  (c) Consortium: X
 
-Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantTelephone_92433599_92433601_processed: (415) 898- 1555
-
-Field1NameAddressAndTelephoneNumberOfLawFirmRepresentingClaimantZipCode_92433599_92433601_processed: 94948
-
-Field2NamesOfFirstNamedPlaintiffAndFirstNamedDefendantOnTheCaptionOfTheComplaintDefendant_92433599_92433601_processed: ABEX CORPORATION, et al.
-
-Field2NamesOfFirstNamedPlaintiffAndFirstNamedDefendantOnTheCaptionOfTheComplaintPlaintiff_92433599_92433601_processed: CHARLES WOODWARD
-
-Field3DateOfClaimantSBirth_92433599_92433601_processed: June 19, 1921
-
-Field4CaseInvolvesCheckAppropriateBoxesAInjury_92433599_92433601_processed: X
-
-Field4CaseInvolvesCheckAppropriateBoxesBWrongfulDeath_92433599_92433601_processed: 
-
-Field4CaseInvolvesCheckAppropriateBoxesCConsortium_92433599_92433601_processed: X
-
-Field5SpecifyTheNatureOrTypeOfAsbestosRelatedInjuryAllegedByTheClaimantEQAsbestosisLungCancerAdenocarcinomaLungCancerMesotheliomaPleuralThickeningFibrosisEtc_92433599_92433601_processed: Mesothelioma and other asbestos- related lung disease
+Field5Specifythenatureortypeofasbestosrelatedinjuryallegedbytheclaimanteqasbestosislungcanceradenocarcinomalungcancermesotheliomapleuralthickeningfibrosisetc_92433599_92433601_processed: Mesothelioma and other asbestos- related lung disease
 

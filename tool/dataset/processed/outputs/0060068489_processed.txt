@@ -1,57 +1,50 @@
 Form: 0060068489_processed
 ==================================================
 
-Agency_0060068489_processed: corporate Media Department
-
-AirTime_0060068489_processed: 
-
-ApprovalsAccounting_0060068489_processed: 
-
-ApprovalsAgency_0060068489_processed: 
-
-ApprovalsAuthorizationNo_0060068489_processed: M- 49
-
-ApprovalsBudgetAllocation_0060068489_processed: L- 3a
-
-ApprovalsExecutive_0060068489_processed: 
-
-ApprovalsMarketing_0060068489_processed: 
-
-ApprovalsMedia_0060068489_processed: 
-
-ApprovalsProduct_0060068489_processed: 
-
-ApprovalsSales_0060068489_processed: 
-
-ArtWork_0060068489_processed: 
-
-Brand_0060068489_processed: LUCKY STRIKE LOW Tar Filters Box- 100%
-
-Contingency_0060068489_processed: 
-
-Date_0060068489_processed: 3/17/82
-
-Description_0060068489_processed: 30 sheet Posters (White Background)
-
-DisplayMaterial_0060068489_processed: 
-
-EstimatedFreightCharges_0060068489_processed: 2.000.00
-
 Field1680_0060068489_processed: 
 
-Field30SheetPosters_0060068489_processed: $ 26,880,00
+Field30Sheetposters_0060068489_processed: $ 26,880,00
 
-MechanicalProduction_0060068489_processed: 
+agency_0060068489_processed: corporate Media Department
 
-Medium_0060068489_processed: Outdoor
+airtime_0060068489_processed: 
 
-No_0060068489_processed: 
+approvals_0060068489_processed:
+  Accounting: 
+  Agency: 
+  Authorization No.: M- 49
+  Budget Allocation: L- 3a
+  Executive: 
+  Marketing: 
+  Media: 
+  Product: 
+  Sales: 
 
-PeriodFrom_0060068489_processed: April THRU July
+artwork_0060068489_processed: 
 
-Remarks_0060068489_processed: For posting in Cincinnati, Covington and Tampa/St. Petersburg. Posters are captioned for identification, "LUCKY STRIKES AGAIN (printed in red) with the word "New" printed in a snipe effect in the upper left corner. These posters have a white background and will be further identified as such in order to differentiate from a second design which will have a solid red background with white lettering. Posters are printed six colors (four color process and two impressions of red) on white 70# outdoor poster paper.
+brand_0060068489_processed: LUCKY STRIKE LOW Tar Filters Box- 100%
 
-Space_0060068489_processed: 
+contingency_0060068489_processed: 
 
-Total_0060068489_processed: $ 28,880.00
+date_0060068489_processed: 3/17/82
+
+description_0060068489_processed: 30 sheet Posters (White Background)
+
+displaymaterial_0060068489_processed: 
+
+estimatedfreightcharges_0060068489_processed: 2.000.00
+
+mechanicalproduction_0060068489_processed: 
+
+medium_0060068489_processed: Outdoor
+
+no_0060068489_processed: 
+
+periodfrom_0060068489_processed: April THRU July
+
+remarks_0060068489_processed: For posting in Cincinnati, Covington and Tampa/St. Petersburg. Posters are captioned for identification, "LUCKY STRIKES AGAIN (printed in red) with the word "New" printed in a snipe effect in the upper left corner. These posters have a white background and will be further identified as such in order to differentiate from a second design which will have a solid red background with white lettering. Posters are printed six colors (four color process and two impressions of red) on white 70# outdoor poster paper.
+
+space_0060068489_processed: 
+
+total_0060068489_processed: $ 28,880.00
 

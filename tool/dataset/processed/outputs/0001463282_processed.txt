@@ -1,79 +1,70 @@
 Form: 0001463282_processed
 ==================================================
 
-AccountName_0001463282_processed: BARCLAY
+Date1_0001463282_processed: 
 
-ApprovedBy_0001463282_processed: 
+Date2_0001463282_processed: 5/ 3/ 90
 
-BudgetCheck_0001463282_processed: Howard 
+accountname_0001463282_processed: BARCLAY
 
-BudgetedNo_0001463282_processed: 
+approvedby_0001463282_processed: 
 
-BudgetedYes_0001463282_processed: x
+budgetcheck_0001463282_processed: Howard 
 
-Cc_0001463282_processed: S. Willinger (3) K. A. Hutchison S. A. Howard
+budgeted_0001463282_processed:
+  No: 
+  Yes: x
 
-CompetitiveProposalsObtainedCostPerInterview_0001463282_processed: ['$ 84.2', '$ 87.5']
+cc_0001463282_processed: S. Willinger (3) K. A. Hutchison S. A. Howard
 
-CompetitiveProposalsObtainedCost_0001463282_processed: ['$ 33,675 + 10% Est.', '$ 35,000 + 10 % Est.']
+competitiveproposalsobtained_0001463282_processed:
+  Cost: ['$ 33,675 + 10% Est.', '$ 35,000 + 10 % Est.']
+  Cost Per Interview: ['$ 84.2', '$ 87.5']
+  Est.: ['$ 2000', '$ 2000']
+  Supplier: ['Kapuler', 'Market Facts']
+  Total Cost: ['$ 35,675', '$ 37000']
 
-CompetitiveProposalsObtainedEst_0001463282_processed: ['$ 2000', '$ 2000']
+description_0001463282_processed: Y- 1 Ultra 100' s vs. Winston Ultra 100' s
 
-CompetitiveProposalsObtainedSupplier_0001463282_processed: ['Kapuler', 'Market Facts']
+fromnextyearsbudget_0001463282_processed: 
 
-CompetitiveProposalsObtainedTotalCost_0001463282_processed: ['$ 35,675', '$ 37000']
+no_0001463282_processed: 6
 
-Date_0001463282_processed: 
+original_0001463282_processed: Project File
 
-Description_0001463282_processed: Y- 1 Ultra 100' s vs. Winston Ultra 100' s
+originalbudgetedamount_0001463282_processed: 23.3
 
-FieldFromNextYearSBudget_0001463282_processed: 
+producttestauetc_0001463282_processed: 
 
-FieldProductTestAUEtc_0001463282_processed: 
+projected_0001463282_processed:
+  Ext. Auth. Date Wave (s): 12/ 90
+  Field Complete Wave (s): 6/ 10/ 90
+  Final Report Due (Supplier Rpt.) Wave (s): 7/ 9/ 90
+  Internal Init. Date: 4/ 
 
-Field_0001463282_processed: 
+projectno_0001463282_processed: 1990- 488
 
-No_0001463282_processed: 6
+projecttype_0001463282_processed: Product Test
 
-OriginalBudgetedAmount_0001463282_processed: 23.3
+reasonsforrecommendation_0001463282_processed: Lowest project costs
 
-Original_0001463282_processed: Project File
+recommendedsupplier_0001463282_processed: Kapuler
 
-ProjectNo_0001463282_processed: 1990- 488
+requestedby_0001463282_processed: W. T. Carpenter
 
-ProjectType_0001463282_processed: Product Test
+researchrequestattached_0001463282_processed:
+  No: 
+  Yes: x
 
-ProjectedExtAuthDateWaveS_0001463282_processed: 12/ 90
+samplesize_0001463282_processed: 400
 
-ProjectedFieldCompleteWaveS_0001463282_processed: 6/ 10/ 90
+submittedby_0001463282_processed:  L. E. Gravely
 
-ProjectedFinalReportDueSupplierRptWaveS_0001463282_processed: 7/ 9/ 90
-
-ProjectedInternalInitDate_0001463282_processed: 4/ 
-
-ReasonSForRecommendation_0001463282_processed: Lowest project costs
-
-RecommendedSupplier_0001463282_processed: Kapuler
-
-RequestedBy_0001463282_processed: W. T. Carpenter
-
-ResearchRequestAttachedNo_0001463282_processed: 
-
-ResearchRequestAttachedYes_0001463282_processed: x
-
-SampleSize_0001463282_processed: 400
-
-SubmittedBy_0001463282_processed:  L. E. Gravely
-
-SummaryOfMrdBudgetCommitedToDateCurrentYear_0001463282_processed: 205,775.00
-
-SummaryOfMrdBudgetCurrentBalAvailable_0001463282_processed: 199,900.00
-
-SummaryOfMrdBudgetNewBalance_0001463282_processed: 164,225.00
-
-SummaryOfMrdBudgetThisAmount_0001463282_processed: -O-
-
-SummaryOfMrdBudgetThisChangeFromCurrentBudget_0001463282_processed: -35,675,00
-
-SummaryOfMrdBudgetTotalAreaBudget_0001463282_processed: 370,000.00
+summaryofmrdbudget_0001463282_processed:
+  Commited to Date: (Current Year): 205,775.00
+  Current Bal. Available:: 199,900.00
+  New Balance: 164,225.00
+  This Amount: -O-
+  This Change: (From Current Budget: -35,675,00
+  Total Area Budget:: 370,000.00
 

@@ -1,51 +1,50 @@
 Form: 00920222_processed
 ==================================================
 
-AcctNo_00920222_processed: 4111
+acctno_00920222_processed: 4111
 
-ApprovedBy_00920222_processed: 
+approvedby_00920222_processed: 
 
-Attn_00920222_processed: Dr. Connie Stone
+attn_00920222_processed: Dr. Connie Stone
 
-BudgetNo_00920222_processed: 
+budgetno_00920222_processed: 
 
-Code_00920222_processed: 
+code_00920222_processed: 
 
-DateWanted_00920222_processed: As required
+date_00920222_processed: March 27, 1984
 
-Date_00920222_processed: March 27, 1984
+datewanted_00920222_processed: As required
 
-DeptNo_00920222_processed: 9590
+deptno_00920222_processed: 9590
 
-Description_00920222_processed: This is your authorization to perform the "Acute Oral Toxicity Study in the Rat" tests on materials D13 and D23 supplied by Lorillard. The fixed price for each test is $2050 for each material, for a total price of $4100. Studies are to be conducted in accordance with the October 17, 1980 formal agreement between Borriston and Lorillard. All work is to be coordinated with our Dr. Connie Stone (919) 373- 6663.
+description_00920222_processed: This is your authorization to perform the "Acute Oral Toxicity Study in the Rat" tests on materials D13 and D23 supplied by Lorillard. The fixed price for each test is $2050 for each material, for a total price of $4100. Studies are to be conducted in accordance with the October 17, 1980 formal agreement between Borriston and Lorillard. All work is to be coordinated with our Dr. Connie Stone (919) 373- 6663.
 
-FieldPurchasing_00920222_processed: 
+followupdate_00920222_processed: 
 
-FieldStationary_00920222_processed: 
+forpurchasingdepartmentuseonly_00920222_processed: Borriston Laboratories, INC. , 5050 Beech Place Temple Hills, MD 20748
 
-FollowUpDate_00920222_processed: 
+issuedby_00920222_processed: 
 
-ForPurchasingDepartmentUseOnly_00920222_processed: Borriston Laboratories, INC. , 5050 Beech Place Temple Hills, MD 20748
+orderno_00920222_processed: 
 
-IssuedBy_00920222_processed: 
+price_00920222_processed: 
 
-OrderNo_00920222_processed: 
+purchasing_00920222_processed: 
 
-Price_00920222_processed: 
+quantity_00920222_processed: 
 
-Quantity_00920222_processed: 
+requisitionno_00920222_processed: 
 
-RequisitionNo_00920222_processed: 
+shiptodeptbranch_00920222_processed: - Lorillard Research Center
 
-ShipToDeptBranch_00920222_processed: - Lorillard Research Center
+stationary_00920222_processed: 
 
-TermsFOB_00920222_processed: N /A
+terms_00920222_processed:
+  F. O. B.: N /A
+  NET: 15
+  VIA: N /A
 
-TermsNet_00920222_processed: 15
+unit_00920222_processed: 
 
-TermsVia_00920222_processed: N /A
-
-Unit_00920222_processed: 
-
-Vendor_00920222_processed: Borriston Laboratories, INC. , 5050 Beech Place Temple Hills, MD 20748
+vendor_00920222_processed: Borriston Laboratories, INC. , 5050 Beech Place Temple Hills, MD 20748
 

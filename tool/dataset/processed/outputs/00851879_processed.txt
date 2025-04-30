@@ -1,23 +1,23 @@
 Form: 00851879_processed
 ==================================================
 
-AuthorizedBy_00851879_processed: Dr. Connie Stone
+EstimatedcostofthestudywillbeDecreased_00851879_processed: False
 
-AuthorizedTo_00851879_processed: Mr. Charles Burns
+EstimatedcostofthestudywillbeIncreased_00851879_processed: True
 
-Date_00851879_processed: 5-13-81
+EstimatedcostofthestudywillbeNotaffected_00851879_processed: False
 
-DescriptionOfChangeOrder_00851879_processed: 
+authorizedby_00851879_processed: Dr. Connie Stone
 
-EstimatedCostOfTheStudyWillBeDecreased_00851879_processed: False
+authorizedto_00851879_processed: Mr. Charles Burns
 
-EstimatedCostOfTheStudyWillBeIncreased_00851879_processed: True
+date_00851879_processed: 5-13-81
 
-EstimatedCostOfTheStudyWillBeNotAffected_00851879_processed: False
+descriptionofchangeorder_00851879_processed: 
 
-Method_00851879_processed: Verbal Phone (Means of communication)
+method_00851879_processed: Verbal Phone (Means of communication)
 
-SectionIiiA2NdParagraphTheFirstSentenceIsToBeChangedToReadAsFollows_00851879_processed: 
+sectioniiia2ndparagraphthefirstsentenceistobechangedtoreadasfollows_00851879_processed: 
 
-Subject_00851879_processed: Change in the time of the Pre- dose Biomicroscopic Examination
+subject_00851879_processed: Change in the time of the Pre- dose Biomicroscopic Examination
 

@@ -1,15 +1,12 @@
 Form: 92298125_processed
 ==================================================
 
-FieldIncludingThisCoverSheet_92298125_processed: 
+includingthiscoversheet_92298125_processed: 
 
-TelecopierTransmittalCoverSheetDate_92298125_processed: JAN 19. 1995
-
-TelecopierTransmittalCoverSheetFrom_92298125_processed: Pam Churchill
-
-TelecopierTransmittalCoverSheetPages_92298125_processed: 
-
-TelecopierTransmittalCoverSheetRe_92298125_processed: CIGARETTE QUESTIONNAIRE
-
-TelecopierTransmittalCoverSheetTo_92298125_processed: MARY MAZZA
+telecopiertransmittalcoversheet_92298125_processed:
+  DATE:: JAN 19. 1995
+  FROM:: Pam Churchill
+  PAGES:: 
+  RE:: CIGARETTE QUESTIONNAIRE
+  TO:: MARY MAZZA
 

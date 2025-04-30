@@ -1,53 +1,59 @@
 Form: 00040534_processed
 ==================================================
 
-AverageWeightRangeGm_00040534_processed: 
+Compound1_00040534_processed: 3-Hydroxy-3-methylbutanoic acid (Tur 13)
 
-Compound_00040534_processed: 3-Hydroxy-3-methylbutanoic acid (Tur 13)
+Compound2_00040534_processed:
+  .5 % METHYL CELULOSE: ☑
+  ☐ CORN OIL: 
+  ☐ OTHER: 
+  ☐ SALINE: 
 
-Conclusion_00040534_processed: This compound appears to act as a CNS depressant with symptons of respiratory depression, constriction of blood vessels, and in- activity. Survivors recovered in 48 hours. The recommended safe dose for a single trial by inhalation in man is 0.3 mg.
+RouteofcompoundadministrationInhalation_00040534_processed: False
 
-CopiesToTheFollowing_00040534_processed: Dr. H. J. Minnemeyer Ms. L. B. Gray
+RouteofcompoundadministrationIp_00040534_processed: False
 
-DateReceived_00040534_processed: Unk.
+RouteofcompoundadministrationIv_00040534_processed: False
 
-DosageMgKgBodyWeight_00040534_processed: 1800 2160 2592 3732 4479
+RouteofcompoundadministrationPo_00040534_processed: True
 
-Female_00040534_processed: 
+averageweightrangegm_00040534_processed: 
 
-FieldSolution_00040534_processed: 5 10 10 10 10
+conclusion_00040534_processed: This compound appears to act as a CNS depressant with symptons of respiratory depression, constriction of blood vessels, and in- activity. Survivors recovered in 48 hours. The recommended safe dose for a single trial by inhalation in man is 0.3 mg.
 
-GroupNo_00040534_processed: 1 2 3 4 5
+copiestothefollowing_00040534_processed: Dr. H. J. Minnemeyer Ms. L. B. Gray
 
-InvestigatorS_00040534_processed: H. S. Tong & M. S. Forte'
+datereceived_00040534_processed: Unk.
 
-Ld5095ConfidenceLimits_00040534_processed: 3.5 (3.1 to 3.9 g /kg
+dosagemgkgbodyweight_00040534_processed: 1800 2160 2592 3732 4479
 
-LorillardNo_00040534_processed: OR39- 23
+female_00040534_processed: 
 
-Male_00040534_processed: X
+groupno_00040534_processed: 1 2 3 4 5
 
-NotebookPage_00040534_processed: B1014- 23
+investigators_00040534_processed: H. S. Tong & M. S. Forte'
 
-ReferenceForCalculation_00040534_processed: Litchfield, J. T. and Wilcoxin F. , J. of Pharmacol and Exper. Ther. , 90: 99 , 1948.
+ld5095confidencelimits_00040534_processed: 3.5 (3.1 to 3.9 g /kg
 
-Reported_00040534_processed: 5/3/79 10/6/80 , Update
+lorillardno_00040534_processed: OR39- 23
 
-ResultsNoTested_00040534_processed: 1/ 6 0/ 6 0/ 6 3/ 6 6/ 6
+male_00040534_processed: X
 
-RouteOfCompoundAdministrationIP_00040534_processed: False
+notebookpage_00040534_processed: B1014- 23
 
-RouteOfCompoundAdministrationIV_00040534_processed: False
+referenceforcalculation_00040534_processed: Litchfield, J. T. and Wilcoxin F. , J. of Pharmacol and Exper. Ther. , 90: 99 , 1948.
 
-RouteOfCompoundAdministrationInhalation_00040534_processed: False
+reported_00040534_processed: 5/3/79 10/6/80 , Update
 
-RouteOfCompoundAdministrationPO_00040534_processed: True
+resultsnotested_00040534_processed: 1/ 6 0/ 6 0/ 6 3/ 6 6/ 6
 
-SignatureS_00040534_processed: 
+signatures_00040534_processed: 
 
-Source_00040534_processed: Camm Research
+solution_00040534_processed: 5 10 10 10 10
 
-StrainOfMice_00040534_processed: Swiss- Webster
+source_00040534_processed: Camm Research
 
-Tested_00040534_processed: 12/28/78
+strainofmice_00040534_processed: Swiss- Webster
+
+tested_00040534_processed: 12/28/78
 

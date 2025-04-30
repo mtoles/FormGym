@@ -1,21 +1,21 @@
 Form: 0011976929_processed
 ==================================================
 
-AudienceConcentration_0011976929_processed: 90 % White - 10 % Black Age category 21 yrs. to 45 yrs.
+audienceconcentration_0011976929_processed: 90 % White - 10 % Black Age category 21 yrs. to 45 yrs.
 
-CityTown_0011976929_processed: Dundee
+citytown_0011976929_processed: Dundee
 
-ContactNameTelephone_0011976929_processed: Ms. Joy Weathers (Sales) 312/ 426 - 8000
+contactnametelephone_0011976929_processed: Ms. Joy Weathers (Sales) 312/ 426 - 8000
 
-Dates_0011976929_processed: March 3rd, 4th & 5th,
+dates_0011976929_processed: March 3rd, 4th & 5th,
 
-EstimatedAttendance_0011976929_processed: 700
+estimatedattendance_0011976929_processed: 700
 
-NameOfEvent_0011976929_processed: Mrs. Illinois Beauty Pageant
+nameofevent_0011976929_processed: Mrs. Illinois Beauty Pageant
 
-RecommendedBrandSAndPromotionalActivity_0011976929_processed: BARCLAY sampling 2 - 12M cases mixed. To be placed on tables by B & W Reps.
+recommendedbrandsandpromotionalactivity_0011976929_processed: BARCLAY sampling 2 - 12M cases mixed. To be placed on tables by B & W Reps.
 
-State_0011976929_processed: Illinois
+state_0011976929_processed: Illinois
 
-TypeOfEvent_0011976929_processed: Beauty Contest
+typeofevent_0011976929_processed: Beauty Contest
 

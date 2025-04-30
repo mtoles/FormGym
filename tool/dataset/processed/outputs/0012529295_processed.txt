@@ -1,67 +1,61 @@
 Form: 0012529295_processed
 ==================================================
 
-AccountName_0012529295_processed: CAPRI
+Date1_0012529295_processed: 10/ /9 87
 
-ApprovedBy_0012529295_processed: 
+Date2_0012529295_processed: 
 
-BudgetCheck_0012529295_processed: K. F. Lyle
+accountname_0012529295_processed: CAPRI
 
-Cc_0012529295_processed: S. Willinger (3) G. D. Raphael V. Hansberry (If Int.)
+approvedby_0012529295_processed: 
 
-CommittedToDateCurrentYear_0012529295_processed: 1, 233, 308. 08
+budgetcheck_0012529295_processed: K. F. Lyle
 
-CompetitiveProposalsObtainedCostPerInterview_0012529295_processed: ['$47 .22', '$74 .67']
+cc_0012529295_processed: S. Willinger (3) G. D. Raphael V. Hansberry (If Int.)
 
-CompetitiveProposalsObtainedCost_0012529295_processed: ['$70 70,825 +/ - 10%', '$112, 000 +/ - 10%']
+committedtodatecurrentyear_0012529295_processed: 1, 233, 308. 08
 
-CompetitiveProposalsObtainedEstTravel_0012529295_processed: ['-0-', '-O-']
+competitiveproposalsobtained_0012529295_processed:
+  Cost ($): ['$70 70,825 +/ - 10%', '$112, 000 +/ - 10%']
+  Cost Per Interview: ['$47 .22', '$74 .67']
+  Est. Travel: ['-0-', '-O-']
+  Supplier: ['Kapuler Market Research', 'Market Facts, Inc.']
+  Total Cost: ['$70 ,825 + - 10%', '$112 000 +/ - 10%']
 
-CompetitiveProposalsObtainedSupplier_0012529295_processed: ['Kapuler Market Research', 'Market Facts, Inc.']
+descriptioncapriexpansion_0012529295_processed: California- A&U Wave II
 
-CompetitiveProposalsObtainedTotalCost_0012529295_processed: ['$70 ,825 + - 10%', '$112 000 +/ - 10%']
+newbalance_0012529295_processed: (452 ,408, 08)
 
-Date_0012529295_processed: 10/ /9 87
+no_0012529295_processed: C- 40
 
-DescriptionCapriExpansion_0012529295_processed: California- A&U Wave II
+original_0012529295_processed: Project File
 
-Field_0012529295_processed: 
+projected_0012529295_processed:
+  Field Complete: 10/ 11/ 87
+  Field Start: 9/ 23/ 87*
+  Final Report Due: 11/ 16/ 87
+  Initiation Date: 8/ 3/ 87
 
-NewBalance_0012529295_processed: (452 ,408, 08)
+projectno_0012529295_processed: 1987- 113CA
 
-No_0012529295_processed: C- 40
+reasonsforrecommendation_0012529295_processed: Low bidder.
 
-Original_0012529295_processed: Project File
+recommemdedsupplier_0012529295_processed: Kapuler Marketing Research
 
-ProjectNo_0012529295_processed: 1987- 113CA
+requestedby_0012529295_processed: S. H. Trebilcock
 
-ProjectedFieldComplete_0012529295_processed: 10/ 11/ 87
+researchrequestattached_0012529295_processed:
+  No: 
+  Yes: x
 
-ProjectedFieldStart_0012529295_processed: 9/ 23/ 87*
+samplesize_0012529295_processed: 1. 500
 
-ProjectedFinalReportDue_0012529295_processed: 11/ 16/ 87
+submittedby_0012529295_processed: L J L. J. Spurtier
 
-ProjectedInitiationDate_0012529295_processed: 8/ 3/ 87
+summaryofresearchbudget_0012529295_processed:
+  Current Bal. Available:: (381, 583. 08)
+  This Change (From Current Budget): -70, 825. 00
+  Total Area Budget:: 780, 900. 00
 
-ReasonSForRecommendation_0012529295_processed: Low bidder.
-
-RecommemdedSupplier_0012529295_processed: Kapuler Marketing Research
-
-RequestedBy_0012529295_processed: S. H. Trebilcock
-
-ResearchRequestAttachedNo_0012529295_processed: 
-
-ResearchRequestAttachedYes_0012529295_processed: x
-
-SampleSize_0012529295_processed: 1. 500
-
-SubmittedBy_0012529295_processed: L J L. J. Spurtier
-
-SummaryOfResearchBudgetCurrentBalAvailable_0012529295_processed: (381, 583. 08)
-
-SummaryOfResearchBudgetThisChangeFromCurrentBudget_0012529295_processed: -70, 825. 00
-
-SummaryOfResearchBudgetTotalAreaBudget_0012529295_processed: 780, 900. 00
-
-ThisAmountFromNextYearSBudget_0012529295_processed: 
+thisamountfromnextyearsbudget_0012529295_processed: 
 

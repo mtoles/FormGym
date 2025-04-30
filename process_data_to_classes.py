@@ -60,11 +60,14 @@ def is_checkbox_dict(value):
     return False
 
 def normalize_field_name(name):
-    """Normalize field name by removing whitespace and converting to lowercase"""
+    """Normalize field name by removing whitespace, special characters and converting to consistent case"""
     if not name:
         return ""
-    # Remove whitespace and convert to lowercase for consistent comparison
-    return re.sub(r'\s+', '', name).lower()
+    # Convert to lowercase and remove whitespace
+    name = re.sub(r'\s+', '', name.lower())
+    # Remove special characters except underscores
+    name = re.sub(r'[^a-z0-9_]', '', name)
+    return name
 
 def process_annotations():
     """Process all annotation JSON files and extract unique fields"""
@@ -92,11 +95,59 @@ def process_annotations():
             if form_name not in all_fields:
                 all_fields[form_name] = {}
             
+            # Track normalized field names for this form to handle merging
+            normalized_fields = {}
+            
             # Process each field in the JSON directly for this form
             for key, value in data.items():
                 # Skip empty keys
                 if not key:
                     continue
+                
+                # Normalize the key
+                normalized_key = normalize_field_name(key)
+                if not normalized_key:
+                    continue
+                
+                # Check if we've already seen this normalized key in this form
+                if normalized_key in normalized_fields:
+                    # Get the existing value
+                    existing_value = all_fields[form_name].get(normalized_key)
+                    
+                    # If both values are dictionaries, merge them
+                    if isinstance(value, dict) and isinstance(existing_value, dict):
+                        all_fields[form_name][normalized_key].update(value)
+                        print(f"Merged dictionary values for fields in form {form_name}: '{key}' and '{normalized_fields[normalized_key]}' (normalized to '{normalized_key}')")
+                    # If both are lists, extend the list
+                    elif isinstance(value, list) and isinstance(existing_value, list):
+                        all_fields[form_name][normalized_key].extend(value)
+                        print(f"Merged list values for fields in form {form_name}: '{key}' and '{normalized_fields[normalized_key]}' (normalized to '{normalized_key}')")
+                    # If one is a dictionary and the other isn't, keep them separate with suffixes
+                    elif isinstance(value, dict) or isinstance(existing_value, dict):
+                        # Create unique keys for both values
+                        key1 = f"{normalized_key}_1"
+                        key2 = f"{normalized_key}_2"
+                        # Store both values with their unique keys
+                        all_fields[form_name][key1] = existing_value if existing_value is not None else ""
+                        all_fields[form_name][key2] = value
+                        # Remove the original key if it exists
+                        if normalized_key in all_fields[form_name]:
+                            del all_fields[form_name][normalized_key]
+                        print(f"Split different-type values for fields in form {form_name}: '{key}' and '{normalized_fields[normalized_key]}' into '{key1}' and '{key2}'")
+                    else:
+                        # For other types, if they're different, keep both with suffixes
+                        if existing_value != value:
+                            key1 = f"{normalized_key}_1"
+                            key2 = f"{normalized_key}_2"
+                            all_fields[form_name][key1] = existing_value if existing_value is not None else ""
+                            all_fields[form_name][key2] = value
+                            # Remove the original key if it exists
+                            if normalized_key in all_fields[form_name]:
+                                del all_fields[form_name][normalized_key]
+                            print(f"Split different values for fields in form {form_name}: '{key}' and '{normalized_fields[normalized_key]}' into '{key1}' and '{key2}'")
+                    continue
+                
+                normalized_fields[normalized_key] = key
                 
                 # Handle dictionaries (nested fields or checkboxes)
                 if isinstance(value, dict):
@@ -106,29 +157,28 @@ def process_annotations():
                             checkbox_fields[form_name] = {}
                         
                         # Add parent checkbox field
-                        checkbox_fields[form_name][key] = {}
+                        checkbox_fields[form_name][normalized_key] = {}
                         
                         # Process each checkbox option
                         for option_key, checked in value.items():
-                            option_field_name = f"{key}_{option_key}"
+                            normalized_option_key = normalize_field_name(option_key)
+                            option_field_name = f"{normalized_key}_{normalized_option_key}"
                             is_checked = isinstance(checked, str) and (
                                 checked.strip() == "☑" or 
                                 checked.strip() == "⬛" or 
                                 checked.strip() == "✓" or 
                                 checked.strip() == "\u2611"
                             )
-                            checkbox_fields[form_name][key][option_field_name] = is_checked
+                            checkbox_fields[form_name][normalized_key][option_field_name] = is_checked
                     else:
                         # Regular nested fields
-                        for nested_key, nested_value in value.items():
-                            nested_field_name = f"{key}_{nested_key}"
-                            all_fields[form_name][nested_field_name] = nested_value
+                        all_fields[form_name][normalized_key] = value
                 else:
                     # Handle array values by joining them with spaces
                     if isinstance(value, list):
-                        all_fields[form_name][key] = ' '.join(value) if value else ""
+                        all_fields[form_name][normalized_key] = ' '.join(value) if value else ""
                     else:
-                        all_fields[form_name][key] = value
+                        all_fields[form_name][normalized_key] = value
             
             processed_jsons.append((form_name, data))
     
@@ -151,7 +201,7 @@ def create_dynamic_classes(all_fields, checkbox_fields, all_form_names):
             
             # Skip if we've already generated this class
             if class_name in generated_classes:
-                print(f"Warning: Skipping duplicate class {class_name} for field {field_name} in form {form_name}")
+                print(f"Warning: Duplicate class name generated: {class_name}")
                 continue
             
             generated_classes.add(class_name)

@@ -1,51 +1,43 @@
 Form: 82254638_processed
 ==================================================
 
-DateToCorp_82254638_processed: 7/11/97
+Fieldfrom_82254638_processed: W. R. KNIGHT - MCA
 
-DivNameNo_82254638_processed: ST. LOUIS, MO
+cases_82254638_processed:
+  KENT 100: 
+  KENT GL 100: 
+  KENT GL LTS K.S.: 
+  KENT II K.S.: 
+  KENT III 100: 1
+  KENT K.S.: 1
+  NEWPORT 100'S: 
+  NEWPORT LTS. 100: 
+  NEWPORT LTS. KS.: 
+  NEWPORTKS K.S.: 1
+  TRUE K.S.: 
 
-FieldCasesKent100_82254638_processed: 
+dateofevent_82254638_processed: September 10, 1997 Marcus Hellenic Spirit Charities Golf Classic September 18, 1997
 
-FieldCasesKentGl100_82254638_processed: 
+datetocorp_82254638_processed: 7/11/97
 
-FieldCasesKentGlLtsKS_82254638_processed: 
+divnameno_82254638_processed: ST. LOUIS, MO
 
-FieldCasesKentIiKS_82254638_processed: 
+items_82254638_processed:
+  Any Other Items Available: 400
+  BASEBALL CAP: 400
+  WATER BOTTLES: ['29-980-7', '29-980-7', '400', '400']
 
-FieldCasesKentIii100_82254638_processed: 1
+nameofevent_82254638_processed: Lorillard Metro Golf Outing 1997
 
-FieldCasesKentKS_82254638_processed: 1
+nyoonly_82254638_processed:
+  DATE FORWARDED TO PROMOTION SERVICES:: 7/11/97
 
-FieldCasesNewport100S_82254638_processed: 
+quantityrequired_82254638_processed: 400 400 400 400
 
-FieldCasesNewportLts100_82254638_processed: 
+samplesitemsrequired_82254638_processed: SAMPLE 10'S (400 PACKS PER CASE)
 
-FieldCasesNewportLtsKs_82254638_processed: 
+shipto_82254638_processed:
+  CUSTOMER SHIPPING NUMBER: 198-820-0003
 
-FieldCasesNewportksKS_82254638_processed: 1
-
-FieldCasesTrueKS_82254638_processed: 
-
-FieldDateOfEvent_82254638_processed: September 10, 1997 Marcus Hellenic Spirit Charities Golf Classic September 18, 1997
-
-From_82254638_processed: W. R. KNIGHT - MCA
-
-ItemsAnyOtherItemsAvailable_82254638_processed: 400
-
-ItemsBaseballCap_82254638_processed: 400
-
-ItemsWaterBottles_82254638_processed: ['29-980-7', '29-980-7', '400', '400']
-
-NameOfEvent_82254638_processed: Lorillard Metro Golf Outing 1997
-
-NyoOnlyDateForwardedToPromotionServices_82254638_processed: 7/11/97
-
-QuantityRequired_82254638_processed: 400 400 400 400
-
-SamplesItemsRequired_82254638_processed: SAMPLE 10'S (400 PACKS PER CASE)
-
-ShipToCustomerShippingNumber_82254638_processed: 198-820-0003
-
-To_82254638_processed: SAM ZOLOT
+to_82254638_processed: SAM ZOLOT
 

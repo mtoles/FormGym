@@ -1,59 +1,53 @@
 Form: 92091873_processed
 ==================================================
 
-AttendeesCustomersAttended_92091873_processed: 35
+attendees_92091873_processed:
+  #Customers Attended: 35
+  #Customers Invited: 40
+  #Lorillard Personnel: 10
 
-AttendeesCustomersInvited_92091873_processed: 40
+cc_92091873_processed: R. P. Bonomo
 
-AttendeesLorillardPersonnel_92091873_processed: 10
+date_92091873_processed: 6/ 12/ 95
 
-Cc_92091873_processed: R. P. Bonomo
+daterecd_92091873_processed: 9/ 6/ 95
 
-DateRecD_92091873_processed: 9/ 6/ 95
+dates_92091873_processed: September 10, 1995
 
-DateS_92091873_processed: September 10, 1995
+datesubmitted_92091873_processed: September 26 1995 (submit by 30 days after event)
 
-DateSubmitted_92091873_processed: September 26 1995 (submit by 30 days after event)
+displaysplaced_92091873_processed:
+  Counter: 15
+  Floor: 9
+  Posters: 100
 
-Date_92091873_processed: 6/ 12/ 95
+division_92091873_processed: San Jose/ 933
 
-DivisionMgr_92091873_processed: T. L. Roberts
+divisionmgr_92091873_processed: T. L. Roberts
 
-Division_92091873_processed: San Jose/ 933
+invitations_92091873_processed:
+  #Requested: 50
+  Date Notified: 9/ 5/ 95
+  Date Ordered: Unknown
 
-FieldDisplaysPlacedCounter_92091873_processed: 15
+inviteescomments_92091873_processed: "Thank You very much for the tickets, we had a great time" Rogers Liquor, Marina California. "We really appreciate Lorillard thinking us." Shiffert's Wholesale, Visalia, California. "Thank you so much for the invitations... We had a great time." Mission Trail Oil Company (Rotten Robbie Stores) San Jose California. "The races were great the Newport Hospitality area was terrific". Coremark, Sacramento, California.
 
-FieldDisplaysPlacedFloor_92091873_processed: 9
+location_92091873_processed: Leguna Seca, Monterey, Ca
 
-FieldDisplaysPlacedPosters_92091873_processed: 100
+promotionquantity_92091873_processed:
+  Displays (8): 40
+  Floor (40): 20
+  Mugs: 720
+  Posters: 100
 
-InvitationsDateNotified_92091873_processed: 9/ 5/ 95
+qualityofhospitalitytent_92091873_processed:
+  Cleanliness: X
+  Food: X
+  Service: X
 
-InvitationsDateOrdered_92091873_processed: Unknown
+racedayinfo_92091873_processed: Event Attendance 100, 000 Hospitality Tent Attendance 35- 40
 
-InvitationsRequested_92091873_processed: 50
+recd_92091873_processed: 6/ 12/ 95
 
-InviteesComments_92091873_processed: "Thank You very much for the tickets, we had a great time" Rogers Liquor, Marina California. "We really appreciate Lorillard thinking us." Shiffert's Wholesale, Visalia, California. "Thank you so much for the invitations... We had a great time." Mission Trail Oil Company (Rotten Robbie Stores) San Jose California. "The races were great the Newport Hospitality area was terrific". Coremark, Sacramento, California.
-
-Location_92091873_processed: Leguna Seca, Monterey, Ca
-
-PromotionQuantityDisplays8_92091873_processed: 40
-
-PromotionQuantityFloor40_92091873_processed: 20
-
-PromotionQuantityMugs_92091873_processed: 720
-
-PromotionQuantityPosters_92091873_processed: 100
-
-QualityOfHospitalityTentCleanliness_92091873_processed: X
-
-QualityOfHospitalityTentFood_92091873_processed: X
-
-QualityOfHospitalityTentService_92091873_processed: X
-
-RaceDayInfo_92091873_processed: Event Attendance 100, 000 Hospitality Tent Attendance 35- 40
-
-RecD_92091873_processed: 6/ 12/ 95
-
-SuggestionsRecommendations_92091873_processed: Perhaps the tickets could be sent but a little sooner This year the tickets arrived on Thursday and the race was Sunday. This made it difficult to get the tickets to customers on tine.
+suggestionsrecommendations_92091873_processed: Perhaps the tickets could be sent but a little sooner This year the tickets arrived on Thursday and the race was Sunday. This made it difficult to get the tickets to customers on tine.
 

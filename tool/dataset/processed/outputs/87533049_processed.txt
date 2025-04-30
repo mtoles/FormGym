@@ -1,45 +1,45 @@
 Form: 87533049_processed
 ==================================================
 
-Analytical_87533049_processed: Break - out separately byl packing as indicated
+Fieldfrom_87533049_processed: J. La Valle
 
-BrandSApplicable_87533049_processed: TRUE
+advertisingcreativetitle_87533049_processed: True Filter King Carton
 
-Cc_87533049_processed: R. G. Ryan 
+analytical_87533049_processed: Break - out separately byl packing as indicated
 
-Circulation_87533049_processed: 1. 213, 400
+brandsapplicable_87533049_processed: TRUE
 
-CouponExpirationDate_87533049_processed: 6 / 30 / 91
+cc_87533049_processed: R. G. Ryan 
 
-CouponIssueDate_87533049_processed: 10 / 90
+circulation_87533049_processed: 1. 213, 400
 
-CouponValue_87533049_processed: $2.00
+couponexpirationdate_87533049_processed: 6 / 30 / 91
 
-DateInitiated_87533049_processed: May 3, 1990
+couponissuedate_87533049_processed: 10 / 90
 
-FieldAdvertisingCreativeTitle_87533049_processed: True Filter King Carton
+couponvalue_87533049_processed: $2.00
 
-FieldIssueFrequencyYear_87533049_processed: N/A
+dateinitiated_87533049_processed: May 3, 1990
 
-FieldSpaceColor_87533049_processed: N/A
+forcontroluseonly_87533049_processed:
+  Code Assigned: 530430
+  Job Number: 1112
 
-ForControlUseOnlyCodeAssigned_87533049_processed: 530430
+geographicalareas_87533049_processed: National
 
-ForControlUseOnlyJobNumber_87533049_processed: 1112
+issuefrequencyyear_87533049_processed: N/A
 
-From_87533049_processed: J. La Valle
+medianame_87533049_processed: N/A
 
-GeographicalAreaS_87533049_processed: National
+mediatype_87533049_processed: ON - Carton Instant Redeemable
 
-MediaName_87533049_processed: N/A
+packandorcarton_87533049_processed: Carton
 
-MediaType_87533049_processed: ON - Carton Instant Redeemable
+requirements_87533049_processed: Break - out separately byl packing as indicated
 
-PackAndOrCarton_87533049_processed: Carton
+signatureofinitiator_87533049_processed: 
 
-Requirements_87533049_processed: Break - out separately byl packing as indicated
+spacecolor_87533049_processed: N/A
 
-SignatureOfInitiator_87533049_processed: 
-
-To_87533049_processed: S. A. Rapisarldi
+to_87533049_processed: S. A. Rapisarldi
 

@@ -1,87 +1,87 @@
 Form: 0000999294_processed
 ==================================================
 
-AmtMenthol7More_0000999294_processed: 3.64*** 4.94 3.58*** 4.85 3.70*** 5.02 3.63*** 5.31 3.65*** 4.61
-
-Aptertaste7Pleasant_0000999294_processed: 3.56*** 3.24 3.69*** 3.21 3.44 3.26 3.52*** 3.07 3.60* 3.39
-
-Attributes_0000999294_processed: 
-
-BrightKsWhiteTipping_0000999294_processed: 5. 5 .55 13. 5 .841
-
-Bright_0000999294_processed: 4.45 3.43 4.85 3.02 2.78 3.21 3.95
-
-Cigarettes_0000999294_processed: # 839 / 869
-
-DirectionalDifference_0000999294_processed: 66 79% confidence Level
-
-EaseOfDraw17Easier_0000999294_processed: 4.00 3.96 4.02 3.95 3.99 3.96 4.07** 3.92 3.94 3.99
-
-Female106_0000999294_processed: 46 43 11 100
-
-FemaleBright_0000999294_processed: ['4.71', '3.41', '5.02', '3.06', '2.78', '3.26', '3.96']
-
-FemaleKl_0000999294_processed: ['4.51', '3.47', '3.70***', '3.33**', '2.97*', '3.44', '3.99']
-
 Field213496_0000999294_processed: 56+++ 35 9 100
 
-Field2134Bright_0000999294_processed: ['4.74', '3.38', '5.31', '2.99', '2.74', '3.07', '3.92']
-
-Field2134Kl_0000999294_processed: ['4.35**', '3.61*', '3.63***', '3.45***', '3.17***', '3.52***', '4.07**']
+Field2134_0000999294_processed:
+  Bright: ['4.74', '3.38', '5.31', '2.99', '2.74', '3.07', '3.92']
+  KL: ['4.35**', '3.61*', '3.63***', '3.45***', '3.17***', '3.52***', '4.07**']
 
 Field35109_0000999294_processed: 50 42 8 100
 
-Field35Bright_0000999294_processed: ['4.45', '3.46', '4.61', '2.08', '2.82', '3.39', '3.99']
+Field35_0000999294_processed:
+  Bright: ['4.45', '3.46', '4.61', '2.08', '2.82', '3.39', '3.99']
+  KL: ['4.27', '3.58', '3.65***', '2.34**', '3.08**', '3.60*', '3.94']
 
-Field35Kl_0000999294_processed: ['4.27', '3.58', '3.65***', '2.34**', '3.08**', '3.60*', '3.94']
+amtmenthol7more_0000999294_processed: 3.64*** 4.94 3.58*** 4.85 3.70*** 5.02 3.63*** 5.31 3.65*** 4.61
 
-FieldDate_0000999294_processed: September 13, 1982
+aptertaste7pleasant_0000999294_processed: 3.56*** 3.24 3.69*** 3.21 3.44 3.26 3.52*** 3.07 3.60* 3.39
 
-KoolLightsKsWhiteTipPingMasked_0000999294_processed: 9.1 .88 14.0 .4 4
+attributes_0000999294_processed: 
 
-KoolLights_0000999294_processed: 53+++ 60+++ 46 56+++ 50
+bright_0000999294_processed: 4.45 3.43 4.85 3.02 2.78 3.21 3.95
 
-Male99_0000999294_processed: 60+++ 34 6 100
+brightkswhitetipping_0000999294_processed: 5. 5 .55 13. 5 .841
 
-Male_0000999294_processed: KL
+cigarettes_0000999294_processed: # 839 / 869
 
-MarginalDifference_0000999294_processed: 80- 94% confidence Level
+directionaldifference_0000999294_processed: 66 79% confidence Level
 
-Ment_0000999294_processed: .4 4 .841
+easeofdraw17easier_0000999294_processed: 4.00 3.96 4.02 3.95 3.99 3.96 4.07** 3.92 3.94 3.99
 
-MentholTaste7Better_0000999294_processed: 3.39*** 3.04 3.46*** 3.02 3.33** 3.06 3.45*** 2.99 2.34** 2.08
+female106_0000999294_processed: 46 43 11 100
 
-Moist_0000999294_processed: 14.0 13. 5
+female_0000999294_processed:
+  Bright: ['4.71', '3.41', '5.02', '3.06', '2.78', '3.26', '3.96']
+  KL: ['4.51', '3.47', '3.70***', '3.33**', '2.97*', '3.44', '3.99']
 
-Nic_0000999294_processed: .88 .55
+fielddate_0000999294_processed: September 13, 1982
 
-NoPreference_0000999294_processed: 8 6 11 9 8
+koollights_0000999294_processed: 53+++ 60+++ 46 56+++ 50
 
-Page_0000999294_processed: 1 of 4
+koollightskswhitetippingmasked_0000999294_processed: 9.1 .88 14.0 .4 4
 
-Pdc_0000999294_processed: C273- 82- 7
+male99_0000999294_processed: 60+++ 34 6 100
 
-Preference_0000999294_processed: 
+male_0000999294_processed: KL
 
-Project_0000999294_processed: 1982 102KL
+marginaldifference_0000999294_processed: 80- 94% confidence Level
 
-Sample_0000999294_processed: 408 Menthol Lights / 105 Menthol Ultra, 111 Non- Menthol Lights / 92 Non- Menthol Ultras)
+ment_0000999294_processed: .4 4 .841
 
-Satisfying7More_0000999294_processed: 3.12*** 2.78 3.28*** 2.78 2.97* 2.78 3.17*** 2.74 3.08** 2.82
+mentholtaste7better_0000999294_processed: 3.39*** 3.04 3.46*** 3.02 3.33** 3.06 3.45*** 2.99 2.34** 2.08
 
-SignificantDifference_0000999294_processed: 95+% confidence Level
+moist_0000999294_processed: 14.0 13. 5
 
-Smoothness75Moother_0000999294_processed: 3.60** 3.42 3.73** 3.43 3.47 3.41 3.61* 3.38 3.58 3.46
+nic_0000999294_processed: .88 .55
 
-Strength7Stronger_0000999294_processed: 4.31*** 4.59 4.09** 4.45 4.51 4.71 4.35** 4.74 4.27 4.45
+nopreference_0000999294_processed: 8 6 11 9 8
 
-Subject_0000999294_processed: KOOL Lights KS vs. Bright KS Product Monitor
+page_0000999294_processed: 1 of 4
 
-Tar_0000999294_processed: 9.1 5. 5
+pdc_0000999294_processed: C273- 82- 7
 
-Total205_0000999294_processed: 53+++ 39 8 200
+preference_0000999294_processed: 
 
-TotalBright_0000999294_processed: ['4.59', '3.42', '4.94', '3.04', '2.78', '3.24', '3.96']
+project_0000999294_processed: 1982 102KL
 
-TotalKl_0000999294_processed: ['4.31***', '3.60**', '3.64***', '3.39***', '3.12***', '3.56***', '4.00']
+sample_0000999294_processed: 408 Menthol Lights / 105 Menthol Ultra, 111 Non- Menthol Lights / 92 Non- Menthol Ultras)
+
+satisfying7more_0000999294_processed: 3.12*** 2.78 3.28*** 2.78 2.97* 2.78 3.17*** 2.74 3.08** 2.82
+
+significantdifference_0000999294_processed: 95+% confidence Level
+
+smoothness75moother_0000999294_processed: 3.60** 3.42 3.73** 3.43 3.47 3.41 3.61* 3.38 3.58 3.46
+
+strength7stronger_0000999294_processed: 4.31*** 4.59 4.09** 4.45 4.51 4.71 4.35** 4.74 4.27 4.45
+
+subject_0000999294_processed: KOOL Lights KS vs. Bright KS Product Monitor
+
+tar_0000999294_processed: 9.1 5. 5
+
+total205_0000999294_processed: 53+++ 39 8 200
+
+total_0000999294_processed:
+  Bright: ['4.59', '3.42', '4.94', '3.04', '2.78', '3.24', '3.96']
+  KL: ['4.31***', '3.60**', '3.64***', '3.39***', '3.12***', '3.56***', '4.00']
 

@@ -1,35 +1,31 @@
 Form: 0001129658_processed
 ==================================================
 
-Chargeback_0001129658_processed: 4162/ 158
+Fieldfrom_0001129658_processed: Kevin Narko
 
-Comments_0001129658_processed: 
+chargeback_0001129658_processed: 4162/ 158
 
-ConfirmationName_0001129658_processed: 
+comments_0001129658_processed: 
 
-ConfirmationNo_0001129658_processed: 
+confirmation_0001129658_processed:
+  Name:: 
+  No:: 
+  Yes: 
 
-ConfirmationYes_0001129658_processed: 
+date_0001129658_processed: 10/ 13/ 99
 
-Date_0001129658_processed: 10/ 13/ 99
+fax_0001129658_processed: (305) 400 6 06
 
-FaxNumber_0001129658_processed: 305 400- 6107
+faxnumber_0001129658_processed: 305 400- 6107
 
-Fax_0001129658_processed: (305) 400 6 06
+operatorinitials_0001129658_processed: 
 
-From_0001129658_processed: Kevin Narko
+pleasedeliverassoonpossibleto_0001129658_processed:
+  COMPANY: ['Philip Morris', 'Philip Morris']
+  FAX: ['917 -663 -5796', '917- 663 5979']
+  No.: ['917 -663 -5796', '917- 663 5979']
+  PHONE No.: 917- 663 3056
+  RECIPIENT: ['John Mulderig', 'Gregory Little']
 
-OperatorInitials_0001129658_processed: 
-
-PleaseDeliverAsSoonPossibleToCompany_0001129658_processed: ['Philip Morris', 'Philip Morris']
-
-PleaseDeliverAsSoonPossibleToFax_0001129658_processed: ['917 -663 -5796', '917- 663 5979']
-
-PleaseDeliverAsSoonPossibleToNo_0001129658_processed: ['917 -663 -5796', '917- 663 5979']
-
-PleaseDeliverAsSoonPossibleToPhoneNo_0001129658_processed: 917- 663 3056
-
-PleaseDeliverAsSoonPossibleToRecipient_0001129658_processed: ['John Mulderig', 'Gregory Little']
-
-TotalNumberOfPagesIncludingThisPage_0001129658_processed: 
+totalnumberofpagesincludingthispage_0001129658_processed: 
 

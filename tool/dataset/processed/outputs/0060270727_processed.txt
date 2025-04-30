@@ -1,67 +1,38 @@
 Form: 0060270727_processed
 ==================================================
 
-CigaretteReportFormBrandFamilyName_0060270727_processed: MALIBU
+cigarettereportform_0060270727_processed:
+  : (check one)
+  "TAR":: 16 mg
+  BRAND FAMILY NAME:: MALIBU
+  FILTER: 
+  FIRST SALES DATE:: 10/ 26/ 87
+  HARD PACK:: 
+  LAST SALES DATE:: 
+  MENTHOL:: 
+  NICOTINE:: 1. 3 mg (Appendix C)
+  NONMENTHOL:: X (check one)
+  PACK SIZE SOLD:: 20' s
+  PRODUCT LENGTH:: King Size
+  SOFT PACK:: X (check one)
+  VARIETY DESCRIPTION:: King Size, Filter
+  VARIETY DOLLAR SALES:: 59, 791
+  VARIETY UNIT SALES:: 1, 800
+  YEAR COVERED:: 1987
 
-CigaretteReportFormFilter_0060270727_processed: 
-
-CigaretteReportFormFirstSalesDate_0060270727_processed: 10/ 26/ 87
-
-CigaretteReportFormHardPack_0060270727_processed: 
-
-CigaretteReportFormLastSalesDate_0060270727_processed: 
-
-CigaretteReportFormMenthol_0060270727_processed: 
-
-CigaretteReportFormNicotine_0060270727_processed: 1. 3 mg (Appendix C)
-
-CigaretteReportFormNonmenthol_0060270727_processed: X (check one)
-
-CigaretteReportFormPackSizeSold_0060270727_processed: 20' s
-
-CigaretteReportFormProductLength_0060270727_processed: King Size
-
-CigaretteReportFormSoftPack_0060270727_processed: X (check one)
-
-CigaretteReportFormTar_0060270727_processed: 16 mg
-
-CigaretteReportFormVarietyDescription_0060270727_processed: King Size, Filter
-
-CigaretteReportFormVarietyDollarSales_0060270727_processed: 59, 791
-
-CigaretteReportFormVarietyUnitSales_0060270727_processed: 1, 800
-
-CigaretteReportFormYearCovered_0060270727_processed: 1987
-
-CigaretteReportForm_0060270727_processed: (check one)
-
-Field_0060270727_processed: 
-
-ReportableExpendituresInThousandsCatAExpenses_0060270727_processed: 34
-
-ReportableExpendituresInThousandsCatCExpenses_0060270727_processed: 38
-
-ReportableExpendituresInThousandsCatDExpenses_0060270727_processed: 
-
-ReportableExpendituresInThousandsCatEExpenses_0060270727_processed: 
-
-ReportableExpendituresInThousandsCatExpenses_0060270727_processed: 0
-
-ReportableExpendituresInThousandsCatFExpenses_0060270727_processed: 
-
-ReportableExpendituresInThousandsCatGExpenses_0060270727_processed: 1
-
-ReportableExpendituresInThousandsCatHExpenses_0060270727_processed: 
-
-ReportableExpendituresInThousandsCatIExpenses_0060270727_processed: 
-
-ReportableExpendituresInThousandsCatJExpenses_0060270727_processed: 20
-
-ReportableExpendituresInThousandsCatKExpenses_0060270727_processed: 
-
-ReportableExpendituresInThousandsCatLExpenses_0060270727_processed: 
-
-ReportableExpendituresInThousandsCatMExpenses_0060270727_processed: 1
-
-ReportableExpendituresInThousandsTotalReportableExpendituresForVarietyi_0060270727_processed: 94
+reportableexpendituresinthousands_0060270727_processed:
+  CAT - - EXPENSES:: 0
+  CAT - C - EXPENSES:: 38
+  CAT - D - EXPENSES:: 
+  CAT - F - EXPENSES:: 
+  CAT - G EXPENSES:: 1
+  CAT - J - EXPENSES:: 20
+  CAT - K - EXPENSES:: 
+  CAT - L - EXPENSES:: 
+  CAT - M EXPENSES:: 1
+  CAT E - EXPENSES:: 
+  CAT H - EXPENSES:: 
+  CAT I - EXPENSES:: 
+  CAT- A - EXPENSES:: 34
+  TOTAL REPORTABLE EXPENDITURES FOR VARIETYI:: 94
 

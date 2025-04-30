@@ -1,25 +1,21 @@
 Form: 92314414_processed
 ==================================================
 
-CompleteEitherAOrBBelow_92314414_processed: 
-
 Field530_92314414_processed: 274- 38- 3042
 
-FieldPleaseSpecify_92314414_processed: 
+completeeitheraorbbelow_92314414_processed: 
 
-Other_92314414_processed: $20.00
+other_92314414_processed: $20.00
 
-Payroll_92314414_processed: 700
+payroll_92314414_processed: 700
 
-TheFollowingInformationMustBeFurnished1FullName_92314414_processed: Andrew H. Tisch (Print or type)
+pleasespecify_92314414_processed: 
 
-TheFollowingInformationMustBeFurnished2ResidenceAddress_92314414_processed: 26 East 63rd Street, New York, N. Y. 10021 (Include state and zip code)
-
-TheFollowingInformationMustBeFurnished3BusinessAddress_92314414_processed: One Park Avenue, New York, N. Y. 10016
-
-TheFollowingInformationMustBeFurnished4Occupation_92314414_processed: Chairman/ CEO - Lorillard Tobacco Company (Job title or position)
-
-TheFollowingInformationMustBeFurnishedDate_92314414_processed: 1 November 1991
-
-TheFollowingInformationMustBeFurnishedSignature_92314414_processed: 
+thefollowinginformationmustbefurnished_92314414_processed:
+  (Date): 1 November 1991
+  (Signature): 
+  1. Full Name: Andrew H. Tisch (Print or type)
+  2. Residence Address: 26 East 63rd Street, New York, N. Y. 10021 (Include state and zip code)
+  3. Business Address: One Park Avenue, New York, N. Y. 10016
+  4. Occupation: Chairman/ CEO - Lorillard Tobacco Company (Job title or position)
 

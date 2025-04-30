@@ -1,143 +1,85 @@
 Form: 91161344_91161347_processed
 ==================================================
 
-Field1StatesAndCitiesSelectedToReceiveProductAlabama_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductAlaska_91161344_91161347_processed: 
-
-Field1StatesAndCitiesSelectedToReceiveProductArizona_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductArkansas_91161344_91161347_processed: 
-
-Field1StatesAndCitiesSelectedToReceiveProductCalifornia_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductChicagoIll_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductColorada_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductConnecticut_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductDC_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductDelaware_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductFlorida_91161344_91161347_processed: 
-
-Field1StatesAndCitiesSelectedToReceiveProductGeorgia_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductHawaii_91161344_91161347_processed: 
-
-Field1StatesAndCitiesSelectedToReceiveProductIdaho_91161344_91161347_processed: 
-
-Field1StatesAndCitiesSelectedToReceiveProductIllinois_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductIndiana_91161344_91161347_processed: 
-
-Field1StatesAndCitiesSelectedToReceiveProductIowa_91161344_91161347_processed: 
-
-Field1StatesAndCitiesSelectedToReceiveProductKansas_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductKentucky_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductLouisiana_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductMaine_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductMaryland_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductMassachusetts_91161344_91161347_processed: 
-
-Field1StatesAndCitiesSelectedToReceiveProductMichigan_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductMinnesota_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductMississippi_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductMissouri_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductMontana_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductNebraska_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductNevada_91161344_91161347_processed: 
-
-Field1StatesAndCitiesSelectedToReceiveProductNewHampshire_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductNewJersey_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductNewMexico_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductNewYork_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductNorthCarolina_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductNorthDakota_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductNycNY_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductOhio_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductOklahoma_91161344_91161347_processed: 
-
-Field1StatesAndCitiesSelectedToReceiveProductOregon_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductPennsylVania_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductRhodeIsland_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductSouthCarolina_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductSouthDakota_91161344_91161347_processed: 
-
-Field1StatesAndCitiesSelectedToReceiveProductTennessee_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductTexas_91161344_91161347_processed: 
-
-Field1StatesAndCitiesSelectedToReceiveProductUtah_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductVermont_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductVirginia_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductWashington_91161344_91161347_processed: 
-
-Field1StatesAndCitiesSelectedToReceiveProductWestVirginia_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductWisconsin_91161344_91161347_processed: x
-
-Field1StatesAndCitiesSelectedToReceiveProductWyoming_91161344_91161347_processed: x
-
-Field2AEstimatedTotalsByProductAllMarketsCombined4S5S20SEtc_91161344_91161347_processed: All are 20's
-
-Field2AEstimatedTotalsByProductAllMarketsCombinedQuantity_91161344_91161347_processed: ['1920 Packs', '1920 Packs', '960 Packs', '960 Packs', '1920 Packs', '1920 Packs', '1920 Packs']
-
-Field2EstimatedTestProductQuantitiesPerMarket4S5S20SEtc_91161344_91161347_processed: All are 20's
-
-Field2EstimatedTestProductQuantitiesPerMarketCode_91161344_91161347_processed: ['519', '934', '639']
-
-Field2EstimatedTestProductQuantitiesPerMarketProductCode_91161344_91161347_processed: ['741', '753', '827', '462']
-
-Field2EstimatedTestProductQuantitiesPerMarketQuantity_91161344_91161347_processed: Varies by market, see attached list. Approx. 20% of the total # by state will receive product
-
-Mrd_91161344_91161347_processed: 5546/478
-
-ProductCade639_91161344_91161347_processed: 
-
-ProductCode327_91161344_91161347_processed: 
-
-ProductCode462_91161344_91161347_processed: 
-
-ProductCode519_91161344_91161347_processed: 
-
-ProductCode741_91161344_91161347_processed: 
-
-ProductCode753_91161344_91161347_processed: 
-
-ProductCode934_91161344_91161347_processed: 
-
-ProjectOriginatedBy_91161344_91161347_processed: William Doyle
-
-To_91161344_91161347_processed: Mr. Flinn Mr. Goldbrenner Mr. Gaalman Mr. Donahue (Loews) Mr. Duffy (Loews) Mr. Miele (Loews) Mr. Hudson (Greensboro) Dr. Schultz (Greensboro Mr. Tucker (Greensboro) Dr. Jones (Greensboro)
-
-TodaySDate_91161344_91161347_processed: 3/20/78
+Field1Statesandcitiesselectedtoreceiveproduct_91161344_91161347_processed:
+  *Chicago, Ill.: x
+  *NYC, N. Y.: x
+  Alabama: x
+  Alaska: 
+  Arizona: x
+  Arkansas: 
+  California: x
+  Colorada: x
+  Connecticut: x
+  D. C.: x
+  Delaware: x
+  Florida: 
+  Georgia: x
+  Hawaii: 
+  Idaho: 
+  Illinois: x
+  Indiana: 
+  Iowa: 
+  Kansas: x
+  Kentucky: x
+  Louisiana: x
+  Maine: x
+  Maryland: x
+  Massachusetts: 
+  Michigan: x
+  Minnesota: x
+  Mississippi: x
+  Missouri: x
+  Montana: x
+  Nebraska: x
+  Nevada: 
+  New Hampshire: x
+  New Jersey: x
+  New Mexico: x
+  New York: x
+  North Carolina: x
+  North Dakota: x
+  Ohio: x
+  Oklahoma: 
+  Oregon: x
+  Pennsyl vania: x
+  Rhode Island: x
+  South Carolina: x
+  South Dakota: 
+  Tennessee: x
+  Texas: 
+  Utah: x
+  Vermont: x
+  Virginia: x
+  Washington: 
+  West Virginia: x
+  Wisconsin: x
+  Wyoming: x
+
+Field2Aestimatedtotalsbyproductallmarketscombined_91161344_91161347_processed:
+  (4's, 5's, 20's etc.): All are 20's
+  QUANTITY: ['1920 Packs', '1920 Packs', '960 Packs', '960 Packs', '1920 Packs', '1920 Packs', '1920 Packs']
+
+Field2Estimatedtestproductquantitiespermarket_91161344_91161347_processed:
+  (4's, 5's, 20's etc.): All are 20's
+  Code #: ['519', '934', '639']
+  PRODUCT Code #: ['741', '753', '827', '462']
+  QUANTITY: Varies by market, see attached list. Approx. 20% of the total # by state will receive product
+
+mrd_91161344_91161347_processed: 5546/478
+
+product_91161344_91161347_processed:
+  Cade # 639: 
+  Code # #519: 
+  Code # 327: 
+  Code # 462: 
+  Code # 741: 
+  Code # 753: 
+  Code # 934: 
+
+projectoriginatedby_91161344_91161347_processed: William Doyle
+
+to_91161344_91161347_processed: Mr. Flinn Mr. Goldbrenner Mr. Gaalman Mr. Donahue (Loews) Mr. Duffy (Loews) Mr. Miele (Loews) Mr. Hudson (Greensboro) Dr. Schultz (Greensboro Mr. Tucker (Greensboro) Dr. Jones (Greensboro)
+
+todaysdate_91161344_91161347_processed: 3/20/78
 

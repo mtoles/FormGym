@@ -1,39 +1,41 @@
 Form: 81619511_9513_processed
 ==================================================
 
-DivisionFull_81619511_9513_processed: 
+Fieldfrom_81619511_9513_processed: C.J. Leiker
 
-DivisionName_81619511_9513_processed: 
+Indlorvolume1_81619511_9513_processed: 139/ 27 202/ 22 126/ 26 176/ 13 98/ 17
 
-DivisionPartial_81619511_9513_processed: 
+Indlorvolume2_81619511_9513_processed: 
 
-FieldOnlyPartialRegionContinueWithDivisionSScope_81619511_9513_processed: 
+SubmissiondateAug11_81619511_9513_processed: False
 
-FieldReps_81619511_9513_processed: 
+SubmissiondateJun30_81619511_9513_processed: False
 
-From_81619511_9513_processed: C.J. Leiker
+SubmissiondateMay19_81619511_9513_processed: False
 
-IndLorVolume_81619511_9513_processed: 139/ 27 202/ 22 126/ 26 176/ 13 98/ 17
+SubmissiondateSep22_81619511_9513_processed: True
 
-IndVolume_81619511_9513_processed: 
+division_81619511_9513_processed:
+  FULL: 
+  PARTIAL: 
 
-NameOfAccount_81619511_9513_processed: _7-Eleven 
+divisionname_81619511_9513_processed: 
 
-NoOfStores_81619511_9513_processed: 25
+indvolume_81619511_9513_processed: 
 
-RegionFull_81619511_9513_processed: x
+nameofaccount_81619511_9513_processed: _7-Eleven 
 
-RegionPartial_81619511_9513_processed: 
+noofstores_81619511_9513_processed: 25
 
-Subject_81619511_9513_processed: MAVERICK SPECIALS MENTHOL- PROGRESS REPORT
+onlypartialregioncontinuewithdivisionsscope_81619511_9513_processed: 
 
-SubmissionDateAug11_81619511_9513_processed: False
+region_81619511_9513_processed:
+  FULL: x
+  PARTIAL: 
 
-SubmissionDateJun30_81619511_9513_processed: False
+reps_81619511_9513_processed: 
 
-SubmissionDateMay19_81619511_9513_processed: False
+subject_81619511_9513_processed: MAVERICK SPECIALS MENTHOL- PROGRESS REPORT
 
-SubmissionDateSep22_81619511_9513_processed: True
-
-To_81619511_9513_processed: S.P. Zolot
+to_81619511_9513_processed: S.P. Zolot
 

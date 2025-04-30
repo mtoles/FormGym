@@ -1,67 +1,62 @@
 Form: 716552_processed
 ==================================================
 
-Branch_716552_processed: 
+IfamaterialordimensionalchangealsoinvolvedNo_716552_processed: True
 
-Comments_716552_processed: Material # 50 -034 A has been assigned to the VICEROY Rich Lights 100' s 20' s Label with new bottom panel. Bottom now incorporates shield. On both side and bottom panels, "VICEROY" and "Rich Lights" have been inverted. Cartons and labels must change design simultaneously. The current design cannot be used in production after 10/ 30/ 81.
+IfamaterialordimensionalchangealsoinvolvedYes_716552_processed: False
 
-CopiesTo_716552_processed: J. F. Banks C. Lamb C. L. Domeck Webb L. C. Lanham Branch QC Branch Supply
+TypechangeOfficial_716552_processed: True
 
-Date_716552_processed: 9/ 17/ 8181
+TypechangeTemporary_716552_processed: False
 
-DeliveryDate_716552_processed: 10/ 16/ 81
+branch_716552_processed: 
 
-Description_716552_processed: VICEROY Rich Lights 100' s 20' s Label
+comments_716552_processed: Material # 50 -034 A has been assigned to the VICEROY Rich Lights 100' s 20' s Label with new bottom panel. Bottom now incorporates shield. On both side and bottom panels, "VICEROY" and "Rich Lights" have been inverted. Cartons and labels must change design simultaneously. The current design cannot be used in production after 10/ 30/ 81.
 
-DesignNo_716552_processed: 15
+copiesto_716552_processed: J. F. Banks C. Lamb C. L. Domeck Webb L. C. Lanham Branch QC Branch Supply
 
-Design_716552_processed: 
+date_716552_processed: 9/ 17/ 8181
 
-Domestic_716552_processed: ☑
+deliverydate_716552_processed: 10/ 16/ 81
 
-Field_716552_processed: 
+description_716552_processed: VICEROY Rich Lights 100' s 20' s Label
 
-GeneralExport_716552_processed: 
+design_716552_processed: 
 
-IfAMaterialOrDimensionalChangeAlsoInvolvedNo_716552_processed: True
+designno_716552_processed: 15
 
-IfAMaterialOrDimensionalChangeAlsoInvolvedYes_716552_processed: False
+domestic_716552_processed: ☑
 
-IfYesSupplyDetails_716552_processed: 
+generalexport_716552_processed: 
 
-InventoryDepletionDate_716552_processed: 10/ 30/ 81
+ifyessupplydetails_716552_processed: 
 
-Louisville_716552_processed: 10/ 30/ 81
+inventorydepletiondate_716552_processed: 10/ 30/ 81
 
-Macon_716552_processed: 
+louisville_716552_processed: 10/ 30/ 81
 
-MaterialNo_716552_processed: 50- 034
+macon_716552_processed: 
 
-MilitaryExport_716552_processed: 
+materialno_716552_processed: 50- 034
 
-NewItemBrandS_716552_processed: VICEROY Rich Lights
+militaryexport_716552_processed: 
 
-NewItemDescription_716552_processed: VICEROY Rich Lights 100' s 20' s Label
+newitem_716552_processed:
+  BRAND (S): VICEROY Rich Lights
+  DESCRIPTION: VICEROY Rich Lights 100' s 20' s Label
+  MATERIAL NO.: 50 -034A
+  NO: B1 -257
+  UPC NO: 272972
 
-NewItemMaterialNo_716552_processed: 50 -034A
+petersburg_716552_processed: 
 
-NewItemNo_716552_processed: B1 -257
+qned_716552_processed: S. T. BEASLEY (MRS )/ jlf
 
-NewItemUpcNo_716552_processed: 272972
+scheduledateorinventorydepletion_716552_processed: 1010/ 30/ 8181
 
-Petersburg_716552_processed: 
+upcno_716552_processed: 272972
 
-Qned_716552_processed: S. T. BEASLEY (MRS )/ jlf
+use_716552_processed: CUSTOMER SPEC. (GRAVURE)
 
-ScheduleDateOrInventoryDepletion_716552_processed: 1010/ 30/ 8181
-
-TypeChangeOfficial_716552_processed: True
-
-TypeChangeTemporary_716552_processed: False
-
-UpcNo_716552_processed: 272972
-
-Use_716552_processed: CUSTOMER SPEC. (GRAVURE)
-
-WinstonSalem_716552_processed: 
+winstonsalem_716552_processed: 
 

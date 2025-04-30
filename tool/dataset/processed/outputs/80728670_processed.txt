@@ -1,43 +1,41 @@
 Form: 80728670_processed
 ==================================================
 
-ADM_80728670_processed: 
+Fieldfrom_80728670_processed: Mary Anne Kayiatos
 
-ArrivalDateAndTimeIncludeAirlineAndFlightNo_80728670_processed: Monday, 3 /12 Evening Shuttle
+adm_80728670_processed: 
 
-DM_80728670_processed: 
+arrivaldateandtimeincludeairlineandflightno_80728670_processed: Monday, 3 /12 Evening Shuttle
 
-Date_80728670_processed: 2 /28 /84
+date_80728670_processed: 2 /28 /84
 
-DatesOfContact_80728670_processed: Tuesday 3 /13 and Wednesday, 3 /14
+dates_80728670_processed: 
 
-Dates_80728670_processed: 
+datesofcontact_80728670_processed: Tuesday 3 /13 and Wednesday, 3 /14
 
-DivisionSToBeContacted_80728670_processed: Boston
+divisionstobecontacted_80728670_processed: Boston
 
-From_80728670_processed: Mary Anne Kayiatos
+dm_80728670_processed: 
 
-HotelMotelReservationsNeeded_80728670_processed: XX
+hotelmotelreservationsneeded_80728670_processed: XX
 
-MethodOfTravelAir_80728670_processed: 
+methodoftravel_80728670_processed:
+  Air: 
+  Auto: 
+  Other: 
+  Train: 
 
-MethodOfTravelAuto_80728670_processed: 
+pleasemakethenecessaryfieldtriparrangementsfor_80728670_processed: Ted van de kamp
 
-MethodOfTravelOther_80728670_processed: 
+purposeoftrip_80728670_processed: To evaluate Satin's overall performance and results of Special Cities.
 
-MethodOfTravelTrain_80728670_processed: 
+reservationsmadeat_80728670_processed: 
 
-PleaseMakeTheNecessaryFieldTripArrangementsFor_80728670_processed: Ted van de kamp
+salespersonneltobecontacted_80728670_processed: 
 
-PurposeOfTrip_80728670_processed: To evaluate Satin's overall performance and results of Special Cities.
+salespersonneltobeworkedwith_80728670_processed: 
 
-ReservationsMadeAt_80728670_processed: 
+salesrepresentative_80728670_processed: X
 
-SalesPersonnelToBeContacted_80728670_processed: 
-
-SalesPersonnelToBeWorkedWith_80728670_processed: 
-
-SalesRepresentative_80728670_processed: X
-
-To_80728670_processed: J. R. Mueller
+to_80728670_processed: J. R. Mueller
 

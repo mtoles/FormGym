@@ -1,31 +1,29 @@
 Form: 92039708_9710_processed
 ==================================================
 
-AverageCouponBuydownValueOnTargetedBrandsDoralBasicMonarchCambridgeGpcCartons_92039708_9710_processed: 
+Fieldfrom_92039708_9710_processed: 
 
-AverageCouponBuydownValueOnTargetedBrandsDoralBasicMonarchCambridgeGpcPacks_92039708_9710_processed: 
+averagecouponbuydownvalueontargetedbrandsdoralbasicmonarchcambridgegpc_92039708_9710_processed:
+  CARTONS ☐: 
+  PACKS ☐: 
 
-BookletCoupon_92039708_9710_processed: 
+bookletcoupon_92039708_9710_processed: 
 
-CompetitivePromotionalActivity_92039708_9710_processed: 
+competitivepromotionalactivity_92039708_9710_processed: 
 
-EffectivenessOf_92039708_9710_processed: Pre- Sell Booklet /Coupon Maverick /Harley B1 G1 F
+effectivenessof_92039708_9710_processed: Pre- Sell Booklet /Coupon Maverick /Harley B1 G1 F
 
-From_92039708_9710_processed: 
+maverickharleyb1g1f_92039708_9710_processed: 
 
-MaverickHarleyB1G1F_92039708_9710_processed: 
+presell_92039708_9710_processed: 
 
-PreSell_92039708_9710_processed: 
+subject_92039708_9710_processed: MAVERICK SPECIALS- PROGRESS REPORT
 
-Subject_92039708_9710_processed: MAVERICK SPECIALS- PROGRESS REPORT
+submissiondate_92039708_9710_processed:
+  AUG 26 ☐: 
+  JUN 24 ☐: 
+  MAY 27 ☐: 
+  OCT 07 ☐: 
 
-SubmissionDateAug26_92039708_9710_processed: 
-
-SubmissionDateJun24_92039708_9710_processed: 
-
-SubmissionDateMay27_92039708_9710_processed: 
-
-SubmissionDateOct07_92039708_9710_processed: 
-
-To_92039708_9710_processed: R. B. SPELL
+to_92039708_9710_processed: R. B. SPELL
 

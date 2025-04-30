@@ -1,41 +1,42 @@
 Form: 0001123541_processed
 ==================================================
 
-ApprovalSignatureDate_0001123541_processed: 
+Date1_0001123541_processed: June 21, 1993
 
-DateRecD_0001123541_processed: 6/ 21/ 93
+Date2_0001123541_processed: 
 
-Date_0001123541_processed: June 21, 1993
+approvalsignaturedate_0001123541_processed: 
 
-Department_0001123541_processed: R&D Library
+daterecd_0001123541_processed: 6/ 21/ 93
 
-DescribePossibleSolutionsAndBenefits_0001123541_processed: 1. Drop the category specifications altogether. 2. Use moregeneral categories. hote: I have passed this to Scott Appleton for the task force to use in streamlining the records management program.
+department_0001123541_processed: R&D Library
 
-ImplementNo_0001123541_processed: 
+describepossiblesolutionsandbenefits_0001123541_processed: 1. Drop the category specifications altogether. 2. Use moregeneral categories. hote: I have passed this to Scott Appleton for the task force to use in streamlining the records management program.
 
-ImplementPending_0001123541_processed: 
+implement_0001123541_processed:
+  ☐ No: 
+  ☐ Pending: 
+  ☐ Yes: 
 
-ImplementYes_0001123541_processed: 
+keywords1993_0001123541_processed: 
 
-Keywords1993_0001123541_processed: 
+profitimprovement_0001123541_processed: (If Applicable)
 
-ProfitImprovement_0001123541_processed: (If Applicable)
+qiplog1_0001123541_processed: 93- 0301
 
-QipLog1_0001123541_processed: 93- 0301
+responderdate_0001123541_processed: 
 
-RespondHere_0001123541_processed: 
+respondhere_0001123541_processed: 
 
-ResponderDate_0001123541_processed: 
+signprintnamesseeinstructionsonback_0001123541_processed: 
 
-SignPrintNamesSeeInstructionsOnBack_0001123541_processed: 
+status1993_0001123541_processed: 
 
-Status1993_0001123541_processed: 
+submittedby_0001123541_processed: Carol S. Lincoln
 
-SubmittedBy_0001123541_processed: Carol S. Lincoln
+submittersss_0001123541_processed: 407- 64- 3484
 
-SubmitterSSs_0001123541_processed: 407- 64- 3484
+suggestiondescribecurrentsituationandidea_0001123541_processed: The current system of managing records is too complex. The trend seems to be increasingly specific, when we should be getting more general. Right now, people must work to understand the system. We must spend too much time adninistering the system, labeling and cleaning our files. Complying is a real burden, both for the individual and for the records coordinators.
 
-SuggestionDescribeCurrentSituationAndIdea_0001123541_processed: The current system of managing records is too complex. The trend seems to be increasingly specific, when we should be getting more general. Right now, people must work to understand the system. We must spend too much time adninistering the system, labeling and cleaning our files. Complying is a real burden, both for the individual and for the records coordinators.
-
-Type_0001123541_processed: EQPR
+type_0001123541_processed: EQPR
 

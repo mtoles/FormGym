@@ -1,31 +1,29 @@
 Form: 0030031163_processed
 ==================================================
 
-FieldBeginner_0030031163_processed: 
+beginner_0030031163_processed: 
 
-FieldExcellent_0030031163_processed: 
+excellent_0030031163_processed: 
 
-FieldFair_0030031163_processed: 
+fair_0030031163_processed: 
 
-FieldGood_0030031163_processed: 
+firmname_0030031163_processed: 
 
-Field_0030031163_processed: 
+golftournament_0030031163_processed: (Ladies & Men) . . . Friday, August 16, Tee off at 8:00 A. M. SHARP (no green fee)
 
-FirmName_0030031163_processed: 
+good_0030031163_processed: 
 
-GolfTournament_0030031163_processed: (Ladies & Men) . . . Friday, August 16, Tee off at 8:00 A. M. SHARP (no green fee)
+iwillparticipateinthegolftournament_0030031163_processed: 
 
-IWillParticipateInTheGolfTournament_0030031163_processed: 
+iwillparticipateinthetennistournamentiwouldclassifymyselfaspleasecheckappropriatebox_0030031163_processed: 
 
-IWillParticipateInTheTennisTournamentIWouldClassifyMyselfAsPleaseCheckAppropriateBox_0030031163_processed: 
+myhandicapis_0030031163_processed: 
 
-MyHandicapIs_0030031163_processed: 
+name_0030031163_processed: 
 
-Name_0030031163_processed: 
+nysawmdinc211east43rdstreetnewyorkny100174707_0030031163_processed: 
 
-NysawmdInc211East43rdStreetNewYorkNy100174707_0030031163_processed: 
+strokes_0030031163_processed: 
 
-Strokes_0030031163_processed: 
-
-TennisTournament_0030031163_processed: (Ladies & Men) . . . Friday, August 16, starting time is 3:00 P. M.
+tennistournament_0030031163_processed: (Ladies & Men) . . . Friday, August 16, starting time is 3:00 P. M.
 

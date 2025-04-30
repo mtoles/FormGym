@@ -1,57 +1,44 @@
 Form: 91903177_processed
 ==================================================
 
-CustomerShippingNumber_91903177_processed: 
-
-DateForwardedPromotionServices_91903177_processed: 
-
-DateToNyo_91903177_processed: 
-
-DivNameNo_91903177_processed: 
-
 Field198_91903177_processed: 
 
-FieldCasesKent100_91903177_processed: 
+Fieldfrom_91903177_processed: 
 
-FieldCasesKentGl100_91903177_processed: 
+cases_91903177_processed:
+  KENT 100: 
+  KENT GL 100: 
+  KENT GL LTS K S.: 
+  KENT III 100: 
+  KENT III K. S.: 
+  KENT K. S.: 
+  NEWPORT 100'S: 
+  NEWPORT K. S.: 
+  NEWPORT LTS K. S.: 
+  NEWPORT LTS. 100: 
+  TRUE K. S.: 
 
-FieldCasesKentGlLtsKS_91903177_processed: 
+customershippingnumber_91903177_processed: 
 
-FieldCasesKentIii100_91903177_processed: 
+dateforwardedpromotionservices_91903177_processed: 
 
-FieldCasesKentIiiKS_91903177_processed: 
+datetonyo_91903177_processed: 
 
-FieldCasesKentKS_91903177_processed: 
+divnameno_91903177_processed: 
 
-FieldCasesNewport100S_91903177_processed: 
+items_91903177_processed:
+  BANNER(S) (4 x 8): 
+  GENERAL MARKET: 
+  SPANISH LANGUAGE: 
+  URBAN: 
+  WATER BOTTLES: 
 
-FieldCasesNewportKS_91903177_processed: 
+quantityrequired_91903177_processed: 
 
-FieldCasesNewportLts100_91903177_processed: 
+specialeventrequestform_91903177_processed:
+  * DATE OF EVENT:: 
+  NAME OF EVENT:: 
+  SAMPLES/ ITEMS REQUIRED:: SAMPLE 10'S (400 PACKS PER CASE)
 
-FieldCasesNewportLtsKS_91903177_processed: 
-
-FieldCasesTrueKS_91903177_processed: 
-
-From_91903177_processed: 
-
-ItemsBannerS4X8_91903177_processed: 
-
-ItemsGeneralMarket_91903177_processed: 
-
-ItemsSpanishLanguage_91903177_processed: 
-
-ItemsUrban_91903177_processed: 
-
-ItemsWaterBottles_91903177_processed: 
-
-QuantityRequired_91903177_processed: 
-
-SpecialEventRequestFormDateOfEvent_91903177_processed: 
-
-SpecialEventRequestFormNameOfEvent_91903177_processed: 
-
-SpecialEventRequestFormSamplesItemsRequired_91903177_processed: SAMPLE 10'S (400 PACKS PER CASE)
-
-To_91903177_processed: K. A. SPARROW
+to_91903177_processed: K. A. SPARROW
 

@@ -1,21 +1,21 @@
 Form: 0011856542_processed
 ==================================================
 
-ApprovedBy_0011856542_processed: 
+approvedby_0011856542_processed: 
 
-Cc_0011856542_processed: RSS RDC PHL PRC DRB Records Project Leader Other Personnel Assigned
+cc_0011856542_processed: RSS RDC PHL PRC DRB Records Project Leader Other Personnel Assigned
 
-Date_0011856542_processed: 1/4/90
+date_0011856542_processed: 1/4/90
 
-OtherPersonnelAssigned_0011856542_processed: 
+otherpersonnelassigned_0011856542_processed: 
 
-ProjectCode_0011856542_processed: BD-FF
+projectcode_0011856542_processed: BD-FF
 
-ProjectLeader_0011856542_processed: J. F. Anders/ J. E. Mann
+projectleader_0011856542_processed: J. F. Anders/ J. E. Mann
 
-ProjectName_0011856542_processed: BULL DURHAM Full Flavor King Size Cigarettes
+projectname_0011856542_processed: BULL DURHAM Full Flavor King Size Cigarettes
 
-ProjectObjective_0011856542_processed: Develop 14- mg "tar" delivery king size cigarette for generic pricing directed toward young male smokers. Cigarette dimensions- 85 mm x 24.9 mm circumference- 20 mm filter- 24 mm tipping. Offshore tobacco blend with unique flavor formulation. Cork tipping.
+projectobjective_0011856542_processed: Develop 14- mg "tar" delivery king size cigarette for generic pricing directed toward young male smokers. Cigarette dimensions- 85 mm x 24.9 mm circumference- 20 mm filter- 24 mm tipping. Offshore tobacco blend with unique flavor formulation. Cork tipping.
 
-WorkRequestedBy_0011856542_processed: Marketing
+workrequestedby_0011856542_processed: Marketing
 

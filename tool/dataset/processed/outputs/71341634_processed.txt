@@ -1,85 +1,87 @@
 Form: 71341634_processed
 ==================================================
 
-AccountMonth_71341634_processed: Pay Handling
+Date1_71341634_processed: Check#
 
-AccountName_71341634_processed: 
+Date2_71341634_processed: 
 
-Account_71341634_processed: 
+account_71341634_processed: 
 
-Address_71341634_processed: 395 DYSTER POINT BLVD SUITE 415 S. SAN FRANCISCO
+accountmonth_71341634_processed: Pay Handling
 
-Amount_71341634_processed: 
+accountname_71341634_processed: 
 
-Attention_71341634_processed: DAVID DRESSER
+address_71341634_processed: 395 DYSTER POINT BLVD SUITE 415 S. SAN FRANCISCO
 
-AvgRate_71341634_processed: $2 84 $2 00
+amount_71341634_processed: 
 
-BusinessUnit_71341634_processed: 
+attention_71341634_processed: DAVID DRESSER
 
-CharNo_71341634_processed: 
+avgrate_71341634_processed: $2 84 $2 00
 
-ChargeToSection_71341634_processed: PER ATTACHED
+businessunit_71341634_processed: 
 
-City_71341634_processed: 
+chargetosection_71341634_processed: PER ATTACHED
 
-Date_71341634_processed: Check#
+charno_71341634_processed: 
 
-Department_71341634_processed: 
+city_71341634_processed: 
 
-Description_71341634_processed: 
+department_71341634_processed: 
 
-DistAsgmtCF_71341634_processed: 39A00A
+description_71341634_processed: 
 
-Distribution_71341634_processed: Fax to Field Payments at (502) 588- 7826
+distasgmtcf_71341634_processed: 39A00A
 
-DistributorNo_71341634_processed: 20182
+distribution_71341634_processed: Fax to Field Payments at (502) 588- 7826
 
-FieldRecordsRetention_71341634_processed: 30 days)
+distributorno_71341634_processed: 20182
 
-Id_71341634_processed: 
+id_71341634_processed: 
 
-IsThisACorporation_71341634_processed: Yes X No
+isthisacorporation_71341634_processed: Yes X No
 
-MaiCheckTo_71341634_processed: 
+maicheckto_71341634_processed: 
 
-PayMethod_71341634_processed: Check
+paymethod_71341634_processed: Check
 
-PayTerms_71341634_processed: 00000
+payterms_71341634_processed: 00000
 
-PayTo_71341634_processed: COREMARK NTERNATIONAL
+payto_71341634_processed: COREMARK NTERNATIONAL
 
-PleaseCompleteTheFollowingIfCheckedNoForCorporationAbove_71341634_processed: 
+pleasecompletethefollowingifcheckednoforcorporationabove_71341634_processed: 
 
-PreparedBy_71341634_processed: 
+preparedby_71341634_processed: 
 
-Product_71341634_processed: 
+product_71341634_processed: 
 
-PromoDates_71341634_processed: March 15- 19, 1999
+promodates_71341634_processed: March 15- 19, 1999
 
-PromotionCode_71341634_processed: 725 725
+promotioncode_71341634_processed: 725 725
 
-PromotionName_71341634_processed: GPC BUYDOWN PROGRAMS SEE ATTACHED Section 18 Narl Chain Walgreens
+promotionname_71341634_processed: GPC BUYDOWN PROGRAMS SEE ATTACHED Section 18 Narl Chain Walgreens
 
-PromotionNumber_71341634_processed: 288 296
+promotionnumber_71341634_processed: 288 296
 
-Quantity_71341634_processed: 50, 759 6. 382
+quantity_71341634_processed: 50, 759 6. 382
 
-Ref_71341634_processed: 
+recordsretention_71341634_processed: 30 days)
 
-RequestedBy_71341634_processed: Robert 
+ref_71341634_processed: 
 
-SeparatePay_71341634_processed: Y
+requestedby_71341634_processed: Robert 
 
-State_71341634_processed: 
+separatepay_71341634_processed: Y
 
-Units_71341634_processed: CTNS CTNS
+state_71341634_processed: 
 
-Vendor_71341634_processed: Check Date
+units_71341634_processed: CTNS CTNS
 
-Verification_71341634_processed: 
+vendor_71341634_processed: Check Date
 
-VoucherApproval_71341634_processed: 
+verification_71341634_processed: 
 
-ZipCode_71341634_processed: 
+voucherapproval_71341634_processed: 
+
+zipcode_71341634_processed: 
 

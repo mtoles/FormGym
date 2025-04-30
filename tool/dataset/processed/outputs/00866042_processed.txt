@@ -1,67 +1,64 @@
 Form: 00866042_processed
 ==================================================
 
-DateIssued_00866042_processed: Oct. 11, 1983
+StorageconditionsDessicator_00866042_processed: False
 
-DirOfLifeSciencesHealthServicesCompoundPrepToxScientificResTox_00866042_processed: 
+StorageconditionsFreezer_00866042_processed: False
 
-ExperimentalProcedures_00866042_processed: to performed in Acure/Dermal Toxicology, building 18.
+StorageconditionsOther_00866042_processed: False
 
-FixedDistribution_00866042_processed: 
+StorageconditionsRefrigerator8C_00866042_processed: True
 
-FollowDepartmentAndCompanySafetyManuals_00866042_processed: ☑
+StorageconditionsRoomtemperature_00866042_processed: False
 
-HazardousCompoundCarcinogenOsha_00866042_processed: 
+StorageconditionsSpecialinstructionswhiledosing_00866042_processed: False
 
-HazardousCompoundCarcinogenOther_00866042_processed: 
+StorageconditionsStoreindark_00866042_processed: False
 
-HazardousCompoundExplosive_00866042_processed: 
+dateissued_00866042_processed: Oct. 11, 1983
 
-HazardousCompoundFlammable_00866042_processed: 
+diroflifescienceshealthservicescompoundpreptoxscientificrestox_00866042_processed: 
 
-HazardousCompoundRadioactive_00866042_processed: 
+experimentalprocedures_00866042_processed: to performed in Acure/Dermal Toxicology, building 18.
 
-LhNumberS_00866042_processed: 20.845
+fixeddistribution_00866042_processed: 
 
-LotNoS_00866042_processed: 
+followdepartmentandcompanysafetymanuals_00866042_processed: ☑
 
-OriginalSignedProjectSheetsToPso_00866042_processed: 
+hazardouscompound_00866042_processed:
+  CARCINOGEN (OSHA): 
+  CARCINOGEN (OTHER): 
+  EXPLOSIVE: 
+  FLAMMABLE: 
+  RADIOACTIVE: 
 
-PerformingDepartments_00866042_processed: 
+lhnumbers_00866042_processed: 20.845
 
-PhysicalDescriptionLiquid_00866042_processed: X
+lotnos_00866042_processed: 
 
-PhysicalDescriptionSolid_00866042_processed: 
+originalsignedprojectsheetstopso_00866042_processed: 
 
-Pressurized_00866042_processed: 
+performingdepartments_00866042_processed: 
 
-ProjectCoordinator_00866042_processed: 
+physicaldescription_00866042_processed:
+  LIQUID: X
+  SOLID: 
 
-ProjectNo_00866042_processed: 642-138
+pressurized_00866042_processed: 
 
-ProjectSheetNo_00866042_processed: 1
+projectcoordinator_00866042_processed: 
 
-ProtectivePrecautionsRequired_00866042_processed: 
+projectno_00866042_processed: 642-138
 
-ReceiptDateS_00866042_processed: 9/28/83
+projectsheetno_00866042_processed: 1
 
-Signature_00866042_processed: D.
+protectiveprecautionsrequired_00866042_processed: 
 
-StorageConditionsDessicator_00866042_processed: False
+receiptdates_00866042_processed: 9/28/83
 
-StorageConditionsFreezer_00866042_processed: False
+signature_00866042_processed: D.
 
-StorageConditionsOther_00866042_processed: False
+studytitleproposalnumber_00866042_processed: 
 
-StorageConditionsRefrigerator8C_00866042_processed: True
-
-StorageConditionsRoomTemperature_00866042_processed: False
-
-StorageConditionsSpecialInstructionsWhileDosing_00866042_processed: False
-
-StorageConditionsStoreInDark_00866042_processed: False
-
-StudyTitleProposalNumber_00866042_processed: 
-
-TestMaterialS_00866042_processed: B166
+testmaterials_00866042_processed: B166
 

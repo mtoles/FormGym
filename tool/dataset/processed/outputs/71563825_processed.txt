@@ -1,39 +1,36 @@
 Form: 71563825_processed
 ==================================================
 
-BackgroundProblemDefinition_71563825_processed: On September 1 97, PMI simultaneously launched Marlboro Menthol KS Box (16mg tar and Menthol Lights KS Box (9mg tar) in Colombia. These two products became KOOL's direct competitors (Premium Menthol Brands). At the same time KOOL replaced its product with a milder 11mg cigarette (the same KOOL Milds but with a 27mm cork tipping).
+backgroundproblemdefinition_71563825_processed: On September 1 97, PMI simultaneously launched Marlboro Menthol KS Box (16mg tar and Menthol Lights KS Box (9mg tar) in Colombia. These two products became KOOL's direct competitors (Premium Menthol Brands). At the same time KOOL replaced its product with a milder 11mg cigarette (the same KOOL Milds but with a 27mm cork tipping).
 
-BriefNumber_71563825_processed: #
+briefnumber_71563825_processed: #
 
-ByCityBQuilla_71563825_processed: KOOL Parent regular smokers 50% -alternate smokers 50%
+bycity_71563825_processed:
+  B/ quilla:: KOOL Parent regular smokers 50% -alternate smokers 50%
+  Bogotá:: KOOL Parent regular smokers 50% -alternate smokers 50%
+  Medellin:: KOOL Parent regular smokers 50% -alternate smokers 50%
 
-ByCityBogot_71563825_processed: KOOL Parent regular smokers 50% -alternate smokers 50%
+clientcontact_71563825_processed: Maria Helena Argüelles/ Edwin Garcia
 
-ByCityMedellin_71563825_processed: KOOL Parent regular smokers 50% -alternate smokers 50%
+clientgroup_71563825_processed: R. B. U. COLOMBIA Brand Group Other KOOL
 
-ClientContact_71563825_processed: Maria Helena Argüelles/ Edwin Garcia
+consumersegments_71563825_processed:
+  BY SEL:: AB1 (100%)
+  By age:: 18 -29 (100%)
+  Female:: 40%
+  Male:: 60%
 
-ClientGroup_71563825_processed: R. B. U. COLOMBIA Brand Group Other KOOL
+date_71563825_processed: 02/ 12/ 98
 
-ConsumerSegmentSByAge_71563825_processed: 18 -29 (100%)
+markets_71563825_processed: Bogotá, Medellin and Barranquilla
 
-ConsumerSegmentSBySel_71563825_processed: AB1 (100%)
+note_71563825_processed: In order to establish a quantitative basis for determining the winning product, results will be
 
-ConsumerSegmentSFemale_71563825_processed: 40%
+projectnamedescription_71563825_processed: K001 vs. Marlboro Menthol Lights
 
-ConsumerSegmentSMale_71563825_processed: 60%
+referentbrands_71563825_processed: Current Kool Filter King Colombia 1 1 mg tar @ 0. 51% menthol white tipping. Kool Milds KS Japan 9mg tar @ 0. 56% menthol white tipping Kool KS. 9 mg tar, @ 0. 51% menthol white tipping Current Marlboro Lights Menthol King US 9mg tar @ 0. 66% menthol, white tipping.
 
-Date_71563825_processed: 02/ 12/ 98
+researchliaison_71563825_processed: Camilo Concha/ Andrea Suarez
 
-MarketS_71563825_processed: Bogotá, Medellin and Barranquilla
-
-Note_71563825_processed: In order to establish a quantitative basis for determining the winning product, results will be
-
-ProjectNameDescription_71563825_processed: K001 vs. Marlboro Menthol Lights
-
-ReferentBrandS_71563825_processed: Current Kool Filter King Colombia 1 1 mg tar @ 0. 51% menthol white tipping. Kool Milds KS Japan 9mg tar @ 0. 56% menthol white tipping Kool KS. 9 mg tar, @ 0. 51% menthol white tipping Current Marlboro Lights Menthol King US 9mg tar @ 0. 66% menthol, white tipping.
-
-ResearchLiaison_71563825_processed: Camilo Concha/ Andrea Suarez
-
-WeightedAsFollows_71563825_processed: Alternate 60%, Regular 40%.
+weightedasfollows_71563825_processed: Alternate 60%, Regular 40%.
 

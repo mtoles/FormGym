@@ -1,75 +1,75 @@
 Form: 01408099_01408101_processed
 ==================================================
 
-A_01408099_01408101_processed: 
+Fieldor_01408099_01408101_processed: 
 
-B_01408099_01408101_processed: 
+a_01408099_01408101_processed: 
 
-Brand_01408099_01408101_processed: 
+b_01408099_01408101_processed: 
 
-Comments_01408099_01408101_processed: 
+brand_01408099_01408101_processed: 
 
-Company_01408099_01408101_processed: 
+by_01408099_01408101_processed: 
 
-Date_01408099_01408101_processed: March 1, 1978
+comments_01408099_01408101_processed: 
 
-EstimatedPaybackPeriod_01408099_01408101_processed: 
+company_01408099_01408101_processed: 
 
-EstimatedTargetDateOriginalComments_01408099_01408101_processed: 
+date_01408099_01408101_processed: March 1, 1978
 
-FieldBy_01408099_01408101_processed: 
+estimatedpaybackperiod_01408099_01408101_processed: 
 
-FieldExplanationOfChange_01408099_01408101_processed: 
+estimatedtargetdateoriginalcomments_01408099_01408101_processed: 
 
-FieldRevisedCompletionDate_01408099_01408101_processed: 
+explanationofchange_01408099_01408101_processed: 
 
-GeneralProjectDescription_01408099_01408101_processed: True 100's, Regular and Menthol tar characteristics as current True 100's product and, 2) Taste characterist- reduction to the range of 8- 10mg tar. Variations to be: 1) Same taste ics similar to True King Size, 5mg. tar product.
+generalprojectdescription_01408099_01408101_processed: True 100's, Regular and Menthol tar characteristics as current True 100's product and, 2) Taste characterist- reduction to the range of 8- 10mg tar. Variations to be: 1) Same taste ics similar to True King Size, 5mg. tar product.
 
-MajorMktAndMktResearchStepsInHomePlacement_01408099_01408101_processed: 
+majormktandmktresearchsteps_01408099_01408101_processed:
+  In- home placement: 
 
-Market_01408099_01408101_processed: 
+market_01408099_01408101_processed: 
 
-Marketing_01408099_01408101_processed: 
+marketing_01408099_01408101_processed: 
 
-Of_01408099_01408101_processed: 
+of_01408099_01408101_processed: 
 
-Or_01408099_01408101_processed: 
+originalcompletiondate_01408099_01408101_processed:
+  1st: 
+  79: 
+  Qtr.: 
 
-OriginalCompletionDate1St_01408099_01408101_processed: 
+project_01408099_01408101_processed: 306
 
-OriginalCompletionDate79_01408099_01408101_processed: 
+projectleader_01408099_01408101_processed: Williams/ Giordano
 
-OriginalCompletionDateQtr_01408099_01408101_processed: 
+projectname_01408099_01408101_processed: True 100's (R&M)
 
-ProjectLeader_01408099_01408101_processed: Williams/ Giordano
+revisedcompletiondate_01408099_01408101_processed: 
 
-ProjectName_01408099_01408101_processed: True 100's (R&M)
+revisedtargetdate_01408099_01408101_processed: 
 
-Project_01408099_01408101_processed: 306
+revision_01408099_01408101_processed: 
 
-RevisedTargetDate_01408099_01408101_processed: 
+salesobjective_01408099_01408101_processed: 
 
-Revision_01408099_01408101_processed: 
+sectionsrevised_01408099_01408101_processed: 
 
-SalesObjective_01408099_01408101_processed: 
+size_01408099_01408101_processed: 
 
-SectionsRevised_01408099_01408101_processed: 
+target_01408099_01408101_processed: 
 
-Size_01408099_01408101_processed: 
+totalbudget_01408099_01408101_processed: 
 
-Target_01408099_01408101_processed: 
+units_01408099_01408101_processed: 
 
-TotalBudget_01408099_01408101_processed: 
+year_01408099_01408101_processed: 
 
-Units_01408099_01408101_processed: 
+yearfive_01408099_01408101_processed: 
 
-YearFive_01408099_01408101_processed: 
+yearfour_01408099_01408101_processed: 
 
-YearFour_01408099_01408101_processed: 
+yearone_01408099_01408101_processed: 
 
-YearOne_01408099_01408101_processed: 
-
-YearThree_01408099_01408101_processed: 
-
-Year_01408099_01408101_processed: 
+yearthree_01408099_01408101_processed: 
 

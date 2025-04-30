@@ -1,37 +1,37 @@
 Form: 0060036622_processed
 ==================================================
 
-CommitteeMeeting_0060036622_processed: 8/ 26
-
-ConsiderationDeferredUntil_0060036622_processed: 
-
-Contribution_0060036622_processed: ☑
-
-DecisionOfCommitteeOnPresentRequest_0060036622_processed: 
-
-DeclinedSendLetter_0060036622_processed: YES NO
-
 Field1976_0060036622_processed: 
 
-FieldMembership_0060036622_processed: 
-
-ForAmericanBrandsInc_0060036622_processed: 
-
-From_0060036622_processed: E. E. Curtin
-
-Message_0060036622_processed: Letter 8/ 1/ 76
-
-Pay_0060036622_processed: 
-
-Payment_0060036622_processed: 1976 $ 40, 921. 30 by A. B., Inc. 1975 84, 309. 94 A. B., Inc. 1974 92, 131. 29 A. B., Inc. 1973 91, 630. 53 A. B., Inc.
-
-RecentActionsRegardingAboveSolicitor_0060036622_processed: 
-
-Remarks_0060036622_processed: For confirmation by the Committee. Check for $ 43, 910. 30 representing the ninth semi- annual installment to the Harvard Project transmitted August 1976.
-
-Requested_0060036622_processed: Harvard Medical School and Dr. Gary Huber Boston, Massachusetts
-
-To_0060036622_processed: Mr. G. J. Schramm Mr. R. H. Stinnette Mr. J. B. McCarthy Mr. W. P. Myhan Mr. F. X. Whelan
+Fieldfrom_0060036622_processed: E. E. Curtin
 
 by_0060036622_processed: 
+
+committeemeeting_0060036622_processed: 8/ 26
+
+considerationdeferreduntil_0060036622_processed: 
+
+contribution_0060036622_processed: ☑
+
+decisionofcommitteeonpresentrequest_0060036622_processed: 
+
+declinedsendletter_0060036622_processed: YES NO
+
+foramericanbrandsinc_0060036622_processed: 
+
+membership_0060036622_processed: 
+
+message_0060036622_processed: Letter 8/ 1/ 76
+
+pay_0060036622_processed: 
+
+payment_0060036622_processed: 1976 $ 40, 921. 30 by A. B., Inc. 1975 84, 309. 94 A. B., Inc. 1974 92, 131. 29 A. B., Inc. 1973 91, 630. 53 A. B., Inc.
+
+recentactionsregardingabovesolicitor_0060036622_processed: 
+
+remarks_0060036622_processed: For confirmation by the Committee. Check for $ 43, 910. 30 representing the ninth semi- annual installment to the Harvard Project transmitted August 1976.
+
+requested_0060036622_processed: Harvard Medical School and Dr. Gary Huber Boston, Massachusetts
+
+to_0060036622_processed: Mr. G. J. Schramm Mr. R. H. Stinnette Mr. J. B. McCarthy Mr. W. P. Myhan Mr. F. X. Whelan
 

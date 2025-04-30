@@ -1,25 +1,25 @@
 Form: 11875011_processed
 ==================================================
 
-BWOriginator_11875011_processed: H.L. Williams
+bworiginator_11875011_processed: H.L. Williams
 
-DateRequested_11875011_processed: 1-23-95
+daterequested_11875011_processed: 1-23-95
 
-DeadlineForBidReceipt_11875011_processed: 1-26-95 9:00 AM EST
+deadlineforbidreceipt_11875011_processed: 1-26-95 9:00 AM EST
 
-FaxNumbers_11875011_processed: 
+fax_11875011_processed: 
 
-Fax_11875011_processed: 
+faxnumbers_11875011_processed: 
 
-IfYouHaveAnyQuestionsPleaseContactTheFollowingPerson_11875011_processed: 
+ifyouhaveanyquestionspleasecontactthefollowingperson_11875011_processed: 
 
-Instructions_11875011_processed: 
+instructions_11875011_processed: 
 
-Numbers_11875011_processed: 
+numbers_11875011_processed: 
 
-OtherInformation_11875011_processed: 
+otherinformation_11875011_processed: 
 
-ProjectNumber_11875011_processed: 1995- 13D
+projectnumber_11875011_processed: 1995- 13D
 
-To_11875011_processed: Goldfarb Consultants
+to_11875011_processed: Goldfarb Consultants
 

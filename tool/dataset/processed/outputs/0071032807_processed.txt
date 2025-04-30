@@ -1,19 +1,19 @@
 Form: 0071032807_processed
 ==================================================
 
-Date_0071032807_processed: November 15, 1968
+date_0071032807_processed: November 15, 1968
 
-EstimatedManHoursForCompletion_0071032807_processed: 
+estimatedmanhoursforcompletion_0071032807_processed: 
 
-OtherPersonnelAssigned_0071032807_processed: Analytical Section is doing most of the work on vapor phase. PDL and John Brooks preparing charocal impregnated RC.
+otherpersonnelassigned_0071032807_processed: Analytical Section is doing most of the work on vapor phase. PDL and John Brooks preparing charocal impregnated RC.
 
-ProjectCode_0071032807_processed: CST- N- 68
+projectcode_0071032807_processed: CST- N- 68
 
-ProjectLeader_0071032807_processed: Mann
+projectleader_0071032807_processed: Mann
 
-ProjectName_0071032807_processed: Charcoal Smoking Tobacco
+projectname_0071032807_processed: Charcoal Smoking Tobacco
 
-ProjectObjective_0071032807_processed: A pipe tobacco containing activated charcoal - must show vapor phase reduction.
+projectobjective_0071032807_processed: A pipe tobacco containing activated charcoal - must show vapor phase reduction.
 
-WorkRequestedBy_0071032807_processed: Marketing
+workrequestedby_0071032807_processed: Marketing
 

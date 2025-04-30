@@ -1,37 +1,32 @@
 Form: 91315069_91315070_processed
 ==================================================
 
-DirectAccountAndChainVoidsUseXToIndicateAVoid100S_91315069_91315070_processed: 
+Fieldfrom_91315069_91315070_processed: 
 
-DirectAccountAndChainVoidsUseXToIndicateAVoidAccount_91315069_91315070_processed: 
+directaccountandchainvoidsusextoindicateavoid_91315069_91315070_processed:
+  100'S: 
+  ACCOUNT: 
+  LTS. 100'S.: 
+  NO. STORES: 
 
-DirectAccountAndChainVoidsUseXToIndicateAVoidLts100S_91315069_91315070_processed: 
+distribution_91315069_91315070_processed: EFFECTIVENESS OF PRE- SELL (REPORT ON OCT. 3 ONLY).
 
-DirectAccountAndChainVoidsUseXToIndicateAVoidNoStores_91315069_91315070_processed: 
+ofdistributionachievedinretailoutlets_91315069_91315070_processed:
+  % ANNUAL CALLS: 
+  % CLASSIFIED CALLS: 
 
-Distribution_91315069_91315070_processed: EFFECTIVENESS OF PRE- SELL (REPORT ON OCT. 3 ONLY).
+promotionalimpact_91315069_91315070_processed:
+  $.50 OFF PACK:: 
+  $5.00 OFF CARTON:: 
+  SALES FORCE 20'S:: 
 
-FieldOfDistributionAchievedInRetailOutletsAnnualCalls_91315069_91315070_processed: 
+subject_91315069_91315070_processed: HARLEY- DAVIDSON 100'S CIGARETTES PROGRESS REPORT
 
-FieldOfDistributionAchievedInRetailOutletsClassifiedCalls_91315069_91315070_processed: 
+submissiondate_91315069_91315070_processed:
+  DEC 26 ☐: 
+  JAN 23 ☐: 
+  OCT 3 ☐: 
+  OCT 31 ☐: 
 
-From_91315069_91315070_processed: 
-
-PromotionalImpact500OffCarton_91315069_91315070_processed: 
-
-PromotionalImpact50OffPack_91315069_91315070_processed: 
-
-PromotionalImpactSalesForce20S_91315069_91315070_processed: 
-
-Subject_91315069_91315070_processed: HARLEY- DAVIDSON 100'S CIGARETTES PROGRESS REPORT
-
-SubmissionDateDec26_91315069_91315070_processed: 
-
-SubmissionDateJan23_91315069_91315070_processed: 
-
-SubmissionDateOct31_91315069_91315070_processed: 
-
-SubmissionDateOct3_91315069_91315070_processed: 
-
-To_91315069_91315070_processed: R. H. ORCUTT
+to_91315069_91315070_processed: R. H. ORCUTT
 

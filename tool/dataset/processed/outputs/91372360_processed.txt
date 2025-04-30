@@ -1,23 +1,20 @@
 Form: 91372360_processed
 ==================================================
 
-Cc_91372360_processed: Mr. R. B. Spell Mr. S. L. Enloe
+cc_91372360_processed: Mr. R. B. Spell Mr. S. L. Enloe
 
-Date_91372360_processed: 11/4/93
+date_91372360_processed: 11/4/93
 
-PleaseTransmitThisDocumentToFaxPhoneNumber_91372360_processed: 212 545- 3299
+pleasetransmitthisdocumentto_91372360_processed:
+  FAX PHONE NUMBER:: 212 545- 3299
+  NAME:: Mr. A. J. Giacoio
+  OFFICE:: New York- Sales Planning
 
-PleaseTransmitThisDocumentToName_91372360_processed: Mr. A. J. Giacoio
+thisdocumentisfrom_91372360_processed:
+  COMMENTS:: The attached Competitive information was secured in Oklahoma today. If you should have any questions.
+  FAX PHONE NUMBER:: (400) 840- 0639
+  NAME:: R F 
+  OFFICE:: Oklahoma City. OK
 
-PleaseTransmitThisDocumentToOffice_91372360_processed: New York- Sales Planning
-
-ThisDocumentIsFromComments_91372360_processed: The attached Competitive information was secured in Oklahoma today. If you should have any questions.
-
-ThisDocumentIsFromFaxPhoneNumber_91372360_processed: (400) 840- 0639
-
-ThisDocumentIsFromName_91372360_processed: R F 
-
-ThisDocumentIsFromOffice_91372360_processed: Oklahoma City. OK
-
-Time_91372360_processed: 3:28 CST
+time_91372360_processed: 3:28 CST
 

@@ -1,95 +1,82 @@
 Form: 81574683_processed
 ==================================================
 
-Blend_81574683_processed: 1077-84
+blend_81574683_processed: 1077-84
 
-Casing_81574683_processed: 7773
+casing_81574683_processed: 7773
 
-CicarettesAirDilution_81574683_processed: NA
+cicarettes_81574683_processed:
+  Air Dilution: NA
+  Circumference: 24.8 mm
+  Glue Roller: Mk II 85
+  Length: 21.0 mm
+  Maker: MK 9
+  Paper: E- 554
+  Tip. Paper: ['51mm cork- Ecusta', 'TOD 01042-4 lines perf.']
+  Tip. Paper Por.: 4260
+  Weight: 96.0 g/100
 
-CicarettesCircumference_81574683_processed: 24.8 mm
+circunference_81574683_processed: 24.7mm
 
-CicarettesGlueRoller_81574683_processed: Mk II 85
+combwrap_81574683_processed: 
 
-CicarettesLength_81574683_processed: 21.0 mm
+combwrappor_81574683_processed: 
 
-CicarettesMaker_81574683_processed: MK 9
+date_81574683_processed: 3/27/84
 
-CicarettesPaper_81574683_processed: E- 554
+filter_81574683_processed: 
 
-CicarettesTipPaperPor_81574683_processed: 4260
+finalflavor_81574683_processed: attached
 
-CicarettesTipPaper_81574683_processed: ['51mm cork- Ecusta', 'TOD 01042-4 lines perf.']
+ginalrequestmadeby_81574683_processed: T. Jessup on 2/13/84
 
-CicarettesWeight_81574683_processed: 96.0 g/100
+kind_81574683_processed: 3.3 35,000y
 
-Circunference_81574683_processed: 24.7mm
+laboratoryanalysis_81574683_processed: Moisture analysis Menthol analysis Tar & nicotine analysis
 
-CombWrapPor_81574683_processed: 
+length_81574683_processed: 126 mm
 
-CombWrap_81574683_processed: 
+menthol_81574683_processed: 8098
 
-Date_81574683_processed: 3/27/84
+other_81574683_processed: 1100 pks.
 
-Filter_81574683_processed: 
+plast_81574683_processed: 7% Kent
 
-FinalFlavor_81574683_processed: attached
+plugwrap_81574683_processed: 626
 
-GinalRequestMadeBy_81574683_processed: T. Jessup on 2/13/84
+plugwrappor_81574683_processed: 1509C
 
-Kind_81574683_processed: 3.3 35,000y
+pressuredrop_81574683_processed: 370mm
 
-LaboratoryAnalysis_81574683_processed: Moisture analysis Menthol analysis Tar & nicotine analysis
+purposeofsample_81574683_processed: Mkt. Research Newport
 
-Length_81574683_processed: 126 mm
+recasing_81574683_processed: 7774
 
-Menthol_81574683_processed: 8098
+requirementslaboratory_81574683_processed: 30 ctns.
 
-Other_81574683_processed: 1100 pks.
+responsibility_81574683_processed:
+  Filter Production: production
+  Making & Packing: Barnes, Fernald
+  Sample Requistion: T. Skinner
+  Shipping: - -
+  Tobacco Blend: production, Barnes
 
-Plast_81574683_processed: 7% Kent
+rod_81574683_processed: 
 
-PlugWrapPor_81574683_processed: 1509C
+samplespecificationswrittenby_81574683_processed: W. Barnes
 
-PlugWrap_81574683_processed: 626
+sectiona_81574683_processed: 21mm 3.3 35,000y RE- 2218 126 mm 370mm 24.7mm 81.0 g/100 7% Kent 626 1509C
 
-PressureDrop_81574683_processed: 370mm
+sectionb_81574683_processed: mm
 
-PurposeOfSample_81574683_processed: Mkt. Research Newport
+specialrequirements_81574683_processed: 1. Cigts. to be packed in white labels printed with "20 Class A. ATF Auth. #47 sample not for sale, all applicable state taxes paid, and code No. 746." 2. Cigts. to be inspected, placed in pk. mailers and shipped Inc., for Mkt. Rsh. Study.
 
-Recasing_81574683_processed: 7774
+weight_81574683_processed: 81.0 g/100
 
-RequirementsLaboratory_81574683_processed: 30 ctns.
-
-ResponsibilityFilterProduction_81574683_processed: production
-
-ResponsibilityMakingPacking_81574683_processed: Barnes, Fernald
-
-ResponsibilitySampleRequistion_81574683_processed: T. Skinner
-
-ResponsibilityShipping_81574683_processed: - -
-
-ResponsibilityTobaccoBlend_81574683_processed: production, Barnes
-
-Rod_81574683_processed: 
-
-SampleSpecificationsWrittenBy_81574683_processed: W. Barnes
-
-SectionA_81574683_processed: 21mm 3.3 35,000y RE- 2218 126 mm 370mm 24.7mm 81.0 g/100 7% Kent 626 1509C
-
-SectionB_81574683_processed: mm
-
-SpecialRequirements_81574683_processed: 1. Cigts. to be packed in white labels printed with "20 Class A. ATF Auth. #47 sample not for sale, all applicable state taxes paid, and code No. 746." 2. Cigts. to be inspected, placed in pk. mailers and shipped Inc., for Mkt. Rsh. Study.
-
-Weight_81574683_processed: 81.0 g/100
-
-WrappingCartons_81574683_processed: white
-
-WrappingClosures_81574683_processed: blue
-
-WrappingLabels_81574683_processed: white
-
-WrappingMarkings_81574683_processed: code #1746
-
-WrappingTearTape_81574683_processed: white
+wrapping_81574683_processed:
+  Cartons: white
+  Closures: blue
+  Labels: white
+  Markings: code #1746
+  Tear Tape: white
 

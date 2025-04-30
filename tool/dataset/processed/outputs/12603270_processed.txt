@@ -1,51 +1,53 @@
 Form: 12603270_processed
 ==================================================
 
-AccountName_12603270_processed: PRODUCT TESTING
+Date1_12603270_processed: June 21, 1985
 
-AdjustedTotalCostOfProtect_12603270_processed: $ -0-
+Date2_12603270_processed: 
 
-AmtOfChange_12603270_processed: Increase Decrease X
+accountname_12603270_processed: PRODUCT TESTING
 
-ApprovedBy_12603270_processed: 
+adjustedtotalcostofprotect_12603270_processed: $ -0-
 
-BrandName_12603270_processed: RICHLAND 100's
+amtofchange_12603270_processed: Increase Decrease X
 
-Cc_12603270_processed: Research Group Manager Bonnie Fuller V. Hansberry (If International)
+approvedby_12603270_processed: 
 
-CommittedToDate_12603270_processed: 3,357,545
+brandname_12603270_processed: RICHLAND 100's
 
-CurrentBalanceAvailable_12603270_processed: 252,955
+cc_12603270_processed: Research Group Manager Bonnie Fuller V. Hansberry (If International)
 
-Date_12603270_processed: June 21, 1985
+committedtodate_12603270_processed: 3,357,545
 
-Description_12603270_processed: Amelia 100's Candidates: (NM-FT and NM- Lights)
+currentbalanceavailable_12603270_processed: 252,955
 
-FieldComplete_12603270_processed: 
+description_12603270_processed: Amelia 100's Candidates: (NM-FT and NM- Lights)
 
-FieldFromNextYearSBudget_12603270_processed: 
+fieldcomplete_12603270_processed: 
 
-FinalReportDue_12603270_processed: 
+finalreportdue_12603270_processed: 
 
-NewBalance_12603270_processed: 311.455
+fromnextyearsbudget_12603270_processed: 
 
-Original_12603270_processed: Project File S. Willinger 
+newbalance_12603270_processed: 311.455
 
-ProjectNo_12603270_processed: 1985-39NP
+original_12603270_processed: Project File S. Willinger 
 
-ProjectedFieldStart_12603270_processed: CANCELLED
+projectedfieldstart_12603270_processed: CANCELLED
 
-Reasons_12603270_processed: 
+projectno_12603270_processed: 1985-39NP
 
-SubmittedBy_12603270_processed: 
+reasons_12603270_processed: 
 
-SummaryOfResearchBudget_12603270_processed: 
+submittedby_12603270_processed: 
 
-Supplier_12603270_processed: Market Facts. Inc.
+summaryofresearchbudget_12603270_processed: 
 
-ThisAmount_12603270_processed: 0
+supplier_12603270_processed: Market Facts. Inc.
 
-ThisChangeFromCurrentBudget_12603270_processed: +58,500
+thisamount_12603270_processed: 0
 
-TotalAreaBudget_12603270_processed: 3,669,000
+thischangefromcurrentbudget_12603270_processed: +58,500
+
+totalareabudget_12603270_processed: 3,669,000
 

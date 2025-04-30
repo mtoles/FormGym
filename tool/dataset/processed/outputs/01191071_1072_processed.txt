@@ -1,21 +1,21 @@
 Form: 01191071_1072_processed
 ==================================================
 
-Attention_01191071_1072_processed: John J. Mulderig C/O Mike Baker
+attention_01191071_1072_processed: John J. Mulderig C/O Mike Baker
 
-Company_01191071_1072_processed: Philip Morris Management Corp.
+company_01191071_1072_processed: Philip Morris Management Corp.
 
-Date_01191071_1072_processed: 11/12/96
+date_01191071_1072_processed: 11/12/96
 
-Fax_01191071_1072_processed: 816/545-7473
+fax_01191071_1072_processed: 816/545-7473
 
-FileFileType_01191071_1072_processed: 083 MEMORY TX
+filefiletype_01191071_1072_processed: 083 MEMORY TX
 
-Option_01191071_1072_processed: 
+option_01191071_1072_processed: 
 
-Page_01191071_1072_processed: 03
+page_01191071_1072_processed: 03
 
-Subject_01191071_1072_processed: Fax Received
+subject_01191071_1072_processed: Fax Received
 
-TelNo_01191071_1072_processed: SHB
+telno_01191071_1072_processed: SHB
 

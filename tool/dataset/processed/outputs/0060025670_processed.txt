@@ -1,23 +1,23 @@
 Form: 0060025670_processed
 ==================================================
 
-AdhesiveCode_0060025670_processed: 
+adhesivecode_0060025670_processed: 
 
-ApplicationTippingCartonEndFlapsEtc_0060025670_processed: 
+applicationtippingcartonendflapsetc_0060025670_processed: 
 
-Approved_0060025670_processed: 
+approved_0060025670_processed: 
 
-LocalPurchasing_0060025670_processed: 
+localpurchasing_0060025670_processed: 
 
-Manager_0060025670_processed: 
+manager_0060025670_processed: 
 
-NotApproved_0060025670_processed: 
+notapproved_0060025670_processed: 
 
-QualityControl_0060025670_processed: 
+qualitycontrol_0060025670_processed: 
 
-Supplier_0060025670_processed: 
+supplier_0060025670_processed: 
 
-TestPeriod_0060025670_processed: 
+tester_0060025670_processed: 
 
-Tester_0060025670_processed: 
+testperiod_0060025670_processed: 
 

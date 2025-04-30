@@ -1,53 +1,53 @@
 Form: 89867723_processed
 ==================================================
 
-Agency_89867723_processed: 816. 00
+Field10Contingencyfinalreportinc_89867723_processed:
+  no: 
+  yes: X
 
-ApprovedBy_89867723_processed:   
+agency_89867723_processed: 816. 00
 
-CostEstimate_89867723_processed: $ 6.816
+approvedby_89867723_processed:   
 
-Date_89867723_processed: April 27, 1981
+banners_89867723_processed: 
 
-Director_89867723_processed: 
+costestimate_89867723_processed: $ 6.816
 
-Facility_89867723_processed: 1. 500. 00
+date_89867723_processed: April 27, 1981
 
-Field10ContingencyFinalReportIncNo_89867723_processed: 
+director_89867723_processed: 
 
-Field10ContingencyFinalReportIncYes_89867723_processed: X
+facility_89867723_processed: 1. 500. 00
 
-FieldBanners_89867723_processed: 
+groupproduct_89867723_processed: 
 
-FieldOpenEnds_89867723_processed: 
+incidence_89867723_processed: 
 
-GroupProduct_89867723_processed: 
+job_89867723_processed: 5546/ 1481
 
-Incidence_89867723_processed: 
+keycriteriaforanalysis_89867723_processed: 
 
-Job_89867723_processed: 5546/ 1481
+lengthint_89867723_processed: 
 
-KeyCriteriaForAnalysis_89867723_processed: 
+manager_89867723_processed: 
 
-LengthInt_89867723_processed: 
+marketingresearch_89867723_processed: 
 
-Manager_89867723_processed: 
+moderatorsfee_89867723_processed: $ 4. 500. 00
 
-MarketingResearch_89867723_processed: 
+openends_89867723_processed: 
 
-ModeratorsFee_89867723_processed: $ 4. 500. 00
+preparedby_89867723_processed: 
 
-PreparedBy_89867723_processed: 
+product_89867723_processed: New Products
 
-ProductManager_89867723_processed: 
+productmanager_89867723_processed: 
 
-Product_89867723_processed: New Products
+projecttitle_89867723_processed: No Side Stream Smoke Focus Groups
 
-ProjectTitle_89867723_processed: No Side Stream Smoke Focus Groups
+researchdesignncellselegibilitydesignkeybannerbreaksmethodologycities_89867723_processed: 
 
-ResearchDesignNCellsElegibilityDesignKeyBannerBreaksMethodologyCities_89867723_processed: 
+researchfirm_89867723_processed: Ruth Manko Assoc.
 
-ResearchFirm_89867723_processed: Ruth Manko Assoc.
-
-ResearchLimitations_89867723_processed: 
+researchlimitations_89867723_processed: 
 

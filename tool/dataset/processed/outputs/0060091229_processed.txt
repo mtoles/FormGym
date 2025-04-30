@@ -1,27 +1,27 @@
 Form: 0060091229_processed
 ==================================================
 
-AnySpecialDietaryMealAndYouOrYourGuestWouldPrefer_0060091229_processed: 
+anyspecialdietarymealandyouoryourguestwouldprefer_0060091229_processed: 
 
-Attention_0060091229_processed: Ms. L. Sobel
+attention_0060091229_processed: Ms. L. Sobel
 
-BusinessTelephone_0060091229_processed: 
+businesstelephone_0060091229_processed: 
 
-DistanceFromYourHomeToAirport_0060091229_processed: 
+distancefromyourhometoairport_0060091229_processed: 
 
-DoYouPreferAirlineSeatsInSmokingOrNonSmokingSection_0060091229_processed: 
+doyoupreferairlineseatsinsmokingornonsmokingsection_0060091229_processed: 
 
-FinalistName_0060091229_processed: 
+finalistname_0060091229_processed: 
 
-HomeAddress_0060091229_processed: 
+homeaddress_0060091229_processed: 
 
-HomeTelephone_0060091229_processed: 
+hometelephone_0060091229_processed: 
 
-MajorAirportNearestYourHome_0060091229_processed: 
+majorairportnearestyourhome_0060091229_processed: 
 
-NameOfGuests_0060091229_processed: 
+nameofguests_0060091229_processed: 
 
-RelationshipToFinalist_0060091229_processed: 
+relationshiptofinalist_0060091229_processed: 
 
-ReturnTo_0060091229_processed: Harden- Kane, Inc. 666 Fifth Avenue New York, N. Y. 10103
+returnto_0060091229_processed: Harden- Kane, Inc. 666 Fifth Avenue New York, N. Y. 10103
 

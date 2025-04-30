@@ -1,71 +1,72 @@
 Form: 71202511_processed
 ==================================================
 
-AcctName_71202511_processed: 
+acctname_71202511_processed: 
 
-ApprovedBy_71202511_processed: Senior VP Marketing (to $ 1,000,000)
+approvedby_71202511_processed: Senior VP Marketing (to $ 1,000,000)
 
-BudgetedNo_71202511_processed: 
+budgeted_71202511_processed:
+  No: 
+  Yes: X
 
-BudgetedYes_71202511_processed: X
+cc_71202511_processed: MaDonna Sliker
 
-Cc_71202511_processed: MaDonna Sliker
+competitiveproposalsobtained_71202511_processed: 
 
-CompetitiveProposalsObtained_71202511_processed: 
+cost_71202511_processed: $ 55,500
 
-CostPerInterview_71202511_processed: 
+costperinterview_71202511_processed: 
 
-Cost_71202511_processed: $ 55,500
+date_71202511_processed: 
 
-Date_71202511_processed: 
+description_71202511_processed: KOOL Natural Lights Packaging - Round I
 
-Description_71202511_processed: KOOL Natural Lights Packaging - Round I
+esttravel_71202511_processed: 3,000
 
-EstTravel_71202511_processed: 3,000
+fieldcomplete_71202511_processed: w /o 3/ 23 /98
 
-FieldComplete_71202511_processed: w /o 3/ 23 /98
+finalsupplierreportdue_71202511_processed: w/ o 4/ 6/ 98
 
-FieldS_71202511_processed: 
+no_71202511_processed: 1998 -18D
 
-FinalSupplierReportDue_71202511_processed: w/ o 4/ 6/ 98
+original_71202511_processed: Project File
 
-No_71202511_processed: 1998 -18D
+originalbudgetedamount_71202511_processed: 
 
-OriginalBudgetedAmount_71202511_processed: 
+proiectedexternalauthorizationdate_71202511_processed: 2 /26 /98
 
-Original_71202511_processed: Project File
+projectno_71202511_processed: 1998 -18D
 
-ProiectedExternalAuthorizationDate_71202511_processed: 2 /26 /98
+projecttypeproducttestauetc_71202511_processed: Qualatative
 
-ProjectNo_71202511_processed: 1998 -18D
+reasonsforrecommendation_71202511_processed: Rabid was selected due to the critical timing of the project and the lack of availability of other suppliers
 
-ProjectTypeProductTestAUEtc_71202511_processed: Qualatative
+recommendedsupplier_71202511_processed: Rabid was selected due to the critical timing of the project and the lack of availability of other suppliers
 
-ReasonSForRecommendation_71202511_processed: Rabid was selected due to the critical timing of the project and the lack of availability of other suppliers
+requestedby_71202511_processed: Nick Wilkerson
 
-RecommendedSupplier_71202511_processed: Rabid was selected due to the critical timing of the project and the lack of availability of other suppliers
+researchreqattached_71202511_processed:
+  No: 
+  Yes: X
 
-RequestedBy_71202511_processed: Nick Wilkerson
+s_71202511_processed: 
 
-ResearchReqAttachedNo_71202511_processed: 
+samplesize_71202511_processed: 12 groups
 
-ResearchReqAttachedYes_71202511_processed: X
+submittedby_71202511_processed: naid
 
-SampleSize_71202511_processed: 12 groups
+supplier_71202511_processed:
+  Rabid Research: 
 
-SubmittedBy_71202511_processed: naid
+tobedeductedfrom1998budget_71202511_processed: $ 58,500
 
-SupplierRabidResearch_71202511_processed: 
+tobedeductedfrom1999budget_71202511_processed: $
 
-ToBeDeductedFrom1998Budget_71202511_processed: $ 58,500
+totalauthorizedprojectamount_71202511_processed: $ 58,500
 
-ToBeDeductedFrom1999Budget_71202511_processed: $
+totalcost_71202511_processed: 58,500
 
-TotalAuthorizedProjectAmount_71202511_processed: $ 58,500
+wave_71202511_processed: 
 
-TotalCost_71202511_processed: 58,500
-
-WaveS_71202511_processed: 
-
-Wave_71202511_processed: 
+waves_71202511_processed: 
 

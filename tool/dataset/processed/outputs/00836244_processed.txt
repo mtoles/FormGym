@@ -1,43 +1,7 @@
 Form: 00836244_processed
 ==================================================
 
-CompoundUsPlate_00836244_processed: 500 250 125
-
-Compound_00836244_processed: 2, 4- Dihydroxypyridine
-
-Concentration1Mgimit_00836244_processed: .5
-
-Conclusion_00836244_processed: This compound is judged non mutagenic in this test system.
-
-ControlAfvertantsPerPlate005MlSolvent_00836244_processed: 4 .67 8 .00 123 .00 135 .33 3 .33.33 16 .00
-
-CopiesToTheFollowing_00836244_processed: Dr. H. J. Minnemeyer Ms. L. B. Gray
-
-DateReceived_00836244_processed: 9 /3 /80
-
 Field2Aminoanthhacene_00836244_processed: 4 2
-
-Field_00836244_processed: 
-
-InvestigatorS_00836244_processed: H. S. Tong & A. A. Poole
-
-Lorillard_00836244_processed: OR61 -2
-
-Lot_00836244_processed: 
-
-No_00836244_processed: 
-
-NotebookPage_00836244_processed: BIO7 -24
-
-PostiveControlUgPlate_00836244_processed: 
-
-Reported_00836244_processed: 10 /10 /80
-
-ReversionRateTestReversantsControlRevertantsPerPlate_00836244_processed: .92 1. 00 .79 .83 .97 .88 .97 .92 .90 .96 .92 .85
-
-STyphimurium_00836244_processed: 
-
-SignatureS_00836244_processed: 
 
 SolventDmsc_00836244_processed: True
 
@@ -45,17 +9,55 @@ SolventOther_00836244_processed: False
 
 SolventWater_00836244_processed: False
 
-Source_00836244_processed: Lorillard - Organic Chemistry
+compound_00836244_processed: 2, 4- Dihydroxypyridine
 
-Ta100_00836244_processed: 123 .00
+compoundusplate_00836244_processed: 500 250 125
 
-Ta15359_00836244_processed: 4 .67
+concentration1mgimit_00836244_processed: .5
 
-Ta1535_00836244_processed: 8 .00
+conclusion_00836244_processed: This compound is judged non mutagenic in this test system.
 
-Ta98_00836244_processed: 3 .33.33
+controlafvertantsperplate005mlsolvent_00836244_processed: 4 .67 8 .00 123 .00 135 .33 3 .33.33 16 .00
 
-Tested_00836244_processed: 9 /10 /80 -10 /10 /80
+copiestothefollowing_00836244_processed: Dr. H. J. Minnemeyer Ms. L. B. Gray
 
-ToxicitySurvival_00836244_processed: 50 80 100
+datereceived_00836244_processed: 9 /3 /80
+
+investigators_00836244_processed: H. S. Tong & A. A. Poole
+
+lorillard_00836244_processed: OR61 -2
+
+lot_00836244_processed: 
+
+no_00836244_processed: 
+
+notebookpage_00836244_processed: BIO7 -24
+
+postivecontrolugplate_00836244_processed: 
+
+reported_00836244_processed: 10 /10 /80
+
+reversionratetestreversantscontrolrevertantsperplate_00836244_processed: .92 1. 00 .79 .83 .97 .88 .97 .92 .90 .96 .92 .85
+
+signatures_00836244_processed: 
+
+source_00836244_processed: Lorillard - Organic Chemistry
+
+styphimurium_00836244_processed: 
+
+ta100_00836244_processed:
+  : 123 .00
+  (+) : 135 .33
+
+ta1535_00836244_processed:
+  (+) : 8 .00
+  (-) 9: 4 .67
+
+ta98_00836244_processed:
+  (+) : 16 .00
+  (-) : 3 .33.33
+
+tested_00836244_processed: 9 /10 /80 -10 /10 /80
+
+toxicitysurvival_00836244_processed: 50 80 100
 

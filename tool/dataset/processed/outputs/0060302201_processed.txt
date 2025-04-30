@@ -1,35 +1,37 @@
 Form: 0060302201_processed
 ==================================================
 
-CanTimeBeSparedForCompletion_0060302201_processed: 
+Comments1_0060302201_processed: none
 
-CommentsByManagerOrDirector_0060302201_processed: 
+Comments2_0060302201_processed: ['been with applicability', 'may provide a technique.']
 
-Comments_0060302201_processed: none
+cantimebesparedforcompletion_0060302201_processed: 
 
-Division_0060302201_processed: Analytical- Radiochemistry
+commentsbymanagerordirector_0060302201_processed: 
 
-DoesWorkMeritPublication_0060302201_processed: 
+division_0060302201_processed: Analytical- Radiochemistry
 
-EstimateOfTimeNeededToCompleteWork_0060302201_processed: approximately one month
+doesworkmeritpublication_0060302201_processed: 
 
-EstimateOfTimeNeededToPrepareManuscriptForPresentation_0060302201_processed: several weeks after completion
+estimateoftimeneededtocompletework_0060302201_processed: approximately one month
 
-EstimateOfTimeNeededToPrepareManuscriptForPublication_0060302201_processed: several weeks after completion of work
+estimateoftimeneededtopreparemanuscriptforpresentation_0060302201_processed: several weeks after completion
 
-HasWorkBeenReportedInManuscript_0060302201_processed: yes
+estimateoftimeneededtopreparemanuscriptforpublication_0060302201_processed: several weeks after completion of work
 
-IfSoGiveDateAndTitle_0060302201_processed: MBTH- reagent for analysis of aliphatic aldehydes 7 / 5 / 67
+hasworkbeenreportedinmanuscript_0060302201_processed: yes
 
-Name_0060302201_processed: Ronald. W Davis
+ifsogivedateandtitle_0060302201_processed: MBTH- reagent for analysis of aliphatic aldehydes 7 / 5 / 67
 
-NamesOfOtherPersonsCollaboratingInWork_0060302201_processed: L. W. McDowell
+name_0060302201_processed: Ronald. W Davis
 
-NatureOfWork_0060302201_processed: Total aldehyde analysis in cigarette mainstream 
+namesofotherpersonscollaboratinginwork_0060302201_processed: L. W. McDowell
 
-PresentStatusOfWorkCiteProgressReportsWhereAppropriate_0060302201_processed: Techniques worked out and reported for pure aldehyde samples; must be adapted for cigarette mainstream smoke by further laboratory work
+natureofwork_0060302201_processed: Total aldehyde analysis in cigarette mainstream 
 
-ScientificJournalOfChoice_0060302201_processed: Tobacco Science
+presentstatusofworkciteprogressreportswhereappropriate_0060302201_processed: Techniques worked out and reported for pure aldehyde samples; must be adapted for cigarette mainstream smoke by further laboratory work
 
-ScientificMetingOfChoice_0060302201_processed: none as yet
+scientificjournalofchoice_0060302201_processed: Tobacco Science
+
+scientificmetingofchoice_0060302201_processed: none as yet
 

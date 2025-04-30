@@ -1,41 +1,41 @@
 Form: 88547278_88547279_processed
 ==================================================
 
-AcceptedBy_88547278_88547279_processed: 
+acceptedby_88547278_88547279_processed: 
 
-AccountExecutive_88547278_88547279_processed: Peter Faucetta Jr.
+accountexecutive_88547278_88547279_processed: Peter Faucetta Jr.
 
-AuthorizedSignature_88547278_88547279_processed: Applied Graphics Technologies 50 West 23rd Street, N.Y.C. 10010
+authorizedsignature_88547278_88547279_processed: Applied Graphics Technologies 50 West 23rd Street, N.Y.C. 10010
 
-Binding_88547278_88547279_processed: Leave in Full Sheets
+binding_88547278_88547279_processed: Leave in Full Sheets
 
-Date_88547278_88547279_processed: July 7, 1993
+date_88547278_88547279_processed: July 7, 1993
 
-DeliveryDate_88547278_88547279_processed: 
+deliverydate_88547278_88547279_processed: 
 
-EstimateNo_88547278_88547279_processed: 4854- 5
+estimateno_88547278_88547279_processed: 4854- 5
 
-Fax_88547278_88547279_processed: (212) 627- 8602
+fax_88547278_88547279_processed: (212) 627- 8602
 
-OtherSpecifications_88547278_88547279_processed: 
+otherspecifications_88547278_88547279_processed: 
 
-PackingAndDistribution_88547278_88547279_processed: Bulk in cartons, FOB Oceanside Please allow 14 working days for delivery
+packinganddistribution_88547278_88547279_processed: Bulk in cartons, FOB Oceanside Please allow 14 working days for delivery
 
-PaperAndMaterials_88547278_88547279_processed: 24 pt. Carolina C/1/S
+paperandmaterials_88547278_88547279_processed: 24 pt. Carolina C/1/S
 
-PreparationAndComposition_88547278_88547279_processed: Final Film Supplied Combined Blue
+preparationandcomposition_88547278_88547279_processed: Final Film Supplied Combined Blue
 
-PricesAndSchedule_88547278_88547279_processed: $16, 158
+pricesandschedule_88547278_88547279_processed: $16, 158
 
-ProcessAndColors_88547278_88547279_processed: 6/1 1/1
+processandcolors_88547278_88547279_processed: 6/1 1/1
 
-Qty_88547278_88547279_processed: 89,725
+qty_88547278_88547279_processed: 89,725
 
-QuantitiesAndDescription_88547278_88547279_processed: H/D 8 Pk. Wide Header 4 C/P + 2 Hits Day- Glo + Spot Varnish
+quantitiesanddescription_88547278_88547279_processed: H/D 8 Pk. Wide Header 4 C/P + 2 Hits Day- Glo + Spot Varnish
 
-QuotationTo_88547278_88547279_processed: Lorillard One Park Avenue New York, NY 10016 Attn: Neil Toumey
+quotationto_88547278_88547279_processed: Lorillard One Park Avenue New York, NY 10016 Attn: Neil Toumey
 
-Sizes_88547278_88547279_processed: 19.750 X 11
+sizes_88547278_88547279_processed: 19.750 X 11
 
-Tel_88547278_88547279_processed: (212) 627 4111
+tel_88547278_88547279_processed: (212) 627 4111
 

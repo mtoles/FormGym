@@ -1,18 +1,6 @@
 Form: 13149651_processed
 ==================================================
 
-AffectedCh20Appropriations_13149651_processed: 
-
-Agency_13149651_processed: University of Wisconsin System
-
-AmendmentNoIfApplicable_13149651_processed: 
-
-AsumptionsUsedInArrivingAtFiscalEstimate_13149651_processed: This bill regulates smoking in university buildings which house educational programs and in inpatient health care facilities. Smoking within these or rooms, provided buildings would be allowed only specified facilities designate these "smoking permitted" areas. that signs are posted to university buildings would each It is estimated that, on the average, The per "smoking signs. sign cost is require about three permitted" This estimate is based on the estimated at $4 50 in 1982-83 dollars. 1981 increased to reflect Inflation from 1981 to 1983. per sign cost, and Thus, the expected one-time cost for the University Systet to implement no be about There are significant the provisions of the bill would $8,000. with the bill's provisions. continuing annual costs associated
-
-CheckColumnsBelowOnlyIfBillMakesARectAppropriationOrAffectASumSufficientAppropriation_13149651_processed: 
-
-Date_13149651_processed: 2-2-83
-
 Field1_13149651_processed: 
 
 Field202851A1B1Im_13149651_processed: 
@@ -21,81 +9,84 @@ Field3_13149651_processed:
 
 Field4_13149651_processed: 
 
-Field5TypesOfLocalGovernmentalUnitAflectedCities_13149651_processed: 
+Field5Typesoflocalgovernmentalunitaflected_13149651_processed:
+  ☐: 
+  ☐ Cities: 
+  ☐ Others: 
+  ☐ Villages: 
 
-Field5TypesOfLocalGovernmentalUnitAflectedOthers_13149651_processed: 
+FundsourceaffectedFed_13149651_processed: False
 
-Field5TypesOfLocalGovernmentalUnitAflectedVillages_13149651_processed: 
+FundsourceaffectedGpr_13149651_processed: True
 
-Field5TypesOfLocalGovernmentalUnitAflected_13149651_processed: 
+FundsourceaffectedPro_13149651_processed: False
 
-FieldCorrected_13149651_processed: 
+FundsourceaffectedPrs_13149651_processed: False
 
-FieldDecreaseRevenues_13149651_processed: 
+FundsourceaffectedSeg_13149651_processed: False
 
-FieldIncreaseRevenues_13149651_processed: 
+FundsourceaffectedSegs_13149651_processed: False
 
-FieldMandatory_13149651_processed: 
+WithinagencysbudgetDecreasecosts_13149651_processed: False
 
-FieldPermissive_13149651_processed: 
+WithinagencysbudgetNo_13149651_processed: False
 
-FieldSupplemental_13149651_processed: 
+WithinagencysbudgetYes_13149651_processed: True
 
-FieldUpdated_13149651_processed: 
+affectedch20appropriations_13149651_processed: 
 
-FiscalEffect_13149651_processed: 
+agency_13149651_processed: University of Wisconsin System
 
-FiscalEstimateAdMba23Rev1180_13149651_processed: 
+amendmentnoifapplicable_13149651_processed: 
 
-FundSourceAffectedFed_13149651_processed: False
+asumptionsusedinarrivingatfiscalestimate_13149651_processed: This bill regulates smoking in university buildings which house educational programs and in inpatient health care facilities. Smoking within these or rooms, provided buildings would be allowed only specified facilities designate these "smoking permitted" areas. that signs are posted to university buildings would each It is estimated that, on the average, The per "smoking signs. sign cost is require about three permitted" This estimate is based on the estimated at $4 50 in 1982-83 dollars. 1981 increased to reflect Inflation from 1981 to 1983. per sign cost, and Thus, the expected one-time cost for the University Systet to implement no be about There are significant the provisions of the bill would $8,000. with the bill's provisions. continuing annual costs associated
 
-FundSourceAffectedGpr_13149651_processed: True
+checkcolumnsbelowonlyifbillmakesarectappropriationoraffectasumsufficientappropriation_13149651_processed: 
 
-FundSourceAffectedPro_13149651_processed: False
+corrected_13149651_processed: 
 
-FundSourceAffectedPrs_13149651_processed: False
+date_13149651_processed: 2-2-83
 
-FundSourceAffectedSegS_13149651_processed: False
+decreaserevenues_13149651_processed: 
 
-FundSourceAffectedSeg_13149651_processed: False
+fiscaleffect_13149651_processed: 
 
-IncreaseCostsMayBePossibleToAbsorb_13149651_processed: ☑
+fiscalestimateadmba23rev1180_13149651_processed: 
 
-LocalDecreasCorts_13149651_processed: 
+increasecostsmaybepossibletoabsorb_13149651_processed: ☑
 
-LocalIncreaseCosts_13149651_processed: 
+increaserevenues_13149651_processed: 
 
-LocalMandatory_13149651_processed: 
+local_13149651_processed:
+  Decreas Corts: 
+  Mandatory: 
+  Permane: 
+  ☐ Increase Costs: 
+  ☐ Mandatory: 
+  ☐ No oca government cost: 
+  ☐ Permissive: 
 
-LocalNoOcaGOvernmentCost_13149651_processed: 
+longrangefiscalimplications_13149651_processed: 
 
-LocalPermane_13149651_processed: 
+lrborbillnohanauno_13149651_processed: LRB 1946
 
-LocalPermissive_13149651_processed: 
+mandatory_13149651_processed: 
 
-LongRangeFiscalImplications_13149651_processed: 
+original_13149651_processed: ☑
 
-LrbOrBillNoHanAuNo_13149651_processed: LRB 1946
+permissive_13149651_processed: 
 
-Original_13149651_processed: ☑
+state_13149651_processed:
+  ☐ Create New Appropriation: 
+  ☐ Decrease Existing Appropriation: 
+  ☐ Decrease Existing Revenues: 
+  ☐ Increase Existing Appropriation: 
+  ☐ Increase Existing Revenues: 
+  ☐ No State Fiscal Effect: 
 
-StateCreateNewAppropriation_13149651_processed: 
+subject_13149651_processed: Regulation of Smoking Public Places
 
-StateDecreaseExistingAppropriation_13149651_processed: 
+supplemental_13149651_processed: 
 
-StateDecreaseExistingRevenues_13149651_processed: 
-
-StateIncreaseExistingAppropriation_13149651_processed: 
-
-StateIncreaseExistingRevenues_13149651_processed: 
-
-StateNoStateFiscalEffect_13149651_processed: 
-
-Subject_13149651_processed: Regulation of Smoking Public Places
-
-WithinAgencySBudgetDecreaseCosts_13149651_processed: False
-
-WithinAgencySBudgetNo_13149651_processed: False
-
-WithinAgencySBudgetYes_13149651_processed: True
+updated_13149651_processed: 
 

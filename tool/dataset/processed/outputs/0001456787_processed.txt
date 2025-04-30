@@ -1,55 +1,37 @@
 Form: 0001456787_processed
 ==================================================
 
-BwitSuggestion_0001456787_processed: 99 mm 72 mm 27 mm mm 58.5 mm 24.8 mm mm 32 mm 35 mm 13 % mg 858 mg 243.6 mg/ 
+bwitsuggestion_0001456787_processed: 99 mm 72 mm 27 mm mm 58.5 mm 24.8 mm mm 32 mm 35 mm 13 % mg 858 mg 243.6 mg/ 
 
-HkTrial_0001456787_processed: 99 mm 72 mm 27 mm 62 mm 58.5 mm 24.8 mm mm 32 mm 35 mm 13% mg 858 mg 243.6 mg/ cc
+hktrial_0001456787_processed: 99 mm 72 mm 27 mm 62 mm 58.5 mm 24.8 mm mm 32 mm 35 mm 13% mg 858 mg 243.6 mg/ cc
 
-PhysicalCharacteristicsCigaretteCircumference_0001456787_processed: ['24.8 mm', '24.8 mm']
+physicalcharacteristics_0001456787_processed:
+  Cigarette Circumference: ['24.8 mm', '24.8 mm']
+  Filter Plug Length: ['27 mm', '27 mm']
+  Filter Plug Pressure Drop (encap.): ['58.5 mm', '58.5 mm']
+  Filter Plug Pressure Drop (unencap.): ['mm', '62 mm']
+  Filter Ventilation Rate: 
+  Moisture content (Packing): ['13 %', '13%']
+  Overall Cigarette Length: ['99 mm', '99 mm']
+  Print Position (from filter end): ['35 mm', '35 mm']
+  Tipping Length: ['32 mm', '32 mm']
+  Tobacco Rod Length: ['72 mm', '72 mm']
+  Total Pressure Drop (encap.): 
+  Total Pressure Drop (unencap.): ['mm', 'mm']
 
-PhysicalCharacteristicsFilterPlugLength_0001456787_processed: ['27 mm', '27 mm']
+tippingpaper_0001456787_processed:
+  Bobbin Width: ['64 mm', '64 mm']
+  Color: 
+  Dobbin Length: ['2500 M', '2500 M']
+  Perforation Type & No. of lines: ['N/A', 'N/A']
+  Porosity: ['Non Porous', 'Non Porous']
+  Print Description: ['N/A', 'N/A']
+  Substance: ['36 nm/ M2', '36 nm /47M2']
+  Supplier Code No(s).: 
+  Supplier(s): ['ECUSTA/ B&W', 'ECUSTA/ B & W']
 
-PhysicalCharacteristicsFilterPlugPressureDropEncap_0001456787_processed: ['58.5 mm', '58.5 mm']
-
-PhysicalCharacteristicsFilterPlugPressureDropUnencap_0001456787_processed: ['mm', '62 mm']
-
-PhysicalCharacteristicsFilterVentilationRate_0001456787_processed: 
-
-PhysicalCharacteristicsMoistureContentPacking_0001456787_processed: ['13 %', '13%']
-
-PhysicalCharacteristicsOverallCigaretteLength_0001456787_processed: ['99 mm', '99 mm']
-
-PhysicalCharacteristicsPrintPositionFromFilterEnd_0001456787_processed: ['35 mm', '35 mm']
-
-PhysicalCharacteristicsTippingLength_0001456787_processed: ['32 mm', '32 mm']
-
-PhysicalCharacteristicsTobaccoRodLength_0001456787_processed: ['72 mm', '72 mm']
-
-PhysicalCharacteristicsTotalPressureDropEncap_0001456787_processed: 
-
-PhysicalCharacteristicsTotalPressureDropUnencap_0001456787_processed: ['mm', 'mm']
-
-TippingPaperBobbinWidth_0001456787_processed: ['64 mm', '64 mm']
-
-TippingPaperColor_0001456787_processed: 
-
-TippingPaperDobbinLength_0001456787_processed: ['2500 M', '2500 M']
-
-TippingPaperPerforationTypeNoOfLines_0001456787_processed: ['N/A', 'N/A']
-
-TippingPaperPorosity_0001456787_processed: ['Non Porous', 'Non Porous']
-
-TippingPaperPrintDescription_0001456787_processed: ['N/A', 'N/A']
-
-TippingPaperSubstance_0001456787_processed: ['36 nm/ M2', '36 nm /47M2']
-
-TippingPaperSupplierCodeNoS_0001456787_processed: 
-
-TippingPaperSupplierS_0001456787_processed: ['ECUSTA/ B&W', 'ECUSTA/ B & W']
-
-WeightsNetNetTobacco_0001456787_processed: ['858 mg', '858 mg']
-
-WeightsTobaccoRodDensity_0001456787_processed: ['243.6 mg/ ', '243.6 mg/ cc']
-
-WeightsTotalCigaretteWeight_0001456787_processed: ['mg', 'mg']
+weights_0001456787_processed:
+  Net Net Tobacco: ['858 mg', '858 mg']
+  Tobacco Rod Density: ['243.6 mg/ ', '243.6 mg/ cc']
+  Total Cigarette Weight: ['mg', 'mg']
 

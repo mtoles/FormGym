@@ -1,93 +1,75 @@
 Form: 00093726_processed
 ==================================================
 
-AdditionalSpray_00093726_processed: 3. 4% PMO in EtoH
+additionalspray_00093726_processed: 3. 4% PMO in EtoH
 
-AppingCartons_00093726_processed: "
+apping_00093726_processed:
+  Cartons: "
+  Closures: Blue
+  Labels: White
+  Markings: Sample No. on overwrap
+  Tear rape: White
 
-AppingClosures_00093726_processed: Blue
+batchsize_00093726_processed: 50 lbs.
 
-AppingLabels_00093726_processed: White
+blend_00093726_processed: OGS
 
-AppingMarkings_00093726_processed: Sample No. on overwrap
+casing_00093726_processed: OGS
 
-AppingTearRape_00093726_processed: White
+cigarettes_00093726_processed:
+  Circumference: 25.
+  Filter Length: 20 mm
+  Length: 85 mm
+  Maker: AMF
+  Paper: 554
+  Tipping Paper: 30 mm
+  Weight: To be det. (803 mg tobacco)
 
-BatchSize_00093726_processed: 50 lbs.
+date_00093726_processed: September 21, 1976
 
-Blend_00093726_processed: OGS
+filters_00093726_processed:
+  Circumference: 
+  Kind: 20 mm True plastic rod
+  Plasticizer: 
+  Plug Wrap: 
+  Pressure Drop: 
+  Process: 
+  Rod Length: 
+  Weight: 
 
-Casing_00093726_processed: OGS
+finalflavor_00093726_processed: OGS
 
-CigarettesCircumference_00093726_processed: 25.
-
-CigarettesFilterLength_00093726_processed: 20 mm
-
-CigarettesLength_00093726_processed: 85 mm
-
-CigarettesMaker_00093726_processed: AMF
-
-CigarettesPaper_00093726_processed: 554
-
-CigarettesTippingPaper_00093726_processed: 30 mm
-
-CigarettesWeight_00093726_processed: To be det. (803 mg tobacco)
-
-Date_00093726_processed: September 21, 1976
-
-FiltersCircumference_00093726_processed: 
-
-FiltersKind_00093726_processed: 20 mm True plastic rod
-
-FiltersPlasticizer_00093726_processed: 
-
-FiltersPlugWrap_00093726_processed: 
-
-FiltersPressureDrop_00093726_processed: 
-
-FiltersProcess_00093726_processed: 
-
-FiltersRodLength_00093726_processed: 
-
-FiltersWeight_00093726_processed: 
-
-FinalFlavor_00093726_processed: OGS
-
-LaboratoryAnalysis_00093726_processed: Smoke Analysis PMO Analysis
-
-OriginalRequestMadeBy_00093726_processed: Dr. A. W. Spears
-
-PressureDrop_00093726_processed: To be determined
-
-Recasing_00093726_processed: OGS
-
-ReportsCopiesTo_00093726_processed: Dr. F. J. Schulz Dr. H. J. Minnemeyer
-
-ReportsOriginalTo_00093726_processed: Dr. A. W. Spears
-
-ReportsWrittenBy_00093726_processed: P. D. Schickedantz
-
-RequirementsLaboratory_00093726_processed: 3 cartons
-
-RequirementsOther_00093726_processed: 20, 000 cigts.
-
-ResponsibilityFilterProduction_00093726_processed: Wicker
-
-ResponsibilityMakingPacking_00093726_processed: Brown /Routh
-
-ResponsibilitySampleRequisitionForm020206_00093726_processed: "
-
-ResponsibilityShipping_00093726_processed: Routh
-
-ResponsibilityTobaccoBlend_00093726_processed: Ammons
-
-SampleNo_00093726_processed: 6030
-
-SampleSpecificationsWrittenBy_00093726_processed: W. E. Routh
-
-SpecialRequirements_00093726_processed: Spray 50 lbs. tobacco with solution of 880 g (= 1. 94 lbs.) PMC in 1175 ml of denatured alcohol. This should give 3. 4% PMO add- on (3. 3% PMO contained) assuming 88% spraying efficiency. PMO delivery from 85 mm cigarette smoked to 30 mm butt should be 6. 5 mg/ cig.
-
-TypeOfCigarette_00093726_processed: 85 mm Filter
+laboratoryanalysis_00093726_processed: Smoke Analysis PMO Analysis
 
 on_00093726_processed: September 21, 1976
+
+originalrequestmadeby_00093726_processed: Dr. A. W. Spears
+
+pressuredrop_00093726_processed: To be determined
+
+recasing_00093726_processed: OGS
+
+reports_00093726_processed:
+  Copies to: Dr. F. J. Schulz Dr. H. J. Minnemeyer
+  Original to: Dr. A. W. Spears
+  Written by: P. D. Schickedantz
+
+requirements_00093726_processed:
+  Laboratory: 3 cartons
+  Other: 20, 000 cigts.
+
+responsibility_00093726_processed:
+  Filter Production: Wicker
+  Making & Packing: Brown /Routh
+  Sample Requisition [Form 02: 02: 06]: "
+  Shipping: Routh
+  Tobacco Blend: Ammons
+
+sampleno_00093726_processed: 6030
+
+samplespecificationswrittenby_00093726_processed: W. E. Routh
+
+specialrequirements_00093726_processed: Spray 50 lbs. tobacco with solution of 880 g (= 1. 94 lbs.) PMC in 1175 ml of denatured alcohol. This should give 3. 4% PMO add- on (3. 3% PMO contained) assuming 88% spraying efficiency. PMO delivery from 85 mm cigarette smoked to 30 mm butt should be 6. 5 mg/ cig.
+
+typeofcigarette_00093726_processed: 85 mm Filter
 

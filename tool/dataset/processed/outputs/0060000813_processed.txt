@@ -1,35 +1,28 @@
 Form: 0060000813_processed
 ==================================================
 
-BackCigarettesComments_0060000813_processed: 
+backcigarettes_0060000813_processed:
+  Comments:: 
+  Cratering:: 
+  Hole Depth:: 
+  Scorching:: 
 
-BackCigarettesCratering_0060000813_processed: 
+datereceived_0060000813_processed: 1 /25 /91
 
-BackCigarettesHoleDepth_0060000813_processed: 
+frontcigarettes_0060000813_processed:
+  Comments:: 
+  Cratering:: 
+  Hole Depth:: 
+  Scorching:: 
 
-BackCigarettesScorching_0060000813_processed: 
+laserperforatedtippingappearancecheckholedepthscorchingcratering_0060000813_processed:
+  Brand:: ["CARLTON Filter 100's - 4 Mg Laser", 'Mfg. for Taiwan']
+  Modules:: 412
+  Power:: 
+  Pulse:: 
+  Shift & Date:: 
 
-DateReceived_0060000813_processed: 1 /25 /91
+ps_0060000813_processed: 73 -91
 
-FrontCigarettesComments_0060000813_processed: 
-
-FrontCigarettesCratering_0060000813_processed: 
-
-FrontCigarettesHoleDepth_0060000813_processed: 
-
-FrontCigarettesScorching_0060000813_processed: 
-
-LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringBrand_0060000813_processed: ["CARLTON Filter 100's - 4 Mg Laser", 'Mfg. for Taiwan']
-
-LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringModules_0060000813_processed: 412
-
-LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringPower_0060000813_processed: 
-
-LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringPulse_0060000813_processed: 
-
-LaserPerforatedTippingAppearanceCheckHoleDepthScorchingCrateringShiftDate_0060000813_processed: 
-
-PS_0060000813_processed: 73 -91
-
-WeekOf_0060000813_processed: 
+weekof_0060000813_processed: 
 

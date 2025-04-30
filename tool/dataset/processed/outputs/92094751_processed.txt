@@ -1,71 +1,61 @@
 Form: 92094751_processed
 ==================================================
 
-AreaRegionDivision_92094751_processed: 03/ 07/ 415415 & 418418
+arearegiondivision_92094751_processed: 03/ 07/ 415415 & 418418
 
-ChainAcceptanceExcellent_92094751_processed: 
+chainacceptance_92094751_processed:
+  EXCELLENT: 
+  FAIR: 
+  GOOD: 
+  POOR: 
 
-ChainAcceptanceFair_92094751_processed: 
+comments_92094751_processed: Premiums packaged to large to store on a van. Could not get enough on a van to sell all day. Retailers only accepted small quantities of deals. Consumers perceived value and not meet expectations.
 
-ChainAcceptanceGood_92094751_processed: 
+consumeracceptance_92094751_processed:
+  EXCELLENT: 
+  FAIR: 
+  GOOD: 
+  POOR: x
 
-ChainAcceptancePoor_92094751_processed: 
+date_92094751_processed: 9/ 8 /95
 
-Comments_92094751_processed: Premiums packaged to large to store on a van. Could not get enough on a van to sell all day. Retailers only accepted small quantities of deals. Consumers perceived value and not meet expectations.
+efficiencyrating_92094751_processed:
+  EXCELLENT: 
+  FAIR: 
+  GOOD: 
+  POOR: x
 
-ConsumerAcceptanceExcellent_92094751_processed: 
+explain_92094751_processed: Chain stores will not accept multiple Newport Promotions (Tier system) at the same time.
 
-ConsumerAcceptanceFair_92094751_processed: 
+ifnoexplain_92094751_processed: This model/ type of sunglass was not received well at consumer/ retail level.
 
-ConsumerAcceptanceGood_92094751_processed: 
+ifyescanitbeimproved_92094751_processed: Velcro on strap did not hold. Two right sides of velcro on same glass did not adhere.
 
-ConsumerAcceptancePoor_92094751_processed: x
+independentacceptance_92094751_processed:
+  EXCELLENT: 
+  FAIR: 
+  GOOD: 
+  POOR: x
 
-Date_92094751_processed: 9/ 8 /95
+itembrand_92094751_processed: Newport Sunglasses
 
-EfficiencyRatingExcellent_92094751_processed: 
+itemsdealsreceived_92094751_processed: 22, 320 (Indy East & West) NO SHOW SAMPLES
 
-EfficiencyRatingFair_92094751_processed: 
+promo_92094751_processed: 28
 
-EfficiencyRatingGood_92094751_processed: 
+promotionalperiod_92094751_processed: June /July 1995
 
-EfficiencyRatingPoor_92094751_processed: x
+scope_92094751_processed:
+  AREA: 
+  DIVISION: 
+  OTHER*: x
+  REGION: 
 
-FieldExplain_92094751_processed: Chain stores will not accept multiple Newport Promotions (Tier system) at the same time.
+shouldpromotionberepeated_92094751_processed:
+  NO: x
+  YES: 
 
-FieldItemsDealsReceived_92094751_processed: 22, 320 (Indy East & West) NO SHOW SAMPLES
-
-IfNoExplain_92094751_processed: This model/ type of sunglass was not received well at consumer/ retail level.
-
-IfYesCanItBeImproved_92094751_processed: Velcro on strap did not hold. Two right sides of velcro on same glass did not adhere.
-
-IndependentAcceptanceExcellent_92094751_processed: 
-
-IndependentAcceptanceFair_92094751_processed: 
-
-IndependentAcceptanceGood_92094751_processed: 
-
-IndependentAcceptancePoor_92094751_processed: x
-
-ItemBrand_92094751_processed: Newport Sunglasses
-
-Promo_92094751_processed: 28
-
-PromotionalPeriod_92094751_processed: June /July 1995
-
-ScopeArea_92094751_processed: 
-
-ScopeDivision_92094751_processed: 
-
-ScopeOther_92094751_processed: x
-
-ScopeRegion_92094751_processed: 
-
-ShouldPromotionBeRepeatedNo_92094751_processed: x
-
-ShouldPromotionBeRepeatedYes_92094751_processed: 
-
-WereQuantitiesAppropriateNo_92094751_processed: 
-
-WereQuantitiesAppropriateYes_92094751_processed: X
+werequantitiesappropriate_92094751_processed:
+  NO*: 
+  YES: X
 

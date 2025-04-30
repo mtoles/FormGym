@@ -1,19 +1,19 @@
 Form: 0060255888_processed
 ==================================================
 
-Address_0060255888_processed: 383 Madison Avenue New York 10017
+address_0060255888_processed: 383 Madison Avenue New York 10017
 
-Agency_0060255888_processed: BBDO Inc.
+agency_0060255888_processed: BBDO Inc.
 
-Client_0060255888_processed: American Tobacco Co.
+client_0060255888_processed: American Tobacco Co.
 
-Contact_0060255888_processed: Mr. Mary Goldsmith
+contact_0060255888_processed: Mr. Mary Goldsmith
 
-Date_0060255888_processed: October 9, 1968
+date_0060255888_processed: October 9, 1968
 
-Products_0060255888_processed: Tareyton Cigarettes
+products_0060255888_processed: Tareyton Cigarettes
 
-ScriptSAndOrStoryBoardSClearedEcu_0060255888_processed: 60
-
-ScriptSAndOrStoryBoardSClearedPhoneBooth_0060255888_processed: 60
+scriptsandorstoryboardscleared_0060255888_processed:
+  ECU :: 60
+  Phone Booth :: 60
 
