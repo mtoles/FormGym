@@ -114,7 +114,12 @@ def main():
     annots_df = annots_df_full[
         annots_df_full["image_id"] == annots_df_full["image_id"].iloc[0]
     ]
+    any_7084 = annots_df_full[
+        annots_df_full.apply(lambda x: "7084" in str(list(x)), axis=1)
+    ]
+    # has_relation = annots_df[annots_df["relation"].notna()]
     has_relation = annots_df[annots_df["relation"].notna()]
+    annots_27 = has_relation[has_relation["image_id"] == 27]
     vp = annots_df_full[annots_df_full["text"] == "Voting power"]
     vp_ = annots_df_full[annots_df_full["text"] == "7.446%"].iloc[0]
     vp_r = vp_["relation"]
