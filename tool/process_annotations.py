@@ -91,20 +91,20 @@ def main():
     # Process all JSON files in the annotations folder
     annotations_dir = Path('./dataset/raw/annotations')
     for input_file in annotations_dir.glob('*.json'):
-        try:
-            qa_pairs = process_annotation_file(input_file)
+        # try:
+        qa_pairs = process_annotation_file(input_file)
+        
+        # Create output filename
+        output_file = output_dir / f"{input_file.stem}_processed.json"
+        
+        # Save processed data
+        with open(output_file, 'w') as f:
+            json.dump(qa_pairs, f, indent=2)
+        
+        print(f"Processed {input_file.name} -> {output_file.name}")
             
-            # Create output filename
-            output_file = output_dir / f"{input_file.stem}_processed.json"
-            
-            # Save processed data
-            with open(output_file, 'w') as f:
-                json.dump(qa_pairs, f, indent=2)
-            
-            print(f"Processed {input_file.name} -> {output_file.name}")
-            
-        except Exception as e:
-            print(f"Error processing {input_file.name}: {str(e)}")
+        # except Exception as e:
+        #     print(f"Error processing {input_file.name}: {str(e)}")
 
 if __name__ == "__main__":
     main()

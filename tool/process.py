@@ -95,7 +95,7 @@ def process_annotation_and_image(
     counter = 1
 
     input_image_path = os.path.join(input_images_dir, f"{form_id}.{image_ext}")
-    text_mask = get_text_mask(input_image_path, output_path="tmp/text_mask.png")
+    text_mask = get_text_mask(input_image_path, output_path="tmp/text_mask.png")[0]
     for entry in doc:
         if entry["label"] != "question" or not entry.get("linking"):
             continue
@@ -108,8 +108,6 @@ def process_annotation_and_image(
             if answer_entry["label"] == "question":
                 continue
 
-            # get the text mask
-
             output_image_path = os.path.join(
                 output_images_dir, f"processed_{form_id}_{counter}.png"
             )
@@ -118,42 +116,67 @@ def process_annotation_and_image(
                 logger.warning(f"Image not found: {input_image_path}")
                 continue
 
-            try:
-                # Process image
-                img = Image.open(input_image_path)
-                img_array = np.array(img)
-                height, width = img_array.shape[:2]
+            # try:
+            # Process image
+            img = Image.open(input_image_path)
+            img_array = np.array(img)
+            height, width = img_array.shape[:2]
 
-                # Process bounding box
-                bbox = BoundingBox.from_list(answer_entry["box"])
-                bbox.clip_to_bounds(width, height)
+            # Process bounding box
+            bbox = BoundingBox.from_list(answer_entry["box"])
+            bbox.clip_to_bounds(width, height)
 
-                # Mask answer region
-                img_array[bbox.y1 : bbox.y2, bbox.x1 : bbox.x2] = 255
+            # Mask answer region
 
-                # Save processed image
-                processed_img = Image.fromarray(img_array)
-                processed_img.save(output_image_path)
+            words_only_bbox = (1 - img_array[bbox.y1 : bbox.y2, bbox.x1 : bbox.x2]) | (
+                text_mask[bbox.y1 : bbox.y2, bbox.x1 : bbox.x2]
+            )
+            text_mask_img = Image.fromarray(
+                text_mask[bbox.y1 : bbox.y2, bbox.x1 : bbox.x2]
+            )
+            text_mask_img.save("tmp/text_mask_img.png")
+            words_only_bbox = Image.fromarray(words_only_bbox.astype(np.uint8))
+            words_only_bbox.save("tmp/words_only_bbox.png")
+            # Convert to numpy array for processing
+            words_array = np.array(words_only_bbox)
 
-                # Add pair metadata
-                pairs.append(
-                    {
-                        "form_id": form_id,
-                        "question_text": entry["text"],
-                        "question_bbox": entry["box"],
-                        "answer_text": answer_entry["text"],
-                        "answer_bbox": answer_entry["box"],
-                        "processed_image": f"processed_{form_id}_{counter}.png",
-                        "w": width,
-                        "h": height,
-                    }
-                )
+            # # Create a dilated version to find adjacent pixels
+            # kernel = np.ones((3, 3), np.uint8)
+            # dilated = cv2.dilate(words_array, kernel, iterations=1)
 
-                counter += 1
+            # # Set any pixel adjacent to a white pixel to also be 255
+            # words_array[dilated >= 254] = 255
 
-            except Exception as e:
-                logger.error(f"Error processing image {input_image_path}: {str(e)}")
-                continue
+            # Convert back to PIL Image
+            words_only_bbox = Image.fromarray(words_array)
+            words_only_bbox.save("tmp/words_only_bbox_dilated.png")
+            img_array[bbox.y1 : bbox.y2, bbox.x1 : bbox.x2] |= words_only_bbox
+
+            # Save processed image
+            processed_img = Image.fromarray(img_array)
+            processed_img.save(output_image_path)
+
+            processed_img.save("tmp/processed_img.png")
+
+            # Add pair metadata
+            pairs.append(
+                {
+                    "form_id": form_id,
+                    "question_text": entry["text"],
+                    "question_bbox": entry["box"],
+                    "answer_text": answer_entry["text"],
+                    "answer_bbox": answer_entry["box"],
+                    "processed_image": f"processed_{form_id}_{counter}.png",
+                    "w": width,
+                    "h": height,
+                }
+            )
+
+            counter += 1
+
+            # except Exception as e:
+            #     logger.error(f"Error processing image {input_image_path}: {str(e)}")
+            #     continue
 
     return pairs
 
