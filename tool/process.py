@@ -58,6 +58,74 @@ class BoundingBox:
         self.y2 = max(0, min(self.y2, height))
 
 
+def get_full_question_text(entry: Dict, id_to_entry: Dict) -> str:
+    question_texts = []
+    seen_ids = set()
+
+    def add_linked_questions(entry_id):
+        if entry_id in seen_ids:
+            return
+        seen_ids.add(entry_id)
+        linked_entry = id_to_entry[entry_id]
+        question_texts.append(linked_entry["text"])
+        for e in linked_entry["linking"]:
+            add_linked_questions(e[0])
+
+    for link in entry["linking"]:
+        add_linked_questions(link[0])
+
+    return " | ".join(question_texts)
+
+
+def get_question_and_answer(
+    entry: Dict, form_id: str, width: int, height: int, id_to_entry: Dict
+) -> dict:
+    if entry["label"] == "question":
+        cbs = [c for c in entry["text"] if c in "☑☐⬛✓✗\u2611\u2610"]
+        non_cbs_text = "".join(
+            [c for c in entry["text"] if c not in "☑☐⬛✓✗\u2611\u2610"]
+        )
+        # If question contains a checkbox, use the checkbox as the answer
+        if cbs:
+            cb = cbs[0]
+            for word in entry["words"]:
+                if cb in word["text"]:
+                    recursive_question_text = get_full_question_text(entry, id_to_entry)
+                    if not (recursive_question_text or non_cbs_text):
+                        print(f"No question text for {form_id} entry {entry['id']}")
+                        return None
+                    question_text = (
+                        f"{recursive_question_text} | {non_cbs_text}"
+                        if recursive_question_text and non_cbs_text
+                        else recursive_question_text or non_cbs_text
+                    ).strip()
+                    out_entry = {
+                        "form_id": form_id,
+                        "question_text": question_text,
+                        "answer_text": word["text"],
+                        "answer_bbox": BoundingBox.from_list(word["box"]),
+                        "processed_image": f"processed_{form_id}.png",
+                        "w": width,
+                        "h": height,
+                    }
+                    return out_entry
+        else:
+            return None
+    elif entry["label"] == "answer":
+        out_entry = {
+            "form_id": form_id,
+            "question_text": get_full_question_text(entry, id_to_entry),
+            "answer_text": entry["text"],
+            "answer_bbox": BoundingBox.from_list(entry["box"]),
+            "processed_image": f"processed_{form_id}.png",
+            "w": width,
+            "h": height,
+        }
+        return out_entry
+    else:
+        return None  # I didn't know there were other options
+
+
 def process_annotation_and_image(
     doc: List[Dict],
     form_id: str,
@@ -90,41 +158,22 @@ def process_annotation_and_image(
     height, width = img.shape[:2]
     output_image_path = os.path.join(output_images_dir, f"processed_{form_id}.png")
     mask_bboxes = []
-
+    filled_img = None
     for entry in doc:
-        if entry["label"] != "question" or not entry.get("linking"):
+        pair = get_question_and_answer(entry, form_id, width, height, id_to_entry)
+        if pair is None:
             continue
 
-        for question_id, answer_id in entry["linking"]:
-            if answer_id not in id_to_entry:
-                continue
-
-            answer_entry = id_to_entry[answer_id]
-            if answer_entry["label"] == "question":
-                continue
-
-            # Process bounding box
-            bbox = BoundingBox.from_list(answer_entry["box"])
-            mask_bboxes.append(bbox)
-            pairs.append(
-                {
-                    "form_id": form_id,
-                    "question_text": entry["text"],
-                    "question_bbox": entry["box"],
-                    "answer_text": answer_entry["text"],
-                    "answer_bbox": answer_entry["box"],
-                    "processed_image": f"processed_{form_id}.png",
-                    "w": width,
-                    "h": height,
-                }
-            )
         filled_img = img.copy()
         # Create a single mask for all bounding boxes
         mask = np.zeros((height, width), dtype=np.uint8)
-        for mask_bbox in mask_bboxes:
-            # Clip bbox to image bounds
-            # mask.clip_to_bounds(width, height)
-            mask[mask_bbox.y1 : mask_bbox.y2, mask_bbox.x1 : mask_bbox.x2] = 255
+        # for mask_bbox in mask_bboxes:
+        # Clip bbox to image bounds
+        # mask.clip_to_bounds(width, height)
+        mask[
+            pair["answer_bbox"].y1 : pair["answer_bbox"].y2,
+            pair["answer_bbox"].x1 : pair["answer_bbox"].x2,
+        ] = 255
 
         # Apply content-aware fill once with combined mask
         filled_img = cwf.content_aware_fill(
@@ -138,8 +187,12 @@ def process_annotation_and_image(
             patchSize=50,
             maxProbeCount=200,
         )
+        pairs.append(pair)
 
     # Save processed image
+    if filled_img is None:
+        print(f"Could not fill image for {form_id} (no answers found?)")
+        return []
     cv2.imwrite(output_image_path, filled_img)
 
     return pairs
@@ -269,6 +322,10 @@ def main(dataset: str = "funsd") -> None:
     for json_file in tqdm(
         list(annotations_dir.glob("*.json")), desc="Processing JSON files"
     ):
+        
+        # # debugging
+        # if "00836816" not in str(json_file):
+        #     continue
         # try:
         with open(json_file, "r") as f:
             data = json.load(f)

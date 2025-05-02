@@ -12,7 +12,7 @@ from transformers import AutoProcessor, AutoModelForCausalLM
 import torch
 from pathlib import Path
 import yaml
-from tool.train_tool import (
+from tool.train_florence import (
     load_from_checkpoint,
     TEXT_INPUT_PROMPT_TEMPLATE,
     TASK_NAME_PREFIX,
