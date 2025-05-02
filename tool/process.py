@@ -11,8 +11,8 @@ from tqdm import tqdm
 from multiprocessing import Pool, cpu_count
 import cv2
 import torch
-from HI_SAM.demo_hisam import main as hi_sam_forward
 from dataclasses import dataclass
+import libcontent_aware_fill as cwf
 
 # Configure logging
 logging.basicConfig(
@@ -58,18 +58,6 @@ class BoundingBox:
         self.y2 = max(0, min(self.y2, height))
 
 
-def get_text_mask(img_path: str, output_path: str = None) -> np.ndarray:
-    args = Args(
-        checkpoint="tool/HI_SAM/pretrained_checkpoint/sam_tss_l_hiertext.pth",
-        model_type="vit_l",
-        input=[img_path],
-        output=output_path,
-        device="cuda" if torch.cuda.is_available() else "cpu",
-    )
-    mask = hi_sam_forward(args)
-    return mask
-
-
 def process_annotation_and_image(
     doc: List[Dict],
     form_id: str,
@@ -92,10 +80,17 @@ def process_annotation_and_image(
     """
     pairs = []
     id_to_entry = {entry["id"]: entry for entry in doc}
-    counter = 1
 
     input_image_path = os.path.join(input_images_dir, f"{form_id}.{image_ext}")
-    text_mask = get_text_mask(input_image_path, output_path="tmp/text_mask.png")[0]
+
+    # Load input image and get dimensions
+    img = cv2.imread(input_image_path)
+    if img is None:
+        raise ValueError(f"Could not load image: {input_image_path}")
+    height, width = img.shape[:2]
+    output_image_path = os.path.join(output_images_dir, f"processed_{form_id}.png")
+    mask_bboxes = []
+
     for entry in doc:
         if entry["label"] != "question" or not entry.get("linking"):
             continue
@@ -108,57 +103,9 @@ def process_annotation_and_image(
             if answer_entry["label"] == "question":
                 continue
 
-            output_image_path = os.path.join(
-                output_images_dir, f"processed_{form_id}_{counter}.png"
-            )
-
-            if not os.path.exists(input_image_path):
-                logger.warning(f"Image not found: {input_image_path}")
-                continue
-
-            # try:
-            # Process image
-            img = Image.open(input_image_path)
-            img_array = np.array(img)
-            height, width = img_array.shape[:2]
-
             # Process bounding box
             bbox = BoundingBox.from_list(answer_entry["box"])
-            bbox.clip_to_bounds(width, height)
-
-            # Mask answer region
-
-            words_only_bbox = (1 - img_array[bbox.y1 : bbox.y2, bbox.x1 : bbox.x2]) | (
-                text_mask[bbox.y1 : bbox.y2, bbox.x1 : bbox.x2]
-            )
-            text_mask_img = Image.fromarray(
-                text_mask[bbox.y1 : bbox.y2, bbox.x1 : bbox.x2]
-            )
-            text_mask_img.save("tmp/text_mask_img.png")
-            words_only_bbox = Image.fromarray(words_only_bbox.astype(np.uint8))
-            words_only_bbox.save("tmp/words_only_bbox.png")
-            # Convert to numpy array for processing
-            words_array = np.array(words_only_bbox)
-
-            # # Create a dilated version to find adjacent pixels
-            # kernel = np.ones((3, 3), np.uint8)
-            # dilated = cv2.dilate(words_array, kernel, iterations=1)
-
-            # # Set any pixel adjacent to a white pixel to also be 255
-            # words_array[dilated >= 254] = 255
-
-            # Convert back to PIL Image
-            words_only_bbox = Image.fromarray(words_array)
-            words_only_bbox.save("tmp/words_only_bbox_dilated.png")
-            img_array[bbox.y1 : bbox.y2, bbox.x1 : bbox.x2] |= words_only_bbox
-
-            # Save processed image
-            processed_img = Image.fromarray(img_array)
-            processed_img.save(output_image_path)
-
-            processed_img.save("tmp/processed_img.png")
-
-            # Add pair metadata
+            mask_bboxes.append(bbox)
             pairs.append(
                 {
                     "form_id": form_id,
@@ -166,17 +113,34 @@ def process_annotation_and_image(
                     "question_bbox": entry["box"],
                     "answer_text": answer_entry["text"],
                     "answer_bbox": answer_entry["box"],
-                    "processed_image": f"processed_{form_id}_{counter}.png",
+                    "processed_image": f"processed_{form_id}.png",
                     "w": width,
                     "h": height,
                 }
             )
+        filled_img = img.copy()
+        # Create a single mask for all bounding boxes
+        mask = np.zeros((height, width), dtype=np.uint8)
+        for mask_bbox in mask_bboxes:
+            # Clip bbox to image bounds
+            # mask.clip_to_bounds(width, height)
+            mask[mask_bbox.y1 : mask_bbox.y2, mask_bbox.x1 : mask_bbox.x2] = 255
 
-            counter += 1
+        # Apply content-aware fill once with combined mask
+        filled_img = cwf.content_aware_fill(
+            filled_img,
+            mask,
+            isMakeSeamlesslyTileableHorizontally=False,
+            isMakeSeamlesslyTileableVertically=False,
+            matchContextType=3,
+            mapWeight=0.5,
+            sensitivityToOutliers=0.117,
+            patchSize=50,
+            maxProbeCount=200,
+        )
 
-            # except Exception as e:
-            #     logger.error(f"Error processing image {input_image_path}: {str(e)}")
-            #     continue
+    # Save processed image
+    cv2.imwrite(output_image_path, filled_img)
 
     return pairs
 
