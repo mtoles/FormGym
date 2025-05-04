@@ -8,7 +8,7 @@ learning_rate: 1e-6
 model_name: "microsoft/Florence-2-large-ft"
 epochs_per_eval: 1
 checkpoint_dir: "tool/checkpoints"
-max_examples_per_image: 1
+max_examples_per_image: 100
 # max_iou_examples: 64
 
 # PEFT configuration

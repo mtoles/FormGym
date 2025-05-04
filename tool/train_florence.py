@@ -48,19 +48,19 @@ class FormGymDataset(Dataset):
         image_groups = {}
         for example in raw_data:
             image_path = example["processed_image"]
-            image_prefix = "_".join(image_path.split("_")[:-1])
-            if image_prefix not in image_groups:
-                image_groups[image_prefix] = []
-            image_groups[image_prefix].append(example)
+            # image_prefix = "_".join(image_path.split("_")[:-1])
+            if image_path not in image_groups:
+                image_groups[image_path] = []
+            image_groups[image_path].append(example)
 
         # Print number of examples per image
         print("\nNumber of examples per image:")
-        for image_prefix, examples in image_groups.items():
-            print(f"{image_prefix}: {len(examples)} examples")
+        for image_path, examples in image_groups.items():
+            print(f"{image_path}: {len(examples)} examples")
 
         # Keep at most max_examples_per_image examples per image
         self.data = []
-        for image_prefix, examples in image_groups.items():
+        for image_path, examples in image_groups.items():
             if max_examples_per_image is not None:
                 examples = examples[:max_examples_per_image]
             self.data.extend(examples)
@@ -77,10 +77,10 @@ class FormGymDataset(Dataset):
         w = example["w"]
         h = example["h"]
         bbox = example["answer_bbox"]
-        x1 = str(int(bbox[0] / w * 1000))
-        y1 = str(int(bbox[1] / h * 1000))
-        x2 = str(int(bbox[2] / w * 1000))
-        y2 = str(int(bbox[3] / h * 1000))
+        x1 = str(int(bbox["x1"] / w * 1000))
+        y1 = str(int(bbox["y1"] / h * 1000))
+        x2 = str(int(bbox["x2"] / w * 1000))
+        y2 = str(int(bbox["y2"] / h * 1000))
         question = TEXT_INPUT_PROMPT_TEMPLATE.format(target=example["question_text"])
         image_path = os.path.join(self.image_dir, f"{example['processed_image']}")
         image = Image.open(image_path).convert("RGB")
@@ -91,8 +91,9 @@ class FormGymDataset(Dataset):
         return question, label, image, bbox, image_path
 
 
-def load_config(config_path, actions, override_args=None):
+def load_config(args, actions, override_args=None):
     """Load configuration from YAML file and override with command line arguments"""
+    config_path = args.config
     with open(config_path, "r") as f:
         config = yaml.safe_load(f)
 
@@ -417,7 +418,7 @@ def main():
         help="Maximum number of examples to use per image (overrides config)",
     )
     args = parser.parse_args()
-    config = load_config(args.config, args.actions)
+    config = load_config(args, parser._actions)
 
     # Configuration
     TRAIN_BATCH_SIZE = config["train_batch_size"]
@@ -662,19 +663,19 @@ def main():
 
         # Draw ground truth box in green
         gt_bbox = row["ground_truth_bbox"]
-        draw.rectangle(gt_bbox, outline="green", width=2)
+        draw.rectangle([gt_bbox["x1"], gt_bbox["y1"], gt_bbox["x2"], gt_bbox["y2"]], outline="green", width=2)
         label = row.answer.split("<")[0]
-        draw.text(gt_bbox[:2], label, fill="green")
+        draw.text((gt_bbox["x1"], gt_bbox["y1"]), label, fill="green")
 
         # Draw predicted box in red
         if row["predicted_bbox"] is not None:
             pred_bbox = row["predicted_bbox"]
             # ensure x_1 < x_2 and y_1 < y_2
             ordered_pred_bbox = [
-                min(pred_bbox[0], pred_bbox[2]),
-                min(pred_bbox[1], pred_bbox[3]),
-                max(pred_bbox[0], pred_bbox[2]),
-                max(pred_bbox[1], pred_bbox[3]),
+                min(pred_bbox["x1"], pred_bbox["x2"]),
+                min(pred_bbox["y1"], pred_bbox["y2"]), 
+                max(pred_bbox["x1"], pred_bbox["x2"]),
+                max(pred_bbox["y1"], pred_bbox["y2"])
             ]
             draw.rectangle(ordered_pred_bbox, outline="red", width=2)
         else:
