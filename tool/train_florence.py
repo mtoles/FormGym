@@ -271,7 +271,26 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                     task=TASK_NAME_PREFIX,
                     image_size=(widths[i], heights[i]),
                 )
-                pred_bboxes = parsed_answer[TASK_NAME_PREFIX]["bboxes"]
+                parsed_bboxes = parsed_answer[TASK_NAME_PREFIX]["bboxes"]
+                pred_bboxes = [
+                    {
+                        "x1": float(bbox[0]),
+                        "y1": float(bbox[1]),
+                        "x2": float(bbox[2]),
+                        "y2": float(bbox[3]),
+                    }
+                    for bbox in parsed_bboxes
+                ]
+                gt_bboxes = [
+                    {
+                        "x1": float(bbox["x1"]) / widths[i],
+                        "y1": float(bbox["y1"]) / heights[i],
+                        "x2": float(bbox["x2"]) / widths[i],
+                        "y2": float(bbox["y2"]) / heights[i],
+                    }
+                    for bbox in gt_bboxes
+                ]
+
                 if len(pred_bboxes) == 0:
                     pred_bbox = None  # always wrong
                 else:
