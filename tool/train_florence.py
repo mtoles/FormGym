@@ -26,7 +26,7 @@ from pathlib import Path
 import pandas as pd  # Add pandas import
 import matplotlib.pyplot as plt
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
-
+import sys
 
 print(os.environ["CUDA_HOME"])
 print(os.environ["LD_LIBRARY_PATH"])
@@ -42,7 +42,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class FormGymDataset(Dataset):
     def __init__(
-        self, json_path: str, max_examples_per_image: int = 5, max_size: int = None
+        self, json_path: str, max_examples_per_image: int = sys.maxsize, max_size: int = None
     ):
         self.image_dir = "tool/dataset/processed/images"
         with open(json_path, "r") as f:
