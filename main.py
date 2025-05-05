@@ -94,6 +94,9 @@ if __name__ == "__main__":
         action_count = 0
 
         flow = None
+
+        # Get ground truth answers using cheater model
+        # ONESHOT might be wrong right now, use multishot for now
         if task == TaskEnum.ONESHOT.value:
             flow = FlowEnum.ONESHOT.value
             available_actions = ["PlaceText", "SignOrInitial"]
@@ -127,7 +130,6 @@ if __name__ == "__main__":
             # target_fields = new_doc_state.pop_target_fields(targets=targets)
             doc_state = new_doc_state
 
-            #
         else:
             raise ValueError(f"Invalid task specified: {args.task}")
 

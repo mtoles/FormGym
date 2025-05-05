@@ -6,10 +6,10 @@ from tqdm import tqdm
 from transformers import (
     AutoModelForCausalLM,
     AutoProcessor,
-    AdamW,
     AutoConfig,
     get_scheduler,
 )
+from torch.optim import AdamW
 import random
 import json
 from PIL import Image, ImageDraw
@@ -17,7 +17,7 @@ import numpy as np
 import os
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-from transformers import AdamW, get_scheduler
+from transformers import get_scheduler
 import wandb
 from datetime import datetime
 import argparse
@@ -27,10 +27,17 @@ import pandas as pd  # Add pandas import
 import matplotlib.pyplot as plt
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 
-TASK_NAME_PREFIX = "<OPEN_VOCABULARY_DETECTION>" #config["task_name_prefix"]
-TEXT_INPUT_PROMPT_TEMPLATE = TASK_NAME_PREFIX + "text entry field corresponding to {target}"
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+print(os.environ["CUDA_HOME"])
+print(os.environ["LD_LIBRARY_PATH"])
+print(torch.cuda.is_available())
+assert torch.cuda.is_available() # not available in debug mode, dunno why
+
+TASK_NAME_PREFIX = "<OPEN_VOCABULARY_DETECTION>"  # config["task_name_prefix"]
+TEXT_INPUT_PROMPT_TEMPLATE = (
+    TASK_NAME_PREFIX + "text entry field corresponding to {target}"
+)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 class FormGymDataset(Dataset):
@@ -53,10 +60,10 @@ class FormGymDataset(Dataset):
                 image_groups[image_path] = []
             image_groups[image_path].append(example)
 
-        # Print number of examples per image
-        print("\nNumber of examples per image:")
-        for image_path, examples in image_groups.items():
-            print(f"{image_path}: {len(examples)} examples")
+        # # Print number of examples per image
+        # print("\nNumber of examples per image:")
+        # for image_path, examples in image_groups.items():
+        #     print(f"{image_path}: {len(examples)} examples")
 
         # Keep at most max_examples_per_image examples per image
         self.data = []
@@ -91,7 +98,7 @@ class FormGymDataset(Dataset):
         return question, label, image, bbox, image_path
 
 
-def load_config(args, actions, override_args=None):
+def load_config(args, actions):
     """Load configuration from YAML file and override with command line arguments"""
     config_path = args.config
     with open(config_path, "r") as f:
@@ -103,11 +110,11 @@ def load_config(args, actions, override_args=None):
         if action.dest in config and action.type is not None:
             config[action.dest] = action.type(config[action.dest])
 
-    if override_args:
+    # if override_args:
         # Update config with command line arguments
-        for key, value in vars(override_args).items():
-            if value is not None:  # Remove the key in config check to allow new keys
-                config[key] = value
+    for key, value in vars(args).items():
+        if value is not None:  # Remove the key in config check to allow new keys
+            config[key] = value
 
     return config
 
@@ -120,16 +127,16 @@ def calculate_iou(bbox1, bbox2):
     if bbox1 is None or bbox2 is None:
         return 0
     # Calculate intersection area
-    x1 = max(bbox1[0], bbox2[0])
-    y1 = max(bbox1[1], bbox2[1])
-    x2 = min(bbox1[2], bbox2[2])
-    y2 = min(bbox1[3], bbox2[3])
+    x1 = max(bbox1["x1"], bbox2["x1"])
+    y1 = max(bbox1["y1"], bbox2["y1"])
+    x2 = min(bbox1["x2"], bbox2["x2"])
+    y2 = min(bbox1["y2"], bbox2["y2"])
 
     intersection_area = max(0, x2 - x1) * max(0, y2 - y1)
 
     # Calculate union area
-    bbox1_area = (bbox1[2] - bbox1[0]) * (bbox1[3] - bbox1[1])
-    bbox2_area = (bbox2[2] - bbox2[0]) * (bbox2[3] - bbox2[1])
+    bbox1_area = (bbox1["x2"] - bbox1["x1"]) * (bbox1["y2"] - bbox1["y1"])
+    bbox2_area = (bbox2["x2"] - bbox2["x1"]) * (bbox2["y2"] - bbox2["y1"])
     union_area = bbox1_area + bbox2_area - intersection_area
 
     # Calculate IoU
@@ -318,11 +325,12 @@ def manage_checkpoints(checkpoint_dir, max_checkpoints=4):
 
         shutil.rmtree(old_path)
 
+
 def load_from_checkpoint(checkpoint_path, device):
     model_config = AutoConfig.from_pretrained(
-            "microsoft/Florence-2-large-ft",
-            trust_remote_code=True,
-        )
+        "microsoft/Florence-2-large-ft",
+        trust_remote_code=True,
+    )
     model = AutoModelForCausalLM.from_pretrained(
         checkpoint_path, trust_remote_code=True, config=model_config
     ).to(device)
@@ -330,7 +338,6 @@ def load_from_checkpoint(checkpoint_path, device):
         "microsoft/Florence-2-large-ft", trust_remote_code=True
     )
     return processor, model
-
 
 
 # Main execution code starts here
@@ -460,16 +467,15 @@ def main():
 
     disable_caching()
 
-
     # Load model from checkpoint if specified, otherwise load from pretrained
     if LOAD_CHECKPOINT_FROM:
         processor, model = load_from_checkpoint(LOAD_CHECKPOINT_FROM)
         print(f"Loading model from checkpoint: {LOAD_CHECKPOINT_FROM}")
-        
+
     else:
-        model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, trust_remote_code=True).to(
-            device
-        )
+        model = AutoModelForCausalLM.from_pretrained(
+            MODEL_NAME, trust_remote_code=True
+        ).to(device)
         processor = AutoProcessor.from_pretrained(MODEL_NAME, trust_remote_code=True)
 
     for param in model.vision_tower.parameters():
@@ -483,7 +489,6 @@ def main():
             for path in config["train_paths"]
         ]
     )
-
 
     val_dataset = FormGymDataset(
         config["eval_path"],
@@ -559,7 +564,7 @@ def main():
     val_accuracy, val_loss, predictions_df = None, None, None
     total_batches = 0
     batches_per_epoch = len(train_loader)
-    for epoch in range(EPOCHS):
+    for epoch in tqdm(range(EPOCHS), desc="Training Epochs"):
         model.train()
         train_loss = 0
         for inputs, answers, widths, heights, bboxes, image_paths in tqdm(
@@ -576,7 +581,9 @@ def main():
                 padding_side="left",
                 return_token_type_ids=False,
             ).input_ids.to(device)
-            outputs = model(input_ids=input_ids, pixel_values=pixel_values, labels=labels)
+            outputs = model(
+                input_ids=input_ids, pixel_values=pixel_values, labels=labels
+            )
             loss = outputs.loss
             loss.backward()
             optimizer.step()
@@ -595,7 +602,7 @@ def main():
             )
 
             # Evaluate every N batches
-            if batch_no % int(EPOCHS_PER_EVAL * batches_per_epoch) == 0:
+            if batch_no % int(EPOCHS_PER_EVAL * batches_per_epoch) == 0 and batch_no != 0:
                 val_loss = calculate_loss(model, val_loader, processor)
                 val_accuracy, predictions_data = calculate_iou_accuracy(
                     model, val_loader, processor
@@ -610,7 +617,9 @@ def main():
                 # Save model checkpoint after evaluation
                 current_epoch_fraction = total_batches / batches_per_epoch
                 checkpoint_path = os.path.join(
-                    CHECKPOINT_DIR, timestamp, f"model_epoch_{current_epoch_fraction:.2f}"
+                    CHECKPOINT_DIR,
+                    timestamp,
+                    f"model_epoch_{current_epoch_fraction:.2f}",
                 )
                 if NOTE:
                     checkpoint_path = f"{checkpoint_path}_{NOTE.replace(' ', '_')}"
@@ -663,7 +672,11 @@ def main():
 
         # Draw ground truth box in green
         gt_bbox = row["ground_truth_bbox"]
-        draw.rectangle([gt_bbox["x1"], gt_bbox["y1"], gt_bbox["x2"], gt_bbox["y2"]], outline="green", width=2)
+        draw.rectangle(
+            [gt_bbox["x1"], gt_bbox["y1"], gt_bbox["x2"], gt_bbox["y2"]],
+            outline="green",
+            width=2,
+        )
         label = row.answer.split("<")[0]
         draw.text((gt_bbox["x1"], gt_bbox["y1"]), label, fill="green")
 
@@ -673,9 +686,9 @@ def main():
             # ensure x_1 < x_2 and y_1 < y_2
             ordered_pred_bbox = [
                 min(pred_bbox["x1"], pred_bbox["x2"]),
-                min(pred_bbox["y1"], pred_bbox["y2"]), 
+                min(pred_bbox["y1"], pred_bbox["y2"]),
                 max(pred_bbox["x1"], pred_bbox["x2"]),
-                max(pred_bbox["y1"], pred_bbox["y2"])
+                max(pred_bbox["y1"], pred_bbox["y2"]),
             ]
             draw.rectangle(ordered_pred_bbox, outline="red", width=2)
         else:
@@ -694,6 +707,7 @@ def main():
         #         )
         #     }
         # )
+
 
 if __name__ == "__main__":
     main()
