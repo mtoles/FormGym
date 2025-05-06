@@ -99,11 +99,13 @@ def get_question_and_answer(
                         if recursive_question_text and non_cbs_text
                         else recursive_question_text or non_cbs_text
                     ).strip()
+                    question_bbox = BoundingBox.from_list(entry["box"])
                     out_entry = {
                         "form_id": form_id,
                         "question_text": question_text,
                         "answer_text": word["text"],
                         "answer_bbox": BoundingBox.from_list(word["box"]),
+                        "question_bbox": question_bbox,
                         "processed_image": f"processed_{form_id}.png",
                         "w": width,
                         "h": height,

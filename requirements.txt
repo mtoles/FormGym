@@ -19,3 +19,5 @@ albumentations
 torchmetrics
 openai
 anthropic
+pymupdf
+pybind11

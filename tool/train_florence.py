@@ -274,22 +274,28 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                 parsed_bboxes = parsed_answer[TASK_NAME_PREFIX]["bboxes"]
                 pred_bboxes = [
                     {
-                        "x1": float(bbox[0]),
-                        "y1": float(bbox[1]),
-                        "x2": float(bbox[2]),
-                        "y2": float(bbox[3]),
+                        "x1": float(bbox[0]) / 1000,
+                        "y1": float(bbox[1]) / 1000,
+                        "x2": float(bbox[2]) / 1000,
+                        "y2": float(bbox[3]) / 1000,
                     }
                     for bbox in parsed_bboxes
                 ]
-                gt_bboxes = [
-                    {
-                        "x1": float(bbox["x1"]) / widths[i],
-                        "y1": float(bbox["y1"]) / heights[i],
-                        "x2": float(bbox["x2"]) / widths[i],
-                        "y2": float(bbox["y2"]) / heights[i],
-                    }
-                    for bbox in gt_bboxes
-                ]
+                # gt_bboxes = [
+                #     {
+                #         "x1": float(bbox["x1"]) / widths[i],
+                #         "y1": float(bbox["y1"]) / heights[i],
+                #         "x2": float(bbox["x2"]) / widths[i],
+                #         "y2": float(bbox["y2"]) / heights[i],
+                #     }
+                #     for bbox in gt_bboxes
+                # ]
+                gt_bbox = {
+                    "x1": float(gt_bboxes[i]["x1"]) / 1000,
+                    "y1": float(gt_bboxes[i]["y1"]) / 1000,
+                    "x2": float(gt_bboxes[i]["x2"]) / 1000,
+                    "y2": float(gt_bboxes[i]["y2"]) / 1000,
+                }
 
                 if len(pred_bboxes) == 0:
                     pred_bbox = None  # always wrong
@@ -297,7 +303,7 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                     pred_bbox = pred_bboxes[0]
 
                 # Calculate IoU
-                iou = calculate_iou(pred_bbox, gt_bboxes[i])
+                iou = calculate_iou(pred_bbox, gt_bbox)
                 total_iou += iou
 
                 # Store data for DataFrame
@@ -488,7 +494,7 @@ def main():
 
     # Load model from checkpoint if specified, otherwise load from pretrained
     if LOAD_CHECKPOINT_FROM:
-        processor, model = load_from_checkpoint(LOAD_CHECKPOINT_FROM)
+        processor, model = load_from_checkpoint(LOAD_CHECKPOINT_FROM, device=device)
         print(f"Loading model from checkpoint: {LOAD_CHECKPOINT_FROM}")
 
     else:
@@ -621,7 +627,7 @@ def main():
             )
 
             # Evaluate every N batches
-            if batch_no % int(EPOCHS_PER_EVAL * batches_per_epoch) == 0 and batch_no != 0:
+            if (batch_no % int(EPOCHS_PER_EVAL * batches_per_epoch) == 0 and batch_no != 0) or batch_no == EPOCHS * batches_per_epoch - 1:
                 val_loss = calculate_loss(model, val_loader, processor)
                 val_accuracy, predictions_data = calculate_iou_accuracy(
                     model, val_loader, processor
