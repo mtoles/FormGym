@@ -12,7 +12,9 @@ from multiprocessing import Pool, cpu_count
 import cv2
 import torch
 from dataclasses import dataclass
-import libcontent_aware_fill as cwf
+
+# import libcontent_aware_fill as cwf
+from resynthesizer import resynthesize, TImageSynthParameters
 
 # Configure logging
 logging.basicConfig(
@@ -160,15 +162,15 @@ def process_annotation_and_image(
     height, width = img.shape[:2]
     output_image_path = os.path.join(output_images_dir, f"processed_{form_id}.png")
     mask_bboxes = []
-    filled_img = None
+    # filled_img = img.copy()
+    mask = np.zeros((height, width), dtype=np.uint8)
     for entry in doc:
         pair = get_question_and_answer(entry, form_id, width, height, id_to_entry)
         if pair is None:
             continue
 
-        filled_img = img.copy()
+        # filled_img = img.copy()
         # Create a single mask for all bounding boxes
-        mask = np.zeros((height, width), dtype=np.uint8)
         # for mask_bbox in mask_bboxes:
         # Clip bbox to image bounds
         # mask.clip_to_bounds(width, height)
@@ -176,25 +178,33 @@ def process_annotation_and_image(
             pair["answer_bbox"].y1 : pair["answer_bbox"].y2,
             pair["answer_bbox"].x1 : pair["answer_bbox"].x2,
         ] = 255
-
-        # Apply content-aware fill once with combined mask
-        filled_img = cwf.content_aware_fill(
-            filled_img,
-            mask,
-            isMakeSeamlesslyTileableHorizontally=False,
-            isMakeSeamlesslyTileableVertically=False,
-            matchContextType=3,
-            mapWeight=0.5,
-            sensitivityToOutliers=0.117,
-            patchSize=50,
-            maxProbeCount=200,
-        )
         pairs.append(pair)
+    if len(pairs) == 0:
+        return []
+    # Apply content-aware fill once with combined mask
+    params = TImageSynthParameters()
+    params.isMakeSeamlesslyTileableHorizontally = False
+    params.isMakeSeamlesslyTileableVertically = False
+    params.matchContextType = 3
+    params.mapWeight = 0.5
+    params.sensitivityToOutliers = 0.117
+    params.patchSize = 50
+    params.maxProbeCount = 200
+
+    filled_img = np.array(
+        resynthesize(
+            Image.fromarray(img),
+            Image.fromarray(mask),
+            parameters=params,
+        )
+    )
 
     # Save processed image
     if filled_img is None:
         print(f"Could not fill image for {form_id} (no answers found?)")
         return []
+    # cv2.imwrite("original_tmp.png", img)
+    # cv2.imwrite("filled_tmp.png", filled_img)
     cv2.imwrite(output_image_path, filled_img)
 
     return pairs
@@ -324,7 +334,7 @@ def main(dataset: str = "funsd") -> None:
     for json_file in tqdm(
         list(annotations_dir.glob("*.json")), desc="Processing JSON files"
     ):
-        
+
         # # debugging
         # if "00836816" not in str(json_file):
         #     continue
