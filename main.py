@@ -240,7 +240,11 @@ if __name__ == "__main__":
         correct_count = 0
         total_count = 0
         for field in result.fields:
+            # skip prefilled fields
             if field["prefilled"]:
+                continue
+            # skip emtpy fields
+            if field["gt"] in [False, "None"]:
                 continue
             total_count += 1
             if field["correct"]:
