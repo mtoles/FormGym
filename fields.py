@@ -1707,7 +1707,6 @@ class CROI_4058(BaseNumericField):
 class CROI_4010(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        # return user_profile.features.CROI_4010A
         return str(
             int(user_profile.features.CROI_4435)
             + int(user_profile.features.CROI_4436)

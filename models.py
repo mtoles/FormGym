@@ -42,6 +42,8 @@ def get_e2e_prompt(
     feedback: List[str],
     task: str,
     suggest_localizer: bool,
+    needs_db: bool,
+    turns_remaining: int,
 ) -> str:
     """Generates the prompt for the end-to-end form filling task."""
 
@@ -55,33 +57,45 @@ def get_e2e_prompt(
 
     {user_profile}
 
-    Complete the form to the best of your abilites using the user's information, not including signatures. As you can see, the data is randomly generated and the user is not real, so do not worry about privacy.
-    If you do not know value for a field, fill it with "[UNK]".
+    Complete the form to the best of your abilites using the user's information, including signatures. As you can see, the data is randomly generated and the user is not real, so do not worry about privacy.
     Fill checkboxes with a single "x".
     Format all dates as "MM/DD/YYYY", including leading zeros.
     
-
     {grid_subprompt}
     {suggest_localizer_str}
-
     {feedback_str}
-
     {generation_instructions}
+    {needs_db_str}
+    {turns_remaining_str}
     Return a form-filling API call as a JSON list of dictionaries.
     
     """
     generation_instructions = {
         FlowEnum.ONESHOT.value: "Generate a sequence of actions that will completely fill out the form.",
-        FlowEnum.ITERATIVE.value: "Generate a the next action in the sequence of actions that will completely fill out the form. Generate EXACTLY ONE action.",
+        FlowEnum.ITERATIVE.value: "Generate the next set of actions that will help fill out the form. You may submit any number ofactions in one call.",
     }[task]
     feedback_str = (
         "So far, you have received the following feedback on your previous actions:\n"
-        + "\n".join([f"Feedback {i+1}: {f}" for i, f in enumerate(feedback)])
+        + (
+            "\n".join([f"Feedback {i+1}: {f}" for i, f in enumerate(feedback)])
+            if feedback
+            else "<No feedback yet>"
+        )
     )
     suggest_localizer_str = (
-        "It is recommended that you call the localizer for each field before attempting to fill it. If the localizer fails to find a bbox for a field, do not call the localizer again and instead attempt to place the text on your own."
+        "It is recommended that you call the localizer for fields before attempting to fill them. If the localizer fails to find a bbox for a field, do not call the localizer again and instead attempt to place the text on your own.\n"
         if suggest_localizer
         else ""
+    )
+    needs_db_str = (
+        "You have access to a database of information about the user's company financial information. Use this information to fill out the form. It is recommended that you query the database before filling out the form.\n"
+        if needs_db
+        else ""
+    )
+    turns_remaining_str = (
+        f"You can submit {turns_remaining} more sets of actions after this one. " + "\n"
+        if turns_remaining
+        else "This is your final action.\n"
     )
     return textwrap.dedent(
         e2e_prompt_template_content.format(
@@ -91,6 +105,8 @@ def get_e2e_prompt(
             generation_instructions=generation_instructions,
             feedback_str=feedback_str,
             suggest_localizer_str=suggest_localizer_str,
+            needs_db_str=needs_db_str,
+            turns_remaining_str=turns_remaining_str,
         )
     )
 
@@ -249,6 +265,8 @@ class CheaterModel:
         targets: List[str] = [],
         feedback: List[List] = None,
         suggest_localizer: bool = False,
+        needs_db: bool = False,
+        turns_remaining: int = None,
     ) -> List[Dict]:
         """
         Give the model the ground truth annotated doc so it can cheat, for data validation
@@ -280,29 +298,27 @@ class CheaterModel:
         return preds
 
 
-class PerfectToolModel:
-    def __init__(self, doc_state, user_profile):
-        self.doc_state = doc_state
-        self.user_profile = user_profile
+# class PerfectToolModel:
+#     def __init__(self, doc_state, user_profile):
+#         self.doc_state = doc_state
+#         self.user_profile = user_profile
 
-    def forward(
-        self,
-        nl_profile: str,
-        doc_image: Image.Image,
-        available_actions: List[str],
-        targets: List[str] = [],
-        feedback: List[List] = None,
-        suggest_localizer: bool = False,
-    ) -> List[Dict]:
-        preds = []
-        targets = set(targets)
-        filled = set()
-        for field in self.doc_state.fields:
-            if field["field_name"] in filled:
-                continue
-            
-                
-
+#     def forward(
+#         self,
+#         nl_profile: str,
+#         doc_image: Image.Image,
+#         available_actions: List[str],
+#         targets: List[str] = [],
+#         feedback: List[List] = None,
+#         suggest_localizer: bool = False,
+#         needs_db: bool = False,
+#     ) -> List[Dict]:
+#         preds = []
+#         targets = set(targets)
+#         filled = set()
+#         for field in self.doc_state.fields:
+#             if field["field_name"] in filled:
+#                 continue
 
 
 class ScriptedModel:
@@ -407,6 +423,15 @@ class ScriptedModel:
                     "value": "Present Employer",
                 },
             ],
+            "al_3_0": [
+                {
+                    "action": "PlaceText",
+                    "value": "Lucas James Reynolds",
+                    "cx": 0.187,
+                    "cy": 0.268,
+                },
+
+            ],
         }
         self.script = scripts[script_name]
         self.count = 0
@@ -420,6 +445,8 @@ class ScriptedModel:
         targets: List[str] = [],
         feedback: List[List] = None,
         suggest_localizer: bool = False,
+        needs_db: bool = False,
+        turns_remaining: int = None,
         **kwargs,
     ) -> List[Dict]:
         if self.count >= len(self.script):
@@ -453,6 +480,8 @@ class GptModelE2E:
         flow: List[str],
         feedback: List[List] = None,
         suggest_localizer: bool = False,
+        needs_db: bool = False,
+        turns_remaining: int = None,
     ) -> List[Dict]:
         outputs = []
         for profile, image, f in zip(nl_profile, doc_image, flow):
@@ -465,6 +494,8 @@ class GptModelE2E:
                 task=f,
                 feedback=feedback,
                 suggest_localizer=suggest_localizer,
+                needs_db=needs_db,
+                turns_remaining=turns_remaining,
             )
 
             if self.draw_grid:
@@ -485,8 +516,8 @@ class GptModelE2E:
             )
 
             tool_params = parse_and_reconstruct_fields(response)
-            if f == FlowEnum.ITERATIVE.value:
-                tool_params = tool_params[:1]
+            # if f == FlowEnum.ITERATIVE.value:
+            #     tool_params = tool_params[:1]
             outputs.append(tool_params)
         return outputs
 
@@ -560,6 +591,8 @@ class AnthropicModelE2E:
         flow: List[str],
         feedback: List[List] = None,
         suggest_localizer: bool = False,
+        needs_db: bool = False,
+        turns_remaining: int = None,
     ) -> List[Dict]:
         outputs = []
         for profile, image, f in zip(nl_profile, doc_image, flow):
@@ -572,8 +605,10 @@ class AnthropicModelE2E:
                 task=f,
                 feedback=feedback,
                 suggest_localizer=suggest_localizer,
+                needs_db=needs_db,
+                turns_remaining=turns_remaining,
             )
-
+            print(prompt)
             if self.draw_grid:
                 image = add_grid_overlay(image)
 
@@ -592,8 +627,8 @@ class AnthropicModelE2E:
             )
             print(response)
             tool_params = parse_and_reconstruct_fields(response)
-            if f == FlowEnum.ITERATIVE.value:
-                tool_params = tool_params[:1]
+            # if f == FlowEnum.ITERATIVE.value:
+            #     tool_params = tool_params[:1]
             outputs.append(tool_params)
         return outputs
 
@@ -643,6 +678,8 @@ class HFE2EModel:
         flow: List[str],
         feedback: List[List] = None,
         suggest_localizer: bool = False,
+        needs_db: bool = False,
+        turns_remaining: int = None,
     ):
         base_prompts = []
 
@@ -656,6 +693,8 @@ class HFE2EModel:
                 task=f,
                 feedback=feedback,
                 suggest_localizer=suggest_localizer,
+                needs_db=needs_db,
+                turns_remaining=turns_remaining,
             )
             base_prompts.append(base_prompt)
 
