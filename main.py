@@ -57,7 +57,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--file_ids", type=str, nargs="+", help="List of file ids, e.g. al_0_0"
     )
-    parser.add_argument("--k_missing_fields", type=int, default=1)
+    # parser.add_argument("--k_missing_fields", type=int, default=1)
     parser.add_argument("--max_actions_multiplier", type=int, default=2)
     parser.add_argument("--suggest_localizer", type=bool, default=False)
     args = parser.parse_args()
@@ -255,18 +255,5 @@ if __name__ == "__main__":
             fields=result.fields,
             img=example["blank_img"],
         )
-        metrics_summary.append(
-            {
-                "png_file": example["png_path"],
-                "overall_accuracy": overall_acc,
-                "action_count": example["action_count"],
-            }
-        )
 
-    # Print summary of metrics for all processed images
-    print("Summary of Metrics:")
-    for metrics in metrics_summary:
-        print(
-            f"File: {metrics['png_file']}, Overall Accuracy: {metrics['overall_accuracy']:.2f}, Actions: {metrics['action_count']}"
-        )
-    print
+        print(f"File: {example['fid']}, Overall Accuracy: {correct_count}/{total_count}, {overall_acc:.2f}%, Actions: {example['action_count']}")

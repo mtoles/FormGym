@@ -66,17 +66,17 @@ class DocState:
                 (x, y), text, fill=color_map[pred["creator"]], font=FILLER_FONT, anchor="mm"
             )
 
-            # Draw a rectangle based on the bbox
-            bbox = pred["bbox"]
-            text_draw.rectangle(
-                (
-                    bbox["x"] * width,
-                    bbox["y"] * height,
-                    (bbox["x"] + bbox["width"]) * width,
-                    (bbox["y"] + bbox["height"]) * height,
-                ),
-                outline=(0, 0, 255),
-            )
+            # # Draw a rectangle based on the bbox
+            # bbox = pred["bbox"]
+            # text_draw.rectangle(
+            #     (
+            #         bbox["x"] * width,
+            #         bbox["y"] * height,
+            #         (bbox["x"] + bbox["width"]) * width,
+            #         (bbox["y"] + bbox["height"]) * height,
+            #     ),
+            #     outline=(0, 0, 255),
+            # )
         # save the image
         if save_path:
             new_img.save(save_path)
