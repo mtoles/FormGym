@@ -1,5 +1,5 @@
 from enum import Enum
-from PIL import ImageFont
+from PIL import ImageFont, Image, ImageDraw
 from typing import List
 
 
@@ -39,3 +39,5 @@ def get_text_bbox(
         "width": text_width,
         "height": text_height,
     }
+
+

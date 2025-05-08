@@ -8,6 +8,16 @@ from copy import deepcopy
 from pydantic import BaseModel
 from enum import Enum
 from utils import *
+from transformers import AutoProcessor, AutoModelForCausalLM
+import torch
+from pathlib import Path
+import yaml
+from tool.train_florence import (
+    load_from_checkpoint,
+    TEXT_INPUT_PROMPT_TEMPLATE,
+    TASK_NAME_PREFIX,
+)
+from utils import *
 
 
 class ActionMeta(type):
@@ -15,7 +25,7 @@ class ActionMeta(type):
 
     def __new__(cls, name, bases, attrs):
         new_p_attr = super().__new__(cls, name, bases, attrs)
-        if name not in ["BaseAction", "InvalidAction"]:
+        if name not in ["BaseAction"]:
             # check for duplicates
             assert name not in cls.registry, f"User attribute {name} already exists"
             cls.registry[name] = new_p_attr
@@ -72,7 +82,7 @@ class PlaceText(BaseAction):
             "value": value,
             "creator": "agent",
         }
-        
+
         mark["bbox"] = get_text_bbox(
             text=value,
             doc_width=doc_state.w,
@@ -114,7 +124,7 @@ class DeleteText(BaseAction):
         if not doc_state.marks:
             feedback = "Action: 'DeleteText'\nNo marks to delete."
             return doc_state, feedback
-        
+
         for mark in doc_state.marks:
             if (
                 (cx >= mark["bbox"]["x"])
@@ -129,6 +139,11 @@ class DeleteText(BaseAction):
         print(f"Marks deleted: {deleted_marks}")
         feedback = f"Action: 'DeleteText'\nMarks deleted: {deleted_marks}"
         return doc_state, feedback
+
+    class Schema(BaseModel):
+        action: Literal["DeleteText"]
+        cx: float
+        cy: float
 
 
 class SignOrInitial(BaseAction):
@@ -152,7 +167,7 @@ class SignOrInitial(BaseAction):
             "value": value,
             "creator": "agent",
         }
-        
+
         mark["bbox"] = get_text_bbox(
             text=value,
             doc_width=doc_state.w,
@@ -189,7 +204,9 @@ class QuerySql(BaseAction):
         assert db is not None
         try:
             output = db.query(query)
-            feedback = f"Action: 'QuerySql'\nQuery executed successfully. Output: {output}"
+            feedback = (
+                f"Action: 'QuerySql'\nQuery executed successfully. Output: {output}"
+            )
         except Exception as e:
             feedback = f"Action: 'QuerySql'\nError executing query: {str(e)}"
             print(feedback)
@@ -222,6 +239,73 @@ class InvalidAction(BaseAction):
     def act(doc_state, **kwargs):
         feedback = "Action: 'InvalidAction'\nDocument returned unchanged."
         return doc_state, feedback
+
+
+class FieldLocalizer(BaseAction):
+    documentation = """
+    Given a string of question in a document, image, or pdf, return the center of the textbox, line, or cell related to the question.
+    Args:
+        value: The string of question in a document, image, or pdf
+
+    Example input:
+        {"action": "FieldLocalizer", "value": "First Name"}
+    """
+    PROD_TOOL_CHECKPOINT_PATH = "tool/prod_tool_checkpoint"
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    processor, model = load_from_checkpoint(PROD_TOOL_CHECKPOINT_PATH, device)
+
+    @classmethod
+    def act(cls, doc_state, value: str, **kwargs):
+        img = doc_state.get_image_of_state()
+        w = img.width
+        h = img.height
+        prompt = TEXT_INPUT_PROMPT_TEMPLATE.format(target=value)
+        inputs = cls.processor(text=prompt, images=img, return_tensors="pt").to(
+            cls.device
+        )
+        generated_ids = cls.model.generate(
+            input_ids=inputs["input_ids"],
+            pixel_values=inputs["pixel_values"],
+            max_new_tokens=512,
+            num_beams=3,
+            do_sample=False,
+        )
+        generated_text = cls.processor.batch_decode(
+            generated_ids, skip_special_tokens=False
+        )[0]
+
+        parsed_answer = cls.processor.post_process_generation(
+            generated_text, task=TASK_NAME_PREFIX, image_size=(img.width, img.height)
+        )
+
+        # outputs = cls.model.generate(**inputs, max_new_tokens=100)
+        # generated_text = cls.processor.decode(outputs[0], skip_special_tokens=False)
+        # parsed_answer = cls.processor.post_process_generation(
+        #     generated_text,
+        #     task=TASK_NAME_PREFIX,
+        #     image_size=(w, h),
+        # )
+        pred_bboxes = parsed_answer[TASK_NAME_PREFIX]["bboxes"]
+        if len(pred_bboxes) == 0:
+            feedback = f"Action: 'FieldLocalizer'\nNo bbox found for {value}"
+            return doc_state, feedback
+        else:
+            all_bboxes = []
+            for bbox in pred_bboxes:
+                bbox = [int(b) for b in bbox]
+                x1 = bbox[0] / w
+                y1 = bbox[1] / h
+                x2 = bbox[2] / w
+                y2 = bbox[3] / h
+                all_bboxes.append(
+                    f"x1: {x1:.3f}, y1: {y1:.3f}, x2: {x2:.3f}, y2: {y2:.3f}"
+                )
+
+            feedback = (
+                f"Action: 'FieldLocalizer'\nPredicted bboxes for {value}:\n"
+                + "\n".join(all_bboxes)
+            )
+            return doc_state, feedback
 
 
 ### Actions for editable pdfs and websites

@@ -67,21 +67,26 @@ class UserAttributeMeta(type):
 
 
 class UserProfile:
-    def __init__(self, idx):
+    def __init__(self, idx, relevant_features: set):
+        self.relevant_features = relevant_features
         class Features:
             pass
 
         self.features = Features()
-        for name, attr_class in UserAttributeMeta.registry.items():
-            if hasattr(attr_class, "options") and isinstance(attr_class.options, list):
-                setattr(self.features, name, attr_class.options[idx])
-            else:
-                raise AttributeError(f"Class {name} must have an 'options' list.")
+        # for name, attr_class in UserAttributeMeta.registry.items():
+        for name in self.relevant_features:
+            attr_class = UserAttributeMeta.registry[name]
+            if name in relevant_features:
+                if hasattr(attr_class, "options") and isinstance(attr_class.options, list):
+                    setattr(self.features, name, attr_class.options[idx])
+                else:
+                    raise AttributeError(f"Class {name} must have an 'options' list.")
 
     def get_nl_profile(self):
         nl_profile = []
         for name, attr_class in UserAttributeMeta.registry.items():
-            nl_profile.append(attr_class.nl_desc(getattr(self.features, name)))
+            if name in self.relevant_features:
+                nl_profile.append(attr_class.nl_desc(getattr(self.features, name)))
         return nl_profile
 
 # metaclass

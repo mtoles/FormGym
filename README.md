@@ -12,6 +12,8 @@ Preprocess with
 python3 tool/process_annotations_and_images.py
 ```
 
+For preprocessing data, you must build https://github.com/Karbo123/content-aware-fill from source to `tool/content-aware-fill`
+
 # FormGym Eval Setup
 
 Preprocess all files with 
