@@ -10,7 +10,7 @@ pydantic
 torchvision
 tqdm
 transformers==4.48.0
-# vllm
+vllm
 wandb
 peft
 einops 
@@ -21,3 +21,4 @@ openai
 anthropic
 pymupdf
 pybind11
+joblib

@@ -31,7 +31,7 @@ import sys
 print(os.environ["CUDA_HOME"])
 print(os.environ["LD_LIBRARY_PATH"])
 print(torch.cuda.is_available())
-assert torch.cuda.is_available() # not available in debug mode, dunno why
+assert torch.cuda.is_available()  # not available in debug mode, dunno why
 
 TASK_NAME_PREFIX = "<OPEN_VOCABULARY_DETECTION>"  # config["task_name_prefix"]
 TEXT_INPUT_PROMPT_TEMPLATE = (
@@ -42,7 +42,10 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class FormGymDataset(Dataset):
     def __init__(
-        self, json_path: str, max_examples_per_image: int = sys.maxsize, max_size: int = None
+        self,
+        json_path: str,
+        max_examples_per_image: int = sys.maxsize,
+        max_size: int = None,
     ):
         self.image_dir = "tool/dataset/processed/images"
         with open(json_path, "r") as f:
@@ -111,7 +114,7 @@ def load_config(args, actions):
             config[action.dest] = action.type(config[action.dest])
 
     # if override_args:
-        # Update config with command line arguments
+    # Update config with command line arguments
     for key, value in vars(args).items():
         if value is not None:  # Remove the key in config check to allow new keys
             config[key] = value
@@ -228,6 +231,7 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
 
             # Generate tokens one by one for the entire batch
             generated_ids_list = [[] for _ in range(batch_size)]
+            still_generating = [True for _ in range(batch_size)]
             for _ in range(max_length):
                 outputs = model(
                     input_ids=inputs["input_ids"],
@@ -246,6 +250,8 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                         != model.config.text_config.eos_token_id
                     ):
                         generated_ids_list[i].append(next_tokens[i].item())
+                    if generated_ids_list[i][-1] == model.config.text_config.eos_token_id:
+                        still_generating[i] = False
 
                 # Check if all sequences have reached EOS
                 if all(
@@ -257,7 +263,9 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                 # Update input for next iteration
                 print(f"token no: {current_ids.shape[1]}", end="\r")
                 current_ids = torch.cat([current_ids, next_tokens], dim=-1)
-            print()
+
+                if not any(still_generating):
+                    break
 
             # Process each sample in the batch
             generated_texts = processor.batch_decode(
@@ -481,6 +489,8 @@ def main():
         NOTE = args.note
     if args.max_iou_examples is not None:
         MAX_IOU_EXAMPLES = args.max_iou_examples
+    if args.val_batch_size is not None:
+        VAL_BATCH_SIZE = args.val_batch_size
 
     # Create a unique run name with timestamp
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -627,10 +637,15 @@ def main():
             )
 
             # Evaluate every N batches
-            if (batch_no % int(EPOCHS_PER_EVAL * batches_per_epoch) == 0 and batch_no != 0) or batch_no == EPOCHS * batches_per_epoch - 1:
+            if (
+                batch_no % int(EPOCHS_PER_EVAL * batches_per_epoch) == 0
+                and batch_no != 0
+            ) or batch_no == EPOCHS * batches_per_epoch - 1:
                 val_loss = calculate_loss(model, val_loader, processor)
                 val_accuracy, predictions_data = calculate_iou_accuracy(
-                    model, val_loader, processor
+                    model,
+                    val_loader,
+                    processor,
                 )
                 predictions_df = pd.DataFrame(predictions_data)
 

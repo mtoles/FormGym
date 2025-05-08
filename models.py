@@ -59,6 +59,7 @@ def get_e2e_prompt(
     If you do not know value for a field, fill it with "[UNK]".
     Fill checkboxes with a single "x".
     Format all dates as "MM/DD/YYYY", including leading zeros.
+    
 
     {grid_subprompt}
     {suggest_localizer_str}
@@ -78,7 +79,7 @@ def get_e2e_prompt(
         + "\n".join([f"Feedback {i+1}: {f}" for i, f in enumerate(feedback)])
     )
     suggest_localizer_str = (
-        "It is recommended that you call the localizer for each field before attempting to fill it."
+        "It is recommended that you call the localizer for each field before attempting to fill it. If the localizer fails to find a bbox for a field, do not call the localizer again and instead attempt to place the text on your own."
         if suggest_localizer
         else ""
     )
@@ -277,6 +278,31 @@ class CheaterModel:
                 }
             )
         return preds
+
+
+class PerfectToolModel:
+    def __init__(self, doc_state, user_profile):
+        self.doc_state = doc_state
+        self.user_profile = user_profile
+
+    def forward(
+        self,
+        nl_profile: str,
+        doc_image: Image.Image,
+        available_actions: List[str],
+        targets: List[str] = [],
+        feedback: List[List] = None,
+        suggest_localizer: bool = False,
+    ) -> List[Dict]:
+        preds = []
+        targets = set(targets)
+        filled = set()
+        for field in self.doc_state.fields:
+            if field["field_name"] in filled:
+                continue
+            
+                
+
 
 
 class ScriptedModel:
