@@ -360,15 +360,24 @@ def manage_checkpoints(checkpoint_dir, max_checkpoints=4):
 
 
 def load_from_checkpoint(checkpoint_path, device):
+    print(f"Loading model from checkpoint: {checkpoint_path}")
+    print(f"Checkpoint path exists: {os.path.exists(checkpoint_path)}")
+    if os.path.exists(checkpoint_path):
+        print(f"Checkpoint contents: {os.listdir(checkpoint_path)}")
+    
     model_config = AutoConfig.from_pretrained(
         "microsoft/Florence-2-large-ft",
         trust_remote_code=True,
     )
     model = AutoModelForCausalLM.from_pretrained(
-        checkpoint_path, trust_remote_code=True, config=model_config
+        checkpoint_path,
+        trust_remote_code=True,
+        config=model_config,
+        local_files_only=True
     ).to(device)
     processor = AutoProcessor.from_pretrained(
-        "microsoft/Florence-2-large-ft", trust_remote_code=True
+        "microsoft/Florence-2-large-ft",
+        trust_remote_code=True
     )
     return processor, model
 

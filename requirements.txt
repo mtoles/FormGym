@@ -6,11 +6,11 @@ numpy
 pandas
 Pillow
 pydantic
-# torch
+# torch==2.7.0
 torchvision
 tqdm
 transformers==4.48.0
-vllm
+vllm==0.7.0
 wandb
 peft
 einops 

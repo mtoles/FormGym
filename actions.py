@@ -18,6 +18,7 @@ from tool.train_florence import (
     TASK_NAME_PREFIX,
 )
 from utils import *
+import os
 
 
 class ActionMeta(type):
@@ -250,7 +251,17 @@ class FieldLocalizer(BaseAction):
     Example input:
         {"action": "FieldLocalizer", "value": "First Name"}
     """
-    PROD_TOOL_CHECKPOINT_PATH = "tool/prod_tool_checkpoint"
+    current_directory = os.getcwd()
+    print("RATTAN")
+    print(current_directory)
+
+    # Use absolute path
+    PROD_TOOL_CHECKPOINT_PATH = os.path.abspath(os.path.join(current_directory, "tool/prod_tool_checkpoint"))
+    print(f"Loading model from: {PROD_TOOL_CHECKPOINT_PATH}")
+    print(f"Checking if directory exists: {os.path.exists(PROD_TOOL_CHECKPOINT_PATH)}")
+    if os.path.exists(PROD_TOOL_CHECKPOINT_PATH):
+        print(f"Directory contents: {os.listdir(PROD_TOOL_CHECKPOINT_PATH)}")
+    
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     processor, model = load_from_checkpoint(PROD_TOOL_CHECKPOINT_PATH, device)
 

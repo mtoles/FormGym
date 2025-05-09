@@ -600,7 +600,7 @@ class AnthropicModelE2E:
 
 class HFE2EModel:
     def __init__(
-        self, model_name: str, download_dir: str, seed=None, draw_grid: bool = False
+        self, model_name: str, download_dir: str, seed=42, draw_grid: bool = False
     ):
         model_registry = {
             "aria": AriaModel,
@@ -622,7 +622,7 @@ class HFE2EModel:
         engine_args_dict["download_dir"] = download_dir
         engine_args_dict["seed"] = seed
         # TODO - Argument for multiple GPUs
-        # engine_args_dict["tensor_parallel_size"] = 4
+        engine_args_dict["tensor_parallel_size"] = 2
 
         self.llm = LLM(**engine_args_dict)
 
