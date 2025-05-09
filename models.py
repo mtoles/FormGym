@@ -82,11 +82,12 @@ def get_e2e_prompt(
             else "<No feedback yet>"
         )
     )
-    suggest_localizer_str = (
-        "It is recommended that you call the localizer for fields before attempting to fill them. If the localizer fails to find a bbox for a field, do not call the localizer again and instead attempt to place the text on your own.\n"
-        if suggest_localizer
-        else ""
-    )
+    # suggest_localizer_str = (
+    #     "It is recommended that you call the localizer for fields before attempting to fill them. If the localizer fails to find a bbox for a field, do not call the localizer again and instead attempt to place the text on your own.\n"
+    #     if suggest_localizer
+    #     else ""
+    # )
+    suggest_localizer_str = ""
     needs_db_str = (
         "You have access to a database of information about the user's company financial information. Use this information to fill out the form. It is recommended that you query the database before filling out the form.\n"
         if needs_db
@@ -608,7 +609,7 @@ class AnthropicModelE2E:
                 needs_db=needs_db,
                 turns_remaining=turns_remaining,
             )
-            print(prompt)
+            # print(prompt)
             if self.draw_grid:
                 image = add_grid_overlay(image)
 

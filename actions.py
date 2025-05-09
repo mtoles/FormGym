@@ -18,6 +18,8 @@ from tool.train_florence import (
     TASK_NAME_PREFIX,
 )
 from utils import *
+from PIL import Image, ImageDraw
+from datetime import datetime
 
 
 class ActionMeta(type):
@@ -255,7 +257,36 @@ class FieldLocalizer(BaseAction):
     processor, model = load_from_checkpoint(PROD_TOOL_CHECKPOINT_PATH, device)
 
     @classmethod
-    def act(cls, doc_state, value: str, **kwargs):
+    def _visualize_localizer(
+        cls,
+        img,
+        value: str,
+        pred_bboxes: List[List[int]],
+        save_path: str = "field_localizer_output.png",
+    ):
+        """Helper method to visualize predictions with bounding boxes and labels.
+
+        Args:
+            img: PIL Image to draw on
+            value: The input value to use as label
+            pred_bboxes: List of predicted bounding boxes
+            save_path: Where to save the visualization
+        """
+        vis_img = img.copy()
+        draw = ImageDraw.Draw(vis_img)
+
+        for bbox in pred_bboxes:
+            # Draw the bounding box
+            draw.rectangle([bbox[0], bbox[1], bbox[2], bbox[3]], outline="red", width=2)
+            # Draw the label
+            draw.text((bbox[0], bbox[1] - 20), value, fill="red")
+
+        # Save the visualization
+        vis_img.save(save_path)
+        return save_path
+
+    @classmethod
+    def act(cls, doc_state, value: str, return_bboxes: bool = False, **kwargs):
         img = doc_state.get_image_of_state()
         w = img.width
         h = img.height
@@ -278,17 +309,13 @@ class FieldLocalizer(BaseAction):
             generated_text, task=TASK_NAME_PREFIX, image_size=(img.width, img.height)
         )
 
-        # outputs = cls.model.generate(**inputs, max_new_tokens=100)
-        # generated_text = cls.processor.decode(outputs[0], skip_special_tokens=False)
-        # parsed_answer = cls.processor.post_process_generation(
-        #     generated_text,
-        #     task=TASK_NAME_PREFIX,
-        #     image_size=(w, h),
-        # )
         pred_bboxes = parsed_answer[TASK_NAME_PREFIX]["bboxes"]
         if len(pred_bboxes) == 0:
             feedback = f"Action: 'FieldLocalizer'\nNo bbox found for {value}"
-            return doc_state, feedback
+            if return_bboxes:
+                return doc_state, feedback, None
+            else:
+                return doc_state, feedback
         else:
             all_bboxes = []
             for bbox in pred_bboxes:
@@ -301,26 +328,53 @@ class FieldLocalizer(BaseAction):
                     f"x1: {x1:.3f}, y1: {y1:.3f}, x2: {x2:.3f}, y2: {y2:.3f}"
                 )
 
+            # Visualize predictions
+            # save_path = cls._visualize_localizer(
+            #     img,
+            #     value,
+            #     pred_bboxes,
+            #     save_path=f"tmp/{doc_state.doc_id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png",
+            # )
+
             feedback = (
                 f"Action: 'FieldLocalizer'\nPredicted bboxes for {value}:\n"
                 + "\n".join(all_bboxes)
+                # + f"\nVisualization saved to {save_path}"
             )
+
+            if return_bboxes:
+                return doc_state, feedback, pred_bboxes
+            else:
+                return doc_state, feedback, None
+
+
+class PlaceWithLocalizer(BaseAction):
+    documentation = """
+    Place a piece of text in a target field on a document, image, or pdf. This tool will automatically find the target field and place the text there. If the target field needs to be described with additional specificity (e.g., section headers, table columns), list them from highest to lowest in the hierarchy, separated by | as in: "Section Header | Table Column | Table Row" or "User 1 | First Name.
+    Args:
+        target: The name of the field as it appears in the document
+        value: The text to place in the target field
+
+    Example input:
+        {"action": "PlaceWithLocalizer", "target": "First Name", "value": "John"}
+    """
+
+    def act(doc_state, target: str, value: str, **kwargs):
+        localizer_doc_state, localizer_feedback, localizer_bboxes = FieldLocalizer.act(
+            doc_state, target, return_bboxes=True
+        )
+        # Get center coordinates from first predicted bbox
+
+        if localizer_bboxes is None:
+            return doc_state, localizer_feedback
+        else:
+            first_bbox = localizer_bboxes[0]
+            x1, y1, x2, y2 = first_bbox
+            cx = (x1 + x2) / (2 * doc_state.w)
+            cy = (y1 + y2) / (2 * doc_state.h)
+            doc_state, feedback = PlaceText.act(doc_state, cx, cy, value)
+            print(f"Placed text for {target} as {value} at {cx}, {cy}")
             return doc_state, feedback
-
-
-### Actions for editable pdfs and websites
-
-# class Click(BaseAction):
-#     pass
-
-# class ModifyText(BaseAction):
-#     pass
-
-# class SelectFileUpload(BaseAction):
-#     pass
-
-# class Terminate(BaseAction):
-#     pass
 
 
 def update_doc_state(doc_state, agent_generations: List[Dict], db=None):

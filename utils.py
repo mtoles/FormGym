@@ -24,6 +24,23 @@ class DatasetEnum(Enum):
     CR = "cr"  # consolidated report of income
 
 
+class AvailableActionsEnum(Enum):
+    BASELINE_MULTISHOT = ["PlaceText", "DeleteText", "SignOrInitial", "Terminate"]
+    BASELINE_ONESHOT = ["PlaceText", "SignOrInitial"]
+    EXPERIMENTAL_MULTISHOT = [
+        "PlaceWithLocalizer",
+        "DeleteText",
+        "SignOrInitial",
+        "Terminate",
+    ]
+    EXPERIMENTAL_ONESHOT = ["PlaceWithLocalizer", "SignOrInitial"]
+
+
+class StudyConditionEnum(Enum):
+    BASELINE = "baseline"
+    EXPERIMENTAL = "ours"
+
+
 FILLER_FONT = ImageFont.truetype("/usr/share/fonts/truetype/DejaVuSerif.ttf", 20)
 
 
@@ -39,5 +56,3 @@ def get_text_bbox(
         "width": text_width,
         "height": text_height,
     }
-
-

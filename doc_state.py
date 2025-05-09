@@ -11,12 +11,13 @@ class DocState:
     Agnostic to the actual fields in the empty form
     """
 
-    def __init__(self, doc_fields, blank_img: Image.Image):
+    def __init__(self, doc_fields, blank_img: Image.Image, doc_id: str):
         self.fields = doc_fields
         self.marks = []
         self.w = blank_img.width
         self.h = blank_img.height
         self.blank_img = blank_img
+        self.doc_id = doc_id
 
     def get_last_k_fields(self, k):
         # sort fields by y coordinate
