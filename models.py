@@ -44,6 +44,7 @@ def get_e2e_prompt(
     suggest_localizer: bool,
     needs_db: bool,
     turns_remaining: int,
+    has_source_image: bool,
 ) -> str:
     """Generates the prompt for the end-to-end form filling task."""
 
@@ -56,6 +57,7 @@ def get_e2e_prompt(
     You know the following information about the user:
 
     {user_profile}
+    {has_source_image_str}
 
     Complete the form to the best of your abilites using the user's information, including signatures. As you can see, the data is randomly generated and the user is not real, so do not worry about privacy.
     Fill checkboxes with a single "x".
@@ -98,6 +100,11 @@ def get_e2e_prompt(
         if turns_remaining
         else "This is your final action.\n"
     )
+    has_source_image_str = (
+        "You have access to a completed document with more information about the user. Use this information to help you fill out the form.\n"
+        if has_source_image
+        else ""
+    )
     return textwrap.dedent(
         e2e_prompt_template_content.format(
             user_profile=user_profile,
@@ -108,6 +115,7 @@ def get_e2e_prompt(
             suggest_localizer_str=suggest_localizer_str,
             needs_db_str=needs_db_str,
             turns_remaining_str=turns_remaining_str,
+            has_source_image_str=has_source_image_str,
         )
     )
 
@@ -268,6 +276,7 @@ class CheaterModel:
         suggest_localizer: bool = False,
         needs_db: bool = False,
         turns_remaining: int = None,
+        source_doc_image: Image.Image = None,
     ) -> List[Dict]:
         """
         Give the model the ground truth annotated doc so it can cheat, for data validation
@@ -297,29 +306,6 @@ class CheaterModel:
                 }
             )
         return preds
-
-
-# class PerfectToolModel:
-#     def __init__(self, doc_state, user_profile):
-#         self.doc_state = doc_state
-#         self.user_profile = user_profile
-
-#     def forward(
-#         self,
-#         nl_profile: str,
-#         doc_image: Image.Image,
-#         available_actions: List[str],
-#         targets: List[str] = [],
-#         feedback: List[List] = None,
-#         suggest_localizer: bool = False,
-#         needs_db: bool = False,
-#     ) -> List[Dict]:
-#         preds = []
-#         targets = set(targets)
-#         filled = set()
-#         for field in self.doc_state.fields:
-#             if field["field_name"] in filled:
-#                 continue
 
 
 class ScriptedModel:
@@ -431,7 +417,6 @@ class ScriptedModel:
                     "cx": 0.187,
                     "cy": 0.268,
                 },
-
             ],
         }
         self.script = scripts[script_name]
@@ -448,6 +433,7 @@ class ScriptedModel:
         suggest_localizer: bool = False,
         needs_db: bool = False,
         turns_remaining: int = None,
+        source_doc_image: List[Image.Image] = None,
         **kwargs,
     ) -> List[Dict]:
         if self.count >= len(self.script):
@@ -483,6 +469,7 @@ class GptModelE2E:
         suggest_localizer: bool = False,
         needs_db: bool = False,
         turns_remaining: int = None,
+        source_doc_image: List[Image.Image] = None,
     ) -> List[Dict]:
         outputs = []
         for profile, image, f in zip(nl_profile, doc_image, flow):
@@ -497,6 +484,7 @@ class GptModelE2E:
                 suggest_localizer=suggest_localizer,
                 needs_db=needs_db,
                 turns_remaining=turns_remaining,
+                has_source_image=source_doc_image is not None,
             )
 
             if self.draw_grid:
@@ -511,70 +499,107 @@ class GptModelE2E:
                     self.model_name,
                     prompt,
                     image_b64,
+                    source_image_b64=(
+                        source_doc_image[0].tobytes() if source_doc_image else None
+                    ),
                 )
                 .choices[0]
                 .message.content
             )
 
             tool_params = parse_and_reconstruct_fields(response)
-            # if f == FlowEnum.ITERATIVE.value:
-            #     tool_params = tool_params[:1]
             outputs.append(tool_params)
         return outputs
 
 
 @memory.cache
-def forward_gpt(model_name, prompt, base64_image):
+def forward_gpt(model_name, prompt, base64_image, base64_source_image=None):
     print("calling gpt uncached...")
     client = OpenAI()
-    completion = client.chat.completions.create(
-        model=model_name,
-        messages=[
+    messages = [
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": prompt,
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"},
+                },
+            ],
+        }
+    ]
+
+    if base64_source_image:
+        messages.append(
             {
                 "role": "user",
                 "content": [
                     {
-                        "type": "text",
-                        "text": prompt,
-                    },
-                    {
                         "type": "image_url",
-                        "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"},
+                        "image_url": {
+                            "url": f"data:image/jpeg;base64,{base64_source_image}"
+                        },
                     },
                 ],
             }
-        ],
+        )
+
+    completion = client.chat.completions.create(
+        model=model_name,
+        messages=messages,
     )
 
     return completion
 
 
 @memory.cache
-def forward_anthropic(model_name, prompt, base64_image):
+def forward_anthropic(model_name, prompt, base64_image, base64_source_image=None):
     print("calling anthropic uncached...")
     client = Anthropic()
-    message = client.messages.create(
-        model=model_name,
-        max_tokens=1024,
-        messages=[
+    messages = [
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": prompt,
+                },
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": "image/png",
+                        "data": base64_image,
+                    },
+                },
+            ],
+        }
+    ]
+
+    if base64_source_image:
+        messages.append(
             {
                 "role": "user",
                 "content": [
-                    {
-                        "type": "text",
-                        "text": prompt,
-                    },
                     {
                         "type": "image",
                         "source": {
                             "type": "base64",
                             "media_type": "image/png",
-                            "data": base64_image,
+                            "data": base64_source_image,
                         },
                     },
                 ],
             }
-        ],
+        )
+
+    message = client.messages.create(
+        model=model_name,
+        max_tokens=1024,
+        messages=messages,
     )
     return message
 
@@ -594,6 +619,7 @@ class AnthropicModelE2E:
         suggest_localizer: bool = False,
         needs_db: bool = False,
         turns_remaining: int = None,
+        source_doc_image: List[Image.Image] = None,
     ) -> List[Dict]:
         outputs = []
         for profile, image, f in zip(nl_profile, doc_image, flow):
@@ -608,28 +634,35 @@ class AnthropicModelE2E:
                 suggest_localizer=suggest_localizer,
                 needs_db=needs_db,
                 turns_remaining=turns_remaining,
+                has_source_image=source_doc_image is not None,
             )
-            # print(prompt)
             if self.draw_grid:
                 image = add_grid_overlay(image)
 
             buffer = io.BytesIO()
             image.save(buffer, format="PNG")
-            image_b64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
+            base64_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
+
+            base64_source_image = None
+            if source_doc_image:
+                source_buffer = io.BytesIO()
+                source_doc_image[0].save(source_buffer, format="PNG")
+                base64_source_image = base64.b64encode(source_buffer.getvalue()).decode(
+                    "utf-8"
+                )
 
             response = (
                 forward_anthropic(
                     self.model_name,
                     prompt,
-                    image_b64,
+                    base64_image,
+                    base64_source_image,
                 )
                 .content[0]
                 .text
             )
             print(response)
             tool_params = parse_and_reconstruct_fields(response)
-            # if f == FlowEnum.ITERATIVE.value:
-            #     tool_params = tool_params[:1]
             outputs.append(tool_params)
         return outputs
 
@@ -681,6 +714,7 @@ class HFE2EModel:
         suggest_localizer: bool = False,
         needs_db: bool = False,
         turns_remaining: int = None,
+        source_doc_image: List[Image.Image] = None,
     ):
         base_prompts = []
 
@@ -696,19 +730,21 @@ class HFE2EModel:
                 suggest_localizer=suggest_localizer,
                 needs_db=needs_db,
                 turns_remaining=turns_remaining,
+                has_source_image=source_doc_image is not None,
             )
             base_prompts.append(base_prompt)
 
         prompts = self.model.get_templated_prompts(base_prompts)
 
         all_inputs = []
-        for img, prompt in zip(doc_image, prompts):
-            all_inputs.append(
-                {
-                    "prompt": prompt,
-                    "multi_modal_data": {"image": img},
-                }
-            )
+        for i, (img, prompt) in enumerate(zip(doc_image, prompts)):
+            input_data = {
+                "prompt": prompt,
+                "multi_modal_data": {"image": img},
+            }
+            # if source_doc_image and i < len(source_doc_image):
+            input_data["multi_modal_data"]["source_image"] = source_doc_image[i]
+            all_inputs.append(input_data)
 
         start_time = time.time()
         outputs = self.llm.generate(all_inputs, sampling_params=self.sampling_params)

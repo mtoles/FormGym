@@ -40,8 +40,11 @@ class StudyConditionEnum(Enum):
     BASELINE = "baseline"
     EXPERIMENTAL = "ours"
 
+class ProfileSourceEnum(Enum):
+    TEXT = "text"
+    IMAGE = "image"
 
-FILLER_FONT = ImageFont.truetype("/usr/share/fonts/truetype/DejaVuSerif.ttf", 20)
+FILLER_FONT = ImageFont.truetype("/usr/share/fonts/truetype/DejaVuSerif.ttf", 12)
 
 
 def get_text_bbox(

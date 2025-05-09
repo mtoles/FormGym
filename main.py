@@ -36,6 +36,52 @@ def get_relevant_user_features(doc_state: DocState) -> set:
     return referenced_features
 
 
+def get_completed_source_doc(source_doc_id: str, user_idx):
+    # Load the document image and annotations
+    png_path = f"pngs/{source_doc_id}.png"
+    blank_img = Image.open(png_path).convert("RGB")
+    annot_path = f"annotations/{source_doc_id}.json"
+    annots = annotations.read_annotations(annot_path)
+    targets = annotations.read_targets(f"targets/{source_doc_id}_targets.json")[
+        "selected_ids"
+    ]
+
+    # Create document state
+    doc_state = DocState(annots, blank_img=blank_img, doc_id=source_doc_id)
+    source_doc_relevant_user_features = get_relevant_user_features(doc_state)
+
+    # Get relevant user features and create user profile
+    source_doc_relevant_user_features = get_relevant_user_features(doc_state)
+    user_profile = user_features.UserProfile(user_idx, source_doc_relevant_user_features)
+    nl_profile = "\n".join(user_profile.get_nl_profile())
+
+    # Create database connection
+    db = SqlDb(user_profile=user_profile)
+
+    # Create and run cheater model
+    cheater_model = models.CheaterModel(doc_state=doc_state, user_profile=user_profile)
+    available_actions = []
+
+    cheater_gens = cheater_model.forward(
+        nl_profile=nl_profile,
+        doc_image=blank_img,
+        available_actions=available_actions,
+        targets=[],
+        suggest_localizer=False,
+    )
+
+    # Update document state with cheater model's actions
+    doc_state, feedback = actions.update_doc_state(
+        doc_state=doc_state, agent_generations=cheater_gens
+    )
+
+    # Get image of filled document and save to tmp directory
+    save_path = f"tmp/{source_doc_id}_gt.png"
+    filled_img = doc_state.get_image_of_state(save_path=save_path)
+
+    return filled_img, source_doc_relevant_user_features
+
+
 def example_should_be_active(example):
     if example["flow"] == FlowEnum.ONESHOT.value:
         return False
@@ -61,16 +107,25 @@ if __name__ == "__main__":
     parser.add_argument("--k_missing_fields", type=int, default=1)
     parser.add_argument("--max_actions_multiplier", type=int, default=2)
     parser.add_argument("--suggest_localizer", type=bool, default=False)
+    parser.add_argument("--source_doc_id", type=str, default=None)
+    parser.add_argument("--user_idx", type=int)
     parser.add_argument(
         "--study_condition",
         type=str,
         help=f"Whether to use a baseline action set or our model [{', '.join([c.value for c in StudyConditionEnum])}]",
+    )
+    parser.add_argument(
+        "--profile_source",
+        type=str,
+        help=f"Whether to use a baseline action set or our model [{', '.join([c.value for c in ProfileSourceEnum])}]",
+        default=ProfileSourceEnum.TEXT.value,
     )
     args = parser.parse_args()
 
     # Validate the task argument
     task = TaskEnum(args.task).value
     study_condition = StudyConditionEnum(args.study_condition).value
+    profile_source = ProfileSourceEnum(args.profile_source).value
     BATCH_SIZE = min(2, len(args.file_ids))
     # set up the db
 
@@ -89,8 +144,20 @@ if __name__ == "__main__":
         doc_state = DocState(annots, blank_img=blank_img, doc_id=fid)
 
         relevant_user_features = get_relevant_user_features(doc_state)
-        user_profile = user_features.UserProfile(i, relevant_user_features)
-        nl_profile = "\n".join(user_profile.get_nl_profile())
+
+        user_profile = user_features.UserProfile(args.user_idx, relevant_user_features)
+        if profile_source == ProfileSourceEnum.TEXT.value:
+            nl_profile = "\n".join(user_profile.get_nl_profile())
+            source_doc_img = None
+        else:
+            assert fid.startswith(
+                "al_"
+            ), "Only auto loan docs dataset supports document transfer setting"
+            # nl_profile = "<Refer to the source image for information on the user>"
+            source_doc_img, source_doc_relevant_user_features = get_completed_source_doc(args.source_doc_id, args.user_idx)
+            user_features_not_in_source_doc = relevant_user_features - source_doc_relevant_user_features
+            user_profile = user_features.UserProfile(args.user_idx, user_features_not_in_source_doc)
+            nl_profile = "\n".join(user_profile.get_nl_profile()) if user_features_not_in_source_doc else "<Refer to the source image for information on the user>"
 
         db = SqlDb(user_profile=user_profile)
 
@@ -164,6 +231,7 @@ if __name__ == "__main__":
                 "active": [True],
                 "max_actions": args.max_actions_multiplier * len(targets),
                 "feedback": [],
+                "source_doc_img": source_doc_img,
             }
         )
 
@@ -205,6 +273,7 @@ if __name__ == "__main__":
                 available_actions=available_actions,
                 flow=batch["flow"].to_list(),
                 suggest_localizer=args.suggest_localizer,  # irrelevant
+                source_doc_image=batch["source_doc_img"].to_list(),
             )
 
             # Process each example in the batch
@@ -227,7 +296,6 @@ if __name__ == "__main__":
 
                 # Generate and save visualization of the updated document state
                 example["img"].append(
-
                     doc_state.get_image_of_state(
                         save_path=f"tmp/{example['fid']}-{len(example['doc_state'])}.png"
                     )
