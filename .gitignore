@@ -107,3 +107,5 @@ cython_debug/
 tmp/
 SimSun.ttf
 output.png
+
+tool/prod_tool_checkpoint/*

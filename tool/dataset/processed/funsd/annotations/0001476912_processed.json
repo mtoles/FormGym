@@ -1,0 +1,47 @@
+{
+  "COMMENTS": "This commercial was tested in color.",
+  "Brand:": "RALEIGH (BELAIR portion not tested)",
+  "Commercial:": "LAKE- NEW PACK: 40 (with BELAIR Badmin- ton: 20)",
+  "Supplier:": "AUDIENCE STUDIES",
+  "Sample:": "336",
+  "Chicago:": "8/8",
+  "Overall": "1.7",
+  "CITY": [
+    "Los ",
+    "Chicago",
+    "0.0",
+    "3.3"
+  ],
+  "Project #": "1969- 105",
+  "PM6 Base:": "(234)",
+  "Code #:": "BW- RT- 69-",
+  "TEST DATES": [
+    "8/5 and 6",
+    "8/8"
+  ],
+  "L. Angeles": "8/5 and 6",
+  "PM6 SCORES": [
+    "0.0",
+    "3.3",
+    "0.0",
+    "3.3",
+    "0.0",
+    "0.0",
+    "0.0",
+    "9.3",
+    "0.0",
+    "5.0"
+  ],
+  "35 & Under": "0.0",
+  "36 & Over": "5.0",
+  "SEX": {
+    "Female": "3.3",
+    "Male": "0.0"
+  },
+  "AGE": {
+    "16-25": "0.0",
+    "26-35": "0.0",
+    "36-45": "0.0",
+    "46 & Over": "9.3"
+  }
+}

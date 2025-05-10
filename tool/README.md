@@ -9,3 +9,12 @@ Otherwise user attributes (dictionary values) are stored as key value pairs.
 cd tool
 python process_annotations.py
 ```
+
+### Mask Images
+
+To get masked images without form data run this script:
+
+```
+python get_bounding_boxes.py
+python mask_images.py
+```

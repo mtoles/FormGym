@@ -1,0 +1,102 @@
+{
+  "Brand": "SALEM (RJR)",
+  "Title": "\"HEAD IN WATER\"",
+  "Size": "FULL PAGE",
+  "Magazine": "TIME",
+  "Location": [
+    "CHICAGO, DALLAS/ FORT WORTH, INDIANAPOLIS, LOS ANGELES",
+    "MEMPHIS, PHILADELPHIA, PITTSBURGH"
+  ],
+  "": "",
+  "COMMENTS": "Tested among a half sample of smokers. Sub- group scores subject to wide variation because of small sample size and should be averaged across several ads for meaningful infor- mation.",
+  "OVERALL": [
+    "1.0",
+    "(.97)",
+    "31",
+    "(167)"
+  ],
+  "Project #": "74- 80",
+  "Total Sample": "214",
+  "Code #": "",
+  "Field Date": "WEEK OF MARCH 25, 1974",
+  "Sample Description": "MALE AND FEMALE MENTHOL SMOKERS",
+  "Under 35": [
+    "2.4",
+    "(42)",
+    "33",
+    "(81)"
+  ],
+  "35 & Over": [
+    "0.0",
+    "(55)",
+    "29",
+    "(86)"
+  ],
+  "Date Sent": "4/19/74",
+  "PM6": {
+    "SCORE": [
+      "1.0",
+      "2.0",
+      "0.0",
+      "2.4",
+      "0.0"
+    ],
+    "BASE": [
+      "(.97)",
+      "(51)",
+      "(46)",
+      "(42)",
+      "(55)"
+    ]
+  },
+  "SEX:": {
+    "Male": [
+      "2.0",
+      "(51)",
+      "31",
+      "(83)"
+    ],
+    "Female": [
+      "0.0",
+      "(46)",
+      "31",
+      "(84)"
+    ]
+  },
+  "AGE:": {
+    "Under 25": "",
+    "35- 44": "",
+    "25- 34": "",
+    "45 & Over": ""
+  },
+  "PROVED RECALL": {
+    "SCORE": [
+      "31",
+      "31",
+      "31",
+      "33",
+      "29",
+      "33",
+      "30"
+    ],
+    "BASE": [
+      "(167)",
+      "(83)",
+      "(84)",
+      "(81)",
+      "(86)",
+      "(42)",
+      "(125)"
+    ]
+  },
+  "BRAND SMOKED:": {
+    "Test Brand Smokers": [
+      "33",
+      "(42)"
+    ],
+    "All Other Smokers": [
+      "30",
+      "(125)"
+    ]
+  }
+}
