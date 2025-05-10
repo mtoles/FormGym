@@ -71,7 +71,7 @@ def normalize_field_name(name):
 
 def process_annotations():
     """Process all annotation JSON files and extract unique fields"""
-    annotations_dir = Path('./tool/dataset/processed/annotations')
+    annotations_dir = Path('./tool/dataset/processed/funsd/annotations')
     all_fields = {}
     processed_jsons = []
     json_file_paths = []  # Keep track of the original file paths in order
@@ -343,7 +343,7 @@ def create_dynamic_classes(all_fields, checkbox_fields, all_form_names):
 
 def write_meta_class_outputs(all_form_names):
     """Write output files using meta classes instead of reading JSONs directly"""
-    output_dir = Path('./tool/dataset/processed/outputs')
+    output_dir = Path('./tool/dataset/processed/funsd/outputs')
     output_dir.mkdir(parents=True, exist_ok=True)
     
     for form_name in all_form_names:

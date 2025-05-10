@@ -1,0 +1,34 @@
+{
+  "FAX:": "(305) 400 6 06",
+  "DATE:": "10/ 13/ 99",
+  "FROM:": "Kevin Narko",
+  "CHARGEBACK:": "4162/ 158",
+  "COMMENTS": "",
+  "Fax Number:": "305 400- 6107",
+  "Total number of pages including this page:": "",
+  "Operator Initials:": "",
+  "Confirmation:": {
+    "Yes": "",
+    "Name:": "",
+    "No:": ""
+  },
+  "Please Deliver as soon Possible To:": {
+    "RECIPIENT": [
+      "John Mulderig",
+      "Gregory Little"
+    ],
+    "COMPANY": [
+      "Philip Morris",
+      "Philip Morris"
+    ],
+    "No.": [
+      "917 -663 -5796",
+      "917- 663 5979"
+    ],
+    "FAX": [
+      "917 -663 -5796",
+      "917- 663 5979"
+    ],
+    "PHONE No.": "917- 663 3056"
+  }
+}

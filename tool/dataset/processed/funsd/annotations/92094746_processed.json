@@ -1,0 +1,56 @@
+{
+  "DATE": "9 /8 /95",
+  "*EXPLAIN:": "Special Emphasis Calls",
+  "COMMENTS:": [
+    "This item was perceived by retailers and consumers as a low",
+    "quality item. Several Sales Reps reported that on occasion our consumers would pass up the deal or leave the glasses in the store."
+  ],
+  "AREA/ REGION/ DIVISION": "2 13",
+  "PROMO #": "28",
+  "PROMOTIONAL PERIOD:": "June/ July",
+  "ITEM/ BRAND:": "Sunglasses / Newport",
+  "#ITEMS/ DEALS RECEIVED:": "28728",
+  "IF NO, EXPLAIN:": "",
+  "IF YES, CAN IT BE IMPROVED?": [
+    "The Promotion can be improved by upgrading",
+    "the quality of the sunglasses"
+  ],
+  "SCOPE:": {
+    "AREA": "",
+    "REGION": "",
+    "DIVISION": "",
+    "OTHER*": "x"
+  },
+  "CHAIN ACCEPTANCE:": {
+    "POOR": "",
+    "FAIR": "",
+    "GOOD": "",
+    "EXCELLENT": ""
+  },
+  "INDEPENDENT ACCEPTANCE:": {
+    "POOR": "",
+    "FAIR": "x",
+    "GOOD": "",
+    "EXCELLENT": ""
+  },
+  "CONSUMER ACCEPTANCE:": {
+    "POOR": "",
+    "FAIR": "x",
+    "GOOD": "",
+    "EXCELLENT": ""
+  },
+  "EFFICIENCY RATING:": {
+    "POOR": "",
+    "FAIR": "x",
+    "GOOD": "",
+    "EXCELLENT": ""
+  },
+  "WERE QUANTITIES APPROPRIATE?": {
+    "YES": "x",
+    "NO*": ""
+  },
+  "SHOULD PROMOTION BE REPEATED": {
+    "YES": "x",
+    "NO": ""
+  }
+}

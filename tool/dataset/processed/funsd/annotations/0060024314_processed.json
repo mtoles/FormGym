@@ -1,0 +1,26 @@
+{
+  "Facility:": "The American Tobacco Company",
+  "Permit#:": "0001",
+  "No": "",
+  "Inorganic": "",
+  "Other": "",
+  "Producion Process": "label adhesive",
+  "Water Treatment:": "",
+  "Housekeeping Cleaning": "",
+  "CHEMICAL DESCRIPTION": {
+    "PRODUCT (CHEMICAL) NAME:": "Fuller G2315 DC",
+    "DESCRIPTION:": "Liquid Adhesive",
+    "PRODUCT CLASSIFICATION (Circle Dne):": "Organic",
+    "CHEMICAL FORMULA:": "Vinyl Acetate",
+    "CAS#": "108 -05 -4",
+    "MANUFACTURER:": "H. B. Fuller Company",
+    "MSDS ON FILE? (Circle One):": "Yes",
+    "PERCENT ACTIVES (Non -water):": ".5%",
+    "PHONE": ""
+  },
+  "CHEMICAL USAGE": {
+    "1993 ANNUAL USAGE (LBS.):": "74880",
+    "1993 AVG. MONTHLY USAGE (LBS.)": "6240",
+    "APPLICATION (Circle One and Briefly Describe):": ""
+  }
+}

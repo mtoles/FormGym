@@ -1,0 +1,26 @@
+{
+  "pH": "The pH of a 50% concentration of B164 in water was calculated to be 4.82 at 25\u00b0C according to the extrapolation procedures by Dr. P. D. Schickedantz, Lorillard Research Center Accession Number 1662.",
+  "Reference:": "BC20- 48",
+  "ORAL": "",
+  "SOLUBILITY": [
+    "(See SOP FOX Biological Solutions)",
+    "B164 forms a suspension in corn oil at 0.5g/ 1.5 ml Triple dosing is required"
+  ],
+  "ACUTE CADCOVASCULAR": [
+    "(See SOP for Determination of Solubility of Materials for Acute Cardiovascular and Respiratory Effects Study Beagle Dogs)",
+    "B164 is insoluble according to this procedure"
+  ],
+  "COMPOUND": [
+    "[] HEAT",
+    "[MOISTURE]",
+    "[] OTHER"
+  ],
+  "TO": "",
+  "SENSITIVE": "[] Air",
+  "SIGNATURE:": "",
+  "DATE": "8/22/83",
+  "LRC FILE NUMBER": "B164",
+  "LOT NUMBER": "",
+  "PHYSICAL STATE": "Brownish- gray powder",
+  "STORAGE RECOMMENDATIONS": "Refrigerate in amber glass bottle at no more than 8\u00b0C"
+}

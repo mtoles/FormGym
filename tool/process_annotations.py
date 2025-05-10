@@ -85,11 +85,11 @@ def process_annotation_file(input_file):
 
 def main():
     # Create output directory if it doesn't exist
-    output_dir = Path('./dataset/processed/annotations')
+    output_dir = Path('./dataset/processed/funsd/annotations')
     output_dir.mkdir(parents=True, exist_ok=True)
     
     # Process all JSON files in the annotations folder
-    annotations_dir = Path('./dataset/raw/annotations')
+    annotations_dir = Path('./dataset/funsd/annotations')
     for input_file in annotations_dir.glob('*.json'):
         # try:
         qa_pairs = process_annotation_file(input_file)
