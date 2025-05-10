@@ -1,0 +1,82 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 802,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "b7efbc33-d74a-4328-98ee-61ac920d2d51",
+      "name": "14",
+      "bounding_box": {
+        "x": 541,
+        "y": 327,
+        "w": 20,
+        "h": 18
+      }
+    },
+    {
+      "id": "c07b6c0c-2f65-4933-beb3-befa7b9b1b55",
+      "name": "6- 29- 94",
+      "bounding_box": {
+        "x": 163,
+        "y": 325,
+        "w": 65,
+        "h": 15
+      }
+    },
+    {
+      "id": "2c20d9b6-8608-45e2-88aa-9a0bc94896a7",
+      "name": "Mr. Al Giacoio",
+      "bounding_box": {
+        "x": 190,
+        "y": 441,
+        "w": 124,
+        "h": 18
+      }
+    },
+    {
+      "id": "28efa719-015a-40e7-8e48-f99d078b7d41",
+      "name": "Fred Paternostro",
+      "bounding_box": {
+        "x": 215,
+        "y": 627,
+        "w": 141,
+        "h": 20
+      }
+    },
+    {
+      "id": "dd28366b-914f-4f7e-a2c5-4abdeadeff68",
+      "name": "(904) 464- 0744",
+      "bounding_box": {
+        "x": 282,
+        "y": 669,
+        "w": 115,
+        "h": 21
+      }
+    },
+    {
+      "id": "25badbed-744b-43f5-92ff-5eb981c6266c",
+      "name": "The attached was obtained from Mackoul Dist.",
+      "bounding_box": {
+        "x": 207,
+        "y": 728,
+        "w": 374,
+        "h": 20
+      }
+    },
+    {
+      "id": "1693f765-ea5b-4ff4-a693-33218bbf64fd",
+      "name": "R. E. KLEIN",
+      "bounding_box": {
+        "x": 281,
+        "y": 810,
+        "w": 87,
+        "h": 21
+      }
+    }
+  ]
+}

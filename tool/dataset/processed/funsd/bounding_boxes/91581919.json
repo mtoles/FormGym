@@ -1,0 +1,182 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 783,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "24b6c1e9-9b8d-4b51-9897-51817b8ac230",
+      "name": "1/31/88",
+      "bounding_box": {
+        "x": 102,
+        "y": 467,
+        "w": 58,
+        "h": 13
+      }
+    },
+    {
+      "id": "29d866f0-6900-4b2c-bf37-c58f232c6aac",
+      "name": "Insert",
+      "bounding_box": {
+        "x": 246,
+        "y": 469,
+        "w": 49,
+        "h": 13
+      }
+    },
+    {
+      "id": "907030d4-c4b7-41fa-aecf-8e1e7656be95",
+      "name": "",
+      "bounding_box": {
+        "x": 458,
+        "y": 650,
+        "w": 150,
+        "h": 70
+      }
+    },
+    {
+      "id": "fac2c766-56da-4cef-afbe-85987305c83a",
+      "name": "4th",
+      "bounding_box": {
+        "x": 478,
+        "y": 749,
+        "w": 33,
+        "h": 16
+      }
+    },
+    {
+      "id": "5fadd080-fd30-49a7-b99e-a30adf399598",
+      "name": "New",
+      "bounding_box": {
+        "x": 102,
+        "y": 659,
+        "w": 30,
+        "h": 13
+      }
+    },
+    {
+      "id": "2b4a0cb8-d18c-4fcc-8075-8121c6853ddb",
+      "name": "Albany",
+      "bounding_box": {
+        "x": 138,
+        "y": 657,
+        "w": 48,
+        "h": 15
+      }
+    },
+    {
+      "id": "f5deaade-8a1f-4260-b51e-06b9f1ba2313",
+      "name": "Bookkeeper",
+      "bounding_box": {
+        "x": 561,
+        "y": 301,
+        "w": 85,
+        "h": 16
+      }
+    },
+    {
+      "id": "4ab13967-5892-40df-9e2c-b0feba22e3c2",
+      "name": "New Albany Tribune",
+      "bounding_box": {
+        "x": 251,
+        "y": 147,
+        "w": 138,
+        "h": 19
+      }
+    },
+    {
+      "id": "40165a7b-bbb4-4de0-8fe6-d72527299f43",
+      "name": "Harley Davidson Cigarettes",
+      "bounding_box": {
+        "x": 588,
+        "y": 148,
+        "w": 120,
+        "h": 32
+      }
+    },
+    {
+      "id": "6f02e859-250b-4251-a0d1-cdb020639b16",
+      "name": "Lorillard Media Service",
+      "bounding_box": {
+        "x": 590,
+        "y": 196,
+        "w": 180,
+        "h": 15
+      }
+    },
+    {
+      "id": "bf1a87d3-d030-4781-a4f3-d264473f9f17",
+      "name": "Indiana )",
+      "bounding_box": {
+        "x": 199,
+        "y": 193,
+        "w": 190,
+        "h": 19
+      }
+    },
+    {
+      "id": "a9ca9a2c-706f-40a7-bb82-f9bf51a2824c",
+      "name": "Floyd )",
+      "bounding_box": {
+        "x": 199,
+        "y": 225,
+        "w": 190,
+        "h": 16
+      }
+    },
+    {
+      "id": "47e8e352-22e7-4f5b-8ea4-d9393a22a8b5",
+      "name": "Holly Inzer",
+      "bounding_box": {
+        "x": 554,
+        "y": 265,
+        "w": 97,
+        "h": 19
+      }
+    },
+    {
+      "id": "698ba327-e60a-4011-a8b8-7ef406f23a16",
+      "name": "January ,1988",
+      "bounding_box": {
+        "x": 243,
+        "y": 394,
+        "w": 201,
+        "h": 19
+      }
+    },
+    {
+      "id": "c3708bc5-374f-4b88-a50b-958348bdc112",
+      "name": "Harley Davidson Cigarettes",
+      "bounding_box": {
+        "x": 436,
+        "y": 469,
+        "w": 200,
+        "h": 13
+      }
+    },
+    {
+      "id": "1421d54e-41c3-4cc0-a3f8-2cfebc9dfc7b",
+      "name": "March ,1988",
+      "bounding_box": {
+        "x": 585,
+        "y": 744,
+        "w": 134,
+        "h": 22
+      }
+    },
+    {
+      "id": "ab3b40cf-92b8-4ac1-856c-eca4c06a3a87",
+      "name": "2-9-90 Betty J. murphy (Notary Public)",
+      "bounding_box": {
+        "x": 349,
+        "y": 838,
+        "w": 287,
+        "h": 39
+      }
+    }
+  ]
+}

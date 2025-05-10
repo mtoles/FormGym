@@ -1,0 +1,212 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "9cdd9f5d-1cde-4e91-898b-3079815d3cad",
+      "name": "7/11/97",
+      "bounding_box": {
+        "x": 609,
+        "y": 108,
+        "w": 50,
+        "h": 15
+      }
+    },
+    {
+      "id": "8ec0ab28-4588-48b2-94c4-c1bda21e0a07",
+      "name": "1",
+      "bounding_box": {
+        "x": 221,
+        "y": 434,
+        "w": 28,
+        "h": 20
+      }
+    },
+    {
+      "id": "f9734fe4-d61c-47f3-ab29-245cd533a4bd",
+      "name": "",
+      "bounding_box": {
+        "x": 221,
+        "y": 454,
+        "w": 25,
+        "h": 11
+      }
+    },
+    {
+      "id": "6ed811c5-0320-4fae-b828-840c4f44bf71",
+      "name": "",
+      "bounding_box": {
+        "x": 223,
+        "y": 468,
+        "w": 24,
+        "h": 14
+      }
+    },
+    {
+      "id": "3df723f6-93bb-4959-a3f6-844006dc477d",
+      "name": "",
+      "bounding_box": {
+        "x": 612,
+        "y": 451,
+        "w": 35,
+        "h": 21
+      }
+    },
+    {
+      "id": "6dcbc224-bc44-46ba-92f6-46aa1f80e0c5",
+      "name": "29-980-7",
+      "bounding_box": {
+        "x": 426,
+        "y": 598,
+        "w": 80,
+        "h": 20
+      }
+    },
+    {
+      "id": "34a21770-7b33-4c05-859c-f4134fe24fce",
+      "name": "400",
+      "bounding_box": {
+        "x": 547,
+        "y": 577,
+        "w": 31,
+        "h": 15
+      }
+    },
+    {
+      "id": "c8b5e0fa-a25d-4b65-80eb-40f59b241d69",
+      "name": "400",
+      "bounding_box": {
+        "x": 549,
+        "y": 608,
+        "w": 27,
+        "h": 11
+      }
+    },
+    {
+      "id": "a9e7b1d8-4b4a-4b1d-a57a-5a6f5a80c2ba",
+      "name": "400",
+      "bounding_box": {
+        "x": 553,
+        "y": 628,
+        "w": 24,
+        "h": 11
+      }
+    },
+    {
+      "id": "a40bee2b-aea1-4193-9864-36b4c96b5b32",
+      "name": "400",
+      "bounding_box": {
+        "x": 608,
+        "y": 595,
+        "w": 32,
+        "h": 21
+      }
+    },
+    {
+      "id": "761026e0-7385-402c-8fc0-a80a9a4119e5",
+      "name": "7/11/97",
+      "bounding_box": {
+        "x": 415,
+        "y": 813,
+        "w": 56,
+        "h": 17
+      }
+    },
+    {
+      "id": "799e2d91-f925-408f-95be-c0cff5ab5057",
+      "name": "198-820-0003",
+      "bounding_box": {
+        "x": 324,
+        "y": 742,
+        "w": 84,
+        "h": 20
+      }
+    },
+    {
+      "id": "7d7f9a58-5960-4a99-a3ea-de04a36a2688",
+      "name": "SAM ZOLOT",
+      "bounding_box": {
+        "x": 207,
+        "y": 110,
+        "w": 68,
+        "h": 15
+      }
+    },
+    {
+      "id": "45d74367-1711-4849-95b8-6672c07e394d",
+      "name": "W. R. KNIGHT - MCA",
+      "bounding_box": {
+        "x": 211,
+        "y": 137,
+        "w": 131,
+        "h": 17
+      }
+    },
+    {
+      "id": "df4e6c5e-be2b-4a31-a9b9-d84101360e48",
+      "name": "ST. LOUIS, MO",
+      "bounding_box": {
+        "x": 211,
+        "y": 163,
+        "w": 95,
+        "h": 17
+      }
+    },
+    {
+      "id": "44b7af5c-24e5-4bb3-9b38-a411e389f561",
+      "name": "Lorillard Metro Golf Outing 1997",
+      "bounding_box": {
+        "x": 209,
+        "y": 274,
+        "w": 232,
+        "h": 17
+      }
+    },
+    {
+      "id": "3e4ddf90-3b94-4a66-82bb-d227394af854",
+      "name": "September 10, 1997 Marcus Hellenic Spirit Charities Golf Classic September 18, 1997",
+      "bounding_box": {
+        "x": 209,
+        "y": 300,
+        "w": 325,
+        "h": 59
+      }
+    },
+    {
+      "id": "fd52063a-abad-44f4-bc9e-23dd561570d3",
+      "name": "SAMPLE 10'S (400 PACKS PER CASE)",
+      "bounding_box": {
+        "x": 272,
+        "y": 356,
+        "w": 201,
+        "h": 17
+      }
+    },
+    {
+      "id": "85d20b43-1c09-4049-aa50-945efd3ac398",
+      "name": "1",
+      "bounding_box": {
+        "x": 420,
+        "y": 448,
+        "w": 51,
+        "h": 20
+      }
+    },
+    {
+      "id": "b5374888-b72e-4224-9804-45afd56c08e1",
+      "name": "1",
+      "bounding_box": {
+        "x": 418,
+        "y": 473,
+        "w": 56,
+        "h": 28
+      }
+    }
+  ]
+}

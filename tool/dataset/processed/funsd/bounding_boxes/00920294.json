@@ -1,0 +1,162 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "006738d3-0972-46d9-bac6-5cc45d9cec20",
+      "name": "970220",
+      "bounding_box": {
+        "x": 504,
+        "y": 113,
+        "w": 38,
+        "h": 15
+      }
+    },
+    {
+      "id": "2bd0c0ca-c519-4a01-a9ce-b9ac014f4447",
+      "name": "5",
+      "bounding_box": {
+        "x": 190,
+        "y": 487,
+        "w": 8,
+        "h": 13
+      }
+    },
+    {
+      "id": "c2f2cd2e-430e-4202-ad03-bf9c00582202",
+      "name": "25",
+      "bounding_box": {
+        "x": 260,
+        "y": 468,
+        "w": 14,
+        "h": 15
+      }
+    },
+    {
+      "id": "7fdb0696-b669-48ca-9488-fe8cbfca24df",
+      "name": "273",
+      "bounding_box": {
+        "x": 211,
+        "y": 302,
+        "w": 25,
+        "h": 14
+      }
+    },
+    {
+      "id": "70ab56e3-a3b0-4593-9109-7ca3147c7e50",
+      "name": "700418",
+      "bounding_box": {
+        "x": 176,
+        "y": 334,
+        "w": 42,
+        "h": 15
+      }
+    },
+    {
+      "id": "0449fe75-bb1b-44f5-9b5c-b05ace2b08f6",
+      "name": "3,",
+      "bounding_box": {
+        "x": 203,
+        "y": 250,
+        "w": 11,
+        "h": 15
+      }
+    },
+    {
+      "id": "07bda6a7-87c1-4617-9058-796bc1692728",
+      "name": "RJR IR - Suz /Art",
+      "bounding_box": {
+        "x": 177,
+        "y": 130,
+        "w": 94,
+        "h": 15
+      }
+    },
+    {
+      "id": "a15ce188-a72e-458e-b644-272087d17431",
+      "name": "Drew Huyett",
+      "bounding_box": {
+        "x": 176,
+        "y": 149,
+        "w": 70,
+        "h": 13
+      }
+    },
+    {
+      "id": "102e2b61-1acf-4103-978b-63e932a2fd06",
+      "name": "3/ 7/ 97",
+      "bounding_box": {
+        "x": 176,
+        "y": 165,
+        "w": 37,
+        "h": 14
+      }
+    },
+    {
+      "id": "a8b7af00-e437-46a7-88b8-162a09c97c4d",
+      "name": "102- Eclipse",
+      "bounding_box": {
+        "x": 179,
+        "y": 198,
+        "w": 63,
+        "h": 15
+      }
+    },
+    {
+      "id": "8711611e-25ae-4fae-b3fc-fbfeab2ebc91",
+      "name": "Corp/ Multibrand",
+      "bounding_box": {
+        "x": 179,
+        "y": 215,
+        "w": 86,
+        "h": 14
+      }
+    },
+    {
+      "id": "6843622e-ca01-4ba5-a322-91b57188042e",
+      "name": "Mail Order- Indy Responders",
+      "bounding_box": {
+        "x": 378,
+        "y": 249,
+        "w": 161,
+        "h": 15
+      }
+    },
+    {
+      "id": "de638279-d79d-4f0d-b8e2-4275e2b8cd5b",
+      "name": "3/ 17/ 97",
+      "bounding_box": {
+        "x": 176,
+        "y": 317,
+        "w": 42,
+        "h": 16
+      }
+    },
+    {
+      "id": "8fff48ee-9e57-4876-97c8-37ba03037846",
+      "name": "HD home delivery",
+      "bounding_box": {
+        "x": 177,
+        "y": 536,
+        "w": 141,
+        "h": 17
+      }
+    },
+    {
+      "id": "74888257-b286-4862-a777-cd32f2ed5979",
+      "name": "SP sneak preview",
+      "bounding_box": {
+        "x": 175,
+        "y": 556,
+        "w": 146,
+        "h": 14
+      }
+    }
+  ]
+}

@@ -1,0 +1,302 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 779,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "4081588b-1352-4acb-a923-7afb52db84a6",
+      "name": "A. REID, DIVISION MANAGER, SAN FRANCISCO, CA",
+      "bounding_box": {
+        "x": 258,
+        "y": 147,
+        "w": 326,
+        "h": 19
+      }
+    },
+    {
+      "id": "e6769e23-8bf1-44b4-9ac7-ae71cf67a29d",
+      "name": "8/ 13/ 93",
+      "bounding_box": {
+        "x": 177,
+        "y": 201,
+        "w": 52,
+        "h": 15
+      }
+    },
+    {
+      "id": "11e2c5a1-d85c-4f99-b65a-41df56db5dc8",
+      "name": "AMERICAN TOBACCO COMPANY",
+      "bounding_box": {
+        "x": 256,
+        "y": 256,
+        "w": 180,
+        "h": 16
+      }
+    },
+    {
+      "id": "50cf24bb-1c17-43a3-91c1-7d807e3223fe",
+      "name": "SPECIAL 10' s",
+      "bounding_box": {
+        "x": 260,
+        "y": 304,
+        "w": 88,
+        "h": 19
+      }
+    },
+    {
+      "id": "7edfe42b-d8ec-4aa9-bcff-6a7d66bf61a4",
+      "name": "SEE ATTACHED COPY OF CIRCULAR NO. 4848",
+      "bounding_box": {
+        "x": 263,
+        "y": 652,
+        "w": 279,
+        "h": 19
+      }
+    },
+    {
+      "id": "2511f90a-f86c-493f-b423-ecc5959568cb",
+      "name": "A. H. Tisch",
+      "bounding_box": {
+        "x": 84,
+        "y": 799,
+        "w": 70,
+        "h": 16
+      }
+    },
+    {
+      "id": "6ffc9494-eb1b-4667-9a42-31cdf3823854",
+      "name": "R. H. Orcutt",
+      "bounding_box": {
+        "x": 84,
+        "y": 818,
+        "w": 78,
+        "h": 15
+      }
+    },
+    {
+      "id": "85676d81-c1c5-4ce5-b552-2624439ab3e8",
+      "name": "M. A. Peterson",
+      "bounding_box": {
+        "x": 82,
+        "y": 837,
+        "w": 99,
+        "h": 14
+      }
+    },
+    {
+      "id": "75d12b6d-5752-423a-8a4e-5e908a33b722",
+      "name": "M. L. Orlowsky",
+      "bounding_box": {
+        "x": 85,
+        "y": 853,
+        "w": 94,
+        "h": 15
+      }
+    },
+    {
+      "id": "292ba2a6-7e82-4690-92cf-a33dd429d504",
+      "name": "L. Gordon",
+      "bounding_box": {
+        "x": 84,
+        "y": 872,
+        "w": 70,
+        "h": 11
+      }
+    },
+    {
+      "id": "ad60df18-a99d-44b4-8b63-c99f49de4b92",
+      "name": "G. Telford",
+      "bounding_box": {
+        "x": 85,
+        "y": 887,
+        "w": 64,
+        "h": 12
+      }
+    },
+    {
+      "id": "fa96505b-29fb-460c-81c9-ee890a7740b3",
+      "name": "V. Norman",
+      "bounding_box": {
+        "x": 242,
+        "y": 797,
+        "w": 72,
+        "h": 14
+      }
+    },
+    {
+      "id": "627ce47f-20a6-416e-91c9-f6517a379880",
+      "name": "A. W. Spears",
+      "bounding_box": {
+        "x": 240,
+        "y": 817,
+        "w": 86,
+        "h": 14
+      }
+    },
+    {
+      "id": "d37369ff-0e4a-4d54-922c-feca8fae031c",
+      "name": "A. J. Giacoio",
+      "bounding_box": {
+        "x": 242,
+        "y": 834,
+        "w": 83,
+        "h": 14
+      }
+    },
+    {
+      "id": "a701792a-2a1b-4463-b3b0-a2b8cce7bc4b",
+      "name": "N. P. Ruffalo",
+      "bounding_box": {
+        "x": 242,
+        "y": 851,
+        "w": 78,
+        "h": 14
+      }
+    },
+    {
+      "id": "be2cd273-40cd-4c07-abde-a93f7a0d35f6",
+      "name": "T. L. Achey",
+      "bounding_box": {
+        "x": 242,
+        "y": 869,
+        "w": 77,
+        "h": 14
+      }
+    },
+    {
+      "id": "ec4d9c33-dce6-4601-bed7-fe35bf86f728",
+      "name": "R. B. Spell",
+      "bounding_box": {
+        "x": 242,
+        "y": 887,
+        "w": 70,
+        "h": 13
+      }
+    },
+    {
+      "id": "a373cd91-0534-46d9-8021-dfc5087fbc93",
+      "name": "P. J. McCann",
+      "bounding_box": {
+        "x": 240,
+        "y": 901,
+        "w": 87,
+        "h": 14
+      }
+    },
+    {
+      "id": "922ec001-17e4-4a69-9f99-161a1260c95b",
+      "name": "J. J. Tatulli",
+      "bounding_box": {
+        "x": 370,
+        "y": 796,
+        "w": 73,
+        "h": 15
+      }
+    },
+    {
+      "id": "b0324757-3416-4eae-bc23-02b3106ec233",
+      "name": "L. H. Kersh",
+      "bounding_box": {
+        "x": 372,
+        "y": 813,
+        "w": 72,
+        "h": 16
+      }
+    },
+    {
+      "id": "34afa6a5-370f-4507-9bd1-1cfa78b7ea90",
+      "name": "J. R. Slater",
+      "bounding_box": {
+        "x": 373,
+        "y": 831,
+        "w": 71,
+        "h": 14
+      }
+    },
+    {
+      "id": "311d01b6-8cbd-435c-b0d0-6dfb9ad9c075",
+      "name": "A. Pasheluk",
+      "bounding_box": {
+        "x": 373,
+        "y": 849,
+        "w": 77,
+        "h": 15
+      }
+    },
+    {
+      "id": "5d72def1-97f7-4284-87bd-d55287f51419",
+      "name": "R. S. Goldbrenner",
+      "bounding_box": {
+        "x": 373,
+        "y": 867,
+        "w": 117,
+        "h": 15
+      }
+    },
+    {
+      "id": "9c319325-99ef-4211-b25c-19b7367c0cf8",
+      "name": "N. Simeonidis",
+      "bounding_box": {
+        "x": 373,
+        "y": 884,
+        "w": 90,
+        "h": 14
+      }
+    },
+    {
+      "id": "702ee533-9b37-4861-8114-7568cb0bc0e4",
+      "name": "S. F. Smith",
+      "bounding_box": {
+        "x": 374,
+        "y": 901,
+        "w": 72,
+        "h": 15
+      }
+    },
+    {
+      "id": "12d34d6f-ff30-482f-8a24-03d1786e208e",
+      "name": "K. P. Augustyn",
+      "bounding_box": {
+        "x": 547,
+        "y": 795,
+        "w": 99,
+        "h": 15
+      }
+    },
+    {
+      "id": "2616128f-d41d-4d2e-a664-c99ecd5d0621",
+      "name": "V. D. Lindsley",
+      "bounding_box": {
+        "x": 547,
+        "y": 811,
+        "w": 91,
+        "h": 15
+      }
+    },
+    {
+      "id": "963411f0-2178-4293-a0be-8feedf1a6b37",
+      "name": "R. C. Bondy",
+      "bounding_box": {
+        "x": 549,
+        "y": 830,
+        "w": 80,
+        "h": 14
+      }
+    },
+    {
+      "id": "f40bda8e-2bce-4936-9a05-912b2e205bf4",
+      "name": "R. D. Hammer",
+      "bounding_box": {
+        "x": 550,
+        "y": 846,
+        "w": 92,
+        "h": 15
+      }
+    }
+  ]
+}

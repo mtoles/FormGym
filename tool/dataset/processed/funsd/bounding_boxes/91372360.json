@@ -1,0 +1,122 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 814,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "d3fbee69-7897-469d-9e75-3764da6d7c3b",
+      "name": "11/4/93",
+      "bounding_box": {
+        "x": 235,
+        "y": 273,
+        "w": 60,
+        "h": 13
+      }
+    },
+    {
+      "id": "cea6f7b0-7e8c-4225-947e-d1b14f0381dc",
+      "name": "3:28 CST",
+      "bounding_box": {
+        "x": 428,
+        "y": 273,
+        "w": 66,
+        "h": 13
+      }
+    },
+    {
+      "id": "ea77b7e3-dd6c-4ae7-8c69-21a75faec824",
+      "name": "Mr. A. J. Giacoio",
+      "bounding_box": {
+        "x": 249,
+        "y": 382,
+        "w": 143,
+        "h": 16
+      }
+    },
+    {
+      "id": "157f10b2-e907-4211-84c0-3db460af4061",
+      "name": "New York- Sales Planning",
+      "bounding_box": {
+        "x": 249,
+        "y": 406,
+        "w": 209,
+        "h": 19
+      }
+    },
+    {
+      "id": "c2399870-cecc-4ce1-bbee-5881561bed4a",
+      "name": "212 545- 3299",
+      "bounding_box": {
+        "x": 365,
+        "y": 436,
+        "w": 110,
+        "h": 19
+      }
+    },
+    {
+      "id": "35c66120-6a99-45d5-9539-914f9909dfbf",
+      "name": "R F",
+      "bounding_box": {
+        "x": 253,
+        "y": 519,
+        "w": 96,
+        "h": 16
+      }
+    },
+    {
+      "id": "71be4002-24ee-4151-ab9f-597205a16f09",
+      "name": "Oklahoma City. OK",
+      "bounding_box": {
+        "x": 226,
+        "y": 544,
+        "w": 157,
+        "h": 18
+      }
+    },
+    {
+      "id": "156fa163-f823-463e-8ea9-5c8c85048e86",
+      "name": "(400) 840- 0639",
+      "bounding_box": {
+        "x": 349,
+        "y": 572,
+        "w": 123,
+        "h": 19
+      }
+    },
+    {
+      "id": "0dea6f3d-6d50-4e84-8eae-35cbb0058dfc",
+      "name": "The attached Competitive information was secured in Oklahoma today. If you should have any questions.",
+      "bounding_box": {
+        "x": 285,
+        "y": 611,
+        "w": 303,
+        "h": 78
+      }
+    },
+    {
+      "id": "89a3ae3f-fe36-40be-bbfb-4fef718a3453",
+      "name": "Mr. R. B. Spell",
+      "bounding_box": {
+        "x": 316,
+        "y": 783,
+        "w": 127,
+        "h": 15
+      }
+    },
+    {
+      "id": "93d734f7-6390-4b91-b73b-0381e49ef1e0",
+      "name": "Mr. S. L. Enloe",
+      "bounding_box": {
+        "x": 321,
+        "y": 798,
+        "w": 123,
+        "h": 14
+      }
+    }
+  ]
+}

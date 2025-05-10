@@ -1,0 +1,72 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 772,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "7d43f9de-108a-481a-9f80-63083c4c99bf",
+      "name": "5",
+      "bounding_box": {
+        "x": 327,
+        "y": 237,
+        "w": 13,
+        "h": 14
+      }
+    },
+    {
+      "id": "ec49b177-485a-49ba-8bc5-e967b58d7f20",
+      "name": "0",
+      "bounding_box": {
+        "x": 330,
+        "y": 272,
+        "w": 11,
+        "h": 15
+      }
+    },
+    {
+      "id": "35a8dbd7-3102-4ad9-a738-cc96dae18923",
+      "name": "2",
+      "bounding_box": {
+        "x": 324,
+        "y": 115,
+        "w": 14,
+        "h": 14
+      }
+    },
+    {
+      "id": "26abc7f5-2f16-4ecf-aeea-8d85a6de1419",
+      "name": "Peter Hatch",
+      "bounding_box": {
+        "x": 341,
+        "y": 149,
+        "w": 81,
+        "h": 17
+      }
+    },
+    {
+      "id": "7404d568-049e-4211-a929-96806ef53966",
+      "name": "KOOL Golf Bags",
+      "bounding_box": {
+        "x": 60,
+        "y": 239,
+        "w": 114,
+        "h": 15
+      }
+    },
+    {
+      "id": "24d6f31b-c1b8-46d2-8f81-c1c4b7d7598e",
+      "name": "GPC Golf Bags",
+      "bounding_box": {
+        "x": 71,
+        "y": 272,
+        "w": 100,
+        "h": 19
+      }
+    }
+  ]
+}

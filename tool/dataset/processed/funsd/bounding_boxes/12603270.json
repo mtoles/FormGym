@@ -1,0 +1,242 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "3455be33-b9c4-40d4-af21-5541524f2a29",
+      "name": "Increase",
+      "bounding_box": {
+        "x": 198,
+        "y": 209,
+        "w": 58,
+        "h": 10
+      }
+    },
+    {
+      "id": "cb08bd5f-cb04-46b0-a3f7-5a5b703d462e",
+      "name": "CANCELLED",
+      "bounding_box": {
+        "x": 206,
+        "y": 357,
+        "w": 68,
+        "h": 10
+      }
+    },
+    {
+      "id": "af9fe18c-b6e4-4825-9cbb-9f640e10a0ce",
+      "name": "3,669,000",
+      "bounding_box": {
+        "x": 513,
+        "y": 352,
+        "w": 83,
+        "h": 13
+      }
+    },
+    {
+      "id": "7bfd6112-c2fb-41c7-953d-8dddd1e63e18",
+      "name": "252,955",
+      "bounding_box": {
+        "x": 532,
+        "y": 380,
+        "w": 63,
+        "h": 8
+      }
+    },
+    {
+      "id": "f50262ae-eb3f-469a-8fa2-357de422ddd5",
+      "name": "+58,500",
+      "bounding_box": {
+        "x": 535,
+        "y": 405,
+        "w": 58,
+        "h": 12
+      }
+    },
+    {
+      "id": "6dd06e2b-391a-4d8c-9378-3b146e2580a1",
+      "name": "311.455",
+      "bounding_box": {
+        "x": 533,
+        "y": 517,
+        "w": 63,
+        "h": 10
+      }
+    },
+    {
+      "id": "4102e1e2-00cf-4b6a-8233-e6047bd710f3",
+      "name": "3,357,545",
+      "bounding_box": {
+        "x": 517,
+        "y": 566,
+        "w": 76,
+        "h": 13
+      }
+    },
+    {
+      "id": "06563f25-ba22-4ac6-9a0d-21d442d2af6a",
+      "name": "0",
+      "bounding_box": {
+        "x": 434,
+        "y": 447,
+        "w": 13,
+        "h": 13
+      }
+    },
+    {
+      "id": "dcf24908-aa81-4c71-8adf-95362a367134",
+      "name": "",
+      "bounding_box": {
+        "x": 497,
+        "y": 621,
+        "w": 71,
+        "h": 20
+      }
+    },
+    {
+      "id": "f5ec3ca4-4806-4730-97d8-b48fb4992f00",
+      "name": "",
+      "bounding_box": {
+        "x": 492,
+        "y": 645,
+        "w": 106,
+        "h": 20
+      }
+    },
+    {
+      "id": "d8fe0a2c-02bd-44da-a409-46191def283d",
+      "name": "",
+      "bounding_box": {
+        "x": 497,
+        "y": 673,
+        "w": 95,
+        "h": 18
+      }
+    },
+    {
+      "id": "5b479458-8a1e-4433-a850-168209d7ec37",
+      "name": "",
+      "bounding_box": {
+        "x": 179,
+        "y": 621,
+        "w": 164,
+        "h": 27
+      }
+    },
+    {
+      "id": "1c08dfff-7a74-44c0-8763-ae58e01a5076",
+      "name": "",
+      "bounding_box": {
+        "x": 178,
+        "y": 648,
+        "w": 246,
+        "h": 25
+      }
+    },
+    {
+      "id": "9ba36eed-683b-4a50-ac67-cd83895ef24f",
+      "name": "1985-39NP",
+      "bounding_box": {
+        "x": 492,
+        "y": 791,
+        "w": 66,
+        "h": 13
+      }
+    },
+    {
+      "id": "54287a88-866a-4cf5-b9f0-6ba0e56173fc",
+      "name": "June 21, 1985",
+      "bounding_box": {
+        "x": 131,
+        "y": 58,
+        "w": 93,
+        "h": 13
+      }
+    },
+    {
+      "id": "1ab74e59-efc3-4695-9084-1de4e4ff5c09",
+      "name": "RICHLAND 100's",
+      "bounding_box": {
+        "x": 174,
+        "y": 86,
+        "w": 99,
+        "h": 12
+      }
+    },
+    {
+      "id": "693a2a47-f21b-4589-876b-164d48caaec4",
+      "name": "Amelia 100's Candidates: (NM-FT and NM- Lights)",
+      "bounding_box": {
+        "x": 186,
+        "y": 121,
+        "w": 324,
+        "h": 19
+      }
+    },
+    {
+      "id": "42d46776-ed59-463f-bef2-3c7b042302ae",
+      "name": "Market Facts. Inc.",
+      "bounding_box": {
+        "x": 168,
+        "y": 154,
+        "w": 123,
+        "h": 14
+      }
+    },
+    {
+      "id": "8d9658c3-0021-46d5-b418-71bab97024eb",
+      "name": "Project File S. Willinger",
+      "bounding_box": {
+        "x": 178,
+        "y": 784,
+        "w": 115,
+        "h": 27
+      }
+    },
+    {
+      "id": "58f9efa1-6071-4822-b7b3-4a0a03f33f32",
+      "name": "Research Group Manager Bonnie Fuller V. Hansberry (If International)",
+      "bounding_box": {
+        "x": 181,
+        "y": 811,
+        "w": 216,
+        "h": 42
+      }
+    },
+    {
+      "id": "1e26cfd3-2e00-418f-b95b-bb89fc3ae3d8",
+      "name": "PRODUCT TESTING",
+      "bounding_box": {
+        "x": 495,
+        "y": 816,
+        "w": 105,
+        "h": 16
+      }
+    },
+    {
+      "id": "03551916-2a2b-47f2-a052-3e8f4ef98e73",
+      "name": "$ -0-",
+      "bounding_box": {
+        "x": 374,
+        "y": 231,
+        "w": 49,
+        "h": 14
+      }
+    },
+    {
+      "id": "01591dcd-a59a-4414-9b7e-a36d5a31e302",
+      "name": "Decrease X",
+      "bounding_box": {
+        "x": 284,
+        "y": 206,
+        "w": 79,
+        "h": 15
+      }
+    }
+  ]
+}

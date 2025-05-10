@@ -1,0 +1,272 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "38bc4937-1714-4319-947c-5c62766836f4",
+      "name": "10",
+      "bounding_box": {
+        "x": 535,
+        "y": 264,
+        "w": 22,
+        "h": 21
+      }
+    },
+    {
+      "id": "30719f1d-346d-4ad2-a2fd-803bd5117958",
+      "name": "8",
+      "bounding_box": {
+        "x": 541,
+        "y": 408,
+        "w": 17,
+        "h": 15
+      }
+    },
+    {
+      "id": "74183240-33a5-49be-86b1-175e5a6cf2e2",
+      "name": "8",
+      "bounding_box": {
+        "x": 539,
+        "y": 418,
+        "w": 15,
+        "h": 17
+      }
+    },
+    {
+      "id": "9b285306-246c-4e3e-8e1e-b34cc830de4f",
+      "name": "2",
+      "bounding_box": {
+        "x": 541,
+        "y": 437,
+        "w": 20,
+        "h": 11
+      }
+    },
+    {
+      "id": "e23bdde1-a3fd-4f3c-af03-534ed2f4a677",
+      "name": "0",
+      "bounding_box": {
+        "x": 186,
+        "y": 415,
+        "w": 17,
+        "h": 17
+      }
+    },
+    {
+      "id": "e182b78f-b34d-4414-8572-c23550d458c8",
+      "name": "0",
+      "bounding_box": {
+        "x": 189,
+        "y": 429,
+        "w": 14,
+        "h": 15
+      }
+    },
+    {
+      "id": "07a35723-50fa-44f3-ba50-8e24003cd485",
+      "name": "0",
+      "bounding_box": {
+        "x": 189,
+        "y": 446,
+        "w": 14,
+        "h": 13
+      }
+    },
+    {
+      "id": "229de580-6972-44bd-b532-85ae629eb08f",
+      "name": "0",
+      "bounding_box": {
+        "x": 186,
+        "y": 275,
+        "w": 13,
+        "h": 20
+      }
+    },
+    {
+      "id": "a6d16990-7fdd-44f7-98fd-e6fd188a92d5",
+      "name": "0",
+      "bounding_box": {
+        "x": 186,
+        "y": 292,
+        "w": 13,
+        "h": 13
+      }
+    },
+    {
+      "id": "9aba0032-8a92-48b9-9bf4-0dd3656761fb",
+      "name": "0",
+      "bounding_box": {
+        "x": 187,
+        "y": 306,
+        "w": 14,
+        "h": 14
+      }
+    },
+    {
+      "id": "19f0bb7b-5465-42c6-87aa-f8b4f07e655b",
+      "name": "0",
+      "bounding_box": {
+        "x": 187,
+        "y": 320,
+        "w": 13,
+        "h": 15
+      }
+    },
+    {
+      "id": "02ae1161-e9ee-4433-9d1a-d0f058fa1837",
+      "name": "10",
+      "bounding_box": {
+        "x": 351,
+        "y": 624,
+        "w": 20,
+        "h": 18
+      }
+    },
+    {
+      "id": "abe38faa-4be6-482d-9a8f-a700ea4a1689",
+      "name": "X",
+      "bounding_box": {
+        "x": 464,
+        "y": 670,
+        "w": 15,
+        "h": 17
+      }
+    },
+    {
+      "id": "f08aeeec-b782-444e-b1d7-8a2a107ebe4e",
+      "name": "X",
+      "bounding_box": {
+        "x": 615,
+        "y": 680,
+        "w": 11,
+        "h": 14
+      }
+    },
+    {
+      "id": "700dc276-dd60-4e1b-9aff-d18cd9487f75",
+      "name": "X",
+      "bounding_box": {
+        "x": 610,
+        "y": 694,
+        "w": 15,
+        "h": 11
+      }
+    },
+    {
+      "id": "6b489ab3-d38a-47f3-8849-ee74cd707d1f",
+      "name": "10",
+      "bounding_box": {
+        "x": 605,
+        "y": 617,
+        "w": 20,
+        "h": 21
+      }
+    },
+    {
+      "id": "7571e75c-8760-4ebc-b1b9-a52a68172c25",
+      "name": "Detroit - MCA",
+      "bounding_box": {
+        "x": 504,
+        "y": 137,
+        "w": 109,
+        "h": 23
+      }
+    },
+    {
+      "id": "a1e86c92-5467-42dc-b4f6-4af21efed387",
+      "name": "R. L. Lavoie",
+      "bounding_box": {
+        "x": 504,
+        "y": 169,
+        "w": 103,
+        "h": 21
+      }
+    },
+    {
+      "id": "fb637884-d4de-48af-b276-b5ab9088470c",
+      "name": "DETROIT GRAND PRIX",
+      "bounding_box": {
+        "x": 159,
+        "y": 147,
+        "w": 152,
+        "h": 20
+      }
+    },
+    {
+      "id": "cc6baafc-5245-4de7-9bfc-e3868b0d1f25",
+      "name": "June 11, 1995",
+      "bounding_box": {
+        "x": 161,
+        "y": 175,
+        "w": 112,
+        "h": 22
+      }
+    },
+    {
+      "id": "e1a66773-cd88-4e5b-bbee-e498ea08fcd6",
+      "name": "July 6, 1995",
+      "bounding_box": {
+        "x": 377,
+        "y": 200,
+        "w": 99,
+        "h": 23
+      }
+    },
+    {
+      "id": "b875d857-0c62-4390-8d42-c05e23c088c0",
+      "name": "05/ 01/ 95",
+      "bounding_box": {
+        "x": 508,
+        "y": 341,
+        "w": 69,
+        "h": 20
+      }
+    },
+    {
+      "id": "14604ce9-f34f-4fa7-b243-86b644620d5d",
+      "name": "Invitees stated the Newport hospitality tent was very",
+      "bounding_box": {
+        "x": 233,
+        "y": 469,
+        "w": 436,
+        "h": 24
+      }
+    },
+    {
+      "id": "fecf6112-22b2-4104-803a-a57ff6068574",
+      "name": "difficult to locate. Also, the Indy Lights Paddock area was not clearly identified Most Invitees were looking for the hospitality tent in a separate identified area away from the Paddock Brea and the Newport car transporter.",
+      "bounding_box": {
+        "x": 84,
+        "y": 490,
+        "w": 569,
+        "h": 70
+      }
+    },
+    {
+      "id": "ed78eb24-bea0-4930-891f-e108bab67235",
+      "name": "In the future, please specify where the",
+      "bounding_box": {
+        "x": 321,
+        "y": 742,
+        "w": 325,
+        "h": 21
+      }
+    },
+    {
+      "id": "972340d2-72ae-4e2c-93e2-d2ffe3e22ed4",
+      "name": "Newport hospitality area will be located - at the Newport car trans- porter site or in a separate area . Specific directions will be needed.",
+      "bounding_box": {
+        "x": 92,
+        "y": 756,
+        "w": 560,
+        "h": 56
+      }
+    }
+  ]
+}

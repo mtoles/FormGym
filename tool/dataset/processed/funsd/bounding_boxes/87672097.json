@@ -1,0 +1,442 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 776,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "931b0737-631b-43aa-8e69-3a746c908639",
+      "name": "Mapleine",
+      "bounding_box": {
+        "x": 154,
+        "y": 108,
+        "w": 72,
+        "h": 13
+      }
+    },
+    {
+      "id": "58f68492-2e9c-4256-a8d1-31309514d295",
+      "name": "Crescent",
+      "bounding_box": {
+        "x": 142,
+        "y": 139,
+        "w": 67,
+        "h": 12
+      }
+    },
+    {
+      "id": "17756a38-7107-4302-a2fa-1940384affd7",
+      "name": "B75",
+      "bounding_box": {
+        "x": 481,
+        "y": 138,
+        "w": 31,
+        "h": 13
+      }
+    },
+    {
+      "id": "5048afe2-10f2-4a4b-8815-bc40b10d3497",
+      "name": "X",
+      "bounding_box": {
+        "x": 368,
+        "y": 289,
+        "w": 15,
+        "h": 12
+      }
+    },
+    {
+      "id": "4226a5c3-bd06-4720-8800-84274c764c9e",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 359,
+        "y": 355,
+        "w": 12,
+        "h": 12
+      }
+    },
+    {
+      "id": "ed4a9dc4-b8a5-48c0-b9ee-a464b68b2a69",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 536,
+        "y": 382,
+        "w": 12,
+        "h": 10
+      }
+    },
+    {
+      "id": "63226bdf-9b49-45c7-8e7b-c5f1d6d2ea34",
+      "name": "1",
+      "bounding_box": {
+        "x": 133,
+        "y": 467,
+        "w": 10,
+        "h": 9
+      }
+    },
+    {
+      "id": "fa69d687-18eb-4ddf-8baf-610ebb3750db",
+      "name": "2",
+      "bounding_box": {
+        "x": 135,
+        "y": 494,
+        "w": 9,
+        "h": 9
+      }
+    },
+    {
+      "id": "6e5d74dc-43b5-419f-9523-43fee3a91178",
+      "name": "3",
+      "bounding_box": {
+        "x": 135,
+        "y": 522,
+        "w": 9,
+        "h": 7
+      }
+    },
+    {
+      "id": "67862050-777b-46e7-8c36-c035780174be",
+      "name": "4",
+      "bounding_box": {
+        "x": 133,
+        "y": 551,
+        "w": 9,
+        "h": 7
+      }
+    },
+    {
+      "id": "8f35b819-3bd3-4f10-acb3-ec87a2a881c1",
+      "name": "5",
+      "bounding_box": {
+        "x": 133,
+        "y": 576,
+        "w": 9,
+        "h": 10
+      }
+    },
+    {
+      "id": "bc63b7ac-b356-42b6-a759-eacd8a2348b7",
+      "name": "100",
+      "bounding_box": {
+        "x": 222,
+        "y": 470,
+        "w": 30,
+        "h": 13
+      }
+    },
+    {
+      "id": "1b100bce-760f-45b7-a6d0-74e6b3bb8e91",
+      "name": "100",
+      "bounding_box": {
+        "x": 223,
+        "y": 494,
+        "w": 30,
+        "h": 15
+      }
+    },
+    {
+      "id": "689574d2-cc1b-4208-a6f3-8337d7a3389e",
+      "name": "100",
+      "bounding_box": {
+        "x": 222,
+        "y": 552,
+        "w": 28,
+        "h": 13
+      }
+    },
+    {
+      "id": "8b0265bb-1d2b-4fad-84ce-dade93d10487",
+      "name": "100",
+      "bounding_box": {
+        "x": 222,
+        "y": 525,
+        "w": 28,
+        "h": 12
+      }
+    },
+    {
+      "id": "0988d435-61b8-4e56-9fe8-56e5b776d854",
+      "name": "100",
+      "bounding_box": {
+        "x": 223,
+        "y": 579,
+        "w": 27,
+        "h": 13
+      }
+    },
+    {
+      "id": "3a32dc2b-6912-4039-870c-a089a8227141",
+      "name": "5000",
+      "bounding_box": {
+        "x": 386,
+        "y": 470,
+        "w": 34,
+        "h": 15
+      }
+    },
+    {
+      "id": "2e2e7843-efcc-4ee2-af67-aed692a1e736",
+      "name": "6000",
+      "bounding_box": {
+        "x": 386,
+        "y": 497,
+        "w": 36,
+        "h": 13
+      }
+    },
+    {
+      "id": "a5a6d20a-3e25-4ff1-a553-95418236522a",
+      "name": "7200",
+      "bounding_box": {
+        "x": 386,
+        "y": 525,
+        "w": 34,
+        "h": 16
+      }
+    },
+    {
+      "id": "7eb22db2-d655-42ee-88aa-233c414856eb",
+      "name": "8640",
+      "bounding_box": {
+        "x": 385,
+        "y": 554,
+        "w": 37,
+        "h": 15
+      }
+    },
+    {
+      "id": "7dffce94-0a62-4227-8c09-61fc364fe846",
+      "name": "10368",
+      "bounding_box": {
+        "x": 377,
+        "y": 578,
+        "w": 45,
+        "h": 16
+      }
+    },
+    {
+      "id": "496e1206-2acc-4405-9cf6-d90a37fcf20c",
+      "name": "3/5/81",
+      "bounding_box": {
+        "x": 566,
+        "y": 289,
+        "w": 56,
+        "h": 13
+      }
+    },
+    {
+      "id": "c8283969-0e9f-4149-ab37-2d00652afe6c",
+      "name": "12 /4 /80",
+      "bounding_box": {
+        "x": 175,
+        "y": 166,
+        "w": 60,
+        "h": 13
+      }
+    },
+    {
+      "id": "742c1978-adb5-438c-801c-8c3f1aedf5b7",
+      "name": "3 /12 /81 -3 /24 /81",
+      "bounding_box": {
+        "x": 364,
+        "y": 168,
+        "w": 126,
+        "h": 13
+      }
+    },
+    {
+      "id": "a4ec0a25-dfbf-4f96-8588-b09b3d874f46",
+      "name": "3 /30 /81",
+      "bounding_box": {
+        "x": 558,
+        "y": 168,
+        "w": 63,
+        "h": 14
+      }
+    },
+    {
+      "id": "e5580bbb-d189-4a2e-8887-c675fe011b4b",
+      "name": "BC19 -15",
+      "bounding_box": {
+        "x": 603,
+        "y": 198,
+        "w": 60,
+        "h": 13
+      }
+    },
+    {
+      "id": "d2057316-ec99-4997-8cc3-c9c55309593c",
+      "name": "H. S. Tong & A. A. Poole",
+      "bounding_box": {
+        "x": 181,
+        "y": 196,
+        "w": 208,
+        "h": 15
+      }
+    },
+    {
+      "id": "3b2866d5-ca03-4f23-b689-46452f00fe11",
+      "name": "",
+      "bounding_box": {
+        "x": 187,
+        "y": 214,
+        "w": 340,
+        "h": 42
+      }
+    },
+    {
+      "id": "72629b38-e1de-4f9b-924e-e2e53c061cd8",
+      "name": "Swiss- Webster",
+      "bounding_box": {
+        "x": 163,
+        "y": 287,
+        "w": 115,
+        "h": 14
+      }
+    },
+    {
+      "id": "2d2f4de0-405b-4378-a23c-0a5d356f6fa0",
+      "name": "16- 30",
+      "bounding_box": {
+        "x": 243,
+        "y": 311,
+        "w": 41,
+        "h": 15
+      }
+    },
+    {
+      "id": "3ba5cc83-dc5a-4d2e-9038-0ace4ecacda4",
+      "name": "Camm Research",
+      "bounding_box": {
+        "x": 448,
+        "y": 314,
+        "w": 112,
+        "h": 12
+      }
+    },
+    {
+      "id": "7b1ca92b-6c53-4f42-afcd-59081b5f5029",
+      "name": "pure solution",
+      "bounding_box": {
+        "x": 582,
+        "y": 373,
+        "w": 117,
+        "h": 16
+      }
+    },
+    {
+      "id": "52627c64-6ded-456f-a7d1-9feabcdfcf75",
+      "name": "0 /6",
+      "bounding_box": {
+        "x": 573,
+        "y": 470,
+        "w": 28,
+        "h": 17
+      }
+    },
+    {
+      "id": "f519de88-67ab-47f3-8970-ed52af7aee60",
+      "name": "0 /6",
+      "bounding_box": {
+        "x": 573,
+        "y": 499,
+        "w": 27,
+        "h": 15
+      }
+    },
+    {
+      "id": "7c10a757-a435-4416-8dfb-c7a637109c3c",
+      "name": "0 /6",
+      "bounding_box": {
+        "x": 573,
+        "y": 525,
+        "w": 27,
+        "h": 16
+      }
+    },
+    {
+      "id": "4c8a573b-366c-4c36-a1f3-8a3548e42a49",
+      "name": "0 /6",
+      "bounding_box": {
+        "x": 573,
+        "y": 554,
+        "w": 28,
+        "h": 18
+      }
+    },
+    {
+      "id": "2b0c8611-406f-4c22-a489-23bd8e5959e5",
+      "name": "0 /6",
+      "bounding_box": {
+        "x": 573,
+        "y": 582,
+        "w": 30,
+        "h": 13
+      }
+    },
+    {
+      "id": "a4890134-53ca-444a-95c7-03fc7224be45",
+      "name": "Weil, Carrol S., Biometrics, Vol. 8, No. 3., Sept. 1952,",
+      "bounding_box": {
+        "x": 213,
+        "y": 612,
+        "w": 483,
+        "h": 21
+      }
+    },
+    {
+      "id": "ccf33ef2-3b9f-4e7f-a606-4551ee3d0a9c",
+      "name": "p. 249.",
+      "bounding_box": {
+        "x": 93,
+        "y": 642,
+        "w": 61,
+        "h": 17
+      }
+    },
+    {
+      "id": "39010561-cbdc-4008-aacc-b72bc8fb6703",
+      "name": "LD0 = 10, 368 mg /kg",
+      "bounding_box": {
+        "x": 214,
+        "y": 669,
+        "w": 157,
+        "h": 21
+      }
+    },
+    {
+      "id": "31b7dc56-d929-4461-a3f1-471b83c8bc4d",
+      "name": "Higher doses were impractical. The recommended safe dose for",
+      "bounding_box": {
+        "x": 151,
+        "y": 696,
+        "w": 527,
+        "h": 21
+      }
+    },
+    {
+      "id": "b41e4390-20e7-49d5-bcc5-122ffa632ef7",
+      "name": "trial inhalation in man is 80. 6, 40. 3, or 26. 8 mg per cigarette . when smoked 1, 2 or 3 cigarettes per hour, respectively.",
+      "bounding_box": {
+        "x": 93,
+        "y": 720,
+        "w": 564,
+        "h": 50
+      }
+    },
+    {
+      "id": "9831d318-02fa-4b7b-8859-e4f912ca6007",
+      "name": "H. J. Minnemeyer L. B. Gray",
+      "bounding_box": {
+        "x": 314,
+        "y": 798,
+        "w": 140,
+        "h": 38
+      }
+    }
+  ]
+}

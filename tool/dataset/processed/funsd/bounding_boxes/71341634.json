@@ -1,0 +1,352 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "9dd65aec-6641-47cb-827c-bc5ec42499eb",
+      "name": "20182",
+      "bounding_box": {
+        "x": 134,
+        "y": 122,
+        "w": 31,
+        "h": 10
+      }
+    },
+    {
+      "id": "fd085f03-0b36-403d-9f05-defa6d57f507",
+      "name": "No",
+      "bounding_box": {
+        "x": 584,
+        "y": 180,
+        "w": 17,
+        "h": 10
+      }
+    },
+    {
+      "id": "fa1ce040-bb76-4a9f-ad06-ffa602626378",
+      "name": "288",
+      "bounding_box": {
+        "x": 254,
+        "y": 395,
+        "w": 18,
+        "h": 11
+      }
+    },
+    {
+      "id": "1908fca3-d86c-40fa-bd87-24e302d879b1",
+      "name": "296",
+      "bounding_box": {
+        "x": 258,
+        "y": 468,
+        "w": 17,
+        "h": 11
+      }
+    },
+    {
+      "id": "ade0a4d6-b08d-4f32-9580-6786292e1e73",
+      "name": "725",
+      "bounding_box": {
+        "x": 318,
+        "y": 392,
+        "w": 18,
+        "h": 11
+      }
+    },
+    {
+      "id": "9600a513-0446-4ea8-aecf-e1af89b7cbf0",
+      "name": "725",
+      "bounding_box": {
+        "x": 318,
+        "y": 465,
+        "w": 21,
+        "h": 13
+      }
+    },
+    {
+      "id": "e525e125-2bff-4b3f-8569-05c16d2aa460",
+      "name": "CTNS",
+      "bounding_box": {
+        "x": 441,
+        "y": 461,
+        "w": 27,
+        "h": 11
+      }
+    },
+    {
+      "id": "f0524ed9-673f-416d-8cac-85d1df53fdc4",
+      "name": "CTNS",
+      "bounding_box": {
+        "x": 440,
+        "y": 390,
+        "w": 28,
+        "h": 10
+      }
+    },
+    {
+      "id": "7f7f2f7f-5b6e-44c2-8ed3-875284c65630",
+      "name": "39A00A",
+      "bounding_box": {
+        "x": 441,
+        "y": 566,
+        "w": 38,
+        "h": 11
+      }
+    },
+    {
+      "id": "839405d0-7236-4250-a50b-75b935f4596f",
+      "name": "Check#",
+      "bounding_box": {
+        "x": 303,
+        "y": 620,
+        "w": 38,
+        "h": 10
+      }
+    },
+    {
+      "id": "98c5b550-fb12-487c-82ee-996474987c43",
+      "name": "00000",
+      "bounding_box": {
+        "x": 489,
+        "y": 784,
+        "w": 32,
+        "h": 13
+      }
+    },
+    {
+      "id": "76f8db3d-1473-4a0b-b519-f707c8ca3b2f",
+      "name": "Check",
+      "bounding_box": {
+        "x": 493,
+        "y": 802,
+        "w": 29,
+        "h": 10
+      }
+    },
+    {
+      "id": "d18da9e6-d4bd-4cd6-8a08-a732723e7c3c",
+      "name": "Y",
+      "bounding_box": {
+        "x": 503,
+        "y": 816,
+        "w": 14,
+        "h": 11
+      }
+    },
+    {
+      "id": "33fae349-da7d-44a1-9d70-14d5ae1919e1",
+      "name": "Fax to Field Payments at (502) 588- 7826",
+      "bounding_box": {
+        "x": 142,
+        "y": 837,
+        "w": 175,
+        "h": 18
+      }
+    },
+    {
+      "id": "3976e25b-1b37-4ce4-9561-71038ae322d4",
+      "name": "Pay Handling",
+      "bounding_box": {
+        "x": 430,
+        "y": 613,
+        "w": 56,
+        "h": 13
+      }
+    },
+    {
+      "id": "f25abdde-7976-4e7f-b27c-ffd44f4a08d9",
+      "name": "Check Date",
+      "bounding_box": {
+        "x": 366,
+        "y": 616,
+        "w": 50,
+        "h": 11
+      }
+    },
+    {
+      "id": "cfe46df8-dafb-405a-bafe-1f7f961f419f",
+      "name": "Robert",
+      "bounding_box": {
+        "x": 115,
+        "y": 575,
+        "w": 87,
+        "h": 17
+      }
+    },
+    {
+      "id": "4f2e08ca-a243-42b2-b6a8-c017952d398d",
+      "name": "03/ 24/ 99",
+      "bounding_box": {
+        "x": 383,
+        "y": 567,
+        "w": 40,
+        "h": 12
+      }
+    },
+    {
+      "id": "d3c2e2e2-9925-4fcf-9cac-5da69a822f96",
+      "name": "$12 784 00",
+      "bounding_box": {
+        "x": 578,
+        "y": 453,
+        "w": 54,
+        "h": 15
+      }
+    },
+    {
+      "id": "2a6162d1-1b72-4dd1-9d3e-293922c8f94e",
+      "name": "$2 00",
+      "bounding_box": {
+        "x": 503,
+        "y": 455,
+        "w": 29,
+        "h": 13
+      }
+    },
+    {
+      "id": "63449ad2-5dd6-4e0c-9acb-c09d2b35625d",
+      "name": "6. 382",
+      "bounding_box": {
+        "x": 377,
+        "y": 462,
+        "w": 27,
+        "h": 14
+      }
+    },
+    {
+      "id": "efd3814d-9e74-4d39-936f-bb3d377f4ff9",
+      "name": "March 15- 19, 1999",
+      "bounding_box": {
+        "x": 237,
+        "y": 510,
+        "w": 86,
+        "h": 14
+      }
+    },
+    {
+      "id": "9a3724cc-6af3-4c62-9596-8eafdeff92ac",
+      "name": "Section 18 Narl Chain Walgreens",
+      "bounding_box": {
+        "x": 77,
+        "y": 471,
+        "w": 145,
+        "h": 15
+      }
+    },
+    {
+      "id": "8062abf5-fc68-4b4b-b825-a0773f7ead15",
+      "name": "PER ATTACHED",
+      "bounding_box": {
+        "x": 170,
+        "y": 527,
+        "w": 77,
+        "h": 14
+      }
+    },
+    {
+      "id": "039b13c7-7986-4d19-907a-d4ac89603849",
+      "name": "SEE ATTACHED",
+      "bounding_box": {
+        "x": 85,
+        "y": 429,
+        "w": 76,
+        "h": 11
+      }
+    },
+    {
+      "id": "f090a23f-9a46-47b0-87ee-7281093fa3a5",
+      "name": "GPC BUYDOWN PROGRAMS",
+      "bounding_box": {
+        "x": 74,
+        "y": 397,
+        "w": 138,
+        "h": 15
+      }
+    },
+    {
+      "id": "8a894bfc-e604-468c-b4dd-ebf0e23c37ef",
+      "name": "$143 922 80",
+      "bounding_box": {
+        "x": 573,
+        "y": 381,
+        "w": 54,
+        "h": 13
+      }
+    },
+    {
+      "id": "1e5cc821-5c6c-4814-98f0-af8c68aff1a1",
+      "name": "$2 84",
+      "bounding_box": {
+        "x": 501,
+        "y": 384,
+        "w": 27,
+        "h": 13
+      }
+    },
+    {
+      "id": "0f950ed8-e86c-4da2-a144-ba6829fd1bdd",
+      "name": "50, 759",
+      "bounding_box": {
+        "x": 373,
+        "y": 390,
+        "w": 32,
+        "h": 12
+      }
+    },
+    {
+      "id": "ece3edbf-a89a-400f-83a1-2311ec91bdc7",
+      "name": "COREMARK NTERNATIONAL",
+      "bounding_box": {
+        "x": 123,
+        "y": 176,
+        "w": 134,
+        "h": 15
+      }
+    },
+    {
+      "id": "c80ec170-7782-4fcb-a20e-994bd9b702df",
+      "name": "DAVID DRESSER",
+      "bounding_box": {
+        "x": 120,
+        "y": 193,
+        "w": 81,
+        "h": 14
+      }
+    },
+    {
+      "id": "adb0792b-e71f-4109-8295-7440eeb43900",
+      "name": "395 DYSTER POINT BLVD SUITE 415 S. SAN FRANCISCO",
+      "bounding_box": {
+        "x": 117,
+        "y": 204,
+        "w": 173,
+        "h": 31
+      }
+    },
+    {
+      "id": "0ef5b185-e92b-4720-856f-ba766c7b76df",
+      "name": "Yes X",
+      "bounding_box": {
+        "x": 511,
+        "y": 180,
+        "w": 20,
+        "h": 26
+      }
+    },
+    {
+      "id": "3598d68c-98e6-4e8e-b8f3-f7ce0228eb15",
+      "name": "30 days)",
+      "bounding_box": {
+        "x": 138,
+        "y": 61,
+        "w": 32,
+        "h": 13
+      }
+    }
+  ]
+}

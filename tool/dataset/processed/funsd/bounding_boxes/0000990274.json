@@ -1,0 +1,132 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "ac75ba1a-de5a-40bf-b97a-258bb84bfc8b",
+      "name": "BELGIUM",
+      "bounding_box": {
+        "x": 191,
+        "y": 321,
+        "w": 56,
+        "h": 14
+      }
+    },
+    {
+      "id": "2abe946b-72e4-4d54-83fd-880834cf08de",
+      "name": "25- 84",
+      "bounding_box": {
+        "x": 196,
+        "y": 177,
+        "w": 36,
+        "h": 17
+      }
+    },
+    {
+      "id": "801b1bc8-9e52-4747-98fc-6c2fc2e30187",
+      "name": "March 27, 1984",
+      "bounding_box": {
+        "x": 191,
+        "y": 207,
+        "w": 108,
+        "h": 15
+      }
+    },
+    {
+      "id": "b80168b1-02e5-479d-bdb9-b13218d2d1ef",
+      "name": "P. H. HARPER PHH",
+      "bounding_box": {
+        "x": 193,
+        "y": 221,
+        "w": 153,
+        "h": 31
+      }
+    },
+    {
+      "id": "4110ee8b-e986-4461-8b0d-c525a6138bfc",
+      "name": "April 13, 1984",
+      "bounding_box": {
+        "x": 191,
+        "y": 292,
+        "w": 105,
+        "h": 16
+      }
+    },
+    {
+      "id": "fd8d4251-b905-4eb9-be8c-9d409740b6f9",
+      "name": "LUCKY STRIKE Filter and VICEROY",
+      "bounding_box": {
+        "x": 193,
+        "y": 348,
+        "w": 229,
+        "h": 17
+      }
+    },
+    {
+      "id": "80f27146-996f-4ca7-a0d0-e8e6c33f82f2",
+      "name": "Advise if locally obtained Yucatan Honey (sample enclosed) is an acceptable substitute for HALWAY.",
+      "bounding_box": {
+        "x": 168,
+        "y": 404,
+        "w": 359,
+        "h": 33
+      }
+    },
+    {
+      "id": "9cf03614-c7ac-42af-8d57-e6a67a9cbd63",
+      "name": "Target the P A 29Mar 84",
+      "bounding_box": {
+        "x": 183,
+        "y": 465,
+        "w": 233,
+        "h": 75
+      }
+    },
+    {
+      "id": "b7b5ca91-35ed-490f-9b91-0dd4a53fb064",
+      "name": "a) Nature of work should be specified in exact terms.",
+      "bounding_box": {
+        "x": 182,
+        "y": 626,
+        "w": 393,
+        "h": 15
+      }
+    },
+    {
+      "id": "9178c7c3-ba00-44d6-a3ea-94a0d04536e3",
+      "name": "b) R & D should advise if completion date cannot be met.",
+      "bounding_box": {
+        "x": 180,
+        "y": 652,
+        "w": 367,
+        "h": 29
+      }
+    },
+    {
+      "id": "9d280f41-b481-4e75-b7e0-a65853e4e5e0",
+      "name": "c) Two copies of this form to be sent to R & D by initiator and R & D is to return to T. O. one completed copy.",
+      "bounding_box": {
+        "x": 179,
+        "y": 697,
+        "w": 353,
+        "h": 43
+      }
+    },
+    {
+      "id": "55fd74f0-f5fd-47f8-b084-58625cad896f",
+      "name": "APR 2 1984 P. H. H.",
+      "bounding_box": {
+        "x": 531,
+        "y": 193,
+        "w": 92,
+        "h": 55
+      }
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "bad622de-3c0a-4e94-821a-7994c3407121",
+      "name": "none",
+      "bounding_box": {
+        "x": 126,
+        "y": 548,
+        "w": 41,
+        "h": 12
+      }
+    },
+    {
+      "id": "e1f53b09-2242-45cc-9c72-220c0ce024e3",
+      "name": "yes",
+      "bounding_box": {
+        "x": 351,
+        "y": 285,
+        "w": 34,
+        "h": 17
+      }
+    },
+    {
+      "id": "c3b2e9de-9c93-41c4-bd90-252b2d71551b",
+      "name": "Ronald. W Davis",
+      "bounding_box": {
+        "x": 107,
+        "y": 120,
+        "w": 113,
+        "h": 14
+      }
+    },
+    {
+      "id": "a0fb740b-5d27-44c4-95ae-213a9fcc513a",
+      "name": "Analytical- Radiochemistry",
+      "bounding_box": {
+        "x": 452,
+        "y": 118,
+        "w": 184,
+        "h": 15
+      }
+    },
+    {
+      "id": "755608c0-0ad1-4629-8773-4c3ec239d04a",
+      "name": "Total aldehyde analysis in cigarette mainstream",
+      "bounding_box": {
+        "x": 171,
+        "y": 143,
+        "w": 385,
+        "h": 19
+      }
+    },
+    {
+      "id": "4b920ebe-c88f-4e8b-8b20-27f6afcf2517",
+      "name": "Techniques worked out",
+      "bounding_box": {
+        "x": 512,
+        "y": 202,
+        "w": 153,
+        "h": 14
+      }
+    },
+    {
+      "id": "78e63725-f591-4ecf-8c15-7261dd162e1d",
+      "name": "and reported for pure aldehyde samples; must be adapted for cigarette mainstream smoke by further laboratory work",
+      "bounding_box": {
+        "x": 55,
+        "y": 228,
+        "w": 612,
+        "h": 47
+      }
+    },
+    {
+      "id": "d116c17c-1c9f-4b25-a435-20684acd229e",
+      "name": "MBTH- reagent for analysis of aliphatic aldehydes 7 / 5 / 67",
+      "bounding_box": {
+        "x": 53,
+        "y": 314,
+        "w": 445,
+        "h": 20
+      }
+    },
+    {
+      "id": "da747fb6-418f-465a-b99b-51a0443d0105",
+      "name": "L. W. McDowell",
+      "bounding_box": {
+        "x": 382,
+        "y": 343,
+        "w": 106,
+        "h": 17
+      }
+    },
+    {
+      "id": "8abafc33-40eb-4fbf-91ed-e83d9ebe7aad",
+      "name": "approximately one month",
+      "bounding_box": {
+        "x": 354,
+        "y": 402,
+        "w": 169,
+        "h": 13
+      }
+    },
+    {
+      "id": "2ebc128b-d1d8-4d6c-8703-b166f7ca4823",
+      "name": "several weeks after completion",
+      "bounding_box": {
+        "x": 500,
+        "y": 426,
+        "w": 217,
+        "h": 20
+      }
+    },
+    {
+      "id": "9128c1d7-72dc-4ecb-b304-ed989aae53dd",
+      "name": "several weeks after completion of work",
+      "bounding_box": {
+        "x": 500,
+        "y": 456,
+        "w": 218,
+        "h": 29
+      }
+    },
+    {
+      "id": "87ce1b25-2b11-47c4-95aa-a6d2c4c5e9ed",
+      "name": "none as yet",
+      "bounding_box": {
+        "x": 259,
+        "y": 489,
+        "w": 85,
+        "h": 12
+      }
+    },
+    {
+      "id": "b6e06a0b-b0c8-4148-865d-e291c0a20628",
+      "name": "Tobacco Science",
+      "bounding_box": {
+        "x": 262,
+        "y": 515,
+        "w": 109,
+        "h": 15
+      }
+    },
+    {
+      "id": "5289dfae-e2ec-4f1b-90b7-a73f8d8694a6",
+      "name": "been with applicability",
+      "bounding_box": {
+        "x": 134,
+        "y": 735,
+        "w": 560,
+        "h": 30
+      }
+    },
+    {
+      "id": "c69c8a53-b294-42f9-8309-ff353d514876",
+      "name": "may provide a technique.",
+      "bounding_box": {
+        "x": 75,
+        "y": 761,
+        "w": 524,
+        "h": 53
+      }
+    }
+  ]
+}

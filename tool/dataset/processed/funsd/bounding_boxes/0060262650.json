@@ -1,0 +1,312 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "30ed3a5e-b2a4-452d-b8fc-43d02036ad8b",
+      "name": "Professor",
+      "bounding_box": {
+        "x": 419,
+        "y": 493,
+        "w": 85,
+        "h": 20
+      }
+    },
+    {
+      "id": "c2c4dde0-b286-4a79-be44-3c3df7615b35",
+      "name": "Professor",
+      "bounding_box": {
+        "x": 413,
+        "y": 635,
+        "w": 85,
+        "h": 21
+      }
+    },
+    {
+      "id": "2fea82d2-3be4-41f1-875c-1f85c1b1894b",
+      "name": "Professor",
+      "bounding_box": {
+        "x": 419,
+        "y": 707,
+        "w": 91,
+        "h": 18
+      }
+    },
+    {
+      "id": "82af7417-a583-43ba-b29d-5318db481dea",
+      "name": "Cytogeneticist",
+      "bounding_box": {
+        "x": 413,
+        "y": 779,
+        "w": 131,
+        "h": 17
+      }
+    },
+    {
+      "id": "d614305b-47be-4fab-ad8b-b53afec73451",
+      "name": "AAAS Meetings Office 1101 Vermont Ave., N W. Washington, D. C. 20005",
+      "bounding_box": {
+        "x": 500,
+        "y": 17,
+        "w": 132,
+        "h": 47
+      }
+    },
+    {
+      "id": "d538c46a-8827-4c09-a58a-cd128b39945d",
+      "name": "(202) 842- 9530",
+      "bounding_box": {
+        "x": 559,
+        "y": 64,
+        "w": 82,
+        "h": 17
+      }
+    },
+    {
+      "id": "b4f86c78-ce1b-4afc-b273-b227d318fbe1",
+      "name": "202/ 457- 4850",
+      "bounding_box": {
+        "x": 527,
+        "y": 127,
+        "w": 114,
+        "h": 24
+      }
+    },
+    {
+      "id": "76904aed-8243-4daa-8754-e567cfb0a72a",
+      "name": "Marvin A Kastenbaum",
+      "bounding_box": {
+        "x": 61,
+        "y": 165,
+        "w": 187,
+        "h": 17
+      }
+    },
+    {
+      "id": "e2a16221-a673-4310-b764-3f3bbf316011",
+      "name": "1825 Eye Street, NW Suite 800",
+      "bounding_box": {
+        "x": 61,
+        "y": 191,
+        "w": 259,
+        "h": 23
+      }
+    },
+    {
+      "id": "faa7b4e1-a460-479c-83e5-12e786a3369e",
+      "name": "Washington DC 20006",
+      "bounding_box": {
+        "x": 433,
+        "y": 190,
+        "w": 185,
+        "h": 21
+      }
+    },
+    {
+      "id": "cf8d3846-6fb2-4388-bfa0-a943e6091ec0",
+      "name": "THE HUMAN CHROMOSOME",
+      "bounding_box": {
+        "x": 279,
+        "y": 351,
+        "w": 191,
+        "h": 22
+      }
+    },
+    {
+      "id": "acf8e6a2-08b9-448f-8f5d-022616bd4427",
+      "name": "Dr. William J. Schull",
+      "bounding_box": {
+        "x": 64,
+        "y": 439,
+        "w": 194,
+        "h": 22
+      }
+    },
+    {
+      "id": "1440e0e7-182f-4f6b-a53f-a9aeaca722c6",
+      "name": "Director - Genetics Centers",
+      "bounding_box": {
+        "x": 391,
+        "y": 436,
+        "w": 247,
+        "h": 24
+      }
+    },
+    {
+      "id": "702a43a6-a054-48bc-a66f-b613b32c312c",
+      "name": "Univ. of Texas Graduate School of Biomedical Sciences (Houston)",
+      "bounding_box": {
+        "x": 73,
+        "y": 461,
+        "w": 585,
+        "h": 24
+      }
+    },
+    {
+      "id": "20ce3ef1-c91f-4bc4-a5af-c23cf0a5dd90",
+      "name": "Dr. Jorge J. Yunis",
+      "bounding_box": {
+        "x": 74,
+        "y": 494,
+        "w": 159,
+        "h": 18
+      }
+    },
+    {
+      "id": "d0c5dc4e-e0b5-4f66-814c-24670036f2e5",
+      "name": "Univ. of Minnesota School of Medicine",
+      "bounding_box": {
+        "x": 94,
+        "y": 510,
+        "w": 339,
+        "h": 22
+      }
+    },
+    {
+      "id": "2e814a7a-a145-433f-b629-0e3c89333fb3",
+      "name": "The Oncogene, the Fragile Site, and Nonrandom Aberrations",
+      "bounding_box": {
+        "x": 67,
+        "y": 534,
+        "w": 519,
+        "h": 23
+      }
+    },
+    {
+      "id": "2c6b125b-5627-4e55-8585-d43c795878d2",
+      "name": "Dr. Sheldon Wolff",
+      "bounding_box": {
+        "x": 75,
+        "y": 561,
+        "w": 163,
+        "h": 23
+      }
+    },
+    {
+      "id": "924ab05d-d9fc-4673-a705-53ccf0de0b29",
+      "name": "Chairman - Professor of Cytogenetic",
+      "bounding_box": {
+        "x": 391,
+        "y": 559,
+        "w": 322,
+        "h": 23
+      }
+    },
+    {
+      "id": "17a28883-d8df-4d84-95ba-c074f61f6dd2",
+      "name": "Laborat. Radiobiology& Environmental Health - U. of Cal. San Francis",
+      "bounding_box": {
+        "x": 74,
+        "y": 582,
+        "w": 639,
+        "h": 24
+      }
+    },
+    {
+      "id": "30a56919-f451-4746-8db9-9edc9e482946",
+      "name": "Sister- -Chromatid Exchanges",
+      "bounding_box": {
+        "x": 92,
+        "y": 608,
+        "w": 240,
+        "h": 22
+      }
+    },
+    {
+      "id": "ef9e108b-a694-48f4-8217-c28ca4ccfac0",
+      "name": "Dr. Patricia Jacobs",
+      "bounding_box": {
+        "x": 67,
+        "y": 637,
+        "w": 178,
+        "h": 20
+      }
+    },
+    {
+      "id": "aeb1158a-73c3-4e6a-8b79-d43f7a455064",
+      "name": "University of Hawai - Dept. of Anatomy",
+      "bounding_box": {
+        "x": 87,
+        "y": 656,
+        "w": 357,
+        "h": 23
+      }
+    },
+    {
+      "id": "99d46561-8f0c-4e07-b4e1-18fd1442e849",
+      "name": "Abnormal Human Chromosome Complements",
+      "bounding_box": {
+        "x": 66,
+        "y": 679,
+        "w": 343,
+        "h": 24
+      }
+    },
+    {
+      "id": "ffd2f0a8-c71c-4213-8796-aec4362452fb",
+      "name": "Dr. Raymond White",
+      "bounding_box": {
+        "x": 92,
+        "y": 707,
+        "w": 165,
+        "h": 22
+      }
+    },
+    {
+      "id": "13e24c0e-2aef-4e35-aaef-4d47e1e4217a",
+      "name": "University of Utah",
+      "bounding_box": {
+        "x": 95,
+        "y": 729,
+        "w": 169,
+        "h": 23
+      }
+    },
+    {
+      "id": "ba5d1598-08fb-4a71-b030-4a10b651fc1f",
+      "name": "Human Linkage Map based on DNA Markers",
+      "bounding_box": {
+        "x": 95,
+        "y": 749,
+        "w": 368,
+        "h": 24
+      }
+    },
+    {
+      "id": "a69cb43e-e22f-4fb5-a2a0-4eb8a18a75e0",
+      "name": "Dr. Michael A. Bender",
+      "bounding_box": {
+        "x": 75,
+        "y": 779,
+        "w": 190,
+        "h": 22
+      }
+    },
+    {
+      "id": "851a1950-ed02-45bf-af42-57eddd06722e",
+      "name": "Brookhaven National Laboratory - Medical Department",
+      "bounding_box": {
+        "x": 98,
+        "y": 799,
+        "w": 483,
+        "h": 24
+      }
+    },
+    {
+      "id": "1b4154fe-c7ae-48ed-b12a-a66af209afbe",
+      "name": "Cyrogeneric Epidemiology",
+      "bounding_box": {
+        "x": 94,
+        "y": 824,
+        "w": 224,
+        "h": 22
+      }
+    }
+  ]
+}

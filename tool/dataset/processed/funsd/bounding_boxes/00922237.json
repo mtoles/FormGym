@@ -1,0 +1,112 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 766,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "b35b921b-051d-4b9a-a4ba-ebb989a7546f",
+      "name": "4111",
+      "bounding_box": {
+        "x": 279,
+        "y": 733,
+        "w": 34,
+        "h": 18
+      }
+    },
+    {
+      "id": "123ca4fb-86dc-4386-82e3-8444814bb459",
+      "name": "9590",
+      "bounding_box": {
+        "x": 427,
+        "y": 732,
+        "w": 34,
+        "h": 15
+      }
+    },
+    {
+      "id": "16a4ecbc-484a-4e38-aa16-d8f8da7a5216",
+      "name": "00922237",
+      "bounding_box": {
+        "x": 585,
+        "y": 675,
+        "w": 98,
+        "h": 17
+      }
+    },
+    {
+      "id": "d3c4daba-252d-4b05-b17c-136703358064",
+      "name": "H.J. Minnemeyer",
+      "bounding_box": {
+        "x": 518,
+        "y": 729,
+        "w": 191,
+        "h": 42
+      }
+    },
+    {
+      "id": "adefa836-f0e1-498c-bbd4-dc2cc0be838a",
+      "name": "Microbiological Associates 5221 River Rd., Bethesda MD 20816",
+      "bounding_box": {
+        "x": 11,
+        "y": 64,
+        "w": 482,
+        "h": 25
+      }
+    },
+    {
+      "id": "76b3aecd-14c9-4c1e-a4f3-58b5db4647c9",
+      "name": "15 Net F.O.S N/A VIA N/A",
+      "bounding_box": {
+        "x": 87,
+        "y": 96,
+        "w": 366,
+        "h": 23
+      }
+    },
+    {
+      "id": "06e7fb58-c61c-446d-ad23-a554b2cede8a",
+      "name": "Lorillard Research Center",
+      "bounding_box": {
+        "x": 14,
+        "y": 130,
+        "w": 190,
+        "h": 18
+      }
+    },
+    {
+      "id": "498c3372-eb25-4c9f-b0ad-4dbaae6fb8ad",
+      "name": "Dr. Harry Minnemeyer",
+      "bounding_box": {
+        "x": 291,
+        "y": 127,
+        "w": 154,
+        "h": 20
+      }
+    },
+    {
+      "id": "31f158cd-2f31-4a22-9a20-6f8d2f18539a",
+      "name": "As required",
+      "bounding_box": {
+        "x": 536,
+        "y": 124,
+        "w": 86,
+        "h": 17
+      }
+    },
+    {
+      "id": "e854aa66-7274-4765-a635-3406d3c3ca85",
+      "name": "This is your authorization to provide the \"1601.013: The Effect of Inhalation of Reference and Test (D3 and D4) Cigarette Smoke on Two Cytogenetic Endpoints in Mice: Chromosome Aberrations and Sister Chromatid Exchange\" test for a fixed price of $19,750 Tests will be performed in accordance with the December 21, 1981 formal agreement between Microbiological Associates and Lorillard. All work is to be coordinated with our Dr. Harry Minnemeyer (919) 373-6603",
+      "bounding_box": {
+        "x": 103,
+        "y": 215,
+        "w": 588,
+        "h": 188
+      }
+    }
+  ]
+}

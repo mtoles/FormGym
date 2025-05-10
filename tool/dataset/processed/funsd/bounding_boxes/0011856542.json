@@ -1,0 +1,92 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "f27900a9-b017-4ab1-a9ce-3ffe4b5e8cab",
+      "name": "BD-FF",
+      "bounding_box": {
+        "x": 259,
+        "y": 255,
+        "w": 42,
+        "h": 15
+      }
+    },
+    {
+      "id": "7fb4078b-5013-464f-87fc-2a41a41cc8bb",
+      "name": "1/4/90",
+      "bounding_box": {
+        "x": 500,
+        "y": 259,
+        "w": 51,
+        "h": 14
+      }
+    },
+    {
+      "id": "0bcc187e-09a7-4a67-a36a-008cd56eb6dd",
+      "name": "Marketing",
+      "bounding_box": {
+        "x": 257,
+        "y": 382,
+        "w": 73,
+        "h": 15
+      }
+    },
+    {
+      "id": "a4293aa0-3a15-4f7f-8af5-658922f563bd",
+      "name": "",
+      "bounding_box": {
+        "x": 363,
+        "y": 737,
+        "w": 218,
+        "h": 57
+      }
+    },
+    {
+      "id": "cee8c12a-a58f-4bb9-b2bb-949d068b45fc",
+      "name": "BULL DURHAM Full Flavor King Size Cigarettes",
+      "bounding_box": {
+        "x": 259,
+        "y": 296,
+        "w": 315,
+        "h": 20
+      }
+    },
+    {
+      "id": "6338e44c-3982-4ae1-ba70-df1da86e10f4",
+      "name": "J. F. Anders/ J. E. Mann",
+      "bounding_box": {
+        "x": 262,
+        "y": 338,
+        "w": 163,
+        "h": 21
+      }
+    },
+    {
+      "id": "19e09780-6843-4902-a110-0429bcedf553",
+      "name": "Develop 14- mg \"tar\" delivery king size cigarette for generic pricing directed toward young male smokers. Cigarette dimensions- 85 mm x 24.9 mm circumference- 20 mm filter- 24 mm tipping. Offshore tobacco blend with unique flavor formulation. Cork tipping.",
+      "bounding_box": {
+        "x": 255,
+        "y": 423,
+        "w": 384,
+        "h": 158
+      }
+    },
+    {
+      "id": "8775fcdc-234e-4cd5-96ec-72bd2eea8fb6",
+      "name": "RSS RDC PHL PRC DRB Records Project Leader Other Personnel Assigned",
+      "bounding_box": {
+        "x": 106,
+        "y": 756,
+        "w": 207,
+        "h": 117
+      }
+    }
+  ]
+}

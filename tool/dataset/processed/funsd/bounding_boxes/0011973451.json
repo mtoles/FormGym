@@ -1,0 +1,142 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 771,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "14fa244d-0fbb-45a2-acec-a4363a68256a",
+      "name": "TBD",
+      "bounding_box": {
+        "x": 60,
+        "y": 422,
+        "w": 25,
+        "h": 11
+      }
+    },
+    {
+      "id": "382af733-84da-47ef-b729-34e1c364dc47",
+      "name": "TBD",
+      "bounding_box": {
+        "x": 462,
+        "y": 603,
+        "w": 25,
+        "h": 13
+      }
+    },
+    {
+      "id": "50ea8923-dbb8-49e8-b42f-233f7882914e",
+      "name": "TBD",
+      "bounding_box": {
+        "x": 67,
+        "y": 521,
+        "w": 24,
+        "h": 13
+      }
+    },
+    {
+      "id": "9d4e4d6d-51c4-4fcb-8d2e-4ca396a173c8",
+      "name": "TBD",
+      "bounding_box": {
+        "x": 134,
+        "y": 605,
+        "w": 24,
+        "h": 11
+      }
+    },
+    {
+      "id": "8760ef4e-9380-44e7-ace5-7b10ba6f3809",
+      "name": "500",
+      "bounding_box": {
+        "x": 289,
+        "y": 705,
+        "w": 21,
+        "h": 11
+      }
+    },
+    {
+      "id": "667ff78a-df34-4aad-888e-0a954a60c5a2",
+      "name": "$250",
+      "bounding_box": {
+        "x": 434,
+        "y": 704,
+        "w": 27,
+        "h": 11
+      }
+    },
+    {
+      "id": "151066fe-2ce8-491b-b441-4bb3a58c7e96",
+      "name": "6/ 24/ 94",
+      "bounding_box": {
+        "x": 94,
+        "y": 73,
+        "w": 50,
+        "h": 11
+      }
+    },
+    {
+      "id": "f194160e-cabe-4e53-aa04-5597b2f9d8c8",
+      "name": "RICHLAND Kings (Soft Pack) -Duty Free (Phoenix)",
+      "bounding_box": {
+        "x": 57,
+        "y": 133,
+        "w": 496,
+        "h": 28
+      }
+    },
+    {
+      "id": "85c819bc-7f32-4ce1-9bc1-d940223695fe",
+      "name": "World- wide Duty Free",
+      "bounding_box": {
+        "x": 57,
+        "y": 221,
+        "w": 208,
+        "h": 22
+      }
+    },
+    {
+      "id": "cd3bea83-25d5-45f1-9498-080d058311a8",
+      "name": "Generate incremental volume for B& W by providing a low price brand to various international duty- free markets.",
+      "bounding_box": {
+        "x": 66,
+        "y": 292,
+        "w": 500,
+        "h": 38
+      }
+    },
+    {
+      "id": "70f15b82-09ee-4bad-b555-360b295202c4",
+      "name": "Value- conscious Smokers",
+      "bounding_box": {
+        "x": 384,
+        "y": 420,
+        "w": 140,
+        "h": 13
+      }
+    },
+    {
+      "id": "f370bd11-e127-4928-b0b7-45b3c7754ac3",
+      "name": "On Hand",
+      "bounding_box": {
+        "x": 289,
+        "y": 670,
+        "w": 49,
+        "h": 14
+      }
+    },
+    {
+      "id": "dd6227f7-e7cb-49fc-b629-7c63a56b1cfe",
+      "name": "On Hand",
+      "bounding_box": {
+        "x": 291,
+        "y": 687,
+        "w": 50,
+        "h": 14
+      }
+    }
+  ]
+}

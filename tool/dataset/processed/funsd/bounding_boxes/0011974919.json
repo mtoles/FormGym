@@ -1,0 +1,232 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "13acd5d3-52a4-4d60-877c-eaa7bd09408b",
+      "name": "Eclipse",
+      "bounding_box": {
+        "x": 110,
+        "y": 304,
+        "w": 39,
+        "h": 15
+      }
+    },
+    {
+      "id": "ec0ee55b-d2a1-4903-b442-d30f0d6366d7",
+      "name": "APAC",
+      "bounding_box": {
+        "x": 211,
+        "y": 459,
+        "w": 36,
+        "h": 15
+      }
+    },
+    {
+      "id": "5324b9ba-5de4-464d-a3b5-bf51fe68c104",
+      "name": "300",
+      "bounding_box": {
+        "x": 226,
+        "y": 490,
+        "w": 24,
+        "h": 14
+      }
+    },
+    {
+      "id": "ac575ce5-37ad-43d5-8727-ecb7b802ac32",
+      "name": "300",
+      "bounding_box": {
+        "x": 226,
+        "y": 549,
+        "w": 22,
+        "h": 15
+      }
+    },
+    {
+      "id": "9b837356-4b5d-4bc6-8a7d-d915abebd025",
+      "name": "W25",
+      "bounding_box": {
+        "x": 425,
+        "y": 628,
+        "w": 39,
+        "h": 21
+      }
+    },
+    {
+      "id": "35fe9527-6ca4-4763-8abd-194d31473be7",
+      "name": "APAC",
+      "bounding_box": {
+        "x": 362,
+        "y": 751,
+        "w": 35,
+        "h": 15
+      }
+    },
+    {
+      "id": "d0f4d125-cdaf-48cf-a79c-fa7afd445a2b",
+      "name": "602399",
+      "bounding_box": {
+        "x": 376,
+        "y": 304,
+        "w": 42,
+        "h": 17
+      }
+    },
+    {
+      "id": "487c9b94-e0b8-4987-a5d1-136bcd75c196",
+      "name": "Joe Leinster",
+      "bounding_box": {
+        "x": 219,
+        "y": 201,
+        "w": 70,
+        "h": 15
+      }
+    },
+    {
+      "id": "bb3d95cf-fd6f-4a81-940d-5d0fe741461d",
+      "name": "Joyce Bagby",
+      "bounding_box": {
+        "x": 219,
+        "y": 230,
+        "w": 70,
+        "h": 18
+      }
+    },
+    {
+      "id": "2f1411d9-7f4f-4774-ba1d-11ba00af4c2f",
+      "name": "September 10, 1996",
+      "bounding_box": {
+        "x": 221,
+        "y": 258,
+        "w": 108,
+        "h": 20
+      }
+    },
+    {
+      "id": "50420d33-8691-46b8-9624-e214c9c8fd38",
+      "name": "Sneak Preview Confirmation Call- Charlotte Tests",
+      "bounding_box": {
+        "x": 109,
+        "y": 334,
+        "w": 257,
+        "h": 20
+      }
+    },
+    {
+      "id": "ddb599b6-1596-4e91-9ff3-ef920d57ae07",
+      "name": "Record of confirmation calls for sneak preview appointments",
+      "bounding_box": {
+        "x": 134,
+        "y": 363,
+        "w": 315,
+        "h": 19
+      }
+    },
+    {
+      "id": "b0a7b158-df3f-4099-b926-003f2a24fdf7",
+      "name": "10/ 03/ 96",
+      "bounding_box": {
+        "x": 207,
+        "y": 580,
+        "w": 45,
+        "h": 17
+      }
+    },
+    {
+      "id": "3d8f6703-f729-489e-9cb0-7d1b5c26565a",
+      "name": "100.00 %",
+      "bounding_box": {
+        "x": 219,
+        "y": 520,
+        "w": 53,
+        "h": 18
+      }
+    },
+    {
+      "id": "80fa7ddb-b869-4cec-8b74-6bb0a5068d5a",
+      "name": "Suzi Hicks RJR- IR",
+      "bounding_box": {
+        "x": 91,
+        "y": 844,
+        "w": 104,
+        "h": 17
+      }
+    },
+    {
+      "id": "f797555e-40b3-4e18-b20b-899f4b9adab0",
+      "name": "Karen Giddens",
+      "bounding_box": {
+        "x": 91,
+        "y": 862,
+        "w": 83,
+        "h": 20
+      }
+    },
+    {
+      "id": "0b0281b6-3caa-4d7a-9053-63eef6991084",
+      "name": "Drew Huyett",
+      "bounding_box": {
+        "x": 94,
+        "y": 884,
+        "w": 67,
+        "h": 17
+      }
+    },
+    {
+      "id": "4b99f588-28a7-4775-b53f-3ab45703351b",
+      "name": "Jackson Roper",
+      "bounding_box": {
+        "x": 89,
+        "y": 908,
+        "w": 84,
+        "h": 15
+      }
+    },
+    {
+      "id": "db1a6359-0f8c-4079-bd68-0607dd1c48c6",
+      "name": "Debbie Lockery",
+      "bounding_box": {
+        "x": 418,
+        "y": 839,
+        "w": 81,
+        "h": 17
+      }
+    },
+    {
+      "id": "af9dc5ba-1b99-4275-8670-36f1b61c2964",
+      "name": "Vanessa Oakley",
+      "bounding_box": {
+        "x": 418,
+        "y": 862,
+        "w": 89,
+        "h": 17
+      }
+    },
+    {
+      "id": "d3f0cabe-2dda-4c25-a673-f84322cc9805",
+      "name": "Melissa Andrews - TBM",
+      "bounding_box": {
+        "x": 418,
+        "y": 884,
+        "w": 126,
+        "h": 19
+      }
+    },
+    {
+      "id": "b73f3bb0-0054-4ecc-b7ec-17ae1e8ae782",
+      "name": "Tammi LaManna - M/ B",
+      "bounding_box": {
+        "x": 416,
+        "y": 906,
+        "w": 122,
+        "h": 18
+      }
+    }
+  ]
+}

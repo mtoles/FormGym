@@ -1,0 +1,92 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 772,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "bbf25d5c-681b-441a-ae80-dc61a7085440",
+      "name": "306",
+      "bounding_box": {
+        "x": 529,
+        "y": 183,
+        "w": 33,
+        "h": 15
+      }
+    },
+    {
+      "id": "ac9d7851-38d9-4e47-ad36-8c8c9f2bccc8",
+      "name": "March 1, 1978",
+      "bounding_box": {
+        "x": 587,
+        "y": 104,
+        "w": 120,
+        "h": 19
+      }
+    },
+    {
+      "id": "cc2e5f96-f289-40e8-87e1-3b859c1df4bd",
+      "name": "True 100's (R&M)",
+      "bounding_box": {
+        "x": 214,
+        "y": 178,
+        "w": 144,
+        "h": 20
+      }
+    },
+    {
+      "id": "0962c4b9-c6ca-4ae2-bfcf-824d017386c5",
+      "name": "Williams/ Giordano",
+      "bounding_box": {
+        "x": 225,
+        "y": 199,
+        "w": 158,
+        "h": 19
+      }
+    },
+    {
+      "id": "c3b245f4-2aef-4b30-8870-c09b668a61c5",
+      "name": "True 100's, Regular and Menthol tar",
+      "bounding_box": {
+        "x": 341,
+        "y": 217,
+        "w": 321,
+        "h": 24
+      }
+    },
+    {
+      "id": "45dd19f4-51a2-45c9-94ac-84df7bce536e",
+      "name": "reduction to the range of 8- 10mg tar. Variations to be: 1) Same taste",
+      "bounding_box": {
+        "x": 88,
+        "y": 233,
+        "w": 636,
+        "h": 21
+      }
+    },
+    {
+      "id": "34066022-7ee5-4ec4-b8d1-cda8c5ec8abd",
+      "name": "characteristics as current True 100's product and, 2) Taste characterist-",
+      "bounding_box": {
+        "x": 95,
+        "y": 249,
+        "w": 657,
+        "h": 20
+      }
+    },
+    {
+      "id": "5d61d3f7-c90f-42bc-a896-d0f4acc73582",
+      "name": "ics similar to True King Size, 5mg. tar product.",
+      "bounding_box": {
+        "x": 96,
+        "y": 262,
+        "w": 436,
+        "h": 20
+      }
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 771,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "087e035f-1d1e-45f3-9b50-c9987ac1240f",
+      "name": "WCC",
+      "bounding_box": {
+        "x": 377,
+        "y": 366,
+        "w": 39,
+        "h": 14
+      }
+    },
+    {
+      "id": "43531c46-90f8-48e1-81ba-d7d2b490a78c",
+      "name": "PCFS Flue cured fines",
+      "bounding_box": {
+        "x": 108,
+        "y": 282,
+        "w": 178,
+        "h": 23
+      }
+    },
+    {
+      "id": "4277797d-c4b4-417b-848c-fd5df6a46f9e",
+      "name": "PCBS Burley fines",
+      "bounding_box": {
+        "x": 108,
+        "y": 328,
+        "w": 148,
+        "h": 21
+      }
+    },
+    {
+      "id": "f41684cb-daa5-4b43-9f67-3f436ef420d8",
+      "name": "MC- 4 Manufacturing fines",
+      "bounding_box": {
+        "x": 105,
+        "y": 406,
+        "w": 201,
+        "h": 22
+      }
+    },
+    {
+      "id": "876bdc80-6128-4564-83b1-0e423a0695f4",
+      "name": "MC -6 Stem Meal",
+      "bounding_box": {
+        "x": 102,
+        "y": 542,
+        "w": 141,
+        "h": 17
+      }
+    },
+    {
+      "id": "e4b7215b-08d0-42d0-ac98-551989517a9c",
+      "name": "MC -7 Winnowers",
+      "bounding_box": {
+        "x": 101,
+        "y": 588,
+        "w": 143,
+        "h": 17
+      }
+    },
+    {
+      "id": "1051f61f-a4ba-4c1b-8151-622af10626d7",
+      "name": "RXF Fine flue cured stem",
+      "bounding_box": {
+        "x": 99,
+        "y": 634,
+        "w": 209,
+        "h": 20
+      }
+    },
+    {
+      "id": "93876eaf-2718-45df-a1d6-8d5274091108",
+      "name": "RBF Fine Burely stem",
+      "bounding_box": {
+        "x": 98,
+        "y": 742,
+        "w": 182,
+        "h": 19
+      }
+    },
+    {
+      "id": "1817d25d-b9f8-4353-9ebd-84012b6606a4",
+      "name": "RPCFS or RPCFS-O",
+      "bounding_box": {
+        "x": 378,
+        "y": 291,
+        "w": 144,
+        "h": 16
+      }
+    },
+    {
+      "id": "982e842c-d5f0-49e1-ba8a-5c5493d2945a",
+      "name": "RPCBS OT RPCBS- O",
+      "bounding_box": {
+        "x": 378,
+        "y": 337,
+        "w": 145,
+        "h": 17
+      }
+    },
+    {
+      "id": "aafbaf21-e002-47fe-8605-337fee219b31",
+      "name": "MC -4 -S",
+      "bounding_box": {
+        "x": 377,
+        "y": 411,
+        "w": 53,
+        "h": 18
+      }
+    },
+    {
+      "id": "fc572b1d-af72-4520-b504-f2297d2b9958",
+      "name": "MC -4 -PH",
+      "bounding_box": {
+        "x": 378,
+        "y": 439,
+        "w": 63,
+        "h": 18
+      }
+    },
+    {
+      "id": "93041a6b-eaed-4b26-b3ed-e7a75a225cd7",
+      "name": "MC -4 -RC",
+      "bounding_box": {
+        "x": 376,
+        "y": 471,
+        "w": 64,
+        "h": 15
+      }
+    },
+    {
+      "id": "350479ac-2a57-40fa-afdb-9071070308fe",
+      "name": "MC -4 -W",
+      "bounding_box": {
+        "x": 376,
+        "y": 500,
+        "w": 58,
+        "h": 17
+      }
+    },
+    {
+      "id": "af9b9b04-2d05-4499-aa73-1ffeb9cfc369",
+      "name": "MC -1",
+      "bounding_box": {
+        "x": 374,
+        "y": 547,
+        "w": 37,
+        "h": 17
+      }
+    },
+    {
+      "id": "4b9f9761-6ba7-42a4-8f26-edcd2671d5f1",
+      "name": "C Stem",
+      "bounding_box": {
+        "x": 374,
+        "y": 594,
+        "w": 51,
+        "h": 15
+      }
+    },
+    {
+      "id": "79ea03d3-c224-4b02-8fb1-03bc6ac84cad",
+      "name": "RRXF or RRXF -O",
+      "bounding_box": {
+        "x": 374,
+        "y": 638,
+        "w": 120,
+        "h": 18
+      }
+    },
+    {
+      "id": "c44620a0-0970-4d9f-afaf-173563d3c360",
+      "name": "RRXM -B",
+      "bounding_box": {
+        "x": 372,
+        "y": 670,
+        "w": 61,
+        "h": 14
+      }
+    },
+    {
+      "id": "c46fc003-efe8-4a12-83b3-40c9236d7e4d",
+      "name": "RRXM -T",
+      "bounding_box": {
+        "x": 372,
+        "y": 700,
+        "w": 59,
+        "h": 16
+      }
+    },
+    {
+      "id": "c9d35d80-6d2a-49ed-809c-0c2fb872c25d",
+      "name": "RRBF or RRBF -O",
+      "bounding_box": {
+        "x": 370,
+        "y": 747,
+        "w": 121,
+        "h": 18
+      }
+    },
+    {
+      "id": "0cb4c7f7-d931-44e9-b209-d25b75929911",
+      "name": "RRB -B",
+      "bounding_box": {
+        "x": 370,
+        "y": 778,
+        "w": 47,
+        "h": 15
+      }
+    },
+    {
+      "id": "9768dfca-7da1-44e9-980a-d56b53e148dd",
+      "name": "RRB -L",
+      "bounding_box": {
+        "x": 369,
+        "y": 809,
+        "w": 46,
+        "h": 14
+      }
+    },
+    {
+      "id": "0e45461c-73e9-4955-9bc0-6b7b5afeb859",
+      "name": "RRB -T",
+      "bounding_box": {
+        "x": 369,
+        "y": 838,
+        "w": 46,
+        "h": 14
+      }
+    }
+  ]
+}

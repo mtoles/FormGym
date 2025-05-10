@@ -1,0 +1,142 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "6bc41b53-5eeb-4a40-9d86-99cce81b5098",
+      "name": "412",
+      "bounding_box": {
+        "x": 197,
+        "y": 169,
+        "w": 24,
+        "h": 15
+      }
+    },
+    {
+      "id": "0ebbbb98-dff1-4a8e-880e-05cda71707c9",
+      "name": "Insignificant.",
+      "bounding_box": {
+        "x": 236,
+        "y": 284,
+        "w": 106,
+        "h": 17
+      }
+    },
+    {
+      "id": "2fdcf294-156a-4d5f-bc5d-320a2050d6b3",
+      "name": "Insignificant.",
+      "bounding_box": {
+        "x": 236,
+        "y": 427,
+        "w": 106,
+        "h": 17
+      }
+    },
+    {
+      "id": "6bf45a22-f2c5-4309-a042-30d276479e17",
+      "name": "73 -91",
+      "bounding_box": {
+        "x": 388,
+        "y": 78,
+        "w": 42,
+        "h": 17
+      }
+    },
+    {
+      "id": "4fcb76c4-bda9-4aa8-bf1f-fb9f89b61e68",
+      "name": "1 /25 /91",
+      "bounding_box": {
+        "x": 547,
+        "y": 110,
+        "w": 59,
+        "h": 16
+      }
+    },
+    {
+      "id": "31d64f6f-d3af-4805-a619-569c5aeabfce",
+      "name": "CARLTON Filter 100's - 4 Mg Laser",
+      "bounding_box": {
+        "x": 387,
+        "y": 169,
+        "w": 259,
+        "h": 18
+      }
+    },
+    {
+      "id": "bda1884b-d641-4919-b548-c414084f3467",
+      "name": "Mfg. for Taiwan",
+      "bounding_box": {
+        "x": 472,
+        "y": 190,
+        "w": 121,
+        "h": 15
+      }
+    },
+    {
+      "id": "966de85d-4a5e-48f8-80ee-a7a1020854e8",
+      "name": "<1 mm 13 .0 mm from end",
+      "bounding_box": {
+        "x": 228,
+        "y": 260,
+        "w": 255,
+        "h": 15
+      }
+    },
+    {
+      "id": "8a727e69-0810-4b5d-8890-f5c51d243104",
+      "name": "None to insignificant.",
+      "bounding_box": {
+        "x": 236,
+        "y": 310,
+        "w": 168,
+        "h": 17
+      }
+    },
+    {
+      "id": "2c47c36e-0aa7-488f-b933-93557c4bb32f",
+      "name": "Excellent appearance (18 holes).",
+      "bounding_box": {
+        "x": 233,
+        "y": 334,
+        "w": 247,
+        "h": 20
+      }
+    },
+    {
+      "id": "8e7f6967-daf0-4363-8ba4-1d41329041d5",
+      "name": "<1 mm 13 .0 mm from end",
+      "bounding_box": {
+        "x": 229,
+        "y": 408,
+        "w": 254,
+        "h": 15
+      }
+    },
+    {
+      "id": "7572e2ce-d7cb-4066-93cb-41b376d4fc69",
+      "name": "None to insignificant.",
+      "bounding_box": {
+        "x": 233,
+        "y": 453,
+        "w": 172,
+        "h": 15
+      }
+    },
+    {
+      "id": "b72bcf0a-e1d3-4b84-89cf-9c8fa1d6384a",
+      "name": "Excellent appearance (18 holes).",
+      "bounding_box": {
+        "x": 237,
+        "y": 476,
+        "w": 244,
+        "h": 18
+      }
+    }
+  ]
+}

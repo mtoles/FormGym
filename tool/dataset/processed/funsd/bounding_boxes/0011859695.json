@@ -1,0 +1,122 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "54ced078-38af-4e85-8765-6e7f0f462622",
+      "name": "cb",
+      "bounding_box": {
+        "x": 91,
+        "y": 779,
+        "w": 22,
+        "h": 14
+      }
+    },
+    {
+      "id": "6079bff4-79d0-48f1-b818-7137c95eeeb0",
+      "name": "SSC&B, Inc",
+      "bounding_box": {
+        "x": 119,
+        "y": 236,
+        "w": 88,
+        "h": 18
+      }
+    },
+    {
+      "id": "fbf1cc3e-c68e-4e53-8625-64deae1b25f2",
+      "name": "September 25, 1969",
+      "bounding_box": {
+        "x": 440,
+        "y": 190,
+        "w": 156,
+        "h": 20
+      }
+    },
+    {
+      "id": "e17218e1-4db7-4337-b80f-28fb8021a0d1",
+      "name": "Larry Odum",
+      "bounding_box": {
+        "x": 448,
+        "y": 232,
+        "w": 91,
+        "h": 21
+      }
+    },
+    {
+      "id": "4cb6e57c-74ec-475d-825a-6e4b5d4b2959",
+      "name": "575 Lexington Avenue, New York, New York 10022",
+      "bounding_box": {
+        "x": 120,
+        "y": 289,
+        "w": 402,
+        "h": 19
+      }
+    },
+    {
+      "id": "43326a88-3a6b-434d-8802-d8ca77c49e9a",
+      "name": "American Tobacco Company",
+      "bounding_box": {
+        "x": 120,
+        "y": 346,
+        "w": 211,
+        "h": 20
+      }
+    },
+    {
+      "id": "e4081ec9-a2a3-4613-9475-1317de24e300",
+      "name": "Pall Mail Filter tip",
+      "bounding_box": {
+        "x": 119,
+        "y": 395,
+        "w": 178,
+        "h": 21
+      }
+    },
+    {
+      "id": "e5e08fa0-19fb-4a34-9522-468d22a04930",
+      "name": "VIDEO TAPE APPROVAL",
+      "bounding_box": {
+        "x": 191,
+        "y": 457,
+        "w": 169,
+        "h": 18
+      }
+    },
+    {
+      "id": "cfa26ba3-2a69-48c8-b214-bcec80917f67",
+      "name": "SEP 30",
+      "bounding_box": {
+        "x": 553,
+        "y": 419,
+        "w": 86,
+        "h": 24
+      }
+    },
+    {
+      "id": "638b2de7-16ab-4656-a134-4f72eef90cf3",
+      "name": "\"Presenter/ Girl Rev\" AT-M B-T-64 :60 \"Pall Mall Filter Tip\" AT-P/ F-T-317 :30",
+      "bounding_box": {
+        "x": 123,
+        "y": 490,
+        "w": 377,
+        "h": 34
+      }
+    },
+    {
+      "id": "6ce98109-c350-4e35-9a94-ccdaacf55f93",
+      "name": "TAPE WILL FOLLOW AS SOON AS I RECEIVE IT FROM THE TAPE LIBRARY.",
+      "bounding_box": {
+        "x": 122,
+        "y": 545,
+        "w": 474,
+        "h": 35
+      }
+    }
+  ]
+}

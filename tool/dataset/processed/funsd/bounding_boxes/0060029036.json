@@ -1,0 +1,162 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 795,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "58a7d23e-3f8d-4a81-8ee9-e59bb2ca1b11",
+      "name": "1-11-94",
+      "bounding_box": {
+        "x": 620,
+        "y": 464,
+        "w": 87,
+        "h": 24
+      }
+    },
+    {
+      "id": "ec7f721d-c0f8-4cc7-8eca-10d3830aa9f6",
+      "name": "SME",
+      "bounding_box": {
+        "x": 409,
+        "y": 842,
+        "w": 34,
+        "h": 14
+      }
+    },
+    {
+      "id": "277be3bf-8f13-4dd0-9b7e-d920f54774fc",
+      "name": "January 11, 1994",
+      "bounding_box": {
+        "x": 225,
+        "y": 135,
+        "w": 108,
+        "h": 19
+      }
+    },
+    {
+      "id": "a0a71574-10d9-4d49-8e12-89a62751022c",
+      "name": "4011 00 00",
+      "bounding_box": {
+        "x": 554,
+        "y": 135,
+        "w": 71,
+        "h": 16
+      }
+    },
+    {
+      "id": "71e838fb-04af-4f47-9deb-186fc74f6bbd",
+      "name": "Joe's Place Exhibits",
+      "bounding_box": {
+        "x": 226,
+        "y": 180,
+        "w": 124,
+        "h": 20
+      }
+    },
+    {
+      "id": "d7adb129-64b8-435d-9e7c-cba83dc4fd43",
+      "name": "SPEVCO, INC.",
+      "bounding_box": {
+        "x": 173,
+        "y": 211,
+        "w": 93,
+        "h": 21
+      }
+    },
+    {
+      "id": "8add424b-2864-42d1-b29a-e3f3480f74bc",
+      "name": "Camel/ Winston",
+      "bounding_box": {
+        "x": 522,
+        "y": 215,
+        "w": 97,
+        "h": 15
+      }
+    },
+    {
+      "id": "8008ab75-25f6-4dae-b0cd-a65b799e2c8e",
+      "name": "$ 1,340,000.00",
+      "bounding_box": {
+        "x": 243,
+        "y": 249,
+        "w": 94,
+        "h": 17
+      }
+    },
+    {
+      "id": "69f298b9-c0dd-43df-ad08-ae2bde1418ea",
+      "name": "1994-1995",
+      "bounding_box": {
+        "x": 582,
+        "y": 250,
+        "w": 66,
+        "h": 17
+      }
+    },
+    {
+      "id": "f1c917cd-47a4-4ea0-b444-8cb81046f030",
+      "name": "2 Joe's Place Exhibits for use at Winston Cup, Winston Drag and Camel Super Bike Events.",
+      "bounding_box": {
+        "x": 247,
+        "y": 284,
+        "w": 454,
+        "h": 31
+      }
+    },
+    {
+      "id": "4f04ff3f-babf-4fa3-8d08-7dba0adb3786",
+      "name": "Michael Wright",
+      "bounding_box": {
+        "x": 226,
+        "y": 426,
+        "w": 96,
+        "h": 19
+      }
+    },
+    {
+      "id": "5afd6aee-938b-4bf9-9cf5-0eea8785fe2c",
+      "name": "John Powell",
+      "bounding_box": {
+        "x": 225,
+        "y": 468,
+        "w": 78,
+        "h": 15
+      }
+    },
+    {
+      "id": "91e1bcec-a4ee-4b81-aece-47dd1118beb4",
+      "name": "B J. Powell",
+      "bounding_box": {
+        "x": 432,
+        "y": 450,
+        "w": 141,
+        "h": 43
+      }
+    },
+    {
+      "id": "7583f4e1-ee33-4385-9e4e-4b8f4c87b6bb",
+      "name": "13 Plaza",
+      "bounding_box": {
+        "x": 599,
+        "y": 842,
+        "w": 53,
+        "h": 15
+      }
+    },
+    {
+      "id": "9da259d5-2eae-4ae1-be7c-75179e151de9",
+      "name": "MARY SEAGRAVES Ext 1485",
+      "bounding_box": {
+        "x": 222,
+        "y": 841,
+        "w": 126,
+        "h": 32
+      }
+    }
+  ]
+}

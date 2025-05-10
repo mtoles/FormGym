@@ -1,0 +1,222 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "fc65a36b-da62-44d9-b0b0-65fa11a04fd0",
+      "name": "(X)",
+      "bounding_box": {
+        "x": 78,
+        "y": 230,
+        "w": 20,
+        "h": 13
+      }
+    },
+    {
+      "id": "d3445689-b57e-48c3-a845-909a2a09aec8",
+      "name": "FLORIDA",
+      "bounding_box": {
+        "x": 310,
+        "y": 265,
+        "w": 71,
+        "h": 15
+      }
+    },
+    {
+      "id": "b7bd0224-38d2-4ddd-93ff-f3093d64daf9",
+      "name": "(X)",
+      "bounding_box": {
+        "x": 568,
+        "y": 190,
+        "w": 17,
+        "h": 13
+      }
+    },
+    {
+      "id": "6b2a3717-9eb3-4308-bd7f-065b7b99ac71",
+      "name": "The Corporation Trust Company",
+      "bounding_box": {
+        "x": 440,
+        "y": 38,
+        "w": 232,
+        "h": 16
+      }
+    },
+    {
+      "id": "c0c50544-11d3-4ff3-8b39-8cbf7c55abab",
+      "name": "C T Corporation System",
+      "bounding_box": {
+        "x": 458,
+        "y": 92,
+        "w": 176,
+        "h": 15
+      }
+    },
+    {
+      "id": "47a91471-90f6-4f9e-b6be-2b36c1607c27",
+      "name": "Phyllis G. Jennings",
+      "bounding_box": {
+        "x": 458,
+        "y": 122,
+        "w": 142,
+        "h": 15
+      }
+    },
+    {
+      "id": "314a0f55-5744-477c-8e9c-c741ae2e8ff0",
+      "name": "Jacksonville, Florida",
+      "bounding_box": {
+        "x": 461,
+        "y": 148,
+        "w": 154,
+        "h": 16
+      }
+    },
+    {
+      "id": "47e095a8-f288-4e20-9fb8-68d44a259599",
+      "name": "1- -27 -69",
+      "bounding_box": {
+        "x": 454,
+        "y": 180,
+        "w": 60,
+        "h": 15
+      }
+    },
+    {
+      "id": "bab4a417-a048-4e6f-859a-aaf4210753a5",
+      "name": "PROCESS SERVED",
+      "bounding_box": {
+        "x": 75,
+        "y": 267,
+        "w": 167,
+        "h": 18
+      }
+    },
+    {
+      "id": "fd717ba4-4736-4c40-8dfd-f25373eaa5dc",
+      "name": "THE AMERICAN TOBACCO COMPANY",
+      "bounding_box": {
+        "x": 88,
+        "y": 307,
+        "w": 283,
+        "h": 15
+      }
+    },
+    {
+      "id": "8e3cef3c-fd7f-4475-9e3a-4649f483ed1e",
+      "name": "Reuben Sunstein, Plaintiff, v. The American Tobacco Company, a New Jorsey corporation, Defendant.",
+      "bounding_box": {
+        "x": 147,
+        "y": 356,
+        "w": 511,
+        "h": 41
+      }
+    },
+    {
+      "id": "22f661cd-0ede-416e-811e-86a9f0f92133",
+      "name": "Summons and Complaint",
+      "bounding_box": {
+        "x": 186,
+        "y": 408,
+        "w": 176,
+        "h": 17
+      }
+    },
+    {
+      "id": "28760c92-df8c-4685-96c9-57a06f20d22e",
+      "name": "Circuit Court, Dade County, Florida. No. 69 -1351",
+      "bounding_box": {
+        "x": 117,
+        "y": 430,
+        "w": 369,
+        "h": 23
+      }
+    },
+    {
+      "id": "2e7bf0d6-d4ac-45c2-a0e8-6226304883b9",
+      "name": "Strike\" cigarettes manufactured by defendant, wherein plaintiff alleges breach of was- anties, seeks damages in excess of $5, 000 and demands trial by jury.",
+      "bounding_box": {
+        "x": 63,
+        "y": 469,
+        "w": 620,
+        "h": 41
+      }
+    },
+    {
+      "id": "c520c866-8b8d-46cc-bc6f-4e1279c04c0a",
+      "name": "Phyllis G. Jonnings, Asst. Socy,. The Corporation Company, Jacksonville, Florida",
+      "bounding_box": {
+        "x": 244,
+        "y": 510,
+        "w": 445,
+        "h": 39
+      }
+    },
+    {
+      "id": "024f8d02-83bf-4077-8b19-bd9ee1be0c7d",
+      "name": "Max A. Goldfarb 414 Biscayne Building Miami, Florida",
+      "bounding_box": {
+        "x": 244,
+        "y": 624,
+        "w": 161,
+        "h": 47
+      }
+    },
+    {
+      "id": "2da1b911-e6c6-4959-8de2-90b3c11471e4",
+      "name": "January 27, 1969 9: 00 a. m.",
+      "bounding_box": {
+        "x": 246,
+        "y": 568,
+        "w": 232,
+        "h": 21
+      }
+    },
+    {
+      "id": "bb5bee6f-7ede-4a92-a09f-1fde3a402cca",
+      "name": "Within 20 days after service, exclusive of day of service.",
+      "bounding_box": {
+        "x": 247,
+        "y": 592,
+        "w": 411,
+        "h": 21
+      }
+    },
+    {
+      "id": "06064710-b280-4153-8508-f9eda7d3f7e7",
+      "name": "1 29/29/ 69 (Date)",
+      "bounding_box": {
+        "x": 610,
+        "y": 746,
+        "w": 80,
+        "h": 18
+      }
+    },
+    {
+      "id": "1bb864b1-cae1-4d6e-a649-6cd840eccbf2",
+      "name": "THE CORPORATION TRUST COMPANY",
+      "bounding_box": {
+        "x": 448,
+        "y": 778,
+        "w": 211,
+        "h": 16
+      }
+    },
+    {
+      "id": "eb2c2dc9-a88b-4b19-996e-081d548069b8",
+      "name": "V. Colvellm Asst. Secy. 277 Park Avenue",
+      "bounding_box": {
+        "x": 448,
+        "y": 795,
+        "w": 166,
+        "h": 56
+      }
+    }
+  ]
+}

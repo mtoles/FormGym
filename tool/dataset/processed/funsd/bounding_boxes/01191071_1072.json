@@ -1,0 +1,92 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "f713690d-8ba4-4caf-a35d-6b53daf1a2e7",
+      "name": "SHB",
+      "bounding_box": {
+        "x": 392,
+        "y": 146,
+        "w": 23,
+        "h": 13
+      }
+    },
+    {
+      "id": "fb4353bc-e6b0-43ea-94f5-31f1ea313179",
+      "name": "03",
+      "bounding_box": {
+        "x": 547,
+        "y": 148,
+        "w": 18,
+        "h": 12
+      }
+    },
+    {
+      "id": "0a45d001-9707-4571-8988-7d807d7ca8b1",
+      "name": "11/12/96",
+      "bounding_box": {
+        "x": 292,
+        "y": 822,
+        "w": 65,
+        "h": 17
+      }
+    },
+    {
+      "id": "3bd178d5-3ab2-4fb7-a487-87966c845ca4",
+      "name": "083 MEMORY TX",
+      "bounding_box": {
+        "x": 70,
+        "y": 145,
+        "w": 111,
+        "h": 18
+      }
+    },
+    {
+      "id": "8637eaf6-5e48-45cf-80bf-b6f4cec3fd3f",
+      "name": "John J. Mulderig C/O Mike Baker",
+      "bounding_box": {
+        "x": 292,
+        "y": 847,
+        "w": 223,
+        "h": 18
+      }
+    },
+    {
+      "id": "2421d294-7868-4c4b-877a-f5893347f06b",
+      "name": "Philip Morris Management Corp.",
+      "bounding_box": {
+        "x": 289,
+        "y": 872,
+        "w": 229,
+        "h": 22
+      }
+    },
+    {
+      "id": "c0efa92c-65d9-463d-a3e0-ae90614d8775",
+      "name": "816/545-7473",
+      "bounding_box": {
+        "x": 294,
+        "y": 900,
+        "w": 96,
+        "h": 18
+      }
+    },
+    {
+      "id": "da6e00c2-ae32-4041-8371-192966cd7114",
+      "name": "Fax Received",
+      "bounding_box": {
+        "x": 292,
+        "y": 925,
+        "w": 94,
+        "h": 19
+      }
+    }
+  ]
+}

@@ -1,0 +1,392 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 779,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "22058e04-4723-4180-8a35-8f602faf8f95",
+      "name": "6030",
+      "bounding_box": {
+        "x": 385,
+        "y": 46,
+        "w": 41,
+        "h": 17
+      }
+    },
+    {
+      "id": "42aa48a5-18ef-4084-bcaf-09c0eb2d9cf9",
+      "name": "OGS",
+      "bounding_box": {
+        "x": 500,
+        "y": 219,
+        "w": 35,
+        "h": 18
+      }
+    },
+    {
+      "id": "67bfbd2a-644a-430b-b539-e962bfdc57a5",
+      "name": "OGS",
+      "bounding_box": {
+        "x": 313,
+        "y": 221,
+        "w": 32,
+        "h": 20
+      }
+    },
+    {
+      "id": "27b2b8a2-22c3-4999-8732-f8b840340f45",
+      "name": "OGS",
+      "bounding_box": {
+        "x": 154,
+        "y": 222,
+        "w": 36,
+        "h": 15
+      }
+    },
+    {
+      "id": "0ee1c9d2-2e08-49ff-a4cd-defa04e73af0",
+      "name": "OGS",
+      "bounding_box": {
+        "x": 10,
+        "y": 222,
+        "w": 35,
+        "h": 17
+      }
+    },
+    {
+      "id": "ea513d8b-7e14-44b8-b5ac-db003e274dd6",
+      "name": "AMF",
+      "bounding_box": {
+        "x": 122,
+        "y": 313,
+        "w": 34,
+        "h": 13
+      }
+    },
+    {
+      "id": "381c337c-ac1d-4219-af0b-46d931a02051",
+      "name": "25.",
+      "bounding_box": {
+        "x": 169,
+        "y": 341,
+        "w": 20,
+        "h": 15
+      }
+    },
+    {
+      "id": "84082b9a-19c0-4e96-b101-d4e621d8dc7c",
+      "name": "554",
+      "bounding_box": {
+        "x": 169,
+        "y": 404,
+        "w": 29,
+        "h": 14
+      }
+    },
+    {
+      "id": "a35444de-cc3c-4a59-9439-787d89c6946e",
+      "name": "Ammons",
+      "bounding_box": {
+        "x": 585,
+        "y": 510,
+        "w": 56,
+        "h": 20
+      }
+    },
+    {
+      "id": "ea8f3c47-8c18-4d2f-9951-f4f48adf72e8",
+      "name": "Wicker",
+      "bounding_box": {
+        "x": 580,
+        "y": 529,
+        "w": 64,
+        "h": 13
+      }
+    },
+    {
+      "id": "6ba6092d-4d7a-407d-836f-b4f7e2a1691a",
+      "name": "Routh",
+      "bounding_box": {
+        "x": 585,
+        "y": 557,
+        "w": 46,
+        "h": 17
+      }
+    },
+    {
+      "id": "5e0502ed-e6e4-4304-9575-f778a98db1cc",
+      "name": "\"",
+      "bounding_box": {
+        "x": 602,
+        "y": 571,
+        "w": 14,
+        "h": 17
+      }
+    },
+    {
+      "id": "1f39cba7-dfaa-40be-a861-066d3d3f803e",
+      "name": "White",
+      "bounding_box": {
+        "x": 159,
+        "y": 514,
+        "w": 49,
+        "h": 18
+      }
+    },
+    {
+      "id": "b57ea6d5-d633-4ce9-81a7-576a2df72c05",
+      "name": "Blue",
+      "bounding_box": {
+        "x": 161,
+        "y": 529,
+        "w": 42,
+        "h": 17
+      }
+    },
+    {
+      "id": "2b90dc84-426c-444d-9c50-783e1e719b49",
+      "name": "White",
+      "bounding_box": {
+        "x": 161,
+        "y": 545,
+        "w": 49,
+        "h": 15
+      }
+    },
+    {
+      "id": "a2cf87e2-ba07-4abf-a87f-f890e7060088",
+      "name": "\"",
+      "bounding_box": {
+        "x": 177,
+        "y": 561,
+        "w": 17,
+        "h": 13
+      }
+    },
+    {
+      "id": "5e8fda96-267f-4b1f-b39f-272b70664681",
+      "name": "September 21, 1976",
+      "bounding_box": {
+        "x": 522,
+        "y": 10,
+        "w": 174,
+        "h": 20
+      }
+    },
+    {
+      "id": "608d7c3c-9790-4dd2-9a45-fa4d14185f2b",
+      "name": "85 mm Filter",
+      "bounding_box": {
+        "x": 387,
+        "y": 74,
+        "w": 112,
+        "h": 21
+      }
+    },
+    {
+      "id": "9b6a9ca2-309d-4bdc-bcf9-cbf03519e305",
+      "name": "50 lbs.",
+      "bounding_box": {
+        "x": 385,
+        "y": 105,
+        "w": 66,
+        "h": 18
+      }
+    },
+    {
+      "id": "ecd36297-5265-47dd-8733-bcdbfd8096f5",
+      "name": "Dr. A. W. Spears",
+      "bounding_box": {
+        "x": 257,
+        "y": 135,
+        "w": 148,
+        "h": 22
+      }
+    },
+    {
+      "id": "161d7a5b-de67-4cf0-96ac-0ea1e4a56309",
+      "name": "September 21, 1976",
+      "bounding_box": {
+        "x": 535,
+        "y": 133,
+        "w": 166,
+        "h": 21
+      }
+    },
+    {
+      "id": "6ccaf694-861a-4593-b818-10fe15274472",
+      "name": "W. E. Routh",
+      "bounding_box": {
+        "x": 338,
+        "y": 166,
+        "w": 106,
+        "h": 20
+      }
+    },
+    {
+      "id": "b0bee0b8-e96f-4eff-ac79-5b17e2262338",
+      "name": "3. 4% PMO in EtoH",
+      "bounding_box": {
+        "x": 606,
+        "y": 218,
+        "w": 152,
+        "h": 17
+      }
+    },
+    {
+      "id": "f927b39e-583f-4377-b422-fdf6cf21c45c",
+      "name": "20 mm True plastic rod",
+      "bounding_box": {
+        "x": 468,
+        "y": 303,
+        "w": 208,
+        "h": 26
+      }
+    },
+    {
+      "id": "5bc52cd6-dbb7-4a87-9ed8-18ea1bc7d484",
+      "name": "85 mm",
+      "bounding_box": {
+        "x": 124,
+        "y": 325,
+        "w": 49,
+        "h": 17
+      }
+    },
+    {
+      "id": "ae18ccbe-7c23-444e-af88-f676f5f48ad5",
+      "name": "To be det. (803 mg tobacco)",
+      "bounding_box": {
+        "x": 102,
+        "y": 356,
+        "w": 249,
+        "h": 17
+      }
+    },
+    {
+      "id": "5d0b5745-1ff0-450b-8fcb-a9b05c3ff727",
+      "name": "To be determined",
+      "bounding_box": {
+        "x": 166,
+        "y": 370,
+        "w": 151,
+        "h": 20
+      }
+    },
+    {
+      "id": "dbd7a259-5fc4-4a47-9bff-c0595c6154a3",
+      "name": "20 mm",
+      "bounding_box": {
+        "x": 172,
+        "y": 390,
+        "w": 50,
+        "h": 15
+      }
+    },
+    {
+      "id": "13fd3d6c-5cbd-4d84-80c2-97bf73dbf8c6",
+      "name": "30 mm",
+      "bounding_box": {
+        "x": 170,
+        "y": 420,
+        "w": 53,
+        "h": 18
+      }
+    },
+    {
+      "id": "261139e1-7699-4675-84bb-84a707a27323",
+      "name": "Sample No. on overwrap",
+      "bounding_box": {
+        "x": 134,
+        "y": 574,
+        "w": 123,
+        "h": 34
+      }
+    },
+    {
+      "id": "402223ce-b946-4d74-b066-a7a3d62bd136",
+      "name": "Brown /Routh",
+      "bounding_box": {
+        "x": 585,
+        "y": 542,
+        "w": 103,
+        "h": 17
+      }
+    },
+    {
+      "id": "a0b02889-e2b6-4291-93ee-1c4526690228",
+      "name": "3 cartons",
+      "bounding_box": {
+        "x": 154,
+        "y": 669,
+        "w": 84,
+        "h": 15
+      }
+    },
+    {
+      "id": "cbc83bf9-fd2d-4723-ac33-68ba363cf9e8",
+      "name": "20, 000 cigts.",
+      "bounding_box": {
+        "x": 152,
+        "y": 682,
+        "w": 123,
+        "h": 18
+      }
+    },
+    {
+      "id": "8d14c1fc-c275-4116-9d18-7f1c5b98cd07",
+      "name": "Smoke Analysis PMO Analysis",
+      "bounding_box": {
+        "x": 190,
+        "y": 743,
+        "w": 129,
+        "h": 37
+      }
+    },
+    {
+      "id": "ebd78305-7a48-4799-b52c-fa9824c6a9cb",
+      "name": "Dr. F. J. Schulz Dr. H. J. Minnemeyer",
+      "bounding_box": {
+        "x": 151,
+        "y": 851,
+        "w": 187,
+        "h": 35
+      }
+    },
+    {
+      "id": "f2467261-66d5-4dc9-8651-0c3b043f4d9d",
+      "name": "P. D. Schickedantz",
+      "bounding_box": {
+        "x": 151,
+        "y": 817,
+        "w": 169,
+        "h": 24
+      }
+    },
+    {
+      "id": "68c5ddfe-b9ea-40c2-b959-eb089526f98c",
+      "name": "Dr. A. W. Spears",
+      "bounding_box": {
+        "x": 152,
+        "y": 837,
+        "w": 151,
+        "h": 17
+      }
+    },
+    {
+      "id": "17a149d5-56ce-49f7-acec-89352756a886",
+      "name": "Spray 50 lbs. tobacco with solution of 880 g (= 1. 94 lbs.) PMC in 1175 ml of denatured alcohol. This should give 3. 4% PMO add- on (3. 3% PMO contained) assuming 88% spraying efficiency. PMO delivery from 85 mm cigarette smoked to 30 mm butt should be 6. 5 mg/ cig.",
+      "bounding_box": {
+        "x": 388,
+        "y": 669,
+        "w": 347,
+        "h": 109
+      }
+    }
+  ]
+}

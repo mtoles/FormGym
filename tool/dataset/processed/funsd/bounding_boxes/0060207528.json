@@ -1,0 +1,182 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "37c984b7-7030-49c4-b346-abb13caedb2b",
+      "name": "9",
+      "bounding_box": {
+        "x": 316,
+        "y": 419,
+        "w": 20,
+        "h": 27
+      }
+    },
+    {
+      "id": "944d9ce4-e10e-449c-b1e6-c2222ebe72bb",
+      "name": "45",
+      "bounding_box": {
+        "x": 459,
+        "y": 419,
+        "w": 39,
+        "h": 25
+      }
+    },
+    {
+      "id": "123f531d-71ea-48a5-8e21-0832e0becb76",
+      "name": "54",
+      "bounding_box": {
+        "x": 601,
+        "y": 415,
+        "w": 42,
+        "h": 25
+      }
+    },
+    {
+      "id": "86898774-7cbd-475e-a4aa-49dad0d64532",
+      "name": "534.1",
+      "bounding_box": {
+        "x": 122,
+        "y": 478,
+        "w": 77,
+        "h": 25
+      }
+    },
+    {
+      "id": "05d1f2de-2cb7-4990-8645-d23903011b48",
+      "name": "",
+      "bounding_box": {
+        "x": 423,
+        "y": 799,
+        "w": 272,
+        "h": 67
+      }
+    },
+    {
+      "id": "a4518269-c9c8-4880-bbcb-c078176f9304",
+      "name": "527.6",
+      "bounding_box": {
+        "x": 542,
+        "y": 476,
+        "w": 74,
+        "h": 22
+      }
+    },
+    {
+      "id": "caefab9a-ae7e-431b-a63b-30402039f546",
+      "name": "A- 530- 1059",
+      "bounding_box": {
+        "x": 158,
+        "y": 239,
+        "w": 78,
+        "h": 17
+      }
+    },
+    {
+      "id": "9f765b1e-0af3-433d-8f07-5556ef62babf",
+      "name": "THE AMERICAN TOBACCO COMPANY",
+      "bounding_box": {
+        "x": 130,
+        "y": 267,
+        "w": 211,
+        "h": 19
+      }
+    },
+    {
+      "id": "680d0179-5e81-485f-92e6-ac81b4a6f01d",
+      "name": "PALL MALL RED LIGHTS",
+      "bounding_box": {
+        "x": 158,
+        "y": 295,
+        "w": 150,
+        "h": 18
+      }
+    },
+    {
+      "id": "5e155ef4-2daf-4d7f-a2d8-5845b73f06f9",
+      "name": "Akron OH.",
+      "bounding_box": {
+        "x": 147,
+        "y": 331,
+        "w": 71,
+        "h": 16
+      }
+    },
+    {
+      "id": "cb20d916-54de-499e-a3a7-aacc3be4599a",
+      "name": "Patrick Media Group, Inc",
+      "bounding_box": {
+        "x": 205,
+        "y": 358,
+        "w": 175,
+        "h": 18
+      }
+    },
+    {
+      "id": "4047ef63-0bd9-45fc-94e9-fd4eafe2fcca",
+      "name": "F 75 GRP",
+      "bounding_box": {
+        "x": 170,
+        "y": 380,
+        "w": 114,
+        "h": 33
+      }
+    },
+    {
+      "id": "d6cb871f-8ff6-4920-ba34-b22cd6a63e0e",
+      "name": "6/ 27/ 89",
+      "bounding_box": {
+        "x": 385,
+        "y": 567,
+        "w": 86,
+        "h": 41
+      }
+    },
+    {
+      "id": "660f8f5f-3ca2-412a-867e-1d481d8f166b",
+      "name": "THE TASTE BREAKS THROUGH",
+      "bounding_box": {
+        "x": 187,
+        "y": 616,
+        "w": 298,
+        "h": 23
+      }
+    },
+    {
+      "id": "81d8f758-568e-428d-b93f-be2cf8187535",
+      "name": "7/ 16/ 89",
+      "bounding_box": {
+        "x": 272,
+        "y": 645,
+        "w": 55,
+        "h": 20
+      }
+    },
+    {
+      "id": "7d4ffa3c-b52f-4546-9a48-1c8496a6c38e",
+      "name": "7/ 21/ 89",
+      "bounding_box": {
+        "x": 263,
+        "y": 665,
+        "w": 84,
+        "h": 32
+      }
+    },
+    {
+      "id": "9e083353-e6d5-440b-94aa-3330a8f11c2f",
+      "name": "2/ 25/ 89",
+      "bounding_box": {
+        "x": 411,
+        "y": 880,
+        "w": 98,
+        "h": 42
+      }
+    }
+  ]
+}

@@ -1,0 +1,412 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "720a4d61-e1c5-495d-8337-dbd9eaad8d50",
+      "name": "S.P. Zolot",
+      "bounding_box": {
+        "x": 142,
+        "y": 85,
+        "w": 47,
+        "h": 14
+      }
+    },
+    {
+      "id": "01fa2132-a106-4c44-a622-e51a57933ab9",
+      "name": "C.J. Leiker",
+      "bounding_box": {
+        "x": 142,
+        "y": 112,
+        "w": 50,
+        "h": 13
+      }
+    },
+    {
+      "id": "8eb8863f-cf86-4b92-8e3c-face19e7c3d5",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 550,
+        "y": 142,
+        "w": 11,
+        "h": 13
+      }
+    },
+    {
+      "id": "c9d47011-5fd2-4470-b113-b6e2e76b6564",
+      "name": "x",
+      "bounding_box": {
+        "x": 264,
+        "y": 216,
+        "w": 10,
+        "h": 11
+      }
+    },
+    {
+      "id": "0cff0706-8f0d-45cd-b95f-eaf1ba9ccfc7",
+      "name": "23",
+      "bounding_box": {
+        "x": 243,
+        "y": 453,
+        "w": 17,
+        "h": 11
+      }
+    },
+    {
+      "id": "e9a166ca-9988-4286-8e18-89ce0db82754",
+      "name": "21",
+      "bounding_box": {
+        "x": 244,
+        "y": 472,
+        "w": 13,
+        "h": 11
+      }
+    },
+    {
+      "id": "65dd698e-66f6-4a34-8af5-3cb176da3c4f",
+      "name": "15",
+      "bounding_box": {
+        "x": 246,
+        "y": 492,
+        "w": 15,
+        "h": 11
+      }
+    },
+    {
+      "id": "0b2eef17-7e41-4796-ba0c-9bbcd7038e03",
+      "name": "17",
+      "bounding_box": {
+        "x": 246,
+        "y": 510,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "4e7941c9-9add-4ca0-8aab-8bd087b29de0",
+      "name": "82",
+      "bounding_box": {
+        "x": 246,
+        "y": 528,
+        "w": 15,
+        "h": 13
+      }
+    },
+    {
+      "id": "1836d1e4-55ef-4c5a-83b5-51f054d36eb1",
+      "name": "25",
+      "bounding_box": {
+        "x": 514,
+        "y": 684,
+        "w": 14,
+        "h": 11
+      }
+    },
+    {
+      "id": "6afbc91e-4257-4e73-afbe-499482f8ce38",
+      "name": "31",
+      "bounding_box": {
+        "x": 244,
+        "y": 686,
+        "w": 17,
+        "h": 10
+      }
+    },
+    {
+      "id": "e0959be7-9055-42f8-9850-3963b2b7f265",
+      "name": "17",
+      "bounding_box": {
+        "x": 246,
+        "y": 704,
+        "w": 15,
+        "h": 11
+      }
+    },
+    {
+      "id": "0668c7cf-52cd-4bf7-9d4b-59e714768c4b",
+      "name": "15",
+      "bounding_box": {
+        "x": 246,
+        "y": 722,
+        "w": 15,
+        "h": 13
+      }
+    },
+    {
+      "id": "e144f12c-068f-4a91-921a-5f9f8bdadff6",
+      "name": "39",
+      "bounding_box": {
+        "x": 244,
+        "y": 742,
+        "w": 18,
+        "h": 11
+      }
+    },
+    {
+      "id": "1b0d6be7-9d42-4748-8523-3259a68d4b1c",
+      "name": "25",
+      "bounding_box": {
+        "x": 246,
+        "y": 761,
+        "w": 15,
+        "h": 11
+      }
+    },
+    {
+      "id": "92aac218-d169-4515-a176-495472445974",
+      "name": "460",
+      "bounding_box": {
+        "x": 244,
+        "y": 779,
+        "w": 20,
+        "h": 11
+      }
+    },
+    {
+      "id": "a91c00ca-5fa6-465a-b166-daca70eb121f",
+      "name": "79",
+      "bounding_box": {
+        "x": 247,
+        "y": 797,
+        "w": 15,
+        "h": 11
+      }
+    },
+    {
+      "id": "e54f0439-e858-4f9a-bf76-dc9b2c376ead",
+      "name": "17",
+      "bounding_box": {
+        "x": 247,
+        "y": 817,
+        "w": 14,
+        "h": 11
+      }
+    },
+    {
+      "id": "162a9b27-c92d-4ad5-9457-deb9a797bb2e",
+      "name": "112",
+      "bounding_box": {
+        "x": 246,
+        "y": 835,
+        "w": 21,
+        "h": 14
+      }
+    },
+    {
+      "id": "161ce162-5632-4e43-9632-3a5285df2c54",
+      "name": "MAVERICK SPECIALS MENTHOL- PROGRESS REPORT",
+      "bounding_box": {
+        "x": 144,
+        "y": 165,
+        "w": 277,
+        "h": 13
+      }
+    },
+    {
+      "id": "0ff12380-9b59-41ca-9673-a869f50def42",
+      "name": "139/ 27",
+      "bounding_box": {
+        "x": 161,
+        "y": 453,
+        "w": 37,
+        "h": 13
+      }
+    },
+    {
+      "id": "16d79653-269d-423f-ae6a-8def80310367",
+      "name": "202/ 22",
+      "bounding_box": {
+        "x": 163,
+        "y": 472,
+        "w": 33,
+        "h": 13
+      }
+    },
+    {
+      "id": "2dcb72cc-0659-4da1-b70b-505d1bfd27e9",
+      "name": "126/ 26",
+      "bounding_box": {
+        "x": 161,
+        "y": 492,
+        "w": 37,
+        "h": 13
+      }
+    },
+    {
+      "id": "56a3399a-66da-4663-9e75-4835dd8b134a",
+      "name": "176/ 13",
+      "bounding_box": {
+        "x": 161,
+        "y": 508,
+        "w": 38,
+        "h": 14
+      }
+    },
+    {
+      "id": "201f39f5-148b-4366-a2b3-5f6ac7731f2f",
+      "name": "98/ 17",
+      "bounding_box": {
+        "x": 163,
+        "y": 528,
+        "w": 34,
+        "h": 14
+      }
+    },
+    {
+      "id": "5282ec7c-53df-49d9-a805-19aa6ef9aaec",
+      "name": "Chatham Oil (311- 01)",
+      "bounding_box": {
+        "x": 22,
+        "y": 453,
+        "w": 99,
+        "h": 14
+      }
+    },
+    {
+      "id": "8708bdb2-ca98-4709-a7ed-27479c031b0b",
+      "name": "Express Stop (309- 30)",
+      "bounding_box": {
+        "x": 22,
+        "y": 472,
+        "w": 104,
+        "h": 15
+      }
+    },
+    {
+      "id": "184f2fc7-3ba3-4cc3-9f12-9b86e4cca505",
+      "name": "Fowlers Oil (308 -21)",
+      "bounding_box": {
+        "x": 22,
+        "y": 490,
+        "w": 95,
+        "h": 16
+      }
+    },
+    {
+      "id": "0fea35f0-b6a9-4608-bc0f-ca21364214a6",
+      "name": "Petro Express (313- 07)",
+      "bounding_box": {
+        "x": 24,
+        "y": 508,
+        "w": 106,
+        "h": 17
+      }
+    },
+    {
+      "id": "3aa62890-321b-4832-9112-56ca55f3def0",
+      "name": "Service Dist. (313- 12)",
+      "bounding_box": {
+        "x": 24,
+        "y": 528,
+        "w": 99,
+        "h": 14
+      }
+    },
+    {
+      "id": "f35b044b-7071-4e24-92f5-7c2bb46c6371",
+      "name": "_7-Eleven",
+      "bounding_box": {
+        "x": 291,
+        "y": 683,
+        "w": 82,
+        "h": 17
+      }
+    },
+    {
+      "id": "f549d40d-255e-45a9-8089-2eb43630af19",
+      "name": "Coastal Mart (210- 06)",
+      "bounding_box": {
+        "x": 25,
+        "y": 683,
+        "w": 99,
+        "h": 14
+      }
+    },
+    {
+      "id": "8608632d-42ef-4c9d-8ad0-d203dbbc38a2",
+      "name": "Conoco (524- 10)",
+      "bounding_box": {
+        "x": 25,
+        "y": 701,
+        "w": 77,
+        "h": 17
+      }
+    },
+    {
+      "id": "7cd369b5-0f01-4210-b846-35c602f59b11",
+      "name": "Dairy Mart (417- 47)",
+      "bounding_box": {
+        "x": 25,
+        "y": 719,
+        "w": 91,
+        "h": 20
+      }
+    },
+    {
+      "id": "16baa4fa-3ae6-4720-9748-faa04232ca4e",
+      "name": "Emro (411- 07)",
+      "bounding_box": {
+        "x": 25,
+        "y": 739,
+        "w": 67,
+        "h": 18
+      }
+    },
+    {
+      "id": "c3824d8b-4157-4dab-9ff2-7fc1cd00e877",
+      "name": "EZ Serve (810 76B)",
+      "bounding_box": {
+        "x": 25,
+        "y": 758,
+        "w": 91,
+        "h": 17
+      }
+    },
+    {
+      "id": "9243afa6-75e6-4002-89a5-f21ad9aad355",
+      "name": "CVS- Revco (014- 20)",
+      "bounding_box": {
+        "x": 25,
+        "y": 778,
+        "w": 99,
+        "h": 15
+      }
+    },
+    {
+      "id": "daa29beb-807c-45a1-972b-1dfd5cc15760",
+      "name": "Rite Aid (209- 07)",
+      "bounding_box": {
+        "x": 27,
+        "y": 796,
+        "w": 77,
+        "h": 17
+      }
+    },
+    {
+      "id": "bc69ade1-9b35-48b3-b87b-b5262f39c7a9",
+      "name": "Walgreen (625- 60)",
+      "bounding_box": {
+        "x": 24,
+        "y": 816,
+        "w": 88,
+        "h": 15
+      }
+    },
+    {
+      "id": "7ea934bd-b7f1-47e8-a2ad-9cb94da33cc3",
+      "name": "Walmart (527- 35)",
+      "bounding_box": {
+        "x": 24,
+        "y": 835,
+        "w": 84,
+        "h": 15
+      }
+    }
+  ]
+}

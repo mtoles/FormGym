@@ -1,0 +1,132 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "70389f73-6633-4cfd-89d0-cca5daf4f783",
+      "name": "Attached",
+      "bounding_box": {
+        "x": 317,
+        "y": 186,
+        "w": 68,
+        "h": 13
+      }
+    },
+    {
+      "id": "db4ef447-db81-412b-b9c5-ab244c2ee67b",
+      "name": "See",
+      "bounding_box": {
+        "x": 282,
+        "y": 186,
+        "w": 28,
+        "h": 11
+      }
+    },
+    {
+      "id": "f83ae125-b740-48ab-9ad3-57314731ccdb",
+      "name": "June 1, 1990",
+      "bounding_box": {
+        "x": 194,
+        "y": 115,
+        "w": 101,
+        "h": 15
+      }
+    },
+    {
+      "id": "acd62873-7dce-46a0-8472-97220193cf99",
+      "name": "General Merchandising Nonspecific",
+      "bounding_box": {
+        "x": 176,
+        "y": 142,
+        "w": 176,
+        "h": 28
+      }
+    },
+    {
+      "id": "bbe0cb25-27a5-424f-bc2d-0c87ed28ac9e",
+      "name": "Package Fixture Circle-K Convenient Stores",
+      "bounding_box": {
+        "x": 450,
+        "y": 147,
+        "w": 203,
+        "h": 28
+      }
+    },
+    {
+      "id": "697fa495-cfae-4c6f-853c-84c529a169ef",
+      "name": "Chicago Show",
+      "bounding_box": {
+        "x": 106,
+        "y": 278,
+        "w": 104,
+        "h": 17
+      }
+    },
+    {
+      "id": "05d4b606-860b-4c86-b2f4-23b9f57e2fe7",
+      "name": "Display Equation",
+      "bounding_box": {
+        "x": 105,
+        "y": 306,
+        "w": 136,
+        "h": 18
+      }
+    },
+    {
+      "id": "4d9182fa-d3ae-4ef4-9d12-5e8984d93f92",
+      "name": "Chicago Display",
+      "bounding_box": {
+        "x": 106,
+        "y": 335,
+        "w": 127,
+        "h": 17
+      }
+    },
+    {
+      "id": "8fd2db78-a23f-4b05-a561-fbf4c34b576f",
+      "name": "Robert Nielson & Associates",
+      "bounding_box": {
+        "x": 106,
+        "y": 360,
+        "w": 227,
+        "h": 20
+      }
+    },
+    {
+      "id": "14e55fc7-1bd2-4fc4-9e9d-dfcd8619b991",
+      "name": "1990 Customized Merchandising",
+      "bounding_box": {
+        "x": 106,
+        "y": 430,
+        "w": 241,
+        "h": 21
+      }
+    },
+    {
+      "id": "4ba64848-61cf-4bed-85d0-c845ad5ac427",
+      "name": "Services ESPNS",
+      "bounding_box": {
+        "x": 105,
+        "y": 459,
+        "w": 126,
+        "h": 15
+      }
+    },
+    {
+      "id": "1ab63181-96b0-4775-b661-42286149e3fd",
+      "name": "REQUESTING MANAGER",
+      "bounding_box": {
+        "x": 197,
+        "y": 771,
+        "w": 154,
+        "h": 14
+      }
+    }
+  ]
+}

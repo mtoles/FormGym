@@ -1,0 +1,122 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "0efa2135-0807-4e05-802d-d19f829fcef8",
+      "name": "3",
+      "bounding_box": {
+        "x": 215,
+        "y": 588,
+        "w": 7,
+        "h": 10
+      }
+    },
+    {
+      "id": "af3c0026-a270-4928-894c-d4dfa2d5955a",
+      "name": "Boston",
+      "bounding_box": {
+        "x": 218,
+        "y": 203,
+        "w": 41,
+        "h": 13
+      }
+    },
+    {
+      "id": "88400ff0-4c31-41f6-b1ac-e9a6def06c22",
+      "name": "Old Gold Lights",
+      "bounding_box": {
+        "x": 216,
+        "y": 256,
+        "w": 103,
+        "h": 13
+      }
+    },
+    {
+      "id": "a0b38fed-4b18-4276-b7b0-5ac213f303cd",
+      "name": "October 3 through October 5",
+      "bounding_box": {
+        "x": 216,
+        "y": 323,
+        "w": 183,
+        "h": 14
+      }
+    },
+    {
+      "id": "49736100-9d58-4b4c-b98d-db85dbf9fc5f",
+      "name": "9: 30 a. m. - 5: 30 p. m.",
+      "bounding_box": {
+        "x": 216,
+        "y": 388,
+        "w": 143,
+        "h": 16
+      }
+    },
+    {
+      "id": "34788633-73c9-4936-8a0b-e0be83358817",
+      "name": "270, 000",
+      "bounding_box": {
+        "x": 216,
+        "y": 443,
+        "w": 48,
+        "h": 14
+      }
+    },
+    {
+      "id": "5f33aff8-e749-484d-b7bb-6d1f42a64336",
+      "name": "24 per day",
+      "bounding_box": {
+        "x": 215,
+        "y": 522,
+        "w": 68,
+        "h": 12
+      }
+    },
+    {
+      "id": "14cb7762-f463-471b-93b1-5301f5810dcf",
+      "name": "October 3rd",
+      "bounding_box": {
+        "x": 267,
+        "y": 658,
+        "w": 76,
+        "h": 11
+      }
+    },
+    {
+      "id": "b2cfaa3d-6d22-4cb0-9759-0e211520d227",
+      "name": "9: 30 a. m.",
+      "bounding_box": {
+        "x": 268,
+        "y": 673,
+        "w": 60,
+        "h": 10
+      }
+    },
+    {
+      "id": "08abad1c-85fe-4f40-89f1-34f48da7474f",
+      "name": "Boston Park Plaza Room 412 64 Arlington Street Boston, Mass 02117 617/ 426- 2000",
+      "bounding_box": {
+        "x": 268,
+        "y": 684,
+        "w": 225,
+        "h": 52
+      }
+    },
+    {
+      "id": "0029a9c4-07b7-4f10-b3c9-b5b11732d59d",
+      "name": "Tony Anari",
+      "bounding_box": {
+        "x": 214,
+        "y": 791,
+        "w": 67,
+        "h": 14
+      }
+    }
+  ]
+}

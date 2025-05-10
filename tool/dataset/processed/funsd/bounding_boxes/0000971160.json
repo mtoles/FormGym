@@ -1,0 +1,92 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "dded1e22-9a4d-40d2-81e0-d38c359a8e7e",
+      "name": "Licensee",
+      "bounding_box": {
+        "x": 511,
+        "y": 309,
+        "w": 59,
+        "h": 14
+      }
+    },
+    {
+      "id": "168360f1-196e-4630-9ecb-fd274ebae23d",
+      "name": "M. Hamann P. Harper, P. Martinez",
+      "bounding_box": {
+        "x": 215,
+        "y": 271,
+        "w": 236,
+        "h": 16
+      }
+    },
+    {
+      "id": "b8be4ee1-e7e9-4ec9-82a9-b59f6cd409f9",
+      "name": "9/ 3/ 92",
+      "bounding_box": {
+        "x": 543,
+        "y": 264,
+        "w": 47,
+        "h": 15
+      }
+    },
+    {
+      "id": "13b5a7a5-2ab1-4ebe-acb0-9d8cb9466972",
+      "name": "J. S. Wigand",
+      "bounding_box": {
+        "x": 236,
+        "y": 313,
+        "w": 91,
+        "h": 14
+      }
+    },
+    {
+      "id": "631ddc19-dd8c-4054-adbd-fddc009db93a",
+      "name": "Discontinue coal retention analyses on licensee submitted product samples (Note : Coal Retention testing is not performed by most licensees. Other B&W physical measurements as ends stability and inspection for soft spots in ciparettes are thought to be sufficient measures to assure cigarette physical integrity. The proposed action will increase laboratory productivity . )",
+      "bounding_box": {
+        "x": 190,
+        "y": 346,
+        "w": 404,
+        "h": 101
+      }
+    },
+    {
+      "id": "0e6b9b7a-e08a-4ba6-918f-f291cb8fe0c6",
+      "name": "Delete coal retention from the list of standard analyses performed on licensee submitted product samples. Special requests for coal retention testing could still be submitted on an exception basis.",
+      "bounding_box": {
+        "x": 263,
+        "y": 483,
+        "w": 330,
+        "h": 70
+      }
+    },
+    {
+      "id": "81c4908a-9a94-4fa2-bc39-beeec655abd7",
+      "name": "Manager, please contact suggester and forward",
+      "bounding_box": {
+        "x": 232,
+        "y": 644,
+        "w": 315,
+        "h": 18
+      }
+    },
+    {
+      "id": "8622279b-18a8-4ab1-8c21-d43adaf50502",
+      "name": "comments to the Quality Council.",
+      "bounding_box": {
+        "x": 99,
+        "y": 662,
+        "w": 224,
+        "h": 15
+      }
+    }
+  ]
+}

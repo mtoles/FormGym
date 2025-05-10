@@ -1,0 +1,102 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "ae76c74d-3d0f-4aca-aa63-915a63a60794",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 482,
+        "y": 102,
+        "w": 15,
+        "h": 13
+      }
+    },
+    {
+      "id": "334d982e-eb54-4aa6-9339-1dcbb04bc696",
+      "name": "20",
+      "bounding_box": {
+        "x": 345,
+        "y": 454,
+        "w": 17,
+        "h": 14
+      }
+    },
+    {
+      "id": "288c4bc9-5f8b-4e8d-8fde-f499dfbefdd9",
+      "name": "Free",
+      "bounding_box": {
+        "x": 584,
+        "y": 458,
+        "w": 32,
+        "h": 14
+      }
+    },
+    {
+      "id": "656b0a77-9020-4894-a312-4e4aacc11701",
+      "name": "6/ 25/ 81",
+      "bounding_box": {
+        "x": 610,
+        "y": 182,
+        "w": 52,
+        "h": 18
+      }
+    },
+    {
+      "id": "38929d81-4e2c-432a-bd3b-6cf1175566a6",
+      "name": "22 244 00",
+      "bounding_box": {
+        "x": 596,
+        "y": 204,
+        "w": 66,
+        "h": 15
+      }
+    },
+    {
+      "id": "380a9ef9-9e3a-456f-9583-8291e7941b04",
+      "name": "Factory Cost Dept. Writer Development Center Sue Livesay",
+      "bounding_box": {
+        "x": 128,
+        "y": 198,
+        "w": 156,
+        "h": 58
+      }
+    },
+    {
+      "id": "e83c200a-a08e-4730-83ce-bda563e7ddb2",
+      "name": "KS 1 mg grooved product using 4. 3/ 37 filter material. Cigarette code 244131",
+      "bounding_box": {
+        "x": 127,
+        "y": 634,
+        "w": 377,
+        "h": 44
+      }
+    },
+    {
+      "id": "4001f12f-f9e0-491a-80be-6399dbe02552",
+      "name": "6/ 25/ 81",
+      "bounding_box": {
+        "x": 221,
+        "y": 895,
+        "w": 51,
+        "h": 14
+      }
+    },
+    {
+      "id": "fe51d040-6aa8-4b3f-b490-10ee432881b0",
+      "name": "B. D. WINGLER",
+      "bounding_box": {
+        "x": 511,
+        "y": 899,
+        "w": 94,
+        "h": 14
+      }
+    }
+  ]
+}

@@ -1,0 +1,432 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "e10585ac-66aa-45a4-8f1f-24341df63d5e",
+      "name": "PHOENIX",
+      "bounding_box": {
+        "x": 145,
+        "y": 127,
+        "w": 52,
+        "h": 10
+      }
+    },
+    {
+      "id": "bff91315-2d61-4d79-9e8c-7c5fcb299e16",
+      "name": "CYPRUS",
+      "bounding_box": {
+        "x": 419,
+        "y": 144,
+        "w": 48,
+        "h": 10
+      }
+    },
+    {
+      "id": "9974c251-38d2-40fa-a010-d0423add5be3",
+      "name": "NICOSIA",
+      "bounding_box": {
+        "x": 512,
+        "y": 171,
+        "w": 55,
+        "h": 12
+      }
+    },
+    {
+      "id": "b242d579-68e2-4653-afb0-8919b6e3be58",
+      "name": "Ecusta",
+      "bounding_box": {
+        "x": 234,
+        "y": 488,
+        "w": 51,
+        "h": 12
+      }
+    },
+    {
+      "id": "4a5edc13-3447-43a4-a5a9-52b4ddaf9edb",
+      "name": "E.30639",
+      "bounding_box": {
+        "x": 235,
+        "y": 501,
+        "w": 52,
+        "h": 13
+      }
+    },
+    {
+      "id": "09e36acb-679b-4cd1-b294-8037fc0aad00",
+      "name": "None",
+      "bounding_box": {
+        "x": 228,
+        "y": 543,
+        "w": 31,
+        "h": 12
+      }
+    },
+    {
+      "id": "dd46db48-3bbc-4218-b57a-a36648a7f7d2",
+      "name": "(coresta)",
+      "bounding_box": {
+        "x": 293,
+        "y": 558,
+        "w": 63,
+        "h": 9
+      }
+    },
+    {
+      "id": "88981dc7-9992-4023-9fc6-2715018535e0",
+      "name": "Swift",
+      "bounding_box": {
+        "x": 476,
+        "y": 488,
+        "w": 39,
+        "h": 12
+      }
+    },
+    {
+      "id": "2e1f979d-dab1-4bab-878f-87210644a707",
+      "name": "N/A",
+      "bounding_box": {
+        "x": 494,
+        "y": 587,
+        "w": 28,
+        "h": 9
+      }
+    },
+    {
+      "id": "d882d4e4-efb8-4d94-88ad-42810fb5735b",
+      "name": "x",
+      "bounding_box": {
+        "x": 448,
+        "y": 558,
+        "w": 9,
+        "h": 9
+      }
+    },
+    {
+      "id": "d3752606-7e40-4837-8b51-22fbc8269f67",
+      "name": "New",
+      "bounding_box": {
+        "x": 165,
+        "y": 777,
+        "w": 27,
+        "h": 12
+      }
+    },
+    {
+      "id": "74104ba1-9215-4952-a145-88bd0c9128d7",
+      "name": "HLB- KS",
+      "bounding_box": {
+        "x": 145,
+        "y": 141,
+        "w": 63,
+        "h": 13
+      }
+    },
+    {
+      "id": "f1be478f-2c26-4c4f-87c9-129aa9da4157",
+      "name": "B. A. T. CYPRUS",
+      "bounding_box": {
+        "x": 419,
+        "y": 129,
+        "w": 99,
+        "h": 15
+      }
+    },
+    {
+      "id": "6d925a45-78bd-4fd0-9585-29665c275f36",
+      "name": "84 mm",
+      "bounding_box": {
+        "x": 350,
+        "y": 268,
+        "w": 45,
+        "h": 12
+      }
+    },
+    {
+      "id": "62edbab0-c925-42a4-a236-61bcc1491776",
+      "name": "64 mm",
+      "bounding_box": {
+        "x": 347,
+        "y": 280,
+        "w": 48,
+        "h": 13
+      }
+    },
+    {
+      "id": "47fed59a-49f3-4c05-b712-67974705de2d",
+      "name": "20 mm",
+      "bounding_box": {
+        "x": 349,
+        "y": 296,
+        "w": 47,
+        "h": 11
+      }
+    },
+    {
+      "id": "c79b1bde-6cba-425c-8fbd-a0eb8cbcdead",
+      "name": "56 mm",
+      "bounding_box": {
+        "x": 347,
+        "y": 308,
+        "w": 50,
+        "h": 12
+      }
+    },
+    {
+      "id": "8eae99af-112a-4e3f-bace-604a93c362a7",
+      "name": "56 mm",
+      "bounding_box": {
+        "x": 346,
+        "y": 322,
+        "w": 51,
+        "h": 12
+      }
+    },
+    {
+      "id": "39d6b21f-1a42-43ec-98de-7dcaf9c23319",
+      "name": "24.75 mm",
+      "bounding_box": {
+        "x": 343,
+        "y": 337,
+        "w": 50,
+        "h": 10
+      }
+    },
+    {
+      "id": "5b328722-40b7-4272-83de-a2a06d737754",
+      "name": "90 mm",
+      "bounding_box": {
+        "x": 349,
+        "y": 349,
+        "w": 46,
+        "h": 12
+      }
+    },
+    {
+      "id": "a9177b1a-1ffd-45ef-a497-dce2a5ac13b9",
+      "name": "110 mm",
+      "bounding_box": {
+        "x": 343,
+        "y": 362,
+        "w": 51,
+        "h": 12
+      }
+    },
+    {
+      "id": "73aa974e-d57e-4d80-a4ff-5ea424800944",
+      "name": "25 mm",
+      "bounding_box": {
+        "x": 350,
+        "y": 377,
+        "w": 46,
+        "h": 14
+      }
+    },
+    {
+      "id": "ecf08231-a0c0-4316-8cf6-1a80294e7e25",
+      "name": "27 mm",
+      "bounding_box": {
+        "x": 349,
+        "y": 392,
+        "w": 46,
+        "h": 10
+      }
+    },
+    {
+      "id": "e7e824a2-5fe3-4357-b135-2e6e00f4b89c",
+      "name": "13.5 %",
+      "bounding_box": {
+        "x": 343,
+        "y": 404,
+        "w": 43,
+        "h": 12
+      }
+    },
+    {
+      "id": "8ec097b3-aaae-4335-8cf7-e24042298533",
+      "name": "Nil %",
+      "bounding_box": {
+        "x": 347,
+        "y": 416,
+        "w": 39,
+        "h": 14
+      }
+    },
+    {
+      "id": "71f4305b-9eb0-45cd-a0ef-e9e74d1ed978",
+      "name": "974 mg",
+      "bounding_box": {
+        "x": 551,
+        "y": 266,
+        "w": 89,
+        "h": 15
+      }
+    },
+    {
+      "id": "b330a105-4ccc-44b7-84cb-6a51512a04db",
+      "name": "749 mg",
+      "bounding_box": {
+        "x": 557,
+        "y": 295,
+        "w": 79,
+        "h": 13
+      }
+    },
+    {
+      "id": "73d9e8d8-d77e-45fa-9c29-d421adb543a8",
+      "name": "245 mg/cc",
+      "bounding_box": {
+        "x": 555,
+        "y": 320,
+        "w": 81,
+        "h": 15
+      }
+    },
+    {
+      "id": "5a440fad-33d3-4bb2-ba6a-5f616043034b",
+      "name": "Imitation Cork",
+      "bounding_box": {
+        "x": 222,
+        "y": 516,
+        "w": 101,
+        "h": 9
+      }
+    },
+    {
+      "id": "b7c36bf6-7aeb-404e-be38-26724be815ad",
+      "name": "Brown on yellow",
+      "bounding_box": {
+        "x": 213,
+        "y": 572,
+        "w": 111,
+        "h": 12
+      }
+    },
+    {
+      "id": "dde0337a-d7c6-415f-ab85-078af84bfd1c",
+      "name": "36 gm/ m2",
+      "bounding_box": {
+        "x": 234,
+        "y": 612,
+        "w": 125,
+        "h": 13
+      }
+    },
+    {
+      "id": "a8394028-6023-4f99-a9e1-9f57459b5d5d",
+      "name": "50 mm mm",
+      "bounding_box": {
+        "x": 229,
+        "y": 584,
+        "w": 137,
+        "h": 13
+      }
+    },
+    {
+      "id": "b9857291-7492-44fc-94e5-cec8caa808a3",
+      "name": "2700 m",
+      "bounding_box": {
+        "x": 229,
+        "y": 599,
+        "w": 129,
+        "h": 13
+      }
+    },
+    {
+      "id": "a4845d04-415c-41b6-b293-ad19227b04f0",
+      "name": "T.K. 9220",
+      "bounding_box": {
+        "x": 527,
+        "y": 501,
+        "w": 58,
+        "h": 13
+      }
+    },
+    {
+      "id": "cc596947-1859-4520-b925-590fa0df78d6",
+      "name": "Printed Imitation cork",
+      "bounding_box": {
+        "x": 418,
+        "y": 515,
+        "w": 162,
+        "h": 10
+      }
+    },
+    {
+      "id": "8d313c4c-d4c3-43fe-9038-af6700e59ab6",
+      "name": "mm from mouth end",
+      "bounding_box": {
+        "x": 510,
+        "y": 614,
+        "w": 126,
+        "h": 10
+      }
+    },
+    {
+      "id": "50b2f991-58ff-4c5e-b5fc-8539563d85c4",
+      "name": "mm x mm",
+      "bounding_box": {
+        "x": 510,
+        "y": 599,
+        "w": 120,
+        "h": 12
+      }
+    },
+    {
+      "id": "cf7286b3-271e-4657-8e3e-58d3984251a5",
+      "name": "M. HAMERTON / enm",
+      "bounding_box": {
+        "x": 419,
+        "y": 656,
+        "w": 125,
+        "h": 12
+      }
+    },
+    {
+      "id": "592a52a8-94cf-4b38-90af-821258c200c3",
+      "name": "May 1, 1985",
+      "bounding_box": {
+        "x": 419,
+        "y": 680,
+        "w": 79,
+        "h": 13
+      }
+    },
+    {
+      "id": "b4937ef2-feb2-46f9-8a52-f581bfe48369",
+      "name": "Director of Technical Operations, Brown & Williamson International Tobacco",
+      "bounding_box": {
+        "x": 391,
+        "y": 723,
+        "w": 236,
+        "h": 39
+      }
+    },
+    {
+      "id": "16df0690-e719-481b-871f-78f82964f82b",
+      "name": "May 1, 1985",
+      "bounding_box": {
+        "x": 139,
+        "y": 747,
+        "w": 87,
+        "h": 17
+      }
+    },
+    {
+      "id": "0bc31c2c-7f07-467c-8f2a-e2befd0aa4e2",
+      "name": "May 1, 1985",
+      "bounding_box": {
+        "x": 410,
+        "y": 778,
+        "w": 83,
+        "h": 14
+      }
+    }
+  ]
+}

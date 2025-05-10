@@ -1,0 +1,282 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "c94cf08a-c9a6-4e6b-8b64-e6195dbc0c54",
+      "name": "M14789",
+      "bounding_box": {
+        "x": 469,
+        "y": 834,
+        "w": 46,
+        "h": 15
+      }
+    },
+    {
+      "id": "da263deb-69ea-462f-915c-f378e8702566",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 222,
+        "y": 795,
+        "w": 15,
+        "h": 21
+      }
+    },
+    {
+      "id": "52fb50b9-b525-4477-8aa0-c6e316f75016",
+      "name": "STAMFORD, CT",
+      "bounding_box": {
+        "x": 325,
+        "y": 85,
+        "w": 95,
+        "h": 17
+      }
+    },
+    {
+      "id": "57f16e8f-e05f-46e0-98af-f625270450f9",
+      "name": "Mr. G. Schumacher",
+      "bounding_box": {
+        "x": 265,
+        "y": 122,
+        "w": 119,
+        "h": 14
+      }
+    },
+    {
+      "id": "b3000f9a-6231-4faf-abce-729d48690346",
+      "name": "January 3, 1995",
+      "bounding_box": {
+        "x": 66,
+        "y": 122,
+        "w": 100,
+        "h": 15
+      }
+    },
+    {
+      "id": "05544617-e0bf-4aeb-aef8-4ae2035e61a0",
+      "name": "WEBCRAFT TECHNOLOGIES INC",
+      "bounding_box": {
+        "x": 64,
+        "y": 151,
+        "w": 216,
+        "h": 15
+      }
+    },
+    {
+      "id": "5469ce99-e880-4666-9081-e7eaacfe6ce3",
+      "name": "Mr. Steven Katz",
+      "bounding_box": {
+        "x": 101,
+        "y": 168,
+        "w": 98,
+        "h": 14
+      }
+    },
+    {
+      "id": "fdb46a4e-f39a-41e0-b172-0b9f2597453a",
+      "name": "Route 4 and Adams Station North Brunswick, NJ 08901- 0623",
+      "bounding_box": {
+        "x": 64,
+        "y": 182,
+        "w": 206,
+        "h": 31
+      }
+    },
+    {
+      "id": "fe625792-c367-41cc-900b-6d9944a06e5d",
+      "name": "NO SHIPPING REQUIRED",
+      "bounding_box": {
+        "x": 388,
+        "y": 151,
+        "w": 158,
+        "h": 17
+      }
+    },
+    {
+      "id": "61282605-ca57-422d-9b09-41be7caa89ef",
+      "name": "NO SHIPPING REQUIRED.",
+      "bounding_box": {
+        "x": 64,
+        "y": 258,
+        "w": 166,
+        "h": 17
+      }
+    },
+    {
+      "id": "fbff9078-f3dc-4a84-b9bc-ca167a6e10d7",
+      "name": "NET 30 Days",
+      "bounding_box": {
+        "x": 385,
+        "y": 279,
+        "w": 81,
+        "h": 16
+      }
+    },
+    {
+      "id": "0d98362b-e5cd-4378-a725-54713bc01cd3",
+      "name": "CARLTON \"Free\" Carton\" Direct Mail Piece",
+      "bounding_box": {
+        "x": 179,
+        "y": 318,
+        "w": 263,
+        "h": 20
+      }
+    },
+    {
+      "id": "6f30dc43-02e4-45a2-83c3-1cc8e89f7d9a",
+      "name": "This Purchase order is to cover all costs incurred to- date listed below.",
+      "bounding_box": {
+        "x": 179,
+        "y": 352,
+        "w": 359,
+        "h": 30
+      }
+    },
+    {
+      "id": "59fb074a-82b8-40ab-aa96-05f60e3d0a03",
+      "name": "42,000 lbs. of 80 lb Sterling C/ 2/ S - 36- 1/ 2\" roll",
+      "bounding_box": {
+        "x": 179,
+        "y": 398,
+        "w": 290,
+        "h": 14
+      }
+    },
+    {
+      "id": "aeb05cc6-37bf-40ea-a2ea-d6cb4f639490",
+      "name": "31,000 lbs. of 80 lb. Sterling C/ 2/ S - 26- 1/ 2\" roll",
+      "bounding_box": {
+        "x": 177,
+        "y": 413,
+        "w": 292,
+        "h": 16
+      }
+    },
+    {
+      "id": "e0521779-dc18-46f7-ad45-0c957bb2ede6",
+      "name": "Prep. (line negatives, paper prints, camera/ stripping)",
+      "bounding_box": {
+        "x": 179,
+        "y": 444,
+        "w": 327,
+        "h": 16
+      }
+    },
+    {
+      "id": "d30b5da8-4d69-4097-a7ce-e77d39f88657",
+      "name": "Federal Express charges",
+      "bounding_box": {
+        "x": 179,
+        "y": 472,
+        "w": 156,
+        "h": 17
+      }
+    },
+    {
+      "id": "81e2acdb-58d7-49e2-afc8-58bf0440fcdb",
+      "name": "ALL MATERIALS HAVE BEEN CANCELLED.",
+      "bounding_box": {
+        "x": 179,
+        "y": 504,
+        "w": 269,
+        "h": 14
+      }
+    },
+    {
+      "id": "36196ed2-462c-482f-8600-9d0858b76222",
+      "name": "$20, 580. 00",
+      "bounding_box": {
+        "x": 575,
+        "y": 398,
+        "w": 67,
+        "h": 14
+      }
+    },
+    {
+      "id": "adf0bedb-7412-4d33-8ae7-2a7eaafe4254",
+      "name": "$15, 190. 00",
+      "bounding_box": {
+        "x": 574,
+        "y": 415,
+        "w": 68,
+        "h": 14
+      }
+    },
+    {
+      "id": "3c3a12b5-a10d-4883-8994-5d2f92f45546",
+      "name": "$431 .25",
+      "bounding_box": {
+        "x": 592,
+        "y": 444,
+        "w": 51,
+        "h": 15
+      }
+    },
+    {
+      "id": "85ad4221-021c-45f7-97db-78e43b7fcf3b",
+      "name": "$48 .75",
+      "bounding_box": {
+        "x": 599,
+        "y": 473,
+        "w": 43,
+        "h": 15
+      }
+    },
+    {
+      "id": "c19ff2bf-1eb6-411b-b376-7b4c12b9100b",
+      "name": "D. Barcia",
+      "bounding_box": {
+        "x": 385,
+        "y": 777,
+        "w": 58,
+        "h": 14
+      }
+    },
+    {
+      "id": "5623a26c-5eb9-4712-bda2-d0d2e3a355fe",
+      "name": "Adv. Expense",
+      "bounding_box": {
+        "x": 261,
+        "y": 777,
+        "w": 85,
+        "h": 15
+      }
+    },
+    {
+      "id": "f8688164-f3e9-47c7-aa0c-a972d66e29c5",
+      "name": "Brand Operations",
+      "bounding_box": {
+        "x": 60,
+        "y": 778,
+        "w": 115,
+        "h": 11
+      }
+    },
+    {
+      "id": "9c71df04-7f8f-4cc2-8e02-d83f8b60e59b",
+      "name": "January 3, 1995",
+      "bounding_box": {
+        "x": 469,
+        "y": 855,
+        "w": 99,
+        "h": 16
+      }
+    },
+    {
+      "id": "8a3e02ea-185d-482f-ab61-aa57df39735c",
+      "name": "M. Stock/ smm",
+      "bounding_box": {
+        "x": 468,
+        "y": 876,
+        "w": 186,
+        "h": 25
+      }
+    }
+  ]
+}

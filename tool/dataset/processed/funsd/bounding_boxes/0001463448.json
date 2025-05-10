@@ -1,0 +1,72 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "afc3bff4-6b41-4512-96db-0c8d08c89689",
+      "name": "6708105266",
+      "bounding_box": {
+        "x": 428,
+        "y": 186,
+        "w": 174,
+        "h": 25
+      }
+    },
+    {
+      "id": "155bd0c4-44f4-44c2-a2da-064b92a1d4c6",
+      "name": "FILE FOLDER",
+      "bounding_box": {
+        "x": 311,
+        "y": 571,
+        "w": 95,
+        "h": 17
+      }
+    },
+    {
+      "id": "e6603642-5c2c-45b7-a1dd-35435773d226",
+      "name": "REDROPE EXPANDABLE FILE",
+      "bounding_box": {
+        "x": 310,
+        "y": 598,
+        "w": 199,
+        "h": 17
+      }
+    },
+    {
+      "id": "8074fc10-334a-4013-96e7-5eaed2d692af",
+      "name": "HANGING FILE",
+      "bounding_box": {
+        "x": 310,
+        "y": 626,
+        "w": 106,
+        "h": 17
+      }
+    },
+    {
+      "id": "a019382a-c4d4-4b63-82df-9049c28c1916",
+      "name": "ENVELOPE",
+      "bounding_box": {
+        "x": 313,
+        "y": 654,
+        "w": 70,
+        "h": 17
+      }
+    },
+    {
+      "id": "d456c6e5-2386-4029-8e03-ee83dc27591f",
+      "name": "OTHER (SPECIFY)",
+      "bounding_box": {
+        "x": 310,
+        "y": 682,
+        "w": 122,
+        "h": 18
+      }
+    }
+  ]
+}

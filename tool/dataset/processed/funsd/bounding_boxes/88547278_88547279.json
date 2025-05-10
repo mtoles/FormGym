@@ -1,0 +1,172 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 757,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "c789d22a-ce12-4b40-8b12-96453c12df76",
+      "name": "Lorillard One Park Avenue New York, NY 10016 Attn: Neil Toumey",
+      "bounding_box": {
+        "x": 190,
+        "y": 171,
+        "w": 142,
+        "h": 67
+      }
+    },
+    {
+      "id": "8160bd5b-63d6-4a36-aca0-252287eb5341",
+      "name": "July 7, 1993",
+      "bounding_box": {
+        "x": 533,
+        "y": 171,
+        "w": 87,
+        "h": 20
+      }
+    },
+    {
+      "id": "8f5663b8-ba61-470f-8e3b-378349f86789",
+      "name": "4854- 5",
+      "bounding_box": {
+        "x": 535,
+        "y": 205,
+        "w": 49,
+        "h": 15
+      }
+    },
+    {
+      "id": "1c4802cd-b686-4ef0-89fa-603d65071ef8",
+      "name": "Peter Faucetta Jr.",
+      "bounding_box": {
+        "x": 532,
+        "y": 238,
+        "w": 123,
+        "h": 19
+      }
+    },
+    {
+      "id": "0ae6b043-8bf3-4d18-b532-21aefaf8494b",
+      "name": "H/D 8 Pk. Wide Header 4 C/P + 2 Hits Day- Glo + Spot Varnish",
+      "bounding_box": {
+        "x": 189,
+        "y": 285,
+        "w": 273,
+        "h": 39
+      }
+    },
+    {
+      "id": "2440076d-5c82-4407-8122-694395f6a6b4",
+      "name": "89,725",
+      "bounding_box": {
+        "x": 236,
+        "y": 321,
+        "w": 48,
+        "h": 18
+      }
+    },
+    {
+      "id": "98dfa06f-dbfd-4a26-8537-b4d34e2006c4",
+      "name": "19.750 X 11",
+      "bounding_box": {
+        "x": 193,
+        "y": 373,
+        "w": 80,
+        "h": 20
+      }
+    },
+    {
+      "id": "a5aeff04-6fcd-4c10-981e-06248e7438cd",
+      "name": "24 pt. Carolina C/1/S",
+      "bounding_box": {
+        "x": 190,
+        "y": 425,
+        "w": 156,
+        "h": 21
+      }
+    },
+    {
+      "id": "200d5f11-598c-40e7-9bf6-9b2763395d6e",
+      "name": "Final Film Supplied Combined Blue",
+      "bounding_box": {
+        "x": 190,
+        "y": 494,
+        "w": 141,
+        "h": 37
+      }
+    },
+    {
+      "id": "20845b6b-b383-4fdb-9f31-37fa1e6cb9b4",
+      "name": "6/1 1/1",
+      "bounding_box": {
+        "x": 190,
+        "y": 566,
+        "w": 27,
+        "h": 34
+      }
+    },
+    {
+      "id": "9b441329-ab21-4842-bc92-d7dc772a2008",
+      "name": "Leave in Full Sheets",
+      "bounding_box": {
+        "x": 192,
+        "y": 634,
+        "w": 137,
+        "h": 17
+      }
+    },
+    {
+      "id": "61a43205-1c06-4ba1-a031-f0b0ed911a5d",
+      "name": "Bulk in cartons, FOB Oceanside Please allow 14 working days for delivery",
+      "bounding_box": {
+        "x": 189,
+        "y": 700,
+        "w": 286,
+        "h": 38
+      }
+    },
+    {
+      "id": "0022b143-6944-4653-aa67-337061a26859",
+      "name": "$16, 158",
+      "bounding_box": {
+        "x": 190,
+        "y": 767,
+        "w": 57,
+        "h": 20
+      }
+    },
+    {
+      "id": "23a2ad24-652c-48a6-ae4c-9e34e6c000b9",
+      "name": "(212) 627 4111",
+      "bounding_box": {
+        "x": 498,
+        "y": 926,
+        "w": 74,
+        "h": 15
+      }
+    },
+    {
+      "id": "a673ee59-61c5-453c-8444-7093080f36d8",
+      "name": "(212) 627- 8602",
+      "bounding_box": {
+        "x": 608,
+        "y": 925,
+        "w": 76,
+        "h": 15
+      }
+    },
+    {
+      "id": "79f6215e-8f20-48fb-9ecf-ebac685dc7cd",
+      "name": "Applied Graphics Technologies 50 West 23rd Street, N.Y.C. 10010",
+      "bounding_box": {
+        "x": 467,
+        "y": 855,
+        "w": 174,
+        "h": 72
+      }
+    }
+  ]
+}

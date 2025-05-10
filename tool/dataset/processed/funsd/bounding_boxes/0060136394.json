@@ -1,0 +1,102 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "32c18d18-637d-4617-975b-0d42a788bc42",
+      "name": "THE AMERICAN TOBACCO COMPANY (LUCKY STRIKE)",
+      "bounding_box": {
+        "x": 309,
+        "y": 134,
+        "w": 320,
+        "h": 21
+      }
+    },
+    {
+      "id": "16161284-782c-4c02-9c95-b0d092dd7e78",
+      "name": "1/2 HOUR PROGRAMES",
+      "bounding_box": {
+        "x": 313,
+        "y": 165,
+        "w": 121,
+        "h": 16
+      }
+    },
+    {
+      "id": "cf162098-5020-49a5-ab8a-e0d2812effa0",
+      "name": "WHAS LOUISVILLE, KENTUCKY",
+      "bounding_box": {
+        "x": 309,
+        "y": 191,
+        "w": 210,
+        "h": 19
+      }
+    },
+    {
+      "id": "0d4c040e-056d-4265-8ca9-0e23519d1682",
+      "name": "CONTRACT #1032",
+      "bounding_box": {
+        "x": 310,
+        "y": 218,
+        "w": 103,
+        "h": 15
+      }
+    },
+    {
+      "id": "7b0dd54b-0dfb-4140-9dc8-b88040510fd1",
+      "name": "24 @ $ 150.00 TIME",
+      "bounding_box": {
+        "x": 359,
+        "y": 296,
+        "w": 161,
+        "h": 15
+      }
+    },
+    {
+      "id": "3735dd84-6195-42e4-a90b-5b1f0fcbb40f",
+      "name": "24 @ $ 125.00 NET TALENT",
+      "bounding_box": {
+        "x": 359,
+        "y": 324,
+        "w": 172,
+        "h": 18
+      }
+    },
+    {
+      "id": "750cfc4f-8649-4793-845c-803a6b04a771",
+      "name": "$ 6.600.00",
+      "bounding_box": {
+        "x": 561,
+        "y": 351,
+        "w": 78,
+        "h": 17
+      }
+    },
+    {
+      "id": "b41cf014-3869-4e2f-9c7c-bb8d2af98ddf",
+      "name": "APRIL 1,1957",
+      "bounding_box": {
+        "x": 584,
+        "y": 408,
+        "w": 96,
+        "h": 16
+      }
+    },
+    {
+      "id": "8a0516f1-bc70-4f9d-ba78-978b89e32415",
+      "name": "HOPE MARTINEZ",
+      "bounding_box": {
+        "x": 309,
+        "y": 409,
+        "w": 95,
+        "h": 15
+      }
+    }
+  ]
+}

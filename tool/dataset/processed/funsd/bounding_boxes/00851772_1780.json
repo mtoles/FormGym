@@ -1,0 +1,92 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "9e393743-abbf-4aa0-89b7-73fe1b11b507",
+      "name": "B73",
+      "bounding_box": {
+        "x": 116,
+        "y": 278,
+        "w": 22,
+        "h": 8
+      }
+    },
+    {
+      "id": "e16ff0a7-538e-4ed8-ae9e-7afa3bb6a3f6",
+      "name": "N/A",
+      "bounding_box": {
+        "x": 520,
+        "y": 277,
+        "w": 22,
+        "h": 14
+      }
+    },
+    {
+      "id": "800a7275-d8ac-4906-bad0-ee253fec88b8",
+      "name": "1929-1966",
+      "bounding_box": {
+        "x": 626,
+        "y": 546,
+        "w": 63,
+        "h": 13
+      }
+    },
+    {
+      "id": "ee3b9570-7d3e-4bc6-b6ce-9dbcf2e917b0",
+      "name": "May 27, 1982",
+      "bounding_box": {
+        "x": 520,
+        "y": 186,
+        "w": 85,
+        "h": 14
+      }
+    },
+    {
+      "id": "f5cfebc1-011f-4049-86c2-67b09ba8f15b",
+      "name": "Valerian Fluid Extract",
+      "bounding_box": {
+        "x": 116,
+        "y": 228,
+        "w": 153,
+        "h": 13
+      }
+    },
+    {
+      "id": "c80acd39-01ad-4d2e-8361-3227a680c0a9",
+      "name": "Jimmy Bell",
+      "bounding_box": {
+        "x": 117,
+        "y": 186,
+        "w": 70,
+        "h": 13
+      }
+    },
+    {
+      "id": "48ef1cf1-73eb-4e7a-8eaa-410e325d64f2",
+      "name": "1974- Jan. 1982 to Dec. 1981",
+      "bounding_box": {
+        "x": 624,
+        "y": 339,
+        "w": 63,
+        "h": 67
+      }
+    },
+    {
+      "id": "7e245b7a-7154-4639-b93f-08d780662b33",
+      "name": "1957- Dec. 1981",
+      "bounding_box": {
+        "x": 624,
+        "y": 658,
+        "w": 64,
+        "h": 25
+      }
+    }
+  ]
+}

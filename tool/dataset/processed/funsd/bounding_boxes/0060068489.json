@@ -1,0 +1,172 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "0a74cc7a-1f02-4db0-8f38-f8f616d82311",
+      "name": "3/17/82",
+      "bounding_box": {
+        "x": 606,
+        "y": 178,
+        "w": 61,
+        "h": 13
+      }
+    },
+    {
+      "id": "7322beb2-18a9-45f4-8d17-ec3f317204cd",
+      "name": "Outdoor",
+      "bounding_box": {
+        "x": 299,
+        "y": 219,
+        "w": 63,
+        "h": 15
+      }
+    },
+    {
+      "id": "0456d827-d2e5-4d5f-8211-2123dbb43655",
+      "name": "April",
+      "bounding_box": {
+        "x": 223,
+        "y": 289,
+        "w": 46,
+        "h": 13
+      }
+    },
+    {
+      "id": "e0b98da9-e828-4efd-95d9-4c2b25d88ae3",
+      "name": "THRU",
+      "bounding_box": {
+        "x": 407,
+        "y": 293,
+        "w": 39,
+        "h": 12
+      }
+    },
+    {
+      "id": "abae9715-a740-4159-9be8-fbe09ff5917d",
+      "name": "July",
+      "bounding_box": {
+        "x": 534,
+        "y": 287,
+        "w": 36,
+        "h": 15
+      }
+    },
+    {
+      "id": "2146f4b0-2edd-46b1-a21c-ff453af6e360",
+      "name": "2.000.00",
+      "bounding_box": {
+        "x": 391,
+        "y": 513,
+        "w": 70,
+        "h": 10
+      }
+    },
+    {
+      "id": "7a71072d-8539-442c-bc94-2f6849caafa5",
+      "name": "corporate Media Department",
+      "bounding_box": {
+        "x": 123,
+        "y": 175,
+        "w": 222,
+        "h": 15
+      }
+    },
+    {
+      "id": "b32bd9f0-4a5c-4412-8b86-b235cffd408c",
+      "name": "30 sheet Posters (White Background)",
+      "bounding_box": {
+        "x": 512,
+        "y": 220,
+        "w": 151,
+        "h": 29
+      }
+    },
+    {
+      "id": "43a5222f-7f8f-4e3e-9a1c-953471a7fba8",
+      "name": "LUCKY STRIKE LOW Tar Filters Box- 100%",
+      "bounding_box": {
+        "x": 13,
+        "y": 216,
+        "w": 174,
+        "h": 30
+      }
+    },
+    {
+      "id": "707a4314-a531-41d2-842f-d1134dd9ea08",
+      "name": "$ 26,880,00",
+      "bounding_box": {
+        "x": 376,
+        "y": 355,
+        "w": 87,
+        "h": 15
+      }
+    },
+    {
+      "id": "13d3a993-266c-4b33-911b-c700990952a5",
+      "name": "$ 28,880.00",
+      "bounding_box": {
+        "x": 352,
+        "y": 584,
+        "w": 110,
+        "h": 16
+      }
+    },
+    {
+      "id": "c1bc55db-c1c1-4bf9-84cb-f60438a4a86d",
+      "name": "For posting in Cincinnati, Covington and Tampa/St. Petersburg.",
+      "bounding_box": {
+        "x": 93,
+        "y": 668,
+        "w": 341,
+        "h": 27
+      }
+    },
+    {
+      "id": "5f87afac-d366-43ce-8657-96cf67612aa3",
+      "name": "Posters are captioned for identification, \"LUCKY STRIKES AGAIN (printed in red) with the word \"New\" printed in a snipe effect in the upper left corner. These posters have a white background and will be further identified as such in order to differentiate from a second design which will have a solid red background with white lettering.",
+      "bounding_box": {
+        "x": 93,
+        "y": 705,
+        "w": 401,
+        "h": 111
+      }
+    },
+    {
+      "id": "e6c94cb1-ec16-4ca5-8113-6d61dddeea03",
+      "name": "Posters are printed six colors (four color process and two impressions of red) on white 70# outdoor poster paper.",
+      "bounding_box": {
+        "x": 93,
+        "y": 823,
+        "w": 375,
+        "h": 41
+      }
+    },
+    {
+      "id": "2ad16fa4-d98a-4f61-84e3-c1d6b87bbcd9",
+      "name": "M- 49",
+      "bounding_box": {
+        "x": 618,
+        "y": 850,
+        "w": 38,
+        "h": 13
+      }
+    },
+    {
+      "id": "249009e4-4d53-4526-a40f-29633593993f",
+      "name": "L- 3a",
+      "bounding_box": {
+        "x": 617,
+        "y": 825,
+        "w": 38,
+        "h": 13
+      }
+    }
+  ]
+}

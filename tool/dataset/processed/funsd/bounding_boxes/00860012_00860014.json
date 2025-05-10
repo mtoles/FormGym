@@ -1,0 +1,132 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 773,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "cddd0b52-e5b1-4e33-bf73-e0afffed7d7f",
+      "name": "4",
+      "bounding_box": {
+        "x": 390,
+        "y": 126,
+        "w": 13,
+        "h": 13
+      }
+    },
+    {
+      "id": "51279205-893b-4401-acc1-8db2356d9487",
+      "name": "",
+      "bounding_box": {
+        "x": 543,
+        "y": 147,
+        "w": 99,
+        "h": 43
+      }
+    },
+    {
+      "id": "3f6acbbd-b0cd-4b29-96cf-6fbda5e8d295",
+      "name": "X",
+      "bounding_box": {
+        "x": 123,
+        "y": 439,
+        "w": 11,
+        "h": 8
+      }
+    },
+    {
+      "id": "945b8517-22e6-4c97-8e83-08544b223149",
+      "name": "Brown",
+      "bounding_box": {
+        "x": 219,
+        "y": 450,
+        "w": 39,
+        "h": 17
+      }
+    },
+    {
+      "id": "98a8e496-3bb8-42e8-8001-72ba8be59c5f",
+      "name": "December 13, 1983",
+      "bounding_box": {
+        "x": 126,
+        "y": 126,
+        "w": 126,
+        "h": 15
+      }
+    },
+    {
+      "id": "4ad7783a-fe18-4bd5-b1f6-cfb60bb262b4",
+      "name": "642 149",
+      "bounding_box": {
+        "x": 591,
+        "y": 124,
+        "w": 53,
+        "h": 16
+      }
+    },
+    {
+      "id": "7dd6a6ca-666a-4a07-8589-289441162be5",
+      "name": "11 18 83",
+      "bounding_box": {
+        "x": 532,
+        "y": 222,
+        "w": 60,
+        "h": 15
+      }
+    },
+    {
+      "id": "8643d892-5d2a-4eb9-be3d-c280b85b310b",
+      "name": "21 017",
+      "bounding_box": {
+        "x": 665,
+        "y": 222,
+        "w": 44,
+        "h": 15
+      }
+    },
+    {
+      "id": "2ad71758-5266-4e76-9701-2ef0c70b79b2",
+      "name": "Acute/ Dermal Toxicology",
+      "bounding_box": {
+        "x": 57,
+        "y": 285,
+        "w": 170,
+        "h": 17
+      }
+    },
+    {
+      "id": "38772a11-1837-41c2-aa3a-68242d932087",
+      "name": "\u2611 REFRIGERATOR 8 C",
+      "bounding_box": {
+        "x": 432,
+        "y": 440,
+        "w": 117,
+        "h": 16
+      }
+    },
+    {
+      "id": "6cd73eed-4fdb-47d9-a8fc-0c759539e16f",
+      "name": "This project sheet is issued to correct Project Sheet which was issued on December 6, 1983 to Project Sheet No 3 instead of 2.",
+      "bounding_box": {
+        "x": 101,
+        "y": 542,
+        "w": 541,
+        "h": 33
+      }
+    },
+    {
+      "id": "6e42ebb7-a629-46b3-8cb0-db3302fe43e7",
+      "name": "Material Safety Data Sheet is attached to Project Sheet 1.",
+      "bounding_box": {
+        "x": 94,
+        "y": 719,
+        "w": 424,
+        "h": 19
+      }
+    }
+  ]
+}

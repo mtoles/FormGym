@@ -1,0 +1,262 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "90e757b8-8515-4b7b-9630-da08284c7f36",
+      "name": "27",
+      "bounding_box": {
+        "x": 475,
+        "y": 123,
+        "w": 15,
+        "h": 14
+      }
+    },
+    {
+      "id": "7fbea2cb-b7f2-4e9d-b9d8-dd308ae5cd6c",
+      "name": ".08",
+      "bounding_box": {
+        "x": 465,
+        "y": 237,
+        "w": 22,
+        "h": 13
+      }
+    },
+    {
+      "id": "3110e20c-b088-471b-8d06-5aa9974668b2",
+      "name": ".08",
+      "bounding_box": {
+        "x": 465,
+        "y": 261,
+        "w": 21,
+        "h": 13
+      }
+    },
+    {
+      "id": "1f635f56-4941-46c3-b856-8655a256a41e",
+      "name": "1.488.126.23",
+      "bounding_box": {
+        "x": 447,
+        "y": 399,
+        "w": 80,
+        "h": 15
+      }
+    },
+    {
+      "id": "b9bc9d11-6ae0-4f4c-8d40-270e2795fe17",
+      "name": ".08",
+      "bounding_box": {
+        "x": 506,
+        "y": 422,
+        "w": 22,
+        "h": 14
+      }
+    },
+    {
+      "id": "03565c7f-3b04-4d83-94ed-1644836912b3",
+      "name": "1.488.126.15",
+      "bounding_box": {
+        "x": 448,
+        "y": 513,
+        "w": 80,
+        "h": 14
+      }
+    },
+    {
+      "id": "767efcbc-7d88-4ccf-aa87-9a7b26832e0e",
+      "name": "1.471.873.85",
+      "bounding_box": {
+        "x": 448,
+        "y": 563,
+        "w": 81,
+        "h": 14
+      }
+    },
+    {
+      "id": "982e596f-f910-49c6-883a-0ad852ec1e34",
+      "name": "International.",
+      "bounding_box": {
+        "x": 465,
+        "y": 777,
+        "w": 87,
+        "h": 15
+      }
+    },
+    {
+      "id": "b4a11c4e-747e-4fd9-93e9-6fb5588991cf",
+      "name": "MD Davis",
+      "bounding_box": {
+        "x": 156,
+        "y": 656,
+        "w": 141,
+        "h": 27
+      }
+    },
+    {
+      "id": "b7f608ef-e7c0-4037-878f-2adf42fc9a18",
+      "name": "",
+      "bounding_box": {
+        "x": 187,
+        "y": 693,
+        "w": 127,
+        "h": 29
+      }
+    },
+    {
+      "id": "4322d1c5-fef9-466a-9db7-9936ac3994c6",
+      "name": "6/ 21/ 90",
+      "bounding_box": {
+        "x": 98,
+        "y": 128,
+        "w": 50,
+        "h": 17
+      }
+    },
+    {
+      "id": "df52eea0-7ac3-49da-a476-9963004ce520",
+      "name": "Hong Kong: Cigarette Market Monitor",
+      "bounding_box": {
+        "x": 152,
+        "y": 149,
+        "w": 236,
+        "h": 20
+      }
+    },
+    {
+      "id": "71c99c27-f7e6-4b99-b253-903bbe465bf4",
+      "name": "MDR. HK",
+      "bounding_box": {
+        "x": 130,
+        "y": 179,
+        "w": 50,
+        "h": 14
+      }
+    },
+    {
+      "id": "f0b75230-b0f2-479b-904e-e493dca5cb97",
+      "name": "Increase X",
+      "bounding_box": {
+        "x": 161,
+        "y": 240,
+        "w": 73,
+        "h": 16
+      }
+    },
+    {
+      "id": "c794de93-e5b8-450b-9e09-65c8bcccd0e6",
+      "name": "$ 43.335.00",
+      "bounding_box": {
+        "x": 330,
+        "y": 212,
+        "w": 77,
+        "h": 17
+      }
+    },
+    {
+      "id": "cfd4e9ae-8cfb-498a-8929-f7f1a0416476",
+      "name": "$ 4.376.47",
+      "bounding_box": {
+        "x": 330,
+        "y": 237,
+        "w": 77,
+        "h": 14
+      }
+    },
+    {
+      "id": "dafdcfcc-3e5c-441b-8223-a243b7dd92f5",
+      "name": "$ 47.711.47",
+      "bounding_box": {
+        "x": 331,
+        "y": 264,
+        "w": 78,
+        "h": 14
+      }
+    },
+    {
+      "id": "a3637c91-1cad-407a-b3d1-552b32a52a83",
+      "name": "$ 0.00",
+      "bounding_box": {
+        "x": 423,
+        "y": 209,
+        "w": 62,
+        "h": 17
+      }
+    },
+    {
+      "id": "4ad0344a-9b92-42ba-ac91-d4c40d5aaf13",
+      "name": "Original MRA did not include cost for the first month of the study (see L. Lee memo of September 11, 1989)",
+      "bounding_box": {
+        "x": 57,
+        "y": 310,
+        "w": 480,
+        "h": 38
+      }
+    },
+    {
+      "id": "3f4066de-51e4-4916-ae86-e5141dbaa01d",
+      "name": "$ 2.960.000.00",
+      "bounding_box": {
+        "x": 440,
+        "y": 374,
+        "w": 86,
+        "h": 15
+      }
+    },
+    {
+      "id": "74f016ee-1373-4705-b444-aea0e1776941",
+      "name": "6/ 21/ 90",
+      "bounding_box": {
+        "x": 430,
+        "y": 651,
+        "w": 85,
+        "h": 32
+      }
+    },
+    {
+      "id": "4a4b9e52-bca5-415e-a7d2-6fc655230ab0",
+      "name": "4/ 22/ 90",
+      "bounding_box": {
+        "x": 443,
+        "y": 687,
+        "w": 75,
+        "h": 27
+      }
+    },
+    {
+      "id": "fb290c3b-5b16-44e4-9240-2155a1933b5c",
+      "name": "1989- 29",
+      "bounding_box": {
+        "x": 465,
+        "y": 751,
+        "w": 47,
+        "h": 17
+      }
+    },
+    {
+      "id": "8ef9fb75-b3c6-4c5c-bae0-34d19d5986e0",
+      "name": "Project File",
+      "bounding_box": {
+        "x": 154,
+        "y": 744,
+        "w": 80,
+        "h": 16
+      }
+    },
+    {
+      "id": "16d7e184-ebf4-465d-9a83-9f24b568e54d",
+      "name": "MRA File N. W. Kremer",
+      "bounding_box": {
+        "x": 154,
+        "y": 758,
+        "w": 83,
+        "h": 29
+      }
+    }
+  ]
+}

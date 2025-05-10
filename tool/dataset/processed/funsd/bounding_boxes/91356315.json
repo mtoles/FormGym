@@ -1,0 +1,252 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 802,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "161bd05e-f7c6-48e2-8ecb-15ebc404eb73",
+      "name": "VAL THURMAN, DIVISION MANAGER, LOUISVILLE, KY",
+      "bounding_box": {
+        "x": 211,
+        "y": 138,
+        "w": 384,
+        "h": 17
+      }
+    },
+    {
+      "id": "0f46681b-27c3-4aa9-8e21-8f79f095b424",
+      "name": "4/ 26/ 91",
+      "bounding_box": {
+        "x": 209,
+        "y": 190,
+        "w": 63,
+        "h": 18
+      }
+    },
+    {
+      "id": "18c8d3eb-6fe0-46b8-9878-d534adc1391d",
+      "name": "SHORT STOP FOOD MARTS. LOUISVILLE, KY",
+      "bounding_box": {
+        "x": 215,
+        "y": 260,
+        "w": 315,
+        "h": 17
+      }
+    },
+    {
+      "id": "b3689dd3-93a9-4d55-993b-356fa7ca1958",
+      "name": "PHILIP MORRIS",
+      "bounding_box": {
+        "x": 205,
+        "y": 310,
+        "w": 113,
+        "h": 17
+      }
+    },
+    {
+      "id": "dde0e319-49b5-489c-aee4-adb4e1c048c1",
+      "name": "MARLBORO CIGARETTES",
+      "bounding_box": {
+        "x": 240,
+        "y": 359,
+        "w": 164,
+        "h": 15
+      }
+    },
+    {
+      "id": "524e101c-ce54-432c-bd8a-a148e287e2da",
+      "name": "CARTON PROMOTION SWEEPSTAKES (SEE ATTACHMENTS)",
+      "bounding_box": {
+        "x": 265,
+        "y": 415,
+        "w": 241,
+        "h": 39
+      }
+    },
+    {
+      "id": "d4428dd2-85a6-466a-95bb-7073d8b49c30",
+      "name": "L. H. LAKERSH",
+      "bounding_box": {
+        "x": 373,
+        "y": 797,
+        "w": 72,
+        "h": 13
+      }
+    },
+    {
+      "id": "387a17bf-fb03-4920-ae63-15cda423c772",
+      "name": "J. R. SLATER",
+      "bounding_box": {
+        "x": 372,
+        "y": 810,
+        "w": 77,
+        "h": 13
+      }
+    },
+    {
+      "id": "13cb008a-69d5-4820-8daf-2d067ab8de7e",
+      "name": "S. T. JONES",
+      "bounding_box": {
+        "x": 372,
+        "y": 824,
+        "w": 75,
+        "h": 13
+      }
+    },
+    {
+      "id": "cfb4d5e5-a40e-4c84-9eae-ee286fe9b340",
+      "name": "R. S. GOLDBRENNER",
+      "bounding_box": {
+        "x": 374,
+        "y": 837,
+        "w": 123,
+        "h": 14
+      }
+    },
+    {
+      "id": "de5fdd31-efa9-4775-8e5a-15b347b40613",
+      "name": "S. F. SMITH",
+      "bounding_box": {
+        "x": 373,
+        "y": 851,
+        "w": 71,
+        "h": 13
+      }
+    },
+    {
+      "id": "49bcd5fa-73e4-48f0-b8c3-786f7037778a",
+      "name": "G. R. TELFORD",
+      "bounding_box": {
+        "x": 253,
+        "y": 797,
+        "w": 87,
+        "h": 14
+      }
+    },
+    {
+      "id": "732a24fd-7a85-4747-82ab-61161ebb6ae2",
+      "name": "R. G. RYAN",
+      "bounding_box": {
+        "x": 251,
+        "y": 811,
+        "w": 68,
+        "h": 12
+      }
+    },
+    {
+      "id": "24a33459-ded5-4b98-970b-cb77455d424f",
+      "name": "N. P. RUFFALO",
+      "bounding_box": {
+        "x": 251,
+        "y": 823,
+        "w": 89,
+        "h": 15
+      }
+    },
+    {
+      "id": "ec0d3549-6f57-4cb1-baea-d13e0127ceed",
+      "name": "T. L. ACHEY",
+      "bounding_box": {
+        "x": 251,
+        "y": 838,
+        "w": 72,
+        "h": 14
+      }
+    },
+    {
+      "id": "a06b4b41-7e4d-4838-9526-9dd579585a4a",
+      "name": "P. J. McCANN",
+      "bounding_box": {
+        "x": 251,
+        "y": 849,
+        "w": 83,
+        "h": 15
+      }
+    },
+    {
+      "id": "1b387604-499e-4695-b1bd-4c051bb00202",
+      "name": "A. J. GIACOIO",
+      "bounding_box": {
+        "x": 250,
+        "y": 865,
+        "w": 83,
+        "h": 11
+      }
+    },
+    {
+      "id": "6caec3ab-b0f4-4c0a-ab45-9fa5255ec580",
+      "name": "J. J. TATULLI",
+      "bounding_box": {
+        "x": 253,
+        "y": 877,
+        "w": 75,
+        "h": 15
+      }
+    },
+    {
+      "id": "23bb2043-4a78-4d53-b60f-1fc3799bd135",
+      "name": "A. H. TISCH",
+      "bounding_box": {
+        "x": 96,
+        "y": 797,
+        "w": 67,
+        "h": 16
+      }
+    },
+    {
+      "id": "0159b718-eac9-4458-b350-44216df43f85",
+      "name": "R. H. ORCUTT",
+      "bounding_box": {
+        "x": 96,
+        "y": 813,
+        "w": 81,
+        "h": 13
+      }
+    },
+    {
+      "id": "cae41f4a-b1f6-4fad-a0f2-2876afcc41d0",
+      "name": "M. A. PETERSON",
+      "bounding_box": {
+        "x": 95,
+        "y": 825,
+        "w": 98,
+        "h": 13
+      }
+    },
+    {
+      "id": "ce451421-29e1-4400-9fb6-5899411abc85",
+      "name": "M. L. ORLOWSKY",
+      "bounding_box": {
+        "x": 95,
+        "y": 839,
+        "w": 100,
+        "h": 11
+      }
+    },
+    {
+      "id": "5d77f5ab-a94c-48b4-b576-e57626455033",
+      "name": "L. GORDON",
+      "bounding_box": {
+        "x": 96,
+        "y": 853,
+        "w": 68,
+        "h": 11
+      }
+    },
+    {
+      "id": "c2acbdeb-c06c-42f7-ba15-e6dd2a74a779",
+      "name": "J. P. MASTANDREA",
+      "bounding_box": {
+        "x": 95,
+        "y": 863,
+        "w": 111,
+        "h": 16
+      }
+    }
+  ]
+}

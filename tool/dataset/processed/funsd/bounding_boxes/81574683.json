@@ -1,0 +1,472 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 773,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "936c1ec0-4ccf-4fd1-9d76-877a1848fefa",
+      "name": "3/27/84",
+      "bounding_box": {
+        "x": 531,
+        "y": 32,
+        "w": 54,
+        "h": 17
+      }
+    },
+    {
+      "id": "e553fc91-d0e0-4b11-9282-bff6e0d4148a",
+      "name": "1077-84",
+      "bounding_box": {
+        "x": 34,
+        "y": 189,
+        "w": 53,
+        "h": 14
+      }
+    },
+    {
+      "id": "1b6724ff-33b5-45a8-b623-e41fcb717a17",
+      "name": "7773",
+      "bounding_box": {
+        "x": 144,
+        "y": 187,
+        "w": 35,
+        "h": 20
+      }
+    },
+    {
+      "id": "51b143a0-4b08-4a2c-b3e9-3cff4cd28789",
+      "name": "7774",
+      "bounding_box": {
+        "x": 268,
+        "y": 190,
+        "w": 32,
+        "h": 15
+      }
+    },
+    {
+      "id": "c974d239-612c-4eed-b9f9-5c27303eb2d4",
+      "name": "attached",
+      "bounding_box": {
+        "x": 392,
+        "y": 191,
+        "w": 64,
+        "h": 17
+      }
+    },
+    {
+      "id": "5e85af79-23ac-4585-a4a1-1e57bc916098",
+      "name": "8098",
+      "bounding_box": {
+        "x": 556,
+        "y": 193,
+        "w": 39,
+        "h": 15
+      }
+    },
+    {
+      "id": "f4f0661c-81b5-4f38-a558-55b3cbfbe049",
+      "name": "mm",
+      "bounding_box": {
+        "x": 585,
+        "y": 281,
+        "w": 20,
+        "h": 10
+      }
+    },
+    {
+      "id": "c083f18a-ece6-450b-9089-bebdcde12610",
+      "name": "370mm",
+      "bounding_box": {
+        "x": 480,
+        "y": 366,
+        "w": 43,
+        "h": 15
+      }
+    },
+    {
+      "id": "5dd50794-c32b-44a7-b8cc-91c7fa574f24",
+      "name": "24.7mm",
+      "bounding_box": {
+        "x": 482,
+        "y": 390,
+        "w": 49,
+        "h": 15
+      }
+    },
+    {
+      "id": "fcb1ba3e-d58b-4461-88a9-627c7ad2af03",
+      "name": "626",
+      "bounding_box": {
+        "x": 494,
+        "y": 458,
+        "w": 25,
+        "h": 14
+      }
+    },
+    {
+      "id": "f7d5d04a-b3c7-466c-b14b-c5a40dc60614",
+      "name": "1509C",
+      "bounding_box": {
+        "x": 480,
+        "y": 482,
+        "w": 39,
+        "h": 11
+      }
+    },
+    {
+      "id": "b5e140a4-8f46-443e-a25f-7344716638a7",
+      "name": "white",
+      "bounding_box": {
+        "x": 198,
+        "y": 571,
+        "w": 45,
+        "h": 18
+      }
+    },
+    {
+      "id": "9836390b-7d35-4e4e-8777-a1a2eab48706",
+      "name": "blue",
+      "bounding_box": {
+        "x": 197,
+        "y": 595,
+        "w": 34,
+        "h": 17
+      }
+    },
+    {
+      "id": "6ca0eb2d-aef8-4efa-92e7-6fd28a748945",
+      "name": "white",
+      "bounding_box": {
+        "x": 197,
+        "y": 623,
+        "w": 45,
+        "h": 14
+      }
+    },
+    {
+      "id": "4391a204-92ed-4b90-92c1-038023255005",
+      "name": "white",
+      "bounding_box": {
+        "x": 198,
+        "y": 644,
+        "w": 38,
+        "h": 14
+      }
+    },
+    {
+      "id": "29c4d8a0-3309-4a54-b20e-c688fdaf7516",
+      "name": "production",
+      "bounding_box": {
+        "x": 479,
+        "y": 599,
+        "w": 78,
+        "h": 14
+      }
+    },
+    {
+      "id": "0a262543-c6f0-491a-ba44-806dabf14606",
+      "name": "4260",
+      "bounding_box": {
+        "x": 201,
+        "y": 433,
+        "w": 32,
+        "h": 15
+      }
+    },
+    {
+      "id": "f04d0f1a-a8bd-46a7-9bcb-0bee197ec669",
+      "name": "NA",
+      "bounding_box": {
+        "x": 198,
+        "y": 476,
+        "w": 22,
+        "h": 18
+      }
+    },
+    {
+      "id": "9476578e-346c-4368-ad35-5589a3e6042d",
+      "name": "T. Jessup on 2/13/84",
+      "bounding_box": {
+        "x": 221,
+        "y": 98,
+        "w": 154,
+        "h": 18
+      }
+    },
+    {
+      "id": "f1ae3120-a940-44c6-8eaf-bae996d1f135",
+      "name": "Mkt. Research Newport",
+      "bounding_box": {
+        "x": 165,
+        "y": 119,
+        "w": 167,
+        "h": 20
+      }
+    },
+    {
+      "id": "1a587cbd-8bc0-4934-a346-9a7fba8b268e",
+      "name": "W. Barnes",
+      "bounding_box": {
+        "x": 281,
+        "y": 144,
+        "w": 72,
+        "h": 18
+      }
+    },
+    {
+      "id": "48624090-68f6-46e3-bf3b-270282e1ed5f",
+      "name": "MK 9",
+      "bounding_box": {
+        "x": 203,
+        "y": 246,
+        "w": 36,
+        "h": 18
+      }
+    },
+    {
+      "id": "8bccbf66-8810-4d7c-9e9f-c449da40d970",
+      "name": "84.0 cm",
+      "bounding_box": {
+        "x": 203,
+        "y": 271,
+        "w": 49,
+        "h": 20
+      }
+    },
+    {
+      "id": "310ed09e-3530-4303-a873-457fc47e222c",
+      "name": "21.0 mm",
+      "bounding_box": {
+        "x": 204,
+        "y": 295,
+        "w": 51,
+        "h": 18
+      }
+    },
+    {
+      "id": "9af39528-55cc-49bc-9cb1-8b7979866639",
+      "name": "24.8 mm",
+      "bounding_box": {
+        "x": 204,
+        "y": 320,
+        "w": 46,
+        "h": 13
+      }
+    },
+    {
+      "id": "569626a2-740c-4acd-958e-8fc4aeeb2539",
+      "name": "96.0 g/100",
+      "bounding_box": {
+        "x": 204,
+        "y": 341,
+        "w": 76,
+        "h": 17
+      }
+    },
+    {
+      "id": "241f299a-3de1-4863-bb00-a8fd975267a5",
+      "name": "E- 554",
+      "bounding_box": {
+        "x": 203,
+        "y": 363,
+        "w": 40,
+        "h": 15
+      }
+    },
+    {
+      "id": "0b8ac2bc-77d9-4121-827b-a8136dd113b6",
+      "name": "51mm cork- Ecusta",
+      "bounding_box": {
+        "x": 173,
+        "y": 385,
+        "w": 132,
+        "h": 19
+      }
+    },
+    {
+      "id": "847c7db3-7a78-49fc-8d38-b0d952f5a274",
+      "name": "TOD 01042-4 lines perf.",
+      "bounding_box": {
+        "x": 133,
+        "y": 409,
+        "w": 173,
+        "h": 16
+      }
+    },
+    {
+      "id": "61fff186-7ed6-4167-9389-2f383b888f4e",
+      "name": "Mk II 85",
+      "bounding_box": {
+        "x": 197,
+        "y": 453,
+        "w": 65,
+        "h": 18
+      }
+    },
+    {
+      "id": "47b7246e-1207-42ae-a840-3266e3ae3977",
+      "name": "21mm",
+      "bounding_box": {
+        "x": 482,
+        "y": 275,
+        "w": 38,
+        "h": 17
+      }
+    },
+    {
+      "id": "e73ea30a-af73-422d-beac-bdf3bff25dd1",
+      "name": "3.3 35,000y",
+      "bounding_box": {
+        "x": 480,
+        "y": 299,
+        "w": 85,
+        "h": 17
+      }
+    },
+    {
+      "id": "52554ff5-07e8-4676-8516-38883cfb0dc3",
+      "name": "RE- 2218",
+      "bounding_box": {
+        "x": 475,
+        "y": 323,
+        "w": 54,
+        "h": 14
+      }
+    },
+    {
+      "id": "cfbfd26a-7236-4d3b-8a27-7ae62bde7a85",
+      "name": "126 mm",
+      "bounding_box": {
+        "x": 482,
+        "y": 344,
+        "w": 47,
+        "h": 16
+      }
+    },
+    {
+      "id": "aca64eaa-4217-449b-b0c0-5bd46cb5af78",
+      "name": "81.0 g/100",
+      "bounding_box": {
+        "x": 480,
+        "y": 412,
+        "w": 78,
+        "h": 15
+      }
+    },
+    {
+      "id": "b0f33e8e-1f8a-4d6d-a942-2920ca6f85d7",
+      "name": "7% Kent",
+      "bounding_box": {
+        "x": 480,
+        "y": 433,
+        "w": 57,
+        "h": 17
+      }
+    },
+    {
+      "id": "a9570546-4085-48be-84d2-1fdeef168ec6",
+      "name": "production, Barnes",
+      "bounding_box": {
+        "x": 473,
+        "y": 577,
+        "w": 146,
+        "h": 16
+      }
+    },
+    {
+      "id": "09eb0371-8b43-4663-a59c-2d33002629e9",
+      "name": "Barnes, Fernald",
+      "bounding_box": {
+        "x": 476,
+        "y": 623,
+        "w": 117,
+        "h": 15
+      }
+    },
+    {
+      "id": "0c4f78dc-4326-4d25-b878-5d9dfa168f14",
+      "name": "- -",
+      "bounding_box": {
+        "x": 472,
+        "y": 648,
+        "w": 17,
+        "h": 16
+      }
+    },
+    {
+      "id": "beda57c3-4e65-49f7-9144-7c291da95076",
+      "name": "T. Skinner",
+      "bounding_box": {
+        "x": 475,
+        "y": 668,
+        "w": 80,
+        "h": 14
+      }
+    },
+    {
+      "id": "539a8827-561a-4c0c-b09f-e721fe637276",
+      "name": "code #1746",
+      "bounding_box": {
+        "x": 198,
+        "y": 662,
+        "w": 71,
+        "h": 16
+      }
+    },
+    {
+      "id": "5527e3bb-ce46-451d-b82b-f1483a805467",
+      "name": "30 ctns.",
+      "bounding_box": {
+        "x": 198,
+        "y": 732,
+        "w": 59,
+        "h": 17
+      }
+    },
+    {
+      "id": "3d7de0af-ab81-4c45-a3f2-bc5426c1b6da",
+      "name": "1100 pks.",
+      "bounding_box": {
+        "x": 179,
+        "y": 753,
+        "w": 69,
+        "h": 18
+      }
+    },
+    {
+      "id": "00647853-b00e-49c5-8d5f-13fb07cf58c7",
+      "name": "Moisture analysis Menthol analysis Tar & nicotine analysis",
+      "bounding_box": {
+        "x": 328,
+        "y": 735,
+        "w": 181,
+        "h": 59
+      }
+    },
+    {
+      "id": "35c82bd2-0e0f-4c06-99f6-5c30d67c3685",
+      "name": "1. Cigts. to be packed in white labels printed with \"20 Class A. ATF Auth. #47 sample not for sale, all applicable state taxes paid, and code No. 746.\"",
+      "bounding_box": {
+        "x": 22,
+        "y": 817,
+        "w": 544,
+        "h": 64
+      }
+    },
+    {
+      "id": "e346329c-b1d3-4979-8b59-fa4dc227caa4",
+      "name": "2. Cigts. to be inspected, placed in pk. mailers and shipped Inc., for Mkt. Rsh. Study.",
+      "bounding_box": {
+        "x": 21,
+        "y": 885,
+        "w": 479,
+        "h": 43
+      }
+    }
+  ]
+}

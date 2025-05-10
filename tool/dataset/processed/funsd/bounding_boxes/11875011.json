@@ -1,0 +1,62 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "3ab7449c-3dd4-4673-ab60-085e9dfbd777",
+      "name": "1-23-95",
+      "bounding_box": {
+        "x": 297,
+        "y": 796,
+        "w": 43,
+        "h": 17
+      }
+    },
+    {
+      "id": "ee1d357a-aba2-4a19-b17e-dadf412bce42",
+      "name": "1995- 13D",
+      "bounding_box": {
+        "x": 223,
+        "y": 140,
+        "w": 58,
+        "h": 17
+      }
+    },
+    {
+      "id": "c399b907-c420-48ae-a8de-a1ba6cda0a3b",
+      "name": "H.L. Williams",
+      "bounding_box": {
+        "x": 221,
+        "y": 159,
+        "w": 85,
+        "h": 13
+      }
+    },
+    {
+      "id": "429b13be-3605-4525-a523-8670bd3ce7ce",
+      "name": "Goldfarb Consultants",
+      "bounding_box": {
+        "x": 221,
+        "y": 174,
+        "w": 121,
+        "h": 13
+      }
+    },
+    {
+      "id": "1f7bdf4e-ebed-422d-8871-fcb2b859ab01",
+      "name": "1-26-95 9:00 AM EST",
+      "bounding_box": {
+        "x": 297,
+        "y": 819,
+        "w": 136,
+        "h": 15
+      }
+    }
+  ]
+}

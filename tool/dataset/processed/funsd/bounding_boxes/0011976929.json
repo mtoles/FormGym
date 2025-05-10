@@ -1,0 +1,122 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "edf9bb97-5bfe-49e3-819a-3178d6a6f72a",
+      "name": "700",
+      "bounding_box": {
+        "x": 327,
+        "y": 383,
+        "w": 29,
+        "h": 15
+      }
+    },
+    {
+      "id": "f4bab465-7bc7-4ed4-80aa-2ff7516800e2",
+      "name": "Dundee",
+      "bounding_box": {
+        "x": 489,
+        "y": 176,
+        "w": 54,
+        "h": 22
+      }
+    },
+    {
+      "id": "ecdecc39-44e7-4cf0-be84-cea750c0d1db",
+      "name": "Illinois",
+      "bounding_box": {
+        "x": 147,
+        "y": 183,
+        "w": 70,
+        "h": 17
+      }
+    },
+    {
+      "id": "be7198c4-c60a-4ddc-ae1f-7a388f662971",
+      "name": "Beauty Contest",
+      "bounding_box": {
+        "x": 300,
+        "y": 237,
+        "w": 117,
+        "h": 19
+      }
+    },
+    {
+      "id": "1317524b-3609-4aa8-be1a-ec1f3380a754",
+      "name": "March 3rd, 4th & 5th,",
+      "bounding_box": {
+        "x": 489,
+        "y": 376,
+        "w": 180,
+        "h": 17
+      }
+    },
+    {
+      "id": "03fec870-8eb3-4c8b-8ad7-49d02cebf5af",
+      "name": "Mrs. Illinois Beauty Pageant",
+      "bounding_box": {
+        "x": 297,
+        "y": 433,
+        "w": 238,
+        "h": 19
+      }
+    },
+    {
+      "id": "fca86e72-931a-4592-963a-dcf502cdd459",
+      "name": "Ms. Joy Weathers (Sales) 312/ 426 - 8000",
+      "bounding_box": {
+        "x": 300,
+        "y": 521,
+        "w": 313,
+        "h": 18
+      }
+    },
+    {
+      "id": "2526f16d-ebcf-4209-a9ca-dbce1c1b4db8",
+      "name": "90 % White - 10 % Black Age category 21 yrs. to 45 yrs.",
+      "bounding_box": {
+        "x": 300,
+        "y": 577,
+        "w": 260,
+        "h": 48
+      }
+    },
+    {
+      "id": "084a8cfd-43d9-4f38-b213-f0e00c7e6e16",
+      "name": "BARCLAY sampling",
+      "bounding_box": {
+        "x": 503,
+        "y": 690,
+        "w": 138,
+        "h": 18
+      }
+    },
+    {
+      "id": "bfc3ef20-b36e-4b49-8c9c-903b738199a1",
+      "name": "2 - 12M cases mixed.",
+      "bounding_box": {
+        "x": 165,
+        "y": 721,
+        "w": 177,
+        "h": 19
+      }
+    },
+    {
+      "id": "2798c97d-946e-4fd3-9785-b6c4489e179e",
+      "name": "To be placed on tables by B & W Reps.",
+      "bounding_box": {
+        "x": 169,
+        "y": 747,
+        "w": 309,
+        "h": 21
+      }
+    }
+  ]
+}

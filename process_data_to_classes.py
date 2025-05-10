@@ -72,7 +72,7 @@ def normalize_field_name(name):
 def process_annotations(dataset_path=None):
     """Process all annotation JSON files and extract unique fields"""
     if dataset_path is None:
-        dataset_path = './tool/dataset/processed/funsd'
+        dataset_path = './tool/dataset/funsd'
     annotations_dir = Path(f'{dataset_path}/annotations')
     all_fields = {}
     processed_jsons = []
@@ -80,7 +80,7 @@ def process_annotations(dataset_path=None):
     checkbox_fields = {}
     
     # Get all processed JSON files
-    for json_file in annotations_dir.glob('*_processed.json'):
+    for json_file in annotations_dir.glob('*.json'):
         json_file_paths.append(json_file)
     
     # Sort the JSON files to ensure consistent ordering
@@ -178,7 +178,8 @@ def process_annotations(dataset_path=None):
                 else:
                     # Handle array values by joining them with spaces
                     if isinstance(value, list):
-                        all_fields[form_name][normalized_key] = ' '.join(value) if value else ""
+                        # Convert all items to strings before joining
+                        all_fields[form_name][normalized_key] = ' '.join(str(item) for item in value) if value else ""
                     else:
                         all_fields[form_name][normalized_key] = value
             

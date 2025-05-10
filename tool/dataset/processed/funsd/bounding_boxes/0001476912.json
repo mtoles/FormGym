@@ -1,0 +1,242 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "2147b402-632c-4709-b442-4486d2bd57bb",
+      "name": "8/8",
+      "bounding_box": {
+        "x": 302,
+        "y": 359,
+        "w": 28,
+        "h": 15
+      }
+    },
+    {
+      "id": "fd72f5cd-76ef-436c-9adb-8a21eed19459",
+      "name": "336",
+      "bounding_box": {
+        "x": 548,
+        "y": 196,
+        "w": 27,
+        "h": 12
+      }
+    },
+    {
+      "id": "0d5ca682-0204-46e9-87ff-9c17bc9c31f4",
+      "name": "(234)",
+      "bounding_box": {
+        "x": 542,
+        "y": 211,
+        "w": 43,
+        "h": 15
+      }
+    },
+    {
+      "id": "d64fca35-b256-407f-b7a2-15b0f1f98638",
+      "name": "Chicago",
+      "bounding_box": {
+        "x": 111,
+        "y": 523,
+        "w": 61,
+        "h": 15
+      }
+    },
+    {
+      "id": "d832d6f1-a06d-4d15-8546-ff561aa284b6",
+      "name": "1.7",
+      "bounding_box": {
+        "x": 264,
+        "y": 467,
+        "w": 27,
+        "h": 15
+      }
+    },
+    {
+      "id": "1a0a8ad7-78ed-4391-b9d4-f77c43aa40d8",
+      "name": "0.0",
+      "bounding_box": {
+        "x": 264,
+        "y": 508,
+        "w": 28,
+        "h": 13
+      }
+    },
+    {
+      "id": "dbcc5421-0d03-4db6-99be-250ec3b09052",
+      "name": "3.3",
+      "bounding_box": {
+        "x": 264,
+        "y": 522,
+        "w": 27,
+        "h": 13
+      }
+    },
+    {
+      "id": "7cb6f34a-92f8-4252-ad4b-98c0c9e2d37f",
+      "name": "0.0",
+      "bounding_box": {
+        "x": 266,
+        "y": 576,
+        "w": 30,
+        "h": 13
+      }
+    },
+    {
+      "id": "b5dd4029-5198-4e0a-954f-dafded727c7f",
+      "name": "3.3",
+      "bounding_box": {
+        "x": 266,
+        "y": 590,
+        "w": 28,
+        "h": 13
+      }
+    },
+    {
+      "id": "e9e7c5db-e75d-4948-b63f-9e552578efb8",
+      "name": "0.0",
+      "bounding_box": {
+        "x": 266,
+        "y": 643,
+        "w": 28,
+        "h": 12
+      }
+    },
+    {
+      "id": "c3b1e521-c30b-42fe-8b20-9777914f8ce7",
+      "name": "0.0",
+      "bounding_box": {
+        "x": 264,
+        "y": 658,
+        "w": 30,
+        "h": 10
+      }
+    },
+    {
+      "id": "c6622d60-54ec-47c2-bcbf-7e914abb2857",
+      "name": "0.0",
+      "bounding_box": {
+        "x": 266,
+        "y": 671,
+        "w": 27,
+        "h": 12
+      }
+    },
+    {
+      "id": "12bc093e-328d-43fb-a7ea-9468a8b9953d",
+      "name": "9.3",
+      "bounding_box": {
+        "x": 267,
+        "y": 683,
+        "w": 27,
+        "h": 13
+      }
+    },
+    {
+      "id": "039a2dd2-d7f4-4447-8dfc-c0c23c4d5b30",
+      "name": "0.0",
+      "bounding_box": {
+        "x": 266,
+        "y": 723,
+        "w": 30,
+        "h": 12
+      }
+    },
+    {
+      "id": "b7ebf48f-8305-447e-8119-cff6961c2b67",
+      "name": "5.0",
+      "bounding_box": {
+        "x": 267,
+        "y": 738,
+        "w": 28,
+        "h": 13
+      }
+    },
+    {
+      "id": "9d47daaa-1457-4239-801a-7f0cb8b48f0c",
+      "name": "RALEIGH (BELAIR portion not tested)",
+      "bounding_box": {
+        "x": 111,
+        "y": 171,
+        "w": 286,
+        "h": 18
+      }
+    },
+    {
+      "id": "972d6361-a621-408d-a320-e9ec7b44678d",
+      "name": "1969- 105",
+      "bounding_box": {
+        "x": 530,
+        "y": 169,
+        "w": 68,
+        "h": 15
+      }
+    },
+    {
+      "id": "fa15e3f3-59e8-4ca3-afc3-e60b7b36c149",
+      "name": "LAKE- NEW PACK: 40 (with BELAIR Badmin- ton: 20)",
+      "bounding_box": {
+        "x": 115,
+        "y": 198,
+        "w": 320,
+        "h": 26
+      }
+    },
+    {
+      "id": "37ba1606-1ff1-4320-8c1f-ceb77768ae63",
+      "name": "BW- RT- 69-",
+      "bounding_box": {
+        "x": 113,
+        "y": 228,
+        "w": 76,
+        "h": 13
+      }
+    },
+    {
+      "id": "66d37895-f633-48c6-a51c-848a49a62a49",
+      "name": "AUDIENCE STUDIES",
+      "bounding_box": {
+        "x": 113,
+        "y": 254,
+        "w": 139,
+        "h": 15
+      }
+    },
+    {
+      "id": "2c508518-72f7-4ec3-a0c5-16d887e55e12",
+      "name": "8/5 and 6",
+      "bounding_box": {
+        "x": 287,
+        "y": 331,
+        "w": 73,
+        "h": 18
+      }
+    },
+    {
+      "id": "4c7d116f-e57b-4dbd-8481-15104d9a2e27",
+      "name": "This commercial was tested in color.",
+      "bounding_box": {
+        "x": 449,
+        "y": 467,
+        "w": 156,
+        "h": 24
+      }
+    },
+    {
+      "id": "9722f54a-4997-4df8-bf51-251e69a04869",
+      "name": "Los",
+      "bounding_box": {
+        "x": 106,
+        "y": 512,
+        "w": 100,
+        "h": 10
+      }
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "e7b8b456-f17f-4d3b-8a06-16d747cc1cad",
+      "name": "7559",
+      "bounding_box": {
+        "x": 191,
+        "y": 216,
+        "w": 24,
+        "h": 13
+      }
+    },
+    {
+      "id": "c69c9034-7ac5-41f4-9494-916bd2aabca9",
+      "name": "BKOOL",
+      "bounding_box": {
+        "x": 186,
+        "y": 247,
+        "w": 34,
+        "h": 13
+      }
+    },
+    {
+      "id": "da6b3b45-11b3-4b3e-a899-4a038165046e",
+      "name": "NA",
+      "bounding_box": {
+        "x": 172,
+        "y": 465,
+        "w": 13,
+        "h": 10
+      }
+    },
+    {
+      "id": "acc0cff0-cbdf-41da-8ce8-f7928b473e86",
+      "name": "CMS Amerada Hess Dispenser Sign",
+      "bounding_box": {
+        "x": 212,
+        "y": 275,
+        "w": 155,
+        "h": 13
+      }
+    },
+    {
+      "id": "c619bc65-e708-4cbc-bb46-ff9bfef4b8b8",
+      "name": "12/ 15/ 97",
+      "bounding_box": {
+        "x": 180,
+        "y": 306,
+        "w": 37,
+        "h": 11
+      }
+    },
+    {
+      "id": "fa36f52f-2308-45b5-b136-24b04bec3667",
+      "name": "261 sq",
+      "bounding_box": {
+        "x": 232,
+        "y": 334,
+        "w": 34,
+        "h": 11
+      }
+    },
+    {
+      "id": "4926c5a8-eb90-40ff-b055-4587d61f77ad",
+      "name": "14 1/2 X 18\"",
+      "bounding_box": {
+        "x": 193,
+        "y": 377,
+        "w": 55,
+        "h": 13
+      }
+    },
+    {
+      "id": "a0a77fad-b2fd-47e2-adbb-19c4e8422909",
+      "name": "3A 14 1/2\" X 8\" - 116 sq.\"",
+      "bounding_box": {
+        "x": 191,
+        "y": 422,
+        "w": 99,
+        "h": 25
+      }
+    },
+    {
+      "id": "ee917ba3-87a0-496c-ae32-7e4e771ce615",
+      "name": "",
+      "bounding_box": {
+        "x": 182,
+        "y": 531,
+        "w": 79,
+        "h": 30
+      }
+    },
+    {
+      "id": "1c67969a-881e-480f-bdfe-8ab8639920fa",
+      "name": "",
+      "bounding_box": {
+        "x": 353,
+        "y": 532,
+        "w": 47,
+        "h": 31
+      }
+    },
+    {
+      "id": "6db52e66-4238-4d8f-a10b-d648ccc7aa34",
+      "name": "",
+      "bounding_box": {
+        "x": 489,
+        "y": 529,
+        "w": 70,
+        "h": 31
+      }
+    }
+  ]
+}

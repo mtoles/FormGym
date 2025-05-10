@@ -1,0 +1,392 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 771,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "5a77b4d5-e2b8-4ea5-a83d-8387fc7e8085",
+      "name": "x",
+      "bounding_box": {
+        "x": 574,
+        "y": 204,
+        "w": 14,
+        "h": 14
+      }
+    },
+    {
+      "id": "3ce7fcca-9c4b-44fd-8dea-7eba605a8e25",
+      "name": "-0-",
+      "bounding_box": {
+        "x": 410,
+        "y": 296,
+        "w": 21,
+        "h": 13
+      }
+    },
+    {
+      "id": "e2fa283c-3c17-4f18-99a3-8123eb6eefea",
+      "name": "-O-",
+      "bounding_box": {
+        "x": 410,
+        "y": 322,
+        "w": 21,
+        "h": 17
+      }
+    },
+    {
+      "id": "e795a76a-bf03-4b2d-9e6f-fd88cacf972d",
+      "name": "CAPRI",
+      "bounding_box": {
+        "x": 461,
+        "y": 893,
+        "w": 42,
+        "h": 17
+      }
+    },
+    {
+      "id": "a7359506-0b77-4a60-808d-9d68c2a708a1",
+      "name": "C- 40",
+      "bounding_box": {
+        "x": 567,
+        "y": 131,
+        "w": 43,
+        "h": 17
+      }
+    },
+    {
+      "id": "74ddaa83-a5b5-41b7-92ae-13ad667d832f",
+      "name": "10/ /9 87",
+      "bounding_box": {
+        "x": 103,
+        "y": 131,
+        "w": 66,
+        "h": 19
+      }
+    },
+    {
+      "id": "9195e73d-0b48-4f64-8d61-5c26830e790f",
+      "name": "California- A&U Wave II",
+      "bounding_box": {
+        "x": 277,
+        "y": 160,
+        "w": 180,
+        "h": 19
+      }
+    },
+    {
+      "id": "54651143-0261-41e3-9d18-dbdaa4cde67e",
+      "name": "S. H. Trebilcock",
+      "bounding_box": {
+        "x": 162,
+        "y": 203,
+        "w": 123,
+        "h": 18
+      }
+    },
+    {
+      "id": "3248b1b4-5a9f-4f2c-92d8-6407067cd79e",
+      "name": "$47 .22",
+      "bounding_box": {
+        "x": 605,
+        "y": 294,
+        "w": 51,
+        "h": 18
+      }
+    },
+    {
+      "id": "d66a57d8-7a5a-44d4-9677-4c8616dcd74b",
+      "name": "$74 .67",
+      "bounding_box": {
+        "x": 605,
+        "y": 318,
+        "w": 53,
+        "h": 22
+      }
+    },
+    {
+      "id": "d9a9317f-c6a5-42a6-9b9a-4e7a0d3a16ae",
+      "name": "$112 000 +/ - 10%",
+      "bounding_box": {
+        "x": 459,
+        "y": 322,
+        "w": 120,
+        "h": 19
+      }
+    },
+    {
+      "id": "6f819e82-2bdb-44d9-973d-e3dd4832ac58",
+      "name": "$70 ,825 + - 10%",
+      "bounding_box": {
+        "x": 465,
+        "y": 291,
+        "w": 105,
+        "h": 19
+      }
+    },
+    {
+      "id": "28c8f689-d8e3-41d6-b66b-ca503f3c885e",
+      "name": "$70 70,825 +/ - 10%",
+      "bounding_box": {
+        "x": 252,
+        "y": 291,
+        "w": 123,
+        "h": 22
+      }
+    },
+    {
+      "id": "220af6ab-5ac5-4a50-a918-9913d0ee1bfd",
+      "name": "$112, 000 +/ - 10%",
+      "bounding_box": {
+        "x": 256,
+        "y": 321,
+        "w": 121,
+        "h": 20
+      }
+    },
+    {
+      "id": "9d7a114e-bbcc-4564-82fb-e490d3be9c41",
+      "name": "Kapuler Market Research",
+      "bounding_box": {
+        "x": 59,
+        "y": 292,
+        "w": 169,
+        "h": 21
+      }
+    },
+    {
+      "id": "9710bfe4-41ca-4bb2-b925-ddf496532074",
+      "name": "Market Facts, Inc.",
+      "bounding_box": {
+        "x": 60,
+        "y": 322,
+        "w": 134,
+        "h": 19
+      }
+    },
+    {
+      "id": "84042989-f0a5-417b-a1e6-a96e932c5190",
+      "name": "8/ 3/ 87",
+      "bounding_box": {
+        "x": 171,
+        "y": 380,
+        "w": 51,
+        "h": 20
+      }
+    },
+    {
+      "id": "96beda41-7b36-4b44-a638-33703f8914ac",
+      "name": "9/ 23/ 87*",
+      "bounding_box": {
+        "x": 177,
+        "y": 407,
+        "w": 67,
+        "h": 21
+      }
+    },
+    {
+      "id": "743c7cae-8e73-4fd5-a945-97189806bbcb",
+      "name": "10/ 11/ 87",
+      "bounding_box": {
+        "x": 169,
+        "y": 438,
+        "w": 61,
+        "h": 19
+      }
+    },
+    {
+      "id": "e404451c-2576-4808-a4e0-60687dc4f1c6",
+      "name": "11/ 16/ 87",
+      "bounding_box": {
+        "x": 180,
+        "y": 466,
+        "w": 63,
+        "h": 21
+      }
+    },
+    {
+      "id": "938d6635-3fee-48ca-b626-9c5feddc7069",
+      "name": "780, 900. 00",
+      "bounding_box": {
+        "x": 534,
+        "y": 379,
+        "w": 91,
+        "h": 21
+      }
+    },
+    {
+      "id": "c3b0b2ac-4cb7-4e18-ae33-cf4724d7f93b",
+      "name": "(381, 583. 08)",
+      "bounding_box": {
+        "x": 525,
+        "y": 408,
+        "w": 103,
+        "h": 22
+      }
+    },
+    {
+      "id": "db7fd65c-735b-43b1-9abe-1e587c6eb430",
+      "name": "-70, 825. 00",
+      "bounding_box": {
+        "x": 535,
+        "y": 440,
+        "w": 89,
+        "h": 19
+      }
+    },
+    {
+      "id": "3ed78fd1-4da7-40ab-aaed-b5f65ccc6733",
+      "name": "(452 ,408, 08)",
+      "bounding_box": {
+        "x": 525,
+        "y": 525,
+        "w": 105,
+        "h": 21
+      }
+    },
+    {
+      "id": "62fbf521-9d8f-445a-be36-2ea2084e199e",
+      "name": "1, 233, 308. 08",
+      "bounding_box": {
+        "x": 513,
+        "y": 570,
+        "w": 113,
+        "h": 22
+      }
+    },
+    {
+      "id": "bcb23f9a-efe8-46de-9320-6ba8a6768b34",
+      "name": "1. 500",
+      "bounding_box": {
+        "x": 152,
+        "y": 614,
+        "w": 42,
+        "h": 18
+      }
+    },
+    {
+      "id": "fa80b4ac-d65a-44c9-9400-c433735258d2",
+      "name": "Kapuler Marketing Research",
+      "bounding_box": {
+        "x": 224,
+        "y": 630,
+        "w": 195,
+        "h": 21
+      }
+    },
+    {
+      "id": "12480d55-f304-4e10-a30c-3a348c42c719",
+      "name": "Low bidder.",
+      "bounding_box": {
+        "x": 274,
+        "y": 643,
+        "w": 82,
+        "h": 16
+      }
+    },
+    {
+      "id": "f0852695-97f7-4b27-a445-0f3627b0cc27",
+      "name": "L J L. J. Spurtier",
+      "bounding_box": {
+        "x": 150,
+        "y": 697,
+        "w": 166,
+        "h": 40
+      }
+    },
+    {
+      "id": "447068ff-9b01-4494-a1c3-9689a78062c1",
+      "name": "L. E. Gravely",
+      "bounding_box": {
+        "x": 147,
+        "y": 719,
+        "w": 236,
+        "h": 48
+      }
+    },
+    {
+      "id": "c5b58278-f962-4bf8-a2f6-c04763ae8803",
+      "name": "K. F. Lyle",
+      "bounding_box": {
+        "x": 147,
+        "y": 836,
+        "w": 84,
+        "h": 15
+      }
+    },
+    {
+      "id": "fbc182b6-a4b3-4078-8cf8-b2d5cd7d8e09",
+      "name": "Project File",
+      "bounding_box": {
+        "x": 131,
+        "y": 849,
+        "w": 91,
+        "h": 17
+      }
+    },
+    {
+      "id": "343ff30e-ea56-4bfc-8594-0936aaf0be7d",
+      "name": "S. Willinger (3)",
+      "bounding_box": {
+        "x": 125,
+        "y": 864,
+        "w": 123,
+        "h": 15
+      }
+    },
+    {
+      "id": "21b574c8-d72f-432c-a98a-5002e256969b",
+      "name": "G. D. Raphael",
+      "bounding_box": {
+        "x": 130,
+        "y": 880,
+        "w": 105,
+        "h": 14
+      }
+    },
+    {
+      "id": "c516cc23-0e50-42ce-ac69-c1c148e37ce9",
+      "name": "V. Hansberry (If Int.)",
+      "bounding_box": {
+        "x": 130,
+        "y": 892,
+        "w": 161,
+        "h": 20
+      }
+    },
+    {
+      "id": "fc96065f-dc51-4c02-aa73-8a62627d258e",
+      "name": "1987- 113CA",
+      "bounding_box": {
+        "x": 462,
+        "y": 861,
+        "w": 74,
+        "h": 19
+      }
+    },
+    {
+      "id": "0d01a0fd-1af1-428e-b2f8-31ecda8c19e2",
+      "name": "10/ 9/ 87",
+      "bounding_box": {
+        "x": 461,
+        "y": 699,
+        "w": 83,
+        "h": 29
+      }
+    },
+    {
+      "id": "5636243a-90e0-4291-a576-87f0e66ee896",
+      "name": "10/ 13/ 87",
+      "bounding_box": {
+        "x": 456,
+        "y": 725,
+        "w": 86,
+        "h": 25
+      }
+    }
+  ]
+}

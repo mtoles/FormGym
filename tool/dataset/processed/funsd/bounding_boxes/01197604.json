@@ -1,0 +1,142 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 775,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "b5cd4eec-8846-4e71-97cd-fa0e09263abc",
+      "name": "195",
+      "bounding_box": {
+        "x": 264,
+        "y": 156,
+        "w": 28,
+        "h": 17
+      }
+    },
+    {
+      "id": "631e6e45-9932-4216-b6cd-b0435fa7c3ae",
+      "name": "II",
+      "bounding_box": {
+        "x": 263,
+        "y": 187,
+        "w": 21,
+        "h": 17
+      }
+    },
+    {
+      "id": "632220c1-2808-44b7-a586-8be982ff3f24",
+      "name": "Sample No. 1166, RD 308",
+      "bounding_box": {
+        "x": 265,
+        "y": 218,
+        "w": 188,
+        "h": 18
+      }
+    },
+    {
+      "id": "fda2f30d-562f-42ef-a53e-c6f98631bd30",
+      "name": "OLD GOLD Straights + 3% KNO3",
+      "bounding_box": {
+        "x": 212,
+        "y": 249,
+        "w": 214,
+        "h": 18
+      }
+    },
+    {
+      "id": "55bb0a86-2e11-4c62-aa09-9bd782751799",
+      "name": "300 mm. tar, 100 mm acetone",
+      "bounding_box": {
+        "x": 226,
+        "y": 310,
+        "w": 223,
+        "h": 19
+      }
+    },
+    {
+      "id": "df28a190-9318-4d5b-aa29-444400ec27ba",
+      "name": "Water removed by co- distillation with acetone under vacum at 45 C.",
+      "bounding_box": {
+        "x": 288,
+        "y": 342,
+        "w": 344,
+        "h": 48
+      }
+    },
+    {
+      "id": "cd5b84c6-5e53-4676-b050-b83e18f8cdd0",
+      "name": "100 unit",
+      "bounding_box": {
+        "x": 212,
+        "y": 434,
+        "w": 61,
+        "h": 18
+      }
+    },
+    {
+      "id": "36c70a50-45bf-48de-bbfb-b9f30456fd89",
+      "name": "Railway Express",
+      "bounding_box": {
+        "x": 209,
+        "y": 464,
+        "w": 119,
+        "h": 19
+      }
+    },
+    {
+      "id": "085edbfc-b5d2-47c5-90cc-cc7a699ac1ad",
+      "name": "Dr. Dietrich Hoffman The Kettering New York, New York",
+      "bounding_box": {
+        "x": 212,
+        "y": 494,
+        "w": 182,
+        "h": 79
+      }
+    },
+    {
+      "id": "7e941e40-5ec4-4f8d-b1ea-38ad7b509b03",
+      "name": "November 2, 1965",
+      "bounding_box": {
+        "x": 263,
+        "y": 585,
+        "w": 124,
+        "h": 18
+      }
+    },
+    {
+      "id": "d5e9da76-c2f4-435f-ba96-76bbef990d0e",
+      "name": "150 gm",
+      "bounding_box": {
+        "x": 264,
+        "y": 617,
+        "w": 52,
+        "h": 17
+      }
+    },
+    {
+      "id": "4a5a4f5c-8809-4128-a41f-ed0197eee116",
+      "name": "February, 136",
+      "bounding_box": {
+        "x": 261,
+        "y": 647,
+        "w": 106,
+        "h": 18
+      }
+    },
+    {
+      "id": "d07a4102-b35f-4271-915a-088a081dcf62",
+      "name": "Moisture content of tar .48% as determined by near infrared spectroscopy",
+      "bounding_box": {
+        "x": 120,
+        "y": 708,
+        "w": 508,
+        "h": 46
+      }
+    }
+  ]
+}

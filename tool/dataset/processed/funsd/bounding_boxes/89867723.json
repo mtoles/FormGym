@@ -1,0 +1,182 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 802,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "56056d9a-b736-4555-b46a-274e3ca8d9cc",
+      "name": "",
+      "bounding_box": {
+        "x": 229,
+        "y": 645,
+        "w": 117,
+        "h": 31
+      }
+    },
+    {
+      "id": "a54d3444-419e-4c8f-9bc3-bea24bb2c9f4",
+      "name": "",
+      "bounding_box": {
+        "x": 228,
+        "y": 679,
+        "w": 50,
+        "h": 29
+      }
+    },
+    {
+      "id": "20369769-f4a6-4ad0-84af-398368eac1e6",
+      "name": "",
+      "bounding_box": {
+        "x": 219,
+        "y": 708,
+        "w": 74,
+        "h": 77
+      }
+    },
+    {
+      "id": "eba56dd0-18f8-4b82-b73d-8353cb89cc30",
+      "name": "",
+      "bounding_box": {
+        "x": 204,
+        "y": 813,
+        "w": 169,
+        "h": 91
+      }
+    },
+    {
+      "id": "83b12365-37f0-4c57-9fb8-d2e875bb0c7c",
+      "name": "X",
+      "bounding_box": {
+        "x": 320,
+        "y": 622,
+        "w": 11,
+        "h": 13
+      }
+    },
+    {
+      "id": "74bf2757-0274-4f3c-ab81-597f30284269",
+      "name": "X",
+      "bounding_box": {
+        "x": 318,
+        "y": 637,
+        "w": 15,
+        "h": 10
+      }
+    },
+    {
+      "id": "f58e0e38-31a2-459e-8ab8-b8e71f9c2492",
+      "name": "April 27, 1981",
+      "bounding_box": {
+        "x": 577,
+        "y": 10,
+        "w": 103,
+        "h": 17
+      }
+    },
+    {
+      "id": "b66d6663-118d-4007-961d-678f632d1054",
+      "name": "New Products",
+      "bounding_box": {
+        "x": 203,
+        "y": 82,
+        "w": 86,
+        "h": 15
+      }
+    },
+    {
+      "id": "f033a339-43ac-419f-b2dc-8d5eb87dec2b",
+      "name": "No Side Stream Smoke Focus Groups",
+      "bounding_box": {
+        "x": 429,
+        "y": 73,
+        "w": 131,
+        "h": 23
+      }
+    },
+    {
+      "id": "351ee6f2-928c-49e6-b1ef-5cf3a19ca6a5",
+      "name": "5546/ 1481",
+      "bounding_box": {
+        "x": 634,
+        "y": 80,
+        "w": 66,
+        "h": 18
+      }
+    },
+    {
+      "id": "a0ca28f1-9129-4405-ab64-f0b8dc8e77e1",
+      "name": "$ 6.816",
+      "bounding_box": {
+        "x": 251,
+        "y": 591,
+        "w": 45,
+        "h": 15
+      }
+    },
+    {
+      "id": "5cd6c99d-abb3-4d07-8c5d-46a63e0830b2",
+      "name": "Ruth Manko Assoc.",
+      "bounding_box": {
+        "x": 584,
+        "y": 591,
+        "w": 119,
+        "h": 18
+      }
+    },
+    {
+      "id": "523a77ff-6042-4592-a977-64e4f3ed1882",
+      "name": "Suburban Associates",
+      "bounding_box": {
+        "x": 554,
+        "y": 608,
+        "w": 140,
+        "h": 14
+      }
+    },
+    {
+      "id": "c499fd18-2c4e-44f6-bbaf-96dcb7198c7c",
+      "name": "D' Arcy/ deGarmo",
+      "bounding_box": {
+        "x": 557,
+        "y": 620,
+        "w": 103,
+        "h": 18
+      }
+    },
+    {
+      "id": "16287573-f9b7-4aa5-9365-f1fe2ccdc04e",
+      "name": "816. 00",
+      "bounding_box": {
+        "x": 641,
+        "y": 837,
+        "w": 44,
+        "h": 14
+      }
+    },
+    {
+      "id": "33bb904f-1a02-4604-98c3-4196d797aa84",
+      "name": "1. 500. 00",
+      "bounding_box": {
+        "x": 624,
+        "y": 823,
+        "w": 61,
+        "h": 13
+      }
+    },
+    {
+      "id": "74f6b4f6-7620-44a5-9a83-c321585d2275",
+      "name": "$ 4. 500. 00",
+      "bounding_box": {
+        "x": 622,
+        "y": 807,
+        "w": 63,
+        "h": 15
+      }
+    }
+  ]
+}

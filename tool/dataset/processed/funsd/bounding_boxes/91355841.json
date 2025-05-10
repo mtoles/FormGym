@@ -1,0 +1,252 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 802,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "7966bb13-5147-4e1d-9d05-0700a058f782",
+      "name": "A. L. EVERETT, MANAGER, CHAIN ACCOUNTS - ATLANTA, GA",
+      "bounding_box": {
+        "x": 253,
+        "y": 131,
+        "w": 449,
+        "h": 15
+      }
+    },
+    {
+      "id": "e2857d28-568b-431b-b354-20c03a48a856",
+      "name": "SEPT. 27, 1991",
+      "bounding_box": {
+        "x": 270,
+        "y": 203,
+        "w": 120,
+        "h": 15
+      }
+    },
+    {
+      "id": "720de0ec-e19b-4286-a92e-7aabda292f43",
+      "name": "BROWN & WILLIAMSON",
+      "bounding_box": {
+        "x": 278,
+        "y": 268,
+        "w": 156,
+        "h": 15
+      }
+    },
+    {
+      "id": "40821f7f-f4be-48ba-b472-e83a4b9b963f",
+      "name": "KOOL CIGARETTES",
+      "bounding_box": {
+        "x": 295,
+        "y": 338,
+        "w": 128,
+        "h": 17
+      }
+    },
+    {
+      "id": "e5eb422f-55ad-4270-89e1-f2a151c581d1",
+      "name": "SEE ATTACHMENTS",
+      "bounding_box": {
+        "x": 278,
+        "y": 402,
+        "w": 128,
+        "h": 17
+      }
+    },
+    {
+      "id": "4cf75a79-2382-42c5-b8e0-532a234926ee",
+      "name": "A. H. TISCH",
+      "bounding_box": {
+        "x": 124,
+        "y": 768,
+        "w": 72,
+        "h": 15
+      }
+    },
+    {
+      "id": "584a443a-c80b-4c00-b6e3-b8358b6de448",
+      "name": "R. H. ORCUTT",
+      "bounding_box": {
+        "x": 124,
+        "y": 785,
+        "w": 84,
+        "h": 17
+      }
+    },
+    {
+      "id": "b0521013-2ce5-402c-9afb-b58bdc16f053",
+      "name": "M. A. PETERSON",
+      "bounding_box": {
+        "x": 124,
+        "y": 803,
+        "w": 101,
+        "h": 17
+      }
+    },
+    {
+      "id": "e93ee972-c6ae-4203-bd35-ae71a17f8550",
+      "name": "M. L. ORLOWSKY",
+      "bounding_box": {
+        "x": 124,
+        "y": 820,
+        "w": 101,
+        "h": 15
+      }
+    },
+    {
+      "id": "3c3e4d20-a253-4156-960a-66db3fd69f1c",
+      "name": "L. GORDON",
+      "bounding_box": {
+        "x": 126,
+        "y": 838,
+        "w": 68,
+        "h": 14
+      }
+    },
+    {
+      "id": "afa96b6b-7023-42b8-9c17-8eed22abc620",
+      "name": "J. P. MASTANDREA",
+      "bounding_box": {
+        "x": 123,
+        "y": 855,
+        "w": 115,
+        "h": 17
+      }
+    },
+    {
+      "id": "178b4545-53a4-4c0e-9a4e-68427056c2da",
+      "name": "G. R. TELFORD",
+      "bounding_box": {
+        "x": 285,
+        "y": 767,
+        "w": 88,
+        "h": 17
+      }
+    },
+    {
+      "id": "ef8a1a73-5f4f-491d-8858-0d13153c9529",
+      "name": "R. G. RYAN",
+      "bounding_box": {
+        "x": 284,
+        "y": 785,
+        "w": 69,
+        "h": 15
+      }
+    },
+    {
+      "id": "4441cb01-f922-4e83-b3a3-0bd18a94f915",
+      "name": "N. P. RUFFALO",
+      "bounding_box": {
+        "x": 285,
+        "y": 802,
+        "w": 88,
+        "h": 15
+      }
+    },
+    {
+      "id": "1e64cb17-5cf6-4f7a-8166-9e2d70514762",
+      "name": "T. L. ACHEY",
+      "bounding_box": {
+        "x": 284,
+        "y": 820,
+        "w": 72,
+        "h": 15
+      }
+    },
+    {
+      "id": "3277beda-9acd-4f4a-a471-add3c6855ae2",
+      "name": "P. J. McCANN",
+      "bounding_box": {
+        "x": 284,
+        "y": 838,
+        "w": 83,
+        "h": 15
+      }
+    },
+    {
+      "id": "87cdc57e-bcdc-4611-8e9d-4813e6aa18c3",
+      "name": "A. J. GIACOIO",
+      "bounding_box": {
+        "x": 282,
+        "y": 856,
+        "w": 88,
+        "h": 13
+      }
+    },
+    {
+      "id": "0c72f8f1-9e37-4dcb-a8a4-d21afe094298",
+      "name": "J. J. TATULLI",
+      "bounding_box": {
+        "x": 284,
+        "y": 872,
+        "w": 77,
+        "h": 14
+      }
+    },
+    {
+      "id": "e56371a5-0f72-453b-87be-f340f4e7f08c",
+      "name": "L. H. KERSH",
+      "bounding_box": {
+        "x": 406,
+        "y": 770,
+        "w": 76,
+        "h": 14
+      }
+    },
+    {
+      "id": "586b175f-a27e-4440-9453-9d072d2f855c",
+      "name": "J. R. SLATER",
+      "bounding_box": {
+        "x": 408,
+        "y": 785,
+        "w": 76,
+        "h": 17
+      }
+    },
+    {
+      "id": "c9141670-946d-4616-bfe5-0b47e30cc0a7",
+      "name": "S. T. JONES",
+      "bounding_box": {
+        "x": 406,
+        "y": 803,
+        "w": 76,
+        "h": 15
+      }
+    },
+    {
+      "id": "4190f194-1ac1-429b-9059-45588f2fd06b",
+      "name": "R. S. GOLDBRENNER",
+      "bounding_box": {
+        "x": 406,
+        "y": 820,
+        "w": 128,
+        "h": 14
+      }
+    },
+    {
+      "id": "838fc400-80e5-4bdb-a498-90526fae5d17",
+      "name": "N. SIMEONIDIS",
+      "bounding_box": {
+        "x": 406,
+        "y": 838,
+        "w": 92,
+        "h": 15
+      }
+    },
+    {
+      "id": "03785d24-5679-4fd4-b303-6c92f21cd6b8",
+      "name": "S. F. SMITH",
+      "bounding_box": {
+        "x": 408,
+        "y": 855,
+        "w": 70,
+        "h": 14
+      }
+    }
+  ]
+}

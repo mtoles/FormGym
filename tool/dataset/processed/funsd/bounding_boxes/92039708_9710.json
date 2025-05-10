@@ -1,0 +1,42 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "4006d875-0d85-4475-8ab7-0e098b78254b",
+      "name": "MAVERICK SPECIALS- PROGRESS REPORT",
+      "bounding_box": {
+        "x": 184,
+        "y": 196,
+        "w": 306,
+        "h": 17
+      }
+    },
+    {
+      "id": "b9349f24-f94a-43cf-9f2d-8fab69a3c501",
+      "name": "R. B. SPELL",
+      "bounding_box": {
+        "x": 186,
+        "y": 116,
+        "w": 75,
+        "h": 14
+      }
+    },
+    {
+      "id": "b6e0b0d2-303c-4d5f-9b32-e1820c48793b",
+      "name": "Pre- Sell Booklet /Coupon Maverick /Harley B1 G1 F",
+      "bounding_box": {
+        "x": 254,
+        "y": 270,
+        "w": 369,
+        "h": 21
+      }
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "82afa7ad-aad4-48b8-ab39-d6d927ea2125",
+      "name": "X",
+      "bounding_box": {
+        "x": 200,
+        "y": 105,
+        "w": 11,
+        "h": 10
+      }
+    },
+    {
+      "id": "d1d4ce82-8c00-41bf-a836-34647999f238",
+      "name": "X",
+      "bounding_box": {
+        "x": 310,
+        "y": 187,
+        "w": 11,
+        "h": 15
+      }
+    },
+    {
+      "id": "5256a673-dd50-416d-b248-1255ff8ec5d6",
+      "name": "X",
+      "bounding_box": {
+        "x": 309,
+        "y": 423,
+        "w": 14,
+        "h": 14
+      }
+    },
+    {
+      "id": "1ec04a98-0f37-42c1-9faa-5e6667c117a9",
+      "name": "X",
+      "bounding_box": {
+        "x": 311,
+        "y": 453,
+        "w": 11,
+        "h": 13
+      }
+    },
+    {
+      "id": "77afca06-87cd-42c2-b8ec-c11c2bd2098e",
+      "name": "ELI CUTTER KS",
+      "bounding_box": {
+        "x": 124,
+        "y": 89,
+        "w": 90,
+        "h": 15
+      }
+    },
+    {
+      "id": "ab8ebdd4-fe79-4252-8fd9-cf1cd4546fa0",
+      "name": "ELI CUTTER KS, for test market, using AMELIA \"B\" Blend (XLF -680G)",
+      "bounding_box": {
+        "x": 141,
+        "y": 243,
+        "w": 450,
+        "h": 15
+      }
+    },
+    {
+      "id": "ba8b8df0-f848-4bcd-bfd4-85c68fde79ce",
+      "name": "9 /17 /84",
+      "bounding_box": {
+        "x": 304,
+        "y": 300,
+        "w": 51,
+        "h": 13
+      }
+    },
+    {
+      "id": "d1a17968-ba09-44e9-92b7-6693c83c88c0",
+      "name": "D. M. Frank",
+      "bounding_box": {
+        "x": 226,
+        "y": 506,
+        "w": 76,
+        "h": 15
+      }
+    },
+    {
+      "id": "360f3a56-5bd5-41e7-a18e-8f284079d92c",
+      "name": "10/ 10/ 84",
+      "bounding_box": {
+        "x": 462,
+        "y": 506,
+        "w": 59,
+        "h": 15
+      }
+    }
+  ]
+}

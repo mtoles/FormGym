@@ -1,0 +1,182 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "a60a1fe4-49e2-4056-a9da-877489574420",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 265,
+        "y": 254,
+        "w": 21,
+        "h": 20
+      }
+    },
+    {
+      "id": "dc09a77f-eeec-4747-aa2f-b72425a4b4f7",
+      "name": "",
+      "bounding_box": {
+        "x": 353,
+        "y": 763,
+        "w": 21,
+        "h": 20
+      }
+    },
+    {
+      "id": "550bd704-0c44-48fd-aaee-08ac51f6239a",
+      "name": "Mr. G. J. Schramm",
+      "bounding_box": {
+        "x": 296,
+        "y": 59,
+        "w": 146,
+        "h": 14
+      }
+    },
+    {
+      "id": "05c505c8-4e84-402e-95d7-91ebc080f3b6",
+      "name": "Mr. W. P. Myhan",
+      "bounding_box": {
+        "x": 507,
+        "y": 59,
+        "w": 129,
+        "h": 14
+      }
+    },
+    {
+      "id": "8806151f-6752-4ca5-85af-4635da4c6821",
+      "name": "Mr. F. X. Whelan",
+      "bounding_box": {
+        "x": 507,
+        "y": 73,
+        "w": 137,
+        "h": 14
+      }
+    },
+    {
+      "id": "34438b27-73b1-42d7-b7f3-4b4a1addd77d",
+      "name": "Mr. R. H. Stinnette",
+      "bounding_box": {
+        "x": 296,
+        "y": 74,
+        "w": 162,
+        "h": 14
+      }
+    },
+    {
+      "id": "7dd6cd0d-eae8-4639-a689-80f06bdabaf6",
+      "name": "Mr. J. B. McCarthy",
+      "bounding_box": {
+        "x": 296,
+        "y": 88,
+        "w": 153,
+        "h": 14
+      }
+    },
+    {
+      "id": "f59f2d8b-c054-4782-93df-5ceede360473",
+      "name": "E. E. Curtin",
+      "bounding_box": {
+        "x": 296,
+        "y": 115,
+        "w": 105,
+        "h": 14
+      }
+    },
+    {
+      "id": "e8455004-2616-469f-977a-e26c98de4421",
+      "name": "Harvard Medical School and Dr. Gary Huber Boston, Massachusetts",
+      "bounding_box": {
+        "x": 377,
+        "y": 271,
+        "w": 189,
+        "h": 57
+      }
+    },
+    {
+      "id": "6c69e595-6e46-4053-a178-46f328d5f590",
+      "name": "Letter 8/ 1/ 76",
+      "bounding_box": {
+        "x": 454,
+        "y": 341,
+        "w": 113,
+        "h": 15
+      }
+    },
+    {
+      "id": "fbd5995f-dc86-4697-b4cc-e4aa76ec4722",
+      "name": "1976 $ 40, 921. 30 by A. B., Inc.",
+      "bounding_box": {
+        "x": 331,
+        "y": 453,
+        "w": 232,
+        "h": 15
+      }
+    },
+    {
+      "id": "4e61fa7e-b450-488a-8796-a783b44e5293",
+      "name": "1975 84, 309. 94 A. B., Inc.",
+      "bounding_box": {
+        "x": 330,
+        "y": 466,
+        "w": 234,
+        "h": 16
+      }
+    },
+    {
+      "id": "2b0c750f-f581-40a4-9437-e56163216b1e",
+      "name": "1974 92, 131. 29 A. B., Inc.",
+      "bounding_box": {
+        "x": 328,
+        "y": 479,
+        "w": 238,
+        "h": 17
+      }
+    },
+    {
+      "id": "adf2a7dc-e768-4c65-87a9-71a444d2c411",
+      "name": "1973 91, 630. 53 A. B., Inc.",
+      "bounding_box": {
+        "x": 331,
+        "y": 492,
+        "w": 235,
+        "h": 18
+      }
+    },
+    {
+      "id": "7315b2d4-79bb-4ab8-ae43-06ac3c0b2109",
+      "name": "For confirmation by the Committee. Check for $ 43, 910. 30 representing the ninth semi- annual installment to the Harvard Project transmitted August 1976.",
+      "bounding_box": {
+        "x": 246,
+        "y": 620,
+        "w": 390,
+        "h": 59
+      }
+    },
+    {
+      "id": "d8f070c0-9d15-4cb8-9ede-46ccf6e97bfc",
+      "name": "YES NO",
+      "bounding_box": {
+        "x": 546,
+        "y": 806,
+        "w": 68,
+        "h": 14
+      }
+    },
+    {
+      "id": "37bbe81e-ac90-4211-9382-784da0ec3ede",
+      "name": "8/ 26",
+      "bounding_box": {
+        "x": 561,
+        "y": 834,
+        "w": 48,
+        "h": 42
+      }
+    }
+  ]
+}

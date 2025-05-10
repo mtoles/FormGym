@@ -1,0 +1,222 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "2d4e6d2a-e788-42f8-ae85-521eb635ba33",
+      "name": "1987",
+      "bounding_box": {
+        "x": 335,
+        "y": 113,
+        "w": 29,
+        "h": 15
+      }
+    },
+    {
+      "id": "8246c78f-7470-4f5e-bb15-7a9abc25aaf8",
+      "name": "MALIBU",
+      "bounding_box": {
+        "x": 335,
+        "y": 141,
+        "w": 43,
+        "h": 17
+      }
+    },
+    {
+      "id": "b05a93c8-0ee7-4971-9f24-810707355d6c",
+      "name": "",
+      "bounding_box": {
+        "x": 235,
+        "y": 228,
+        "w": 11,
+        "h": 14
+      }
+    },
+    {
+      "id": "b512b980-6667-45de-9aff-fec0b00a7d8d",
+      "name": "94",
+      "bounding_box": {
+        "x": 536,
+        "y": 885,
+        "w": 17,
+        "h": 13
+      }
+    },
+    {
+      "id": "83609859-49c7-4cd1-8d07-e1674ca9b7fd",
+      "name": "34",
+      "bounding_box": {
+        "x": 395,
+        "y": 503,
+        "w": 18,
+        "h": 15
+      }
+    },
+    {
+      "id": "35cef79a-4bae-449f-ac26-3a0f147c3e43",
+      "name": "0",
+      "bounding_box": {
+        "x": 401,
+        "y": 532,
+        "w": 10,
+        "h": 13
+      }
+    },
+    {
+      "id": "54466fc1-a1bb-4d9e-97a4-c3b7bc32cacf",
+      "name": "38",
+      "bounding_box": {
+        "x": 394,
+        "y": 561,
+        "w": 17,
+        "h": 14
+      }
+    },
+    {
+      "id": "49fefbdb-85f1-44ca-ac3d-8aefd7106954",
+      "name": "1",
+      "bounding_box": {
+        "x": 401,
+        "y": 680,
+        "w": 8,
+        "h": 15
+      }
+    },
+    {
+      "id": "6351940b-7c6b-4dae-9411-0030d0672ed9",
+      "name": "20",
+      "bounding_box": {
+        "x": 394,
+        "y": 764,
+        "w": 15,
+        "h": 18
+      }
+    },
+    {
+      "id": "0aa233ff-b732-4c00-8044-268b63b45652",
+      "name": "1",
+      "bounding_box": {
+        "x": 399,
+        "y": 858,
+        "w": 8,
+        "h": 15
+      }
+    },
+    {
+      "id": "52228c75-547c-4d40-8bfd-c2558ff200a9",
+      "name": "King Size, Filter",
+      "bounding_box": {
+        "x": 334,
+        "y": 169,
+        "w": 122,
+        "h": 18
+      }
+    },
+    {
+      "id": "3a44afd4-623c-4660-a107-76e55d34a4cc",
+      "name": "King Size",
+      "bounding_box": {
+        "x": 332,
+        "y": 198,
+        "w": 67,
+        "h": 20
+      }
+    },
+    {
+      "id": "280e5f78-6f94-4f38-9438-04e0d7c9032f",
+      "name": "(check one)",
+      "bounding_box": {
+        "x": 527,
+        "y": 229,
+        "w": 92,
+        "h": 18
+      }
+    },
+    {
+      "id": "02a3cd89-abdd-4304-a5bc-aa0f0c1df622",
+      "name": "X (check one)",
+      "bounding_box": {
+        "x": 432,
+        "y": 254,
+        "w": 185,
+        "h": 21
+      }
+    },
+    {
+      "id": "b5e83215-1e12-4b60-9303-b5f28e3ffca4",
+      "name": "X (check one)",
+      "bounding_box": {
+        "x": 433,
+        "y": 284,
+        "w": 184,
+        "h": 21
+      }
+    },
+    {
+      "id": "3ea7640d-db92-44cc-a606-5df1170095b4",
+      "name": "20' s",
+      "bounding_box": {
+        "x": 332,
+        "y": 311,
+        "w": 29,
+        "h": 17
+      }
+    },
+    {
+      "id": "846a0afa-1822-402a-8cbe-fbd146f200d2",
+      "name": "16 mg",
+      "bounding_box": {
+        "x": 235,
+        "y": 341,
+        "w": 35,
+        "h": 16
+      }
+    },
+    {
+      "id": "6663d58f-4fec-4ece-95cc-7fd8ee970e37",
+      "name": "1. 3 mg (Appendix C)",
+      "bounding_box": {
+        "x": 500,
+        "y": 338,
+        "w": 137,
+        "h": 22
+      }
+    },
+    {
+      "id": "0c6fd732-1437-4e76-a084-c46ef49460ef",
+      "name": "1, 800",
+      "bounding_box": {
+        "x": 376,
+        "y": 376,
+        "w": 34,
+        "h": 15
+      }
+    },
+    {
+      "id": "8433eca7-8459-4002-bec2-3c3a0943c9d0",
+      "name": "59, 791",
+      "bounding_box": {
+        "x": 369,
+        "y": 404,
+        "w": 42,
+        "h": 14
+      }
+    },
+    {
+      "id": "3d1d168e-63ae-46ad-9185-1894de9c6a2b",
+      "name": "10/ 26/ 87",
+      "bounding_box": {
+        "x": 303,
+        "y": 433,
+        "w": 57,
+        "h": 17
+      }
+    }
+  ]
+}

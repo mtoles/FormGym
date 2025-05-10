@@ -1,0 +1,32 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "c0a985c8-7f1e-48fe-add9-6f63779318e6",
+      "name": "Harden- Kane, Inc. 666 Fifth Avenue New York, N. Y. 10103",
+      "bounding_box": {
+        "x": 183,
+        "y": 814,
+        "w": 175,
+        "h": 44
+      }
+    },
+    {
+      "id": "b9f1ada1-a19d-4263-bfb1-e71f1e6990c5",
+      "name": "Ms. L. Sobel",
+      "bounding_box": {
+        "x": 277,
+        "y": 855,
+        "w": 107,
+        "h": 16
+      }
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "60685fc6-aad3-4add-ad57-525d5ba8cb1e",
+      "name": "2463",
+      "bounding_box": {
+        "x": 303,
+        "y": 154,
+        "w": 57,
+        "h": 21
+      }
+    },
+    {
+      "id": "5098d179-7f5d-408e-8e73-1bf43b7b45a0",
+      "name": "28 Apr. 98",
+      "bounding_box": {
+        "x": 267,
+        "y": 263,
+        "w": 71,
+        "h": 14
+      }
+    },
+    {
+      "id": "49c0912d-d951-4063-a99d-e798c1053c94",
+      "name": "Dr. Wolf Reininghaus",
+      "bounding_box": {
+        "x": 267,
+        "y": 309,
+        "w": 137,
+        "h": 17
+      }
+    },
+    {
+      "id": "d7de67a8-2af3-4ddd-9b3a-117c79aaeb63",
+      "name": "Dr. Don Leyden, Dept. Scientific Affairs",
+      "bounding_box": {
+        "x": 267,
+        "y": 359,
+        "w": 155,
+        "h": 30
+      }
+    },
+    {
+      "id": "68c249c7-5871-4ec3-bc40-c8c184387f1e",
+      "name": "Philip Morris Europe Fabriques de Tabac Reunies S. A.",
+      "bounding_box": {
+        "x": 267,
+        "y": 422,
+        "w": 217,
+        "h": 32
+      }
+    },
+    {
+      "id": "38f40ce8-98aa-403a-a7a5-c71a5c8ecfa6",
+      "name": "CH- 2003 Neuchatel",
+      "bounding_box": {
+        "x": 267,
+        "y": 469,
+        "w": 129,
+        "h": 16
+      }
+    },
+    {
+      "id": "7f6cb78f-180d-4ba1-87e3-2b2efea44a10",
+      "name": "0041- 32- 888 5776",
+      "bounding_box": {
+        "x": 335,
+        "y": 514,
+        "w": 119,
+        "h": 17
+      }
+    },
+    {
+      "id": "36e5c337-7064-44e2-8281-2d65eb2490b1",
+      "name": "21",
+      "bounding_box": {
+        "x": 370,
+        "y": 553,
+        "w": 193,
+        "h": 42
+      }
+    },
+    {
+      "id": "a28ccb71-be80-47da-9e21-f4de4ddd310a",
+      "name": "TPM/ Nocotine ratio",
+      "bounding_box": {
+        "x": 135,
+        "y": 627,
+        "w": 143,
+        "h": 15
+      }
+    },
+    {
+      "id": "7b52f58f-83ad-4860-9f17-e8033782c962",
+      "name": "Cologne HRB 367",
+      "bounding_box": {
+        "x": 552,
+        "y": 936,
+        "w": 68,
+        "h": 10
+      }
+    },
+    {
+      "id": "70eea8b4-8ad7-4267-a628-dd2afc79f7c5",
+      "name": "Dr. Wolf Reninghaus",
+      "bounding_box": {
+        "x": 561,
+        "y": 947,
+        "w": 80,
+        "h": 10
+      }
+    },
+    {
+      "id": "e3813de0-ad50-43b0-9b9f-49b2c1f23dba",
+      "name": "(0 22 03) 303 -1",
+      "bounding_box": {
+        "x": 529,
+        "y": 172,
+        "w": 59,
+        "h": 11
+      }
+    },
+    {
+      "id": "fc5abde8-7c97-4dfd-afbe-3eed0f58ef0b",
+      "name": "(0 22 03) 303 -362",
+      "bounding_box": {
+        "x": 518,
+        "y": 182,
+        "w": 67,
+        "h": 10
+      }
+    }
+  ]
+}

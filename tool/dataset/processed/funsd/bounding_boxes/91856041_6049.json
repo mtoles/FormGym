@@ -1,0 +1,102 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "5308500b-3223-4a8b-aeee-58b9d0c811cf",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 232,
+        "y": 659,
+        "w": 14,
+        "h": 14
+      }
+    },
+    {
+      "id": "343a26b6-f031-496c-b31e-832dd792b710",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 230,
+        "y": 715,
+        "w": 17,
+        "h": 14
+      }
+    },
+    {
+      "id": "11f086cd-ece4-4d5c-b80f-79a990735a71",
+      "name": "The USO Spring Festival",
+      "bounding_box": {
+        "x": 282,
+        "y": 356,
+        "w": 153,
+        "h": 16
+      }
+    },
+    {
+      "id": "9d2c9c8b-fb2e-4976-a6f9-f9406c38af43",
+      "name": "42nd- 57th Street, New York NY",
+      "bounding_box": {
+        "x": 284,
+        "y": 385,
+        "w": 213,
+        "h": 14
+      }
+    },
+    {
+      "id": "d0c046d6-9a1b-4f8a-81c4-0ac76b85700f",
+      "name": "June 3, 1995",
+      "bounding_box": {
+        "x": 282,
+        "y": 413,
+        "w": 82,
+        "h": 14
+      }
+    },
+    {
+      "id": "a0b3daed-918e-46f8-945b-43f42a13eaf2",
+      "name": "llam- 6pm",
+      "bounding_box": {
+        "x": 286,
+        "y": 542,
+        "w": 68,
+        "h": 18
+      }
+    },
+    {
+      "id": "90228f52-b625-43d4-b91a-5bb50cd8e4ce",
+      "name": "Jerome Curry",
+      "bounding_box": {
+        "x": 376,
+        "y": 813,
+        "w": 85,
+        "h": 17
+      }
+    },
+    {
+      "id": "23279cff-80d3-4553-96a1-b03d3a737a5d",
+      "name": "(201) 923-9208",
+      "bounding_box": {
+        "x": 275,
+        "y": 839,
+        "w": 97,
+        "h": 16
+      }
+    },
+    {
+      "id": "5094b07c-d15a-429f-9e32-99ff729b6e59",
+      "name": "(201) 698- 780",
+      "bounding_box": {
+        "x": 514,
+        "y": 839,
+        "w": 91,
+        "h": 15
+      }
+    }
+  ]
+}

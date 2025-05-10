@@ -1,0 +1,102 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "d7fc1e2e-f061-4545-bfdc-9475d632ee4a",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 209,
+        "y": 746,
+        "w": 14,
+        "h": 13
+      }
+    },
+    {
+      "id": "da34a4c9-7fc2-4a9e-bf35-a8d559ce37d3",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 208,
+        "y": 686,
+        "w": 13,
+        "h": 14
+      }
+    },
+    {
+      "id": "bff1a36f-adb9-43c0-b982-4217a2adbcd4",
+      "name": "Upper Madisor Avenue Festival",
+      "bounding_box": {
+        "x": 258,
+        "y": 372,
+        "w": 201,
+        "h": 17
+      }
+    },
+    {
+      "id": "1a5b3930-13e9-4efa-a04a-9f2c399f09e4",
+      "name": "68th -86th Street New York, NY",
+      "bounding_box": {
+        "x": 258,
+        "y": 402,
+        "w": 215,
+        "h": 17
+      }
+    },
+    {
+      "id": "c05ba370-b85c-496b-8e50-336b335cf342",
+      "name": "June 4, 1995",
+      "bounding_box": {
+        "x": 260,
+        "y": 432,
+        "w": 83,
+        "h": 17
+      }
+    },
+    {
+      "id": "5b868926-7936-456d-a52e-cc51c1ac5e91",
+      "name": "11 am - 6 pm",
+      "bounding_box": {
+        "x": 272,
+        "y": 566,
+        "w": 72,
+        "h": 15
+      }
+    },
+    {
+      "id": "4b163d38-3139-4378-b065-1b0148af62bc",
+      "name": "Jerome Curry",
+      "bounding_box": {
+        "x": 359,
+        "y": 851,
+        "w": 82,
+        "h": 14
+      }
+    },
+    {
+      "id": "aa1ec874-f6d3-4988-a0c1-87213204d9c8",
+      "name": "(201) 923 -9208",
+      "bounding_box": {
+        "x": 251,
+        "y": 877,
+        "w": 94,
+        "h": 15
+      }
+    },
+    {
+      "id": "0acde13a-3146-4fd0-9c31-63d065026fe1",
+      "name": "(201) 698 1780",
+      "bounding_box": {
+        "x": 494,
+        "y": 877,
+        "w": 94,
+        "h": 15
+      }
+    }
+  ]
+}

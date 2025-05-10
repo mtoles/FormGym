@@ -1,0 +1,32 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "7809bc56-e5bc-4484-93b9-66ecce3cb068",
+      "name": "K. A. SPARROW",
+      "bounding_box": {
+        "x": 229,
+        "y": 126,
+        "w": 88,
+        "h": 15
+      }
+    },
+    {
+      "id": "0855bea9-160f-4754-80e2-1cd53268cae3",
+      "name": "SAMPLE 10'S (400 PACKS PER CASE)",
+      "bounding_box": {
+        "x": 286,
+        "y": 369,
+        "w": 189,
+        "h": 15
+      }
+    }
+  ]
+}

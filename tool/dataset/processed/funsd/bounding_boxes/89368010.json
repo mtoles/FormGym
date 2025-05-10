@@ -1,0 +1,232 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 774,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "a5f86770-aa4e-4160-8062-016b39154084",
+      "name": "16/3/82",
+      "bounding_box": {
+        "x": 133,
+        "y": 587,
+        "w": 106,
+        "h": 24
+      }
+    },
+    {
+      "id": "9dc896b9-33c8-497d-a734-328b28bece67",
+      "name": "",
+      "bounding_box": {
+        "x": 490,
+        "y": 576,
+        "w": 162,
+        "h": 39
+      }
+    },
+    {
+      "id": "fba9c86a-a64a-41b8-bf35-54ca8dc71cb4",
+      "name": "Accept",
+      "bounding_box": {
+        "x": 364,
+        "y": 684,
+        "w": 78,
+        "h": 25
+      }
+    },
+    {
+      "id": "8ac388e9-772b-4462-9549-e94c11cd4d9d",
+      "name": "Accept",
+      "bounding_box": {
+        "x": 368,
+        "y": 726,
+        "w": 78,
+        "h": 31
+      }
+    },
+    {
+      "id": "ed861f82-6e30-4ec4-b097-d21b56d2e44c",
+      "name": "Accept",
+      "bounding_box": {
+        "x": 361,
+        "y": 775,
+        "w": 72,
+        "h": 30
+      }
+    },
+    {
+      "id": "62ecdf8a-3871-4b98-90b5-96f245904e32",
+      "name": "",
+      "bounding_box": {
+        "x": 469,
+        "y": 668,
+        "w": 223,
+        "h": 39
+      }
+    },
+    {
+      "id": "79dba901-2ca7-4f72-a393-e754275d58f5",
+      "name": "",
+      "bounding_box": {
+        "x": 510,
+        "y": 714,
+        "w": 108,
+        "h": 39
+      }
+    },
+    {
+      "id": "780e5c33-0d7e-47ad-9550-97d10c8277bd",
+      "name": "",
+      "bounding_box": {
+        "x": 475,
+        "y": 766,
+        "w": 216,
+        "h": 30
+      }
+    },
+    {
+      "id": "e946b5a9-a04d-4634-b45f-f9518672bd42",
+      "name": "",
+      "bounding_box": {
+        "x": 490,
+        "y": 843,
+        "w": 115,
+        "h": 30
+      }
+    },
+    {
+      "id": "f6dcd2a1-ec07-49b6-b68b-9f73a3ac807d",
+      "name": "",
+      "bounding_box": {
+        "x": 370,
+        "y": 850,
+        "w": 93,
+        "h": 25
+      }
+    },
+    {
+      "id": "8cd237aa-9983-406a-a80a-93459686483f",
+      "name": "The attached is an addition to the I- 1725.001 Final Report",
+      "bounding_box": {
+        "x": 117,
+        "y": 232,
+        "w": 518,
+        "h": 18
+      }
+    },
+    {
+      "id": "61c66b9e-9b7d-4d0e-9ecb-2049cd2494f3",
+      "name": "27 April 1982",
+      "bounding_box": {
+        "x": 478,
+        "y": 183,
+        "w": 117,
+        "h": 21
+      }
+    },
+    {
+      "id": "8d37e1ff-a564-43c9-aaba-36a1aa3f26dd",
+      "name": "25 March 1982",
+      "bounding_box": {
+        "x": 266,
+        "y": 162,
+        "w": 120,
+        "h": 16
+      }
+    },
+    {
+      "id": "32ee01f6-0894-46d0-9759-0679e7b8904f",
+      "name": "I- 1725.001",
+      "bounding_box": {
+        "x": 220,
+        "y": 141,
+        "w": 93,
+        "h": 15
+      }
+    },
+    {
+      "id": "5e6b5454-4992-4631-915e-226a2b17c2cd",
+      "name": "Acute Toxicity of Reference Cigarette Smoke lafter Inhalation in Mice.",
+      "bounding_box": {
+        "x": 190,
+        "y": 117,
+        "w": 571,
+        "h": 33
+      }
+    },
+    {
+      "id": "b3386ff3-739b-4ebe-aeee-93837bc7c161",
+      "name": "Survival after repeated doses over a 14 day period",
+      "bounding_box": {
+        "x": 308,
+        "y": 305,
+        "w": 454,
+        "h": 17
+      }
+    },
+    {
+      "id": "db718316-b3a4-4dbf-b304-c64f2294428a",
+      "name": "may not be accurately predicted from survival after a single day's exposure.",
+      "bounding_box": {
+        "x": 123,
+        "y": 328,
+        "w": 593,
+        "h": 38
+      }
+    },
+    {
+      "id": "94c55179-2aa4-4e4a-9f46-8224f01c7af2",
+      "name": "The report of the results of",
+      "bounding_box": {
+        "x": 496,
+        "y": 401,
+        "w": 251,
+        "h": 18
+      }
+    },
+    {
+      "id": "5bebc0bd-a027-42a4-9a7a-ba0bf95687f2",
+      "name": "A 14 Day Repeated Dose Assay for Reference Cigarette Smoke in Mice (I- 1725.001- M1 is attached.",
+      "bounding_box": {
+        "x": 133,
+        "y": 425,
+        "w": 590,
+        "h": 42
+      }
+    },
+    {
+      "id": "51cb546d-d72b-4dcb-a8de-a62e0f38094e",
+      "name": "03 June 1982",
+      "bounding_box": {
+        "x": 112,
+        "y": 689,
+        "w": 135,
+        "h": 22
+      }
+    },
+    {
+      "id": "0c513727-903c-4156-bea2-efcc6f3bc8d3",
+      "name": "3 June 1982",
+      "bounding_box": {
+        "x": 132,
+        "y": 725,
+        "w": 118,
+        "h": 45
+      }
+    },
+    {
+      "id": "4e869943-f788-4fc3-9a66-5ea64359b166",
+      "name": "3 June 1982",
+      "bounding_box": {
+        "x": 117,
+        "y": 772,
+        "w": 130,
+        "h": 28
+      }
+    }
+  ]
+}

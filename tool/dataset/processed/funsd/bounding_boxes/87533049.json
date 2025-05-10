@@ -1,0 +1,212 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "b395f63b-a874-40e6-9e44-96707f0b1476",
+      "name": "TRUE",
+      "bounding_box": {
+        "x": 423,
+        "y": 258,
+        "w": 31,
+        "h": 13
+      }
+    },
+    {
+      "id": "eef39208-e955-42b4-a0d6-224aa0164a51",
+      "name": "N/A",
+      "bounding_box": {
+        "x": 425,
+        "y": 309,
+        "w": 21,
+        "h": 14
+      }
+    },
+    {
+      "id": "b9318fed-292f-4bd3-b777-2a1d3bcc4915",
+      "name": "N/A",
+      "bounding_box": {
+        "x": 425,
+        "y": 335,
+        "w": 21,
+        "h": 14
+      }
+    },
+    {
+      "id": "900953d5-fe97-4b90-a74f-af83e70baf2e",
+      "name": "N/A",
+      "bounding_box": {
+        "x": 425,
+        "y": 362,
+        "w": 21,
+        "h": 11
+      }
+    },
+    {
+      "id": "4e39a271-c152-4176-8fa9-da7ee70c9218",
+      "name": "$2.00",
+      "bounding_box": {
+        "x": 425,
+        "y": 487,
+        "w": 34,
+        "h": 13
+      }
+    },
+    {
+      "id": "8fc0e4c6-a03c-42a7-ae1b-423efeb047dd",
+      "name": "Carton",
+      "bounding_box": {
+        "x": 423,
+        "y": 515,
+        "w": 43,
+        "h": 10
+      }
+    },
+    {
+      "id": "d88bc95b-86f2-4051-8198-4f952c8c3e65",
+      "name": "",
+      "bounding_box": {
+        "x": 415,
+        "y": 549,
+        "w": 222,
+        "h": 50
+      }
+    },
+    {
+      "id": "fb4bc731-e04c-477f-bbc5-a807b09291bc",
+      "name": "530430",
+      "bounding_box": {
+        "x": 415,
+        "y": 774,
+        "w": 94,
+        "h": 24
+      }
+    },
+    {
+      "id": "1cb2743a-e925-4199-af76-42dfeb509219",
+      "name": "1112",
+      "bounding_box": {
+        "x": 420,
+        "y": 802,
+        "w": 66,
+        "h": 21
+      }
+    },
+    {
+      "id": "9be6af53-9a57-46ff-b8ec-af3a6555ebe8",
+      "name": "J. La Valle",
+      "bounding_box": {
+        "x": 225,
+        "y": 131,
+        "w": 75,
+        "h": 16
+      }
+    },
+    {
+      "id": "30f85a0b-102a-465f-b095-8120a260edb5",
+      "name": "S. A. Rapisarldi",
+      "bounding_box": {
+        "x": 219,
+        "y": 170,
+        "w": 130,
+        "h": 16
+      }
+    },
+    {
+      "id": "e7357493-a6c2-4453-807e-bf631c8a9676",
+      "name": "R. G. Ryan",
+      "bounding_box": {
+        "x": 218,
+        "y": 211,
+        "w": 89,
+        "h": 32
+      }
+    },
+    {
+      "id": "4959adab-a4c6-4f42-8cc5-fa065fca0395",
+      "name": "May 3, 1990",
+      "bounding_box": {
+        "x": 422,
+        "y": 612,
+        "w": 76,
+        "h": 14
+      }
+    },
+    {
+      "id": "c94c8032-8cbc-4bc1-962c-3012ae9d3b24",
+      "name": "ON - Carton Instant Redeemable",
+      "bounding_box": {
+        "x": 423,
+        "y": 285,
+        "w": 188,
+        "h": 13
+      }
+    },
+    {
+      "id": "5781304d-e2f6-42fd-b6df-ff4f1271a560",
+      "name": "10 / 90",
+      "bounding_box": {
+        "x": 425,
+        "y": 383,
+        "w": 33,
+        "h": 14
+      }
+    },
+    {
+      "id": "999cb970-b9c8-44c8-b366-07c04d1e8c3e",
+      "name": "6 / 30 / 91",
+      "bounding_box": {
+        "x": 423,
+        "y": 408,
+        "w": 48,
+        "h": 14
+      }
+    },
+    {
+      "id": "aed71904-df18-476d-85e9-e4697673222b",
+      "name": "1. 213, 400",
+      "bounding_box": {
+        "x": 425,
+        "y": 436,
+        "w": 60,
+        "h": 11
+      }
+    },
+    {
+      "id": "ca6b3a8f-9db3-489d-b822-3355280df93d",
+      "name": "National",
+      "bounding_box": {
+        "x": 423,
+        "y": 461,
+        "w": 53,
+        "h": 13
+      }
+    },
+    {
+      "id": "cc1d2e4e-7211-4344-b4bf-8fed582b3ac9",
+      "name": "True Filter King Carton",
+      "bounding_box": {
+        "x": 425,
+        "y": 535,
+        "w": 152,
+        "h": 14
+      }
+    },
+    {
+      "id": "5d20b86c-f866-40f8-a8c1-81ddfe6fb10d",
+      "name": "Break - out separately byl packing as indicated",
+      "bounding_box": {
+        "x": 349,
+        "y": 659,
+        "w": 294,
+        "h": 13
+      }
+    }
+  ]
+}

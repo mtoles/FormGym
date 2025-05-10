@@ -1,0 +1,162 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 802,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "29e5bf8e-bdc7-4f0d-8452-d96be7a7f95c",
+      "name": "3",
+      "bounding_box": {
+        "x": 514,
+        "y": 261,
+        "w": 11,
+        "h": 15
+      }
+    },
+    {
+      "id": "d37198b7-c2b6-4348-abe6-030a1b3304dd",
+      "name": "12/ 28/ 94",
+      "bounding_box": {
+        "x": 228,
+        "y": 207,
+        "w": 60,
+        "h": 17
+      }
+    },
+    {
+      "id": "0b41fdd3-4e4b-4ac0-9515-3b0b316f7ba7",
+      "name": "10: 15",
+      "bounding_box": {
+        "x": 508,
+        "y": 208,
+        "w": 39,
+        "h": 17
+      }
+    },
+    {
+      "id": "79c0cb10-3ca0-4569-94df-a36385c7f831",
+      "name": "R. H. Orcutt",
+      "bounding_box": {
+        "x": 278,
+        "y": 348,
+        "w": 86,
+        "h": 15
+      }
+    },
+    {
+      "id": "ba90e2fb-df32-405c-9d5c-cf6dd3895c73",
+      "name": "Lorillard- New York",
+      "bounding_box": {
+        "x": 277,
+        "y": 381,
+        "w": 146,
+        "h": 18
+      }
+    },
+    {
+      "id": "9ba0309e-be07-4be9-b260-705a720aa7c0",
+      "name": "(212) 545- 3299",
+      "bounding_box": {
+        "x": 278,
+        "y": 415,
+        "w": 104,
+        "h": 15
+      }
+    },
+    {
+      "id": "62e75bf4-a558-4043-ae93-9c9fac96d7e9",
+      "name": "J. L. McGinnis - Region 9",
+      "bounding_box": {
+        "x": 274,
+        "y": 521,
+        "w": 184,
+        "h": 18
+      }
+    },
+    {
+      "id": "16250aa6-9f5e-4240-bd87-7d088637d895",
+      "name": "Lorillard Tobacco Company Houston N., Texas",
+      "bounding_box": {
+        "x": 263,
+        "y": 553,
+        "w": 399,
+        "h": 24
+      }
+    },
+    {
+      "id": "2001396b-c29a-4da5-8e41-ccffa7f665b1",
+      "name": "(713) 591 0204",
+      "bounding_box": {
+        "x": 261,
+        "y": 587,
+        "w": 112,
+        "h": 22
+      }
+    },
+    {
+      "id": "abb23b74-3739-4351-98ab-a653ebc25691",
+      "name": "Harley Davidson 100's Progress Report.",
+      "bounding_box": {
+        "x": 275,
+        "y": 658,
+        "w": 274,
+        "h": 19
+      }
+    },
+    {
+      "id": "21053e1e-4edd-4bca-b5dd-9c5fd9a5e5d2",
+      "name": "R. B. Spell",
+      "bounding_box": {
+        "x": 309,
+        "y": 726,
+        "w": 81,
+        "h": 17
+      }
+    },
+    {
+      "id": "82ecc21d-efe4-4025-a23d-47163ea6a110",
+      "name": "A. J. Giacoio",
+      "bounding_box": {
+        "x": 309,
+        "y": 746,
+        "w": 96,
+        "h": 15
+      }
+    },
+    {
+      "id": "b0b67868-0a50-4bd2-95fb-f8c2908c41b0",
+      "name": "P. J. McCann",
+      "bounding_box": {
+        "x": 306,
+        "y": 763,
+        "w": 92,
+        "h": 14
+      }
+    },
+    {
+      "id": "306e3ab7-5127-459c-a83f-ada06a00c954",
+      "name": "S. L. Enloe",
+      "bounding_box": {
+        "x": 309,
+        "y": 779,
+        "w": 83,
+        "h": 15
+      }
+    },
+    {
+      "id": "5483c635-e0ea-4798-bf72-5fcbaf3c5c31",
+      "name": "T. L. Achey",
+      "bounding_box": {
+        "x": 307,
+        "y": 796,
+        "w": 84,
+        "h": 15
+      }
+    }
+  ]
+}

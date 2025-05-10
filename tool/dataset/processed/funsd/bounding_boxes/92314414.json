@@ -1,0 +1,102 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 863,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "8c14e43d-6bdf-400c-b520-f3145d815cc7",
+      "name": "700",
+      "bounding_box": {
+        "x": 589,
+        "y": 71,
+        "w": 31,
+        "h": 15
+      }
+    },
+    {
+      "id": "4464c3f9-c4d0-4d76-97bf-834874dc04d2",
+      "name": "",
+      "bounding_box": {
+        "x": 87,
+        "y": 806,
+        "w": 198,
+        "h": 43
+      }
+    },
+    {
+      "id": "88f576a8-82a1-45cf-9ae1-42733ed141d0",
+      "name": "274- 38- 3042",
+      "bounding_box": {
+        "x": 538,
+        "y": 54,
+        "w": 113,
+        "h": 16
+      }
+    },
+    {
+      "id": "75312673-8a51-4079-9e37-aca34a24bfd5",
+      "name": "$20.00",
+      "bounding_box": {
+        "x": 521,
+        "y": 311,
+        "w": 60,
+        "h": 18
+      }
+    },
+    {
+      "id": "78b871ef-b460-49db-9a59-648cf7e7a8bd",
+      "name": "Andrew H. Tisch (Print or type)",
+      "bounding_box": {
+        "x": 291,
+        "y": 628,
+        "w": 224,
+        "h": 34
+      }
+    },
+    {
+      "id": "b4ba2ad6-f22b-4809-8cfc-efe02f8583c7",
+      "name": "26 East 63rd Street, New York, N. Y. 10021 (Include state and zip code)",
+      "bounding_box": {
+        "x": 293,
+        "y": 669,
+        "w": 409,
+        "h": 39
+      }
+    },
+    {
+      "id": "1c5c5935-9f9b-4985-85fd-2231b663f4ea",
+      "name": "One Park Avenue, New York, N. Y. 10016",
+      "bounding_box": {
+        "x": 292,
+        "y": 716,
+        "w": 375,
+        "h": 19
+      }
+    },
+    {
+      "id": "7f8644b3-6850-4cea-9209-cbe47c688c04",
+      "name": "Chairman/ CEO - Lorillard Tobacco Company (Job title or position)",
+      "bounding_box": {
+        "x": 289,
+        "y": 747,
+        "w": 395,
+        "h": 38
+      }
+    },
+    {
+      "id": "080bcd12-ab79-4c4c-8466-78812643f267",
+      "name": "1 November 1991",
+      "bounding_box": {
+        "x": 492,
+        "y": 820,
+        "w": 126,
+        "h": 22
+      }
+    }
+  ]
+}

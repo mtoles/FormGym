@@ -1,0 +1,72 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 778,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "82f01ff8-30e7-4c87-9573-f3eaf3a155e5",
+      "name": "Multiple",
+      "bounding_box": {
+        "x": 209,
+        "y": 405,
+        "w": 63,
+        "h": 11
+      }
+    },
+    {
+      "id": "8ef203c0-1036-460d-9f21-1184e576b45b",
+      "name": "1419A",
+      "bounding_box": {
+        "x": 571,
+        "y": 274,
+        "w": 36,
+        "h": 15
+      }
+    },
+    {
+      "id": "55630ff0-89d9-40c9-bb5c-c41f9fdcd988",
+      "name": "Mice",
+      "bounding_box": {
+        "x": 527,
+        "y": 405,
+        "w": 34,
+        "h": 14
+      }
+    },
+    {
+      "id": "ce71a96b-6c23-4a8d-adb2-454cc876de17",
+      "name": "Borriston Laboratories, Inc.",
+      "bounding_box": {
+        "x": 200,
+        "y": 274,
+        "w": 197,
+        "h": 15
+      }
+    },
+    {
+      "id": "059b92f4-480e-40df-91e7-2746cdce2dc3",
+      "name": "Dr. William O. Iverson Pathologist Dr. Charley E. Gilmore",
+      "bounding_box": {
+        "x": 212,
+        "y": 316,
+        "w": 424,
+        "h": 19
+      }
+    },
+    {
+      "id": "e87dccac-c325-4077-a91f-af5d62fd3065",
+      "name": "Bioassay of Cigarette Smoke Condensates for potential Tumorigenic Activity on Mouse Skin (Revised Pathology Report)",
+      "bounding_box": {
+        "x": 214,
+        "y": 344,
+        "w": 380,
+        "h": 47
+      }
+    }
+  ]
+}

@@ -1,0 +1,442 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 777,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "ade4101d-0e14-4552-814a-19c205e6bc52",
+      "name": "Unk.",
+      "bounding_box": {
+        "x": 180,
+        "y": 162,
+        "w": 39,
+        "h": 20
+      }
+    },
+    {
+      "id": "923d7c6c-cdb8-4069-b34c-c00c5e685f18",
+      "name": "A4",
+      "bounding_box": {
+        "x": 669,
+        "y": 127,
+        "w": 28,
+        "h": 24
+      }
+    },
+    {
+      "id": "5fa2bba6-f0c9-49b4-a6ac-47a9d0f6e4b8",
+      "name": "12/28/78",
+      "bounding_box": {
+        "x": 377,
+        "y": 163,
+        "w": 74,
+        "h": 17
+      }
+    },
+    {
+      "id": "cd6d2233-e3af-4be8-a3db-ad7482534d47",
+      "name": "X",
+      "bounding_box": {
+        "x": 369,
+        "y": 284,
+        "w": 18,
+        "h": 18
+      }
+    },
+    {
+      "id": "3d305b26-9c68-4bd9-8948-c7b4f9e86543",
+      "name": "Unk.",
+      "bounding_box": {
+        "x": 591,
+        "y": 286,
+        "w": 39,
+        "h": 17
+      }
+    },
+    {
+      "id": "5fdb3eee-cad1-4f58-82a8-ede6a16b04be",
+      "name": "Camm",
+      "bounding_box": {
+        "x": 473,
+        "y": 323,
+        "w": 41,
+        "h": 15
+      }
+    },
+    {
+      "id": "1ac2169b-119d-4512-a07a-6a55ca356279",
+      "name": "Research",
+      "bounding_box": {
+        "x": 522,
+        "y": 320,
+        "w": 74,
+        "h": 15
+      }
+    },
+    {
+      "id": "1d5e7a84-5759-4eea-8bac-c778541ce96a",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 288,
+        "y": 360,
+        "w": 14,
+        "h": 13
+      }
+    },
+    {
+      "id": "123dcc63-406a-451b-8ccf-0f05eee80283",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 201,
+        "y": 388,
+        "w": 17,
+        "h": 18
+      }
+    },
+    {
+      "id": "055961da-c72d-4d92-9922-6f156f9e0afa",
+      "name": "5",
+      "bounding_box": {
+        "x": 216,
+        "y": 487,
+        "w": 15,
+        "h": 17
+      }
+    },
+    {
+      "id": "abc55da4-695d-4f0a-b998-071255e8cfda",
+      "name": "10",
+      "bounding_box": {
+        "x": 208,
+        "y": 517,
+        "w": 20,
+        "h": 15
+      }
+    },
+    {
+      "id": "8603e063-f3be-4910-b88f-1ba6fef5b5a2",
+      "name": "10",
+      "bounding_box": {
+        "x": 209,
+        "y": 546,
+        "w": 21,
+        "h": 15
+      }
+    },
+    {
+      "id": "d041db29-d1e8-474d-89e2-a55c1fd6ae48",
+      "name": "10",
+      "bounding_box": {
+        "x": 211,
+        "y": 578,
+        "w": 20,
+        "h": 15
+      }
+    },
+    {
+      "id": "ed16fbcb-e898-45f4-b2aa-863a01a8f198",
+      "name": "10",
+      "bounding_box": {
+        "x": 208,
+        "y": 606,
+        "w": 22,
+        "h": 14
+      }
+    },
+    {
+      "id": "02fe6928-f60c-424c-95ce-6142bd8203dd",
+      "name": "1",
+      "bounding_box": {
+        "x": 122,
+        "y": 483,
+        "w": 10,
+        "h": 13
+      }
+    },
+    {
+      "id": "53295bcc-ea2b-46bd-9b23-50cbf225861b",
+      "name": "2",
+      "bounding_box": {
+        "x": 122,
+        "y": 511,
+        "w": 11,
+        "h": 15
+      }
+    },
+    {
+      "id": "7117344b-f368-4926-b135-569af4d29429",
+      "name": "3",
+      "bounding_box": {
+        "x": 123,
+        "y": 541,
+        "w": 10,
+        "h": 14
+      }
+    },
+    {
+      "id": "0dd02f54-b980-43dd-81e4-b6da03d95247",
+      "name": "4",
+      "bounding_box": {
+        "x": 122,
+        "y": 571,
+        "w": 11,
+        "h": 14
+      }
+    },
+    {
+      "id": "7e140e9e-92d6-422e-8e89-53ac88a2cfc9",
+      "name": "5",
+      "bounding_box": {
+        "x": 123,
+        "y": 602,
+        "w": 10,
+        "h": 13
+      }
+    },
+    {
+      "id": "918dc4c0-9af6-4cc0-b386-135f1817238f",
+      "name": "1800",
+      "bounding_box": {
+        "x": 383,
+        "y": 487,
+        "w": 41,
+        "h": 17
+      }
+    },
+    {
+      "id": "a4649bfa-2c03-4ace-838f-b6310463ddd4",
+      "name": "2160",
+      "bounding_box": {
+        "x": 380,
+        "y": 518,
+        "w": 41,
+        "h": 14
+      }
+    },
+    {
+      "id": "c23822f1-581b-41e5-965c-85635b1a0ae2",
+      "name": "2592",
+      "bounding_box": {
+        "x": 383,
+        "y": 547,
+        "w": 36,
+        "h": 15
+      }
+    },
+    {
+      "id": "e8e0e3d7-e080-4e79-b308-9395d8749e7d",
+      "name": "3732",
+      "bounding_box": {
+        "x": 384,
+        "y": 577,
+        "w": 36,
+        "h": 17
+      }
+    },
+    {
+      "id": "5769ee50-6292-4c51-98a4-cd8554c4f05e",
+      "name": "4479",
+      "bounding_box": {
+        "x": 381,
+        "y": 605,
+        "w": 39,
+        "h": 15
+      }
+    },
+    {
+      "id": "a5f6df09-9b20-4ab6-94d4-39b8cc0711df",
+      "name": "3-Hydroxy-3-methylbutanoic acid (Tur 13)",
+      "bounding_box": {
+        "x": 145,
+        "y": 98,
+        "w": 362,
+        "h": 18
+      }
+    },
+    {
+      "id": "082c8627-4213-4f86-98d8-3f75851ba4d1",
+      "name": "Lorillard - Organic Chemistry",
+      "bounding_box": {
+        "x": 144,
+        "y": 128,
+        "w": 265,
+        "h": 24
+      }
+    },
+    {
+      "id": "ffc46210-040c-4928-accb-308c28100fb9",
+      "name": "OR39- 23",
+      "bounding_box": {
+        "x": 499,
+        "y": 127,
+        "w": 65,
+        "h": 17
+      }
+    },
+    {
+      "id": "192630c2-11a5-4456-a073-68dbdb711409",
+      "name": "5/3/79 10/6/80 , Update",
+      "bounding_box": {
+        "x": 573,
+        "y": 148,
+        "w": 140,
+        "h": 36
+      }
+    },
+    {
+      "id": "50694896-f6ac-4d6a-99db-65485f7e2c02",
+      "name": "H. S. Tong & M. S. Forte'",
+      "bounding_box": {
+        "x": 198,
+        "y": 194,
+        "w": 229,
+        "h": 19
+      }
+    },
+    {
+      "id": "1e6e325c-946b-47c3-8cf0-ba33ac422cb7",
+      "name": "",
+      "bounding_box": {
+        "x": 186,
+        "y": 211,
+        "w": 544,
+        "h": 53
+      }
+    },
+    {
+      "id": "8d170586-c3f7-45fd-a30e-397a826847fe",
+      "name": "B1014- 23",
+      "bounding_box": {
+        "x": 637,
+        "y": 194,
+        "w": 77,
+        "h": 15
+      }
+    },
+    {
+      "id": "2b1e4cb6-34d5-41ca-8b9f-2edd57f4b79b",
+      "name": "Swiss- Webster",
+      "bounding_box": {
+        "x": 162,
+        "y": 286,
+        "w": 120,
+        "h": 20
+      }
+    },
+    {
+      "id": "bfe2dee1-483d-477c-9448-8be56b5a7f5a",
+      "name": "1/ 6",
+      "bounding_box": {
+        "x": 574,
+        "y": 489,
+        "w": 29,
+        "h": 17
+      }
+    },
+    {
+      "id": "3362319f-173f-4acf-ac75-659b7df2960f",
+      "name": "0/ 6",
+      "bounding_box": {
+        "x": 575,
+        "y": 515,
+        "w": 32,
+        "h": 17
+      }
+    },
+    {
+      "id": "6c6b1229-bb85-4b9d-bdbc-4dd31eb27239",
+      "name": "0/ 6",
+      "bounding_box": {
+        "x": 575,
+        "y": 545,
+        "w": 28,
+        "h": 18
+      }
+    },
+    {
+      "id": "e742e89d-e4de-41d9-a2fc-05826491a344",
+      "name": "3/ 6",
+      "bounding_box": {
+        "x": 575,
+        "y": 575,
+        "w": 30,
+        "h": 19
+      }
+    },
+    {
+      "id": "7a47fd48-33f5-4ea0-9d60-2401a40c7745",
+      "name": "6/ 6",
+      "bounding_box": {
+        "x": 575,
+        "y": 605,
+        "w": 29,
+        "h": 18
+      }
+    },
+    {
+      "id": "1b1a04f2-e1dd-48fe-810f-a7e35c1bc68f",
+      "name": "Litchfield, J. T. and Wilcoxin F. , J. of Pharmacol",
+      "bounding_box": {
+        "x": 228,
+        "y": 638,
+        "w": 472,
+        "h": 23
+      }
+    },
+    {
+      "id": "94f859e0-e75c-4bc3-b761-2807ff996cd0",
+      "name": "and Exper. Ther. , 90: 99 , 1948.",
+      "bounding_box": {
+        "x": 92,
+        "y": 670,
+        "w": 272,
+        "h": 20
+      }
+    },
+    {
+      "id": "382d9083-9a25-429c-8560-acf67ed8a541",
+      "name": "3.5 (3.1 to 3.9 g /kg",
+      "bounding_box": {
+        "x": 239,
+        "y": 703,
+        "w": 181,
+        "h": 18
+      }
+    },
+    {
+      "id": "50ff3825-0e59-4cde-89da-7cd9c2b01d10",
+      "name": "Dr. H. J. Minnemeyer Ms. L. B. Gray",
+      "bounding_box": {
+        "x": 345,
+        "y": 863,
+        "w": 185,
+        "h": 32
+      }
+    },
+    {
+      "id": "3b17d2d4-035e-4b4f-895e-c98ead4fc657",
+      "name": "of respiratory depression, constriction of blood vessels, and in- activity. Survivors recovered in 48 hours. The recommended safe dose for a single trial by inhalation in man is 0.3 mg.",
+      "bounding_box": {
+        "x": 89,
+        "y": 753,
+        "w": 599,
+        "h": 78
+      }
+    },
+    {
+      "id": "20d8371f-4fb5-4e38-b3b7-a89dd250c1c0",
+      "name": "This compound appears to act as a CNS depressant with symptons",
+      "bounding_box": {
+        "x": 135,
+        "y": 728,
+        "w": 569,
+        "h": 21
+      }
+    }
+  ]
+}

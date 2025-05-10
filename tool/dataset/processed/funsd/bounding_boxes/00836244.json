@@ -1,0 +1,402 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 786,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "e72fc111-23e8-47d7-bc3a-214e45c273db",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 538,
+        "y": 303,
+        "w": 14,
+        "h": 14
+      }
+    },
+    {
+      "id": "0fdbd9ce-1da0-444d-ad34-c2d148d8b086",
+      "name": "50",
+      "bounding_box": {
+        "x": 284,
+        "y": 303,
+        "w": 11,
+        "h": 11
+      }
+    },
+    {
+      "id": "157e4d90-e261-49c6-9500-6344773cd05b",
+      "name": "80",
+      "bounding_box": {
+        "x": 349,
+        "y": 304,
+        "w": 11,
+        "h": 10
+      }
+    },
+    {
+      "id": "c6fb9bcf-4f1b-4d4e-8393-e1f4cf19d32f",
+      "name": "100",
+      "bounding_box": {
+        "x": 415,
+        "y": 303,
+        "w": 18,
+        "h": 13
+      }
+    },
+    {
+      "id": "a88aeb60-3a58-486c-aacc-e198b7c11362",
+      "name": ".5",
+      "bounding_box": {
+        "x": 352,
+        "y": 332,
+        "w": 17,
+        "h": 14
+      }
+    },
+    {
+      "id": "a7fc3a35-8ac9-47a5-954d-4e9cee66513f",
+      "name": ".90",
+      "bounding_box": {
+        "x": 507,
+        "y": 497,
+        "w": 27,
+        "h": 18
+      }
+    },
+    {
+      "id": "7eedda04-ad13-4a63-8ff4-eea21ba8ec19",
+      "name": ".96",
+      "bounding_box": {
+        "x": 563,
+        "y": 478,
+        "w": 27,
+        "h": 15
+      }
+    },
+    {
+      "id": "6ee1e56c-a653-4dea-a855-51916e6e6026",
+      "name": ".92",
+      "bounding_box": {
+        "x": 563,
+        "y": 500,
+        "w": 27,
+        "h": 15
+      }
+    },
+    {
+      "id": "62d529ba-e54c-425b-8f77-d6ab9b9e3a7e",
+      "name": ".85",
+      "bounding_box": {
+        "x": 563,
+        "y": 521,
+        "w": 28,
+        "h": 17
+      }
+    },
+    {
+      "id": "af3fb09b-dc3e-4b97-8903-09dd5e8a3af2",
+      "name": ".88",
+      "bounding_box": {
+        "x": 451,
+        "y": 475,
+        "w": 28,
+        "h": 20
+      }
+    },
+    {
+      "id": "9c0177b8-0b62-4a5c-8e89-2f87bc94ddce",
+      "name": ".97",
+      "bounding_box": {
+        "x": 454,
+        "y": 500,
+        "w": 24,
+        "h": 15
+      }
+    },
+    {
+      "id": "feb74725-f99d-42b1-9305-c405c15f45f3",
+      "name": ".92",
+      "bounding_box": {
+        "x": 453,
+        "y": 521,
+        "w": 27,
+        "h": 17
+      }
+    },
+    {
+      "id": "ce191f83-d0c2-4837-8770-a302a0a000d9",
+      "name": ".92",
+      "bounding_box": {
+        "x": 313,
+        "y": 473,
+        "w": 29,
+        "h": 20
+      }
+    },
+    {
+      "id": "067626cb-f0fd-45bd-afe7-13e998baf344",
+      "name": ".79",
+      "bounding_box": {
+        "x": 316,
+        "y": 499,
+        "w": 25,
+        "h": 15
+      }
+    },
+    {
+      "id": "1f9d17d8-e621-4503-b650-f2ed3936d227",
+      "name": ".83",
+      "bounding_box": {
+        "x": 316,
+        "y": 521,
+        "w": 25,
+        "h": 17
+      }
+    },
+    {
+      "id": "7cbcdc93-6afd-42f5-bbf5-5f2eec101866",
+      "name": ".97",
+      "bounding_box": {
+        "x": 388,
+        "y": 496,
+        "w": 28,
+        "h": 20
+      }
+    },
+    {
+      "id": "44859152-dab6-4010-ba4e-737a4cc50e1d",
+      "name": "500",
+      "bounding_box": {
+        "x": 137,
+        "y": 475,
+        "w": 31,
+        "h": 15
+      }
+    },
+    {
+      "id": "02b65386-e3ab-4e0b-8eff-4880a48f7bf0",
+      "name": "250",
+      "bounding_box": {
+        "x": 140,
+        "y": 500,
+        "w": 25,
+        "h": 15
+      }
+    },
+    {
+      "id": "b216ee9b-a962-470a-81a3-07276ef2b232",
+      "name": "125",
+      "bounding_box": {
+        "x": 138,
+        "y": 521,
+        "w": 31,
+        "h": 15
+      }
+    },
+    {
+      "id": "d6eed74d-4522-4373-8a5a-43efd5ba35cc",
+      "name": "4",
+      "bounding_box": {
+        "x": 138,
+        "y": 634,
+        "w": 14,
+        "h": 13
+      }
+    },
+    {
+      "id": "945516d0-f5f6-4e35-a1df-f4fcce2e9605",
+      "name": "2",
+      "bounding_box": {
+        "x": 137,
+        "y": 656,
+        "w": 15,
+        "h": 15
+      }
+    },
+    {
+      "id": "620d694e-378c-4c28-8cfe-a033ec21254f",
+      "name": "2, 4- Dihydroxypyridine",
+      "bounding_box": {
+        "x": 145,
+        "y": 112,
+        "w": 198,
+        "h": 19
+      }
+    },
+    {
+      "id": "86cd4cd1-72e4-416c-aad1-b64aa8bc38b8",
+      "name": "Lorillard - Organic Chemistry",
+      "bounding_box": {
+        "x": 137,
+        "y": 144,
+        "w": 267,
+        "h": 22
+      }
+    },
+    {
+      "id": "5e49a56a-9de4-4196-af07-8729281b621b",
+      "name": "OR61 -2",
+      "bounding_box": {
+        "x": 483,
+        "y": 141,
+        "w": 59,
+        "h": 21
+      }
+    },
+    {
+      "id": "9dfe6ee1-d768-49eb-8848-26779755a0e9",
+      "name": "9 /3 /80",
+      "bounding_box": {
+        "x": 175,
+        "y": 176,
+        "w": 56,
+        "h": 17
+      }
+    },
+    {
+      "id": "8562380d-5019-4189-817b-f456171f04a7",
+      "name": "9 /10 /80 -10 /10 /80",
+      "bounding_box": {
+        "x": 363,
+        "y": 172,
+        "w": 152,
+        "h": 23
+      }
+    },
+    {
+      "id": "89aed1f5-beff-4800-8ac0-9d53b262d8f0",
+      "name": "10 /10 /80",
+      "bounding_box": {
+        "x": 616,
+        "y": 173,
+        "w": 74,
+        "h": 22
+      }
+    },
+    {
+      "id": "b350d1b3-c9c4-4c2d-88f7-01666aa89cbf",
+      "name": "H. S. Tong & A. A. Poole",
+      "bounding_box": {
+        "x": 175,
+        "y": 203,
+        "w": 222,
+        "h": 22
+      }
+    },
+    {
+      "id": "2d8bc4e8-2857-457d-9b41-fc8d30598615",
+      "name": "BIO7 -24",
+      "bounding_box": {
+        "x": 633,
+        "y": 205,
+        "w": 65,
+        "h": 19
+      }
+    },
+    {
+      "id": "c64f63ae-f4c1-49e6-b9d5-5f5c4b591c5e",
+      "name": "",
+      "bounding_box": {
+        "x": 186,
+        "y": 229,
+        "w": 420,
+        "h": 39
+      }
+    },
+    {
+      "id": "87720c94-9366-499b-b8b0-4d94c79566ea",
+      "name": "4 .67",
+      "bounding_box": {
+        "x": 239,
+        "y": 419,
+        "w": 40,
+        "h": 20
+      }
+    },
+    {
+      "id": "d97bea3e-02be-45e2-9eac-6d7be22d4f9c",
+      "name": "8 .00",
+      "bounding_box": {
+        "x": 300,
+        "y": 418,
+        "w": 43,
+        "h": 20
+      }
+    },
+    {
+      "id": "0a0bbea7-e034-4c55-b7e4-0ed634b21fa8",
+      "name": "123 .00",
+      "bounding_box": {
+        "x": 359,
+        "y": 419,
+        "w": 55,
+        "h": 20
+      }
+    },
+    {
+      "id": "5e5081bb-0677-4c4c-8a64-b029088237a7",
+      "name": "135 .33",
+      "bounding_box": {
+        "x": 423,
+        "y": 419,
+        "w": 57,
+        "h": 18
+      }
+    },
+    {
+      "id": "ade297b8-5048-43fd-9a30-f571cd1bc759",
+      "name": "3 .33.33",
+      "bounding_box": {
+        "x": 496,
+        "y": 422,
+        "w": 38,
+        "h": 17
+      }
+    },
+    {
+      "id": "544bf9ea-c6b5-40f2-ab8d-b5a044429700",
+      "name": "16 .00",
+      "bounding_box": {
+        "x": 543,
+        "y": 420,
+        "w": 47,
+        "h": 17
+      }
+    },
+    {
+      "id": "5478dc40-7578-4a5e-a006-e7c0b2676641",
+      "name": "1. 00",
+      "bounding_box": {
+        "x": 250,
+        "y": 497,
+        "w": 35,
+        "h": 20
+      }
+    },
+    {
+      "id": "a0f0923f-27eb-4460-add6-1b5ad96faa44",
+      "name": "This compound is judged non mutagenic in this test system.",
+      "bounding_box": {
+        "x": 166,
+        "y": 785,
+        "w": 545,
+        "h": 24
+      }
+    },
+    {
+      "id": "af3e06f6-b57c-4f9a-b8de-28b482eca8cf",
+      "name": "Dr. H. J. Minnemeyer Ms. L. B. Gray",
+      "bounding_box": {
+        "x": 377,
+        "y": 832,
+        "w": 187,
+        "h": 39
+      }
+    }
+  ]
+}

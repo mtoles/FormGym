@@ -1,0 +1,102 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 772,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "17a375b3-706b-4cbf-9080-b2521f18fc58",
+      "name": "6692",
+      "bounding_box": {
+        "x": 623,
+        "y": 145,
+        "w": 35,
+        "h": 13
+      }
+    },
+    {
+      "id": "a97eaae4-530a-4c6d-a3c7-925b6f8a91d7",
+      "name": "B83",
+      "bounding_box": {
+        "x": 225,
+        "y": 145,
+        "w": 25,
+        "h": 11
+      }
+    },
+    {
+      "id": "807f0193-f027-44d3-a3fd-af01f852e2d1",
+      "name": "N/ A",
+      "bounding_box": {
+        "x": 187,
+        "y": 175,
+        "w": 26,
+        "h": 13
+      }
+    },
+    {
+      "id": "c142c103-3bd7-4292-8c68-a000c847acaf",
+      "name": "Proprietary Mixture",
+      "bounding_box": {
+        "x": 226,
+        "y": 200,
+        "w": 173,
+        "h": 17
+      }
+    },
+    {
+      "id": "fe233dc3-6568-4c92-ab73-4119d5675b9a",
+      "name": "M. Lymph: negative with S9 activation, positive without S9 activation; Rerun: negative without S9 activation, border- line positive with S9 activation -Technical problems with the",
+      "bounding_box": {
+        "x": 186,
+        "y": 263,
+        "w": 555,
+        "h": 78
+      }
+    },
+    {
+      "id": "f2e34642-e43b-4b28-a0ed-2e2b6693c91d",
+      "name": "5. 26",
+      "bounding_box": {
+        "x": 249,
+        "y": 485,
+        "w": 35,
+        "h": 18
+      }
+    },
+    {
+      "id": "d3ef1e8c-27dd-4973-9357-f83d3f482ad2",
+      "name": "Yellow liquid",
+      "bounding_box": {
+        "x": 247,
+        "y": 546,
+        "w": 118,
+        "h": 15
+      }
+    },
+    {
+      "id": "774847ab-fe9a-4b08-ac45-5ad1b909c819",
+      "name": "N/ A",
+      "bounding_box": {
+        "x": 182,
+        "y": 574,
+        "w": 31,
+        "h": 17
+      }
+    },
+    {
+      "id": "612a10ab-833f-46af-ab44-2ac8cbd73853",
+      "name": "N/ A",
+      "bounding_box": {
+        "x": 246,
+        "y": 619,
+        "w": 33,
+        "h": 20
+      }
+    }
+  ]
+}

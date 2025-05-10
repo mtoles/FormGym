@@ -1,0 +1,102 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "e833b64f-7390-4e54-9363-674f49e0cc15",
+      "name": "A30",
+      "bounding_box": {
+        "x": 103,
+        "y": 179,
+        "w": 27,
+        "h": 11
+      }
+    },
+    {
+      "id": "7e41271a-f619-436e-a51f-23cee68de1d6",
+      "name": "Clear Colorless liquid",
+      "bounding_box": {
+        "x": 103,
+        "y": 203,
+        "w": 183,
+        "h": 15
+      }
+    },
+    {
+      "id": "6f3850d1-5f5e-4b10-967b-30f0294dba89",
+      "name": "The pH of a 50 % concentration of A30 in (52.6% dioxane/ water was calculated to be 8.13 at 24 C according to the extrapolation procedures by Dr. P. D. Schickedantz, Lorillard Research Center Accession Number 1662, Reference OR 83- 81.",
+      "bounding_box": {
+        "x": 102,
+        "y": 228,
+        "w": 542,
+        "h": 56
+      }
+    },
+    {
+      "id": "1ee8647d-5754-418e-83e2-1537edf56631",
+      "name": "(See SOE for Biological Solutions)",
+      "bounding_box": {
+        "x": 144,
+        "y": 359,
+        "w": 283,
+        "h": 14
+      }
+    },
+    {
+      "id": "de822d62-cdf3-4ba5-9480-55cc0a6c657d",
+      "name": "Reference OR 100- 32 . 5g A30 soluble in .5 mL corn oil at room temperature.",
+      "bounding_box": {
+        "x": 109,
+        "y": 388,
+        "w": 449,
+        "h": 45
+      }
+    },
+    {
+      "id": "5492200c-a9cc-43be-a1ee-7a9ca23bb49d",
+      "name": "(See SOP for Determination of Solubility of Materials for Acute Cardiovascular and Respiratory Effects Study in Beagle Dogs) Reference OR 100- 32 .2 mg A30 soluble in .5 mL 10 % propylene glycol solution at 38 C. Add A30 to warm (38 C) propylene glycol; add warm water to make 10 % propylene glycol solution.",
+      "bounding_box": {
+        "x": 108,
+        "y": 500,
+        "w": 543,
+        "h": 108
+      }
+    },
+    {
+      "id": "d05169a1-d960-4372-8a19-6e826feb8ac9",
+      "name": "Refrig erate in amber bottle at no more than 8 C.",
+      "bounding_box": {
+        "x": 103,
+        "y": 644,
+        "w": 397,
+        "h": 14
+      }
+    },
+    {
+      "id": "2ec40e4a-2092-4424-8ede-a974e42b6baa",
+      "name": "",
+      "bounding_box": {
+        "x": 161,
+        "y": 858,
+        "w": 136,
+        "h": 50
+      }
+    },
+    {
+      "id": "d2bf9ee4-94fd-4974-b106-8d6d012e8cd7",
+      "name": "8/ 10/ 82",
+      "bounding_box": {
+        "x": 527,
+        "y": 869,
+        "w": 82,
+        "h": 39
+      }
+    }
+  ]
+}

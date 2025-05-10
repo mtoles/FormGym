@@ -1,0 +1,292 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 780,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "a5a2646a-47a8-400e-b4d9-7b9117f26e95",
+      "name": "",
+      "bounding_box": {
+        "x": 219,
+        "y": 655,
+        "w": 156,
+        "h": 53
+      }
+    },
+    {
+      "id": "d87f7b09-d3a4-4391-ba0f-dd7c0d6280df",
+      "name": "",
+      "bounding_box": {
+        "x": 223,
+        "y": 708,
+        "w": 152,
+        "h": 32
+      }
+    },
+    {
+      "id": "89f0d71c-129f-49db-9780-b18c12a022e7",
+      "name": "",
+      "bounding_box": {
+        "x": 362,
+        "y": 781,
+        "w": 123,
+        "h": 42
+      }
+    },
+    {
+      "id": "5ebe8c3b-293b-4ba4-b026-82e4df9d00db",
+      "name": "",
+      "bounding_box": {
+        "x": 328,
+        "y": 804,
+        "w": 162,
+        "h": 60
+      }
+    },
+    {
+      "id": "54b37000-134f-4ca7-9d4c-8ddcadabaec8",
+      "name": "NP -75",
+      "bounding_box": {
+        "x": 642,
+        "y": 66,
+        "w": 48,
+        "h": 17
+      }
+    },
+    {
+      "id": "110f7209-899b-4a18-bef6-df722b62ad8d",
+      "name": "11/ 28/ 84",
+      "bounding_box": {
+        "x": 187,
+        "y": 57,
+        "w": 58,
+        "h": 20
+      }
+    },
+    {
+      "id": "3e56e484-b5f5-4d50-a034-f9feaf4a94f6",
+      "name": "GEMINI AWARENESS ATTITUDE & USAGE MONITOR. - PORTLAND",
+      "bounding_box": {
+        "x": 215,
+        "y": 103,
+        "w": 386,
+        "h": 23
+      }
+    },
+    {
+      "id": "05601348-7128-460a-9158-5ab99021e332",
+      "name": "BURKE MARKETING RESEARCH",
+      "bounding_box": {
+        "x": 203,
+        "y": 133,
+        "w": 177,
+        "h": 17
+      }
+    },
+    {
+      "id": "0afaf006-bd53-4a55-9e63-54bbb5beffb9",
+      "name": "+1 ,000 (0 .5% CHANGE)",
+      "bounding_box": {
+        "x": 504,
+        "y": 205,
+        "w": 214,
+        "h": 27
+      }
+    },
+    {
+      "id": "37add995-565e-4864-83fb-f2be0fa2b6d8",
+      "name": "221, 000",
+      "bounding_box": {
+        "x": 497,
+        "y": 251,
+        "w": 64,
+        "h": 20
+      }
+    },
+    {
+      "id": "9a703b67-1028-4587-b2d2-b041d86f529f",
+      "name": "REVISED COST DUE TO A QUESTION ADDED TO THE SECOND WAVE AND CHANGES MADE IN WORDING OF OTHER QUESTIONS. THIS COVERS THE COST OF ADDITIONAL TELEPHONE INTERVIEW LENGTH, CODING OF THE OPEN- END, PROGRAMING CHANGES, TABULATION AND ANALYSIS.",
+      "bounding_box": {
+        "x": 135,
+        "y": 330,
+        "w": 559,
+        "h": 59
+      }
+    },
+    {
+      "id": "8e701b99-0a3e-4ba7-b0a9-233ba32da74e",
+      "name": "Aug. 1984",
+      "bounding_box": {
+        "x": 223,
+        "y": 448,
+        "w": 85,
+        "h": 17
+      }
+    },
+    {
+      "id": "47bd6ac1-a7ca-4f74-8a9a-b7ad71cb6312",
+      "name": "Dec. 1984",
+      "bounding_box": {
+        "x": 223,
+        "y": 466,
+        "w": 83,
+        "h": 13
+      }
+    },
+    {
+      "id": "aa4120a5-75b9-4be5-8a20-a38077172e4a",
+      "name": "Jan. 1985",
+      "bounding_box": {
+        "x": 225,
+        "y": 480,
+        "w": 84,
+        "h": 15
+      }
+    },
+    {
+      "id": "63d68128-a2ec-4cd9-b6c1-8278ec621759",
+      "name": "16, 395. 66",
+      "bounding_box": {
+        "x": 644,
+        "y": 564,
+        "w": 82,
+        "h": 18
+      }
+    },
+    {
+      "id": "860a62ed-1236-4663-a0c9-f8f717ed174e",
+      "name": "200. 00",
+      "bounding_box": {
+        "x": 494,
+        "y": 528,
+        "w": 55,
+        "h": 14
+      }
+    },
+    {
+      "id": "579ebe43-9454-463d-a6b9-6255e65178c4",
+      "name": "17 195. 66",
+      "bounding_box": {
+        "x": 645,
+        "y": 459,
+        "w": 78,
+        "h": 17
+      }
+    },
+    {
+      "id": "9ef4ca38-58d1-4d59-8eee-962bb21e2cda",
+      "name": "-800. 00",
+      "bounding_box": {
+        "x": 662,
+        "y": 483,
+        "w": 67,
+        "h": 20
+      }
+    },
+    {
+      "id": "c9b3530b-a36c-47bf-97c3-fabcd86ab7d7",
+      "name": "1984 (REV) 3, 488, 000. 00",
+      "bounding_box": {
+        "x": 531,
+        "y": 423,
+        "w": 195,
+        "h": 29
+      }
+    },
+    {
+      "id": "a29fdfe5-e95d-4a73-8563-8eb735774457",
+      "name": "11/ /29 /84",
+      "bounding_box": {
+        "x": 573,
+        "y": 666,
+        "w": 79,
+        "h": 34
+      }
+    },
+    {
+      "id": "abfe758c-1ebb-42c2-978f-245863ac01e5",
+      "name": "12- 10- 84",
+      "bounding_box": {
+        "x": 559,
+        "y": 743,
+        "w": 86,
+        "h": 32
+      }
+    },
+    {
+      "id": "c9b9c15e-94b6-4d32-847a-a2a7241fcbe0",
+      "name": "12/ 11/ 84",
+      "bounding_box": {
+        "x": 567,
+        "y": 786,
+        "w": 92,
+        "h": 30
+      }
+    },
+    {
+      "id": "a7bbb85a-9384-450e-8536-8d500561dfdd",
+      "name": "12 -11",
+      "bounding_box": {
+        "x": 568,
+        "y": 821,
+        "w": 66,
+        "h": 22
+      }
+    },
+    {
+      "id": "b8433ec7-60d4-4fa9-9de9-8ef6720b68c4",
+      "name": "- PROJECT FILE",
+      "bounding_box": {
+        "x": 147,
+        "y": 863,
+        "w": 127,
+        "h": 27
+      }
+    },
+    {
+      "id": "cf7a1dd8-fcaf-4027-8742-5f342071948c",
+      "name": "S. WILLINGER (3) \u2611 RESEARCH GROUP MANAGER",
+      "bounding_box": {
+        "x": 163,
+        "y": 880,
+        "w": 196,
+        "h": 54
+      }
+    },
+    {
+      "id": "6b649b41-3ccb-42cc-a4a9-5edafeb5f51a",
+      "name": "B a",
+      "bounding_box": {
+        "x": 230,
+        "y": 732,
+        "w": 164,
+        "h": 52
+      }
+    },
+    {
+      "id": "5da44729-9f3e-4a03-80d6-02e938723f95",
+      "name": "1984- 175NP",
+      "bounding_box": {
+        "x": 531,
+        "y": 894,
+        "w": 78,
+        "h": 16
+      }
+    },
+    {
+      "id": "f4fed85a-e3e4-4b88-abae-4efa92e1a78a",
+      "name": "New Products",
+      "bounding_box": {
+        "x": 531,
+        "y": 923,
+        "w": 91,
+        "h": 15
+      }
+    }
+  ]
+}

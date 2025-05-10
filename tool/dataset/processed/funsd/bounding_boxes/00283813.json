@@ -1,0 +1,272 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 784,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "f066abb7-bce3-4a23-9046-ff3a41411461",
+      "name": "5031",
+      "bounding_box": {
+        "x": 380,
+        "y": 49,
+        "w": 41,
+        "h": 13
+      }
+    },
+    {
+      "id": "d88f2ca8-ee6e-475b-b8ab-7dd19fc24d8c",
+      "name": "Gold",
+      "bounding_box": {
+        "x": 550,
+        "y": 489,
+        "w": 41,
+        "h": 14
+      }
+    },
+    {
+      "id": "eef7c9cf-7f3a-4817-ac17-c54c86ee5f98",
+      "name": "7/ 16/ 68",
+      "bounding_box": {
+        "x": 601,
+        "y": 21,
+        "w": 69,
+        "h": 21
+      }
+    },
+    {
+      "id": "cebe78d6-b020-4235-9b06-857271952656",
+      "name": "7/ 10/ 68",
+      "bounding_box": {
+        "x": 663,
+        "y": 73,
+        "w": 72,
+        "h": 21
+      }
+    },
+    {
+      "id": "95a20e0d-167b-4a04-8e5c-f0b91959dd0d",
+      "name": "Mr. C. L. Tucker, Jr.",
+      "bounding_box": {
+        "x": 334,
+        "y": 71,
+        "w": 191,
+        "h": 18
+      }
+    },
+    {
+      "id": "48303f84-42c6-4e06-a49a-0e2f9b55af5e",
+      "name": "John H. M. Bohlken",
+      "bounding_box": {
+        "x": 426,
+        "y": 98,
+        "w": 169,
+        "h": 20
+      }
+    },
+    {
+      "id": "961de5ea-599e-418d-9f8e-bd0ad441f46b",
+      "name": "OLD GOLD STRAIGHT",
+      "bounding_box": {
+        "x": 239,
+        "y": 323,
+        "w": 159,
+        "h": 17
+      }
+    },
+    {
+      "id": "2659e372-0353-4402-963f-0b0624e2d5df",
+      "name": "85 mm.",
+      "bounding_box": {
+        "x": 239,
+        "y": 339,
+        "w": 55,
+        "h": 14
+      }
+    },
+    {
+      "id": "67ca0d85-d65f-4cc3-bb64-a5c210e6b708",
+      "name": "25. 3 mm.",
+      "bounding_box": {
+        "x": 240,
+        "y": 355,
+        "w": 73,
+        "h": 16
+      }
+    },
+    {
+      "id": "a3fd4e7c-cc99-41a5-be86-d73612867b11",
+      "name": "Ecusta 556",
+      "bounding_box": {
+        "x": 237,
+        "y": 372,
+        "w": 95,
+        "h": 14
+      }
+    },
+    {
+      "id": "7cf2454c-ad78-46a0-8414-3f57f7314057",
+      "name": "OLD GOLD STRAIGHT",
+      "bounding_box": {
+        "x": 237,
+        "y": 387,
+        "w": 160,
+        "h": 16
+      }
+    },
+    {
+      "id": "8ed4c863-1196-4726-ae97-7260b1ebcf48",
+      "name": "OLD GOLD STRAIGHT",
+      "bounding_box": {
+        "x": 239,
+        "y": 405,
+        "w": 158,
+        "h": 15
+      }
+    },
+    {
+      "id": "cf0c5452-7e8e-40bb-b2b7-9e83dc52faf3",
+      "name": "OLD GOLD STRAIGHT",
+      "bounding_box": {
+        "x": 237,
+        "y": 420,
+        "w": 161,
+        "h": 15
+      }
+    },
+    {
+      "id": "b5dd1bf7-1cc0-4d12-b442-8ca6877fde97",
+      "name": "OLD GOLD STRAIGHT",
+      "bounding_box": {
+        "x": 237,
+        "y": 459,
+        "w": 159,
+        "h": 17
+      }
+    },
+    {
+      "id": "5c898748-a6d2-41f7-a512-0dab4844ad68",
+      "name": "OLD GOLD STRAIGHT",
+      "bounding_box": {
+        "x": 550,
+        "y": 454,
+        "w": 161,
+        "h": 18
+      }
+    },
+    {
+      "id": "601d2388-b730-48b4-bdb3-1adc5e5f4d66",
+      "name": "Standard Blue",
+      "bounding_box": {
+        "x": 550,
+        "y": 471,
+        "w": 122,
+        "h": 16
+      }
+    },
+    {
+      "id": "aab39f75-2ce4-4118-b098-7700af517bac",
+      "name": "OLD GOLD STRAIGHT",
+      "bounding_box": {
+        "x": 552,
+        "y": 506,
+        "w": 158,
+        "h": 15
+      }
+    },
+    {
+      "id": "9f802792-8977-4231-8b02-86562ddcb8e7",
+      "name": "Sample number on each pack and carton",
+      "bounding_box": {
+        "x": 550,
+        "y": 522,
+        "w": 197,
+        "h": 32
+      }
+    },
+    {
+      "id": "b76cf0da-ba61-4787-84d2-e9d94a8ab8b7",
+      "name": "One Tray",
+      "bounding_box": {
+        "x": 236,
+        "y": 542,
+        "w": 78,
+        "h": 20
+      }
+    },
+    {
+      "id": "dc0eaca6-5006-4d3f-83fb-ea2c9a857f3a",
+      "name": "Benzo (A) Pyrene Analyses",
+      "bounding_box": {
+        "x": 78,
+        "y": 634,
+        "w": 232,
+        "h": 18
+      }
+    },
+    {
+      "id": "0dd54a53-31fc-4329-b482-b486d81e934c",
+      "name": "Tars and Nicotine, Taste Panel, Burning Time, Gas Phase Analysis,",
+      "bounding_box": {
+        "x": 70,
+        "y": 617,
+        "w": 610,
+        "h": 24
+      }
+    },
+    {
+      "id": "c43aed23-53e7-407e-a8de-1df4e5a54861",
+      "name": "Manufacturing - A. Kraus",
+      "bounding_box": {
+        "x": 263,
+        "y": 677,
+        "w": 224,
+        "h": 17
+      }
+    },
+    {
+      "id": "75dcd092-682d-4d6a-8b6a-e8655e2c4301",
+      "name": "Product Development, John H. M. Bohlker",
+      "bounding_box": {
+        "x": 264,
+        "y": 707,
+        "w": 368,
+        "h": 20
+      }
+    },
+    {
+      "id": "0100fc92-dfd9-4f2e-af25-509cafad4ef1",
+      "name": "John H. M. Bohlken",
+      "bounding_box": {
+        "x": 197,
+        "y": 786,
+        "w": 168,
+        "h": 15
+      }
+    },
+    {
+      "id": "cf686baf-84d1-4401-825c-2d0381839736",
+      "name": "Mr. C. L. Tucker, Jr.",
+      "bounding_box": {
+        "x": 196,
+        "y": 803,
+        "w": 196,
+        "h": 15
+      }
+    },
+    {
+      "id": "996c2e77-50e7-412a-ad4a-c05d43c84e0a",
+      "name": "Dr. A. W. Spears",
+      "bounding_box": {
+        "x": 196,
+        "y": 818,
+        "w": 150,
+        "h": 16
+      }
+    }
+  ]
+}

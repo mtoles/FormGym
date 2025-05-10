@@ -1,0 +1,272 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "5f113e96-0c39-4b83-b709-3785b2ea4254",
+      "name": "54%",
+      "bounding_box": {
+        "x": 515,
+        "y": 468,
+        "w": 28,
+        "h": 11
+      }
+    },
+    {
+      "id": "267e0238-6868-4df2-ae1b-cf31ddb87450",
+      "name": "46%46%",
+      "bounding_box": {
+        "x": 515,
+        "y": 478,
+        "w": 29,
+        "h": 11
+      }
+    },
+    {
+      "id": "28477391-b303-4de6-96ce-feef14f5bc0b",
+      "name": "47%",
+      "bounding_box": {
+        "x": 377,
+        "y": 468,
+        "w": 22,
+        "h": 10
+      }
+    },
+    {
+      "id": "10bf790e-c9b2-4f26-85ad-82259214af83",
+      "name": "53%",
+      "bounding_box": {
+        "x": 377,
+        "y": 479,
+        "w": 22,
+        "h": 10
+      }
+    },
+    {
+      "id": "33790ae9-6aed-4a0a-a076-0a76a328b5d0",
+      "name": "-13",
+      "bounding_box": {
+        "x": 451,
+        "y": 557,
+        "w": 21,
+        "h": 10
+      }
+    },
+    {
+      "id": "e600977c-059e-4c3f-b82e-af333410e647",
+      "name": "-4",
+      "bounding_box": {
+        "x": 536,
+        "y": 559,
+        "w": 22,
+        "h": 10
+      }
+    },
+    {
+      "id": "7133e32f-8cd1-40e2-a1c5-d565a03e91fe",
+      "name": "-7",
+      "bounding_box": {
+        "x": 450,
+        "y": 571,
+        "w": 21,
+        "h": 8
+      }
+    },
+    {
+      "id": "bf05c0d6-d3ce-4d6e-8e40-3a9230fff021",
+      "name": "+7*",
+      "bounding_box": {
+        "x": 534,
+        "y": 570,
+        "w": 27,
+        "h": 13
+      }
+    },
+    {
+      "id": "318c7a26-0a88-4df0-bc9d-ab776b1d24e9",
+      "name": "+14",
+      "bounding_box": {
+        "x": 450,
+        "y": 582,
+        "w": 25,
+        "h": 10
+      }
+    },
+    {
+      "id": "6888d718-3621-42d9-8675-dba3bbb42dab",
+      "name": "+26*",
+      "bounding_box": {
+        "x": 532,
+        "y": 581,
+        "w": 29,
+        "h": 11
+      }
+    },
+    {
+      "id": "572a905d-eba4-4bf9-878f-041667dbb670",
+      "name": "-15*",
+      "bounding_box": {
+        "x": 293,
+        "y": 557,
+        "w": 27,
+        "h": 14
+      }
+    },
+    {
+      "id": "8988b822-b1d7-469a-93b5-58560c295d35",
+      "name": "+22",
+      "bounding_box": {
+        "x": 211,
+        "y": 582,
+        "w": 20,
+        "h": 10
+      }
+    },
+    {
+      "id": "1b256709-834e-42fb-b3e3-8752a0c0ac45",
+      "name": "+1",
+      "bounding_box": {
+        "x": 208,
+        "y": 557,
+        "w": 20,
+        "h": 13
+      }
+    },
+    {
+      "id": "7fad696e-72f6-44ad-8757-588811c432c1",
+      "name": "+5",
+      "bounding_box": {
+        "x": 208,
+        "y": 571,
+        "w": 22,
+        "h": 10
+      }
+    },
+    {
+      "id": "1098d85f-d44c-4162-979a-cbf16e8956f7",
+      "name": "-5",
+      "bounding_box": {
+        "x": 293,
+        "y": 570,
+        "w": 24,
+        "h": 8
+      }
+    },
+    {
+      "id": "526fe083-6e40-4ec1-8311-44b4eecfb15c",
+      "name": "+21",
+      "bounding_box": {
+        "x": 292,
+        "y": 581,
+        "w": 22,
+        "h": 11
+      }
+    },
+    {
+      "id": "c52f73ce-0cd3-4d3f-b1d6-8afaf7ad419c",
+      "name": "# 19 4- 26A",
+      "bounding_box": {
+        "x": 486,
+        "y": 233,
+        "w": 61,
+        "h": 17
+      }
+    },
+    {
+      "id": "95a08c02-5edf-42d2-b3e5-8cf6cd39c8ff",
+      "name": "25% Replacement of Propylene Glycol With SORBITOL",
+      "bounding_box": {
+        "x": 203,
+        "y": 281,
+        "w": 296,
+        "h": 15
+      }
+    },
+    {
+      "id": "83ef2031-fee9-416e-af68-b60562f8e6bd",
+      "name": "250 VICEROY/ 125 Marlboro/ 125 Winston",
+      "bounding_box": {
+        "x": 203,
+        "y": 303,
+        "w": 219,
+        "h": 16
+      }
+    },
+    {
+      "id": "9fff2381-92fb-4e4a-b6a9-240756fb9c2d",
+      "name": "Current VICEROY B4",
+      "bounding_box": {
+        "x": 275,
+        "y": 338,
+        "w": 111,
+        "h": 14
+      }
+    },
+    {
+      "id": "df8e6b48-0896-4430-acb4-a9c5d74e9208",
+      "name": "Current VICEROY 84 except with 25% of the propylene glycol replaced with SORBITOL.",
+      "bounding_box": {
+        "x": 275,
+        "y": 362,
+        "w": 182,
+        "h": 36
+      }
+    },
+    {
+      "id": "964d3524-6aa2-4d51-9eb6-5f751f2fee9e",
+      "name": "(#627/ 647",
+      "bounding_box": {
+        "x": 109,
+        "y": 468,
+        "w": 63,
+        "h": 11
+      }
+    },
+    {
+      "id": "f9d4f59f-6938-4ae1-a66c-148257690ce6",
+      "name": "(#647/ 627)",
+      "bounding_box": {
+        "x": 108,
+        "y": 479,
+        "w": 63,
+        "h": 13
+      }
+    },
+    {
+      "id": "a538eea0-752d-418e-9378-2bbb23774224",
+      "name": "Current VICEROY 84 25% PG with SORBITOL",
+      "bounding_box": {
+        "x": 184,
+        "y": 468,
+        "w": 126,
+        "h": 22
+      }
+    },
+    {
+      "id": "67159c10-92f4-4d80-8fcb-f7fd202c3001",
+      "name": "Current VICEROY 84 (#627/ 647)",
+      "bounding_box": {
+        "x": 184,
+        "y": 513,
+        "w": 70,
+        "h": 34
+      }
+    },
+    {
+      "id": "ef8acbe9-759d-4ef0-ac20-f1b79b65610c",
+      "name": "25% PG w/ SORBITOL #647/ 627",
+      "bounding_box": {
+        "x": 268,
+        "y": 511,
+        "w": 71,
+        "h": 37
+      }
+    }
+  ]
+}

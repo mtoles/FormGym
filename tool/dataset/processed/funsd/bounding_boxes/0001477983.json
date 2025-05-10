@@ -1,0 +1,122 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "22e1f687-e71c-49ac-a534-81a0e7cd19dc",
+      "name": "No.",
+      "bounding_box": {
+        "x": 300,
+        "y": 366,
+        "w": 38,
+        "h": 17
+      }
+    },
+    {
+      "id": "9c65f532-6362-45ed-a00c-b06b52b9b446",
+      "name": "$",
+      "bounding_box": {
+        "x": 316,
+        "y": 380,
+        "w": 8,
+        "h": 17
+      }
+    },
+    {
+      "id": "0fced415-325a-4d33-84d5-132666e882d3",
+      "name": "$",
+      "bounding_box": {
+        "x": 314,
+        "y": 397,
+        "w": 10,
+        "h": 15
+      }
+    },
+    {
+      "id": "af829cd4-b006-4fcc-8393-26a9e224a070",
+      "name": "$",
+      "bounding_box": {
+        "x": 297,
+        "y": 415,
+        "w": 11,
+        "h": 14
+      }
+    },
+    {
+      "id": "3a2a1eb0-9765-41ba-b8cf-30a73606a2bf",
+      "name": "$",
+      "bounding_box": {
+        "x": 507,
+        "y": 390,
+        "w": 13,
+        "h": 14
+      }
+    },
+    {
+      "id": "65eadbc7-5836-421b-bba6-0b89a72dc6b7",
+      "name": "$",
+      "bounding_box": {
+        "x": 598,
+        "y": 408,
+        "w": 10,
+        "h": 15
+      }
+    },
+    {
+      "id": "61c5ae96-76c2-467d-9313-f9f5208159b7",
+      "name": "",
+      "bounding_box": {
+        "x": 142,
+        "y": 697,
+        "w": 68,
+        "h": 25
+      }
+    },
+    {
+      "id": "327035b0-bba9-4c7c-ad42-eaf90965475f",
+      "name": "",
+      "bounding_box": {
+        "x": 214,
+        "y": 691,
+        "w": 66,
+        "h": 35
+      }
+    },
+    {
+      "id": "57473dec-7e13-4696-b74c-107695d6a658",
+      "name": "Month of May",
+      "bounding_box": {
+        "x": 218,
+        "y": 232,
+        "w": 91,
+        "h": 16
+      }
+    },
+    {
+      "id": "6fff2efd-6b61-4eb4-9d01-8761a4e85bb8",
+      "name": "R. J. Reynolds Tobacco",
+      "bounding_box": {
+        "x": 306,
+        "y": 254,
+        "w": 151,
+        "h": 17
+      }
+    },
+    {
+      "id": "b571957d-8611-41ef-b225-719844a71031",
+      "name": "Peter J. McGinn",
+      "bounding_box": {
+        "x": 249,
+        "y": 271,
+        "w": 105,
+        "h": 15
+      }
+    }
+  ]
+}

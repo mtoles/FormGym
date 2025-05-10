@@ -1,0 +1,92 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "854d8076-24a5-4e46-ab6f-9e4e6e57b88d",
+      "name": "3",
+      "bounding_box": {
+        "x": 154,
+        "y": 385,
+        "w": 13,
+        "h": 17
+      }
+    },
+    {
+      "id": "03e5cec7-7bbe-4a73-914f-8a17baeefa71",
+      "name": "2",
+      "bounding_box": {
+        "x": 429,
+        "y": 390,
+        "w": 15,
+        "h": 13
+      }
+    },
+    {
+      "id": "2187db64-d307-42f0-a262-40b6acfc4597",
+      "name": "",
+      "bounding_box": {
+        "x": 443,
+        "y": 420,
+        "w": 141,
+        "h": 34
+      }
+    },
+    {
+      "id": "0c1217e0-825b-409c-86bd-9f8e4bc8619d",
+      "name": "7/ 24/ 90",
+      "bounding_box": {
+        "x": 487,
+        "y": 159,
+        "w": 56,
+        "h": 21
+      }
+    },
+    {
+      "id": "7a740706-1cfc-4f16-bbac-e2027d57383a",
+      "name": "CARLTON 100's FMSP",
+      "bounding_box": {
+        "x": 285,
+        "y": 228,
+        "w": 133,
+        "h": 22
+      }
+    },
+    {
+      "id": "1eb14971-b930-4037-aa02-03da4379d38a",
+      "name": "0 .2",
+      "bounding_box": {
+        "x": 566,
+        "y": 387,
+        "w": 31,
+        "h": 17
+      }
+    },
+    {
+      "id": "f56c4c4a-548d-4565-a2fe-7f89d7f967e5",
+      "name": "0 .3",
+      "bounding_box": {
+        "x": 285,
+        "y": 387,
+        "w": 27,
+        "h": 17
+      }
+    },
+    {
+      "id": "0ec43000-c016-424a-adfe-99e7cac94e24",
+      "name": "Use Separate Form For Each Change",
+      "bounding_box": {
+        "x": 187,
+        "y": 546,
+        "w": 291,
+        "h": 19
+      }
+    }
+  ]
+}

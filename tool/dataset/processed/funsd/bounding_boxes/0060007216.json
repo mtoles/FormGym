@@ -1,0 +1,192 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "684d46fe-a1c4-4ac0-9c86-bace9df218eb",
+      "name": "PMRM",
+      "bounding_box": {
+        "x": 275,
+        "y": 270,
+        "w": 33,
+        "h": 15
+      }
+    },
+    {
+      "id": "635233c8-d766-4273-a723-593e0d439bba",
+      "name": "ference.",
+      "bounding_box": {
+        "x": 274,
+        "y": 525,
+        "w": 66,
+        "h": 11
+      }
+    },
+    {
+      "id": "98d54ce6-5db7-4484-8b74-98820f86204f",
+      "name": "RSS",
+      "bounding_box": {
+        "x": 151,
+        "y": 722,
+        "w": 25,
+        "h": 13
+      }
+    },
+    {
+      "id": "ed340445-f8eb-4363-a864-4f099edf9090",
+      "name": "RDC",
+      "bounding_box": {
+        "x": 152,
+        "y": 735,
+        "w": 25,
+        "h": 12
+      }
+    },
+    {
+      "id": "71345876-5f3a-4214-8e7e-d353b0e1cec8",
+      "name": "PHL",
+      "bounding_box": {
+        "x": 154,
+        "y": 747,
+        "w": 23,
+        "h": 13
+      }
+    },
+    {
+      "id": "4a23aa3e-761b-4b8b-854d-56816c1c106d",
+      "name": "PRC",
+      "bounding_box": {
+        "x": 152,
+        "y": 761,
+        "w": 24,
+        "h": 12
+      }
+    },
+    {
+      "id": "f7caa883-e74f-47fc-8950-83930e4ecd5d",
+      "name": "BMC",
+      "bounding_box": {
+        "x": 152,
+        "y": 773,
+        "w": 24,
+        "h": 11
+      }
+    },
+    {
+      "id": "5dd3f147-55b8-402f-9ba1-f3409bfd8969",
+      "name": "Records",
+      "bounding_box": {
+        "x": 154,
+        "y": 785,
+        "w": 53,
+        "h": 12
+      }
+    },
+    {
+      "id": "5b847412-7869-4540-bea6-38a7fd6c0974",
+      "name": "April 30, 1985",
+      "bounding_box": {
+        "x": 483,
+        "y": 270,
+        "w": 111,
+        "h": 16
+      }
+    },
+    {
+      "id": "b50a07b4-ba46-4db2-9606-bb50b855b5e8",
+      "name": "PALL MALL Regular Menthol",
+      "bounding_box": {
+        "x": 275,
+        "y": 307,
+        "w": 192,
+        "h": 17
+      }
+    },
+    {
+      "id": "3bf1f7a3-a74b-4bb1-9ae5-3e57c13d0094",
+      "name": "J. F. Anders",
+      "bounding_box": {
+        "x": 273,
+        "y": 346,
+        "w": 96,
+        "h": 17
+      }
+    },
+    {
+      "id": "a50886b2-b40c-4778-bbd7-bd8f1fbc68f2",
+      "name": "R. S. Sprinkle, III",
+      "bounding_box": {
+        "x": 275,
+        "y": 384,
+        "w": 147,
+        "h": 16
+      }
+    },
+    {
+      "id": "587b735a-c39c-47d7-91d8-cd180ae33a63",
+      "name": "To develop a nonfilter menthol cigarette delivering 21- 24 mg \"tar\" as a menthol companion to PALL MALL Famous Cigarettes.",
+      "bounding_box": {
+        "x": 275,
+        "y": 422,
+        "w": 318,
+        "h": 67
+      }
+    },
+    {
+      "id": "3b660288-7d03-4e2b-a2fd-20af8204d21b",
+      "name": "84 x 24.9 mm circum-",
+      "bounding_box": {
+        "x": 455,
+        "y": 499,
+        "w": 155,
+        "h": 13
+      }
+    },
+    {
+      "id": "76074de1-d407-419f-ad00-29492b3d4e6e",
+      "name": "E. P. Barbee",
+      "bounding_box": {
+        "x": 275,
+        "y": 563,
+        "w": 93,
+        "h": 15
+      }
+    },
+    {
+      "id": "12aab72e-cfe3-447b-acd0-d00d17b48e92",
+      "name": "Other Personnel Assigned",
+      "bounding_box": {
+        "x": 152,
+        "y": 810,
+        "w": 190,
+        "h": 16
+      }
+    },
+    {
+      "id": "1512a0f1-2c72-4f3a-9a71-a616115e7d5c",
+      "name": "Project Leader",
+      "bounding_box": {
+        "x": 152,
+        "y": 797,
+        "w": 110,
+        "h": 13
+      }
+    },
+    {
+      "id": "85bf5e6e-eccf-45b9-9df6-9d004fccc128",
+      "name": "R. S. Sprinkle III",
+      "bounding_box": {
+        "x": 392,
+        "y": 701,
+        "w": 178,
+        "h": 48
+      }
+    }
+  ]
+}

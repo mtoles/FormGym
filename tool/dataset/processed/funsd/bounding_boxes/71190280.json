@@ -1,0 +1,132 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "d2f2c1d4-450c-4eaa-b92b-76e10266e728",
+      "name": "8'",
+      "bounding_box": {
+        "x": 171,
+        "y": 447,
+        "w": 18,
+        "h": 17
+      }
+    },
+    {
+      "id": "6d650bda-9bff-4110-bf38-a69520808396",
+      "name": "",
+      "bounding_box": {
+        "x": 181,
+        "y": 628,
+        "w": 158,
+        "h": 143
+      }
+    },
+    {
+      "id": "10445267-df53-4c0f-be67-ee80940b46c3",
+      "name": "33/16\"WX21/2\"H",
+      "bounding_box": {
+        "x": 171,
+        "y": 332,
+        "w": 125,
+        "h": 13
+      }
+    },
+    {
+      "id": "fd6b9d99-2cc2-47ac-9119-eb42cc8089ad",
+      "name": "10/22/98",
+      "bounding_box": {
+        "x": 113,
+        "y": 238,
+        "w": 55,
+        "h": 13
+      }
+    },
+    {
+      "id": "ca27b1b9-67a0-4ed2-b429-84269b866160",
+      "name": "7848",
+      "bounding_box": {
+        "x": 120,
+        "y": 120,
+        "w": 33,
+        "h": 15
+      }
+    },
+    {
+      "id": "e45e9ff6-179b-4c47-bb35-99f92bfad894",
+      "name": "KOOL Natural",
+      "bounding_box": {
+        "x": 116,
+        "y": 159,
+        "w": 86,
+        "h": 15
+      }
+    },
+    {
+      "id": "6aea485e-5420-4f6d-8eef-7e4cb0d054a9",
+      "name": "Passport Winter Program Ad- EMRO",
+      "bounding_box": {
+        "x": 145,
+        "y": 183,
+        "w": 274,
+        "h": 30
+      }
+    },
+    {
+      "id": "639b3ac6-7b7f-4070-b40f-5d51bb839a33",
+      "name": "7.96875 sq inches",
+      "bounding_box": {
+        "x": 173,
+        "y": 276,
+        "w": 115,
+        "h": 15
+      }
+    },
+    {
+      "id": "45bdcf8b-7289-4fe1-b363-fdfa3338b034",
+      "name": "Exhibt 1(a) Statement A",
+      "bounding_box": {
+        "x": 173,
+        "y": 387,
+        "w": 140,
+        "h": 22
+      }
+    },
+    {
+      "id": "fe64ec82-bba7-4722-8cff-fe0ee097f7c3",
+      "name": "LKelly",
+      "bounding_box": {
+        "x": 95,
+        "y": 537,
+        "w": 85,
+        "h": 63
+      }
+    },
+    {
+      "id": "0a846ec9-8d2a-40cb-9b3c-081ea3e20a9a",
+      "name": "production AE",
+      "bounding_box": {
+        "x": 326,
+        "y": 540,
+        "w": 110,
+        "h": 42
+      }
+    },
+    {
+      "id": "965c924b-f051-4e99-82d1-6410b74b1d00",
+      "name": "10/22/98 10/22/98",
+      "bounding_box": {
+        "x": 517,
+        "y": 533,
+        "w": 92,
+        "h": 45
+      }
+    }
+  ]
+}

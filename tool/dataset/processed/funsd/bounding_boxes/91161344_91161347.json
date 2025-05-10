@@ -1,0 +1,732 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 803,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "65295482-7e0f-40f1-99ae-6b004a5993d2",
+      "name": "EF1",
+      "bounding_box": {
+        "x": 244,
+        "y": 143,
+        "w": 25,
+        "h": 15
+      }
+    },
+    {
+      "id": "cb9d20f5-d9f0-4d7d-ab5f-260f2c2b5e9a",
+      "name": "5546/478",
+      "bounding_box": {
+        "x": 243,
+        "y": 174,
+        "w": 66,
+        "h": 15
+      }
+    },
+    {
+      "id": "2c4f6198-0b9d-49a3-bbc6-c1c2225a2fa1",
+      "name": "x",
+      "bounding_box": {
+        "x": 234,
+        "y": 279,
+        "w": 13,
+        "h": 13
+      }
+    },
+    {
+      "id": "c60e49bd-89fa-4036-aa71-d328b504038f",
+      "name": "x",
+      "bounding_box": {
+        "x": 236,
+        "y": 309,
+        "w": 10,
+        "h": 8
+      }
+    },
+    {
+      "id": "0254b2c6-e6e2-4a7e-aef6-17eb5c3f7748",
+      "name": "",
+      "bounding_box": {
+        "x": 234,
+        "y": 324,
+        "w": 13,
+        "h": 10
+      }
+    },
+    {
+      "id": "cd07442c-b9f7-4d6b-a6a3-ff0b0a9e932f",
+      "name": "x",
+      "bounding_box": {
+        "x": 234,
+        "y": 341,
+        "w": 12,
+        "h": 10
+      }
+    },
+    {
+      "id": "795a4071-0720-4bf3-a2af-0d77683d6f52",
+      "name": "x",
+      "bounding_box": {
+        "x": 234,
+        "y": 354,
+        "w": 10,
+        "h": 10
+      }
+    },
+    {
+      "id": "90ff8fbd-05e9-41fc-91f7-b12ffc410270",
+      "name": "x",
+      "bounding_box": {
+        "x": 234,
+        "y": 369,
+        "w": 12,
+        "h": 12
+      }
+    },
+    {
+      "id": "a94381dc-48f3-4ee2-8789-d7e29a5a90a7",
+      "name": "x",
+      "bounding_box": {
+        "x": 234,
+        "y": 385,
+        "w": 12,
+        "h": 10
+      }
+    },
+    {
+      "id": "ea183d78-1c32-400e-8ddc-12b5ff26a9f8",
+      "name": "x",
+      "bounding_box": {
+        "x": 234,
+        "y": 399,
+        "w": 13,
+        "h": 10
+      }
+    },
+    {
+      "id": "95d8b7f1-40a7-46c8-a7d1-9807d1b46f3f",
+      "name": "x",
+      "bounding_box": {
+        "x": 233,
+        "y": 427,
+        "w": 13,
+        "h": 12
+      }
+    },
+    {
+      "id": "6bac396f-0a39-4aae-8393-a91812d0a3e4",
+      "name": "x",
+      "bounding_box": {
+        "x": 463,
+        "y": 281,
+        "w": 10,
+        "h": 12
+      }
+    },
+    {
+      "id": "c61eb1d1-b040-4f62-a20d-fcadae22b1e0",
+      "name": "x",
+      "bounding_box": {
+        "x": 460,
+        "y": 297,
+        "w": 15,
+        "h": 12
+      }
+    },
+    {
+      "id": "53c07bf8-bd33-463a-9b51-249bb6864940",
+      "name": "x",
+      "bounding_box": {
+        "x": 460,
+        "y": 311,
+        "w": 12,
+        "h": 12
+      }
+    },
+    {
+      "id": "24b7c3c7-641d-457b-87e2-3c311cb22abe",
+      "name": "x",
+      "bounding_box": {
+        "x": 460,
+        "y": 346,
+        "w": 8,
+        "h": 10
+      }
+    },
+    {
+      "id": "59a8d641-85b9-4bcf-8e01-f36f650b17b0",
+      "name": "x",
+      "bounding_box": {
+        "x": 457,
+        "y": 359,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "id": "f621a660-5e89-4a51-a488-fdfb7ff9be03",
+      "name": "x",
+      "bounding_box": {
+        "x": 460,
+        "y": 374,
+        "w": 8,
+        "h": 8
+      }
+    },
+    {
+      "id": "f21e8d99-0028-4aba-bbc4-5aca0af3afc7",
+      "name": "x",
+      "bounding_box": {
+        "x": 458,
+        "y": 389,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "id": "5ea85828-7fcf-4de2-9448-16da7032849f",
+      "name": "x",
+      "bounding_box": {
+        "x": 458,
+        "y": 404,
+        "w": 13,
+        "h": 7
+      }
+    },
+    {
+      "id": "d17542c2-b6d9-4f8a-803e-33002e70531c",
+      "name": "x",
+      "bounding_box": {
+        "x": 460,
+        "y": 417,
+        "w": 10,
+        "h": 10
+      }
+    },
+    {
+      "id": "4c032a16-d458-4f21-8ea0-5e76da1bc400",
+      "name": "x",
+      "bounding_box": {
+        "x": 457,
+        "y": 447,
+        "w": 12,
+        "h": 10
+      }
+    },
+    {
+      "id": "dc8b8f3a-d4c1-4868-82ad-8fba95934f34",
+      "name": "x",
+      "bounding_box": {
+        "x": 460,
+        "y": 460,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "id": "c5788b56-6580-4ded-a433-4fb789fa97e7",
+      "name": "x",
+      "bounding_box": {
+        "x": 460,
+        "y": 475,
+        "w": 10,
+        "h": 10
+      }
+    },
+    {
+      "id": "ec4de842-c815-4847-87b2-924fb3521c67",
+      "name": "x",
+      "bounding_box": {
+        "x": 457,
+        "y": 490,
+        "w": 12,
+        "h": 12
+      }
+    },
+    {
+      "id": "b0976c1f-871f-49a1-bad3-bb7c0b9b9852",
+      "name": "x",
+      "bounding_box": {
+        "x": 458,
+        "y": 507,
+        "w": 10,
+        "h": 10
+      }
+    },
+    {
+      "id": "d097c52c-a726-46e9-bd7a-55117e93ab67",
+      "name": "x",
+      "bounding_box": {
+        "x": 458,
+        "y": 522,
+        "w": 10,
+        "h": 7
+      }
+    },
+    {
+      "id": "71201ad5-e7fc-4cbe-af5b-9a236eb4d1cc",
+      "name": "x",
+      "bounding_box": {
+        "x": 458,
+        "y": 537,
+        "w": 10,
+        "h": 8
+      }
+    },
+    {
+      "id": "e48a69da-0902-4e2d-9058-13a8ecc99134",
+      "name": "x",
+      "bounding_box": {
+        "x": 691,
+        "y": 299,
+        "w": 8,
+        "h": 13
+      }
+    },
+    {
+      "id": "5585def0-6206-4b95-9e5b-a72fdcd7c1ba",
+      "name": "x",
+      "bounding_box": {
+        "x": 689,
+        "y": 316,
+        "w": 10,
+        "h": 8
+      }
+    },
+    {
+      "id": "cca78a3d-94b3-4b7b-9e9f-ec911b415e01",
+      "name": "x",
+      "bounding_box": {
+        "x": 689,
+        "y": 329,
+        "w": 8,
+        "h": 10
+      }
+    },
+    {
+      "id": "93fa35d9-3a4f-45b8-a630-a7df015f4baa",
+      "name": "x",
+      "bounding_box": {
+        "x": 689,
+        "y": 344,
+        "w": 8,
+        "h": 10
+      }
+    },
+    {
+      "id": "5857c533-410f-4fd1-a6f7-7e1b6cebe05b",
+      "name": "x",
+      "bounding_box": {
+        "x": 689,
+        "y": 370,
+        "w": 8,
+        "h": 13
+      }
+    },
+    {
+      "id": "e1c4b4c3-cb77-45f4-9249-a670d273494c",
+      "name": "x",
+      "bounding_box": {
+        "x": 689,
+        "y": 402,
+        "w": 10,
+        "h": 10
+      }
+    },
+    {
+      "id": "2ae5a15b-84ed-4fb2-a383-2737c3838689",
+      "name": "x",
+      "bounding_box": {
+        "x": 689,
+        "y": 417,
+        "w": 8,
+        "h": 8
+      }
+    },
+    {
+      "id": "3029c6cd-d229-411f-af1d-18770d77932a",
+      "name": "x",
+      "bounding_box": {
+        "x": 688,
+        "y": 432,
+        "w": 10,
+        "h": 10
+      }
+    },
+    {
+      "id": "72f0b7b0-4093-4638-aecd-714de7317bd0",
+      "name": "x",
+      "bounding_box": {
+        "x": 689,
+        "y": 460,
+        "w": 7,
+        "h": 10
+      }
+    },
+    {
+      "id": "58263eb9-1ffd-44ab-91ef-72ef1dd9a7a0",
+      "name": "x",
+      "bounding_box": {
+        "x": 689,
+        "y": 475,
+        "w": 10,
+        "h": 8
+      }
+    },
+    {
+      "id": "db62a3a9-e509-43a0-9d2f-b60ccb79ed28",
+      "name": "x",
+      "bounding_box": {
+        "x": 689,
+        "y": 490,
+        "w": 8,
+        "h": 12
+      }
+    },
+    {
+      "id": "64037b4e-3f1d-4055-a30c-5eecd56cd19b",
+      "name": "x",
+      "bounding_box": {
+        "x": 688,
+        "y": 503,
+        "w": 8,
+        "h": 13
+      }
+    },
+    {
+      "id": "824fbdde-edad-4111-90d7-2c6a76a04c8e",
+      "name": "x",
+      "bounding_box": {
+        "x": 686,
+        "y": 520,
+        "w": 13,
+        "h": 8
+      }
+    },
+    {
+      "id": "a839e936-c522-43dd-b44f-e1c98d20c6b0",
+      "name": "x",
+      "bounding_box": {
+        "x": 231,
+        "y": 473,
+        "w": 13,
+        "h": 10
+      }
+    },
+    {
+      "id": "7e1dddcd-749a-4223-a099-69c4ded34fbd",
+      "name": "x",
+      "bounding_box": {
+        "x": 231,
+        "y": 518,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "id": "aee88924-e07d-4655-8e06-3aabedfdedc5",
+      "name": "x",
+      "bounding_box": {
+        "x": 231,
+        "y": 533,
+        "w": 10,
+        "h": 8
+      }
+    },
+    {
+      "id": "a6a464a3-fc8d-448f-beea-df761a1cfb02",
+      "name": "741",
+      "bounding_box": {
+        "x": 123,
+        "y": 635,
+        "w": 25,
+        "h": 12
+      }
+    },
+    {
+      "id": "ef415b7a-2f3d-49a1-8e54-0811c810de7d",
+      "name": "753",
+      "bounding_box": {
+        "x": 123,
+        "y": 651,
+        "w": 27,
+        "h": 10
+      }
+    },
+    {
+      "id": "b47a4df6-f913-4582-b12b-fdf46dfd1f10",
+      "name": "827",
+      "bounding_box": {
+        "x": 123,
+        "y": 664,
+        "w": 25,
+        "h": 12
+      }
+    },
+    {
+      "id": "94347086-7ee9-4b9d-8253-620a5ba4bf72",
+      "name": "462",
+      "bounding_box": {
+        "x": 123,
+        "y": 678,
+        "w": 27,
+        "h": 12
+      }
+    },
+    {
+      "id": "62581186-5ddf-47a5-ada2-c25ef049ccf5",
+      "name": "519",
+      "bounding_box": {
+        "x": 206,
+        "y": 635,
+        "w": 28,
+        "h": 12
+      }
+    },
+    {
+      "id": "ef02f90b-f01c-4db0-b59d-8822f4c1069e",
+      "name": "934",
+      "bounding_box": {
+        "x": 208,
+        "y": 651,
+        "w": 23,
+        "h": 10
+      }
+    },
+    {
+      "id": "75459af5-5d88-4d8d-92fa-7db8e70740f0",
+      "name": "639",
+      "bounding_box": {
+        "x": 206,
+        "y": 664,
+        "w": 25,
+        "h": 13
+      }
+    },
+    {
+      "id": "f3a762fc-9d30-4e55-9fef-729934245f77",
+      "name": "3/20/78",
+      "bounding_box": {
+        "x": 618,
+        "y": 15,
+        "w": 55,
+        "h": 15
+      }
+    },
+    {
+      "id": "2884b2ea-4907-40d4-a441-cfc1dd790bfa",
+      "name": "Mr. Flinn",
+      "bounding_box": {
+        "x": 161,
+        "y": 75,
+        "w": 74,
+        "h": 12
+      }
+    },
+    {
+      "id": "5eaf78f3-5e35-49b1-9266-b9ee6846b418",
+      "name": "Mr. Donahue (Loews)",
+      "bounding_box": {
+        "x": 336,
+        "y": 73,
+        "w": 152,
+        "h": 15
+      }
+    },
+    {
+      "id": "e920f521-faff-4c59-ac97-5636ef945d8f",
+      "name": "Mr. Hudson (Greensboro)",
+      "bounding_box": {
+        "x": 538,
+        "y": 75,
+        "w": 183,
+        "h": 17
+      }
+    },
+    {
+      "id": "93935e2a-df2b-4ac5-807b-0c886e835072",
+      "name": "Dr. Schultz (Greensboro",
+      "bounding_box": {
+        "x": 537,
+        "y": 91,
+        "w": 184,
+        "h": 14
+      }
+    },
+    {
+      "id": "03e1811e-58cb-4040-9d16-9d714de5674c",
+      "name": "Mr. Tucker (Greensboro)",
+      "bounding_box": {
+        "x": 537,
+        "y": 105,
+        "w": 184,
+        "h": 13
+      }
+    },
+    {
+      "id": "a072f0e6-d74a-4519-8afd-412445eff010",
+      "name": "Dr. Jones (Greensboro)",
+      "bounding_box": {
+        "x": 538,
+        "y": 118,
+        "w": 184,
+        "h": 15
+      }
+    },
+    {
+      "id": "743a424f-fd57-4b14-80de-a1f6d9fcd8d8",
+      "name": "Mr. Gaalman",
+      "bounding_box": {
+        "x": 161,
+        "y": 90,
+        "w": 84,
+        "h": 12
+      }
+    },
+    {
+      "id": "cef627c6-7426-496e-b9b2-e47d05eba602",
+      "name": "Mr. Goldbrenner",
+      "bounding_box": {
+        "x": 161,
+        "y": 101,
+        "w": 116,
+        "h": 13
+      }
+    },
+    {
+      "id": "ebc44db9-bfec-46cc-a9fa-567ae4c3a285",
+      "name": "Mr. Duffy (Loews)",
+      "bounding_box": {
+        "x": 336,
+        "y": 88,
+        "w": 153,
+        "h": 16
+      }
+    },
+    {
+      "id": "efffc1a6-7a89-4822-938d-36b626dfcb7f",
+      "name": "Mr. Miele (Loews)",
+      "bounding_box": {
+        "x": 334,
+        "y": 103,
+        "w": 154,
+        "h": 15
+      }
+    },
+    {
+      "id": "4a28813a-442b-4e42-8009-d758894029f4",
+      "name": "William Doyle",
+      "bounding_box": {
+        "x": 311,
+        "y": 203,
+        "w": 100,
+        "h": 17
+      }
+    },
+    {
+      "id": "63048064-28bc-4ec0-856f-d953aa946989",
+      "name": "All are 20's",
+      "bounding_box": {
+        "x": 571,
+        "y": 635,
+        "w": 93,
+        "h": 13
+      }
+    },
+    {
+      "id": "4ae503da-4aa5-4e30-9758-417226535581",
+      "name": "All are 20's",
+      "bounding_box": {
+        "x": 575,
+        "y": 767,
+        "w": 90,
+        "h": 15
+      }
+    },
+    {
+      "id": "a47c1348-02ea-45c2-8a28-d2384d23ac94",
+      "name": "Varies by market, see attached list. Approx. 20% of the total # by state will receive product",
+      "bounding_box": {
+        "x": 339,
+        "y": 635,
+        "w": 156,
+        "h": 73
+      }
+    },
+    {
+      "id": "3444777f-b892-4a84-aec2-8c09e9fe5ab9",
+      "name": "1920 Packs",
+      "bounding_box": {
+        "x": 347,
+        "y": 754,
+        "w": 79,
+        "h": 12
+      }
+    },
+    {
+      "id": "78214e6f-9f62-4fc9-8900-13ca29e5faed",
+      "name": "1920 Packs",
+      "bounding_box": {
+        "x": 349,
+        "y": 769,
+        "w": 77,
+        "h": 12
+      }
+    },
+    {
+      "id": "6d15651a-70f0-4f1f-86b5-436334937711",
+      "name": "960 Packs",
+      "bounding_box": {
+        "x": 357,
+        "y": 784,
+        "w": 69,
+        "h": 12
+      }
+    },
+    {
+      "id": "7e1fa698-630f-4ab6-8478-b398f1eab80c",
+      "name": "960 Packs",
+      "bounding_box": {
+        "x": 354,
+        "y": 797,
+        "w": 70,
+        "h": 14
+      }
+    },
+    {
+      "id": "508f7c12-c48b-46a9-8ef2-d226e5099f46",
+      "name": "1920 Packs",
+      "bounding_box": {
+        "x": 347,
+        "y": 812,
+        "w": 76,
+        "h": 14
+      }
+    },
+    {
+      "id": "d26fa18d-f300-425b-8ea3-96aee0fffe70",
+      "name": "1920 Packs",
+      "bounding_box": {
+        "x": 347,
+        "y": 827,
+        "w": 77,
+        "h": 12
+      }
+    },
+    {
+      "id": "10d8e3d2-c154-4e53-aec5-bc587f4d46de",
+      "name": "1920 Packs",
+      "bounding_box": {
+        "x": 349,
+        "y": 842,
+        "w": 75,
+        "h": 12
+      }
+    }
+  ]
+}

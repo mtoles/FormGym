@@ -1,0 +1,132 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 764,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "4ab71d07-7938-4ef1-813f-4be3e9b47d9c",
+      "name": "X",
+      "bounding_box": {
+        "x": 123,
+        "y": 483,
+        "w": 11,
+        "h": 13
+      }
+    },
+    {
+      "id": "c7297bc4-561e-4e3c-aaba-389bfd3de971",
+      "name": "1",
+      "bounding_box": {
+        "x": 399,
+        "y": 133,
+        "w": 15,
+        "h": 20
+      }
+    },
+    {
+      "id": "38c1c99b-b38c-4755-a3b5-c8628cc19a0f",
+      "name": "642-138",
+      "bounding_box": {
+        "x": 592,
+        "y": 131,
+        "w": 54,
+        "h": 21
+      }
+    },
+    {
+      "id": "4ca74741-6132-4fdc-97e7-9b1a3128951f",
+      "name": "D.",
+      "bounding_box": {
+        "x": 538,
+        "y": 161,
+        "w": 110,
+        "h": 39
+      }
+    },
+    {
+      "id": "106a7fba-8f88-4984-96fa-8904a9d02a5e",
+      "name": "",
+      "bounding_box": {
+        "x": 563,
+        "y": 162,
+        "w": 45,
+        "h": 14
+      }
+    },
+    {
+      "id": "78f97f94-a746-468b-b124-ca62ba910d53",
+      "name": "9/28/83",
+      "bounding_box": {
+        "x": 531,
+        "y": 233,
+        "w": 56,
+        "h": 20
+      }
+    },
+    {
+      "id": "bbca5a33-6f3b-43fa-a09e-790acbcf4210",
+      "name": "20.845",
+      "bounding_box": {
+        "x": 654,
+        "y": 235,
+        "w": 52,
+        "h": 15
+      }
+    },
+    {
+      "id": "74cc4f38-895f-42a1-a3c3-093f380624ce",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 425,
+        "y": 472,
+        "w": 14,
+        "h": 13
+      }
+    },
+    {
+      "id": "fd453524-0b9a-4ad1-9137-dc9e8cae4189",
+      "name": "B166",
+      "bounding_box": {
+        "x": 183,
+        "y": 230,
+        "w": 34,
+        "h": 18
+      }
+    },
+    {
+      "id": "2ee1b78f-844b-46c1-a6c6-3ec0feb51dc4",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 605,
+        "y": 413,
+        "w": 15,
+        "h": 13
+      }
+    },
+    {
+      "id": "5f04640f-05d8-46e8-a580-84d9501f7765",
+      "name": "Oct. 11, 1983",
+      "bounding_box": {
+        "x": 123,
+        "y": 130,
+        "w": 97,
+        "h": 20
+      }
+    },
+    {
+      "id": "fb7aa524-f147-4e09-a952-30cf1fffd6a9",
+      "name": "to performed in Acure/Dermal Toxicology, building 18.",
+      "bounding_box": {
+        "x": 189,
+        "y": 522,
+        "w": 390,
+        "h": 20
+      }
+    }
+  ]
+}

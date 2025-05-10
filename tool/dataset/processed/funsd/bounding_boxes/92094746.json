@@ -1,0 +1,182 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "7a39d8ae-0c63-4220-b7ef-7970e66dc3ae",
+      "name": "28",
+      "bounding_box": {
+        "x": 184,
+        "y": 219,
+        "w": 24,
+        "h": 15
+      }
+    },
+    {
+      "id": "02ace2d5-5f1d-49a4-95a8-d6bdcbda5d80",
+      "name": "x",
+      "bounding_box": {
+        "x": 513,
+        "y": 262,
+        "w": 21,
+        "h": 19
+      }
+    },
+    {
+      "id": "8d694729-018c-485e-a595-7be269614532",
+      "name": "x",
+      "bounding_box": {
+        "x": 383,
+        "y": 401,
+        "w": 18,
+        "h": 17
+      }
+    },
+    {
+      "id": "efd18433-d7e4-4911-a6b1-a3ff1233995c",
+      "name": "x",
+      "bounding_box": {
+        "x": 382,
+        "y": 439,
+        "w": 15,
+        "h": 21
+      }
+    },
+    {
+      "id": "e646a4b6-354b-4d89-87b5-4795ebe50f4b",
+      "name": "x",
+      "bounding_box": {
+        "x": 382,
+        "y": 481,
+        "w": 18,
+        "h": 18
+      }
+    },
+    {
+      "id": "ec7312c7-8fbb-4913-b56e-cb76f0f0a678",
+      "name": "28728",
+      "bounding_box": {
+        "x": 329,
+        "y": 637,
+        "w": 47,
+        "h": 19
+      }
+    },
+    {
+      "id": "9d2e031a-59ba-4262-809d-cb66b85c6f60",
+      "name": "x",
+      "bounding_box": {
+        "x": 380,
+        "y": 666,
+        "w": 20,
+        "h": 19
+      }
+    },
+    {
+      "id": "d45fe877-4818-4331-9d49-fda2e9aded89",
+      "name": "x",
+      "bounding_box": {
+        "x": 387,
+        "y": 743,
+        "w": 15,
+        "h": 19
+      }
+    },
+    {
+      "id": "2e977d07-9d72-4cd6-a748-34817c111908",
+      "name": "9 /8 /95",
+      "bounding_box": {
+        "x": 454,
+        "y": 166,
+        "w": 48,
+        "h": 25
+      }
+    },
+    {
+      "id": "9ee03ba7-ab54-4642-b181-0b8e2ddbde3b",
+      "name": "2 13",
+      "bounding_box": {
+        "x": 111,
+        "y": 182,
+        "w": 75,
+        "h": 15
+      }
+    },
+    {
+      "id": "d19267c4-ce9f-425b-a7b9-beecb89c2471",
+      "name": "June/ July",
+      "bounding_box": {
+        "x": 508,
+        "y": 203,
+        "w": 64,
+        "h": 24
+      }
+    },
+    {
+      "id": "eeb397d1-070e-4500-8aaf-0471439a6f84",
+      "name": "Sunglasses / Newport",
+      "bounding_box": {
+        "x": 218,
+        "y": 238,
+        "w": 144,
+        "h": 25
+      }
+    },
+    {
+      "id": "ecc2decd-ae31-431c-a742-efc5f8fda985",
+      "name": "Special Emphasis Calls",
+      "bounding_box": {
+        "x": 197,
+        "y": 297,
+        "w": 146,
+        "h": 21
+      }
+    },
+    {
+      "id": "65cee28c-ce29-455c-bf0c-46837eaeaf73",
+      "name": "This item was perceived by retailers and consumers as a low",
+      "bounding_box": {
+        "x": 195,
+        "y": 517,
+        "w": 395,
+        "h": 23
+      }
+    },
+    {
+      "id": "c9676685-9068-4510-b339-f5519b72ae94",
+      "name": "quality item. Several Sales Reps reported that on occasion our consumers would pass up the deal or leave the glasses in the store.",
+      "bounding_box": {
+        "x": 107,
+        "y": 541,
+        "w": 483,
+        "h": 53
+      }
+    },
+    {
+      "id": "3b7dca13-b342-43db-8531-1763b2f77e9c",
+      "name": "The Promotion can be improved by upgrading",
+      "bounding_box": {
+        "x": 353,
+        "y": 818,
+        "w": 277,
+        "h": 22
+      }
+    },
+    {
+      "id": "b1c05a13-c147-44bb-8a78-22df1297059d",
+      "name": "the quality of the sunglasses",
+      "bounding_box": {
+        "x": 116,
+        "y": 854,
+        "w": 199,
+        "h": 20
+      }
+    }
+  ]
+}

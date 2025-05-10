@@ -1,0 +1,42 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "e0e32ff5-0bb5-4972-881b-a574c1cea30e",
+      "name": "$ 170.00",
+      "bounding_box": {
+        "x": 504,
+        "y": 599,
+        "w": 53,
+        "h": 15
+      }
+    },
+    {
+      "id": "d24838ac-b364-4a82-afe1-cb184ae868a5",
+      "name": "$ $185.00",
+      "bounding_box": {
+        "x": 506,
+        "y": 616,
+        "w": 52,
+        "h": 14
+      }
+    },
+    {
+      "id": "19786f1c-cab8-42b9-b146-61486b3b14f9",
+      "name": "Ms. Susan Mathison Canadian Tobacco Manufacturers Council 701- 99 Bank Street Ottawa, Ontario, Canada K1P 6B9 (613) 238- 2799",
+      "bounding_box": {
+        "x": 310,
+        "y": 784,
+        "w": 253,
+        "h": 78
+      }
+    }
+  ]
+}

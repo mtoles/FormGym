@@ -1,0 +1,132 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "591668e1-468a-4fd2-95f0-4a1712081e39",
+      "name": "DR. HUGHES, MESSRS. ALAR, SANDEFUR,",
+      "bounding_box": {
+        "x": 102,
+        "y": 101,
+        "w": 299,
+        "h": 24
+      }
+    },
+    {
+      "id": "e690ef9b-f1f3-457f-9819-ece13c6877c4",
+      "name": "CORPORATE AFFAIRS",
+      "bounding_box": {
+        "x": 524,
+        "y": 103,
+        "w": 145,
+        "h": 21
+      }
+    },
+    {
+      "id": "c4a78cd0-195d-498a-bcd8-fef79ef9a73b",
+      "name": "BLOTT, BUTLER, MIDDLETON, CHRISTENSEN, PEPPLES, SACHS FREEDMAN",
+      "bounding_box": {
+        "x": 103,
+        "y": 128,
+        "w": 534,
+        "h": 23
+      }
+    },
+    {
+      "id": "fcd23871-4b55-45bf-8cae-252e3b79b000",
+      "name": "T. HUMBER, M. BATEMAN",
+      "bounding_box": {
+        "x": 85,
+        "y": 158,
+        "w": 180,
+        "h": 21
+      }
+    },
+    {
+      "id": "d999fc42-8b91-480a-9254-82641a0f958b",
+      "name": "L&M Lawsuit",
+      "bounding_box": {
+        "x": 406,
+        "y": 159,
+        "w": 97,
+        "h": 17
+      }
+    },
+    {
+      "id": "87076495-a0eb-4f01-83b9-b21594527907",
+      "name": "ADWEEK - Midwest",
+      "bounding_box": {
+        "x": 151,
+        "y": 240,
+        "w": 139,
+        "h": 20
+      }
+    },
+    {
+      "id": "d865b813-5aa8-4303-9893-01b2b39d723a",
+      "name": "Fran Brock (312) 467- 6500",
+      "bounding_box": {
+        "x": 186,
+        "y": 267,
+        "w": 469,
+        "h": 23
+      }
+    },
+    {
+      "id": "2715bc1f-bae8-484e-b969-1547d8120c8d",
+      "name": "Mark Ahearn",
+      "bounding_box": {
+        "x": 133,
+        "y": 296,
+        "w": 100,
+        "h": 15
+      }
+    },
+    {
+      "id": "d1b5a866-5976-46ec-af97-c3e8e4f2d458",
+      "name": "1: 45 P. M.",
+      "bounding_box": {
+        "x": 406,
+        "y": 292,
+        "w": 75,
+        "h": 24
+      }
+    },
+    {
+      "id": "8b5fae20-89fa-4103-987d-5f04bf48cabf",
+      "name": "7/ 9/ 84",
+      "bounding_box": {
+        "x": 581,
+        "y": 295,
+        "w": 56,
+        "h": 19
+      }
+    },
+    {
+      "id": "50087c2d-82e8-4d4f-b265-d0769ae03566",
+      "name": "Already handled",
+      "bounding_box": {
+        "x": 218,
+        "y": 324,
+        "w": 134,
+        "h": 20
+      }
+    },
+    {
+      "id": "6c5bd468-df69-4e75-9a7d-e9cca42fdf83",
+      "name": "JUL 10 1984 JOHN ALAR",
+      "bounding_box": {
+        "x": 547,
+        "y": 764,
+        "w": 92,
+        "h": 47
+      }
+    }
+  ]
+}

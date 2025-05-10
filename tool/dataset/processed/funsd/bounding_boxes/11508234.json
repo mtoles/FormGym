@@ -1,0 +1,402 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "e69da575-ca7a-46d2-95bb-68ff694bbad0",
+      "name": "X",
+      "bounding_box": {
+        "x": 525,
+        "y": 124,
+        "w": 14,
+        "h": 14
+      }
+    },
+    {
+      "id": "0acddbcf-b5da-4a8f-9b93-783fc40d575a",
+      "name": "X",
+      "bounding_box": {
+        "x": 608,
+        "y": 141,
+        "w": 13,
+        "h": 14
+      }
+    },
+    {
+      "id": "55bfdafd-2bdf-4e2c-876c-6c650cc59d24",
+      "name": "",
+      "bounding_box": {
+        "x": 483,
+        "y": 158,
+        "w": 7,
+        "h": 11
+      }
+    },
+    {
+      "id": "80cfeafc-447a-4f5d-9a9f-be151cac7a90",
+      "name": "contract.",
+      "bounding_box": {
+        "x": 78,
+        "y": 190,
+        "w": 46,
+        "h": 11
+      }
+    },
+    {
+      "id": "5a035594-a759-4372-b1ea-852063d0ca1a",
+      "name": "29,500",
+      "bounding_box": {
+        "x": 500,
+        "y": 235,
+        "w": 39,
+        "h": 13
+      }
+    },
+    {
+      "id": "6aed789d-c743-4cd6-accd-e7c8072ccc41",
+      "name": "31,716",
+      "bounding_box": {
+        "x": 501,
+        "y": 251,
+        "w": 36,
+        "h": 13
+      }
+    },
+    {
+      "id": "dac6665d-a2c6-4064-8c3e-d65fad5c5d55",
+      "name": "2,500",
+      "bounding_box": {
+        "x": 413,
+        "y": 235,
+        "w": 31,
+        "h": 14
+      }
+    },
+    {
+      "id": "b8decb67-18cc-40a4-ba4b-5e0d4b3eb151",
+      "name": "2,500",
+      "bounding_box": {
+        "x": 415,
+        "y": 251,
+        "w": 29,
+        "h": 14
+      }
+    },
+    {
+      "id": "690a6239-8e89-4798-96af-20e9e33b68ef",
+      "name": "27,000",
+      "bounding_box": {
+        "x": 317,
+        "y": 233,
+        "w": 39,
+        "h": 17
+      }
+    },
+    {
+      "id": "dca307c0-430a-43ca-a47d-c96062b2530e",
+      "name": "29,216",
+      "bounding_box": {
+        "x": 316,
+        "y": 250,
+        "w": 42,
+        "h": 14
+      }
+    },
+    {
+      "id": "d5b6fdac-bc1c-482e-9278-20f3e7f0f10c",
+      "name": "1995",
+      "bounding_box": {
+        "x": 538,
+        "y": 282,
+        "w": 29,
+        "h": 14
+      }
+    },
+    {
+      "id": "5b9f2392-2fe2-4c87-9392-2b968a38b660",
+      "name": "500,000",
+      "bounding_box": {
+        "x": 543,
+        "y": 297,
+        "w": 45,
+        "h": 14
+      }
+    },
+    {
+      "id": "df76477f-8544-44f6-a553-9f70ebed8b09",
+      "name": "382,575",
+      "bounding_box": {
+        "x": 542,
+        "y": 330,
+        "w": 42,
+        "h": 14
+      }
+    },
+    {
+      "id": "b975de31-8a59-4605-9b56-d1ea001b9260",
+      "name": "29,500",
+      "bounding_box": {
+        "x": 546,
+        "y": 359,
+        "w": 41,
+        "h": 18
+      }
+    },
+    {
+      "id": "eb261f82-b0da-459b-9759-b7f77c0eb622",
+      "name": "0",
+      "bounding_box": {
+        "x": 578,
+        "y": 411,
+        "w": 8,
+        "h": 11
+      }
+    },
+    {
+      "id": "e499b653-94f5-431b-a741-23457efc17b2",
+      "name": "353,075",
+      "bounding_box": {
+        "x": 542,
+        "y": 457,
+        "w": 45,
+        "h": 13
+      }
+    },
+    {
+      "id": "c7f9c704-6145-4097-95fc-a81bc8650b25",
+      "name": "146,925",
+      "bounding_box": {
+        "x": 542,
+        "y": 486,
+        "w": 46,
+        "h": 15
+      }
+    },
+    {
+      "id": "d7cdaf35-e139-4c67-9cca-6c14ce03a057",
+      "name": "Musiclask",
+      "bounding_box": {
+        "x": 211,
+        "y": 749,
+        "w": 56,
+        "h": 18
+      }
+    },
+    {
+      "id": "58dac802-1dd4-4a24-a61a-9e8d703a2b87",
+      "name": "",
+      "bounding_box": {
+        "x": 225,
+        "y": 709,
+        "w": 145,
+        "h": 25
+      }
+    },
+    {
+      "id": "35e12d4b-9e7d-4f6f-be07-6ff589126cb5",
+      "name": "",
+      "bounding_box": {
+        "x": 189,
+        "y": 644,
+        "w": 172,
+        "h": 47
+      }
+    },
+    {
+      "id": "0dfe09b1-7474-44ba-9b90-8b39e53342ba",
+      "name": "Lumea",
+      "bounding_box": {
+        "x": 191,
+        "y": 615,
+        "w": 96,
+        "h": 35
+      }
+    },
+    {
+      "id": "4633cc46-d8c0-4a3a-a677-0055568d48f3",
+      "name": "March3, 1995",
+      "bounding_box": {
+        "x": 177,
+        "y": 78,
+        "w": 77,
+        "h": 15
+      }
+    },
+    {
+      "id": "12dda35c-da7a-4ce7-b6b2-7e3ecd872480",
+      "name": "1995- 48D",
+      "bounding_box": {
+        "x": 567,
+        "y": 80,
+        "w": 53,
+        "h": 13
+      }
+    },
+    {
+      "id": "0f94139e-138d-442c-af72-ea6581b65a17",
+      "name": "LUCKY STRIKE QUALITATIVE ADVERTISING RESEARCH - GATEWAY CITIES",
+      "bounding_box": {
+        "x": 179,
+        "y": 92,
+        "w": 409,
+        "h": 31
+      }
+    },
+    {
+      "id": "cb1094b4-da2b-4052-9777-f835a42b2865",
+      "name": "A. A. Strobel",
+      "bounding_box": {
+        "x": 177,
+        "y": 124,
+        "w": 70,
+        "h": 16
+      }
+    },
+    {
+      "id": "6d824e49-1667-4f35-8de6-5f3441a5500d",
+      "name": "Only two bidders because third supplier has not yet signed B & W",
+      "bounding_box": {
+        "x": 258,
+        "y": 172,
+        "w": 338,
+        "h": 17
+      }
+    },
+    {
+      "id": "7f86896b-de79-453c-a634-08340e639ae4",
+      "name": "Analytic Insight, Inc.",
+      "bounding_box": {
+        "x": 77,
+        "y": 232,
+        "w": 106,
+        "h": 18
+      }
+    },
+    {
+      "id": "43c0af72-40f0-40c7-aba7-ed9dc0c93ff9",
+      "name": "Goldfarb Consultants",
+      "bounding_box": {
+        "x": 78,
+        "y": 251,
+        "w": 109,
+        "h": 14
+      }
+    },
+    {
+      "id": "af939f60-e159-4620-b6c8-c0b32c94fa57",
+      "name": "3/ 25/ 95",
+      "bounding_box": {
+        "x": 226,
+        "y": 408,
+        "w": 41,
+        "h": 17
+      }
+    },
+    {
+      "id": "32efb51a-cdeb-4e9f-8a05-45ff3040f71f",
+      "name": "3/ 20/ 95",
+      "bounding_box": {
+        "x": 225,
+        "y": 346,
+        "w": 42,
+        "h": 13
+      }
+    },
+    {
+      "id": "8476afe5-7cd9-4d6d-882e-522137cd2242",
+      "name": "3/ 1/ 95",
+      "bounding_box": {
+        "x": 230,
+        "y": 299,
+        "w": 35,
+        "h": 13
+      }
+    },
+    {
+      "id": "c1a7b3e6-9fb0-46f3-bf84-7ee067a7f990",
+      "name": "3/ 31/ 95",
+      "bounding_box": {
+        "x": 228,
+        "y": 489,
+        "w": 41,
+        "h": 15
+      }
+    },
+    {
+      "id": "eccaa174-8a1f-44bc-963d-547cb49428cd",
+      "name": "Lowest Bid",
+      "bounding_box": {
+        "x": 302,
+        "y": 584,
+        "w": 62,
+        "h": 14
+      }
+    },
+    {
+      "id": "ca553df0-13c5-4447-bc9c-e39bed831ade",
+      "name": "Analytic Insight, Inc.",
+      "bounding_box": {
+        "x": 302,
+        "y": 567,
+        "w": 107,
+        "h": 16
+      }
+    },
+    {
+      "id": "d48777ab-a7bc-4abd-af5e-a13aaabac11b",
+      "name": "3433/ 3/ 95",
+      "bounding_box": {
+        "x": 497,
+        "y": 620,
+        "w": 82,
+        "h": 31
+      }
+    },
+    {
+      "id": "69b818ed-5fbf-49f5-904a-0ce43d58a532",
+      "name": "3/ 3/ 95",
+      "bounding_box": {
+        "x": 510,
+        "y": 640,
+        "w": 74,
+        "h": 42
+      }
+    },
+    {
+      "id": "7347c8f3-36ab-4135-a1ee-f7902a16f657",
+      "name": "3/ 3/ 95",
+      "bounding_box": {
+        "x": 511,
+        "y": 714,
+        "w": 68,
+        "h": 29
+      }
+    },
+    {
+      "id": "deaf985c-27a8-47f0-a739-90300f2207a1",
+      "name": "H. Williams",
+      "bounding_box": {
+        "x": 131,
+        "y": 841,
+        "w": 59,
+        "h": 14
+      }
+    },
+    {
+      "id": "9b37c4de-0693-4926-8db9-64a4eb7c69e7",
+      "name": "Project File",
+      "bounding_box": {
+        "x": 130,
+        "y": 827,
+        "w": 58,
+        "h": 14
+      }
+    }
+  ]
+}

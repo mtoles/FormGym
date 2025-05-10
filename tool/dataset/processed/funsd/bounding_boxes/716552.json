@@ -1,0 +1,222 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "3488fa57-ac56-4778-9e4d-87ea9e24ac9c",
+      "name": "272972",
+      "bounding_box": {
+        "x": 341,
+        "y": 154,
+        "w": 46,
+        "h": 14
+      }
+    },
+    {
+      "id": "8708bfc2-3140-439a-a1ee-edcea73e22dd",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 246,
+        "y": 215,
+        "w": 11,
+        "h": 8
+      }
+    },
+    {
+      "id": "98cd7e5a-63da-45b8-b9bb-dc7495245f2d",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 24,
+        "y": 218,
+        "w": 11,
+        "h": 10
+      }
+    },
+    {
+      "id": "7dd9ffb5-2f8b-4ec5-80a4-2ff9f65f357f",
+      "name": "(GRAVURE)",
+      "bounding_box": {
+        "x": 589,
+        "y": 215,
+        "w": 52,
+        "h": 11
+      }
+    },
+    {
+      "id": "25721a0f-6689-4484-87c5-def143359153",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 324,
+        "y": 257,
+        "w": 10,
+        "h": 7
+      }
+    },
+    {
+      "id": "7ed37d51-0054-40a3-abeb-c5169fa81117",
+      "name": "15",
+      "bounding_box": {
+        "x": 138,
+        "y": 536,
+        "w": 13,
+        "h": 13
+      }
+    },
+    {
+      "id": "bbc8b057-6225-433c-ad47-4273d6205ad9",
+      "name": "272972",
+      "bounding_box": {
+        "x": 341,
+        "y": 535,
+        "w": 43,
+        "h": 14
+      }
+    },
+    {
+      "id": "8326b838-2417-4592-8fb6-bb511402d487",
+      "name": "VICEROY Rich Lights 100' s 20' s Label",
+      "bounding_box": {
+        "x": 117,
+        "y": 99,
+        "w": 256,
+        "h": 18
+      }
+    },
+    {
+      "id": "4a1d0f06-b977-46aa-8d4a-01a891810a01",
+      "name": "VICEROY Rich Lights",
+      "bounding_box": {
+        "x": 117,
+        "y": 128,
+        "w": 135,
+        "h": 15
+      }
+    },
+    {
+      "id": "a5046a52-0b57-4c2a-b328-d2f2302da538",
+      "name": "B1 -257",
+      "bounding_box": {
+        "x": 116,
+        "y": 155,
+        "w": 42,
+        "h": 17
+      }
+    },
+    {
+      "id": "fe4395a1-42e8-4d60-893b-c532d3de8953",
+      "name": "50 -034A",
+      "bounding_box": {
+        "x": 568,
+        "y": 151,
+        "w": 48,
+        "h": 16
+      }
+    },
+    {
+      "id": "ce718630-96b0-4311-9761-bc823441c369",
+      "name": "CUSTOMER SPEC.",
+      "bounding_box": {
+        "x": 524,
+        "y": 209,
+        "w": 54,
+        "h": 19
+      }
+    },
+    {
+      "id": "6a39af48-8f20-471f-a954-24de4566cb61",
+      "name": "10/ 16/ 81",
+      "bounding_box": {
+        "x": 201,
+        "y": 453,
+        "w": 55,
+        "h": 14
+      }
+    },
+    {
+      "id": "5ea31673-4a2a-44f7-bf44-be3dabe5ff2b",
+      "name": "1010/ 30/ 8181",
+      "bounding_box": {
+        "x": 201,
+        "y": 422,
+        "w": 56,
+        "h": 13
+      }
+    },
+    {
+      "id": "203b7542-3438-48c4-9d24-adcfe2bba659",
+      "name": "VICEROY Rich Lights 100' s 20' s Label",
+      "bounding_box": {
+        "x": 115,
+        "y": 508,
+        "w": 255,
+        "h": 16
+      }
+    },
+    {
+      "id": "de771489-d774-46e4-969e-9be477c3a80b",
+      "name": "50- 034",
+      "bounding_box": {
+        "x": 575,
+        "y": 536,
+        "w": 42,
+        "h": 13
+      }
+    },
+    {
+      "id": "03cfeac3-5184-44ff-acf2-b579a576e74e",
+      "name": "10/ 30/ 81",
+      "bounding_box": {
+        "x": 215,
+        "y": 601,
+        "w": 56,
+        "h": 13
+      }
+    },
+    {
+      "id": "329a72a4-dfb2-4d86-aa02-791810ce3881",
+      "name": "Material # 50 -034 A has been assigned to the VICEROY Rich Lights 100' s 20' s Label with new bottom panel. Bottom now incorporates shield. On both side and bottom panels, \"VICEROY\" and \"Rich Lights\" have been inverted. Cartons and labels must change design simultaneously. The current design cannot be used in production after 10/ 30/ 81.",
+      "bounding_box": {
+        "x": 115,
+        "y": 630,
+        "w": 559,
+        "h": 81
+      }
+    },
+    {
+      "id": "f2509488-129a-44df-b57a-246b4fa9844f",
+      "name": "J. F. Banks C. Lamb C. L. Domeck Webb L. C. Lanham Branch QC Branch Supply",
+      "bounding_box": {
+        "x": 75,
+        "y": 747,
+        "w": 71,
+        "h": 82
+      }
+    },
+    {
+      "id": "b7617b4e-6398-4e78-9e8f-259a1fb4e366",
+      "name": "S. T. BEASLEY (MRS )/ jlf",
+      "bounding_box": {
+        "x": 99,
+        "y": 835,
+        "w": 189,
+        "h": 50
+      }
+    },
+    {
+      "id": "e17aa31e-8575-4e70-a6ad-6015c4cf7454",
+      "name": "9/ 17/ 8181",
+      "bounding_box": {
+        "x": 554,
+        "y": 852,
+        "w": 48,
+        "h": 14
+      }
+    }
+  ]
+}

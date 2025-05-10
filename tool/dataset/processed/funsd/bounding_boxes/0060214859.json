@@ -1,0 +1,212 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 780,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "b7feb4e9-2e53-4385-97d0-75fed43919b0",
+      "name": "517",
+      "bounding_box": {
+        "x": 163,
+        "y": 179,
+        "w": 28,
+        "h": 17
+      }
+    },
+    {
+      "id": "95579ab3-9e25-4f7a-aa65-a9c82e6433a2",
+      "name": "XX",
+      "bounding_box": {
+        "x": 102,
+        "y": 433,
+        "w": 22,
+        "h": 17
+      }
+    },
+    {
+      "id": "835e8735-11f8-492f-a294-60d35815185c",
+      "name": "6926",
+      "bounding_box": {
+        "x": 377,
+        "y": 754,
+        "w": 36,
+        "h": 17
+      }
+    },
+    {
+      "id": "47972e80-c9e5-4a4c-a12d-8edb34bb0bb3",
+      "name": "",
+      "bounding_box": {
+        "x": 641,
+        "y": 851,
+        "w": 57,
+        "h": 27
+      }
+    },
+    {
+      "id": "9c869aaa-c79b-45b6-9375-462b1c460f1e",
+      "name": "436",
+      "bounding_box": {
+        "x": 524,
+        "y": 853,
+        "w": 56,
+        "h": 27
+      }
+    },
+    {
+      "id": "c51df900-d765-4b2d-b59c-ab05dd097972",
+      "name": "P- 830 GLASS FIBER",
+      "bounding_box": {
+        "x": 253,
+        "y": 254,
+        "w": 159,
+        "h": 18
+      }
+    },
+    {
+      "id": "0bb3429f-5901-4d57-9df2-740d7ae1de7b",
+      "name": "10- NOV- 1986",
+      "bounding_box": {
+        "x": 588,
+        "y": 226,
+        "w": 103,
+        "h": 19
+      }
+    },
+    {
+      "id": "5b0e2315-a5c3-432f-a63a-1f79c66ff14e",
+      "name": "OWENS CORNING",
+      "bounding_box": {
+        "x": 587,
+        "y": 257,
+        "w": 119,
+        "h": 16
+      }
+    },
+    {
+      "id": "5a8e32cc-5e0c-489b-a4c7-1d7bea7fc386",
+      "name": "2 ROLLS",
+      "bounding_box": {
+        "x": 668,
+        "y": 289,
+        "w": 66,
+        "h": 16
+      }
+    },
+    {
+      "id": "158f327f-3e11-46ca-9257-d5cadd6bb2b0",
+      "name": "ROLL 34 & 35",
+      "bounding_box": {
+        "x": 254,
+        "y": 285,
+        "w": 114,
+        "h": 16
+      }
+    },
+    {
+      "id": "b4c6e367-0821-412b-a351-d9350f770187",
+      "name": "11- 6- 86",
+      "bounding_box": {
+        "x": 254,
+        "y": 316,
+        "w": 64,
+        "h": 16
+      }
+    },
+    {
+      "id": "29be9294-a2c4-471c-b073-147fb7cb3458",
+      "name": "WEIGHT OUT OF",
+      "bounding_box": {
+        "x": 620,
+        "y": 483,
+        "w": 121,
+        "h": 18
+      }
+    },
+    {
+      "id": "76165cde-7016-4ca1-bda5-aa6fd6a527ae",
+      "name": "SPECIFICATIONS ON ROLLS 34 & 35. WT. AV. ROLL 34 (183. 04) ; WT. AV. ROLL 35 (183. 44) : SPECS. 190 -210 GMS/ SQM. LOI OUT DE SPEC. ON ROLL 34 (AV 2. 49%) SPECIFICATIONS (2.6 6- 3. 1% .",
+      "bounding_box": {
+        "x": 74,
+        "y": 510,
+        "w": 656,
+        "h": 66
+      }
+    },
+    {
+      "id": "09dc5955-5e86-4ac8-a1c6-a701fcc5e2de",
+      "name": "Mr. Lucien L. Bass, III",
+      "bounding_box": {
+        "x": 198,
+        "y": 785,
+        "w": 216,
+        "h": 18
+      }
+    },
+    {
+      "id": "0c296f71-c741-4f91-a121-4f0c8eedd8c3",
+      "name": "Dr. L. H. O' Conner",
+      "bounding_box": {
+        "x": 198,
+        "y": 797,
+        "w": 161,
+        "h": 18
+      }
+    },
+    {
+      "id": "5e7b251a-72ef-425c-9145-c82a74f60e0f",
+      "name": "Mr. L. W. Peterson",
+      "bounding_box": {
+        "x": 198,
+        "y": 814,
+        "w": 161,
+        "h": 17
+      }
+    },
+    {
+      "id": "bb1c05c9-0cde-4372-bb7d-216088b4a48a",
+      "name": "Mr. W. B. Scantland",
+      "bounding_box": {
+        "x": 197,
+        "y": 832,
+        "w": 172,
+        "h": 13
+      }
+    },
+    {
+      "id": "6196a99e-b6ac-4eb6-9e2a-f74dd1ff14a9",
+      "name": "Ms. R. deLacy",
+      "bounding_box": {
+        "x": 197,
+        "y": 845,
+        "w": 124,
+        "h": 14
+      }
+    },
+    {
+      "id": "f0e752c7-03d9-4fd8-bf13-433072790936",
+      "name": "Mr. M. D. Shannon",
+      "bounding_box": {
+        "x": 197,
+        "y": 859,
+        "w": 155,
+        "h": 16
+      }
+    },
+    {
+      "id": "f3a83aab-6e0b-492c-a32d-7dce5c4941e5",
+      "name": "Mr. R. L. McGee",
+      "bounding_box": {
+        "x": 197,
+        "y": 874,
+        "w": 137,
+        "h": 19
+      }
+    }
+  ]
+}

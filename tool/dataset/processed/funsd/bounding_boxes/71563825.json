@@ -1,0 +1,272 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "af3f809f-475a-4a10-af24-40e9c1746377",
+      "name": "#",
+      "bounding_box": {
+        "x": 218,
+        "y": 205,
+        "w": 11,
+        "h": 14
+      }
+    },
+    {
+      "id": "2511c305-34be-4a17-91eb-af04e6cfa223",
+      "name": "Other",
+      "bounding_box": {
+        "x": 219,
+        "y": 270,
+        "w": 32,
+        "h": 14
+      }
+    },
+    {
+      "id": "83cb022a-fb9c-4096-acd5-466e4bfaeaf8",
+      "name": "COLOMBIA",
+      "bounding_box": {
+        "x": 313,
+        "y": 239,
+        "w": 70,
+        "h": 11
+      }
+    },
+    {
+      "id": "22c2288b-2175-4928-89c9-4ccdfc5dbd2b",
+      "name": "KOOL",
+      "bounding_box": {
+        "x": 311,
+        "y": 254,
+        "w": 41,
+        "h": 13
+      }
+    },
+    {
+      "id": "fdb130fd-8339-47b1-bb94-295cfe05a387",
+      "name": "60%",
+      "bounding_box": {
+        "x": 190,
+        "y": 541,
+        "w": 25,
+        "h": 18
+      }
+    },
+    {
+      "id": "930f582a-e782-4221-aa1c-ec3507342e91",
+      "name": "40%",
+      "bounding_box": {
+        "x": 190,
+        "y": 559,
+        "w": 25,
+        "h": 11
+      }
+    },
+    {
+      "id": "9bf8be91-11f4-49fc-b669-64a2a8cf51fc",
+      "name": "02/ 12/ 98",
+      "bounding_box": {
+        "x": 573,
+        "y": 205,
+        "w": 51,
+        "h": 13
+      }
+    },
+    {
+      "id": "1afd7452-6db1-402c-84e8-b88039c9b66f",
+      "name": "R. B. U.",
+      "bounding_box": {
+        "x": 216,
+        "y": 237,
+        "w": 40,
+        "h": 13
+      }
+    },
+    {
+      "id": "1e65d29f-a066-47d6-abf7-da0b72b8ad01",
+      "name": "Brand Group",
+      "bounding_box": {
+        "x": 221,
+        "y": 254,
+        "w": 72,
+        "h": 13
+      }
+    },
+    {
+      "id": "803f8e2c-574e-4099-b89a-fd75167ebf27",
+      "name": "Maria Helena Arg\u00fcelles/ Edwin Garcia",
+      "bounding_box": {
+        "x": 219,
+        "y": 303,
+        "w": 135,
+        "h": 31
+      }
+    },
+    {
+      "id": "0bbf0ce5-bfa5-4fb7-82f1-6f91e207077d",
+      "name": "Camilo Concha/ Andrea Suarez",
+      "bounding_box": {
+        "x": 504,
+        "y": 302,
+        "w": 130,
+        "h": 32
+      }
+    },
+    {
+      "id": "387ecd1c-bdc3-45a4-b518-35ae97e33910",
+      "name": "K001 vs. Marlboro Menthol Lights",
+      "bounding_box": {
+        "x": 274,
+        "y": 352,
+        "w": 198,
+        "h": 17
+      }
+    },
+    {
+      "id": "727f4b20-2c34-48de-bd41-8b431e18b314",
+      "name": "Bogot\u00e1, Medellin and Barranquilla",
+      "bounding_box": {
+        "x": 183,
+        "y": 388,
+        "w": 190,
+        "h": 15
+      }
+    },
+    {
+      "id": "1eb934ff-8ea3-4214-ab77-d234f28d078a",
+      "name": "Current Kool Filter King Colombia 1 1 mg tar @ 0. 51% menthol white tipping.",
+      "bounding_box": {
+        "x": 134,
+        "y": 441,
+        "w": 436,
+        "h": 17
+      }
+    },
+    {
+      "id": "d08f12dc-9f60-4482-a92e-beeb2b955e54",
+      "name": "Kool Milds KS Japan 9mg tar @ 0. 56% menthol white tipping",
+      "bounding_box": {
+        "x": 135,
+        "y": 458,
+        "w": 348,
+        "h": 14
+      }
+    },
+    {
+      "id": "213ee3e6-d81c-4e81-8982-9be36747d6a1",
+      "name": "Kool KS. 9 mg tar, @ 0. 51% menthol white tipping",
+      "bounding_box": {
+        "x": 135,
+        "y": 473,
+        "w": 283,
+        "h": 15
+      }
+    },
+    {
+      "id": "f22be785-cf02-40a5-94f7-b29ede4430cb",
+      "name": "Current Marlboro Lights Menthol King US 9mg tar @ 0. 66% menthol, white tipping.",
+      "bounding_box": {
+        "x": 135,
+        "y": 490,
+        "w": 467,
+        "h": 17
+      }
+    },
+    {
+      "id": "dc9e44f0-84c2-4c21-bbff-3849adc3cc89",
+      "name": "18 -29 (100%)",
+      "bounding_box": {
+        "x": 190,
+        "y": 574,
+        "w": 75,
+        "h": 15
+      }
+    },
+    {
+      "id": "5b7130a0-aa39-4a39-9824-f150689aeefc",
+      "name": "AB1 (100%)",
+      "bounding_box": {
+        "x": 190,
+        "y": 591,
+        "w": 69,
+        "h": 13
+      }
+    },
+    {
+      "id": "a71a0052-df71-490a-9637-80ea2b402378",
+      "name": "KOOL Parent regular smokers 50% -alternate smokers 50%",
+      "bounding_box": {
+        "x": 249,
+        "y": 605,
+        "w": 323,
+        "h": 17
+      }
+    },
+    {
+      "id": "97616783-bbaa-46b3-838b-08f464557862",
+      "name": "KOOL Parent regular smokers 50% -alternate smokers 50%",
+      "bounding_box": {
+        "x": 249,
+        "y": 622,
+        "w": 323,
+        "h": 14
+      }
+    },
+    {
+      "id": "b887cb10-58c5-4fae-9cc0-bd9432ba8e25",
+      "name": "KOOL Parent regular smokers 50% -alternate smokers 50%",
+      "bounding_box": {
+        "x": 250,
+        "y": 638,
+        "w": 324,
+        "h": 14
+      }
+    },
+    {
+      "id": "9d539ac4-1f85-44f1-bda7-d55dcca027c5",
+      "name": "In order to establish a quantitative basis for determining the winning product, results will be",
+      "bounding_box": {
+        "x": 154,
+        "y": 668,
+        "w": 497,
+        "h": 18
+      }
+    },
+    {
+      "id": "8c3a8f80-f5ff-414c-a31f-e3a00932edda",
+      "name": "Alternate 60%, Regular 40%.",
+      "bounding_box": {
+        "x": 233,
+        "y": 686,
+        "w": 158,
+        "h": 14
+      }
+    },
+    {
+      "id": "3c94f0e7-e5e5-471c-95e7-acf3fb18b0ea",
+      "name": "On September 1 97, PMI simultaneously launched Marlboro Menthol KS Box (16mg tar and Menthol Lights KS Box (9mg tar) in Colombia. These two products became KOOL's direct competitors (Premium Menthol Brands).",
+      "bounding_box": {
+        "x": 122,
+        "y": 736,
+        "w": 531,
+        "h": 48
+      }
+    },
+    {
+      "id": "9c73c428-78a0-427c-b9f0-9a0e3c5755a7",
+      "name": "At the same time KOOL replaced its product with a milder 11mg cigarette (the same KOOL Milds but with a 27mm cork tipping).",
+      "bounding_box": {
+        "x": 122,
+        "y": 785,
+        "w": 527,
+        "h": 32
+      }
+    }
+  ]
+}

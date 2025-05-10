@@ -1,0 +1,422 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 766,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "4b0db6ee-cc5e-4aaa-912f-3917ccaf22e1",
+      "name": "-339",
+      "bounding_box": {
+        "x": 628,
+        "y": 39,
+        "w": 36,
+        "h": 18
+      }
+    },
+    {
+      "id": "0b866c89-9efb-43bf-a4db-1bedb14bf0d5",
+      "name": ".0",
+      "bounding_box": {
+        "x": 640,
+        "y": 117,
+        "w": 17,
+        "h": 17
+      }
+    },
+    {
+      "id": "3d419f2d-5718-46a4-80ad-077ccf1d5412",
+      "name": "6",
+      "bounding_box": {
+        "x": 623,
+        "y": 117,
+        "w": 15,
+        "h": 17
+      }
+    },
+    {
+      "id": "49457b4e-826b-499d-9ff4-e423e278b44e",
+      "name": "Good",
+      "bounding_box": {
+        "x": 624,
+        "y": 142,
+        "w": 41,
+        "h": 17
+      }
+    },
+    {
+      "id": "0675cd99-f26d-4ba7-8bc8-2d2786b52d18",
+      "name": "Good",
+      "bounding_box": {
+        "x": 623,
+        "y": 168,
+        "w": 47,
+        "h": 20
+      }
+    },
+    {
+      "id": "af408d0c-e78d-4fee-a069-a30b086d0b1f",
+      "name": "Good",
+      "bounding_box": {
+        "x": 626,
+        "y": 194,
+        "w": 41,
+        "h": 17
+      }
+    },
+    {
+      "id": "1d2d0a43-7963-4682-b25c-cd7b92dace4b",
+      "name": "#450",
+      "bounding_box": {
+        "x": 624,
+        "y": 219,
+        "w": 41,
+        "h": 20
+      }
+    },
+    {
+      "id": "47bde3a5-b9c6-4866-8d67-aabe138d31e6",
+      "name": "3",
+      "bounding_box": {
+        "x": 635,
+        "y": 250,
+        "w": 14,
+        "h": 14
+      }
+    },
+    {
+      "id": "05c2221f-e748-4487-8ebb-fe109731d9de",
+      "name": "1067",
+      "bounding_box": {
+        "x": 626,
+        "y": 270,
+        "w": 39,
+        "h": 21
+      }
+    },
+    {
+      "id": "4957220f-4e8b-454b-8304-a80f5b0cc624",
+      "name": "White",
+      "bounding_box": {
+        "x": 257,
+        "y": 163,
+        "w": 50,
+        "h": 20
+      }
+    },
+    {
+      "id": "eeaac539-4585-45a7-864b-be9ca5c14176",
+      "name": "\"D\"",
+      "bounding_box": {
+        "x": 268,
+        "y": 297,
+        "w": 31,
+        "h": 18
+      }
+    },
+    {
+      "id": "49482354-067b-4a6a-bf6d-97beaf144248",
+      "name": "24",
+      "bounding_box": {
+        "x": 249,
+        "y": 349,
+        "w": 18,
+        "h": 18
+      }
+    },
+    {
+      "id": "021d30f5-fe8c-43d3-bc96-5b739fb83564",
+      "name": ".844",
+      "bounding_box": {
+        "x": 652,
+        "y": 402,
+        "w": 38,
+        "h": 18
+      }
+    },
+    {
+      "id": "c6609292-336b-4213-afe9-42ae509df2cf",
+      "name": "SPRING",
+      "bounding_box": {
+        "x": 346,
+        "y": 709,
+        "w": 57,
+        "h": 24
+      }
+    },
+    {
+      "id": "b86e70ad-9a37-4879-aede-08453b725459",
+      "name": "AMF",
+      "bounding_box": {
+        "x": 226,
+        "y": 767,
+        "w": 35,
+        "h": 14
+      }
+    },
+    {
+      "id": "bb20540b-06ac-4450-9b02-3515af65b92a",
+      "name": "85",
+      "bounding_box": {
+        "x": 649,
+        "y": 714,
+        "w": 28,
+        "h": 22
+      }
+    },
+    {
+      "id": "799fa89c-d6b3-4126-91f5-ea2be9d25f06",
+      "name": "Hauni",
+      "bounding_box": {
+        "x": 588,
+        "y": 767,
+        "w": 47,
+        "h": 20
+      }
+    },
+    {
+      "id": "a52d58cd-20c1-4bf1-9530-cefff0ff0370",
+      "name": "(Revised 5/ 9/ 61)",
+      "bounding_box": {
+        "x": 109,
+        "y": 87,
+        "w": 147,
+        "h": 22
+      }
+    },
+    {
+      "id": "a95668d3-d523-4be6-8ca7-815370c20276",
+      "name": "T. E.",
+      "bounding_box": {
+        "x": 256,
+        "y": 116,
+        "w": 39,
+        "h": 18
+      }
+    },
+    {
+      "id": "7d3baf92-96e5-46cd-b027-f204f7411c31",
+      "name": "58 ,000",
+      "bounding_box": {
+        "x": 254,
+        "y": 191,
+        "w": 59,
+        "h": 20
+      }
+    },
+    {
+      "id": "118bdb0e-6e39-44d6-b09f-eec82732cfa0",
+      "name": "Research Division",
+      "bounding_box": {
+        "x": 204,
+        "y": 272,
+        "w": 159,
+        "h": 17
+      }
+    },
+    {
+      "id": "89c8ed46-dd81-4121-81b4-8e81a7d25b3e",
+      "name": "120 mm.",
+      "bounding_box": {
+        "x": 237,
+        "y": 323,
+        "w": 68,
+        "h": 21
+      }
+    },
+    {
+      "id": "115fada0-9532-4858-a576-f78f4fe7113e",
+      "name": "0 .12 (new scale)",
+      "bounding_box": {
+        "x": 251,
+        "y": 370,
+        "w": 141,
+        "h": 24
+      }
+    },
+    {
+      "id": "7fd9166b-b7ff-4e5e-9de1-19862ae0299b",
+      "name": "86 .9 gms",
+      "bounding_box": {
+        "x": 236,
+        "y": 397,
+        "w": 85,
+        "h": 23
+      }
+    },
+    {
+      "id": "670e4918-cf8c-4847-b237-75ee50c3d1db",
+      "name": "93 .3 gms.",
+      "bounding_box": {
+        "x": 240,
+        "y": 426,
+        "w": 83,
+        "h": 20
+      }
+    },
+    {
+      "id": "802fda81-3da8-4188-9ec1-dd026c8a7d0e",
+      "name": "99 .2 gms.",
+      "bounding_box": {
+        "x": 239,
+        "y": 451,
+        "w": 81,
+        "h": 24
+      }
+    },
+    {
+      "id": "e19f1b08-c6b2-4525-a681-0e08d980b162",
+      "name": "99 .2 gms.",
+      "bounding_box": {
+        "x": 237,
+        "y": 479,
+        "w": 85,
+        "h": 20
+      }
+    },
+    {
+      "id": "095f0159-2877-4a21-bf80-b416f4d78cd2",
+      "name": "* Special Plasticizer - 1 part LG- 168 - 15 parts Estrobond \"B\" Union Carbide LG- 168 additive .38%",
+      "bounding_box": {
+        "x": 140,
+        "y": 510,
+        "w": 560,
+        "h": 36
+      }
+    },
+    {
+      "id": "92b281c2-e7c9-4b89-bd8b-31f59e1e0f58",
+      "name": "Sample repeated as RE- 341 because 2. 1/ 58 ,000 tow was used instead of 2. 1/ 42 ,000 tow.",
+      "bounding_box": {
+        "x": 158,
+        "y": 563,
+        "w": 515,
+        "h": 34
+      }
+    },
+    {
+      "id": "de7f0b65-08fc-453a-bf1a-94b25e619b69",
+      "name": "11 /2 /61",
+      "bounding_box": {
+        "x": 617,
+        "y": 91,
+        "w": 67,
+        "h": 21
+      }
+    },
+    {
+      "id": "8da354c5-3e6d-4625-a9c4-29bdc109a763",
+      "name": "400 F. P. M.",
+      "bounding_box": {
+        "x": 626,
+        "y": 299,
+        "w": 89,
+        "h": 21
+      }
+    },
+    {
+      "id": "6ea32e5b-7f4c-4965-b211-5e78d1ad8c69",
+      "name": "337 .5",
+      "bounding_box": {
+        "x": 624,
+        "y": 324,
+        "w": 49,
+        "h": 21
+      }
+    },
+    {
+      "id": "e4a3e836-5e6c-46d9-b495-2042ababf31f",
+      "name": "477 .5",
+      "bounding_box": {
+        "x": 626,
+        "y": 351,
+        "w": 50,
+        "h": 18
+      }
+    },
+    {
+      "id": "a665285b-c02c-42a7-b454-7eaf7a392062",
+      "name": "362 .5",
+      "bounding_box": {
+        "x": 628,
+        "y": 373,
+        "w": 46,
+        "h": 20
+      }
+    },
+    {
+      "id": "dd334a40-bfa8-413d-819e-d865f914c024",
+      "name": "1 .194",
+      "bounding_box": {
+        "x": 642,
+        "y": 429,
+        "w": 51,
+        "h": 15
+      }
+    },
+    {
+      "id": "abaf7e84-d075-432d-a7e4-1095234d7610",
+      "name": "120 psig",
+      "bounding_box": {
+        "x": 626,
+        "y": 454,
+        "w": 75,
+        "h": 21
+      }
+    },
+    {
+      "id": "7f69a64a-4e0d-4de2-9f4b-ba429a3a8e8b",
+      "name": "16 psig",
+      "bounding_box": {
+        "x": 634,
+        "y": 482,
+        "w": 68,
+        "h": 20
+      }
+    },
+    {
+      "id": "972ecbd1-89e6-4dc3-8982-01048b98fb2e",
+      "name": "11 /3 /61",
+      "bounding_box": {
+        "x": 131,
+        "y": 712,
+        "w": 64,
+        "h": 23
+      }
+    },
+    {
+      "id": "b297be99-9756-444e-b22d-96d15143121d",
+      "name": ".922 1 .059 .54 .20 20 .2 7 .6 62 .4 1 .07 .41 61 .7",
+      "bounding_box": {
+        "x": 194,
+        "y": 824,
+        "w": 532,
+        "h": 25
+      }
+    },
+    {
+      "id": "261d0335-9ab5-4e69-854e-7a98930885e7",
+      "name": "Benner",
+      "bounding_box": {
+        "x": 404,
+        "y": 887,
+        "w": 184,
+        "h": 45
+      }
+    },
+    {
+      "id": "38a63823-9864-4659-b7f2-3e8caf2aedaf",
+      "name": "Dr. C. O. Jensen Mr. R. A. Wagner Mr. J. Berner Dr. A. W. Spears",
+      "bounding_box": {
+        "x": 137,
+        "y": 899,
+        "w": 163,
+        "h": 69
+      }
+    }
+  ]
+}

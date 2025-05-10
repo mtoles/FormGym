@@ -1,0 +1,222 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "2d587727-baab-4c08-8f01-ee38ba835173",
+      "name": "28",
+      "bounding_box": {
+        "x": 180,
+        "y": 236,
+        "w": 15,
+        "h": 11
+      }
+    },
+    {
+      "id": "40bf3d20-719a-4fdf-a001-f30e25ad89e2",
+      "name": "x",
+      "bounding_box": {
+        "x": 518,
+        "y": 284,
+        "w": 14,
+        "h": 11
+      }
+    },
+    {
+      "id": "65a0d5c7-ed8a-4364-9b12-7b25a9f9cd36",
+      "name": "x",
+      "bounding_box": {
+        "x": 318,
+        "y": 416,
+        "w": 11,
+        "h": 14
+      }
+    },
+    {
+      "id": "3832a1b2-3a78-4bea-b207-4137ba0386e7",
+      "name": "x",
+      "bounding_box": {
+        "x": 321,
+        "y": 457,
+        "w": 8,
+        "h": 11
+      }
+    },
+    {
+      "id": "2d93cfff-bd41-4a02-8be2-c8279549330b",
+      "name": "x",
+      "bounding_box": {
+        "x": 321,
+        "y": 494,
+        "w": 10,
+        "h": 11
+      }
+    },
+    {
+      "id": "6d096318-f985-42c5-b6bd-33061abd16ff",
+      "name": "X",
+      "bounding_box": {
+        "x": 387,
+        "y": 680,
+        "w": 11,
+        "h": 13
+      }
+    },
+    {
+      "id": "3519161b-9ae3-41b5-9015-15e31c7fbb8e",
+      "name": "x",
+      "bounding_box": {
+        "x": 487,
+        "y": 758,
+        "w": 10,
+        "h": 11
+      }
+    },
+    {
+      "id": "8a50f038-1f69-48a7-8eb6-03268dd729f2",
+      "name": "03/ 07/ 415415 & 418418",
+      "bounding_box": {
+        "x": 120,
+        "y": 193,
+        "w": 108,
+        "h": 14
+      }
+    },
+    {
+      "id": "ea9d7760-b769-4094-ba48-8f2f2da529fd",
+      "name": "9/ 8 /95",
+      "bounding_box": {
+        "x": 434,
+        "y": 190,
+        "w": 39,
+        "h": 15
+      }
+    },
+    {
+      "id": "33fe924c-27aa-49c2-b570-3a0637bb9fd9",
+      "name": "June /July 1995",
+      "bounding_box": {
+        "x": 494,
+        "y": 229,
+        "w": 94,
+        "h": 15
+      }
+    },
+    {
+      "id": "98b21da5-b7c8-4541-bfe7-c481c223d9a8",
+      "name": "Newport Sunglasses",
+      "bounding_box": {
+        "x": 211,
+        "y": 258,
+        "w": 123,
+        "h": 15
+      }
+    },
+    {
+      "id": "3f399ade-1ed0-45fd-84bb-66ff4bb7530c",
+      "name": "Newport Special Emphasis",
+      "bounding_box": {
+        "x": 194,
+        "y": 311,
+        "w": 159,
+        "h": 16
+      }
+    },
+    {
+      "id": "8c3893fe-afd9-49ac-90cd-216d75962c87",
+      "name": "Premiums packaged to large to store on a van. Could not get",
+      "bounding_box": {
+        "x": 203,
+        "y": 531,
+        "w": 396,
+        "h": 17
+      }
+    },
+    {
+      "id": "0b845d41-5884-47ee-813b-3e7c3a962546",
+      "name": "enough on a van to sell all day. Retailers only accepted small quantities of deals. Consumers perceived value and not meet expectations.",
+      "bounding_box": {
+        "x": 120,
+        "y": 560,
+        "w": 486,
+        "h": 41
+      }
+    },
+    {
+      "id": "badc3812-a822-44b3-b807-29a3a1f8f47f",
+      "name": "22, 320 (Indy East & West) NO SHOW SAMPLES",
+      "bounding_box": {
+        "x": 303,
+        "y": 651,
+        "w": 273,
+        "h": 17
+      }
+    },
+    {
+      "id": "568b9f67-ff18-4b50-abad-c6a91b2d983b",
+      "name": "Chain stores will not accept multiple Newport Promotions",
+      "bounding_box": {
+        "x": 214,
+        "y": 704,
+        "w": 367,
+        "h": 18
+      }
+    },
+    {
+      "id": "53305d22-8c7f-45f4-87be-b9a11be95d48",
+      "name": "(Tier system) at the same time.",
+      "bounding_box": {
+        "x": 123,
+        "y": 735,
+        "w": 199,
+        "h": 15
+      }
+    },
+    {
+      "id": "f02b15ef-1295-4bf0-a160-bfb123d2192a",
+      "name": "This model/ type of sunglass was not received well at",
+      "bounding_box": {
+        "x": 247,
+        "y": 784,
+        "w": 340,
+        "h": 15
+      }
+    },
+    {
+      "id": "4cff6220-1d05-4ea6-9d55-29f7f4414b99",
+      "name": "consumer/ retail level.",
+      "bounding_box": {
+        "x": 123,
+        "y": 813,
+        "w": 142,
+        "h": 13
+      }
+    },
+    {
+      "id": "9743a192-0df5-42d0-b003-b3dbf211b7a0",
+      "name": "Velcro on strap did not hold. Two right",
+      "bounding_box": {
+        "x": 345,
+        "y": 835,
+        "w": 267,
+        "h": 16
+      }
+    },
+    {
+      "id": "fece116a-31d0-46a6-b343-78c865d4563d",
+      "name": "sides of velcro on same glass did not adhere.",
+      "bounding_box": {
+        "x": 126,
+        "y": 860,
+        "w": 292,
+        "h": 19
+      }
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "bc45332e-08cb-451d-823a-d80da655c699",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 263,
+        "y": 117,
+        "w": 10,
+        "h": 10
+      }
+    },
+    {
+      "id": "6cdf54a3-dc8c-4cfe-8810-e5026181df47",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 443,
+        "y": 221,
+        "w": 11,
+        "h": 13
+      }
+    },
+    {
+      "id": "399b19b7-bca9-41ac-a7f5-7208cef2d740",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 568,
+        "y": 229,
+        "w": 11,
+        "h": 11
+      }
+    },
+    {
+      "id": "3dccea10-f0b2-42d0-9541-e18ea684aa94",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 60,
+        "y": 388,
+        "w": 11,
+        "h": 11
+      }
+    },
+    {
+      "id": "2333f717-61e4-4a5a-a41a-5e5ac2944ead",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 170,
+        "y": 385,
+        "w": 13,
+        "h": 10
+      }
+    },
+    {
+      "id": "9e8b2c21-09a3-4917-9548-fd623d44c0ce",
+      "name": "2-2-83",
+      "bounding_box": {
+        "x": 588,
+        "y": 860,
+        "w": 43,
+        "h": 11
+      }
+    },
+    {
+      "id": "b865e949-9d73-483a-99c5-15c9a1badcf0",
+      "name": "LRB 1946",
+      "bounding_box": {
+        "x": 529,
+        "y": 103,
+        "w": 58,
+        "h": 14
+      }
+    },
+    {
+      "id": "b4797a96-4cd5-40c4-bc7d-fcd2d25455fe",
+      "name": "Regulation of Smoking Public Places",
+      "bounding_box": {
+        "x": 81,
+        "y": 163,
+        "w": 264,
+        "h": 20
+      }
+    },
+    {
+      "id": "0bbdc3c8-8362-484e-a3b7-5268fa16b6d6",
+      "name": "This bill regulates smoking in university buildings which house educational programs and in inpatient health care facilities. Smoking within these or rooms, provided buildings would be allowed only specified facilities designate these \"smoking permitted\" areas. that signs are posted to",
+      "bounding_box": {
+        "x": 89,
+        "y": 405,
+        "w": 520,
+        "h": 68
+      }
+    },
+    {
+      "id": "2026b3c0-10f1-4760-a73f-9810d232b7af",
+      "name": "university buildings would each It is estimated that, on the average, The per \"smoking signs. sign cost is require about three permitted\" This estimate is based on the estimated at $4 50 in 1982-83 dollars. 1981 increased to reflect Inflation from 1981 to 1983. per sign cost, and Thus, the expected one-time cost for the University Systet to implement no be about There are significant the provisions of the bill would $8,000. with the bill's provisions. continuing annual costs associated",
+      "bounding_box": {
+        "x": 91,
+        "y": 475,
+        "w": 523,
+        "h": 109
+      }
+    },
+    {
+      "id": "63b974df-c960-4a43-9bb7-f97e603773dc",
+      "name": "University of Wisconsin System",
+      "bounding_box": {
+        "x": 103,
+        "y": 870,
+        "w": 213,
+        "h": 17
+      }
+    }
+  ]
+}

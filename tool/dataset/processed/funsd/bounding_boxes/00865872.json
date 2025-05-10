@@ -1,0 +1,172 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "02538ec4-cbea-49cf-b45b-c536078ffae2",
+      "name": "B164",
+      "bounding_box": {
+        "x": 166,
+        "y": 182,
+        "w": 36,
+        "h": 14
+      }
+    },
+    {
+      "id": "f7094b02-41f7-4617-877f-bfb99bb22ae8",
+      "name": "[] OTHER",
+      "bounding_box": {
+        "x": 259,
+        "y": 793,
+        "w": 37,
+        "h": 11
+      }
+    },
+    {
+      "id": "b21720b5-3b20-46f1-bc27-8dbcfd407fe4",
+      "name": "[MOISTURE]",
+      "bounding_box": {
+        "x": 198,
+        "y": 795,
+        "w": 48,
+        "h": 8
+      }
+    },
+    {
+      "id": "7a2c1135-88d6-40bd-9af3-ff823f805325",
+      "name": "[] HEAT",
+      "bounding_box": {
+        "x": 158,
+        "y": 793,
+        "w": 27,
+        "h": 12
+      }
+    },
+    {
+      "id": "6d5a431e-02f3-4444-a1f7-718ed27dff52",
+      "name": "[] Air",
+      "bounding_box": {
+        "x": 118,
+        "y": 793,
+        "w": 25,
+        "h": 12
+      }
+    },
+    {
+      "id": "ae8c8dca-c9e7-407f-a311-cf33a409a6b0",
+      "name": "",
+      "bounding_box": {
+        "x": 135,
+        "y": 921,
+        "w": 180,
+        "h": 23
+      }
+    },
+    {
+      "id": "15bc8984-bc57-441f-83cd-b49886c01ded",
+      "name": "8/22/83",
+      "bounding_box": {
+        "x": 531,
+        "y": 924,
+        "w": 88,
+        "h": 24
+      }
+    },
+    {
+      "id": "cecc1647-492d-4014-9579-5987d61fa688",
+      "name": "Brownish- gray powder",
+      "bounding_box": {
+        "x": 169,
+        "y": 211,
+        "w": 168,
+        "h": 17
+      }
+    },
+    {
+      "id": "cd71d7db-e6cd-4598-8af2-b42c1cd19ac2",
+      "name": "The pH of a 50% concentration of B164 in water was calculated to be 4.82 at 25\u00b0C according to the extrapolation procedures by Dr. P. D. Schickedantz, Lorillard Research Center Accession Number 1662.",
+      "bounding_box": {
+        "x": 131,
+        "y": 267,
+        "w": 522,
+        "h": 56
+      }
+    },
+    {
+      "id": "a669dbc6-c924-49a1-b554-bf0e1fd1a648",
+      "name": "(See SOP FOX Biological Solutions)",
+      "bounding_box": {
+        "x": 152,
+        "y": 377,
+        "w": 283,
+        "h": 18
+      }
+    },
+    {
+      "id": "158e6825-e766-445a-aa82-3371abe16fa2",
+      "name": "BC20- 48",
+      "bounding_box": {
+        "x": 226,
+        "y": 405,
+        "w": 60,
+        "h": 16
+      }
+    },
+    {
+      "id": "5dec9049-8b8f-4366-ab54-d9019f310198",
+      "name": "B164 forms a suspension in corn oil at 0.5g/ 1.5 ml Triple dosing is required",
+      "bounding_box": {
+        "x": 130,
+        "y": 430,
+        "w": 433,
+        "h": 45
+      }
+    },
+    {
+      "id": "402a3665-ecde-49db-a442-fb0a2d408ec3",
+      "name": "(See SOP for Determination of Solubility of Materials for Acute Cardiovascular and Respiratory Effects Study Beagle Dogs)",
+      "bounding_box": {
+        "x": 130,
+        "y": 516,
+        "w": 553,
+        "h": 30
+      }
+    },
+    {
+      "id": "d92a203c-7cdc-47e1-b2bd-d034675c7959",
+      "name": "BC20- 48",
+      "bounding_box": {
+        "x": 222,
+        "y": 559,
+        "w": 64,
+        "h": 15
+      }
+    },
+    {
+      "id": "304c3d63-11d7-4a81-8d3f-adb417f00509",
+      "name": "B164 is insoluble according to this procedure",
+      "bounding_box": {
+        "x": 131,
+        "y": 584,
+        "w": 378,
+        "h": 19
+      }
+    },
+    {
+      "id": "e5720240-2143-4f54-9b69-83517caf5927",
+      "name": "Refrigerate in amber glass bottle at no more than 8\u00b0C",
+      "bounding_box": {
+        "x": 134,
+        "y": 679,
+        "w": 454,
+        "h": 19
+      }
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "f1a4d135-f834-4826-9526-1b3527776257",
+      "name": "Lakeland Metro Market",
+      "bounding_box": {
+        "x": 119,
+        "y": 131,
+        "w": 149,
+        "h": 15
+      }
+    },
+    {
+      "id": "50211372-3a20-4dd8-ad3f-6ddb6c9440e8",
+      "name": "Misty",
+      "bounding_box": {
+        "x": 427,
+        "y": 130,
+        "w": 38,
+        "h": 14
+      }
+    },
+    {
+      "id": "5a56c1bf-ceb1-44cf-b2da-6ef93e5de3fb",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 427,
+        "y": 317,
+        "w": 17,
+        "h": 15
+      }
+    },
+    {
+      "id": "eedf8118-6ba9-4166-87d9-5e2bbfe6e58d",
+      "name": "",
+      "bounding_box": {
+        "x": 246,
+        "y": 391,
+        "w": 21,
+        "h": 13
+      }
+    },
+    {
+      "id": "6a3f993b-70e7-4dff-9f5a-0d0b3d209b53",
+      "name": "",
+      "bounding_box": {
+        "x": 216,
+        "y": 388,
+        "w": 28,
+        "h": 18
+      }
+    },
+    {
+      "id": "b2372f6b-39af-4a84-a87f-132d0f932e17",
+      "name": "400.400",
+      "bounding_box": {
+        "x": 154,
+        "y": 159,
+        "w": 50,
+        "h": 17
+      }
+    },
+    {
+      "id": "3795017a-1b61-40b9-b62a-30954d1a99df",
+      "name": "The Lamar Corp.",
+      "bounding_box": {
+        "x": 141,
+        "y": 186,
+        "w": 102,
+        "h": 17
+      }
+    },
+    {
+      "id": "78c001ec-e3be-44c5-b8b5-543e02882b5a",
+      "name": "2/ 20 & 3/ 20",
+      "bounding_box": {
+        "x": 433,
+        "y": 159,
+        "w": 84,
+        "h": 18
+      }
+    },
+    {
+      "id": "3a50785f-bd5d-47ef-8862-106f50a5545e",
+      "name": "See attached list",
+      "bounding_box": {
+        "x": 141,
+        "y": 345,
+        "w": 120,
+        "h": 17
+      }
+    },
+    {
+      "id": "12b95e67-d329-4a8a-8d60-b524a7258a91",
+      "name": "8 RB",
+      "bounding_box": {
+        "x": 508,
+        "y": 351,
+        "w": 34,
+        "h": 17
+      }
+    },
+    {
+      "id": "3b711f99-b690-44f9-9c37-68e0388d17ca",
+      "name": "218, 499",
+      "bounding_box": {
+        "x": 539,
+        "y": 390,
+        "w": 49,
+        "h": 18
+      }
+    },
+    {
+      "id": "3c66deff-c369-49a1-aa36-330a54509212",
+      "name": "(Condition And Rendition of Copy)",
+      "bounding_box": {
+        "x": 183,
+        "y": 419,
+        "w": 178,
+        "h": 18
+      }
+    },
+    {
+      "id": "b98678a3-5579-4126-964c-a1482a843b05",
+      "name": "(Description of Location or Rotary Plan, Brand Category Competition)",
+      "bounding_box": {
+        "x": 133,
+        "y": 490,
+        "w": 357,
+        "h": 22
+      }
+    },
+    {
+      "id": "17871a23-53b5-47b2-975b-0e7c6a66618a",
+      "name": "This is a comparatively easy market to cover. It is less than an hour from Tampa airport. Our bulletins are on every major arterial and in all No quadrants of the area. changes were made. Some minor on- premise blocking and trees were noted, but deemed serious enough for correction. not",
+      "bounding_box": {
+        "x": 54,
+        "y": 511,
+        "w": 598,
+        "h": 63
+      }
+    },
+    {
+      "id": "5cbd8c56-5e2c-4c89-9107-c3ab166de47b",
+      "name": "The only other tobacco in the market was a standing 6 Panel RJR buy currently showing Camel.",
+      "bounding_box": {
+        "x": 52,
+        "y": 582,
+        "w": 600,
+        "h": 33
+      }
+    },
+    {
+      "id": "dece8fa4-410f-40c0-ac21-886da0c0b66f",
+      "name": "(Condition, Structures, Painting Ability, Lighting, Cooperation, etc.)",
+      "bounding_box": {
+        "x": 197,
+        "y": 689,
+        "w": 338,
+        "h": 18
+      }
+    },
+    {
+      "id": "a3c407f5-3508-418a-815c-eb0b116da9ba",
+      "name": "The plant is well maintained and covers all parts of the market. Lamar looks like a good citizen here, keeping a good- looking public and carrying lot operation. doing service, a of local advertisers.",
+      "bounding_box": {
+        "x": 52,
+        "y": 708,
+        "w": 596,
+        "h": 45
+      }
+    }
+  ]
+}

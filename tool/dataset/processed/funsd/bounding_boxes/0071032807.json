@@ -1,0 +1,92 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "0d091897-b976-46fd-a4d5-457810130d8a",
+      "name": "Marketing",
+      "bounding_box": {
+        "x": 197,
+        "y": 295,
+        "w": 70,
+        "h": 17
+      }
+    },
+    {
+      "id": "c31e172c-61a1-4801-a9f9-3b22f936beab",
+      "name": "Mann",
+      "bounding_box": {
+        "x": 168,
+        "y": 270,
+        "w": 35,
+        "h": 13
+      }
+    },
+    {
+      "id": "c4036516-5e96-4409-b6e4-648ef9de9220",
+      "name": "November 15, 1968",
+      "bounding_box": {
+        "x": 547,
+        "y": 141,
+        "w": 127,
+        "h": 18
+      }
+    },
+    {
+      "id": "7b7a0ae7-a74d-4e20-bf6c-486040605c4d",
+      "name": "CST- N- 68",
+      "bounding_box": {
+        "x": 168,
+        "y": 141,
+        "w": 61,
+        "h": 15
+      }
+    },
+    {
+      "id": "6d6a5d46-5691-4acc-910d-1a4947eb4881",
+      "name": "Charcoal Smoking Tobacco",
+      "bounding_box": {
+        "x": 170,
+        "y": 207,
+        "w": 179,
+        "h": 19
+      }
+    },
+    {
+      "id": "3da81806-ff89-4d82-8e28-f4853fcdd20b",
+      "name": "A pipe tobacco containing activated charcoal - must show vapor phase reduction.",
+      "bounding_box": {
+        "x": 200,
+        "y": 353,
+        "w": 455,
+        "h": 49
+      }
+    },
+    {
+      "id": "71057299-e006-4b5d-a8df-1e7909e638ae",
+      "name": "Analytical Section is doing most of the work on vapor phase.",
+      "bounding_box": {
+        "x": 254,
+        "y": 742,
+        "w": 436,
+        "h": 18
+      }
+    },
+    {
+      "id": "dc935170-c585-4d37-be17-860329570012",
+      "name": "PDL and John Brooks preparing charocal impregnated RC.",
+      "bounding_box": {
+        "x": 74,
+        "y": 771,
+        "w": 394,
+        "h": 19
+      }
+    }
+  ]
+}

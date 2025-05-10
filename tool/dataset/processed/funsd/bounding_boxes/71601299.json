@@ -1,0 +1,182 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "8defdf30-aa8c-4aca-b861-e73247be1d6a",
+      "name": "15. 03. 2000",
+      "bounding_box": {
+        "x": 140,
+        "y": 152,
+        "w": 60,
+        "h": 19
+      }
+    },
+    {
+      "id": "b7b82f1d-6160-450e-9e9a-850c3f9c2fee",
+      "name": "BAT Korea",
+      "bounding_box": {
+        "x": 184,
+        "y": 186,
+        "w": 69,
+        "h": 15
+      }
+    },
+    {
+      "id": "d3b8eccb-9e7d-4591-897a-7be82bd0a9d5",
+      "name": "Alberto Marcheggiano Kyu Yeon Hwang",
+      "bounding_box": {
+        "x": 196,
+        "y": 219,
+        "w": 126,
+        "h": 31
+      }
+    },
+    {
+      "id": "4f97afd3-f617-4a41-95fe-9df1ca6b6d8b",
+      "name": "Subi. Jeong",
+      "bounding_box": {
+        "x": 527,
+        "y": 218,
+        "w": 64,
+        "h": 15
+      }
+    },
+    {
+      "id": "a6645f54-e3d9-4f8a-8878-f7cbe5b03db6",
+      "name": "to be assigned by Brown & Williamson USA",
+      "bounding_box": {
+        "x": 180,
+        "y": 265,
+        "w": 245,
+        "h": 17
+      }
+    },
+    {
+      "id": "9e49e2bd-2fe9-44d4-9913-f2768c65aa6e",
+      "name": "Dunhill Lights, CPT",
+      "bounding_box": {
+        "x": 243,
+        "y": 300,
+        "w": 112,
+        "h": 15
+      }
+    },
+    {
+      "id": "cd472208-175f-42a9-8d0f-c867e0151b61",
+      "name": "South Korea",
+      "bounding_box": {
+        "x": 85,
+        "y": 366,
+        "w": 66,
+        "h": 16
+      }
+    },
+    {
+      "id": "cefaa42e-22f2-487b-a547-31f3e1dd3d93",
+      "name": "Dunhill Lights Kent Super Lights Mild 7 This",
+      "bounding_box": {
+        "x": 82,
+        "y": 432,
+        "w": 179,
+        "h": 46
+      }
+    },
+    {
+      "id": "570997e7-b48d-4d31-b812-d32dd383f6d4",
+      "name": "150 Males, 25 ~ 39 years old, ABC+ who live Seoul/ Pusan",
+      "bounding_box": {
+        "x": 250,
+        "y": 528,
+        "w": 319,
+        "h": 17
+      }
+    },
+    {
+      "id": "d21495d2-cee6-495d-8326-04f8eaabf507",
+      "name": "150 Males, 25 ~ 39 years old, ABC+ who live",
+      "bounding_box": {
+        "x": 323,
+        "y": 559,
+        "w": 238,
+        "h": 16
+      }
+    },
+    {
+      "id": "358e63b6-9137-4c3a-8ef8-e5e9746e4303",
+      "name": "250 Males, (100 smokers 25 ~ 29 years old, 150 smokers, 30 ~ 39 years old)",
+      "bounding_box": {
+        "x": 223,
+        "y": 605,
+        "w": 404,
+        "h": 17
+      }
+    },
+    {
+      "id": "dd50ff1c-1229-451b-83cf-23285c83f6a1",
+      "name": "ABC+ who are not rejectors of imported cigarette and live in Seoul/ Pusan",
+      "bounding_box": {
+        "x": 85,
+        "y": 620,
+        "w": 386,
+        "h": 16
+      }
+    },
+    {
+      "id": "4829b5bd-9875-4710-a9e0-2818f258498f",
+      "name": "250 Males (100 smokers, 25 ~ 29 years old, 150",
+      "bounding_box": {
+        "x": 348,
+        "y": 649,
+        "w": 256,
+        "h": 17
+      }
+    },
+    {
+      "id": "50ab52f7-d50e-4dfa-858d-e9f591faeb92",
+      "name": "smokers, 30 ~ 39 years old ABC+ who are not rejectors of imported cigarette and live in Seoul/ Pusan",
+      "bounding_box": {
+        "x": 84,
+        "y": 666,
+        "w": 533,
+        "h": 16
+      }
+    },
+    {
+      "id": "0b259b7d-db3e-443a-ad8a-829d5bbc5bf4",
+      "name": "1999 showed that imported cigarettes are recovering from the 1997 / 1998 economic crisis and we forecasted continuos growth over the company's plan period.",
+      "bounding_box": {
+        "x": 105,
+        "y": 732,
+        "w": 484,
+        "h": 30
+      }
+    },
+    {
+      "id": "ca63e7c2-1b5f-4342-b8c6-48d9eef6924a",
+      "name": "BAT objective is to substantially increase its market share with growth coming primarily from its first priority brand: Dunhill Lights",
+      "bounding_box": {
+        "x": 103,
+        "y": 761,
+        "w": 513,
+        "h": 30
+      }
+    },
+    {
+      "id": "5260146e-0739-446f-95ce-5c0aab6c580c",
+      "name": "To achieve growth we consider fundamental to have a superior product in terms of acceptability among potential source of business as well as for our current franchise",
+      "bounding_box": {
+        "x": 105,
+        "y": 791,
+        "w": 517,
+        "h": 30
+      }
+    }
+  ]
+}

@@ -1,0 +1,292 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "632bfbcb-8f5e-4cbf-a2a3-aef8877dca08",
+      "name": "3,000",
+      "bounding_box": {
+        "x": 407,
+        "y": 237,
+        "w": 34,
+        "h": 13
+      }
+    },
+    {
+      "id": "14111e27-bad0-4b86-8840-e69d44a5d59f",
+      "name": "58,500",
+      "bounding_box": {
+        "x": 500,
+        "y": 234,
+        "w": 40,
+        "h": 13
+      }
+    },
+    {
+      "id": "d4610c47-226e-4604-a6d9-c9e2f7238519",
+      "name": "X",
+      "bounding_box": {
+        "x": 522,
+        "y": 138,
+        "w": 15,
+        "h": 13
+      }
+    },
+    {
+      "id": "b7ad3912-e22f-4fa3-be9d-951dd9a145d2",
+      "name": "X",
+      "bounding_box": {
+        "x": 524,
+        "y": 154,
+        "w": 19,
+        "h": 10
+      }
+    },
+    {
+      "id": "6f5afb2c-268a-49dd-b741-36c21806e564",
+      "name": "Qualatative",
+      "bounding_box": {
+        "x": 419,
+        "y": 431,
+        "w": 66,
+        "h": 18
+      }
+    },
+    {
+      "id": "d284f395-6100-4840-b23a-9241360af3a5",
+      "name": "$",
+      "bounding_box": {
+        "x": 476,
+        "y": 497,
+        "w": 12,
+        "h": 12
+      }
+    },
+    {
+      "id": "be5760c8-a42b-480e-a4b4-4c6726bbbb9b",
+      "name": "2/ 26/ 98",
+      "bounding_box": {
+        "x": 168,
+        "y": 99,
+        "w": 42,
+        "h": 15
+      }
+    },
+    {
+      "id": "525836ff-97bf-40f1-9b40-61d4315c3799",
+      "name": "KOOL Natural Lights Packaging - Round I",
+      "bounding_box": {
+        "x": 169,
+        "y": 109,
+        "w": 226,
+        "h": 18
+      }
+    },
+    {
+      "id": "87d1c1ae-0018-4e88-87d0-f9c46be99847",
+      "name": "1998 -18D",
+      "bounding_box": {
+        "x": 555,
+        "y": 88,
+        "w": 53,
+        "h": 12
+      }
+    },
+    {
+      "id": "23d19863-f23d-4284-be08-5e3105cea264",
+      "name": "Nick Wilkerson",
+      "bounding_box": {
+        "x": 171,
+        "y": 145,
+        "w": 84,
+        "h": 13
+      }
+    },
+    {
+      "id": "350f49dc-e18c-47c3-9bda-ffa79ea50940",
+      "name": "$ 55,500",
+      "bounding_box": {
+        "x": 304,
+        "y": 240,
+        "w": 49,
+        "h": 13
+      }
+    },
+    {
+      "id": "2c2cf397-db64-46e0-be3a-839dd0c4d49b",
+      "name": "2 /26 /98",
+      "bounding_box": {
+        "x": 469,
+        "y": 299,
+        "w": 43,
+        "h": 15
+      }
+    },
+    {
+      "id": "d2e7c87d-6824-4b57-adb4-5d201d7241c7",
+      "name": "w /o 3/ 23 /98",
+      "bounding_box": {
+        "x": 449,
+        "y": 332,
+        "w": 63,
+        "h": 15
+      }
+    },
+    {
+      "id": "5ded8aad-40dd-4034-aef5-24e56888c148",
+      "name": "w/ o 4/ 6/ 98",
+      "bounding_box": {
+        "x": 449,
+        "y": 379,
+        "w": 60,
+        "h": 19
+      }
+    },
+    {
+      "id": "5e0c2dcf-2268-4c67-b595-ee0e4c4f6f43",
+      "name": "$ 58,500",
+      "bounding_box": {
+        "x": 436,
+        "y": 464,
+        "w": 46,
+        "h": 12
+      }
+    },
+    {
+      "id": "a39bca86-cca4-4b01-84e9-2b5c07decb16",
+      "name": "$ 58,500",
+      "bounding_box": {
+        "x": 440,
+        "y": 481,
+        "w": 45,
+        "h": 13
+      }
+    },
+    {
+      "id": "84fb1004-2992-46d0-a235-bcd02f1f30e1",
+      "name": "12 groups",
+      "bounding_box": {
+        "x": 205,
+        "y": 569,
+        "w": 63,
+        "h": 15
+      }
+    },
+    {
+      "id": "93ddae0d-979e-4dad-9b02-0714e50d298a",
+      "name": "Rabid was selected due to the critical timing of the project and the lack of availability of other suppliers",
+      "bounding_box": {
+        "x": 308,
+        "y": 591,
+        "w": 327,
+        "h": 39
+      }
+    },
+    {
+      "id": "0261bf58-f9ac-4417-967c-caf8061332e1",
+      "name": "Senior VP Marketing (to $ 1,000,000)",
+      "bounding_box": {
+        "x": 201,
+        "y": 780,
+        "w": 195,
+        "h": 22
+      }
+    },
+    {
+      "id": "b7397eb8-9fcd-4c68-ae98-132d98234eee",
+      "name": "Director Market Research (to $ 250,000)",
+      "bounding_box": {
+        "x": 198,
+        "y": 753,
+        "w": 193,
+        "h": 19
+      }
+    },
+    {
+      "id": "3b45b005-bf8a-4aab-af18-933b89d09504",
+      "name": "Director Research Development (to $ 250,000)",
+      "bounding_box": {
+        "x": 199,
+        "y": 722,
+        "w": 212,
+        "h": 18
+      }
+    },
+    {
+      "id": "ded8bed7-d86d-43a6-a2bf-83b4399cb43a",
+      "name": "Autos Mgr. Trade & Consumer Research (to $ 100,000)",
+      "bounding_box": {
+        "x": 192,
+        "y": 663,
+        "w": 235,
+        "h": 50
+      }
+    },
+    {
+      "id": "a12ea046-6549-4e61-9113-535857e16fd4",
+      "name": "naid",
+      "bounding_box": {
+        "x": 187,
+        "y": 635,
+        "w": 160,
+        "h": 31
+      }
+    },
+    {
+      "id": "03f0dce7-7f5b-40bc-a81f-206bbf27a07a",
+      "name": "B 90",
+      "bounding_box": {
+        "x": 527,
+        "y": 627,
+        "w": 70,
+        "h": 31
+      }
+    },
+    {
+      "id": "3956a0d3-cf34-4313-8efd-7de1673ab077",
+      "name": "",
+      "bounding_box": {
+        "x": 533,
+        "y": 660,
+        "w": 70,
+        "h": 27
+      }
+    },
+    {
+      "id": "de84de17-790f-473b-b233-df676226c958",
+      "name": "1998 -18D",
+      "bounding_box": {
+        "x": 564,
+        "y": 796,
+        "w": 58,
+        "h": 15
+      }
+    },
+    {
+      "id": "4f97bb41-efc9-4ed7-849d-260f4c074a41",
+      "name": "Project File",
+      "bounding_box": {
+        "x": 139,
+        "y": 868,
+        "w": 58,
+        "h": 15
+      }
+    },
+    {
+      "id": "a1638f23-aa9a-4a7f-9ac3-429f80368a58",
+      "name": "MaDonna Sliker",
+      "bounding_box": {
+        "x": 138,
+        "y": 883,
+        "w": 85,
+        "h": 15
+      }
+    }
+  ]
+}

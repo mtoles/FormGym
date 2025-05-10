@@ -1,0 +1,92 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "d5949fa2-a1ac-4ddc-ad01-c1bdbafd10dd",
+      "name": "1991- 18",
+      "bounding_box": {
+        "x": 275,
+        "y": 179,
+        "w": 47,
+        "h": 15
+      }
+    },
+    {
+      "id": "e6de5900-59b8-41b5-9f9e-4655b0a4c566",
+      "name": "Mary D. Davis",
+      "bounding_box": {
+        "x": 233,
+        "y": 205,
+        "w": 90,
+        "h": 17
+      }
+    },
+    {
+      "id": "5af715ea-f92b-4df2-bc67-521ae179d03a",
+      "name": "Mr. Johnny Pedersen - Gallup",
+      "bounding_box": {
+        "x": 152,
+        "y": 230,
+        "w": 194,
+        "h": 19
+      }
+    },
+    {
+      "id": "58f10ab3-a913-44bf-acd7-30bce211e94c",
+      "name": "2/ 22 by courier",
+      "bounding_box": {
+        "x": 328,
+        "y": 719,
+        "w": 103,
+        "h": 18
+      }
+    },
+    {
+      "id": "fc15cada-69c6-4268-b1b2-4580b04dd493",
+      "name": "3/1/91",
+      "bounding_box": {
+        "x": 325,
+        "y": 740,
+        "w": 45,
+        "h": 18
+      }
+    },
+    {
+      "id": "3b8a6fbc-a97b-4fe2-8300-6cb81a52910e",
+      "name": "Mary D. Davis",
+      "bounding_box": {
+        "x": 170,
+        "y": 628,
+        "w": 92,
+        "h": 16
+      }
+    },
+    {
+      "id": "b433140d-418c-45c0-ba19-46ffe4097f25",
+      "name": "1- 502- 568- 8092",
+      "bounding_box": {
+        "x": 249,
+        "y": 656,
+        "w": 96,
+        "h": 15
+      }
+    },
+    {
+      "id": "5de90515-1361-480e-a59f-9efa1c876141",
+      "name": "1- 502- 568 8092",
+      "bounding_box": {
+        "x": 450,
+        "y": 466,
+        "w": 96,
+        "h": 16
+      }
+    }
+  ]
+}

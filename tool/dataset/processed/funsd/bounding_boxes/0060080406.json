@@ -1,0 +1,92 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "545efaac-1752-4a14-8b9e-15617b826a07",
+      "name": "5060",
+      "bounding_box": {
+        "x": 518,
+        "y": 849,
+        "w": 41,
+        "h": 15
+      }
+    },
+    {
+      "id": "41f397f7-f494-49af-9060-dd4f13e03a19",
+      "name": "BULL DURHAM Filter Box",
+      "bounding_box": {
+        "x": 57,
+        "y": 191,
+        "w": 198,
+        "h": 19
+      }
+    },
+    {
+      "id": "f4cb95c3-df8f-4e1d-9e3e-a326e3eedcc2",
+      "name": "BULL DURHAM Lights BOX",
+      "bounding_box": {
+        "x": 57,
+        "y": 207,
+        "w": 200,
+        "h": 15
+      }
+    },
+    {
+      "id": "5cc04bc8-878c-4ef0-a9a0-49420e911353",
+      "name": "COLLATERAL MERCHANDISING MATERIALS",
+      "bounding_box": {
+        "x": 506,
+        "y": 191,
+        "w": 199,
+        "h": 30
+      }
+    },
+    {
+      "id": "7e7f6803-1694-46d3-be32-d49772b1cbae",
+      "name": "$ 10.000.",
+      "bounding_box": {
+        "x": 304,
+        "y": 654,
+        "w": 104,
+        "h": 14
+      }
+    },
+    {
+      "id": "402c5452-cb5a-4127-b901-6bc851472a22",
+      "name": "$ 10.000.",
+      "bounding_box": {
+        "x": 307,
+        "y": 666,
+        "w": 103,
+        "h": 15
+      }
+    },
+    {
+      "id": "42a714ca-cadc-49ac-8864-64b81d588da6",
+      "name": "$ 15,000.",
+      "bounding_box": {
+        "x": 306,
+        "y": 677,
+        "w": 105,
+        "h": 18
+      }
+    },
+    {
+      "id": "c036e92c-7f66-450c-8295-b763d2500c87",
+      "name": "10- 320",
+      "bounding_box": {
+        "x": 547,
+        "y": 792,
+        "w": 59,
+        "h": 20
+      }
+    }
+  ]
+}

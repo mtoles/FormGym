@@ -1,0 +1,132 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "49680490-38d2-44ed-83ae-6fdbda7022ce",
+      "name": "BTF",
+      "bounding_box": {
+        "x": 248,
+        "y": 271,
+        "w": 32,
+        "h": 18
+      }
+    },
+    {
+      "id": "7c8bc7ad-ce18-448e-be19-c6adde9aee8a",
+      "name": "-",
+      "bounding_box": {
+        "x": 249,
+        "y": 321,
+        "w": 15,
+        "h": 8
+      }
+    },
+    {
+      "id": "d4f5a5a1-e5c6-4610-a5ea-ee5e74375d79",
+      "name": "Files",
+      "bounding_box": {
+        "x": 100,
+        "y": 86,
+        "w": 45,
+        "h": 18
+      }
+    },
+    {
+      "id": "53075a49-3d03-425b-86a6-62a5a8868a20",
+      "name": "ODL",
+      "bounding_box": {
+        "x": 88,
+        "y": 826,
+        "w": 32,
+        "h": 17
+      }
+    },
+    {
+      "id": "6719f0e7-b322-4d80-b427-52a0ad74a971",
+      "name": "September 16, 1980",
+      "bounding_box": {
+        "x": 527,
+        "y": 269,
+        "w": 158,
+        "h": 23
+      }
+    },
+    {
+      "id": "797e1214-dc6f-488b-acf8-8c2760462a12",
+      "name": "E. P. Barbee",
+      "bounding_box": {
+        "x": 249,
+        "y": 355,
+        "w": 104,
+        "h": 22
+      }
+    },
+    {
+      "id": "636a855b-578c-4a5f-b225-2231c7f03470",
+      "name": "R. S. Sprinkle, III",
+      "bounding_box": {
+        "x": 248,
+        "y": 402,
+        "w": 162,
+        "h": 18
+      }
+    },
+    {
+      "id": "208a54bc-7c2c-4a46-8f7f-78342dcee777",
+      "name": "To develop cigarette Cigarette to utilize a filter tip with longitudinal grooves from the mouth end to the tobacco end in con- junction with perforated tipping paper.",
+      "bounding_box": {
+        "x": 249,
+        "y": 444,
+        "w": 394,
+        "h": 133
+      }
+    },
+    {
+      "id": "0d569fde-5f5c-4807-8588-193c3a66b8f7",
+      "name": "J. E. Mann, Jr.",
+      "bounding_box": {
+        "x": 251,
+        "y": 613,
+        "w": 126,
+        "h": 22
+      }
+    },
+    {
+      "id": "d95db973-9f75-44fb-ac07-33cacacb75ca",
+      "name": "D. E. Cawthon",
+      "bounding_box": {
+        "x": 249,
+        "y": 643,
+        "w": 116,
+        "h": 20
+      }
+    },
+    {
+      "id": "67405c9b-3363-413f-a7c1-4209cdeb926b",
+      "name": "R. S. Sprinkle, III",
+      "bounding_box": {
+        "x": 405,
+        "y": 771,
+        "w": 233,
+        "h": 73
+      }
+    },
+    {
+      "id": "c21b4019-deb5-4aac-96be-34da8eec0de0",
+      "name": "BMC/RMI/EPB JEM/DEC PRC/DRB",
+      "bounding_box": {
+        "x": 98,
+        "y": 855,
+        "w": 98,
+        "h": 47
+      }
+    }
+  ]
+}

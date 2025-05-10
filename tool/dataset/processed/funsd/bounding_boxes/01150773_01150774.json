@@ -1,0 +1,102 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "40211c7b-d10a-4547-a8d8-c104f1dfb242",
+      "name": "803E",
+      "bounding_box": {
+        "x": 257,
+        "y": 549,
+        "w": 45,
+        "h": 20
+      }
+    },
+    {
+      "id": "ccfeb8a4-b884-40c1-8970-acfc1ed7f7d1",
+      "name": "COVLING",
+      "bounding_box": {
+        "x": 372,
+        "y": 284,
+        "w": 47,
+        "h": 11
+      }
+    },
+    {
+      "id": "7c055c34-92c7-460e-b8ae-e58a54e0fc13",
+      "name": "44 71 495 5655",
+      "bounding_box": {
+        "x": 154,
+        "y": 284,
+        "w": 58,
+        "h": 11
+      }
+    },
+    {
+      "id": "1d64956d-2e26-43d7-a5a8-ef9db86300e1",
+      "name": "89- 193 COVLING WSH",
+      "bounding_box": {
+        "x": 345,
+        "y": 270,
+        "w": 100,
+        "h": 13
+      }
+    },
+    {
+      "id": "36816d38-264f-4d9c-a81d-9ad186daabf0",
+      "name": "(202) 662-6291",
+      "bounding_box": {
+        "x": 374,
+        "y": 257,
+        "w": 52,
+        "h": 13
+      }
+    },
+    {
+      "id": "e7e1aa86-e814-4cf4-bdf2-c6ca382fe24c",
+      "name": "32 512 7890",
+      "bounding_box": {
+        "x": 606,
+        "y": 282,
+        "w": 53,
+        "h": 14
+      }
+    },
+    {
+      "id": "f9f5c89b-326c-4b1b-ad09-41899e553a06",
+      "name": "January 15, 1997",
+      "bounding_box": {
+        "x": 256,
+        "y": 420,
+        "w": 170,
+        "h": 29
+      }
+    },
+    {
+      "id": "44603130-c8e4-4beb-b367-971f985cbbbb",
+      "name": "Mark Berlind",
+      "bounding_box": {
+        "x": 258,
+        "y": 465,
+        "w": 127,
+        "h": 22
+      }
+    },
+    {
+      "id": "72d2125e-550d-4605-9077-9fe41ae94d94",
+      "name": "David H. Remes",
+      "bounding_box": {
+        "x": 253,
+        "y": 503,
+        "w": 153,
+        "h": 25
+      }
+    }
+  ]
+}

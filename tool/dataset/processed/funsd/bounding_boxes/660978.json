@@ -1,0 +1,122 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "ad448539-c5be-4857-b105-d4552a0b8618",
+      "name": "mg",
+      "bounding_box": {
+        "x": 115,
+        "y": 506,
+        "w": 15,
+        "h": 11
+      }
+    },
+    {
+      "id": "c53285ec-5fbf-4a05-bcac-b8dbaff37b85",
+      "name": "Telephone",
+      "bounding_box": {
+        "x": 437,
+        "y": 141,
+        "w": 64,
+        "h": 17
+      }
+    },
+    {
+      "id": "08a4c650-1dfb-4725-8bf3-8406255f9cfd",
+      "name": "Viceroy",
+      "bounding_box": {
+        "x": 186,
+        "y": 135,
+        "w": 50,
+        "h": 15
+      }
+    },
+    {
+      "id": "3c21c517-1bd9-4f23-ace5-cf9d3713c91c",
+      "name": "Brown & Williamson",
+      "bounding_box": {
+        "x": 170,
+        "y": 106,
+        "w": 129,
+        "h": 17
+      }
+    },
+    {
+      "id": "72bdaa43-9e20-46fb-842a-0b101c619f7e",
+      "name": "1/ 19/ 82",
+      "bounding_box": {
+        "x": 437,
+        "y": 113,
+        "w": 50,
+        "h": 17
+      }
+    },
+    {
+      "id": "82f66c87-2220-4294-b40d-800589f3b3a8",
+      "name": "482 -2 R1",
+      "bounding_box": {
+        "x": 550,
+        "y": 116,
+        "w": 56,
+        "h": 16
+      }
+    },
+    {
+      "id": "2841eb31-9c28-418d-9f57-13affc0b9c62",
+      "name": "(For the client)",
+      "bounding_box": {
+        "x": 166,
+        "y": 163,
+        "w": 85,
+        "h": 17
+      }
+    },
+    {
+      "id": "28ff4f62-94a4-462d-9cfd-2a94415f85ad",
+      "name": "T. Parrack",
+      "bounding_box": {
+        "x": 101,
+        "y": 182,
+        "w": 71,
+        "h": 15
+      }
+    },
+    {
+      "id": "6b839426-c16c-4edc-9c55-c9ffad127c76",
+      "name": "2/ 17/ 82",
+      "bounding_box": {
+        "x": 476,
+        "y": 170,
+        "w": 53,
+        "h": 17
+      }
+    },
+    {
+      "id": "07aee225-184a-422e-a0b6-6248567abc6f",
+      "name": "P. Hendricks",
+      "bounding_box": {
+        "x": 538,
+        "y": 306,
+        "w": 86,
+        "h": 17
+      }
+    },
+    {
+      "id": "25bcd714-a304-4c3f-bdd6-1a1858796df1",
+      "name": "R. Schoenfein S. Dammers P. Hendricks",
+      "bounding_box": {
+        "x": 127,
+        "y": 531,
+        "w": 92,
+        "h": 43
+      }
+    }
+  ]
+}

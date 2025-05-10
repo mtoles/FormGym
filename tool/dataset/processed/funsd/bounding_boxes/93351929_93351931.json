@@ -1,0 +1,222 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 779,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "d7c11c7d-5ee2-4ba3-96b5-e46ea0684c69",
+      "name": "September",
+      "bounding_box": {
+        "x": 310,
+        "y": 356,
+        "w": 66,
+        "h": 14
+      }
+    },
+    {
+      "id": "e0cc124a-139b-4fa0-bacf-9a62933e9c8e",
+      "name": "Pack",
+      "bounding_box": {
+        "x": 307,
+        "y": 615,
+        "w": 32,
+        "h": 14
+      }
+    },
+    {
+      "id": "5d8c164d-8b6f-4bb0-8f63-574a26aa8e1c",
+      "name": "Rebecca",
+      "bounding_box": {
+        "x": 307,
+        "y": 648,
+        "w": 53,
+        "h": 14
+      }
+    },
+    {
+      "id": "5a7ecb42-185d-4fd7-b404-4364a2f63f62",
+      "name": "JESSICA ARATO",
+      "bounding_box": {
+        "x": 138,
+        "y": 112,
+        "w": 108,
+        "h": 15
+      }
+    },
+    {
+      "id": "2e728687-4f67-4b28-8827-3b85bd109445",
+      "name": "VINCE LOSITO",
+      "bounding_box": {
+        "x": 127,
+        "y": 145,
+        "w": 93,
+        "h": 15
+      }
+    },
+    {
+      "id": "2820b03f-b85c-43b8-b82e-9692fe4a9db1",
+      "name": "K. AUGUSTYN. L. GIORDANO, M. McGLYNN, S. RAPISARLDI",
+      "bounding_box": {
+        "x": 127,
+        "y": 180,
+        "w": 377,
+        "h": 17
+      }
+    },
+    {
+      "id": "697c0653-5288-4c5f-97e0-c68ce52ad027",
+      "name": "3 %",
+      "bounding_box": {
+        "x": 568,
+        "y": 849,
+        "w": 41,
+        "h": 22
+      }
+    },
+    {
+      "id": "9a4644a5-e998-4c29-b1a8-8508ca3340e1",
+      "name": "414",
+      "bounding_box": {
+        "x": 553,
+        "y": 832,
+        "w": 34,
+        "h": 17
+      }
+    },
+    {
+      "id": "b866c59b-7094-4d82-b59b-9089c8fa5e07",
+      "name": "221782",
+      "bounding_box": {
+        "x": 527,
+        "y": 807,
+        "w": 89,
+        "h": 24
+      }
+    },
+    {
+      "id": "a4ed7a80-5430-4341-9815-2c32089b8834",
+      "name": "May 14, 1992",
+      "bounding_box": {
+        "x": 306,
+        "y": 715,
+        "w": 83,
+        "h": 16
+      }
+    },
+    {
+      "id": "d90aef44-fb98-4b46-91a7-aa5033b7246f",
+      "name": "Free Pack",
+      "bounding_box": {
+        "x": 307,
+        "y": 578,
+        "w": 63,
+        "h": 17
+      }
+    },
+    {
+      "id": "9de1806e-5203-4348-b982-4786c216f498",
+      "name": "Tier",
+      "bounding_box": {
+        "x": 309,
+        "y": 545,
+        "w": 31,
+        "h": 15
+      }
+    },
+    {
+      "id": "a526f277-d4b6-4540-bb48-9f7b3ec25159",
+      "name": "1, 221, 000",
+      "bounding_box": {
+        "x": 309,
+        "y": 511,
+        "w": 59,
+        "h": 15
+      }
+    },
+    {
+      "id": "f074a0d6-49a7-4259-8409-1c2a6213fc2e",
+      "name": "December 31, 1992",
+      "bounding_box": {
+        "x": 307,
+        "y": 459,
+        "w": 119,
+        "h": 15
+      }
+    },
+    {
+      "id": "03b31bd7-cfa6-43dc-9c65-4fa04bddc0f8",
+      "name": "September 1, 1992",
+      "bounding_box": {
+        "x": 309,
+        "y": 425,
+        "w": 112,
+        "h": 15
+      }
+    },
+    {
+      "id": "ac9b2421-2cae-4c72-96be-0be59d5ff34a",
+      "name": "P 4/ C;",
+      "bounding_box": {
+        "x": 378,
+        "y": 388,
+        "w": 41,
+        "h": 20
+      }
+    },
+    {
+      "id": "e9430db0-42ee-46dc-8bda-e18299460182",
+      "name": "1/ 2 B/ W",
+      "bounding_box": {
+        "x": 500,
+        "y": 388,
+        "w": 49,
+        "h": 19
+      }
+    },
+    {
+      "id": "69bbd2a0-b36e-4401-bc05-3edf94e37f95",
+      "name": "Village Voice",
+      "bounding_box": {
+        "x": 383,
+        "y": 320,
+        "w": 78,
+        "h": 16
+      }
+    },
+    {
+      "id": "8a4043a8-3132-47a8-ab3f-60559dad7270",
+      "name": "All Kent Family Packings",
+      "bounding_box": {
+        "x": 309,
+        "y": 253,
+        "w": 146,
+        "h": 15
+      }
+    },
+    {
+      "id": "4c918d42-8827-4f47-9a48-fefae0c8ac78",
+      "name": "People, Rolling Stone, Cosmopolitan,",
+      "bounding_box": {
+        "x": 383,
+        "y": 285,
+        "w": 222,
+        "h": 18
+      }
+    },
+    {
+      "id": "783ef1eb-63f6-4cee-aa05-18bf4407c75b",
+      "name": "Mademoiselle, New York Magazine",
+      "bounding_box": {
+        "x": 309,
+        "y": 304,
+        "w": 208,
+        "h": 15
+      }
+    }
+  ]
+}

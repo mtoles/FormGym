@@ -1,0 +1,152 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "8e15cc17-6e9e-449b-b83c-8fcf74233414",
+      "name": "x",
+      "bounding_box": {
+        "x": 112,
+        "y": 205,
+        "w": 15,
+        "h": 15
+      }
+    },
+    {
+      "id": "9df48a52-7dd7-44c2-9d3b-b1752f7ceb34",
+      "name": "7970",
+      "bounding_box": {
+        "x": 207,
+        "y": 127,
+        "w": 29,
+        "h": 11
+      }
+    },
+    {
+      "id": "f89c0b0c-6060-4f1c-bb86-7ef1a8327ca3",
+      "name": "x",
+      "bounding_box": {
+        "x": 271,
+        "y": 176,
+        "w": 18,
+        "h": 14
+      }
+    },
+    {
+      "id": "b3a8602b-38b7-42b3-b78a-641954b7060d",
+      "name": "X",
+      "bounding_box": {
+        "x": 462,
+        "y": 189,
+        "w": 14,
+        "h": 13
+      }
+    },
+    {
+      "id": "b4421d7b-ea9f-4d48-a345-6187923c1f61",
+      "name": "4/20/98",
+      "bounding_box": {
+        "x": 480,
+        "y": 122,
+        "w": 43,
+        "h": 15
+      }
+    },
+    {
+      "id": "af0bf8ac-d1d8-4342-8167-a1769a6c78eb",
+      "name": "4/17/98",
+      "bounding_box": {
+        "x": 482,
+        "y": 102,
+        "w": 46,
+        "h": 15
+      }
+    },
+    {
+      "id": "41a12b20-1304-4f88-af7e-677ef8ef68ab",
+      "name": "Karl Hutchison",
+      "bounding_box": {
+        "x": 200,
+        "y": 73,
+        "w": 94,
+        "h": 15
+      }
+    },
+    {
+      "id": "89c66904-7e17-4ddd-9582-e4f3de18a49c",
+      "name": "(assigned by MIS)",
+      "bounding_box": {
+        "x": 485,
+        "y": 70,
+        "w": 88,
+        "h": 15
+      }
+    },
+    {
+      "id": "a01d580a-3803-43d4-b16e-255f0f45d097",
+      "name": "BD & SS",
+      "bounding_box": {
+        "x": 196,
+        "y": 108,
+        "w": 55,
+        "h": 14
+      }
+    },
+    {
+      "id": "ee38c57c-50c8-4dca-8d6b-803365d6a545",
+      "name": "Please run job FRMRXUM2 for GPC, Misty, and Kool against file b:\\common\\khutchi\\r892unm.lst. Please place output in the same directory.",
+      "bounding_box": {
+        "x": 109,
+        "y": 318,
+        "w": 497,
+        "h": 34
+      }
+    },
+    {
+      "id": "f2002dde-95d1-499d-8153-efe661433daa",
+      "name": "Calculation of 1997 STR volumes for these brands for allocation of Period 2A budgets.",
+      "bounding_box": {
+        "x": 109,
+        "y": 430,
+        "w": 427,
+        "h": 17
+      }
+    },
+    {
+      "id": "1dbec339-93e9-4057-aa8a-0acc0b59995c",
+      "name": "Karl Hutchison",
+      "bounding_box": {
+        "x": 309,
+        "y": 520,
+        "w": 84,
+        "h": 17
+      }
+    },
+    {
+      "id": "7a3b5156-73e0-4a0e-ac45-b043bc4fe0b5",
+      "name": "MUST BE AUTHORIZED BY THE DEPARTMENT DIRECTOR OR THE",
+      "bounding_box": {
+        "x": 270,
+        "y": 777,
+        "w": 357,
+        "h": 20
+      }
+    },
+    {
+      "id": "a11b70b2-5c10-4c7e-a017-b5bf37675b4f",
+      "name": "DESIGNATED SYSTEM OWNER BEFORE SUBMISSION TO THE MIS CLIENT SYSTEMS MANAGER.",
+      "bounding_box": {
+        "x": 101,
+        "y": 793,
+        "w": 520,
+        "h": 17
+      }
+    }
+  ]
+}

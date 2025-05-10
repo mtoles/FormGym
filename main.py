@@ -33,8 +33,34 @@ def get_relevant_user_features(doc_state: DocState) -> set:
     referenced_features = set()
     for field in doc_state.fields:
         field_cls = field["field"]
-        src_code = inspect.getsource(field_cls)
-        referenced_features_in_field = _get_referenced_features(src_code)
+        try:
+            # Try to get source code for regular classes
+            src_code = inspect.getsource(field_cls)
+            referenced_features_in_field = _get_referenced_features(src_code)
+        except (OSError, TypeError):
+            # For dynamically created classes, get features from get_profile_info implementation
+            if hasattr(field_cls, 'get_profile_info'):
+                # Get the implementation of get_profile_info
+                get_profile_info = field_cls.get_profile_info.__func__
+                try:
+                    src_code = inspect.getsource(get_profile_info)
+                    referenced_features_in_field = _get_referenced_features(src_code)
+                except (OSError, TypeError):
+                    # If we can't get source code, try to get features from the class name
+                    class_name = field_cls.__name__
+                    # Remove form name suffix if present (e.g. "FieldName_form1" -> "FieldName")
+                    if '_' in class_name:
+                        class_name = class_name.rsplit('_', 1)[0]
+                    # Add both the full class name and the base name as features
+                    referenced_features_in_field = {class_name, field_cls.__name__}
+            else:
+                # If no get_profile_info method, use the class name
+                class_name = field_cls.__name__
+                # Remove form name suffix if present (e.g. "FieldName_form1" -> "FieldName")
+                if '_' in class_name:
+                    class_name = class_name.rsplit('_', 1)[0]
+                referenced_features_in_field = {class_name}
+        
         assert referenced_features_in_field, f"No features referenced in {field_cls}"
         referenced_features.update(referenced_features_in_field)
 
@@ -116,16 +142,23 @@ if __name__ == "__main__":
     for i, fid in enumerate(file_ids):
         if args.use_dynamic_classes:
             png_path = f"{dataset_path}/images/{fid}.png"
-            annot_path = f"{dataset_path}/annotations/{fid}_processed.json"
+            bounding_boxes_path = f"tool/dataset/processed/{args.dataset_name}/bounding_boxes/{fid}.json"
+            annot_path = f"tool/dataset/processed/{args.dataset_name}/annotations/{fid}_processed.json"
+            targets_path = f"tool/dataset/processed/{args.dataset_name}/targets/{fid}_targets.json"
+            # Get form name from the file ID (assuming format like "formname_0_0")
+            form_name = fid.split('_')[0]
+            annots = annotations.read_annotations_dynamic(bounding_boxes_path, annot_path, form_name)
         else:
             png_path = f"pngs/{fid}.png"
             annot_path = f"annotations/{fid}.json"
+            targets_path = f"targets/{fid}_targets.json"
+            annots = annotations.read_annotations(annot_path)
             
         print(f"Processing file: {png_path}")
 
         blank_img = Image.open(png_path).convert("RGB")
-        annots = annotations.read_annotations(annot_path)
-        targets = annotations.read_targets(f"targets/{fid}_targets.json")[
+        
+        targets = annotations.read_targets(targets_path)[
             "selected_ids"
         ]
         doc_state = DocState(annots, blank_img=blank_img, doc_id=fid)
@@ -134,8 +167,6 @@ if __name__ == "__main__":
         form_name = fid.split('_')[0]
         
         if args.use_dynamic_classes:
-            # Create user profile using dynamic classes for this form
-            user_profile = FormUserProfile(form_name=form_name)
             # Get all form fields for this form from the dynamic registry
             form_fields = []
             for field_name, field_class in form_field_types.FormFieldMeta.registry.items():
@@ -147,6 +178,11 @@ if __name__ == "__main__":
                     })
             # Update doc_state with dynamic form fields
             doc_state.fields = form_fields
+            
+            # Get relevant features and create user profile
+            relevant_user_features = get_relevant_user_features(doc_state)
+            user_profile = FormUserProfile(form_name=form_name)
+            user_profile.relevant_features = relevant_user_features
         else:
             # Original behavior
             relevant_user_features = get_relevant_user_features(doc_state)

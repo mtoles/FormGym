@@ -1,0 +1,132 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "6057d76b-8149-4559-a030-3f1a83c55bc2",
+      "name": "(305) 400 6 06",
+      "bounding_box": {
+        "x": 126,
+        "y": 179,
+        "w": 99,
+        "h": 13
+      }
+    },
+    {
+      "id": "04df4343-16af-4667-bd21-648047b9ca48",
+      "name": "305 400- 6107",
+      "bounding_box": {
+        "x": 359,
+        "y": 256,
+        "w": 95,
+        "h": 17
+      }
+    },
+    {
+      "id": "7964a25f-3b6b-4578-b57b-6503d4bb91e1",
+      "name": "Kevin Narko",
+      "bounding_box": {
+        "x": 161,
+        "y": 286,
+        "w": 73,
+        "h": 18
+      }
+    },
+    {
+      "id": "7d079205-c63b-4a1b-9e0b-9ea90ea61a57",
+      "name": "10/ 13/ 99",
+      "bounding_box": {
+        "x": 161,
+        "y": 335,
+        "w": 52,
+        "h": 14
+      }
+    },
+    {
+      "id": "c0d91fde-a390-47e2-b843-7c56e7ffe642",
+      "name": "4162/ 158",
+      "bounding_box": {
+        "x": 468,
+        "y": 310,
+        "w": 55,
+        "h": 14
+      }
+    },
+    {
+      "id": "01f3ace6-c13c-4a34-9d6d-711f83fa6664",
+      "name": "John Mulderig",
+      "bounding_box": {
+        "x": 108,
+        "y": 430,
+        "w": 85,
+        "h": 19
+      }
+    },
+    {
+      "id": "a1392b85-945b-483c-a0b2-a339e8f9cae8",
+      "name": "Gregory Little",
+      "bounding_box": {
+        "x": 109,
+        "y": 458,
+        "w": 83,
+        "h": 18
+      }
+    },
+    {
+      "id": "3df40891-e5ae-4439-934f-b3bdccc03d0f",
+      "name": "Philip Morris",
+      "bounding_box": {
+        "x": 235,
+        "y": 430,
+        "w": 80,
+        "h": 20
+      }
+    },
+    {
+      "id": "eaa07a15-5696-4e0f-bb7b-9ce72c201fdd",
+      "name": "Philip Morris",
+      "bounding_box": {
+        "x": 236,
+        "y": 459,
+        "w": 77,
+        "h": 20
+      }
+    },
+    {
+      "id": "74b1275c-3acf-498a-9b3c-8c1939448c9f",
+      "name": "917 -663 -5796",
+      "bounding_box": {
+        "x": 399,
+        "y": 432,
+        "w": 83,
+        "h": 17
+      }
+    },
+    {
+      "id": "4f0dd008-6064-4eef-9ca6-c22774b8f603",
+      "name": "917- 663 5979",
+      "bounding_box": {
+        "x": 397,
+        "y": 461,
+        "w": 84,
+        "h": 15
+      }
+    },
+    {
+      "id": "6bf0028f-2d07-409c-9487-4867245936cb",
+      "name": "917- 663 3056",
+      "bounding_box": {
+        "x": 514,
+        "y": 432,
+        "w": 82,
+        "h": 15
+      }
+    }
+  ]
+}

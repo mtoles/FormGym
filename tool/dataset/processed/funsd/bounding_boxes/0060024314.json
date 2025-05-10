@@ -1,0 +1,152 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "af904d3e-a8e3-40ed-86c8-160fdbf5f36d",
+      "name": "Organic",
+      "bounding_box": {
+        "x": 381,
+        "y": 324,
+        "w": 36,
+        "h": 13
+      }
+    },
+    {
+      "id": "de2fc1b6-d311-4260-ae4b-b0682e654d8b",
+      "name": "Yes",
+      "bounding_box": {
+        "x": 376,
+        "y": 471,
+        "w": 20,
+        "h": 11
+      }
+    },
+    {
+      "id": "42e08f51-1d75-4651-9bfb-3b824c17ef54",
+      "name": "74880",
+      "bounding_box": {
+        "x": 295,
+        "y": 568,
+        "w": 34,
+        "h": 15
+      }
+    },
+    {
+      "id": "7f2a3411-48b0-4d68-8160-fd90b13ca57c",
+      "name": "6240",
+      "bounding_box": {
+        "x": 309,
+        "y": 596,
+        "w": 28,
+        "h": 10
+      }
+    },
+    {
+      "id": "c826bd52-ee9b-4340-b805-7611107ee9c9",
+      "name": "0001",
+      "bounding_box": {
+        "x": 612,
+        "y": 175,
+        "w": 28,
+        "h": 15
+      }
+    },
+    {
+      "id": "6b123124-ff52-4698-b78f-026f91850186",
+      "name": "The American Tobacco Company",
+      "bounding_box": {
+        "x": 161,
+        "y": 176,
+        "w": 185,
+        "h": 17
+      }
+    },
+    {
+      "id": "91a97761-0e11-4653-bb87-c1cf30b8ce28",
+      "name": "Fuller G2315 DC",
+      "bounding_box": {
+        "x": 295,
+        "y": 256,
+        "w": 100,
+        "h": 15
+      }
+    },
+    {
+      "id": "8f32043f-80be-441d-90eb-ff593d717700",
+      "name": "Liquid Adhesive",
+      "bounding_box": {
+        "x": 196,
+        "y": 286,
+        "w": 101,
+        "h": 16
+      }
+    },
+    {
+      "id": "f34554d2-c4ab-4070-b007-c9ecba5bbbc1",
+      "name": "Vinyl Acetate",
+      "bounding_box": {
+        "x": 267,
+        "y": 362,
+        "w": 85,
+        "h": 16
+      }
+    },
+    {
+      "id": "860757bd-5974-4adb-b17b-6d9153af1238",
+      "name": ".5%",
+      "bounding_box": {
+        "x": 623,
+        "y": 391,
+        "w": 42,
+        "h": 31
+      }
+    },
+    {
+      "id": "3feb21fc-e9c4-4359-ab71-a16550b61f89",
+      "name": "",
+      "bounding_box": {
+        "x": 584,
+        "y": 441,
+        "w": 81,
+        "h": 15
+      }
+    },
+    {
+      "id": "efb5091f-8ee7-4aa1-b95f-14cf2b8b34cf",
+      "name": "H. B. Fuller Company",
+      "bounding_box": {
+        "x": 237,
+        "y": 439,
+        "w": 133,
+        "h": 15
+      }
+    },
+    {
+      "id": "d032052f-ed20-4e90-994f-c2d03a9063cb",
+      "name": "108 -05 -4",
+      "bounding_box": {
+        "x": 197,
+        "y": 399,
+        "w": 52,
+        "h": 15
+      }
+    },
+    {
+      "id": "ee1b56a7-5af2-4ce6-9d7a-e319045273ec",
+      "name": "label adhesive",
+      "bounding_box": {
+        "x": 289,
+        "y": 648,
+        "w": 89,
+        "h": 15
+      }
+    }
+  ]
+}

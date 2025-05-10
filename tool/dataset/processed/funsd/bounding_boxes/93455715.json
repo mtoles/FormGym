@@ -1,0 +1,282 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 777,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "329ebe90-7c61-40cc-8b79-876f45aaabf0",
+      "name": "4/7/88",
+      "bounding_box": {
+        "x": 118,
+        "y": 184,
+        "w": 55,
+        "h": 16
+      }
+    },
+    {
+      "id": "04096308-1157-4147-a75a-a80dc7c84436",
+      "name": "R. E. Klein, Regional Sales Manager, Cleveland, OH",
+      "bounding_box": {
+        "x": 184,
+        "y": 136,
+        "w": 443,
+        "h": 22
+      }
+    },
+    {
+      "id": "76fb2e46-12f4-4c2b-ae90-769029bd25ac",
+      "name": "Best Cigarette Co., Mentor, OH",
+      "bounding_box": {
+        "x": 247,
+        "y": 225,
+        "w": 270,
+        "h": 21
+      }
+    },
+    {
+      "id": "24d04df8-2ad5-4dce-bae8-b180cfdbc2ab",
+      "name": "R. J. REYNOLDS AND PHILIP MORRIS",
+      "bounding_box": {
+        "x": 193,
+        "y": 271,
+        "w": 283,
+        "h": 18
+      }
+    },
+    {
+      "id": "e3cf5f94-fdcb-4184-9be2-c787a042867c",
+      "name": "SEE ATTACHED CORRESPONDENCE REGARDING:",
+      "bounding_box": {
+        "x": 207,
+        "y": 364,
+        "w": 340,
+        "h": 16
+      }
+    },
+    {
+      "id": "a5ceb1cb-4d4e-4fde-bbe9-7d63557cf97c",
+      "name": "- R. J. REYNOLDS SPRING DIRECT ACCOUNT INCENTIVE PROGRAM",
+      "bounding_box": {
+        "x": 187,
+        "y": 391,
+        "w": 500,
+        "h": 18
+      }
+    },
+    {
+      "id": "137242f5-c5f6-47f0-814d-256b867482fa",
+      "name": "- Philip Morris- SPECIAL PROMOTIONS ON MAKLBORO AND CAMBRIDGE CIGARETTES",
+      "bounding_box": {
+        "x": 187,
+        "y": 418,
+        "w": 467,
+        "h": 48
+      }
+    },
+    {
+      "id": "9887226c-cce3-4baf-98b3-abacc8d74c79",
+      "name": "Mr. J. R. Ave",
+      "bounding_box": {
+        "x": 102,
+        "y": 720,
+        "w": 100,
+        "h": 17
+      }
+    },
+    {
+      "id": "cea70ff9-a2f7-445b-b1c5-e7fc5fd1fd67",
+      "name": "Mr. T. L. Achey",
+      "bounding_box": {
+        "x": 283,
+        "y": 722,
+        "w": 115,
+        "h": 18
+      }
+    },
+    {
+      "id": "28c36948-f42b-4157-b2a9-5f4ed4e2c7dd",
+      "name": "P. J. McCann",
+      "bounding_box": {
+        "x": 283,
+        "y": 737,
+        "w": 124,
+        "h": 17
+      }
+    },
+    {
+      "id": "d34b73a1-ae44-48c7-9b26-f02aa9d644c4",
+      "name": "Mr. A. J. Giacoio",
+      "bounding_box": {
+        "x": 281,
+        "y": 751,
+        "w": 132,
+        "h": 18
+      }
+    },
+    {
+      "id": "44d7a7d5-7281-4ca0-b179-23e830733fc9",
+      "name": "Mr. L. H. Kersh",
+      "bounding_box": {
+        "x": 283,
+        "y": 766,
+        "w": 112,
+        "h": 16
+      }
+    },
+    {
+      "id": "450a7b46-a7c5-4598-bdad-786ce255b0f8",
+      "name": "Mr. R. G. Ryan",
+      "bounding_box": {
+        "x": 284,
+        "y": 781,
+        "w": 105,
+        "h": 15
+      }
+    },
+    {
+      "id": "f74c7ab2-b625-4063-bcc6-9ad2f6b24e8d",
+      "name": "Mr. P. A. Lawless",
+      "bounding_box": {
+        "x": 281,
+        "y": 793,
+        "w": 128,
+        "h": 18
+      }
+    },
+    {
+      "id": "55376534-d476-494d-8e7f-dae1113d0faf",
+      "name": "Mr. J. E. Daghlian",
+      "bounding_box": {
+        "x": 284,
+        "y": 810,
+        "w": 134,
+        "h": 14
+      }
+    },
+    {
+      "id": "a4e8c573-e85c-4f64-8652-b480865f6c74",
+      "name": "Mr. R. S. Goldbrenner",
+      "bounding_box": {
+        "x": 281,
+        "y": 823,
+        "w": 155,
+        "h": 16
+      }
+    },
+    {
+      "id": "39c0c736-c12b-4367-b609-873dac43bbb6",
+      "name": "Ms. E. R. Harrow",
+      "bounding_box": {
+        "x": 281,
+        "y": 837,
+        "w": 123,
+        "h": 16
+      }
+    },
+    {
+      "id": "a6331128-aacd-470f-b583-e5284bcf4760",
+      "name": "Ms. S. F. Smith",
+      "bounding_box": {
+        "x": 278,
+        "y": 850,
+        "w": 118,
+        "h": 16
+      }
+    },
+    {
+      "id": "8baaaca9-7b7d-4b2b-9c17-d50aead969a3",
+      "name": "Mr. N. P. Ruffalo",
+      "bounding_box": {
+        "x": 100,
+        "y": 862,
+        "w": 128,
+        "h": 16
+      }
+    },
+    {
+      "id": "db7a0b1e-1aec-41bf-a9bb-cba843a18be4",
+      "name": "Mr. C. Toti",
+      "bounding_box": {
+        "x": 102,
+        "y": 847,
+        "w": 81,
+        "h": 20
+      }
+    },
+    {
+      "id": "f62d195f-038e-4358-9872-fc4a0dd88f68",
+      "name": "Dr. S. T. Jones",
+      "bounding_box": {
+        "x": 100,
+        "y": 835,
+        "w": 113,
+        "h": 15
+      }
+    },
+    {
+      "id": "c4c82fb8-8836-46e0-b8c9-99501bc4fae2",
+      "name": "Mr. G. R. Telford",
+      "bounding_box": {
+        "x": 100,
+        "y": 820,
+        "w": 130,
+        "h": 17
+      }
+    },
+    {
+      "id": "ef51aa83-ddd6-4c78-9eef-4e391c36de84",
+      "name": "Mr. L. Gordon",
+      "bounding_box": {
+        "x": 102,
+        "y": 805,
+        "w": 99,
+        "h": 18
+      }
+    },
+    {
+      "id": "ade03c0a-96db-445c-b2de-81ff7a6aba00",
+      "name": "Mr. J. P. Mastandrea",
+      "bounding_box": {
+        "x": 103,
+        "y": 793,
+        "w": 150,
+        "h": 15
+      }
+    },
+    {
+      "id": "90a68f85-fe61-49a7-8367-8111c1bcb85e",
+      "name": "Ms. S. Ridgway",
+      "bounding_box": {
+        "x": 102,
+        "y": 778,
+        "w": 106,
+        "h": 14
+      }
+    },
+    {
+      "id": "a8a73a8f-50c4-4c33-9948-9e643f334a89",
+      "name": "Mr. M. A. Peterson Mr. T. H. Mau",
+      "bounding_box": {
+        "x": 100,
+        "y": 750,
+        "w": 137,
+        "h": 29
+      }
+    },
+    {
+      "id": "b0d5444b-083b-4959-be78-f975c9279440",
+      "name": "Mr. R. H. Orcutt",
+      "bounding_box": {
+        "x": 100,
+        "y": 737,
+        "w": 123,
+        "h": 13
+      }
+    }
+  ]
+}

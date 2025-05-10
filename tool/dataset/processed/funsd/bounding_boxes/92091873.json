@@ -1,0 +1,342 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "f1ccf549-c0e2-4af8-93e9-56e663b660e1",
+      "name": "720",
+      "bounding_box": {
+        "x": 177,
+        "y": 251,
+        "w": 28,
+        "h": 13
+      }
+    },
+    {
+      "id": "e682cee8-9fc4-433e-b3c7-0edc6c892398",
+      "name": "40",
+      "bounding_box": {
+        "x": 186,
+        "y": 268,
+        "w": 17,
+        "h": 14
+      }
+    },
+    {
+      "id": "f51a884c-ec0a-46c7-8ef4-1642b877ee50",
+      "name": "20",
+      "bounding_box": {
+        "x": 184,
+        "y": 286,
+        "w": 20,
+        "h": 11
+      }
+    },
+    {
+      "id": "335bf5a7-9ab0-4950-9cad-47873f002c8d",
+      "name": "100",
+      "bounding_box": {
+        "x": 179,
+        "y": 299,
+        "w": 27,
+        "h": 11
+      }
+    },
+    {
+      "id": "e6bb283d-d82f-402f-b2b1-8dabf961706b",
+      "name": "50",
+      "bounding_box": {
+        "x": 547,
+        "y": 250,
+        "w": 21,
+        "h": 13
+      }
+    },
+    {
+      "id": "80df6401-cf4f-4096-8f9e-6329649cb758",
+      "name": "Unknown",
+      "bounding_box": {
+        "x": 527,
+        "y": 281,
+        "w": 59,
+        "h": 14
+      }
+    },
+    {
+      "id": "e8929820-c6cb-4800-96b6-bd70ffb4dfeb",
+      "name": "15",
+      "bounding_box": {
+        "x": 201,
+        "y": 388,
+        "w": 20,
+        "h": 13
+      }
+    },
+    {
+      "id": "aeb95f1d-2ad5-47cf-ab8e-932bc64d5cbd",
+      "name": "9",
+      "bounding_box": {
+        "x": 205,
+        "y": 408,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "4f9e059e-d578-4529-abcb-8c6611e4d957",
+      "name": "100",
+      "bounding_box": {
+        "x": 193,
+        "y": 419,
+        "w": 29,
+        "h": 15
+      }
+    },
+    {
+      "id": "dcf25885-d5ad-494e-a537-f44bd71ed77a",
+      "name": "40",
+      "bounding_box": {
+        "x": 534,
+        "y": 384,
+        "w": 20,
+        "h": 13
+      }
+    },
+    {
+      "id": "8573d5f3-b156-4d9c-9706-4814e648c560",
+      "name": "35",
+      "bounding_box": {
+        "x": 535,
+        "y": 402,
+        "w": 20,
+        "h": 10
+      }
+    },
+    {
+      "id": "89058d40-0916-4d28-8987-1f944ebd128a",
+      "name": "10",
+      "bounding_box": {
+        "x": 535,
+        "y": 418,
+        "w": 18,
+        "h": 13
+      }
+    },
+    {
+      "id": "84b940b9-e002-4761-946a-eb977b263faa",
+      "name": "X",
+      "bounding_box": {
+        "x": 475,
+        "y": 641,
+        "w": 18,
+        "h": 15
+      }
+    },
+    {
+      "id": "a7d107c1-71f1-4a7b-b50f-700dfad3f7b7",
+      "name": "X",
+      "bounding_box": {
+        "x": 616,
+        "y": 659,
+        "w": 11,
+        "h": 15
+      }
+    },
+    {
+      "id": "37da66f3-854e-452d-a1ab-b7f00e597aa3",
+      "name": "X",
+      "bounding_box": {
+        "x": 616,
+        "y": 675,
+        "w": 15,
+        "h": 13
+      }
+    },
+    {
+      "id": "f16982c1-152a-4f87-a647-3a96466e5801",
+      "name": "6/",
+      "bounding_box": {
+        "x": 190,
+        "y": 321,
+        "w": 17,
+        "h": 18
+      }
+    },
+    {
+      "id": "e726a210-fbca-426c-a55e-e15f602a4ac2",
+      "name": "12/",
+      "bounding_box": {
+        "x": 211,
+        "y": 321,
+        "w": 22,
+        "h": 20
+      }
+    },
+    {
+      "id": "bdefc505-2b33-44d4-9893-c005d4249b9f",
+      "name": "95",
+      "bounding_box": {
+        "x": 235,
+        "y": 321,
+        "w": 15,
+        "h": 18
+      }
+    },
+    {
+      "id": "2fcf1f32-e340-4fe1-b9e4-eb8c5df2c33f",
+      "name": "Leguna Seca, Monterey, Ca",
+      "bounding_box": {
+        "x": 176,
+        "y": 133,
+        "w": 205,
+        "h": 15
+      }
+    },
+    {
+      "id": "3cb5b78a-81ef-4595-aa6c-aaae24c5b9a1",
+      "name": "San Jose/ 933",
+      "bounding_box": {
+        "x": 518,
+        "y": 126,
+        "w": 100,
+        "h": 21
+      }
+    },
+    {
+      "id": "714ef310-f07f-42cf-ad2e-a4fca003ac94",
+      "name": "T. L. Roberts",
+      "bounding_box": {
+        "x": 517,
+        "y": 161,
+        "w": 99,
+        "h": 14
+      }
+    },
+    {
+      "id": "57654a1a-9ba1-4a70-bb9d-3079e81d83d5",
+      "name": "September 10, 1995",
+      "bounding_box": {
+        "x": 177,
+        "y": 159,
+        "w": 147,
+        "h": 18
+      }
+    },
+    {
+      "id": "66ae9708-9991-4f73-8b81-7cd9c7fcbb4b",
+      "name": "September 26 1995",
+      "bounding_box": {
+        "x": 388,
+        "y": 182,
+        "w": 145,
+        "h": 17
+      }
+    },
+    {
+      "id": "f626f71a-cb1d-47b5-9778-cf8e5344ab49",
+      "name": "(submit by 30 days after event)",
+      "bounding_box": {
+        "x": 311,
+        "y": 204,
+        "w": 160,
+        "h": 17
+      }
+    },
+    {
+      "id": "3da9f7e3-d1e7-40e8-8308-7edc0c6029d4",
+      "name": "9/ 5/ 95",
+      "bounding_box": {
+        "x": 532,
+        "y": 267,
+        "w": 54,
+        "h": 17
+      }
+    },
+    {
+      "id": "e2b56aac-b54d-474b-8528-9459ad66d91f",
+      "name": "9/ 6/ 95",
+      "bounding_box": {
+        "x": 520,
+        "y": 321,
+        "w": 46,
+        "h": 19
+      }
+    },
+    {
+      "id": "3c5f75ec-07c4-47cf-870f-24dfced4332d",
+      "name": "\"Thank You very much for the tickets, we had a great time\" Rogers Liquor, Marina California.",
+      "bounding_box": {
+        "x": 109,
+        "y": 462,
+        "w": 585,
+        "h": 37
+      }
+    },
+    {
+      "id": "c7be8173-21f0-4d6c-a016-3464f78059d5",
+      "name": "\"We really appreciate Lorillard thinking us.\" Shiffert's Wholesale, Visalia, California.",
+      "bounding_box": {
+        "x": 106,
+        "y": 493,
+        "w": 570,
+        "h": 34
+      }
+    },
+    {
+      "id": "cc8cc157-05ea-485c-823a-828cde1f5d9b",
+      "name": "\"Thank you so much for the invitations... We had a great time.\" Mission Trail Oil Company (Rotten Robbie Stores) San Jose California.",
+      "bounding_box": {
+        "x": 108,
+        "y": 524,
+        "w": 567,
+        "h": 34
+      }
+    },
+    {
+      "id": "5daf06ac-4bc0-4c82-9c93-97be699258fe",
+      "name": "\"The races were great the Newport Hospitality area was terrific\". Coremark, Sacramento, California.",
+      "bounding_box": {
+        "x": 106,
+        "y": 556,
+        "w": 535,
+        "h": 33
+      }
+    },
+    {
+      "id": "86bb2115-c930-4493-8060-01109e252dfa",
+      "name": "Event Attendance 100, 000 Hospitality Tent Attendance 35- 40",
+      "bounding_box": {
+        "x": 230,
+        "y": 598,
+        "w": 413,
+        "h": 19
+      }
+    },
+    {
+      "id": "40095218-8f95-4957-95d1-7793b678630f",
+      "name": "Perhaps the tickets could be sent but a little sooner This year the tickets arrived on Thursday and the race was Sunday. This made it difficult to get the tickets to customers on tine.",
+      "bounding_box": {
+        "x": 148,
+        "y": 733,
+        "w": 525,
+        "h": 48
+      }
+    },
+    {
+      "id": "543eb95b-ba18-4508-aa74-607dbd478a20",
+      "name": "R. P. Bonomo",
+      "bounding_box": {
+        "x": 191,
+        "y": 887,
+        "w": 93,
+        "h": 15
+      }
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 780,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "b23921b3-e18d-488c-8441-7ab74f3004e6",
+      "name": "Novato",
+      "bounding_box": {
+        "x": 236,
+        "y": 323,
+        "w": 61,
+        "h": 14
+      }
+    },
+    {
+      "id": "f11b8c07-bb71-4103-b0f4-1c518858af48",
+      "name": "CA",
+      "bounding_box": {
+        "x": 545,
+        "y": 321,
+        "w": 24,
+        "h": 14
+      }
+    },
+    {
+      "id": "717824a8-600d-45d9-8764-d3af154d3259",
+      "name": "X",
+      "bounding_box": {
+        "x": 612,
+        "y": 594,
+        "w": 13,
+        "h": 15
+      }
+    },
+    {
+      "id": "51d0f597-c5a9-424c-a1aa-b9b27f4fd685",
+      "name": "X",
+      "bounding_box": {
+        "x": 613,
+        "y": 652,
+        "w": 11,
+        "h": 17
+      }
+    },
+    {
+      "id": "f622e3ba-f646-4d5c-8e20-a77f4fbbbb31",
+      "name": "94948",
+      "bounding_box": {
+        "x": 238,
+        "y": 352,
+        "w": 48,
+        "h": 20
+      }
+    },
+    {
+      "id": "48415c1b-91fc-49d8-bec7-17a0331981b8",
+      "name": "BRAYTON, GISVOLD. & HARLEY",
+      "bounding_box": {
+        "x": 236,
+        "y": 260,
+        "w": 235,
+        "h": 18
+      }
+    },
+    {
+      "id": "80b184cc-8422-4845-83af-4081b43eef4f",
+      "name": "999 Grant Avenue, P. O. Box 2109",
+      "bounding_box": {
+        "x": 236,
+        "y": 288,
+        "w": 292,
+        "h": 20
+      }
+    },
+    {
+      "id": "61d97a70-ed2c-4aa4-8134-11346b918011",
+      "name": "(415) 898- 1555",
+      "bounding_box": {
+        "x": 501,
+        "y": 349,
+        "w": 130,
+        "h": 19
+      }
+    },
+    {
+      "id": "3fbceb7b-81b6-487b-a3ff-89db031f4b8d",
+      "name": "CHARLES WOODWARD",
+      "bounding_box": {
+        "x": 239,
+        "y": 444,
+        "w": 150,
+        "h": 15
+      }
+    },
+    {
+      "id": "f21699bf-a362-44b2-9347-32512d9c9064",
+      "name": "ABEX CORPORATION, et al.",
+      "bounding_box": {
+        "x": 237,
+        "y": 473,
+        "w": 224,
+        "h": 16
+      }
+    },
+    {
+      "id": "39ce8f23-4303-4398-93f8-d0e9e9c581c8",
+      "name": "June 19, 1921",
+      "bounding_box": {
+        "x": 433,
+        "y": 518,
+        "w": 126,
+        "h": 17
+      }
+    },
+    {
+      "id": "6dfca0b0-91f4-4ec1-acc0-44b341eec31d",
+      "name": "Mesothelioma and other asbestos- related lung disease",
+      "bounding_box": {
+        "x": 165,
+        "y": 757,
+        "w": 490,
+        "h": 21
+      }
+    }
+  ]
+}

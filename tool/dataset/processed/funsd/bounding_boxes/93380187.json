@@ -1,0 +1,422 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "1fbcf290-56bf-4041-aec5-54aaae30b6ad",
+      "name": "TRUE",
+      "bounding_box": {
+        "x": 335,
+        "y": 277,
+        "w": 37,
+        "h": 15
+      }
+    },
+    {
+      "id": "822e52c5-226a-48e3-a08c-6069cedc4b10",
+      "name": "560,000",
+      "bounding_box": {
+        "x": 329,
+        "y": 496,
+        "w": 52,
+        "h": 13
+      }
+    },
+    {
+      "id": "e063ad0f-4d0d-4f19-bf2d-bfa6ced89ee2",
+      "name": "PROVIDENCE",
+      "bounding_box": {
+        "x": 207,
+        "y": 792,
+        "w": 58,
+        "h": 10
+      }
+    },
+    {
+      "id": "ee112108-c199-4d27-87e6-7c523d842eb6",
+      "name": "CAMDEN",
+      "bounding_box": {
+        "x": 204,
+        "y": 807,
+        "w": 45,
+        "h": 10
+      }
+    },
+    {
+      "id": "a479d247-4302-4fa1-9092-292260f40cc8",
+      "name": "CONCORD",
+      "bounding_box": {
+        "x": 208,
+        "y": 825,
+        "w": 46,
+        "h": 9
+      }
+    },
+    {
+      "id": "e72c435e-7a29-47d5-9149-cfc572de6dee",
+      "name": "SPRINGFIELD",
+      "bounding_box": {
+        "x": 204,
+        "y": 837,
+        "w": 61,
+        "h": 13
+      }
+    },
+    {
+      "id": "0caefcbc-53ef-4b04-96a0-2b0d4da8505d",
+      "name": "BALTIMORE",
+      "bounding_box": {
+        "x": 205,
+        "y": 855,
+        "w": 54,
+        "h": 10
+      }
+    },
+    {
+      "id": "88a55209-b84d-4964-a730-fd270ca9e427",
+      "name": "HARTFORD",
+      "bounding_box": {
+        "x": 90,
+        "y": 822,
+        "w": 49,
+        "h": 12
+      }
+    },
+    {
+      "id": "2ab3d0dc-2abf-4758-8033-ba4d6a4406f2",
+      "name": "SYRACUSE",
+      "bounding_box": {
+        "x": 88,
+        "y": 853,
+        "w": 51,
+        "h": 10
+      }
+    },
+    {
+      "id": "65c88bcc-6a85-4e34-9d0c-968dfa353750",
+      "name": "ROCHESTER",
+      "bounding_box": {
+        "x": 88,
+        "y": 870,
+        "w": 57,
+        "h": 10
+      }
+    },
+    {
+      "id": "2092ba25-0291-4246-b6c2-d2eb8f1e93f7",
+      "name": "BUFFALO",
+      "bounding_box": {
+        "x": 88,
+        "y": 916,
+        "w": 42,
+        "h": 10
+      }
+    },
+    {
+      "id": "8894663a-1aeb-4811-b156-ebd120a593d7",
+      "name": "WILMINGTON",
+      "bounding_box": {
+        "x": 204,
+        "y": 918,
+        "w": 61,
+        "h": 9
+      }
+    },
+    {
+      "id": "13a31423-8a8e-4927-be94-323317f3fded",
+      "name": "ALBANY",
+      "bounding_box": {
+        "x": 88,
+        "y": 931,
+        "w": 39,
+        "h": 12
+      }
+    },
+    {
+      "id": "fc008753-5640-4c00-82af-cea98da77b0a",
+      "name": "57288",
+      "bounding_box": {
+        "x": 445,
+        "y": 825,
+        "w": 69,
+        "h": 25
+      }
+    },
+    {
+      "id": "be06c24b-8840-4d7d-90c2-00dede6425e2",
+      "name": "1143",
+      "bounding_box": {
+        "x": 457,
+        "y": 852,
+        "w": 37,
+        "h": 13
+      }
+    },
+    {
+      "id": "fd60d83d-4ef4-485a-ad32-3ce9df699c5a",
+      "name": "MICHELLE LEPRE",
+      "bounding_box": {
+        "x": 201,
+        "y": 148,
+        "w": 103,
+        "h": 21
+      }
+    },
+    {
+      "id": "c243f14a-5221-4240-ba6d-8d6b1744ec9b",
+      "name": "V. M. LOSITO",
+      "bounding_box": {
+        "x": 204,
+        "y": 180,
+        "w": 74,
+        "h": 18
+      }
+    },
+    {
+      "id": "59a33fd9-067f-4ea3-8d28-ca3601455e2c",
+      "name": "S. A. RAPISARLDI",
+      "bounding_box": {
+        "x": 202,
+        "y": 211,
+        "w": 104,
+        "h": 15
+      }
+    },
+    {
+      "id": "9e297fc3-feac-45a2-8e2c-431b8dbcb455",
+      "name": "J BAYLIES",
+      "bounding_box": {
+        "x": 202,
+        "y": 226,
+        "w": 69,
+        "h": 18
+      }
+    },
+    {
+      "id": "fcc8c730-ffd0-4cfc-a7fa-55e3b66d4abc",
+      "name": "K. P. AUGUSTYN",
+      "bounding_box": {
+        "x": 201,
+        "y": 243,
+        "w": 100,
+        "h": 19
+      }
+    },
+    {
+      "id": "4ad4420c-f661-427e-af18-4344b20fed9b",
+      "name": "M. McGLYNN",
+      "bounding_box": {
+        "x": 328,
+        "y": 225,
+        "w": 83,
+        "h": 21
+      }
+    },
+    {
+      "id": "a2a0761c-53d1-4dd2-b11a-36f4a476624c",
+      "name": "SALES FORCE APPLIED - IRC",
+      "bounding_box": {
+        "x": 334,
+        "y": 308,
+        "w": 175,
+        "h": 15
+      }
+    },
+    {
+      "id": "d124159f-fd42-4b62-9030-7e6f9a96f454",
+      "name": "MAY 1992",
+      "bounding_box": {
+        "x": 332,
+        "y": 433,
+        "w": 60,
+        "h": 13
+      }
+    },
+    {
+      "id": "236f3278-dba0-47ef-8962-665f38179c63",
+      "name": "8 /31 /92",
+      "bounding_box": {
+        "x": 332,
+        "y": 464,
+        "w": 46,
+        "h": 15
+      }
+    },
+    {
+      "id": "3f6beb95-3f51-4598-9e00-8a1e0489b759",
+      "name": "TRUE CORE MARKETS *",
+      "bounding_box": {
+        "x": 332,
+        "y": 525,
+        "w": 142,
+        "h": 17
+      }
+    },
+    {
+      "id": "3be37c06-0999-48c1-af15-146487f5002b",
+      "name": "50c",
+      "bounding_box": {
+        "x": 331,
+        "y": 555,
+        "w": 25,
+        "h": 16
+      }
+    },
+    {
+      "id": "cfc17012-7ded-4da7-b9a4-b4a90ddae3b0",
+      "name": "PACK",
+      "bounding_box": {
+        "x": 331,
+        "y": 587,
+        "w": 40,
+        "h": 15
+      }
+    },
+    {
+      "id": "c9bb7a86-7457-42a2-a946-fb0c37e9de16",
+      "name": "Michell",
+      "bounding_box": {
+        "x": 329,
+        "y": 654,
+        "w": 213,
+        "h": 36
+      }
+    },
+    {
+      "id": "7c3dc545-458d-49fa-aa25-a4b5c67658f1",
+      "name": "JANUARY 8, 1992",
+      "bounding_box": {
+        "x": 328,
+        "y": 695,
+        "w": 102,
+        "h": 16
+      }
+    },
+    {
+      "id": "2d3c93bb-66db-43a7-a8c6-0ca9f3cbc651",
+      "name": "80 %",
+      "bounding_box": {
+        "x": 464,
+        "y": 864,
+        "w": 63,
+        "h": 24
+      }
+    },
+    {
+      "id": "8fa2e139-5d5a-4a97-a843-2520669d382b",
+      "name": "TOTAL NEW YORK",
+      "bounding_box": {
+        "x": 91,
+        "y": 775,
+        "w": 78,
+        "h": 12
+      }
+    },
+    {
+      "id": "809c2265-5308-4a74-b470-d99e3555de97",
+      "name": "TOTAL NEW JERSEY",
+      "bounding_box": {
+        "x": 205,
+        "y": 777,
+        "w": 90,
+        "h": 10
+      }
+    },
+    {
+      "id": "fb32e89b-0b7c-48ec-b6eb-0c513fd7cec8",
+      "name": "NEW HAVEN",
+      "bounding_box": {
+        "x": 88,
+        "y": 792,
+        "w": 57,
+        "h": 10
+      }
+    },
+    {
+      "id": "5c0d5577-5bb5-4e52-a9f0-1cacf55ad248",
+      "name": "TOTAL BOSTON",
+      "bounding_box": {
+        "x": 91,
+        "y": 805,
+        "w": 69,
+        "h": 13
+      }
+    },
+    {
+      "id": "6b03da03-4692-4d9a-b229-3f1b1302dd55",
+      "name": "TOTAL SAN FRANCISCO",
+      "bounding_box": {
+        "x": 88,
+        "y": 837,
+        "w": 103,
+        "h": 13
+      }
+    },
+    {
+      "id": "be0ac53f-7653-44f0-8c51-8178e28c5c9a",
+      "name": "TOTAL PHILADELPHIA",
+      "bounding_box": {
+        "x": 88,
+        "y": 883,
+        "w": 93,
+        "h": 11
+      }
+    },
+    {
+      "id": "45191332-a2c7-47bd-a4dc-2179cba9114f",
+      "name": "TOTAL CHICAGO",
+      "bounding_box": {
+        "x": 88,
+        "y": 900,
+        "w": 74,
+        "h": 12
+      }
+    },
+    {
+      "id": "1dee5e28-ad5d-4a3d-9a09-e9b9db5f9305",
+      "name": "REGION 15 x SAN BERNADINO",
+      "bounding_box": {
+        "x": 202,
+        "y": 931,
+        "w": 134,
+        "h": 12
+      }
+    },
+    {
+      "id": "95828ffe-414a-475f-a288-76ff1e02eb3a",
+      "name": "TOTAL WASHINGTON",
+      "bounding_box": {
+        "x": 201,
+        "y": 900,
+        "w": 93,
+        "h": 13
+      }
+    },
+    {
+      "id": "4dfa0c50-72cb-4e1d-9e6d-72e7fc4a2b80",
+      "name": "TOTAL DETROIT",
+      "bounding_box": {
+        "x": 202,
+        "y": 883,
+        "w": 72,
+        "h": 13
+      }
+    },
+    {
+      "id": "273b72cd-b57d-4fac-b65d-6a68ae568442",
+      "name": "PORTLAND, ME",
+      "bounding_box": {
+        "x": 207,
+        "y": 870,
+        "w": 65,
+        "h": 12
+      }
+    }
+  ]
+}

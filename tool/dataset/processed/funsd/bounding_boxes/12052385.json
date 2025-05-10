@@ -1,0 +1,72 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 773,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "a217e83c-66d6-424c-9251-08dfbadcbcb9",
+      "name": "JAN",
+      "bounding_box": {
+        "x": 195,
+        "y": 568,
+        "w": 32,
+        "h": 15
+      }
+    },
+    {
+      "id": "30c1c2d4-1eac-42b0-90a5-07d5ae855824",
+      "name": "0595- 529- 1510 -0",
+      "bounding_box": {
+        "x": 58,
+        "y": 55,
+        "w": 135,
+        "h": 17
+      }
+    },
+    {
+      "id": "cbf571f0-6d9c-44b8-8d0b-7d989521cc18",
+      "name": "KMDP ANALYSIS UTILIZING BLACK SWITCHING STUDY DATA",
+      "bounding_box": {
+        "x": 197,
+        "y": 100,
+        "w": 428,
+        "h": 25
+      }
+    },
+    {
+      "id": "6a12ed67-2f41-4861-90a8-b79c08c4554a",
+      "name": "C. B. Pugh",
+      "bounding_box": {
+        "x": 200,
+        "y": 177,
+        "w": 78,
+        "h": 18
+      }
+    },
+    {
+      "id": "c682c305-382d-44da-b421-8b1b54d3b08b",
+      "name": "Market Facts",
+      "bounding_box": {
+        "x": 200,
+        "y": 218,
+        "w": 108,
+        "h": 17
+      }
+    },
+    {
+      "id": "2a8d4947-a669-4a0d-b7fb-1c3b3b35643d",
+      "name": "12, 500 (10- 15- 87)",
+      "bounding_box": {
+        "x": 198,
+        "y": 258,
+        "w": 174,
+        "h": 22
+      }
+    }
+  ]
+}

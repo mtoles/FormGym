@@ -1,0 +1,132 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "fa8835af-91b9-4c17-9064-8eaf051e98c5",
+      "name": "20",
+      "bounding_box": {
+        "x": 303,
+        "y": 504,
+        "w": 20,
+        "h": 13
+      }
+    },
+    {
+      "id": "460c1069-9845-44da-9a49-238f079a9f12",
+      "name": "30",
+      "bounding_box": {
+        "x": 304,
+        "y": 518,
+        "w": 18,
+        "h": 13
+      }
+    },
+    {
+      "id": "c00f48ad-298a-4134-a1bf-515c0040051c",
+      "name": "60",
+      "bounding_box": {
+        "x": 303,
+        "y": 531,
+        "w": 20,
+        "h": 13
+      }
+    },
+    {
+      "id": "2f14305c-3af0-4ccb-8894-ec2b36815173",
+      "name": "20",
+      "bounding_box": {
+        "x": 303,
+        "y": 545,
+        "w": 18,
+        "h": 13
+      }
+    },
+    {
+      "id": "f9b93ef4-df43-4384-9a55-85ee8b2c8917",
+      "name": "30",
+      "bounding_box": {
+        "x": 306,
+        "y": 560,
+        "w": 17,
+        "h": 13
+      }
+    },
+    {
+      "id": "f3ff82d6-f1cd-4386-8313-24659a43011a",
+      "name": "60",
+      "bounding_box": {
+        "x": 306,
+        "y": 574,
+        "w": 15,
+        "h": 13
+      }
+    },
+    {
+      "id": "b02f3095-2cad-4bf8-b894-8194f292e4e3",
+      "name": "October 9, 1968",
+      "bounding_box": {
+        "x": 455,
+        "y": 182,
+        "w": 133,
+        "h": 16
+      }
+    },
+    {
+      "id": "fd3a289f-32e3-46b3-9cad-f990d87b4c62",
+      "name": "Mr. Mary Goldsmith",
+      "bounding_box": {
+        "x": 464,
+        "y": 216,
+        "w": 159,
+        "h": 17
+      }
+    },
+    {
+      "id": "064e4fc9-5630-4c02-909a-590534c6c412",
+      "name": "BBDO Inc.",
+      "bounding_box": {
+        "x": 138,
+        "y": 221,
+        "w": 79,
+        "h": 14
+      }
+    },
+    {
+      "id": "7789a8d6-4970-44ed-8d4c-9b2d4d3d7981",
+      "name": "383 Madison Avenue New York 10017",
+      "bounding_box": {
+        "x": 135,
+        "y": 274,
+        "w": 300,
+        "h": 15
+      }
+    },
+    {
+      "id": "2864f3f3-ebb6-48d1-97f4-b09cfb5a756e",
+      "name": "American Tobacco Co.",
+      "bounding_box": {
+        "x": 137,
+        "y": 327,
+        "w": 173,
+        "h": 17
+      }
+    },
+    {
+      "id": "dfc9db86-7bb4-4f83-b50f-65de6b28a951",
+      "name": "Tareyton Cigarettes",
+      "bounding_box": {
+        "x": 137,
+        "y": 378,
+        "w": 169,
+        "h": 16
+      }
+    }
+  ]
+}

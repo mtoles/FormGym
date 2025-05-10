@@ -1,0 +1,132 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 754,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "02e56151-e7fa-47ed-a6e2-7e5b1b8e785e",
+      "name": "LORILLARD CORPORATION",
+      "bounding_box": {
+        "x": 108,
+        "y": 228,
+        "w": 148,
+        "h": 14
+      }
+    },
+    {
+      "id": "53a2e9f7-1fb0-4445-acf3-50bf484b9fb5",
+      "name": "Kent, Newport, True and Old Gold",
+      "bounding_box": {
+        "x": 110,
+        "y": 251,
+        "w": 218,
+        "h": 20
+      }
+    },
+    {
+      "id": "38d0d860-c83f-46ed-9860-ee27a00f9127",
+      "name": "Daily Newspapers",
+      "bounding_box": {
+        "x": 457,
+        "y": 223,
+        "w": 110,
+        "h": 15
+      }
+    },
+    {
+      "id": "dfcb318e-e921-48a9-8ade-bcb5bc97d10c",
+      "name": "August 19, 1969",
+      "bounding_box": {
+        "x": 455,
+        "y": 251,
+        "w": 106,
+        "h": 15
+      }
+    },
+    {
+      "id": "89f93ef0-55bf-4131-add0-63282b88f488",
+      "name": "1000 lines B&W 1750 lines 2- color",
+      "bounding_box": {
+        "x": 415,
+        "y": 278,
+        "w": 127,
+        "h": 29
+      }
+    },
+    {
+      "id": "133249ed-ce38-40a3-ae4e-bf2925301ceb",
+      "name": "8/ 8/ 69",
+      "bounding_box": {
+        "x": 587,
+        "y": 274,
+        "w": 43,
+        "h": 17
+      }
+    },
+    {
+      "id": "952c56a5-fcb3-4527-aced-7fc92f942ee4",
+      "name": "New York Football Fans",
+      "bounding_box": {
+        "x": 172,
+        "y": 362,
+        "w": 151,
+        "h": 15
+      }
+    },
+    {
+      "id": "1dea02b2-a8c8-44c9-9a21-7710cf77a316",
+      "name": "Los Angeles Football Fans Chicago Football Fans",
+      "bounding_box": {
+        "x": 205,
+        "y": 388,
+        "w": 172,
+        "h": 31
+      }
+    },
+    {
+      "id": "a82c98eb-7b8d-47db-bdb1-6dc0f9574dc6",
+      "name": "Pick The Winners And Win Up $ 5 ,000",
+      "bounding_box": {
+        "x": 180,
+        "y": 430,
+        "w": 256,
+        "h": 19
+      }
+    },
+    {
+      "id": "b9f5a899-f6ea-477e-8e77-1b5da5ce8a13",
+      "name": "Line Drawings of Football Scenes",
+      "bounding_box": {
+        "x": 207,
+        "y": 458,
+        "w": 219,
+        "h": 16
+      }
+    },
+    {
+      "id": "67aaa5f9-ecde-45d9-8b3b-ab4b2e27d26d",
+      "name": "1st Prize $ 5,000 2nd Prize 2,000 3rd Prize 1,000 4th Prizes 500 fans will receive copies of \"The Golden Anniversary of Pro- Football\"",
+      "bounding_box": {
+        "x": 214,
+        "y": 497,
+        "w": 360,
+        "h": 70
+      }
+    },
+    {
+      "id": "6e5be3f2-8c90-4b74-b48a-f5c7329370e9",
+      "name": "Now you can win up $ 5,000 for simply picking the winners of the games listed below. Just check the box next to the team you think will win. Allow for the point spread in your selections. (For example, if a team is quoted as +7 pts. this means they must win the game by at least 7 points.) Prizes will be awarded by random drawings to those who have the greatest official number of winning selections. Full details are in the Rules.",
+      "bounding_box": {
+        "x": 154,
+        "y": 592,
+        "w": 443,
+        "h": 110
+      }
+    }
+  ]
+}

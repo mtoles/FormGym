@@ -1,0 +1,212 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "f6d6f212-5c44-4790-a8f6-934279ed5a04",
+      "name": "88",
+      "bounding_box": {
+        "x": 251,
+        "y": 330,
+        "w": 15,
+        "h": 15
+      }
+    },
+    {
+      "id": "3d46a69b-5baa-49bf-b03e-bbf5399b06bc",
+      "name": "x",
+      "bounding_box": {
+        "x": 183,
+        "y": 276,
+        "w": 12,
+        "h": 11
+      }
+    },
+    {
+      "id": "98b07a92-600b-4d2f-b8ac-87a2ce3f20d1",
+      "name": "80",
+      "bounding_box": {
+        "x": 490,
+        "y": 296,
+        "w": 17,
+        "h": 14
+      }
+    },
+    {
+      "id": "eaadd3a0-805a-4d41-a87e-34e825282232",
+      "name": "80",
+      "bounding_box": {
+        "x": 565,
+        "y": 296,
+        "w": 17,
+        "h": 15
+      }
+    },
+    {
+      "id": "b52e8a9b-fd3f-4c9f-af58-67b48572c7d3",
+      "name": "0",
+      "bounding_box": {
+        "x": 636,
+        "y": 297,
+        "w": 15,
+        "h": 12
+      }
+    },
+    {
+      "id": "9e28bac0-627e-4ce1-b369-29f8c962e897",
+      "name": "88",
+      "bounding_box": {
+        "x": 627,
+        "y": 337,
+        "w": 16,
+        "h": 10
+      }
+    },
+    {
+      "id": "04322072-a5b0-405b-9594-dcd51be3a4f6",
+      "name": "11",
+      "bounding_box": {
+        "x": 574,
+        "y": 335,
+        "w": 14,
+        "h": 12
+      }
+    },
+    {
+      "id": "6bf6a017-ec16-4144-85aa-82c0fb35f42a",
+      "name": "88",
+      "bounding_box": {
+        "x": 420,
+        "y": 333,
+        "w": 16,
+        "h": 15
+      }
+    },
+    {
+      "id": "1ccb96e8-19a3-468c-bfc6-eb6651beb981",
+      "name": "7",
+      "bounding_box": {
+        "x": 372,
+        "y": 334,
+        "w": 14,
+        "h": 12
+      }
+    },
+    {
+      "id": "0d9fd9d1-ac9d-405c-ae83-ff598a174cc1",
+      "name": "1989",
+      "bounding_box": {
+        "x": 147,
+        "y": 600,
+        "w": 29,
+        "h": 12
+      }
+    },
+    {
+      "id": "46ed82e9-cd9a-4001-a5e5-1ab788c81ab9",
+      "name": "80",
+      "bounding_box": {
+        "x": 146,
+        "y": 617,
+        "w": 16,
+        "h": 9
+      }
+    },
+    {
+      "id": "c73995ff-5d55-4a49-b434-21c79eadda4e",
+      "name": "0",
+      "bounding_box": {
+        "x": 153,
+        "y": 631,
+        "w": 9,
+        "h": 10
+      }
+    },
+    {
+      "id": "bc0da6ff-2e75-4f42-935b-390f4b227ff3",
+      "name": "1990",
+      "bounding_box": {
+        "x": 495,
+        "y": 711,
+        "w": 27,
+        "h": 17
+      }
+    },
+    {
+      "id": "1b14aec7-34ef-4eb2-ab1d-90836af60dea",
+      "name": "1991",
+      "bounding_box": {
+        "x": 494,
+        "y": 739,
+        "w": 27,
+        "h": 11
+      }
+    },
+    {
+      "id": "8aedcfb4-9ea6-4a9d-a4b3-95c1308cb1a1",
+      "name": "1992",
+      "bounding_box": {
+        "x": 493,
+        "y": 767,
+        "w": 29,
+        "h": 11
+      }
+    },
+    {
+      "id": "d92e7bd0-f549-4e78-ba3a-a5debf8da250",
+      "name": "1993",
+      "bounding_box": {
+        "x": 493,
+        "y": 794,
+        "w": 30,
+        "h": 11
+      }
+    },
+    {
+      "id": "632d8500-63cf-4042-9989-f10177fbc304",
+      "name": "CICARETTE TEST STATION (CT5400)",
+      "bounding_box": {
+        "x": 76,
+        "y": 165,
+        "w": 212,
+        "h": 15
+      }
+    },
+    {
+      "id": "a69c45ca-50cc-43b6-9f7c-187e2af2b061",
+      "name": "The Cigarette Test Station (CTS400) combines many of the stand- alone instruments that R&D currently uses to measure cigarette weight, pressure drop, ventilation, and hardness into one compact module. The CTS400 has the additional measurement of cigarette hardness in comparison with the CTS300. With this added, measurement R&D will be able to replace the Firmness Integrator that measures cigarette firmness in addition to other measurements that are mentioned above. The Firmness Integrator is no longer manufactured and parts are becoming difficult to obtain. Lastly, purchase of this instrument would provide similar capability as the Macon Plant and help facilitate comparisions between laboratories.",
+      "bounding_box": {
+        "x": 65,
+        "y": 399,
+        "w": 596,
+        "h": 124
+      }
+    },
+    {
+      "id": "f7d97f75-3894-4db2-ab9d-38b032f69363",
+      "name": "W. O. Crain",
+      "bounding_box": {
+        "x": 61,
+        "y": 858,
+        "w": 79,
+        "h": 14
+      }
+    },
+    {
+      "id": "62aafcd4-b6c3-497c-a55d-089197a90251",
+      "name": "Beyond 1993",
+      "bounding_box": {
+        "x": 485,
+        "y": 808,
+        "w": 42,
+        "h": 22
+      }
+    }
+  ]
+}

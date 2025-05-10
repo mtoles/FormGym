@@ -1,0 +1,82 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 773,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "7a6a9b45-2398-4657-a454-7387d3a970f7",
+      "name": "II",
+      "bounding_box": {
+        "x": 205,
+        "y": 330,
+        "w": 17,
+        "h": 11
+      }
+    },
+    {
+      "id": "95db8aef-a436-4d79-8a44-822b1f89c535",
+      "name": "A41",
+      "bounding_box": {
+        "x": 461,
+        "y": 337,
+        "w": 25,
+        "h": 11
+      }
+    },
+    {
+      "id": "686f8cbc-edaf-4a72-b397-555541cab384",
+      "name": "Paul Schickedantz, Jack Reid",
+      "bounding_box": {
+        "x": 106,
+        "y": 109,
+        "w": 213,
+        "h": 15
+      }
+    },
+    {
+      "id": "7903a5f4-9356-4eb6-b32a-8e59b69fba01",
+      "name": "12- 4- 80",
+      "bounding_box": {
+        "x": 560,
+        "y": 108,
+        "w": 53,
+        "h": 14
+      }
+    },
+    {
+      "id": "e45ecae8-00f5-42eb-a88f-420e1d15d181",
+      "name": "2-Hydroxycyclododecanone",
+      "bounding_box": {
+        "x": 104,
+        "y": 154,
+        "w": 184,
+        "h": 15
+      }
+    },
+    {
+      "id": "2e5d43b7-c439-4111-93e5-e394f2e99ca7",
+      "name": "OH O",
+      "bounding_box": {
+        "x": 123,
+        "y": 225,
+        "w": 86,
+        "h": 64
+      }
+    },
+    {
+      "id": "2b812eaf-5c25-4198-82d2-45e914996ea1",
+      "name": "This carbocyclic keto alcohol was placed in estimated toxicity class II due to the direct attachment of the ketone to the cyclic nucleus.",
+      "bounding_box": {
+        "x": 108,
+        "y": 377,
+        "w": 534,
+        "h": 30
+      }
+    }
+  ]
+}

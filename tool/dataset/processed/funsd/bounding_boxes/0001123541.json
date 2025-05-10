@@ -1,0 +1,132 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 762,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "7ae62bc0-40cc-431f-87a4-4d9fc4d0fcfb",
+      "name": "EQPR",
+      "bounding_box": {
+        "x": 503,
+        "y": 205,
+        "w": 57,
+        "h": 17
+      }
+    },
+    {
+      "id": "4e160411-28be-496f-870b-1d34fda8e2b5",
+      "name": "June 21, 1993",
+      "bounding_box": {
+        "x": 53,
+        "y": 165,
+        "w": 93,
+        "h": 14
+      }
+    },
+    {
+      "id": "67de21e4-90d1-473d-b076-ee386a135bdd",
+      "name": "R&D Library",
+      "bounding_box": {
+        "x": 250,
+        "y": 163,
+        "w": 79,
+        "h": 17
+      }
+    },
+    {
+      "id": "12de32a8-0047-4284-b6e7-8c8a2b8824b9",
+      "name": "Carol S. Lincoln",
+      "bounding_box": {
+        "x": 144,
+        "y": 191,
+        "w": 116,
+        "h": 16
+      }
+    },
+    {
+      "id": "53295aed-81cc-4f12-9182-8bd7087c39be",
+      "name": "407- 64- 3484",
+      "bounding_box": {
+        "x": 147,
+        "y": 219,
+        "w": 78,
+        "h": 16
+      }
+    },
+    {
+      "id": "cfe2dcf2-8646-4855-a173-115e4b8f8fad",
+      "name": "6/ 21/ 93",
+      "bounding_box": {
+        "x": 546,
+        "y": 168,
+        "w": 70,
+        "h": 29
+      }
+    },
+    {
+      "id": "d87775a6-785c-44ad-985a-cf5378ce5204",
+      "name": "93- 0301",
+      "bounding_box": {
+        "x": 541,
+        "y": 190,
+        "w": 86,
+        "h": 20
+      }
+    },
+    {
+      "id": "47bfdd1a-4af3-49ec-99d4-6b1cd3afe676",
+      "name": "The current system of managing records is too complex. The trend seems to be increasingly specific, when we should be getting more general. Right now, people must work to understand the system. We must spend too much time adninistering the system, labeling and cleaning our files. Complying is a real burden, both for the individual and for the records coordinators.",
+      "bounding_box": {
+        "x": 32,
+        "y": 306,
+        "w": 652,
+        "h": 124
+      }
+    },
+    {
+      "id": "005324e0-2d0f-4ace-8b2f-61d80a0b667d",
+      "name": "1. Drop the category specifications altogether.",
+      "bounding_box": {
+        "x": 32,
+        "y": 500,
+        "w": 330,
+        "h": 19
+      }
+    },
+    {
+      "id": "08a48647-c908-4bc6-8c3a-62a3baf9e44f",
+      "name": "2. Use moregeneral categories.",
+      "bounding_box": {
+        "x": 31,
+        "y": 528,
+        "w": 228,
+        "h": 18
+      }
+    },
+    {
+      "id": "b7f01432-76dd-4927-aefe-ebb2e4481d43",
+      "name": "hote: I have passed this to Scott Appleton for the task force to use in streamlining the records management program.",
+      "bounding_box": {
+        "x": 32,
+        "y": 549,
+        "w": 622,
+        "h": 52
+      }
+    },
+    {
+      "id": "b972a94d-e0e9-4748-80aa-4010ad807242",
+      "name": "(If Applicable)",
+      "bounding_box": {
+        "x": 152,
+        "y": 591,
+        "w": 109,
+        "h": 15
+      }
+    }
+  ]
+}

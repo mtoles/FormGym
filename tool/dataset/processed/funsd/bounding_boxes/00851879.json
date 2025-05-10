@@ -1,0 +1,92 @@
+{
+  "item": {
+    "slots": [
+      {
+        "width": 777,
+        "height": 1000
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "id": "b18d2842-6366-4b40-aa1c-92a92712444e",
+      "name": "5-13-81",
+      "bounding_box": {
+        "x": 571,
+        "y": 152,
+        "w": 59,
+        "h": 13
+      }
+    },
+    {
+      "id": "f2b65d18-08a3-4e8c-9119-ee62226e4412",
+      "name": "5-13-81",
+      "bounding_box": {
+        "x": 454,
+        "y": 275,
+        "w": 61,
+        "h": 20
+      }
+    },
+    {
+      "id": "7314fa8b-524d-434e-af28-bca200469e04",
+      "name": "\u2611",
+      "bounding_box": {
+        "x": 279,
+        "y": 392,
+        "w": 13,
+        "h": 15
+      }
+    },
+    {
+      "id": "9e7b056a-f88e-406f-b139-74ecca36c59b",
+      "name": "Verbal Phone",
+      "bounding_box": {
+        "x": 587,
+        "y": 278,
+        "w": 104,
+        "h": 18
+      }
+    },
+    {
+      "id": "bfcf96ff-214c-46c1-b151-5c43f6c7a450",
+      "name": "(Means of communication)",
+      "bounding_box": {
+        "x": 536,
+        "y": 297,
+        "w": 196,
+        "h": 16
+      }
+    },
+    {
+      "id": "5658eb5e-4adf-4b32-acf0-12df1e9f4efe",
+      "name": "Change in the time of the Pre- dose Biomicroscopic Examination",
+      "bounding_box": {
+        "x": 165,
+        "y": 190,
+        "w": 490,
+        "h": 25
+      }
+    },
+    {
+      "id": "12e06d73-89de-4cdd-b925-3d48b1418e3f",
+      "name": "Dr. Connie Stone",
+      "bounding_box": {
+        "x": 221,
+        "y": 281,
+        "w": 131,
+        "h": 15
+      }
+    },
+    {
+      "id": "c58c443f-2547-47bd-a795-4632e71b536a",
+      "name": "Mr. Charles Burns",
+      "bounding_box": {
+        "x": 219,
+        "y": 324,
+        "w": 141,
+        "h": 20
+      }
+    }
+  ]
+}
