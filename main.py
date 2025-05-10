@@ -7,6 +7,9 @@ from tasks import ImagePdfFill
 from doc_state import DocState
 from utils import *
 from apis import SqlDb
+from process_data_to_classes import process_annotations, create_dynamic_classes
+import form_fields as form_field_types
+from user_profile_attributes import FormUserProfile
 
 from tqdm import tqdm
 import argparse
@@ -60,13 +63,25 @@ if __name__ == "__main__":
     )
     parser.add_argument("--k_missing_fields", type=int, default=1)
     parser.add_argument("--max_actions_multiplier", type=int, default=2)
-    parser.add_argument("--suggest_localizer", type=bool, default=False)
+    parser.add_argument("--suggest_localizer", action="store_true", default=False)
     parser.add_argument(
         "--study_condition",
         type=str,
         help=f"Whether to use a baseline action set or our model [{', '.join([c.value for c in StudyConditionEnum])}]",
     )
+    parser.add_argument(
+        "--use_dynamic_classes",
+        action="store_true",
+        help="Whether to use dynamically generated classes from annotations",
+    )
     args = parser.parse_args()
+
+    # If using dynamic classes, process annotations and create classes
+    if args.use_dynamic_classes:
+        print("Processing annotations and creating dynamic classes...")
+        all_fields, checkbox_fields, processed_jsons, all_form_names = process_annotations()
+        create_dynamic_classes(all_fields, checkbox_fields, all_form_names)
+        print(f"Created dynamic classes for {len(all_form_names)} forms")
 
     # Validate the task argument
     task = TaskEnum(args.task).value
@@ -88,8 +103,28 @@ if __name__ == "__main__":
         ]
         doc_state = DocState(annots, blank_img=blank_img, doc_id=fid)
 
-        relevant_user_features = get_relevant_user_features(doc_state)
-        user_profile = user_features.UserProfile(i, relevant_user_features)
+        # Get form name from the file ID (assuming format like "formname_0_0")
+        form_name = fid.split('_')[0]
+        
+        if args.use_dynamic_classes:
+            # Create user profile using dynamic classes for this form
+            user_profile = FormUserProfile(form_name=form_name)
+            # Get all form fields for this form from the dynamic registry
+            form_fields = []
+            for field_name, field_class in form_field_types.FormFieldMeta.registry.items():
+                if field_name.endswith(f"_{form_name}"):
+                    form_fields.append({
+                        "field": field_class,
+                        "id": field_name,
+                        "prefilled": False
+                    })
+            # Update doc_state with dynamic form fields
+            doc_state.fields = form_fields
+        else:
+            # Original behavior
+            relevant_user_features = get_relevant_user_features(doc_state)
+            user_profile = user_features.UserProfile(i, relevant_user_features)
+
         nl_profile = "\n".join(user_profile.get_nl_profile())
 
         db = SqlDb(user_profile=user_profile)
