@@ -15,7 +15,8 @@ from PIL import Image
 import pandas as pd
 import inspect
 import re
-
+import numpy as np
+from datetime import datetime
 
 def get_relevant_user_features(doc_state: DocState) -> set:
     def _get_referenced_features(src_code: str) -> set:
@@ -105,10 +106,10 @@ if __name__ == "__main__":
         "--file_ids", type=str, nargs="+", help="List of file ids, e.g. al_0_0"
     )
     parser.add_argument("--k_missing_fields", type=int, default=1)
-    parser.add_argument("--max_actions_multiplier", type=int, default=2)
+    parser.add_argument("--max_turns", type=int, default=10)
     parser.add_argument("--suggest_localizer", type=bool, default=False)
-    parser.add_argument("--source_doc_id", type=str, default=None)
-    parser.add_argument("--user_idx", type=int)
+    # parser.add_argument("--source_doc_id", type=str, default=None)
+    parser.add_argument("--user_idx", type=int, default=0)
     parser.add_argument(
         "--study_condition",
         type=str,
@@ -120,6 +121,10 @@ if __name__ == "__main__":
         help=f"Whether to use a baseline action set or our model [{', '.join([c.value for c in ProfileSourceEnum])}]",
         default=ProfileSourceEnum.TEXT.value,
     )
+
+    today = datetime.now().strftime("%Y-%m-%d")
+    now = datetime.now().strftime("%H:%M:%S")
+
     args = parser.parse_args()
 
     # Validate the task argument
@@ -127,11 +132,15 @@ if __name__ == "__main__":
     study_condition = StudyConditionEnum(args.study_condition).value
     profile_source = ProfileSourceEnum(args.profile_source).value
     BATCH_SIZE = min(2, len(args.file_ids))
+
     # set up the db
 
     # Prepare list to collect per-file data for batch processing
     all_files = []
     for i, fid in enumerate(args.file_ids):
+        if "al" not in fid:
+            assert args.profile_source == ProfileSourceEnum.TEXT.value, "Only auto loan docs dataset supports document transfer setting"
+        source_doc_id = (int(fid.split("_")[1]) - 1) % 4 # use the previous doc as the source doc
         png_path = f"pngs/{fid}.png"
         print(f"Processing file: {png_path}")
 
@@ -161,7 +170,7 @@ if __name__ == "__main__":
 
         db = SqlDb(user_profile=user_profile)
 
-        action_count = 0
+        turn_count = 0
 
         flow = None
         if task == TaskEnum.ONESHOT.value:
@@ -218,7 +227,7 @@ if __name__ == "__main__":
                 "nl_profile": nl_profile,
                 "png_path": png_path,
                 "blank_img": blank_img,
-                "action_count": action_count,
+                "turn_count": turn_count,
                 "flow": flow,
                 "targets": targets,
                 # fields calculated dynamically
@@ -229,7 +238,7 @@ if __name__ == "__main__":
                     []
                 ],  # fill first with empty list since no actions are taken during the prep
                 "active": [True],
-                "max_actions": args.max_actions_multiplier * len(targets),
+                "max_turns": args.max_turns,
                 "feedback": [],
                 "source_doc_img": source_doc_img,
             }
@@ -305,7 +314,7 @@ if __name__ == "__main__":
                 example["active"].append(example_should_be_active(example=example))
                 print
 
-    metrics_summary = []
+    file_wise_metrics = []
     for example in df.iloc:
         doc_state = example["doc_state"][-1]
         user_profile = example["user_profile"]
@@ -322,24 +331,60 @@ if __name__ == "__main__":
                 continue
             if field["correct"]:
                 correct_count += 1
-        overall_acc = correct_count / total_count
+        file_acc = correct_count / total_count
         models.visualize_preds(
             doc_state=doc_state,
             fields=result.fields,
             img=example["blank_img"],
         )
-        metrics_summary.append(
+        file_wise_metrics.append(
             {
                 "png_file": example["png_path"],
-                "overall_accuracy": overall_acc,
-                "action_count": example["action_count"],
+                "overall_accuracy": file_acc,
+                "turn_count": example["turn_count"],
+                "flow": example["flow"],
+                # "study_condition": args.study_condition,
             }
         )
 
     # Print summary of metrics for all processed images
     print("Summary of Metrics:")
-    for metrics in metrics_summary:
+    for metrics in file_wise_metrics:
         print(
-            f"File: {metrics['png_file']}, Overall Accuracy: {metrics['overall_accuracy']:.2f}, Actions: {metrics['action_count']}"
+            f"File: {metrics['png_file']}, Overall Accuracy: {metrics['overall_accuracy']:.2f}, Actions: {metrics['turn_count']}"
         )
-    print
+
+    average_acc = sum([m["overall_accuracy"] for m in file_wise_metrics]) / len(
+        file_wise_metrics
+    )
+    acc_std = np.std([m["overall_accuracy"] for m in file_wise_metrics])
+
+    # print average acc and acc std to a markdown file
+
+    save_path = f"results/{args.model_name.replace('/', '_')}/{today}/{now}.md"
+    with open("metrics.md", "w") as f:
+        f.write("# Form Filler Metrics Report\n\n")
+
+        # Write input parameters
+        f.write("## Input Parameters\n")
+        f.write(f"- Model Type: {args.model_type}\n")
+        f.write(f"- Model Name: {args.model_name}\n")
+        f.write(f"- Task: {args.task}\n")
+        f.write(f"- Study Condition: {args.study_condition}\n")
+        f.write(f"- File IDs: {', '.join(args.file_ids)}\n")
+        f.write(f"- Suggest Localizer: {args.suggest_localizer}\n\n")
+        f.write(f"- User Index: {args.user_idx}\n\n")
+
+        # Write summary metrics
+        f.write("## Summary Metrics\n")
+        f.write(f"- Average Accuracy: {average_acc:.2f}\n")
+        f.write(f"- Accuracy Standard Deviation: {acc_std:.2f}\n\n")
+
+        # Write raw data
+        f.write("## Raw Data\n")
+        f.write("| File | Accuracy | Actions |\n")
+        f.write("|------|----------|---------|\n")
+        for metrics in file_wise_metrics:
+            f.write(
+                f"| {metrics['png_file']} | {metrics['overall_accuracy']:.2f} | {metrics['turn_count']} |\n"
+            )

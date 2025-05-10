@@ -3,7 +3,6 @@
 
 output.png
 tool/checkpoints
-tool/dataset
 wandb
 test.py
 
@@ -51,7 +50,7 @@ venv.bak/
 # Project specific
 # Generated files and directories
 tmp/
-*.png
+# *.png
 .joblib_cache/
 static/
 pdfs/
