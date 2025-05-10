@@ -16,7 +16,7 @@ import pandas as pd
 import inspect
 import re
 import numpy as np
-
+from datetime import datetime
 
 def get_relevant_user_features(doc_state: DocState) -> set:
     def _get_referenced_features(src_code: str) -> set:
@@ -60,13 +60,17 @@ if __name__ == "__main__":
         "--file_ids", type=str, nargs="+", help="List of file ids, e.g. al_0_0"
     )
     parser.add_argument("--k_missing_fields", type=int, default=1)
-    parser.add_argument("--max_actions_multiplier", type=int, default=2)
+    parser.add_argument("--max_turns", type=int, default=10)
     parser.add_argument("--suggest_localizer", type=bool, default=False)
     parser.add_argument(
         "--study_condition",
         type=str,
         help=f"Whether to use a baseline action set or our model [{', '.join([c.value for c in StudyConditionEnum])}]",
     )
+
+    today = datetime.now().strftime("%Y-%m-%d")
+    now = datetime.now().strftime("%H:%M:%S")
+
     args = parser.parse_args()
 
     # Validate the task argument
@@ -95,7 +99,7 @@ if __name__ == "__main__":
 
         db = SqlDb(user_profile=user_profile)
 
-        action_count = 0
+        turn_count = 0
 
         flow = None
         if task == TaskEnum.ONESHOT.value:
@@ -152,7 +156,7 @@ if __name__ == "__main__":
                 "nl_profile": nl_profile,
                 "png_path": png_path,
                 "blank_img": blank_img,
-                "action_count": action_count,
+                "turn_count": turn_count,
                 "flow": flow,
                 "targets": targets,
                 # fields calculated dynamically
@@ -163,7 +167,7 @@ if __name__ == "__main__":
                     []
                 ],  # fill first with empty list since no actions are taken during the prep
                 "active": [True],
-                "max_actions": args.max_actions_multiplier * len(targets),
+                "max_turns": args.max_turns,
                 "feedback": [],
             }
         )
@@ -264,7 +268,7 @@ if __name__ == "__main__":
             {
                 "png_file": example["png_path"],
                 "overall_accuracy": file_acc,
-                "action_count": example["action_count"],
+                "turn_count": example["turn_count"],
                 "flow": example["flow"],
                 # "study_condition": args.study_condition,
             }
@@ -274,7 +278,7 @@ if __name__ == "__main__":
     print("Summary of Metrics:")
     for metrics in file_wise_metrics:
         print(
-            f"File: {metrics['png_file']}, Overall Accuracy: {metrics['overall_accuracy']:.2f}, Actions: {metrics['action_count']}"
+            f"File: {metrics['png_file']}, Overall Accuracy: {metrics['overall_accuracy']:.2f}, Actions: {metrics['turn_count']}"
         )
 
     average_acc = sum([m["overall_accuracy"] for m in file_wise_metrics]) / len(
@@ -283,6 +287,8 @@ if __name__ == "__main__":
     acc_std = np.std([m["overall_accuracy"] for m in file_wise_metrics])
 
     # print average acc and acc std to a markdown file
+
+    save_path = f"results/{args.model_name.replace('/', '_')}/{today}/{now}.md"
     with open("metrics.md", "w") as f:
         f.write("# Form Filler Metrics Report\n\n")
 
@@ -293,8 +299,6 @@ if __name__ == "__main__":
         f.write(f"- Task: {args.task}\n")
         f.write(f"- Study Condition: {args.study_condition}\n")
         f.write(f"- File IDs: {', '.join(args.file_ids)}\n")
-        f.write(f"- K Missing Fields: {args.k_missing_fields}\n")
-        f.write(f"- Max Actions Multiplier: {args.max_actions_multiplier}\n")
         f.write(f"- Suggest Localizer: {args.suggest_localizer}\n\n")
 
         # Write summary metrics
@@ -308,5 +312,5 @@ if __name__ == "__main__":
         f.write("|------|----------|---------|\n")
         for metrics in file_wise_metrics:
             f.write(
-                f"| {metrics['png_file']} | {metrics['overall_accuracy']:.2f} | {metrics['action_count']} |\n"
+                f"| {metrics['png_file']} | {metrics['overall_accuracy']:.2f} | {metrics['turn_count']} |\n"
             )
