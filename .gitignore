@@ -50,7 +50,7 @@ venv.bak/
 # Project specific
 # Generated files and directories
 tmp/
-*.png
+# *.png
 .joblib_cache/
 static/
 pdfs/
