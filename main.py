@@ -18,6 +18,7 @@ from PIL import Image
 import pandas as pd
 import inspect
 import re
+import numpy as np
 
 
 def get_relevant_user_features(doc_state: DocState) -> set:
@@ -262,7 +263,6 @@ if __name__ == "__main__":
 
                 # Generate and save visualization of the updated document state
                 example["img"].append(
-
                     doc_state.get_image_of_state(
                         save_path=f"tmp/{example['fid']}-{len(example['doc_state'])}.png"
                     )
@@ -272,7 +272,7 @@ if __name__ == "__main__":
                 example["active"].append(example_should_be_active(example=example))
                 print
 
-    metrics_summary = []
+    file_wise_metrics = []
     for example in df.iloc:
         doc_state = example["doc_state"][-1]
         user_profile = example["user_profile"]
@@ -289,24 +289,59 @@ if __name__ == "__main__":
                 continue
             if field["correct"]:
                 correct_count += 1
-        overall_acc = correct_count / total_count
+        file_acc = correct_count / total_count
         models.visualize_preds(
             doc_state=doc_state,
             fields=result.fields,
             img=example["blank_img"],
         )
-        metrics_summary.append(
+        file_wise_metrics.append(
             {
                 "png_file": example["png_path"],
-                "overall_accuracy": overall_acc,
+                "overall_accuracy": file_acc,
                 "action_count": example["action_count"],
+                "flow": example["flow"],
+                # "study_condition": args.study_condition,
             }
         )
 
     # Print summary of metrics for all processed images
     print("Summary of Metrics:")
-    for metrics in metrics_summary:
+    for metrics in file_wise_metrics:
         print(
             f"File: {metrics['png_file']}, Overall Accuracy: {metrics['overall_accuracy']:.2f}, Actions: {metrics['action_count']}"
         )
-    print
+
+    average_acc = sum([m["overall_accuracy"] for m in file_wise_metrics]) / len(
+        file_wise_metrics
+    )
+    acc_std = np.std([m["overall_accuracy"] for m in file_wise_metrics])
+
+    # print average acc and acc std to a markdown file
+    with open("metrics.md", "w") as f:
+        f.write("# Form Filler Metrics Report\n\n")
+
+        # Write input parameters
+        f.write("## Input Parameters\n")
+        f.write(f"- Model Type: {args.model_type}\n")
+        f.write(f"- Model Name: {args.model_name}\n")
+        f.write(f"- Task: {args.task}\n")
+        f.write(f"- Study Condition: {args.study_condition}\n")
+        f.write(f"- File IDs: {', '.join(args.file_ids)}\n")
+        f.write(f"- K Missing Fields: {args.k_missing_fields}\n")
+        f.write(f"- Max Actions Multiplier: {args.max_actions_multiplier}\n")
+        f.write(f"- Suggest Localizer: {args.suggest_localizer}\n\n")
+
+        # Write summary metrics
+        f.write("## Summary Metrics\n")
+        f.write(f"- Average Accuracy: {average_acc:.2f}\n")
+        f.write(f"- Accuracy Standard Deviation: {acc_std:.2f}\n\n")
+
+        # Write raw data
+        f.write("## Raw Data\n")
+        f.write("| File | Accuracy | Actions |\n")
+        f.write("|------|----------|---------|\n")
+        for metrics in file_wise_metrics:
+            f.write(
+                f"| {metrics['png_file']} | {metrics['overall_accuracy']:.2f} | {metrics['action_count']} |\n"
+            )
