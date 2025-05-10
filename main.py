@@ -19,6 +19,7 @@ import pandas as pd
 import inspect
 import re
 import numpy as np
+from pathlib import Path
 
 
 def get_relevant_user_features(doc_state: DocState) -> set:
@@ -75,29 +76,54 @@ if __name__ == "__main__":
         action="store_true",
         help="Whether to use dynamically generated classes from annotations",
     )
+    parser.add_argument(
+        "--dataset_name",
+        type=str,
+        help="Name of the dataset to use when use_dynamic_classes is enabled",
+    )
     args = parser.parse_args()
-
-    # If using dynamic classes, process annotations and create classes
-    if args.use_dynamic_classes:
-        print("Processing annotations and creating dynamic classes...")
-        all_fields, checkbox_fields, processed_jsons, all_form_names = process_annotations()
-        create_dynamic_classes(all_fields, checkbox_fields, all_form_names)
-        print(f"Created dynamic classes for {len(all_form_names)} forms")
 
     # Validate the task argument
     task = TaskEnum(args.task).value
     study_condition = StudyConditionEnum(args.study_condition).value
-    BATCH_SIZE = min(2, len(args.file_ids))
+
+    # If using dynamic classes, get files from dataset directory
+    if args.use_dynamic_classes:
+        if not args.dataset_name:
+            raise ValueError("dataset_name must be provided when use_dynamic_classes is enabled")
+        print("Processing annotations and creating dynamic classes...")
+        dataset_path = f"tool/dataset/{args.dataset_name}"
+        all_fields, checkbox_fields, processed_jsons, all_form_names = process_annotations(dataset_path)
+        create_dynamic_classes(all_fields, checkbox_fields, all_form_names)
+        print(f"Created dynamic classes for {len(all_form_names)} forms")
+
+        # Get all image files from the dataset directory
+        image_dir = Path(f"{dataset_path}/images")
+        file_ids = [f.stem for f in image_dir.glob("*.png")]
+        if not file_ids:
+            raise ValueError(f"No PNG files found in {image_dir}")
+        print(f"Found {len(file_ids)} files in dataset directory")
+    else:
+        file_ids = args.file_ids
+        if not file_ids:
+            raise ValueError("file_ids must be provided when use_dynamic_classes is disabled")
+
+    BATCH_SIZE = min(2, len(file_ids))
     # set up the db
 
     # Prepare list to collect per-file data for batch processing
     all_files = []
-    for i, fid in enumerate(args.file_ids):
-        png_path = f"pngs/{fid}.png"
+    for i, fid in enumerate(file_ids):
+        if args.use_dynamic_classes:
+            png_path = f"{dataset_path}/images/{fid}.png"
+            annot_path = f"{dataset_path}/annotations/{fid}_processed.json"
+        else:
+            png_path = f"pngs/{fid}.png"
+            annot_path = f"annotations/{fid}.json"
+            
         print(f"Processing file: {png_path}")
 
         blank_img = Image.open(png_path).convert("RGB")
-        annot_path = f"annotations/{fid}.json"
         annots = annotations.read_annotations(annot_path)
         targets = annotations.read_targets(f"targets/{fid}_targets.json")[
             "selected_ids"

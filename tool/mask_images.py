@@ -85,9 +85,9 @@ def process_images(bounding_boxes_file, images_dir, output_dir):
 
 if __name__ == "__main__":
     # Paths
-    bounding_boxes_file = "dataset/all_bounding_boxes.txt"
-    images_dir = "dataset/raw/images"
-    output_dir = "dataset/processed/images"
+    bounding_boxes_file = "./dataset/funsd/all_bounding_boxes.txt"
+    images_dir = "./dataset/funsd/images"
+    output_dir = "./dataset/processed/funsd/images"
     
     # Process images
     process_images(bounding_boxes_file, images_dir, output_dir)
