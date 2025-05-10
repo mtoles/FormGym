@@ -3,7 +3,6 @@
 
 output.png
 tool/checkpoints
-tool/dataset
 wandb
 test.py
 
