@@ -3,11 +3,14 @@ from PIL import ImageFont, Image, ImageDraw
 from typing import List
 
 
-class TaskEnum(Enum):
-    MULTISHOT = "iterative"
-    ONESHOT = "oneshot"
-    UPDATE = "update"
+# class TaskEnum(Enum):
+#     MULTISHOT = "iterative"
+#     ONESHOT = "oneshot"
 
+class DomainEnum(Enum):
+    AL = "al"  # auto loans
+    CR = "cr"  # consolidated report of income
+    FUN = "fun"  # funsd/xfund
 
 class FlowEnum(Enum):
     ONESHOT = "oneshot"
@@ -59,3 +62,11 @@ def get_text_bbox(
         "width": text_width,
         "height": text_height,
     }
+
+def get_domain_from_doc_id(doc_id: str) -> DomainEnum:
+    if doc_id.startswith("al_"):
+        return DomainEnum.AL
+    elif doc_id.startswith("cr_"):
+        return DomainEnum.CR
+    else:
+        raise ValueError(f"Invalid document ID: {doc_id}")

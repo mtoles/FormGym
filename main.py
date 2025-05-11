@@ -33,7 +33,9 @@ def get_relevant_user_features(doc_state: DocState) -> set:
         rec_matches = []
         get_profile_info_matches = re.findall(get_profile_info_pattern, src_code)
         for match in get_profile_info_matches:
-            rec_matches.extend(_get_referenced_features(inspect.getsource(FieldMeta.registry[match])))
+            rec_matches.extend(
+                _get_referenced_features(inspect.getsource(FieldMeta.registry[match]))
+            )
         return set(feat_matches + other_matches + rec_matches)
 
     referenced_features = set()
@@ -43,6 +45,9 @@ def get_relevant_user_features(doc_state: DocState) -> set:
         referenced_features_in_field = _get_referenced_features(src_code)
         assert referenced_features_in_field, f"No features referenced in {field_cls}"
         referenced_features.update(referenced_features_in_field)
+
+    # drop database features (CROI)
+    referenced_features = {f for f in referenced_features if not f.startswith("CROI")}
 
     return referenced_features
 
@@ -63,7 +68,9 @@ def get_completed_source_doc(source_doc_id: str, user_idx):
 
     # Get relevant user features and create user profile
     source_doc_relevant_user_features = get_relevant_user_features(doc_state)
-    user_profile = user_features.UserProfile(user_idx, source_doc_relevant_user_features)
+    user_profile = user_features.UserProfile(
+        user_idx, source_doc_relevant_user_features
+    )
     nl_profile = "\n".join(user_profile.get_nl_profile())
 
     # Create database connection
@@ -134,13 +141,12 @@ if __name__ == "__main__":
     parser.add_argument("--note", type=str, default="no_note")
     args = parser.parse_args()
 
-
     today = datetime.now().strftime("%Y-%m-%d")
     now = datetime.now().strftime("%H:%M:%S")
     save_dir = f"results/{args.note}/{args.model_name.replace('/', '_')}/{today}/{now}/"
 
     # Validate the task argument
-    task = TaskEnum(args.task).value
+    flow = FlowEnum(args.task).value
     study_condition = StudyConditionEnum(args.study_condition).value
     profile_source = ProfileSourceEnum(args.profile_source).value
     BATCH_SIZE = min(2, len(args.file_ids))
@@ -151,8 +157,13 @@ if __name__ == "__main__":
     all_files = []
     for i, fid in enumerate(args.file_ids):
         if "al" not in fid:
-            assert args.profile_source == ProfileSourceEnum.TEXT.value, "Only auto loan docs dataset supports document transfer setting"
-        source_doc_no = (int(fid.split("_")[1]) - 1) % 4 # use the previous doc as the source doc
+            assert (
+                args.profile_source == ProfileSourceEnum.TEXT.value
+            ), "Only auto loan docs dataset supports document transfer setting"
+        domain = get_domain_from_doc_id(fid).value
+        source_doc_no = (
+            int(fid.split("_")[1]) - 1
+        ) % 4  # use the previous doc as the source doc
         source_doc_id = f"al_{source_doc_no}_0"
         png_path = f"pngs/{fid}.png"
         print(f"Processing file: {png_path}")
@@ -172,31 +183,43 @@ if __name__ == "__main__":
             nl_profile = "\n".join(user_profile.get_nl_profile())
             source_doc_img = None
         else:
-            assert fid.startswith(
-                "al_"
+            assert (
+                domain == DomainEnum.AL
             ), "Only auto loan docs dataset supports document transfer setting"
             # nl_profile = "<Refer to the source image for information on the user>"
-            source_doc_img, source_doc_relevant_user_features = get_completed_source_doc(source_doc_id, args.user_idx)
-            user_features_not_in_source_doc = relevant_user_features - source_doc_relevant_user_features
-            user_profile = user_features.UserProfile(args.user_idx, relevant_user_features) # only used for creating the nl profile, which has reduced info when source doc is provided
+            source_doc_img, source_doc_relevant_user_features = (
+                get_completed_source_doc(source_doc_id, args.user_idx)
+            )
+            user_features_not_in_source_doc = (
+                relevant_user_features - source_doc_relevant_user_features
+            )
+            user_profile = user_features.UserProfile(
+                args.user_idx, relevant_user_features
+            )  # only used for creating the nl profile, which has reduced info when source doc is provided
 
-            nl_user_profile = user_features.UserProfile(args.user_idx, user_features_not_in_source_doc)
-            nl_profile = "\n".join(nl_user_profile.get_nl_profile()) if user_features_not_in_source_doc else "<Refer to the source image for information on the user>"
+            nl_user_profile = user_features.UserProfile(
+                args.user_idx, user_features_not_in_source_doc
+            )
+            nl_profile = (
+                "\n".join(nl_user_profile.get_nl_profile())
+                if user_features_not_in_source_doc
+                else "<Refer to the source image for information on the user>"
+            )
 
         db = SqlDb(user_profile=user_profile)
 
         turn_count = 0
 
-        flow = None
-        if task == TaskEnum.ONESHOT.value:
-            flow = FlowEnum.ONESHOT.value
+        # flow = None
+        if flow == FlowEnum.ONESHOT.value:
+            # flow = FlowEnum.ONESHOT.value
             if study_condition == StudyConditionEnum.BASELINE.value:
                 available_actions = AvailableActionsEnum.BASELINE_ONESHOT.value
             else:
                 available_actions = AvailableActionsEnum.EXPERIMENTAL_ONESHOT.value
 
-        elif task == TaskEnum.MULTISHOT.value:
-            flow = FlowEnum.ITERATIVE.value
+        elif flow == FlowEnum.ITERATIVE.value:
+            # flow = FlowEnum.ITERATIVE.value
             cheater_model = models.CheaterModel(
                 doc_state=doc_state, user_profile=user_profile
             )
@@ -234,7 +257,8 @@ if __name__ == "__main__":
             #
         else:
             raise ValueError(f"Invalid task specified: {args.task}")
-
+        if domain == DomainEnum.CR.value:
+            available_actions.append("QuerySql")
         all_files.append(
             {
                 "fid": fid,
@@ -380,11 +404,13 @@ if __name__ == "__main__":
     # Save raw data to jsonl, keeping only json-serializable columns
     json_serializable_df = df.copy()
     # Drop columns with non-serializable objects like PIL Images
-    json_serializable_df = json_serializable_df.drop(columns=['blank_img', "user_profile", "doc_state", "img", "source_doc_img"])
-    
+    json_serializable_df = json_serializable_df.drop(
+        columns=["blank_img", "user_profile", "doc_state", "img", "source_doc_img"]
+    )
+
     os.makedirs(os.path.dirname(data_save_path), exist_ok=True)
-    json_serializable_df.to_json(data_save_path, orient='records', lines=True)
-    
+    json_serializable_df.to_json(data_save_path, orient="records", lines=True)
+
     os.makedirs(os.path.dirname(results_save_path), exist_ok=True)
     with open(results_save_path, "w") as f:
         f.write("# Form Filler Metrics Report\n\n")
