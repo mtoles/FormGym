@@ -146,7 +146,7 @@ if __name__ == "__main__":
             targets_path = f"tool/dataset/processed/{args.dataset_name}/targets/{fid}_targets.json"
             # Get form name from the file ID (assuming format like "formname_0_0")
             form_name = fid.split('_')[0]
-            annots = annotations.read_annotations_dynamic(bounding_boxes_path, annot_path, form_name)
+            annots = annotations.read_annotations_dynamic(bounding_boxes_path, form_name)
         else:
             png_path = f"pngs/{fid}.png"
             annot_path = f"annotations/{fid}.json"

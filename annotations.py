@@ -56,13 +56,12 @@ def read_targets(filename):
         data = json.load(f)
     return data
 
-def read_annotations_dynamic(bounding_boxes_path, annot_path, form_name):
+def read_annotations_dynamic(bounding_boxes_path, form_name):
     """
     Read annotations using dynamic classes from the registry.
     
     Args:
-        bounding_boxes_path: Path to the bounding boxes JSON file
-        annot_path: Path to the annotations JSON file
+        bounding_boxes_path: Path to the bounding boxes JSON file containing annotations
         form_name: Name of the form to get dynamic classes for
     """
     # Load the bounding boxes data
@@ -71,15 +70,7 @@ def read_annotations_dynamic(bounding_boxes_path, annot_path, form_name):
     doc_width = bbox_data["item"]["slots"][0]["width"]
     doc_height = bbox_data["item"]["slots"][0]["height"]
 
-    # Load the annotations data
-    with open(annot_path, "r") as file:
-        annot_data = json.load(file)
-
-    # Extract annotations
-    annotations = []
-    missing_fields = []
-    
-    # Get all dynamic classes for this form from registry
+    # Get all form fields for this form from the dynamic registry
     form_fields = {}
     for field_name, field_class in form_field_types.FormFieldMeta.registry.items():
         if field_name.endswith(f"_{form_name}"):
@@ -87,7 +78,11 @@ def read_annotations_dynamic(bounding_boxes_path, annot_path, form_name):
             base_name = field_name[:-len(f"_{form_name}")]
             form_fields[base_name] = field_class
 
-    for annotation in annot_data.get("annotations", []):
+    # Extract annotations
+    annotations = []
+    missing_fields = []
+
+    for annotation in bbox_data.get("annotations", []):
         try:
             # Get the field class from our form-specific registry
             field_class = form_fields[annotation["name"]]
