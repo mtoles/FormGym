@@ -118,13 +118,12 @@ if __name__ == "__main__":
         if not args.dataset_name:
             raise ValueError("dataset_name must be provided when use_dynamic_classes is enabled")
         print("Processing annotations and creating dynamic classes...")
-        dataset_path = f"tool/dataset/{args.dataset_name}"
-        all_fields, checkbox_fields, processed_jsons, all_form_names = process_annotations(dataset_path)
+        all_fields, checkbox_fields, processed_jsons, all_form_names = process_annotations()
         create_dynamic_classes(all_fields, checkbox_fields, all_form_names)
         print(f"Created dynamic classes for {len(all_form_names)} forms")
 
         # Get all image files from the dataset directory
-        image_dir = Path(f"{dataset_path}/images")
+        image_dir = Path(f"tool/dataset/{args.dataset_name}/images")
         file_ids = [f.stem for f in image_dir.glob("*.png")]
         if not file_ids:
             raise ValueError(f"No PNG files found in {image_dir}")
@@ -141,7 +140,7 @@ if __name__ == "__main__":
     all_files = []
     for i, fid in enumerate(file_ids):
         if args.use_dynamic_classes:
-            png_path = f"{dataset_path}/images/{fid}.png"
+            png_path = f"tool/dataset/{args.dataset_name}/images/{fid}.png"
             bounding_boxes_path = f"tool/dataset/processed/{args.dataset_name}/bounding_boxes/{fid}.json"
             annot_path = f"tool/dataset/processed/{args.dataset_name}/annotations/{fid}_processed.json"
             targets_path = f"tool/dataset/processed/{args.dataset_name}/targets/{fid}_targets.json"
