@@ -26,6 +26,18 @@ from prompt import parse_raw_output
 from json import JSONDecodeError
 import textwrap
 from anthropic import Anthropic
+import random
+from tenacity import (
+    retry,
+    stop_after_attempt,
+    wait_exponential,
+    retry_if_exception_type,
+)
+from openai import APIError, RateLimitError, APITimeoutError, APIConnectionError
+from anthropic import (
+    APIError as AnthropicAPIError,
+    RateLimitError as AnthropicRateLimitError,
+)
 
 memory = Memory(".joblib_cache", verbose=0)
 
@@ -472,7 +484,9 @@ class GptModelE2E:
         source_doc_image: List[Image.Image] = None,
     ) -> List[Dict]:
         outputs = []
-        for profile, image, f in zip(nl_profile, doc_image, flow):
+        for profile, image, f, source_image in zip(
+            nl_profile, doc_image, flow, source_doc_image
+        ):
             prompt = get_e2e_prompt(
                 user_profile=profile,
                 api_documentation=ActionMeta.all_documentation(
@@ -499,8 +513,11 @@ class GptModelE2E:
                     self.model_name,
                     prompt,
                     image_b64,
-                    source_image_b64=(
-                        source_doc_image[0].tobytes() if source_doc_image else None
+                    base64_source_image=(
+                        # source_doc_image[0].tobytes() if source_doc_image else None
+                        None
+                        if source_image is None
+                        else source_image.tobytes()
                     ),
                 )
                 .choices[0]
@@ -512,7 +529,50 @@ class GptModelE2E:
         return outputs
 
 
+def exponential_backoff(func):
+    """Decorator that implements exponential backoff for API calls.
+
+    Args:
+        func: The function to wrap with exponential backoff
+
+    Returns:
+        The wrapped function that will retry on failure with exponential backoff
+    """
+
+    @retry(
+        stop=stop_after_attempt(12),  
+        wait=wait_exponential(
+            multiplier=2,
+        ),
+        retry=retry_if_exception_type(
+            (
+                # OpenAI specific errors
+                APIError,
+                RateLimitError,
+                APITimeoutError,
+                APIConnectionError,
+                # Anthropic specific errors
+                AnthropicAPIError,
+                AnthropicRateLimitError,
+                # General network errors
+                ConnectionError,
+                TimeoutError,
+            )
+        ),
+        reraise=True,
+    )
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            print(f"API call failed with error: {str(e)}")
+            raise
+
+    return wrapper
+
+
 @memory.cache
+@exponential_backoff
 def forward_gpt(model_name, prompt, base64_image, base64_source_image=None):
     print("calling gpt uncached...")
     client = OpenAI()
@@ -556,6 +616,7 @@ def forward_gpt(model_name, prompt, base64_image, base64_source_image=None):
 
 
 @memory.cache
+@exponential_backoff
 def forward_anthropic(model_name, prompt, base64_image, base64_source_image=None):
     print("calling anthropic uncached...")
     client = Anthropic()
@@ -622,7 +683,9 @@ class AnthropicModelE2E:
         source_doc_image: List[Image.Image] = None,
     ) -> List[Dict]:
         outputs = []
-        for profile, image, f in zip(nl_profile, doc_image, flow):
+        for profile, image, f, source_image in zip(
+            nl_profile, doc_image, flow, source_doc_image
+        ):
             prompt = get_e2e_prompt(
                 user_profile=profile,
                 api_documentation=ActionMeta.all_documentation(
@@ -644,9 +707,9 @@ class AnthropicModelE2E:
             base64_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
 
             base64_source_image = None
-            if source_doc_image:
+            if source_image:
                 source_buffer = io.BytesIO()
-                source_doc_image[0].save(source_buffer, format="PNG")
+                source_image.save(source_buffer, format="PNG")
                 base64_source_image = base64.b64encode(source_buffer.getvalue()).decode(
                     "utf-8"
                 )

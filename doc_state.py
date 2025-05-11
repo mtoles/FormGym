@@ -2,8 +2,11 @@ import random
 from typing import List
 from PIL import Image, ImageDraw
 from utils import *
+import os
+
 # seed
 random.seed(0)
+
 
 class DocState:
     """
@@ -30,7 +33,7 @@ class DocState:
         popped = self.marks[-k:]
         self.marks = self.marks[:-k]
         return popped
-    
+
     def pop_target_fields(self, targets: List[str]):
         """Edits the doc state IN PLACE and pops/returns the target fields"""
         remaining_fields = []
@@ -43,10 +46,8 @@ class DocState:
                 remaining_fields.append(mark)
         self.marks = remaining_fields
         return target_fields
-            
-    def get_image_of_state(
-        self, save_path: str = None
-    ) -> Image.Image:
+
+    def get_image_of_state(self, save_path: str = None) -> Image.Image:
         new_img = self.blank_img.copy()
         text_draw = ImageDraw.Draw(new_img)
         preds = self.marks
@@ -64,7 +65,11 @@ class DocState:
             text = str(pred["value"])
 
             text_draw.text(
-                (x, y), text, fill=color_map[pred["creator"]], font=FILLER_FONT, anchor="mm"
+                (x, y),
+                text,
+                fill=color_map[pred["creator"]],
+                font=FILLER_FONT,
+                anchor="mm",
             )
 
             # # Draw a rectangle based on the bbox
@@ -80,6 +85,7 @@ class DocState:
             # )
         # save the image
         if save_path:
+            os.makedirs(os.path.dirname(save_path), exist_ok=True)
             new_img.save(save_path)
         return new_img  # drawn on
 
@@ -91,5 +97,3 @@ class DocState:
     #     popped = hashed[-k:]
     #     self.marks = self.marks[:-k]
     #     return popped
-
-

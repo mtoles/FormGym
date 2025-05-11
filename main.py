@@ -17,6 +17,10 @@ import inspect
 import re
 import numpy as np
 from datetime import datetime
+import os
+import json
+from fields import FieldMeta
+
 
 def get_relevant_user_features(doc_state: DocState) -> set:
     def _get_referenced_features(src_code: str) -> set:
@@ -24,7 +28,13 @@ def get_relevant_user_features(doc_state: DocState) -> set:
         feat_matches = re.findall(feat_pattern, src_code)
         other_pattern = r"user_profile\.features\.([A-Za-z0-9_]+)"
         other_matches = re.findall(other_pattern, src_code)
-        return set(feat_matches + other_matches)
+        get_profile_info_pattern = r"([A-Za-z0-9_]+)\.get_profile_info"
+
+        rec_matches = []
+        get_profile_info_matches = re.findall(get_profile_info_pattern, src_code)
+        for match in get_profile_info_matches:
+            rec_matches.extend(_get_referenced_features(inspect.getsource(FieldMeta.registry[match])))
+        return set(feat_matches + other_matches + rec_matches)
 
     referenced_features = set()
     for field in doc_state.fields:
@@ -89,7 +99,7 @@ def example_should_be_active(example):
     for action in example["actions"][-1]:
         if action["action"] == "Terminate":
             return False
-    if len(example["doc_state"]) >= example["max_actions"]:
+    if len(example["doc_state"]) >= example["max_turns"]:
         return False
     return True
 
@@ -121,11 +131,13 @@ if __name__ == "__main__":
         help=f"Whether to use a baseline action set or our model [{', '.join([c.value for c in ProfileSourceEnum])}]",
         default=ProfileSourceEnum.TEXT.value,
     )
+    parser.add_argument("--note", type=str, default="no_note")
+    args = parser.parse_args()
+
 
     today = datetime.now().strftime("%Y-%m-%d")
     now = datetime.now().strftime("%H:%M:%S")
-
-    args = parser.parse_args()
+    save_dir = f"results/{args.note}/{args.model_name.replace('/', '_')}/{today}/{now}/"
 
     # Validate the task argument
     task = TaskEnum(args.task).value
@@ -140,7 +152,8 @@ if __name__ == "__main__":
     for i, fid in enumerate(args.file_ids):
         if "al" not in fid:
             assert args.profile_source == ProfileSourceEnum.TEXT.value, "Only auto loan docs dataset supports document transfer setting"
-        source_doc_id = (int(fid.split("_")[1]) - 1) % 4 # use the previous doc as the source doc
+        source_doc_no = (int(fid.split("_")[1]) - 1) % 4 # use the previous doc as the source doc
+        source_doc_id = f"al_{source_doc_no}_0"
         png_path = f"pngs/{fid}.png"
         print(f"Processing file: {png_path}")
 
@@ -163,10 +176,12 @@ if __name__ == "__main__":
                 "al_"
             ), "Only auto loan docs dataset supports document transfer setting"
             # nl_profile = "<Refer to the source image for information on the user>"
-            source_doc_img, source_doc_relevant_user_features = get_completed_source_doc(args.source_doc_id, args.user_idx)
+            source_doc_img, source_doc_relevant_user_features = get_completed_source_doc(source_doc_id, args.user_idx)
             user_features_not_in_source_doc = relevant_user_features - source_doc_relevant_user_features
-            user_profile = user_features.UserProfile(args.user_idx, user_features_not_in_source_doc)
-            nl_profile = "\n".join(user_profile.get_nl_profile()) if user_features_not_in_source_doc else "<Refer to the source image for information on the user>"
+            user_profile = user_features.UserProfile(args.user_idx, relevant_user_features) # only used for creating the nl profile, which has reduced info when source doc is provided
+
+            nl_user_profile = user_features.UserProfile(args.user_idx, user_features_not_in_source_doc)
+            nl_profile = "\n".join(nl_user_profile.get_nl_profile()) if user_features_not_in_source_doc else "<Refer to the source image for information on the user>"
 
         db = SqlDb(user_profile=user_profile)
 
@@ -306,7 +321,7 @@ if __name__ == "__main__":
                 # Generate and save visualization of the updated document state
                 example["img"].append(
                     doc_state.get_image_of_state(
-                        save_path=f"tmp/{example['fid']}-{len(example['doc_state'])}.png"
+                        save_path=f"{save_dir}/images/{example['fid']}-{len(example['doc_state'])}.png"
                     )
                 )
 
@@ -360,9 +375,18 @@ if __name__ == "__main__":
     acc_std = np.std([m["overall_accuracy"] for m in file_wise_metrics])
 
     # print average acc and acc std to a markdown file
-
-    save_path = f"results/{args.model_name.replace('/', '_')}/{today}/{now}.md"
-    with open("metrics.md", "w") as f:
+    results_save_path = f"{save_dir}/results.md"
+    data_save_path = f"{save_dir}/history.jsonl"
+    # Save raw data to jsonl, keeping only json-serializable columns
+    json_serializable_df = df.copy()
+    # Drop columns with non-serializable objects like PIL Images
+    json_serializable_df = json_serializable_df.drop(columns=['blank_img', "user_profile", "doc_state", "img", "source_doc_img"])
+    
+    os.makedirs(os.path.dirname(data_save_path), exist_ok=True)
+    json_serializable_df.to_json(data_save_path, orient='records', lines=True)
+    
+    os.makedirs(os.path.dirname(results_save_path), exist_ok=True)
+    with open(results_save_path, "w") as f:
         f.write("# Form Filler Metrics Report\n\n")
 
         # Write input parameters
@@ -374,7 +398,7 @@ if __name__ == "__main__":
         f.write(f"- File IDs: {', '.join(args.file_ids)}\n")
         f.write(f"- Suggest Localizer: {args.suggest_localizer}\n\n")
         f.write(f"- User Index: {args.user_idx}\n\n")
-
+        f.write(f"- Note: {args.note}\n\n")
         # Write summary metrics
         f.write("## Summary Metrics\n")
         f.write(f"- Average Accuracy: {average_acc:.2f}\n")
