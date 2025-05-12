@@ -38,7 +38,6 @@ from anthropic import (
     APIError as AnthropicAPIError,
     RateLimitError as AnthropicRateLimitError,
 )
-from transformers import AutoModelForCausalLM
 
 memory = Memory(".joblib_cache", verbose=0)
 
@@ -120,7 +119,7 @@ def get_e2e_prompt(
     )
     return textwrap.dedent(
         e2e_prompt_template_content.format(
-            user_profile=user_profile if user_profile else "<",
+            user_profile=user_profile if user_profile else "<No user profile provided>",
             api_documentation=api_documentation,
             grid_subprompt=grid_subprompt,
             generation_instructions=generation_instructions,
@@ -757,8 +756,7 @@ class HFE2EModel:
         # TODO - Argument for multiple GPUs
         # engine_args_dict["tensor_parallel_size"] = 4
 
-        # self.llm = LLM(**engine_args_dict)
-        self.llm = self.model.cls.from_pretrained(self.model.engine_args.model)
+        self.llm = LLM(**engine_args_dict)
 
         self.sampling_params = SamplingParams(
             temperature=0.2,
@@ -812,8 +810,7 @@ class HFE2EModel:
             all_inputs.append(input_data)
 
         start_time = time.time()
-        # outputs = self.llm.generate(all_inputs, sampling_params=self.sampling_params)
-        outputs = self.llm.generate(all_inputs, max_new_tokens=64, do_sample=False, stop_token_ids=self.model.stop_token_ids)
+        outputs = self.llm.generate(all_inputs, sampling_params=self.sampling_params)
         elapsed_time = time.time() - start_time
 
         parsed_outputs = []
