@@ -4,7 +4,7 @@ huggingface-hub
 matplotlib
 numpy
 pandas
-Pillow
+pillow
 pydantic
 # torch
 torchvision
@@ -22,3 +22,4 @@ anthropic
 pymupdf
 pybind11
 joblib
+tenacity

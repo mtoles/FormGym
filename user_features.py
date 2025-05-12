@@ -69,6 +69,7 @@ class UserAttributeMeta(type):
 class UserProfile:
     def __init__(self, idx, relevant_features: set):
         self.relevant_features = relevant_features
+
         class Features:
             pass
 
@@ -77,7 +78,9 @@ class UserProfile:
         for name in self.relevant_features:
             attr_class = UserAttributeMeta.registry[name]
             if name in relevant_features:
-                if hasattr(attr_class, "options") and isinstance(attr_class.options, list):
+                if hasattr(attr_class, "options") and isinstance(
+                    attr_class.options, list
+                ):
                     setattr(self.features, name, attr_class.options[idx])
                 else:
                     raise AttributeError(f"Class {name} must have an 'options' list.")
@@ -89,6 +92,7 @@ class UserProfile:
                 nl_profile.append(attr_class.nl_desc(getattr(self.features, name)))
         return nl_profile
 
+
 # metaclass
 # abstract class
 # rattan's abstract class rattans(options, nl_desc)
@@ -96,10 +100,8 @@ class UserProfile:
 # rattans class                                         <- product
 
 
-
 class BaseUserAttr(metaclass=UserAttributeMeta):
     pass
-
 
 
 class BaseUserDbAttr(metaclass=UserAttributeMeta):
@@ -120,8 +122,10 @@ class FirstName(BaseUserAttr):
     @staticmethod
     def nl_desc(option):
         return f"The user's first name is: {option}"
-    
+
+
 # class xyz(BaseUserAttr):
+
 
 class LastName(BaseUserAttr):
     options = ["Reynolds", "Chen", "Patel", "Nguyen"]
@@ -549,7 +553,7 @@ class BankAccountNumber(BaseUserAttr):
 
 
 class BankruptcyStatus(BaseUserAttr):
-    options = ["Yes", "No"]
+    options = ["Yes", "No", "Yes", "No"]
 
     @staticmethod
     def nl_desc(option):
@@ -578,7 +582,7 @@ class AutoBalanceDue(BaseUserAttr):
 
 
 class TradingInCar(BaseUserAttr):
-    options = ["Yes", "No"]
+    options = ["Yes", "No", "Yes", "No"]
 
     @staticmethod
     def nl_desc(option):
@@ -586,7 +590,7 @@ class TradingInCar(BaseUserAttr):
 
 
 class RegisteredCarOwner(BaseUserAttr):
-    options = ["Self", "Spouse"]
+    options = ["Self", "Spouse", "Self", "Spouse"]
 
     @staticmethod
     def nl_desc(option):
@@ -656,7 +660,7 @@ class VehicleMiles(BaseUserAttr):
 
 
 class ApplyingWithJointCredit(BaseUserAttr):
-    options = ["Yes", "No"]
+    options = ["Yes", "No", "Yes", "No"]
 
     @staticmethod
     def nl_desc(option):
@@ -1365,7 +1369,7 @@ class BankruptcyYear(BaseUserAttr):
 
 
 class JointBankruptcyStatus(BaseUserAttr):
-    options = ["Yes", "No"]
+    options = ["Yes", "No", "Yes", "No"]
 
     @staticmethod
     def nl_desc(option):
@@ -1389,7 +1393,7 @@ class TodaysDate(BaseUserAttr):
 
 
 class LoanType(BaseUserAttr):
-    options = [o.value for o in list(LoanTypeEnum) * 4]
+    options = ([o.value for o in LoanTypeEnum] * 4)[:4]
 
     @staticmethod
     def nl_desc(option):
@@ -1397,7 +1401,7 @@ class LoanType(BaseUserAttr):
 
 
 class VehicleLoanCondition(BaseUserAttr):
-    options = [o.value for o in VehicleLoanConditionEnum]
+    options = ([o.value for o in VehicleLoanConditionEnum] * 4)[:4]
 
     @staticmethod
     def nl_desc(option):
@@ -1405,7 +1409,7 @@ class VehicleLoanCondition(BaseUserAttr):
 
 
 class VehicleLoanType(BaseUserAttr):
-    options = [o.value for o in VehicleLoanTypeEnum]
+    options = ([o.value for o in VehicleLoanTypeEnum] * 4)[:4]
 
     @staticmethod
     def nl_desc(option):
@@ -1485,7 +1489,7 @@ class EmployerStreetName(BaseUserAttr):
 
 
 class JointEmployerStreetName(BaseUserAttr):
-    options = ["Cox Rd", "Woodlands Cv", "Patterson Dr"]
+    options = ["Cox Rd", "Woodlands Cv", "Patterson Dr", "12th st"]
 
     @staticmethod
     def nl_desc(option):
@@ -1625,7 +1629,7 @@ class JointDriversLicenseState(BaseUserAttr):
 
 
 class MarriageStatus(BaseUserAttr):
-    options = [o.value for o in MarriageStatusEnum]
+    options = ([o.value for o in MarriageStatusEnum] * 4)[:4]
 
     @staticmethod
     def nl_desc(option):
@@ -1633,7 +1637,7 @@ class MarriageStatus(BaseUserAttr):
 
 
 class JointMarriageStatus(BaseUserAttr):
-    options = [o.value for o in MarriageStatusEnum][::-1]
+    options = ([o.value for o in MarriageStatusEnum] * 4)[:4]
 
     @staticmethod
     def nl_desc(option):

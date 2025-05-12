@@ -38,6 +38,7 @@ from anthropic import (
     APIError as AnthropicAPIError,
     RateLimitError as AnthropicRateLimitError,
 )
+from transformers import AutoModelForCausalLM
 
 memory = Memory(".joblib_cache", verbose=0)
 
@@ -119,7 +120,7 @@ def get_e2e_prompt(
     )
     return textwrap.dedent(
         e2e_prompt_template_content.format(
-            user_profile=user_profile,
+            user_profile=user_profile if user_profile else "<",
             api_documentation=api_documentation,
             grid_subprompt=grid_subprompt,
             generation_instructions=generation_instructions,
@@ -540,7 +541,7 @@ def exponential_backoff(func):
     """
 
     @retry(
-        stop=stop_after_attempt(12),  
+        stop=stop_after_attempt(12),
         wait=wait_exponential(
             multiplier=2,
         ),
@@ -683,8 +684,8 @@ class AnthropicModelE2E:
         source_doc_image: List[Image.Image] = None,
     ) -> List[Dict]:
         outputs = []
-        for profile, image, f, source_image in zip(
-            nl_profile, doc_image, flow, source_doc_image
+        for profile, image, f, source_image, source_doc_image in zip(
+            nl_profile, doc_image, flow, source_doc_image, source_doc_image
         ):
             prompt = get_e2e_prompt(
                 user_profile=profile,
@@ -756,7 +757,8 @@ class HFE2EModel:
         # TODO - Argument for multiple GPUs
         # engine_args_dict["tensor_parallel_size"] = 4
 
-        self.llm = LLM(**engine_args_dict)
+        # self.llm = LLM(**engine_args_dict)
+        self.llm = self.model.cls.from_pretrained(self.model.engine_args.model)
 
         self.sampling_params = SamplingParams(
             temperature=0.2,
@@ -810,7 +812,8 @@ class HFE2EModel:
             all_inputs.append(input_data)
 
         start_time = time.time()
-        outputs = self.llm.generate(all_inputs, sampling_params=self.sampling_params)
+        # outputs = self.llm.generate(all_inputs, sampling_params=self.sampling_params)
+        outputs = self.llm.generate(all_inputs, max_new_tokens=64, do_sample=False, stop_token_ids=self.model.stop_token_ids)
         elapsed_time = time.time() - start_time
 
         parsed_outputs = []

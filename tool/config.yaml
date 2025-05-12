@@ -11,16 +11,6 @@ checkpoint_dir: "tool/checkpoints"
 max_examples_per_image: 100
 # max_iou_examples: 64
 
-# PEFT configuration
-use_peft: false
-peft_config:
-  r: 16
-  lora_alpha: 16
-  lora_dropout: 0.1
-  target_modules: ["q_proj", "v_proj"]
-  bias: "none"
-  task_type: "CAUSAL_LM"
-
 # Dataset paths
 train_paths: ["tool/dataset/processed/funsd_train_qa_pairs.json", "tool/dataset/processed/xfund_train_qa_pairs.json"]
 eval_path: "tool/dataset/processed/funsd_test_qa_pairs.json"

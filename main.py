@@ -47,7 +47,7 @@ def get_relevant_user_features(doc_state: DocState) -> set:
         referenced_features.update(referenced_features_in_field)
 
     # drop database features (CROI)
-    referenced_features = {f for f in referenced_features if not f.startswith("CROI")}
+    # referenced_features = {f for f in referenced_features if not f.startswith("CROI")}
 
     return referenced_features
 
@@ -143,7 +143,8 @@ if __name__ == "__main__":
 
     today = datetime.now().strftime("%Y-%m-%d")
     now = datetime.now().strftime("%H:%M:%S")
-    save_dir = f"results/{args.note}/{args.model_name.replace('/', '_')}/{today}/{now}/"
+    domain = get_domain_from_doc_id(args.file_ids[0]).value
+    save_dir = f"results/{args.note}/{args.model_name.replace('/', '_')}/{domain}/{args.task}/{args.study_condition}/{args.profile_source}/u{args.user_idx}/{today}/{now}/"
 
     # Validate the task argument
     flow = FlowEnum(args.task).value
@@ -160,7 +161,6 @@ if __name__ == "__main__":
             assert (
                 args.profile_source == ProfileSourceEnum.TEXT.value
             ), "Only auto loan docs dataset supports document transfer setting"
-        domain = get_domain_from_doc_id(fid).value
         source_doc_no = (
             int(fid.split("_")[1]) - 1
         ) % 4  # use the previous doc as the source doc
@@ -180,11 +180,15 @@ if __name__ == "__main__":
 
         user_profile = user_features.UserProfile(args.user_idx, relevant_user_features)
         if profile_source == ProfileSourceEnum.TEXT.value:
-            nl_profile = "\n".join(user_profile.get_nl_profile())
+            nl_profile = "\n".join(
+                [
+                    f for f in user_profile.get_nl_profile() if not f.startswith("CROI")
+                ]  # don't show features that appear in the db
+            )
             source_doc_img = None
         else:
             assert (
-                domain == DomainEnum.AL
+                domain == DomainEnum.AL.value
             ), "Only auto loan docs dataset supports document transfer setting"
             # nl_profile = "<Refer to the source image for information on the user>"
             source_doc_img, source_doc_relevant_user_features = (

@@ -18,12 +18,18 @@ import json
 from vllm.sampling_params import GuidedDecodingParams
 from pydantic import BaseModel
 import time
-from vllm.distributed.parallel_state import destroy_model_parallel, destroy_distributed_environment
+from vllm.distributed.parallel_state import (
+    destroy_model_parallel,
+    destroy_distributed_environment,
+)
 from torch.distributed import destroy_process_group
 
 import gc
 import torch
 import textwrap
+
+from transformers import LlavaForConditionalGeneration
+
 
 class BaseHFModel:
     def __init__(self):
@@ -33,6 +39,7 @@ class BaseHFModel:
     def get_prompt(self, images: List[Image.Image]) -> List[str]:
         """Subclasses must override this with prompt-building logic."""
         raise NotImplementedError("Subclasses must implement get_prompt()")
+
 
 class AriaModel(BaseHFModel):
     def __init__(self):
@@ -57,8 +64,10 @@ class AriaModel(BaseHFModel):
             template_prompts.append(template_prompt)
         return template_prompts
 
+
 class LlavaModel(BaseHFModel):
     def __init__(self):
+        self.cls = LlavaForConditionalGeneration
         super().__init__()
         self.engine_args = EngineArgs(
             model="llava-hf/llava-1.5-7b-hf",
@@ -73,6 +82,7 @@ class LlavaModel(BaseHFModel):
             template_prompt = f"USER: <image>\n{prompt}\nASSISTANT:"
             template_prompts.append(template_prompt)
         return template_prompts
+
 
 class MolmoModel(BaseHFModel):
     def __init__(self):
@@ -95,6 +105,7 @@ class MolmoModel(BaseHFModel):
             template_prompts.append(template_prompt)
         return template_prompts
 
+
 class QwenVLModel(BaseHFModel):
     def __init__(self):
         super().__init__()
@@ -115,6 +126,7 @@ class QwenVLModel(BaseHFModel):
             template_prompts.append(template_prompt)
         return template_prompts
 
+
 class DeepseekVL2Model(BaseHFModel):
     def __init__(self):
         super().__init__()
@@ -133,6 +145,7 @@ class DeepseekVL2Model(BaseHFModel):
             template_prompt = f"<|User|>: <image>\n{prompt}\n\n<|Assistant|>:"
             template_prompts.append(template_prompt)
         return template_prompts
+
 
 class Gemma3Model(BaseHFModel):
     def __init__(self):
@@ -157,6 +170,7 @@ class Gemma3Model(BaseHFModel):
             template_prompts.append(template_prompt)
         return template_prompts
 
+
 class MLLamaModel(BaseHFModel):
     def __init__(self):
         super().__init__()
@@ -166,25 +180,27 @@ class MLLamaModel(BaseHFModel):
             max_num_seqs=16,
         )
         self.stop_token_ids = None
-        
+
         self.tokenizer = AutoTokenizer.from_pretrained(
-            self.engine_args.model,
-            trust_remote_code=self.engine_args.trust_remote_code
+            self.engine_args.model, trust_remote_code=self.engine_args.trust_remote_code
         )
 
     def get_templated_prompts(self, base_prompts: List[str]) -> List[str]:
-        messages = [[{
-            "role": "user",
-            "content": [
-                {"type": "image"},
-                {"type": "text", "text": textwrap.dedent(p).strip()}
+        messages = [
+            [
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "image"},
+                        {"type": "text", "text": textwrap.dedent(p).strip()},
+                    ],
+                }
             ]
-        }] for p in base_prompts]
+            for p in base_prompts
+        ]
 
         template_prompts = self.tokenizer.apply_chat_template(
-            messages,
-            add_generation_prompt=True,
-            tokenize=False
+            messages, add_generation_prompt=True, tokenize=False
         )
 
         return template_prompts
