@@ -35,9 +35,11 @@ class ActionMeta(type):
 
     def all_documentation(available_actions: List[str]):
         docstring = ""
-        for name, action in ActionMeta.registry.items():
-            if name in available_actions:
-                docstring += f"{name}: {action.documentation}\n\n"
+        # for name, action in ActionMeta.registry.items():
+        #     if name in available_actions:
+        #         docstring += f"{name}: {action.documentation}\n\n"
+        for act in available_actions:
+            docstring += f"{act}: {ActionMeta.registry[act].documentation}\n\n"
         return docstring
 
 
@@ -310,6 +312,9 @@ class FieldLocalizer(BaseAction):
         )
 
         pred_bboxes = parsed_answer[TASK_NAME_PREFIX]["bboxes"]
+        # Round bbox coordinates to 3 decimal points
+        pred_bboxes = [[round(coord, 3) for coord in bbox] for bbox in pred_bboxes]
+
         if len(pred_bboxes) == 0:
             feedback = f"Action: 'FieldLocalizer'\nNo bbox found for {value}"
             if return_bboxes:
@@ -325,7 +330,7 @@ class FieldLocalizer(BaseAction):
                 x2 = bbox[2] / w
                 y2 = bbox[3] / h
                 all_bboxes.append(
-                    f"x1: {x1:.3f}, y1: {y1:.3f}, x2: {x2:.3f}, y2: {y2:.3f}"
+                    f"x1: {x1}, y1: {y1}, x2: {x2}, y2: {y2}"
                 )
 
             # Visualize predictions
@@ -375,6 +380,34 @@ class PlaceWithLocalizer(BaseAction):
             doc_state, feedback = PlaceText.act(doc_state, cx, cy, value)
             print(f"Placed text for {target} as {value} at {cx}, {cy}")
             return doc_state, feedback
+        
+class SignOrInitialWithLocalizer(BaseAction):
+    documentation = """
+    Sign or initial a target field on a document, image, or pdf. This tool will automatically find the target field and place the signature there. If the target field needs to be described with additional specificity (e.g., section headers, table columns), list them from highest to lowest in the hierarchy, separated by | as in: "Section Header | Table Column | Table Row" or "User 1 | Signature".
+    Args:
+        target: The name of the field as it appears in the document
+        value: The text to place in the target field
+
+    Example input:
+        {"action": "SignOrInitialWithLocalizer", "target": "Signature", "value": "John Doe"}
+    """
+
+    def act(doc_state, target: str, value: str, **kwargs):
+        localizer_doc_state, localizer_feedback, localizer_bboxes = FieldLocalizer.act(
+            doc_state, target, return_bboxes=True
+        )
+        # Get center coordinates from first predicted bbox
+
+        if localizer_bboxes is None:
+            return doc_state, localizer_feedback
+        else:
+            first_bbox = localizer_bboxes[0]
+            x1, y1, x2, y2 = first_bbox
+            cx = (x1 + x2) / (2 * doc_state.w)
+            cy = (y1 + y2) / (2 * doc_state.h)
+            doc_state, feedback = SignOrInitial.act(doc_state, cx, cy, value)
+            print(f"Placed signature for {target} as {value} at {cx}, {cy}")
+            return doc_state, feedback
 
 
 def update_doc_state(doc_state, agent_generations: List[Dict], db=None):
@@ -386,7 +419,10 @@ def update_doc_state(doc_state, agent_generations: List[Dict], db=None):
     feedbacks = []
     for ag in agent_generations:
         act_name = ag["action"]
-        act = ActionMeta.registry[act_name]
+        if act_name in ActionMeta.registry:
+            act = ActionMeta.registry[act_name]
+        else:
+            act = InvalidAction
         doc_state, feedback = act.act(doc_state, **ag, db=db)
         feedbacks.append(feedback)
 

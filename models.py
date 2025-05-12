@@ -117,7 +117,7 @@ def get_e2e_prompt(
         if has_source_image
         else ""
     )
-    return textwrap.dedent(
+    prompt = textwrap.dedent(
         e2e_prompt_template_content.format(
             user_profile=user_profile if user_profile else "<No user profile provided>",
             api_documentation=api_documentation,
@@ -130,6 +130,7 @@ def get_e2e_prompt(
             has_source_image_str=has_source_image_str,
         )
     )
+    return prompt
 
 
 def visualize_preds(doc_state, fields, img):
@@ -252,7 +253,8 @@ def parse_and_reconstruct_fields(response_text):
             if action_name in ActionMeta.registry:
                 action = ActionMeta.registry[action_name]
             else:
-                raise ValueError(f"Invalid action: {action_name}")
+                # raise ValueError(f"Invalid action: {action_name}")
+                action = InvalidAction
 
             # Validate against the schema
             action.Schema(**match_dict)
@@ -490,7 +492,7 @@ class GptModelE2E:
             prompt = get_e2e_prompt(
                 user_profile=profile,
                 api_documentation=ActionMeta.all_documentation(
-                    "\n\n".join(available_actions)
+                    available_actions
                 ),
                 grid_subprompt=grid_subprompt_content if self.draw_grid else "",
                 task=f,
@@ -689,7 +691,7 @@ class AnthropicModelE2E:
             prompt = get_e2e_prompt(
                 user_profile=profile,
                 api_documentation=ActionMeta.all_documentation(
-                    "\n\n".join(available_actions)
+                    available_actions
                 ),
                 grid_subprompt=grid_subprompt_content if self.draw_grid else "",
                 task=f,
@@ -754,7 +756,7 @@ class HFE2EModel:
         engine_args_dict["download_dir"] = download_dir
         engine_args_dict["seed"] = seed
         # TODO - Argument for multiple GPUs
-        # engine_args_dict["tensor_parallel_size"] = 4
+        # engine_args_dict["tensor_parallel_size"] = 2
 
         self.llm = LLM(**engine_args_dict)
 
@@ -785,7 +787,7 @@ class HFE2EModel:
             base_prompt = get_e2e_prompt(
                 user_profile=profile,
                 api_documentation=ActionMeta.all_documentation(
-                    "\n\n".join(available_actions)
+                    available_actions
                 ),
                 grid_subprompt=grid_subprompt_content if self.draw_grid else "",
                 task=f,

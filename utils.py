@@ -33,10 +33,10 @@ class AvailableActionsEnum(Enum):
     EXPERIMENTAL_MULTISHOT = [
         "PlaceWithLocalizer",
         "DeleteText",
-        "SignOrInitial",
+        "SignOrInitialWithLocalizer",
         "Terminate",
     ]
-    EXPERIMENTAL_ONESHOT = ["PlaceWithLocalizer", "SignOrInitial"]
+    EXPERIMENTAL_ONESHOT = ["PlaceWithLocalizer", "SignOrInitialWithLocalizer"]
 
 
 class StudyConditionEnum(Enum):
