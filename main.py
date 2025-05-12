@@ -301,7 +301,7 @@ if __name__ == "__main__":
         model = models.GptModelE2E(model_name=args.model_name, draw_grid=False)
     elif args.model_type.lower().startswith("hf"):
         model = models.HFE2EModel(
-            model_name=args.model_name, download_dir=args.download_dir
+            model_name=args.model_name, download_dir=args.download_dir, profile_source=args.profile_source
         )
     elif args.model_type.lower().startswith("anthropic"):
         model = models.AnthropicModelE2E(model_name=args.model_name, draw_grid=False)
@@ -370,7 +370,7 @@ if __name__ == "__main__":
             if field["prefilled"]:
                 continue
             total_count += 1
-            if field["gt"] in ["None", False, ""]:
+            if field["gt"] in ["None", False, "", None, "N/A"]:
                 continue
             if field["correct"]:
                 correct_count += 1

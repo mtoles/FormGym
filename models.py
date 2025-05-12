@@ -730,7 +730,12 @@ class AnthropicModelE2E:
 
 class HFE2EModel:
     def __init__(
-        self, model_name: str, download_dir: str, seed=42, draw_grid: bool = False
+        self,
+        model_name: str,
+        download_dir: str,
+        profile_source: str,
+        seed=42,
+        draw_grid: bool = False,
     ):
         model_registry = {
             "aria": AriaModel,
@@ -751,13 +756,22 @@ class HFE2EModel:
         engine_args_dict = asdict(self.model.engine_args)
         engine_args_dict["download_dir"] = download_dir
         engine_args_dict["seed"] = seed
+        # Add 4-bit quantization parameters
+        engine_args_dict["dtype"] = (
+            "float16"  # Use float16 for better memory efficiency
+        )
+        num_images = {
+            ProfileSourceEnum.TEXT.value: 1,
+            ProfileSourceEnum.IMAGE.value: 2,
+        }[profile_source]
+        engine_args_dict["limit_mm_per_prompt"] = {"image": num_images}
         # TODO - Argument for multiple GPUs
         # engine_args_dict["tensor_parallel_size"] = 2
 
         self.llm = LLM(**engine_args_dict)
 
         self.sampling_params = SamplingParams(
-            temperature=0.2,
+            temperature=1.0,
             max_tokens=64,
             stop_token_ids=self.model.stop_token_ids,
         )
@@ -796,7 +810,9 @@ class HFE2EModel:
         prompts = self.model.get_templated_prompts(base_prompts)
 
         all_inputs = []
-        for i, (img, sdi, prompt) in enumerate(zip(doc_image, source_doc_image, prompts)):
+        for i, (img, sdi, prompt) in enumerate(
+            zip(doc_image, source_doc_image, prompts)
+        ):
             images = [img] + [sdi] if sdi else [img]
             input_data = {
                 "prompt": prompt,
