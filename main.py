@@ -301,7 +301,10 @@ if __name__ == "__main__":
         model = models.GptModelE2E(model_name=args.model_name, draw_grid=False)
     elif args.model_type.lower().startswith("hf"):
         model = models.HFE2EModel(
-            model_name=args.model_name, download_dir=args.download_dir, profile_source=args.profile_source
+            model_name=args.model_name,
+            download_dir=args.download_dir,
+            profile_source=args.profile_source,
+            n_images=2 if args.profile_source == ProfileSourceEnum.IMAGE.value else 1,
         )
     elif args.model_type.lower().startswith("anthropic"):
         model = models.AnthropicModelE2E(model_name=args.model_name, draw_grid=False)

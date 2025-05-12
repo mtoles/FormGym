@@ -6,6 +6,9 @@ tool/checkpoints
 wandb
 test.py
 
+form-conda/
+form-conda-vllm/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

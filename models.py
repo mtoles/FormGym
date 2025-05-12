@@ -38,6 +38,7 @@ from anthropic import (
     APIError as AnthropicAPIError,
     RateLimitError as AnthropicRateLimitError,
 )
+import torch
 
 memory = Memory(".joblib_cache", verbose=0)
 
@@ -734,6 +735,7 @@ class HFE2EModel:
         model_name: str,
         download_dir: str,
         profile_source: str,
+        n_images: int,
         seed=42,
         draw_grid: bool = False,
     ):
@@ -751,19 +753,23 @@ class HFE2EModel:
         if model_name not in model_registry:
             raise ValueError(f"Unsupported model: {model_name}")
 
-        self.model = model_registry[model_name]()
+        self.model = model_registry[model_name](n_images=n_images)
 
         engine_args_dict = asdict(self.model.engine_args)
         engine_args_dict["download_dir"] = download_dir
         engine_args_dict["seed"] = seed
         # Add 4-bit quantization parameters
         engine_args_dict["dtype"] = (
-            "float16"  # Use float16 for better memory efficiency
+            torch.bfloat16  # Use float16 for better memory efficiency
         )
+        # engine_args_dict["quantization"] = "bitsandbytes"
+        # engine_args_dict["load_format"] = "bitsandbytes"
+        # engine
         num_images = {
             ProfileSourceEnum.TEXT.value: 1,
             ProfileSourceEnum.IMAGE.value: 2,
         }[profile_source]
+
         engine_args_dict["limit_mm_per_prompt"] = {"image": num_images}
         # TODO - Argument for multiple GPUs
         # engine_args_dict["tensor_parallel_size"] = 2

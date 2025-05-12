@@ -30,9 +30,10 @@ import textwrap
 
 
 class BaseHFModel:
-    def __init__(self):
+    def __init__(self, n_images: int):
         self.engine_args: EngineArgs = None
         self.stop_token_ids: Optional[List[int]] = None
+        self.n_images = n_images
 
     def get_prompt(self, images: List[Image.Image]) -> List[str]:
         """Subclasses must override this with prompt-building logic."""
@@ -40,11 +41,11 @@ class BaseHFModel:
 
 
 class AriaModel(BaseHFModel):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, n_images: int):
+        super().__init__(n_images=n_images)
         self.engine_args = EngineArgs(
             model="rhymes-ai/Aria",
-            max_model_len=4096,
+            max_model_len=8192,
             max_num_seqs=2,
             dtype="bfloat16",
         )
@@ -54,21 +55,30 @@ class AriaModel(BaseHFModel):
         template_prompts = []
         for prompt in base_prompts:
             prompt = textwrap.dedent(prompt).strip()
-            template_prompt = (
-                "<|im_start|>user\n<fim_prefix><|img|><fim_suffix>"
-                f"{prompt}"
-                "<|im_end|>\n<|im_start|>assistant\n"
-            )
+            if self.n_images == 2:
+                template_prompt = (
+                    "<|im_start|>user\n<fim_prefix><|img|><|img|><fim_suffix>"
+                    f"{prompt}"
+                    "<|im_end|>\n<|im_start|>assistant\n"
+                )
+            elif self.n_images == 1:
+                template_prompt = (
+                    "<|im_start|>user\n<fim_prefix><|img|><fim_suffix>"
+                    f"{prompt}"
+                    "<|im_end|>\n<|im_start|>assistant\n"
+                )
+            else:
+                raise ValueError(f"Unsupported number of images: {self.n_images}")
             template_prompts.append(template_prompt)
         return template_prompts
 
 
 class LlavaModel(BaseHFModel):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, n_images: int):
+        super().__init__(n_images=n_images)
         self.engine_args = EngineArgs(
             model="llava-hf/llava-1.5-7b-hf",
-            max_model_len=4096,
+            max_model_len=8192,
             max_num_seqs=2,
             ngram_prompt_lookup_max=0,
             ngram_prompt_lookup_min=0,
@@ -79,14 +89,19 @@ class LlavaModel(BaseHFModel):
         template_prompts = []
         for prompt in base_prompts:
             prompt = textwrap.dedent(prompt).strip()
-            template_prompt = f"USER: <image>\n{prompt}\nASSISTANT:"
+            if self.n_images == 2:
+                template_prompt = f"USER: <image>\n<image>\n{prompt}\nASSISTANT:"
+            elif self.n_images == 1:
+                template_prompt = f"USER: <image>\n{prompt}\nASSISTANT:"
+            else:
+                raise ValueError(f"Unsupported number of images: {self.n_images}")
             template_prompts.append(template_prompt)
         return template_prompts
 
 
 class MolmoModel(BaseHFModel):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, n_images: int):
+        super().__init__(n_images=n_images)
         self.engine_args = EngineArgs(
             model="allenai/Molmo-7B-D-0924",
             trust_remote_code=True,
@@ -98,21 +113,27 @@ class MolmoModel(BaseHFModel):
         template_prompts = []
         for prompt in base_prompts:
             prompt = textwrap.dedent(prompt).strip()
-            template_prompt = (
-                f"<|im_start|>user <image>\n{prompt}<|im_end|> "
-                "<|im_start|>assistant\n"
-            )
+            if self.n_images == 2:
+                template_prompt = (
+                    f"<|im_start|>user <image>\n<image>\n{prompt}<|im_end|> "
+                    "<|im_start|>assistant\n"
+                )
+            elif self.n_images == 1:
+                template_prompt = (
+                    f"<|im_start|>user <image>\n{prompt}<|im_end|> "
+                    "<|im_start|>assistant\n"
+                )
             template_prompts.append(template_prompt)
         return template_prompts
 
 
 class QwenVLModel(BaseHFModel):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, n_images: int):
+        super().__init__(n_images=n_images)
         self.engine_args = EngineArgs(
             model="Qwen/Qwen-VL",
             trust_remote_code=True,
-            max_model_len=1024,
+            max_model_len=8192,
             max_num_seqs=2,
             hf_overrides={"architectures": ["QwenVLForConditionalGeneration"]},
         )
@@ -122,16 +143,23 @@ class QwenVLModel(BaseHFModel):
         template_prompts = []
         for prompt in base_prompts:
             prompt = textwrap.dedent(prompt).strip()
-            template_prompt = f"{prompt}Picture 1: <img></img>\n"
+            if self.n_images == 2:
+                template_prompt = (
+                    f"{prompt}Picture 1: <img></img>\nPicture 2: <img></img>\n"
+                )
+            elif self.n_images == 1:
+                template_prompt = f"{prompt}Picture 1: <img></img>\n"
+            else:
+                raise ValueError(f"Unsupported number of images: {self.n_images}")
             template_prompts.append(template_prompt)
         return template_prompts
 
 
 class DeepseekVL2Model(BaseHFModel):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, n_images: int):
+        super().__init__(n_images=n_images)
         self.engine_args = EngineArgs(
-            model="deepseek-ai/deepseek-vl2-tiny",
+            model="deepseek-ai/deepseek-vl2",
             max_model_len=4096,
             max_num_seqs=2,
             hf_overrides={"architectures": ["DeepseekVLV2ForCausalLM"]},
@@ -142,17 +170,24 @@ class DeepseekVL2Model(BaseHFModel):
         template_prompts = []
         for prompt in base_prompts:
             prompt = textwrap.dedent(prompt).strip()
-            template_prompt = f"<|User|>: <image>\n{prompt}\n\n<|Assistant|>:"
+            if self.n_images == 2:
+                template_prompt = (
+                    f"<|User|>: <image>\n<image>\n{prompt}\n\n<|Assistant|>:"
+                )
+            elif self.n_images == 1:
+                template_prompt = f"<|User|>: <image>\n{prompt}\n\n<|Assistant|>:"
+            else:
+                raise ValueError(f"Unsupported number of images: {self.n_images}")
             template_prompts.append(template_prompt)
         return template_prompts
 
 
 class Gemma3Model(BaseHFModel):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, n_images: int):
+        super().__init__(n_images=n_images)
         self.engine_args = EngineArgs(
             model="google/gemma-3-4b-it",
-            max_model_len=2048,
+            max_model_len=8192,
             max_num_seqs=2,
             mm_processor_kwargs={"do_pan_and_scan": True},
         )
@@ -162,21 +197,30 @@ class Gemma3Model(BaseHFModel):
         template_prompts = []
         for prompt in base_prompts:
             prompt = textwrap.dedent(prompt).strip()
-            template_prompt = (
-                "<bos><start_of_turn>user\n"
-                f"<start_of_image>{prompt}<end_of_turn>\n"
-                "<start_of_turn>model\n"
-            )
+            if self.n_images == 2:
+                template_prompt = (
+                    "<bos><start_of_turn>user\n"
+                    f"<start_of_image>\n<start_of_image>\n{prompt}<end_of_turn>\n"
+                    "<start_of_turn>model\n"
+                )
+            elif self.n_images == 1:
+                template_prompt = (
+                    "<bos><start_of_turn>user\n"
+                    f"<start_of_image>\n{prompt}<end_of_turn>\n"
+                    "<start_of_turn>model\n"
+                )
+            else:
+                raise ValueError(f"Unsupported number of images: {self.n_images}")
             template_prompts.append(template_prompt)
         return template_prompts
 
 
 class MLLamaModel(BaseHFModel):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, n_images: int):
+        super().__init__(n_images=n_images)
         self.engine_args = EngineArgs(
             model="meta-llama/Llama-3.2-90B-Vision-Instruct",
-            max_model_len=4096,
+            max_model_len=8192,
             max_num_seqs=16,
         )
         self.stop_token_ids = None
@@ -191,6 +235,7 @@ class MLLamaModel(BaseHFModel):
                 {
                     "role": "user",
                     "content": [
+                        {"type": "image"},
                         {"type": "image"},
                         {"type": "text", "text": textwrap.dedent(p).strip()},
                     ],
