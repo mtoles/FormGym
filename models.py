@@ -491,9 +491,7 @@ class GptModelE2E:
         ):
             prompt = get_e2e_prompt(
                 user_profile=profile,
-                api_documentation=ActionMeta.all_documentation(
-                    available_actions
-                ),
+                api_documentation=ActionMeta.all_documentation(available_actions),
                 grid_subprompt=grid_subprompt_content if self.draw_grid else "",
                 task=f,
                 feedback=feedback,
@@ -690,9 +688,7 @@ class AnthropicModelE2E:
         ):
             prompt = get_e2e_prompt(
                 user_profile=profile,
-                api_documentation=ActionMeta.all_documentation(
-                    available_actions
-                ),
+                api_documentation=ActionMeta.all_documentation(available_actions),
                 grid_subprompt=grid_subprompt_content if self.draw_grid else "",
                 task=f,
                 feedback=feedback,
@@ -734,7 +730,7 @@ class AnthropicModelE2E:
 
 class HFE2EModel:
     def __init__(
-        self, model_name: str, download_dir: str, seed=None, draw_grid: bool = False
+        self, model_name: str, download_dir: str, seed=42, draw_grid: bool = False
     ):
         model_registry = {
             "aria": AriaModel,
@@ -786,9 +782,7 @@ class HFE2EModel:
         for profile, f in zip(nl_profile, flow):
             base_prompt = get_e2e_prompt(
                 user_profile=profile,
-                api_documentation=ActionMeta.all_documentation(
-                    available_actions
-                ),
+                api_documentation=ActionMeta.all_documentation(available_actions),
                 grid_subprompt=grid_subprompt_content if self.draw_grid else "",
                 task=f,
                 feedback=feedback,
@@ -802,13 +796,13 @@ class HFE2EModel:
         prompts = self.model.get_templated_prompts(base_prompts)
 
         all_inputs = []
-        for i, (img, prompt) in enumerate(zip(doc_image, prompts)):
+        for i, (img, sdi, prompt) in enumerate(zip(doc_image, source_doc_image, prompts)):
+            images = [img] + [sdi] if sdi else [img]
             input_data = {
                 "prompt": prompt,
-                "multi_modal_data": {"image": img},
+                "multi_modal_data": {"image": images},
             }
-            # if source_doc_image and i < len(source_doc_image):
-            input_data["multi_modal_data"]["source_image"] = source_doc_image[i]
+
             all_inputs.append(input_data)
 
         start_time = time.time()
