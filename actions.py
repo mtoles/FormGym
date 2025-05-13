@@ -254,13 +254,13 @@ class FieldLocalizer(BaseAction):
     Example input:
         {"action": "FieldLocalizer", "value": "First Name"}
     """
-    PROD_TOOL_CHECKPOINT_PATH = "tool/prod_tool_checkpoint"
-    device = torch.device(
-        "cuda:1"
-        if torch.cuda.is_available() and torch.cuda.device_count() >= 2
-        else "cuda:0" if torch.cuda.is_available() else "cpu"
-    )
-    processor, model = load_from_checkpoint(PROD_TOOL_CHECKPOINT_PATH, device)
+    # PROD_TOOL_CHECKPOINT_PATH = "tool/prod_tool_checkpoint"
+    # device = torch.device(
+    #     "cuda:1"
+    #     if torch.cuda.is_available() and torch.cuda.device_count() >= 2
+    #     else "cuda:0" if torch.cuda.is_available() else "cpu"
+    # )
+    # processor, model = load_from_checkpoint(PROD_TOOL_CHECKPOINT_PATH, device)
 
     @classmethod
     def _visualize_localizer(

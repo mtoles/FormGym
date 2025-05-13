@@ -5,8 +5,8 @@ import sys
 from pathlib import Path
 
 
-def get_db_connection():
-    db_path = Path(__file__).parent / "gui_agents.db"
+def get_db_connection(db_file=None):
+    db_path = db_file or Path(__file__).parent / "gui_agents.db"
     if not db_path.exists():
         print(f"Error: Database file not found at {db_path}")
         sys.exit(1)
@@ -43,13 +43,13 @@ def execute_query(conn, query):
         print(f"Error executing query: {e}")
 
 
-def main():
+def main(db_file=None):
     print("SQLite Database Query Tool")
     print("Type your SQL queries (type 'exit' or 'quit' to exit)")
     print("Type 'tables' to list all tables")
     print("-" * 50)
 
-    conn = get_db_connection()
+    conn = get_db_connection(db_file=None)
 
     try:
         while True:

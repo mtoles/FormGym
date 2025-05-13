@@ -31,34 +31,33 @@ if __name__ == "__main__":
     parser.add_argument("--user_idx", type=int, nargs="+", default=0)
     parser.add_argument(
         "--study_condition",
-        type=str,
-        nargs="+",
+        type=str, nargs="+",
         help=f"Whether to use a baseline action set or our model [{', '.join([c.value for c in StudyConditionEnum])}]",
     )
     parser.add_argument(
         "--profile_source",
-        type=str,
-        nargs="+",
+        type=str, nargs="+",
         help=f"Whether to use a baseline action set or our model [{', '.join([c.value for c in ProfileSourceEnum])}]",
         default=ProfileSourceEnum.TEXT.value,
     )
     parser.add_argument("--note", type=str, default="no_note")
     args = parser.parse_args()
-    
+
+    # mirrors the argparse structure
     params = [
-        args.model_type, 
-        args.model_name, 
-        args.doc_format, 
-        args.task, 
-        [args.file_ids], # file_ids gets wrapped as original main takes list
-        args.k_missing_fields, 
-        args.max_turns, 
-        args.suggest_localizer, 
-        args.user_idx, 
-        args.study_condition, 
-        args.profile_source, 
-        args.note, 
-        args.download_dir
+        args.model_type,
+        args.model_name,
+        args.doc_format,
+        args.task,
+        [args.file_ids],
+        args.k_missing_fields,
+        args.max_turns,
+        args.suggest_localizer,
+        args.user_idx,
+        args.study_condition,
+        args.profile_source,
+        args.note,
+        args.download_dir,
     ]
     
     params = [arg if isinstance(arg, list) else [arg] for arg in params]

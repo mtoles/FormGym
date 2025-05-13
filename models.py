@@ -436,7 +436,7 @@ class ScriptedModel:
                 },
             ],
         }
-        self.script = scripts[script_name]
+        self.script = scripts
         self.count = 0
 
     # @add_bbox

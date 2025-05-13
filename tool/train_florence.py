@@ -28,10 +28,10 @@ import matplotlib.pyplot as plt
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 import sys
 
-print(os.environ["CUDA_HOME"])
-print(os.environ["LD_LIBRARY_PATH"])
-print(torch.cuda.is_available())
-assert torch.cuda.is_available()  # not available in debug mode, dunno why
+# print(os.environ["CUDA_HOME"])
+# print(os.environ["LD_LIBRARY_PATH"])
+# print(torch.cuda.is_available())
+# assert torch.cuda.is_available() # not available in debug mode, dunno why
 
 TASK_NAME_PREFIX = "<OPEN_VOCABULARY_DETECTION>"  # config["task_name_prefix"]
 TEXT_INPUT_PROMPT_TEMPLATE = (

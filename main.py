@@ -2,8 +2,7 @@ import fields
 import user_features
 import annotations
 import models
-
-# from ui_agents import ui_model
+from gui_agents import gui_model
 import actions
 from tasks import ImagePdfFill
 from doc_state import DocState
@@ -160,20 +159,25 @@ def main(
     flow = FlowEnum(task).value
     study_condition = StudyConditionEnum(study_condition).value
     profile_source = ProfileSourceEnum(profile_source).value
-    BATCH_SIZE = min(1, len(file_ids))
+    BATCH_SIZE = min(4, len(file_ids))
 
     # set up the db
 
     # Prepare list to collect per-file data for batch processing
     all_files = []
+<<<<<<< HEAD
     if domain == DomainEnum.FUN.value:
         args.file_ids = [
+=======
+    if file_ids[0] == "funsd_test":
+        file_ids = [
+>>>>>>> b3d15d4 (add gui_agents evaluator)
             f.split(".")[0]
             for f in os.listdir("annotations/funsd_test")
             if f.endswith(".json")
         ]
         # assert len(args.file_ids) == 50, "there should be 50 docs"
-    for i, fid in enumerate(args.file_ids):
+    for i, fid in enumerate(file_ids):
         if "al" not in fid:
             assert (
                 profile_source == ProfileSourceEnum.TEXT.value
@@ -336,10 +340,10 @@ def main(
         model = models.CheaterModel()  # Instance now will use batched inputs
     elif model_type == "scripted":
         model = models.ScriptedModel(batch_size=BATCH_SIZE, script_name=file_ids[0])
-    # elif model_type == "ui-agent":
-    #     model = ui_model.UIModel(
-    #         batch_size=BATCH_SIZE, model_name=model_name, filename=file_ids[0], user_idx=user_idx
-    #     )
+    elif model_type == "ui-agent":
+        model = gui_model.GUIModel(
+            batch_size=BATCH_SIZE, model_name=model_name, file_ids=file_ids, user_idx=user_idx
+        )
     elif model_type.lower().startswith("gpt"):
         model = models.GptModelE2E(model_name=model_name, draw_grid=False)
     elif model_type.lower().startswith("hf"):
@@ -565,6 +569,10 @@ if __name__ == "__main__":
     overall_results = main(*params)
 
     # written to a csv file for easy temporary storage
+<<<<<<< HEAD
     os.makedirs("tmp/run_summaries", exist_ok=True)
     overall_results.to_csv("tmp/run_summaries/summary.csv", index=False)
+=======
+    overall_results.to_csv("summaries/summary.csv", index=False)
+>>>>>>> b3d15d4 (add gui_agents evaluator)
     print(overall_results)
