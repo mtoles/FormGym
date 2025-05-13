@@ -63,7 +63,7 @@ form-filler/
 # Logs and databases
 *.log
 *.sqlite
-*.db
+# *.db
 
 # Local development settings
 local_settings.py
