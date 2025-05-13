@@ -6,14 +6,14 @@
     "path": "/",
     "source_info": {
       "item_id": "019561b8-a1ed-4a9d-67a1-45e3775e2054",
-      "team": {
-        "name": "ClosedAI",
-        "slug": "closedai"
-      },
       "dataset": {
         "name": "Form Filling",
         "slug": "form-filling",
         "dataset_management_url": "https://darwin.v7labs.com/datasets/1649572/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
       },
       "workview_url": "https://darwin.v7labs.com/workview?dataset=1649572&item=019561b8-a1ed-4a9d-67a1-45e3775e2054"
     },

@@ -6,14 +6,14 @@
     "path": "/",
     "source_info": {
       "item_id": "019561b8-a1ed-b85e-66af-c4b3928a31d8",
-      "team": {
-        "name": "ClosedAI",
-        "slug": "closedai"
-      },
       "dataset": {
         "name": "Form Filling",
         "slug": "form-filling",
         "dataset_management_url": "https://darwin.v7labs.com/datasets/1649572/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
       },
       "workview_url": "https://darwin.v7labs.com/workview?dataset=1649572&item=019561b8-a1ed-b85e-66af-c4b3928a31d8"
     },
@@ -1218,7 +1218,7 @@
         "y": 1347.9979
       },
       "id": "0605a419-4c93-490e-8ff6-b9884c43569c",
-      "name": "ReferencePHone",
+      "name": "ReferencePhone",
       "properties": [],
       "slot_names": [
         "0"

@@ -241,8 +241,7 @@ def main(
             )
 
         db = SqlDb(user_profile=user_profile)
-
-        turn_count = 0
+        
 
         # flow = None
         if flow == FlowEnum.ONESHOT.value:
@@ -546,7 +545,7 @@ if __name__ == "__main__":
     overall_results = main(*params)
     
     # written to a csv file for easy temporary storage
-    os.makedirs("run_summaries", exist_ok=True)
-    overall_results.to_csv("run_summaries/summary.csv", index=False)
+    os.makedirs("results/run_summaries", exist_ok=True)
+    overall_results.to_csv("results/run_summaries/summary.csv", index=False)
     print(overall_results)
     
