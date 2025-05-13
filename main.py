@@ -150,7 +150,7 @@ if __name__ == "__main__":
     flow = FlowEnum(args.task).value
     study_condition = StudyConditionEnum(args.study_condition).value
     profile_source = ProfileSourceEnum(args.profile_source).value
-    BATCH_SIZE = min(2, len(args.file_ids))
+    BATCH_SIZE = min(1, len(args.file_ids))
 
     # set up the db
 

@@ -78,10 +78,10 @@ class LlavaModel(BaseHFModel):
         super().__init__(n_images=n_images)
         self.engine_args = EngineArgs(
             model="llava-hf/llava-1.5-7b-hf",
-            max_model_len=8192,
+            max_model_len=4096,
             max_num_seqs=2,
-            ngram_prompt_lookup_max=0,
-            ngram_prompt_lookup_min=0,
+            # ngram_prompt_lookup_max=0,
+            # ngram_prompt_lookup_min=0,
         )
         self.stop_token_ids = None  # LLaVA might not need special stop tokens
 

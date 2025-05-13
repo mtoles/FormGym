@@ -261,7 +261,7 @@ def parse_and_reconstruct_fields(response_text):
             action.Schema(**match_dict)
             passed_actions.append(match_dict)
 
-        except (JSONDecodeError, ValidationError) as e:
+        except (JSONDecodeError, ValidationError, KeyError) as e:
             # Instead of crashing, just skip the broken chunk
 
             print(f"Skipping invalid JSON block: {match}\nError: {e}")

@@ -255,7 +255,11 @@ class FieldLocalizer(BaseAction):
         {"action": "FieldLocalizer", "value": "First Name"}
     """
     PROD_TOOL_CHECKPOINT_PATH = "tool/prod_tool_checkpoint"
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = torch.device(
+        "cuda:1"
+        if torch.cuda.is_available() and torch.cuda.device_count() >= 2
+        else "cuda:0" if torch.cuda.is_available() else "cpu"
+    )
     processor, model = load_from_checkpoint(PROD_TOOL_CHECKPOINT_PATH, device)
 
     @classmethod
@@ -329,9 +333,7 @@ class FieldLocalizer(BaseAction):
                 y1 = bbox[1] / h
                 x2 = bbox[2] / w
                 y2 = bbox[3] / h
-                all_bboxes.append(
-                    f"x1: {x1}, y1: {y1}, x2: {x2}, y2: {y2}"
-                )
+                all_bboxes.append(f"x1: {x1}, y1: {y1}, x2: {x2}, y2: {y2}")
 
             # Visualize predictions
             # save_path = cls._visualize_localizer(
@@ -380,7 +382,8 @@ class PlaceWithLocalizer(BaseAction):
             doc_state, feedback = PlaceText.act(doc_state, cx, cy, value)
             print(f"Placed text for {target} as {value} at {cx}, {cy}")
             return doc_state, feedback
-        
+
+
 class SignOrInitialWithLocalizer(BaseAction):
     documentation = """
     Sign or initial a target field on a document, image, or pdf. This tool will automatically find the target field and place the signature there. If the target field needs to be described with additional specificity (e.g., section headers, table columns), list them from highest to lowest in the hierarchy, separated by | as in: "Section Header | Table Column | Table Row" or "User 1 | Signature".
