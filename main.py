@@ -372,6 +372,7 @@ def main(
                 suggest_localizer=suggest_localizer,  # irrelevant
                 source_doc_image=batch["source_doc_img"].to_list(),
                 needs_db=needs_db,
+                file_ids=batch["fid"].to_list(),
             )
 
             # Process each example in the batch
