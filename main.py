@@ -2,6 +2,7 @@ import fields
 import user_features
 import annotations
 import models
+
 # from ui_agents import ui_model
 import actions
 from tasks import ImagePdfFill
@@ -131,25 +132,24 @@ def mask_answer_field(blank_img: Image.Image, annots: list) -> Image.Image:
     return blank_img
 
 
-
 # Main function to run the form filling process
 # nearly full copy-paste from original if __name__ == "__main__"
 # args.{field} -> {field}
 def main(
-        model_type, 
-        model_name, 
-        doc_format, 
-        task, 
-        file_ids, 
-        k_missing_fields, 
-        max_turns, 
-        suggest_localizer, 
-        user_idx, 
-        study_condition, 
-        profile_source, 
-        note, 
-        download_dir
-    ):
+    model_type,
+    model_name,
+    doc_format,
+    task,
+    file_ids,
+    k_missing_fields,
+    max_turns,
+    suggest_localizer,
+    user_idx,
+    study_condition,
+    profile_source,
+    note,
+    download_dir,
+):
     today = datetime.now().strftime("%Y-%m-%d")
     now = datetime.now().strftime("%H:%M:%S")
     domain = get_domain_from_doc_ids(file_ids).value
@@ -241,7 +241,6 @@ def main(
             )
 
         db = SqlDb(user_profile=user_profile)
-        
 
         # flow = None
         if flow == FlowEnum.ONESHOT.value:
@@ -299,7 +298,7 @@ def main(
                 "nl_profile": nl_profile,
                 "png_path": png_path,
                 "blank_img": blank_img,
-                "turn_count": turn_count,
+                # "turn_count": turn_count,
                 "flow": flow,
                 "targets": targets,
                 # fields calculated dynamically
@@ -323,17 +322,13 @@ def main(
         raise NotImplementedError
         model = models.CheaterModel()  # Instance now will use batched inputs
     elif model_type == "scripted":
-        model = models.ScriptedModel(
-            batch_size=BATCH_SIZE, script_name=file_ids[0]
-        )
+        model = models.ScriptedModel(batch_size=BATCH_SIZE, script_name=file_ids[0])
     # elif model_type == "ui-agent":
     #     model = ui_model.UIModel(
     #         batch_size=BATCH_SIZE, model_name=model_name, filename=file_ids[0], user_idx=user_idx
     #     )
     elif model_type.lower().startswith("gpt"):
-        model = models.GptModelE2E(
-            model_name=model_name, draw_grid=False
-        )
+        model = models.GptModelE2E(model_name=model_name, draw_grid=False)
     elif model_type.lower().startswith("hf"):
         model = models.HFE2EModel(
             model_name=model_name,
@@ -342,9 +337,7 @@ def main(
             n_images=2 if profile_source == ProfileSourceEnum.IMAGE.value else 1,
         )
     elif model_type.lower().startswith("anthropic"):
-        model = models.AnthropicModelE2E(
-            model_name=model_name, draw_grid=False
-        )
+        model = models.AnthropicModelE2E(model_name=model_name, draw_grid=False)
     else:
         raise ValueError(f"Unknown model type: {model_type}")
     # Set batch size to 2 and process in batches
@@ -424,7 +417,7 @@ def main(
             {
                 "png_file": example["png_path"],
                 "overall_accuracy": file_acc,
-                "turn_count": example["turn_count"],
+                # "turn_count": example["turn_count"],
                 "flow": example["flow"],
                 # "study_condition": study_condition,
             }
@@ -434,7 +427,7 @@ def main(
     print("Summary of Metrics:")
     for metrics in file_wise_metrics:
         print(
-            f"File: {metrics['png_file']}, Overall Accuracy: {metrics['overall_accuracy']:.2f}, Actions: {metrics['turn_count']}"
+            f"File: {metrics['png_file']}, Overall Accuracy: {metrics['overall_accuracy']:.2f}"
         )
 
     average_acc = sum([m["overall_accuracy"] for m in file_wise_metrics]) / len(
@@ -479,21 +472,22 @@ def main(
         f.write("| File | Accuracy | Actions |\n")
         f.write("|------|----------|---------|\n")
         for metrics in file_wise_metrics:
-            f.write(
-                f"| {metrics['png_file']} | {metrics['overall_accuracy']:.2f} | {metrics['turn_count']} |\n"
-            )
-            
-    result_df = pd.DataFrame({
-        "model_type": model_type, 
-        "model_name": model_name, 
-        "task": task, 
-        "study_condition": study_condition, 
-        "user_idx": user_idx,
-        "average_accuracy": average_acc, 
-        "accuracy_std": acc_std}, 
-        index=[0]
+            f.write(f"| {metrics['png_file']} | {metrics['overall_accuracy']:.2f} |\n")
+
+    result_df = pd.DataFrame(
+        {
+            "model_type": model_type,
+            "model_name": model_name,
+            "task": task,
+            "study_condition": study_condition,
+            "user_idx": user_idx,
+            "average_accuracy": average_acc,
+            "accuracy_std": acc_std,
+        },
+        index=[0],
     )
     return result_df
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -524,28 +518,27 @@ if __name__ == "__main__":
     )
     parser.add_argument("--note", type=str, default="no_note")
     args = parser.parse_args()
-    
+
     # mirrors the argparse structure
     params = [
-        args.model_type, 
-        args.model_name, 
-        args.doc_format, 
-        args.task, 
-        args.file_ids, 
-        args.k_missing_fields, 
-        args.max_turns, 
-        args.suggest_localizer, 
-        args.user_idx, 
-        args.study_condition, 
-        args.profile_source, 
-        args.note, 
-        args.download_dir
+        args.model_type,
+        args.model_name,
+        args.doc_format,
+        args.task,
+        args.file_ids,
+        args.k_missing_fields,
+        args.max_turns,
+        args.suggest_localizer,
+        args.user_idx,
+        args.study_condition,
+        args.profile_source,
+        args.note,
+        args.download_dir,
     ]
     # called with the param list
     overall_results = main(*params)
-    
+
     # written to a csv file for easy temporary storage
     os.makedirs("results/run_summaries", exist_ok=True)
     overall_results.to_csv("results/run_summaries/summary.csv", index=False)
     print(overall_results)
-    

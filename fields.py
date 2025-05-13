@@ -1629,6 +1629,12 @@ class JointReferencePhone(BaseNumericField):
         return user_profile.features.JointReferencePhone
 
 
+class ReferencePhone(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.ReferencePhone
+
+
 class JointReferenceCity(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
