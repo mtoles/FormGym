@@ -63,6 +63,13 @@ def get_text_bbox(
         "height": text_height,
     }
 
+def get_domain_from_doc_ids(doc_ids: List[str]) -> DomainEnum:
+    domains = set(get_domain_from_doc_id(doc_id) for doc_id in doc_ids)
+    if len(domains) != 1:
+        raise ValueError(f"Multiple domains found: {domains}")
+    
+    return domains.pop()
+    
 def get_domain_from_doc_id(doc_id: str) -> DomainEnum:
     if doc_id.startswith("al_"):
         return DomainEnum.AL

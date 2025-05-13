@@ -2,6 +2,7 @@ import fields
 import user_features
 import annotations
 import models
+# from ui_agents import ui_model
 import actions
 from tasks import ImagePdfFill
 from doc_state import DocState
@@ -130,46 +131,35 @@ def mask_answer_field(blank_img: Image.Image, annots: list) -> Image.Image:
     return blank_img
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--model_type", type=str, help="Specify model type, e.g., hf")
-    parser.add_argument("--download_dir", type=str)
-    parser.add_argument("--model_name", type=str)
-    parser.add_argument("--doc_format", type=str)
-    parser.add_argument("--task", type=str)
-    # New argument to take a list of PNG file paths
-    parser.add_argument(
-        "--file_ids", type=str, nargs="+", help="List of file ids, e.g. al_0_0"
-    )
-    parser.add_argument("--k_missing_fields", type=int, default=1)
-    parser.add_argument("--max_turns", type=int, default=10)
-    parser.add_argument("--suggest_localizer", type=bool, default=False)
-    # parser.add_argument("--source_doc_id", type=str, default=None)
-    parser.add_argument("--user_idx", type=int, default=0)
-    parser.add_argument(
-        "--study_condition",
-        type=str,
-        help=f"Whether to use a baseline action set or our model [{', '.join([c.value for c in StudyConditionEnum])}]",
-    )
-    parser.add_argument(
-        "--profile_source",
-        type=str,
-        help=f"Whether to use a baseline action set or our model [{', '.join([c.value for c in ProfileSourceEnum])}]",
-        default=ProfileSourceEnum.TEXT.value,
-    )
-    parser.add_argument("--note", type=str, default="no_note")
-    args = parser.parse_args()
 
+# Main function to run the form filling process
+# nearly full copy-paste from original if __name__ == "__main__"
+# args.{field} -> {field}
+def main(
+        model_type, 
+        model_name, 
+        doc_format, 
+        task, 
+        file_ids, 
+        k_missing_fields, 
+        max_turns, 
+        suggest_localizer, 
+        user_idx, 
+        study_condition, 
+        profile_source, 
+        note, 
+        download_dir
+    ):
     today = datetime.now().strftime("%Y-%m-%d")
     now = datetime.now().strftime("%H:%M:%S")
-    domain = get_domain_from_doc_id(args.file_ids[0]).value
-    save_dir = f"results/{args.note}/{args.model_name.replace('/', '_')}/{domain}/{args.task}/{args.study_condition}/{args.profile_source}/u{args.user_idx}/{today}/{now}/"
+    domain = get_domain_from_doc_ids(file_ids).value
+    save_dir = f"results/{note}/{model_name.replace('/', '_')}/{domain}/{task}/{study_condition}/{profile_source}/u{user_idx}/{today}/{now}/"
 
     # Validate the task argument
-    flow = FlowEnum(args.task).value
-    study_condition = StudyConditionEnum(args.study_condition).value
-    profile_source = ProfileSourceEnum(args.profile_source).value
-    BATCH_SIZE = min(1, len(args.file_ids))
+    flow = FlowEnum(task).value
+    study_condition = StudyConditionEnum(study_condition).value
+    profile_source = ProfileSourceEnum(profile_source).value
+    BATCH_SIZE = min(1, len(file_ids))
 
     # set up the db
 
@@ -185,7 +175,7 @@ if __name__ == "__main__":
     for i, fid in enumerate(args.file_ids):
         if "al" not in fid:
             assert (
-                args.profile_source == ProfileSourceEnum.TEXT.value
+                profile_source == ProfileSourceEnum.TEXT.value
             ), "Only auto loan docs dataset supports document transfer setting"
         if profile_source == ProfileSourceEnum.IMAGE.value:
             source_doc_no = (
@@ -218,7 +208,7 @@ if __name__ == "__main__":
         # if domain == DomainEnum.FUN.value:
         #     raise NotImplementedError
 
-        user_profile = user_features.UserProfile(args.user_idx, relevant_user_features)
+        user_profile = user_features.UserProfile(user_idx, relevant_user_features)
         if profile_source == ProfileSourceEnum.TEXT.value:
             nl_profile = "\n".join(
                 [
@@ -232,17 +222,17 @@ if __name__ == "__main__":
             ), "Only auto loan docs dataset supports document transfer setting"
             # nl_profile = "<Refer to the source image for information on the user>"
             source_doc_img, source_doc_relevant_user_features = (
-                get_completed_source_doc(source_doc_id, args.user_idx)
+                get_completed_source_doc(source_doc_id, user_idx)
             )
             user_features_not_in_source_doc = (
                 relevant_user_features - source_doc_relevant_user_features
             )
             user_profile = user_features.UserProfile(
-                args.user_idx, relevant_user_features
+                user_idx, relevant_user_features
             )  # only used for creating the nl profile, which has reduced info when source doc is provided
 
             nl_user_profile = user_features.UserProfile(
-                args.user_idx, user_features_not_in_source_doc
+                user_idx, user_features_not_in_source_doc
             )
             nl_profile = (
                 "\n".join(nl_user_profile.get_nl_profile())
@@ -294,13 +284,13 @@ if __name__ == "__main__":
             new_doc_state = deepcopy(doc_state)
             for j in range(len(new_doc_state.marks)):
                 new_doc_state.marks[j]["creator"] = CreatorEnum.PREFILLED.value
-            # new_doc_state.pop_last_k_fields(k=args.k_missing_fields)
+            # new_doc_state.pop_last_k_fields(k=k_missing_fields)
             # target_fields = new_doc_state.pop_target_fields(targets=targets)
             doc_state = new_doc_state
 
             #
         else:
-            raise ValueError(f"Invalid task specified: {args.task}")
+            raise ValueError(f"Invalid task specified: {task}")
         if domain == DomainEnum.CR.value:
             available_actions.append("QuerySql")
         all_files.append(
@@ -321,7 +311,7 @@ if __name__ == "__main__":
                     []
                 ],  # fill first with empty list since no actions are taken during the prep
                 "active": [True],
-                "max_turns": args.max_turns,
+                "max_turns": max_turns,
                 "feedback": [],
                 "source_doc_img": source_doc_img,
             }
@@ -330,26 +320,34 @@ if __name__ == "__main__":
     df = pd.DataFrame(all_files)
 
     # Create a model instance based on the model name.
-    if args.model_type == "cheater":
+    if model_type == "cheater":
         raise NotImplementedError
         model = models.CheaterModel()  # Instance now will use batched inputs
-    elif args.model_type == "scripted":
+    elif model_type == "scripted":
         model = models.ScriptedModel(
-            batch_size=BATCH_SIZE, script_name=args.file_ids[0]
+            batch_size=BATCH_SIZE, script_name=file_ids[0]
         )
-    elif args.model_type.lower().startswith("gpt"):
-        model = models.GptModelE2E(model_name=args.model_name, draw_grid=False)
-    elif args.model_type.lower().startswith("hf"):
+    # elif model_type == "ui-agent":
+    #     model = ui_model.UIModel(
+    #         batch_size=BATCH_SIZE, model_name=model_name, filename=file_ids[0], user_idx=user_idx
+    #     )
+    elif model_type.lower().startswith("gpt"):
+        model = models.GptModelE2E(
+            model_name=model_name, draw_grid=False
+        )
+    elif model_type.lower().startswith("hf"):
         model = models.HFE2EModel(
-            model_name=args.model_name,
-            download_dir=args.download_dir,
-            profile_source=args.profile_source,
-            n_images=2 if args.profile_source == ProfileSourceEnum.IMAGE.value else 1,
+            model_name=model_name,
+            download_dir=download_dir,
+            profile_source=profile_source,
+            n_images=2 if profile_source == ProfileSourceEnum.IMAGE.value else 1,
         )
-    elif args.model_type.lower().startswith("anthropic"):
-        model = models.AnthropicModelE2E(model_name=args.model_name, draw_grid=False)
+    elif model_type.lower().startswith("anthropic"):
+        model = models.AnthropicModelE2E(
+            model_name=model_name, draw_grid=False
+        )
     else:
-        raise ValueError(f"Unknown model type: {args.model_type}")
+        raise ValueError(f"Unknown model type: {model_type}")
     # Set batch size to 2 and process in batches
 
     # Main processing loop: continue while there are active examples to process
@@ -367,7 +365,7 @@ if __name__ == "__main__":
                 feedback=batch["feedback"].to_list(),
                 available_actions=available_actions,
                 flow=batch["flow"].to_list(),
-                suggest_localizer=args.suggest_localizer,  # irrelevant
+                suggest_localizer=suggest_localizer,  # irrelevant
                 source_doc_image=batch["source_doc_img"].to_list(),
             )
 
@@ -413,7 +411,7 @@ if __name__ == "__main__":
             if field["prefilled"]:
                 continue
             total_count += 1
-            if field["gt"] in ["None", False, "", None, "N/A"]:
+            if field["gt"] in [None, "None", "N/A", False, ""]:
                 continue
             if field["correct"]:
                 correct_count += 1
@@ -429,7 +427,7 @@ if __name__ == "__main__":
                 "overall_accuracy": file_acc,
                 "turn_count": example["turn_count"],
                 "flow": example["flow"],
-                # "study_condition": args.study_condition,
+                # "study_condition": study_condition,
             }
         )
 
@@ -464,14 +462,14 @@ if __name__ == "__main__":
 
         # Write input parameters
         f.write("## Input Parameters\n")
-        f.write(f"- Model Type: {args.model_type}\n")
-        f.write(f"- Model Name: {args.model_name}\n")
-        f.write(f"- Task: {args.task}\n")
-        f.write(f"- Study Condition: {args.study_condition}\n")
-        f.write(f"- File IDs: {', '.join(args.file_ids)}\n")
-        f.write(f"- Suggest Localizer: {args.suggest_localizer}\n\n")
-        f.write(f"- User Index: {args.user_idx}\n\n")
-        f.write(f"- Note: {args.note}\n\n")
+        f.write(f"- Model Type: {model_type}\n")
+        f.write(f"- Model Name: {model_name}\n")
+        f.write(f"- Task: {task}\n")
+        f.write(f"- Study Condition: {study_condition}\n")
+        f.write(f"- File IDs: {', '.join(file_ids)}\n")
+        f.write(f"- Suggest Localizer: {suggest_localizer}\n\n")
+        f.write(f"- User Index: {user_idx}\n\n")
+        f.write(f"- Note: {note}\n\n")
         # Write summary metrics
         f.write("## Summary Metrics\n")
         f.write(f"- Average Accuracy: {average_acc:.2f}\n")
@@ -485,3 +483,70 @@ if __name__ == "__main__":
             f.write(
                 f"| {metrics['png_file']} | {metrics['overall_accuracy']:.2f} | {metrics['turn_count']} |\n"
             )
+            
+    result_df = pd.DataFrame({
+        "model_type": model_type, 
+        "model_name": model_name, 
+        "task": task, 
+        "study_condition": study_condition, 
+        "user_idx": user_idx,
+        "average_accuracy": average_acc, 
+        "accuracy_std": acc_std}, 
+        index=[0]
+    )
+    return result_df
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model_type", type=str, help="Specify model type, e.g., hf")
+    parser.add_argument("--download_dir", type=str)
+    parser.add_argument("--model_name", type=str)
+    parser.add_argument("--doc_format", type=str)
+    parser.add_argument("--task", type=str)
+    # New argument to take a list of PNG file paths
+    parser.add_argument(
+        "--file_ids", type=str, nargs="+", help="List of file ids, e.g. al_0_0"
+    )
+    parser.add_argument("--k_missing_fields", type=int, default=1)
+    parser.add_argument("--max_turns", type=int, default=10)
+    parser.add_argument("--suggest_localizer", type=bool, default=False)
+    # parser.add_argument("--source_doc_id", type=str, default=None)
+    parser.add_argument("--user_idx", type=int, default=0)
+    parser.add_argument(
+        "--study_condition",
+        type=str,
+        help=f"Whether to use a baseline action set or our model [{', '.join([c.value for c in StudyConditionEnum])}]",
+    )
+    parser.add_argument(
+        "--profile_source",
+        type=str,
+        help=f"Whether to use a baseline action set or our model [{', '.join([c.value for c in ProfileSourceEnum])}]",
+        default=ProfileSourceEnum.TEXT.value,
+    )
+    parser.add_argument("--note", type=str, default="no_note")
+    args = parser.parse_args()
+    
+    # mirrors the argparse structure
+    params = [
+        args.model_type, 
+        args.model_name, 
+        args.doc_format, 
+        args.task, 
+        args.file_ids, 
+        args.k_missing_fields, 
+        args.max_turns, 
+        args.suggest_localizer, 
+        args.user_idx, 
+        args.study_condition, 
+        args.profile_source, 
+        args.note, 
+        args.download_dir
+    ]
+    # called with the param list
+    overall_results = main(*params)
+    
+    # written to a csv file for easy temporary storage
+    os.makedirs("run_summaries", exist_ok=True)
+    overall_results.to_csv("run_summaries/summary.csv", index=False)
+    print(overall_results)
+    
