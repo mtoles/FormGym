@@ -849,20 +849,6 @@
     {
       "bounding_box": {
         "h": 52.3231,
-        "w": 483.9884,
-        "x": 267.429,
-        "y": 1597.307
-      },
-      "id": "f24ab7c7-81cf-45cb-8df3-24913732a1d5",
-      "name": "TodaysDate",
-      "properties": [],
-      "slot_names": [
-        "0"
-      ]
-    },
-    {
-      "bounding_box": {
-        "h": 52.3231,
         "w": 103.1927,
         "x": 748.5106,
         "y": 1597.307
@@ -911,6 +897,20 @@
       },
       "id": "2aaf17ad-619e-46e9-accc-6c7830b215a0",
       "name": "JointDriversLicenseNo",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 60.791,
+        "w": 470.2366,
+        "x": 273.5597,
+        "y": 1593.0829
+      },
+      "id": "4ffb590c-6585-4c29-8808-24216f837ed3",
+      "name": "Signature",
       "properties": [],
       "slot_names": [
         "0"
