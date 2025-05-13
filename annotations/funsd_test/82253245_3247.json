@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "82253245_3247.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88b-afca-cc20-1ab8c7ce42ef",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88b-afca-cc20-1ab8c7ce42ef"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 754,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/908bed4e-43aa-412f-92a3-72e9b1ec9e66/thumbnail",
+        "source_files": [
+          {
+            "file_name": "82253245_3247.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/9e6bc294-c87d-4d97-8be0-d3799aaa2954"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 13.1469,
+        "w": 81.9152,
+        "x": 249.2851,
+        "y": 741.2817
+      },
+      "id": "819291a0-16cd-4995-84ab-94916d74c572",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "Rich Oil | NO. OF STORES"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "52"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

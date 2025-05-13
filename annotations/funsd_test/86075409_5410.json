@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "86075409_5410.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88d-2f18-d589-ffeb8a9be6f2",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88d-2f18-d589-ffeb8a9be6f2"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 802,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/a1aa78ca-650c-4822-a291-59550ca1b7f3/thumbnail",
+        "source_files": [
+          {
+            "file_name": "86075409_5410.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/f9a5e11a-7559-423a-ae78-ff4ec5d5d826"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 22.5115,
+        "w": 239.1316,
+        "x": 343.619,
+        "y": 414.5514
+      },
+      "id": "0e2c54ca-c389-419c-9830-b661dcefb900",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "Circulation (#)"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "APPROX. 600.000"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

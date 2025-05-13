@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "87528380.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88e-bae0-99f0-19af96cee9ab",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88e-bae0-99f0-19af96cee9ab"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 777,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/62d91e8f-09ae-4e56-92d2-1aa890908067/thumbnail",
+        "source_files": [
+          {
+            "file_name": "87528380.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/1ea25e5f-9ad5-48c5-8094-1bb02ed7b01b"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 17.9156,
+        "w": 256.9605,
+        "x": 443.2825,
+        "y": 204.2376
+      },
+      "id": "c4228fde-b820-4f00-a891-21c969440a34",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "FOR"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "Metal \"Pack\" Plaque"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

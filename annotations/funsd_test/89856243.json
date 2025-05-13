@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "89856243.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88e-d5fe-b538-b4ef8d7c8bd7",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88e-d5fe-b538-b4ef8d7c8bd7"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 802,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/f6e8f80b-6cd5-49cf-b9e1-592f680d6381/thumbnail",
+        "source_files": [
+          {
+            "file_name": "89856243.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/4da58d59-b555-4393-a1b5-d26e2c804c64"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 13.1444,
+        "w": 155.3103,
+        "x": 162.1027,
+        "y": 112.3876
+      },
+      "id": "5b86af30-e45a-4454-9068-4a862292db73",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "PRODUCT"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "Triumph"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "82253058_3059.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88b-1697-9c8b-8857e9f4cf2b",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88b-1697-9c8b-8857e9f4cf2b"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 754,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/37405b98-2b92-4b49-9ef6-d83790d9d493/thumbnail",
+        "source_files": [
+          {
+            "file_name": "82253058_3059.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/fe7d7151-2734-48a8-bb25-c5a92c255bf5"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 15.6029,
+        "w": 218.007,
+        "x": 451.1836,
+        "y": 240.1111
+      },
+      "id": "45a185ae-80e7-49fd-a0c2-375410dae86e",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "TYPE OF PACKINGS:"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "Full Flavor Box and Light Box"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

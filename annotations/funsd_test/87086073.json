@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "87086073.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88d-f751-f403-e99f75d094b0",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88d-f751-f403-e99f75d094b0"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 802,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/c2a63118-ff35-4e6e-b89f-24e863aedc25/thumbnail",
+        "source_files": [
+          {
+            "file_name": "87086073.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/0a1882ca-de1d-4a04-b9ae-b657522fc733"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 19.5383,
+        "w": 372.5016,
+        "x": 111.708,
+        "y": 144.4134
+      },
+      "id": "e76ed51a-718b-47e4-956e-8643285c109c",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "NAME"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "J. D. Ergle and R. F. Dufresne"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

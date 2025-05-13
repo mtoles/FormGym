@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "83996357.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88c-0204-b40f-b353e2da8540",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88c-0204-b40f-b353e2da8540"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 754,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/75bc0c33-3fb7-4c53-9db6-b6fbbf29c8e6/thumbnail",
+        "source_files": [
+          {
+            "file_name": "83996357.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/073a3548-e767-4932-88aa-28dd206a5529"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 23.7857,
+        "w": 266.4003,
+        "x": 377.0039,
+        "y": 576.2095
+      },
+      "id": "54a0c93a-2f91-406c-85d8-2cdde0ed2f75",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "GEOGRAPHICAL AREA(S)"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "DISCOUNT SMOKERS-OG GROUPS I AND II"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

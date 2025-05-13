@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "82491256.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88b-9d46-1ac0-d78b6f23efde",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88b-9d46-1ac0-d78b6f23efde"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 754,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/522ae505-d80e-4deb-a298-671b1c46d121/thumbnail",
+        "source_files": [
+          {
+            "file_name": "82491256.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/63322430-b3cc-491a-8a65-1f4d516f8fdb"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 21.4072,
+        "w": 373.4361,
+        "x": 232.5056,
+        "y": 321.1075
+      },
+      "id": "bd3729d4-5789-4a57-b236-a229a0ad824c",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "CASE TYPE"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "Asbestos"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

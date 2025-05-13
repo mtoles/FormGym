@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "87594142_87594144.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88e-7c40-a509-dfa08b3bb6b7",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88e-7c40-a509-dfa08b3bb6b7"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 774,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/8d39ac41-0ef3-476d-b0e2-546de990111d/thumbnail",
+        "source_files": [
+          {
+            "file_name": "87594142_87594144.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/2727f66f-4e7f-4e55-ada7-07d912c7293f"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 20.0237,
+        "w": 153.8185,
+        "x": 531.5384,
+        "y": 378.0233
+      },
+      "id": "fcb556a3-2425-42d6-a778-6290f940699d",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "State/Zip"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "Maryland 21205"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

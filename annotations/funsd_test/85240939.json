@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "85240939.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88d-868a-e5cb-ae14fcb9f08a",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88d-868a-e5cb-ae14fcb9f08a"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 769,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/82338214-1a89-4c0d-ba1e-6604a693d976/thumbnail",
+        "source_files": [
+          {
+            "file_name": "85240939.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/b9b298af-2e3f-4bc7-9a12-213222bbbbee"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 18.6888,
+        "w": 53.5179,
+        "x": 177.1188,
+        "y": 433.2402
+      },
+      "id": "9207a93b-6778-49cb-a0b3-8d39537b0ad4",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "I will make my own housing arrangements"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "x"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

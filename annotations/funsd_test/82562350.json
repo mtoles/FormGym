@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "82562350.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88c-8bf2-62b1-56c04bccf09c",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88c-8bf2-62b1-56c04bccf09c"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 754,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/615e4421-5c58-452d-b283-5f9220445bf9/thumbnail",
+        "source_files": [
+          {
+            "file_name": "82562350.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/f243bc2d-f857-4e47-b375-76a54de9942d"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 20.8125,
+        "w": 209.9091,
+        "x": 148.6609,
+        "y": 382.9504
+      },
+      "id": "8142c374-92fc-43ae-bc4e-49f4ae1a8552",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "CC:"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "Mr. Fred Paternostro"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

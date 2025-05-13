@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "82573104.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88c-eb0c-c737-dc6cde39cfaf",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88c-eb0c-c737-dc6cde39cfaf"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 754,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/dcb28e79-2a68-4353-866c-777b856a8064/thumbnail",
+        "source_files": [
+          {
+            "file_name": "82573104.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/159ecb3e-c843-4c8c-a554-74ac604234c0"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 24.2105,
+        "w": 288.8268,
+        "x": 279.4824,
+        "y": 497.8015
+      },
+      "id": "b43c3d11-9ab3-49f0-b38c-f070fdb62a0f",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "To:"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "Haney H. Bell, Esq"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "82253362_3364.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88b-eb73-84be-7fb2e1efc661",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88b-eb73-84be-7fb2e1efc661"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 754,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/ea019d85-34f5-4f44-a4b0-28c2c502a878/thumbnail",
+        "source_files": [
+          {
+            "file_name": "82253362_3364.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/b9565c44-74ea-41fe-8bcb-b075f2c13860"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 15.2908,
+        "w": 77.7284,
+        "x": 246.777,
+        "y": 468.4941
+      },
+      "id": "566833f5-ddc1-44a7-be37-f09f0951d715",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "Speedy Stop | NO. OF STORES"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "29"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

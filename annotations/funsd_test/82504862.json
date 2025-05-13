@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "82504862.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88c-1e23-1e8c-f90cdb2ecb75",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88c-1e23-1e8c-f90cdb2ecb75"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 754,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/269d2492-4188-44bd-81fb-4af00b3db7a5/thumbnail",
+        "source_files": [
+          {
+            "file_name": "82504862.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/bec05f77-21ec-496f-a28e-49a9ed5a1855"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 27.9482,
+        "w": 355.0021,
+        "x": 240.8306,
+        "y": 190.2859
+      },
+      "id": "b0a46184-3a57-4b17-a9a1-5406171b848a",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "COURT:"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "San Francisco Superior Court - No. 996382"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

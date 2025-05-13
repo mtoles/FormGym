@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "83641919_1921.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88c-c93b-47ba-91461ca665d6",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88c-c93b-47ba-91461ca665d6"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 802,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/da09e5ff-9d1e-4aaf-b157-da26e866b3f7/thumbnail",
+        "source_files": [
+          {
+            "file_name": "83641919_1921.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/7e0c9693-ac03-4c29-b50f-119152fe6327"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 15.8918,
+        "w": 191.0632,
+        "x": 143.3877,
+        "y": 144.4712
+      },
+      "id": "2255c142-8e89-4cfc-b667-765a6a479470",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "FROM:"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "R. W. RICHARDSON"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

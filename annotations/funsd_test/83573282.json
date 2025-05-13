@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "83573282.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88c-1d7f-15be-ae9bee0fa454",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88c-1d7f-15be-ae9bee0fa454"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 754,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/aa64c9c3-6d03-4c60-bfd8-bea2ee3c4bd1/thumbnail",
+        "source_files": [
+          {
+            "file_name": "83573282.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/c9aa6d9b-fe47-4d4f-b78e-6008deb1dd03"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 22.5965,
+        "w": 503.663,
+        "x": 114.7662,
+        "y": 327.6485
+      },
+      "id": "1c934fa2-44fe-423d-8f12-c941654edd53",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "Re:"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "Tobacco - Fee Payment Agreement and Release"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

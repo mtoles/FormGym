@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "83594639.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88c-f44a-e5a0-88957b28abcf",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88c-f44a-e5a0-88957b28abcf"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 754,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/afd6c352-70d9-422d-bd23-eb80f3a887cf/thumbnail",
+        "source_files": [
+          {
+            "file_name": "83594639.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/14bbe855-e1a4-4d8a-b3cf-ffa9391b8220"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 19.5383,
+        "w": 169.0486,
+        "x": 208.1252,
+        "y": 327.0539
+      },
+      "id": "1e06fbd1-99a9-4ffb-b0d2-4e10456c1a92",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "Company:"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "Lorillard"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

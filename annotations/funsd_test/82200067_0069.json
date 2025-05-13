@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "82200067_0069.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88a-bea9-9eaf-1d9b5c040940",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88a-bea9-9eaf-1d9b5c040940"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 754,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/60b8c2ba-6829-493d-9185-b1e4c0a34394/thumbnail",
+        "source_files": [
+          {
+            "file_name": "82200067_0069.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/61ff663c-1a2a-496d-bfb3-2599bd1c6dd8"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 15.2908,
+        "w": 162.6775,
+        "x": 222.5665,
+        "y": 166.9249
+      },
+      "id": "80b7eddd-38f6-43cf-baf9-f47aef7b3339",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "FROM:"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "T.D. Blachly"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "83635935.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88c-b67f-f39f-463956d4af92",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88c-b67f-f39f-463956d4af92"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 754,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/1c32939b-896f-42e8-93d2-6fc4e35abec6/thumbnail",
+        "source_files": [
+          {
+            "file_name": "83635935.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/8a846875-bba6-4aba-9fba-b72b0ac51d7c"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 25.7881,
+        "w": 358.5053,
+        "x": 164.8416,
+        "y": 396.429
+      },
+      "id": "f66f8dce-de11-424e-b527-410f9b37479e",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "TO:"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "Dr. Spears/A.J. Stevens/R. Milstein"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

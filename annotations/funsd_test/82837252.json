@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "82837252.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88c-7a37-b78b-2460919706f4",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88c-7a37-b78b-2460919706f4"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 754,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/0e309670-1876-4305-8452-0d1f8d985c35/thumbnail",
+        "source_files": [
+          {
+            "file_name": "82837252.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/19f7cdef-3401-4baf-9a77-36dc6a7964c6"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 31.0064,
+        "w": 499.9252,
+        "x": 180.9415,
+        "y": 310.4888
+      },
+      "id": "43b039bf-ad2c-48a3-a8f8-6e2bca458100",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "BRAND NAME"
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "VICEROY KING BOX AND VICEROY LIGHTS KING BOX"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

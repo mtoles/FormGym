@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "91814768_91814769.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196c742-c88e-cf7d-8b5a-d5082402c717",
+      "dataset": {
+        "name": "funsd",
+        "slug": "funsd",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1686601/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1686601&item=0196c742-c88e-cf7d-8b5a-d5082402c717"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 777,
+        "height": 1000,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/4ed7aba9-043c-4e46-8a25-476d79ab206b/thumbnail",
+        "source_files": [
+          {
+            "file_name": "91814768_91814769.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/21de49c0-7f30-448a-ae20-4ba8b6b950e7"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 18.4274,
+        "w": 70.1267,
+        "x": 145.3721,
+        "y": 362.9184
+      },
+      "id": "bd36b0da-3356-4578-884f-ab8232df9b52",
+      "name": "funsd",
+      "properties": [
+        {
+          "frame_index": 0,
+          "name": "key",
+          "value": "Question No."
+        },
+        {
+          "frame_index": 0,
+          "name": "value",
+          "value": "1"
+        }
+      ],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}
