@@ -111,6 +111,25 @@ def example_should_be_active(example):
     return True
 
 
+def mask_answer_field(blank_img: Image.Image, annots: list) -> Image.Image:
+    """return an image with white rectangle over the answer field"""
+    for annot in annots:
+        # if annot["type"] == "answer":
+        # x1, y1, x2, y2 = annot["bbox"]
+        x1 = annot["bbox"]["x"] * blank_img.width
+        y1 = annot["bbox"]["y"] * blank_img.height
+        x2 = (annot["bbox"]["x"] + annot["bbox"]["w"]) * blank_img.width
+        y2 = (annot["bbox"]["y"] + annot["bbox"]["h"]) * blank_img.height
+        blank_img = blank_img.copy()
+        draw = ImageDraw.Draw(blank_img)
+        draw.rectangle([x1, y1, x2, y2], fill="white")
+    # Save masked image to tmp directory
+    # os.makedirs("tmp", exist_ok=True)
+    # save_path = f"tmp/masked.png"
+    # blank_img.save(save_path)
+    return blank_img
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_type", type=str, help="Specify model type, e.g., hf")
@@ -156,27 +175,42 @@ if __name__ == "__main__":
 
     # Prepare list to collect per-file data for batch processing
     all_files = []
+    if args.file_ids[0] == "funsd_test":
+        args.file_ids = [
+            f.split(".")[0]
+            for f in os.listdir("annotations/funsd_test")
+            if f.endswith(".json")
+        ]
+        assert len(args.file_ids) == 50, "there should be 50 docs"
     for i, fid in enumerate(args.file_ids):
         if "al" not in fid:
             assert (
                 args.profile_source == ProfileSourceEnum.TEXT.value
             ), "Only auto loan docs dataset supports document transfer setting"
-        source_doc_no = (
-            int(fid.split("_")[1]) - 1
-        ) % 4  # use the previous doc as the source doc
-        source_doc_id = f"al_{source_doc_no}_0"
+        if profile_source == ProfileSourceEnum.IMAGE.value:
+            source_doc_no = (
+                int(fid.split("_")[1]) - 1
+            ) % 4  # use the previous doc as the source doc
+            source_doc_id = f"al_{source_doc_no}_0"
         png_path = f"pngs/{fid}.png"
         print(f"Processing file: {png_path}")
 
         blank_img = Image.open(png_path).convert("RGB")
-        annot_path = f"annotations/{fid}.json"
-        annots = annotations.read_annotations(annot_path)
-        targets = annotations.read_targets(f"targets/{fid}_targets.json")[
-            "selected_ids"
-        ]
+        if domain == DomainEnum.FUN.value:
+            annot_path = f"annotations/funsd_test/{fid}.json"
+            annots = annotations.read_annotations_funsd(annot_path)
+            blank_img = mask_answer_field(blank_img, annots)
+            targets = [x["id"] for x in annots]
+        else:
+            annot_path = f"annotations/{fid}.json"
+            annots = annotations.read_annotations(annot_path)
+            targets = annotations.read_targets(f"targets/{fid}_targets.json")[
+                "selected_ids"
+            ]
         doc_state = DocState(annots, blank_img=blank_img, doc_id=fid)
 
-        relevant_user_features = get_relevant_user_features(doc_state)
+        if domain == DomainEnum.FUN.value:
+            raise NotImplementedError
 
         user_profile = user_features.UserProfile(args.user_idx, relevant_user_features)
         if profile_source == ProfileSourceEnum.TEXT.value:
