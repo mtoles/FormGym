@@ -15,28 +15,29 @@ def get_db_connection():
 
 def execute_query(conn, query):
     try:
+        # Check if query is a SELECT query
+        if not query.strip().upper().startswith("SELECT"):
+            print(
+                "Error: Only SELECT queries are allowed. This is a read-only database."
+            )
+            return
+
         cursor = conn.cursor()
         cursor.execute(query)
 
-        # If it's a SELECT query, fetch and display results
-        if query.strip().upper().startswith("SELECT"):
-            results = cursor.fetchall()
-            if results:
-                # Get column names
-                columns = [description[0] for description in cursor.description]
-                # Print column names
-                print("\n" + " | ".join(columns))
-                print("-" * (sum(len(col) for col in columns) + 3 * len(columns)))
-                # Print results
-                for row in results:
-                    print(" | ".join(str(value) for value in row))
-                print(f"\n{len(results)} rows returned")
-            else:
-                print("No results found")
+        results = cursor.fetchall()
+        if results:
+            # Get column names
+            columns = [description[0] for description in cursor.description]
+            # Print column names
+            print("\n" + " | ".join(columns))
+            print("-" * (sum(len(col) for col in columns) + 3 * len(columns)))
+            # Print results
+            for row in results:
+                print(" | ".join(str(value) for value in row))
+            print(f"\n{len(results)} rows returned")
         else:
-            # For non-SELECT queries, commit the changes
-            conn.commit()
-            print("Query executed successfully")
+            print("No results found")
 
     except sqlite3.Error as e:
         print(f"Error executing query: {e}")
