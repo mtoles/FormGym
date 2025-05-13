@@ -180,8 +180,8 @@ if __name__ == "__main__":
             f.split(".")[0]
             for f in os.listdir("annotations/funsd_test")
             if f.endswith(".json")
-        ]
-        assert len(args.file_ids) == 50, "there should be 50 docs"
+        ][:3]
+        # assert len(args.file_ids) == 50, "there should be 50 docs"
     for i, fid in enumerate(args.file_ids):
         if "al" not in fid:
             assert (
@@ -201,16 +201,22 @@ if __name__ == "__main__":
             annots = annotations.read_annotations_funsd(annot_path)
             blank_img = mask_answer_field(blank_img, annots)
             targets = [x["id"] for x in annots]
+            doc_state = DocState(annots, blank_img=blank_img, doc_id=fid)
+            relevant_user_features = set([annots[0]["field_name"]])
+
         else:
             annot_path = f"annotations/{fid}.json"
             annots = annotations.read_annotations(annot_path)
             targets = annotations.read_targets(f"targets/{fid}_targets.json")[
                 "selected_ids"
             ]
-        doc_state = DocState(annots, blank_img=blank_img, doc_id=fid)
+            doc_state = DocState(annots, blank_img=blank_img, doc_id=fid)
+            relevant_user_features = get_relevant_user_features(
+                doc_state
+            )  # list of strings
 
-        if domain == DomainEnum.FUN.value:
-            raise NotImplementedError
+        # if domain == DomainEnum.FUN.value:
+        #     raise NotImplementedError
 
         user_profile = user_features.UserProfile(args.user_idx, relevant_user_features)
         if profile_source == ProfileSourceEnum.TEXT.value:

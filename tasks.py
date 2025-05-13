@@ -25,7 +25,8 @@ class ImagePdfFill(BaseTask):
     def eval(self, user_profile, doc_state):
         doc_state = deepcopy(doc_state)
         for field in tqdm(doc_state.fields):
-            field_class = getattr(fields, field["field_name"])(
+            # field_class = getattr(fields, field["field_name"])(
+            field_class = fields.FieldMeta.registry[field["field_name"]](
                 x=field["bbox"]["x"],
                 y=field["bbox"]["y"],
                 w=field["bbox"]["w"],

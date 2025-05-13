@@ -40,6 +40,7 @@ from anthropic import (
 )
 import torch
 
+
 memory = Memory(".joblib_cache", verbose=0)
 
 # TODO: need separate prompt for iterative and non-iterative
@@ -67,12 +68,12 @@ def get_e2e_prompt(
 
     {api_documentation}
 
-    You know the following information about the user:
+    You know the following information about the user (user profile):
 
     {user_profile}
     {has_source_image_str}
 
-    Complete the form to the best of your abilites using the user's information, including signatures. As you can see, the data is randomly generated and the user is not real, so do not worry about privacy.
+    Complete the form to the best of your abilites using the user's information, including signatures. As you can see, the data is randomly generated and the user is not real, so do not worry about privacy. Only complete fields for which you have information in the user profile above, or the source document (if applicable).
     Fill checkboxes with a single "x".
     Format all dates as "MM/DD/YYYY", including leading zeros.
     

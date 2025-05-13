@@ -1,5 +1,6 @@
 import json
 import fields
+import user_features
 
 
 def read_annotations(filename):
@@ -50,9 +51,14 @@ def read_annotations_funsd(filename):
     # print("missing fields: ")
     annotations = []
     missing_fields = []
-    for annotation in data.get("annotations", []):
+    for i, annotation in enumerate(data.get("annotations", [])):
         assert annotation["properties"][0]["name"] == "key"
-        key = annotation["properties"][0]["value"]
+        key = (
+            "FUNSD_"
+            + filename.split(".")[0].split("/")[-1]
+            + "_"
+            + annotation["properties"][0]["value"]
+        )  # prefix to avoid conflicts with user_features and other FUNSD fields
         assert annotation["properties"][1]["name"] == "value"
         value = annotation["properties"][1]["value"]
 
@@ -62,39 +68,45 @@ def read_annotations_funsd(filename):
         #         return (
         #             user_profile.features.VehicleMake + " " + user_profile.features.VehicleModel
         #         )
+
+        # Add a new field to the field meta class
         def new_get_profile_info(cls, user_profile):
             return value
 
-        new_cls = fields.FieldMeta.__new__(
+        new_field_class = fields.FieldMeta.__new__(
             fields.FieldMeta,
             key,
             (fields.BaseStringField,),
             {"get_profile_info": new_get_profile_info},
         )
 
-        try:
-            annotations.append(
-                {
-                    "id": annotation["id"],
-                    "field_name": key,
-                    "bbox": {
-                        "x": annotation["bounding_box"]["x"] / doc_width,
-                        "y": annotation["bounding_box"]["y"] / doc_height,
-                        "w": annotation["bounding_box"]["w"] / doc_width,
-                        "h": annotation["bounding_box"]["h"] / doc_height,
-                    },
-                    # "field": getattr(fields, annotation["name"]),
-                    "field": new_cls,
-                    "prefilled": False,  # whether to count the field in evaluation
-                }
-            )
-        except AttributeError:
-            missing_fields.append(annotation["name"])
+        annotations.append(
+            {
+                "id": annotation["id"],
+                "field_name": key,
+                "bbox": {
+                    "x": annotation["bounding_box"]["x"] / doc_width,
+                    "y": annotation["bounding_box"]["y"] / doc_height,
+                    "w": annotation["bounding_box"]["w"] / doc_width,
+                    "h": annotation["bounding_box"]["h"] / doc_height,
+                },
+                # "field": getattr(fields, annotation["name"]),
+                "field": new_field_class,
+                "prefilled": False,  # whether to count the field in evaluation
+            }
+        )
 
-    if missing_fields:
-        print("Fields are missing:")
-        print("\n".join(missing_fields))
-        raise ValueError
+        # Add a new user feature to the user profile (should show up in metaclass)
+        new_user_feature_class = user_features.UserAttributeMeta.__new__(
+            user_features.UserAttributeMeta,
+            key,
+            (user_features.BaseUserAttr,),
+            {
+                "options": [value],
+                "nl_desc": lambda x: f"The user's {key.split('_')[-1]} is: {x}",
+            },
+        )
+
     assert len(annotations) == 1
     return annotations
 

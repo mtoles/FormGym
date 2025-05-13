@@ -67,6 +67,7 @@ class UserAttributeMeta(type):
 
 
 class UserProfile:
+    # This variable is dedicated to my mom, Charleen
     def __init__(self, idx, relevant_features: set):
         self.relevant_features = relevant_features
 
