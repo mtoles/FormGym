@@ -1387,7 +1387,7 @@ class JointBankruptcyYear(BaseUserAttr):
 
 
 class TodaysDate(BaseUserAttr):
-    options = ["02/17/2023", "07/10/2023", "11/28/2024", "03/06/2025"]
+    options = ["2/17/2023", "7/10/2023", "11/28/2024", "3/6/2025"]
 
     @staticmethod
     def nl_desc(option):
@@ -1539,7 +1539,7 @@ class JointEmployerZip(BaseUserAttr):
 
 
 class EmployerHireDate(BaseUserAttr):
-    options = ["01/01/2000", "01/01/2001", "01/01/2002", "01/01/2003"]
+    options = ["1/1/2000", "1/1/2001", "1/1/2002", "1/1/2003"]
 
     @staticmethod
     def nl_desc(option):
@@ -1547,7 +1547,7 @@ class EmployerHireDate(BaseUserAttr):
 
 
 class JointEmployerHireDate(BaseUserAttr):
-    options = ["02/02/2000", "02/02/2001", "02/02/2002", "02/02/2003"]
+    options = ["2/2/2000", "2/2/2001", "2/2/2002", "2/2/2003"]
 
     @staticmethod
     def nl_desc(option):
@@ -1599,7 +1599,7 @@ class JointDriversLicenseNo(BaseUserAttr):
 
 
 class DriversLicenseExpirationDate(BaseUserAttr):
-    options = ["01/01/2030", "01/01/2031", "01/01/2032", "01/01/2033"]
+    options = ["1/1/2030", "1/1/2031", "1/1/2032", "1/1/2033"]
 
     @staticmethod
     def nl_desc(option):
@@ -1607,7 +1607,7 @@ class DriversLicenseExpirationDate(BaseUserAttr):
 
 
 class JointDriversLicenseExpirationDate(BaseUserAttr):
-    options = ["02/02/2030", "02/02/2031", "02/02/2032", "02/02/2033"]
+    options = ["2/2/2030", "2/2/2031", "2/2/2032", "2/2/2033"]
 
     @staticmethod
     def nl_desc(option):
