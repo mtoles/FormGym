@@ -5,12 +5,13 @@ Types of fields:
 - Text
 - Checkbox
 
-NOTE TO EDITORS: 
+NOTE TO EDITORS:
 """
 
 from typing import List
 from abc import ABC, abstractmethod
 import user_features
+from dateutil.parser import parse, ParserError
 
 
 # -----------------------------------------
@@ -110,7 +111,20 @@ class BaseCheckboxField(BaseField):
             return concatted_input == "x"
         else:
             return concatted_input == ""
-        
+
+
+class BaseDateField(BaseField):
+    def is_correct(self, agent_generations_inside, profile_info: str):
+        assert isinstance(profile_info, str)
+        concatted_input = concat_agent_generations(agent_generations_inside)
+        gt_date = parse(profile_info).date()
+        try:
+            input_date = parse(concatted_input).date()
+        except ParserError:
+            return False
+        return input_date == gt_date
+
+
 class AnnotatedField(BaseField):
     pass
 
@@ -358,7 +372,7 @@ class SocialSecurityNumber(BaseNumericField):
         return user_profile.features.SocialSecurityNumber
 
 
-class FullBirthDate(BaseNumericField):
+class FullBirthDate(BaseDateField):
     @classmethod
     def get_profile_info(cls, user_profile):
         feat = user_profile.features
@@ -456,7 +470,7 @@ class JointSocialSecurityNumber(BaseNumericField):
         return user_profile.features.JointSocialSecurityNumber
 
 
-class JointFullBirthDate(BaseNumericField):
+class JointFullBirthDate(BaseDateField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return f"{user_profile.features.JointBirthMonth}/{user_profile.features.JointBirthDay}/{user_profile.features.JointBirthYear}"
@@ -989,7 +1003,7 @@ class RegisteredCarOwner(BaseStringField):
 # -----------------------------------------
 # DATE FIELDS
 # -----------------------------------------
-class TodaysDate(BaseNumericField):
+class TodaysDate(BaseDateField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.TodaysDate
@@ -1533,25 +1547,25 @@ class JointAfcuAccountNo(BaseStringField):
         return user_profile.features.JointAfcuAccountNo
 
 
-class EmployerHireDate(BaseNumericField):
+class EmployerHireDate(BaseDateField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.EmployerHireDate
 
 
-class JointEmployerHireDate(BaseNumericField):
+class JointEmployerHireDate(BaseDateField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointEmployerHireDate
 
 
-class DriversLicenseExpirationDate(BaseStringField):
+class DriversLicenseExpirationDate(BaseDateField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.DriversLicenseExpirationDate
 
 
-class JointDriversLicenseExperationDate(BaseNumericField):
+class JointDriversLicenseExperationDate(BaseDateField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointDriversLicenseExpirationDate
