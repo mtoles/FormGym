@@ -76,6 +76,7 @@ def get_e2e_prompt(
     Complete the form to the best of your abilites using the user's information, including signatures. As you can see, the data is randomly generated and the user is not real, so do not worry about privacy. Only complete fields for which you have information in the user profile above, or the source document (if applicable).
     Fill checkboxes with a single "x".
     Format all dates as "MM/DD/YYYY".
+    Names should be "First Middle Last" unless otherwise specified.
     
     {grid_subprompt}
     {suggest_localizer_str}

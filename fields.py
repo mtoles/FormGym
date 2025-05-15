@@ -127,7 +127,20 @@ class BaseDateField(BaseField):
             return False
         return input_date == gt_date
 
-
+class BaseNameField(BaseField):
+    def is_correct(self, agent_generations_inside, profile_info: str):
+        assert isinstance(profile_info, str)
+        concatted_input = concat_agent_generations(agent_generations_inside)
+        pred_words = concatted_input.split()
+        gt_words = profile_info.split()
+        # first name
+        if len(set(pred_words)) <=2:
+            return False
+        for pred_word in pred_words:
+            if pred_word not in gt_words:
+                return False
+        return True
+        
 class AnnotatedField(BaseField):
     pass
 
@@ -238,18 +251,19 @@ class ApplyingWithJointCredit(BaseStringField):
         return user_profile.features.ApplyingWithJointCredit
 
 
-class FullName(BaseStringField):
+class FullName(BaseNameField):
     @classmethod
     def get_profile_info(cls, user_profile):
         if (
             not hasattr(user_profile.features, "FirstName")
             or not hasattr(user_profile.features, "MiddleName")
             or not hasattr(user_profile.features, "LastName")
+            or not hasattr(user_profile.features, "Suffix")
         ):
             raise Exception(
                 "No user_feature for FullName. Expected FirstName, MiddleName, LastName."
             )
-        return f"{user_profile.features.FirstName} {user_profile.features.MiddleName} {user_profile.features.LastName}"
+        return f"{user_profile.features.FirstName} {user_profile.features.MiddleName} {user_profile.features.LastName} {user_profile.features.Suffix}"
 
 
 class LastName(BaseStringField):
@@ -389,7 +403,7 @@ class FullBirthDate(BaseDateField):
 # -----------------------------------------
 # JOINT APPLICANT PERSONAL INFORMATION
 # -----------------------------------------
-class JointFullName(BaseStringField):
+class JointFullName(BaseNameField):
     @classmethod
     def get_profile_info(cls, user_profile):
         # user_features do not provide separate joint first/middle/last name attributes
@@ -399,6 +413,7 @@ class JointFullName(BaseStringField):
                 user_profile.features.JointFirstName,
                 user_profile.features.JointMiddleName,
                 user_profile.features.JointLastName,
+                user_profile.features.JointSuffix,
             ]
         )
 
