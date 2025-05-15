@@ -160,7 +160,7 @@ class DeepseekVL2Model(BaseHFModel):
         super().__init__(n_images=n_images)
         self.engine_args = EngineArgs(
             model="deepseek-ai/deepseek-vl2",
-            max_model_len=4096,
+            max_model_len=8192,
             max_num_seqs=2,
             hf_overrides={"architectures": ["DeepseekVLV2ForCausalLM"]},
         )

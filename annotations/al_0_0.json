@@ -3,7 +3,7 @@
   "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
   "item": {
     "name": "al_0_0.png",
-    "path": "/",
+    "path": "/al",
     "source_info": {
       "item_id": "01959699-d552-7e58-9a33-eaef2a22db9d",
       "dataset": {
@@ -154,20 +154,6 @@
         "y": 244.1743
       },
       "id": "e22f08bb-bd5f-4f61-b388-4eb850ad1ea0",
-      "name": "EnterpriseType_Partnership",
-      "properties": [],
-      "slot_names": [
-        "0"
-      ]
-    },
-    {
-      "bounding_box": {
-        "h": 21.3168,
-        "w": 27.1305,
-        "x": 593.9637,
-        "y": 268.398
-      },
-      "id": "4ea54242-1bed-4d65-84dc-e78006adc494",
       "name": "EnterpriseType_Partnership",
       "properties": [],
       "slot_names": [
@@ -1079,6 +1065,20 @@
       },
       "id": "82d2a071-af76-4d43-b578-2cfef0fac9a0",
       "name": "TodaysDate",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 19.9467,
+        "w": 23.6406,
+        "x": 595.4469,
+        "y": 268.9115
+      },
+      "id": "8d3dd524-9cdf-41f1-be45-ad1731e15159",
+      "name": "EnterpriseType_LLC",
       "properties": [],
       "slot_names": [
         "0"

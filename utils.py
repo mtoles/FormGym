@@ -77,5 +77,7 @@ def get_domain_from_doc_id(doc_id: str) -> DomainEnum:
         return DomainEnum.CR
     elif doc_id=="funsd_test":
         return DomainEnum.FUN
+    elif doc_id.startswith("xx_"):
+        return DomainEnum.AL
     else:
         raise ValueError(f"Invalid document ID: {doc_id}")

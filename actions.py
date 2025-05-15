@@ -152,7 +152,7 @@ class DeleteText(BaseAction):
 
 class SignOrInitial(BaseAction):
     documentation = """
-    Sign or initial a document, image, or pdf. The center of the signature will be placed at (x, y), where (0, 0) is the top left corner and (1, 1) is the bottom right of the image. `Value` is the name or initials of the signer.
+    Sign or initial a document, image, or pdf. The center of the signature will be placed at (x, y), where (0, 0) is the top left corner and (1, 1) is the bottom right of the image. `Value` is the name or initials of the signer. When signing a document, sign with the user's first name and last name, nothing else.
 
     Args:
         x: The x position of the center of the signature relative to the top left corner of the screen
@@ -201,7 +201,7 @@ class QuerySql(BaseAction):
         query: The SQL query to execute. The table is called "features".
     
     Example input:
-        {"action": "QuerySql", "query": "SELECT * FROM features WHERE column_name = 'value'"}
+        {"action": "QuerySql", "query": "SELECT value FROM features where key='CROI_0093'"}
     """
 
     def act(doc_state, query: str, db, **kwargs):
@@ -386,7 +386,7 @@ class PlaceWithLocalizer(BaseAction):
 
 class SignOrInitialWithLocalizer(BaseAction):
     documentation = """
-    Sign or initial a target field on a document, image, or pdf. This tool will automatically find the target field and place the signature there. If the target field needs to be described with additional specificity (e.g., section headers, table columns), list them from highest to lowest in the hierarchy, separated by | as in: "Section Header | Table Column | Table Row" or "User 1 | Signature".
+    Sign or initial a target field on a document, image, or pdf. This tool will automatically find the target field and place the signature there. If the target field needs to be described with additional specificity (e.g., section headers, table columns), list them from highest to lowest in the hierarchy, separated by | as in: "Section Header | Table Column | Table Row" or "User 1 | Signature". When signing a document, sign with the user's first name and last name, nothing else.
     Args:
         target: The name of the field as it appears in the document
         value: The text to place in the target field
@@ -422,11 +422,18 @@ def update_doc_state(doc_state, agent_generations: List[Dict], db=None):
     feedbacks = []
     for ag in agent_generations:
         act_name = ag["action"]
-        if act_name in ActionMeta.registry:
+        # if act_name in ActionMeta.registry:
+        try:
             act = ActionMeta.registry[act_name]
-        else:
+        except KeyError as e:
+            print(f"Error with action:\n{ag}\n{e}")
             act = InvalidAction
-        doc_state, feedback = act.act(doc_state, **ag, db=db)
+        try:
+            doc_state, feedback = act.act(doc_state, **ag, db=db)
+        except (TypeError, ValueError) as e:
+            print(f"Error with action:\n{ag}\n{e}")
+            act = InvalidAction
+            doc_state, feedback = act.act(doc_state, **ag, db=db)
         feedbacks.append(feedback)
 
     # # add bboxes to every mark

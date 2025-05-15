@@ -332,26 +332,26 @@ class ScriptedModel:
         # self.script = [
         scripts = {
             "xx_0_0": [
-                {
-                    "action": "FieldLocalizer",
-                    "value": "Bank Name",
-                },
-                {
-                    "action": "FieldLocalizer",
-                    "value": "Bank Account Number",
-                },
-                {
-                    "action": "FieldLocalizer",
-                    "value": "Single",
-                },
-                {
-                    "action": "FieldLocalizer",
-                    "value": "Married",
-                },
-                {
-                    "action": "FieldLocalizer",
-                    "value": "Initial",
-                },
+                # {
+                #     "action": "FieldLocalizer",
+                #     "value": "Bank Name",
+                # },
+                # {
+                #     "action": "FieldLocalizer",
+                #     "value": "Bank Account Number",
+                # },
+                # {
+                #     "action": "FieldLocalizer",
+                #     "value": "Single",
+                # },
+                # {
+                #     "action": "FieldLocalizer",
+                #     "value": "Married",
+                # },
+                # {
+                #     "action": "FieldLocalizer",
+                #     "value": "Initial",
+                # },
                 {
                     "action": "PlaceText",
                     "cx": 551 / w,
@@ -367,7 +367,7 @@ class ScriptedModel:
                 {
                     "action": "PlaceText",
                     "cx": 37 / w,
-                    "cy": 247 / h,
+                    "cy": 300 / h,
                     "value": "x",
                 },
                 {
@@ -509,17 +509,21 @@ class GptModelE2E:
             buffer = io.BytesIO()
             image.save(buffer, format="PNG")
             image_b64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
-
+            if source_image:
+                source_buffer = io.BytesIO()
+                source_image.save(source_buffer, format="PNG")
+                base64_source_image = base64.b64encode(source_buffer.getvalue()).decode(
+                    "utf-8"
+                )
+            else:
+                base64_source_image = None
             response = (
                 forward_gpt(
                     self.model_name,
                     prompt,
                     image_b64,
                     base64_source_image=(
-                        # source_doc_image[0].tobytes() if source_doc_image else None
-                        None
-                        if source_image is None
-                        else source_image.tobytes()
+                        base64_source_image if base64_source_image else None
                     ),
                 )
                 .choices[0]

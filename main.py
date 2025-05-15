@@ -153,6 +153,7 @@ def main(
     today = datetime.now().strftime("%Y-%m-%d")
     now = datetime.now().strftime("%H:%M:%S")
     domain = get_domain_from_doc_ids(file_ids).value
+    needs_db = domain == DomainEnum.CR.value
     save_dir = f"results/{note}/{model_name.replace('/', '_')}/{domain}/{task}/{study_condition}/{profile_source}/u{user_idx}/{today}/{now}/"
 
     # Validate the task argument
@@ -165,12 +166,12 @@ def main(
 
     # Prepare list to collect per-file data for batch processing
     all_files = []
-    if args.file_ids[0] == "funsd_test":
+    if domain == DomainEnum.FUN.value:
         args.file_ids = [
             f.split(".")[0]
             for f in os.listdir("annotations/funsd_test")
             if f.endswith(".json")
-        ][:3]
+        ]
         # assert len(args.file_ids) == 50, "there should be 50 docs"
     for i, fid in enumerate(args.file_ids):
         if "al" not in fid:
@@ -209,10 +210,22 @@ def main(
         #     raise NotImplementedError
 
         user_profile = user_features.UserProfile(user_idx, relevant_user_features)
+        # Temp stuff for gui agent testing
+        # Save masked image to tmp folder
+        os.makedirs("tmp/funsd", exist_ok=True)
+        tmp_path = f"tmp/funsd/{fid}.png"
+        blank_img.save(tmp_path)
+        # Save annotations to txt file
+        txt_path = f"tmp/funsd/{fid}.txt"
+        os.makedirs(os.path.dirname(txt_path), exist_ok=True)
+        with open(txt_path, "w") as f:
+            ann = annots[0]
+            f.write(user_profile.get_nl_profile()[0])
+
         if profile_source == ProfileSourceEnum.TEXT.value:
             nl_profile = "\n".join(
                 [
-                    f for f in user_profile.get_nl_profile() if not f.startswith("CROI")
+                    f for f in user_profile.get_nl_profile() if f is not None
                 ]  # don't show features that appear in the db
             )
             source_doc_img = None
@@ -359,6 +372,7 @@ def main(
                 flow=batch["flow"].to_list(),
                 suggest_localizer=suggest_localizer,  # irrelevant
                 source_doc_image=batch["source_doc_img"].to_list(),
+                needs_db=needs_db,
             )
 
             # Process each example in the batch
@@ -419,7 +433,10 @@ def main(
                 "overall_accuracy": file_acc,
                 # "turn_count": example["turn_count"],
                 "flow": example["flow"],
-                # "study_condition": study_condition,
+                "study_condition": study_condition,
+                "correct_fields_count": correct_count,
+                "total_fields_count": total_count,
+                "total_placements": len(doc_state.marks),
             }
         )
 
@@ -464,8 +481,17 @@ def main(
         f.write(f"- Note: {note}\n\n")
         # Write summary metrics
         f.write("## Summary Metrics\n")
-        f.write(f"- Average Accuracy: {average_acc:.2f}\n")
+        f.write(f"- Average Field Accuracy: {average_acc:.2f}\n")
         f.write(f"- Accuracy Standard Deviation: {acc_std:.2f}\n\n")
+        f.write(
+            f"- Correct Fields Count: {sum([m['correct_fields_count'] for m in file_wise_metrics])}\n"
+        )
+        f.write(
+            f"- Total Fields Count: {sum([m['total_fields_count'] for m in file_wise_metrics])}\n"
+        )
+        f.write(
+            f"- Total Placements: {sum([m['total_placements'] for m in file_wise_metrics])}\n"
+        )
 
         # Write raw data
         f.write("## Raw Data\n")
@@ -539,6 +565,6 @@ if __name__ == "__main__":
     overall_results = main(*params)
 
     # written to a csv file for easy temporary storage
-    os.makedirs("results/run_summaries", exist_ok=True)
-    overall_results.to_csv("results/run_summaries/summary.csv", index=False)
+    os.makedirs("tmp/run_summaries", exist_ok=True)
+    overall_results.to_csv("tmp/run_summaries/summary.csv", index=False)
     print(overall_results)

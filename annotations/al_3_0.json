@@ -3,7 +3,7 @@
   "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
   "item": {
     "name": "al_3_0.png",
-    "path": "/",
+    "path": "/al",
     "source_info": {
       "item_id": "019561b8-a1ed-b85e-66af-c4b3928a31d8",
       "dataset": {

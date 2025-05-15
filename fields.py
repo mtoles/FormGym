@@ -105,7 +105,7 @@ class BaseCheckboxField(BaseField):
     # def is_correct(self, agent_generation, user_profile):
     def is_correct(self, agent_generations_inside, profile_info: bool):
         assert isinstance(profile_info, bool)
-        concatted_input = concat_agent_generations(agent_generations_inside)
+        concatted_input = concat_agent_generations(agent_generations_inside).lower()
         if profile_info:
             return concatted_input == "x"
         else:

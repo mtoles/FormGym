@@ -111,7 +111,8 @@ class BaseUserDbAttr(metaclass=UserAttributeMeta):
     @staticmethod
     def nl_desc(option):
         # form_name, cell_id = __class__.__name__.split("_")
-        return f"The user's value for form {__class__.form_name} in cell {__class__.cell_id} ({__class__.__doc__}) is: {option}"
+        # return f"The user's value for form {__class__.form_name} in cell {__class__.cell_id} ({__class__.__doc__}) is: {option}"
+        return None
 
 
 ### AUTO LOAN FEATURES ###
