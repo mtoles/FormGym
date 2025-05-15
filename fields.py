@@ -363,7 +363,16 @@ class CityState(BaseStringField):
             if not hasattr(feat, n):
                 raise Exception(f"No user_feature for {n} in CityState.")
         return f"{feat.City}, {feat.State}"
-
+    
+class JointCityState(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        feat = user_profile.features
+        needed = ["JointCity", "JointState"]
+        for n in needed:
+            if not hasattr(feat, n):
+                raise Exception(f"No user_feature for {n} in JointCityState.")
+        return f"{feat.JointCity}, {feat.JointState}"
 
 class City(BaseStringField):
     @classmethod
