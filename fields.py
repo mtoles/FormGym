@@ -99,7 +99,10 @@ class BaseStringField(BaseField):
         # agent_generations_inside = get_inputs_inside_field(self, agent_generation)
         concatted_input = concat_agent_generations(agent_generations_inside)
         # profile_info = self.get_profile_info(user_profile)
-        return remove_punctuation(profile_info) == remove_punctuation(concatted_input)
+        return (
+            remove_punctuation(profile_info).lower()
+            == remove_punctuation(concatted_input).lower()
+        )
 
 
 class BaseCheckboxField(BaseField):
@@ -1314,7 +1317,7 @@ class JointGrossIncomePeriod_Yearly(BaseCheckboxField):
 # -----------------------------------------
 
 
-class TimeAtAddressYearsAndMonths(BaseStringField):
+class TimeAtAddressYearsAndMonths(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
@@ -1325,7 +1328,7 @@ class TimeAtAddressYearsAndMonths(BaseStringField):
         )
 
 
-class JointTimeAtAddressYearsAndMonths(BaseStringField):
+class JointTimeAtAddressYearsAndMonths(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
