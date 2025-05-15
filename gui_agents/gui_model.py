@@ -45,10 +45,10 @@ class GUIModel:
         feedback: List[List] = None,
         suggest_localizer: bool = False,
         source_doc_image: str = None,
-        file_ids: List[str] = None,
+        **kwargs: Dict
     ) -> List[Dict]:
         preds = []
-        for fid in file_ids:
+        for fid in kwargs["file_ids"]:
             script = self.scripts[fid]
             if self.count >= len(script):
                 # todo: terminate and check for errors

@@ -335,7 +335,7 @@ def main(
         model = models.CheaterModel()  # Instance now will use batched inputs
     elif model_type == "scripted":
         model = models.ScriptedModel(batch_size=BATCH_SIZE, script_name=file_ids[0])
-    elif model_type == "ui-agent":
+    elif model_type == "gui-agent":
         model = gui_model.GUIModel(
             batch_size=BATCH_SIZE, model_name=model_name, file_ids=file_ids, user_idx=user_idx
         )
