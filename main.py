@@ -565,15 +565,6 @@ if __name__ == "__main__":
     overall_results = main(*params)
 
     # written to a csv file for easy temporary storage
-<<<<<<< HEAD
-<<<<<<< HEAD
     os.makedirs("tmp/run_summaries", exist_ok=True)
     overall_results.to_csv("tmp/run_summaries/summary.csv", index=False)
-=======
-    overall_results.to_csv("summaries/summary.csv", index=False)
->>>>>>> b3d15d4 (add gui_agents evaluator)
-=======
-    os.makedirs("tmp/run_summaries", exist_ok=True)
-    overall_results.to_csv("tmp/run_summaries/summary.csv", index=False)
->>>>>>> 2369bfe (feat: hella fixes)
     print(overall_results)

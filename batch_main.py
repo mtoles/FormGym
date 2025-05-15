@@ -75,6 +75,6 @@ if __name__ == "__main__":
     # Combine all results into a single DataFrame
     overall_results = pd.concat(results, ignore_index=True)
     # written to a csv file for easy temporary storage
-    overall_results.to_csv("tmp/batch_summary.csv", index=False)
+    overall_results.to_csv("tmp/run_summaries/batch_summary.csv", index=False)
     
     print(overall_results)
