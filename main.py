@@ -212,15 +212,15 @@ def main(
         user_profile = user_features.UserProfile(user_idx, relevant_user_features)
         # Temp stuff for gui agent testing
         # Save masked image to tmp folder
-        os.makedirs("tmp/funsd", exist_ok=True)
-        tmp_path = f"tmp/funsd/{fid}.png"
-        blank_img.save(tmp_path)
-        # Save annotations to txt file
-        txt_path = f"tmp/funsd/{fid}.txt"
-        os.makedirs(os.path.dirname(txt_path), exist_ok=True)
-        with open(txt_path, "w") as f:
-            ann = annots[0]
-            f.write(user_profile.get_nl_profile()[0])
+        # os.makedirs("tmp/funsd", exist_ok=True)
+        # tmp_path = f"tmp/funsd/{fid}.png"
+        # blank_img.save(tmp_path)
+        # # Save annotations to txt file
+        # txt_path = f"tmp/funsd/{fid}.txt"
+        # os.makedirs(os.path.dirname(txt_path), exist_ok=True)
+        # with open(txt_path, "w") as f:
+        #     ann = annots[0]
+        #     f.write(user_profile.get_nl_profile()[0])
 
         if profile_source == ProfileSourceEnum.TEXT.value:
             nl_profile = "\n".join(
@@ -252,6 +252,13 @@ def main(
                 if user_features_not_in_source_doc
                 else "<Refer to the source image for information on the user>"
             )
+
+
+            # save the source image and nl profile to tmp folder for gui agent doc transfer
+            os.makedirs(f"tmp/source_doc/{fid}", exist_ok=True)
+            source_doc_img.save(f"tmp/source_doc/{fid}/{args.user_idx}.png")
+            with open(f"tmp/source_doc/{fid}/{args.user_idx}.txt", "w") as f:
+                f.write(nl_profile)
 
         db = SqlDb(user_profile=user_profile)
 

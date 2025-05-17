@@ -1,5 +1,6 @@
 export CUDA_VISIBLE_DEVICES=2,7
 export VLLM_ALLOW_LONG_MAX_MODEL_LEN=1
+export CUDA_HOME=/usr/local/cuda-12.6
 
 MODEL_NAMES=(
     "llava"
