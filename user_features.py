@@ -1794,36 +1794,42 @@ class JointGrossIncomePeriod(BaseUserAttr):
 class CROI_4435(BaseUserDbAttr):
     """1.a.(1)(a): Loans secured by 1–4 family residential properties"""
 
+    db = "cr"
     options = ["23456", "34567", "45678", "56789"]
 
 
 class CROI_4436(BaseUserDbAttr):
     """1.a.(1)(b): All other loans secured by real estate"""
 
+    db = "cr"
     options = ["67890", "78901", "89012", "90123"]
 
 
 class CROI_4012(BaseUserDbAttr):
     """1.a.(2): Commercial and industrial loans"""
 
+    db = "cr"
     options = ["11234", "22345", "33456", "44567"]
 
 
 class CROI_B485(BaseUserDbAttr):
     """1.a.(3)(a): Credit cards"""
 
+    db = "cr"
     options = ["55678", "66789", "77890", "88901"]
 
 
 class CROI_B486(BaseUserDbAttr):
     """1.a.(3)(b): Other"""
 
+    db = "cr"
     options = ["40112", "51223", "62334", "73445"]
 
 
 class CROI_4058(BaseUserDbAttr):
     """1.a.(5): All other loans"""
 
+    db = "cr"
     options = ["99012", "10123", "21234", "32345"]
 
 
@@ -1836,42 +1842,49 @@ class CROI_4058(BaseUserDbAttr):
 class CROI_4065(BaseUserDbAttr):
     """1.b: Income from lease financing receivables"""
 
+    db = "cr"
     options = ["87890", "98901", "10912", "21023"]
 
 
 class CROI_4115(BaseUserDbAttr):
     """1.c: Interest income on balances due from depository institutions"""
 
+    db = "cr"
     options = ["31134", "42245", "53356", "64467"]
 
 
 class CROI_B488(BaseUserDbAttr):
     """1.d.(1): U.S. Treasury securities and U.S. Government agency obligations"""
 
+    db = "cr"
     options = ["75578", "86689", "97790", "10891"]
 
 
 class CROI_B489(BaseUserDbAttr):
     """1.d.(2): Mortgage-backed securities"""
 
+    db = "cr"
     options = ["21902", "32013", "42124", "52235"]
 
 
 class CROI_4060(BaseUserDbAttr):
     """1.d.(3): (3) All other securities (includes securities issued by states and political subdivisions in the U.S.)"""
 
+    db = "cr"
     options = ["11365", "22476", "33587", "44698"]
 
 
 class CROI_4020(BaseUserDbAttr):
     """1.f: Interest income on federal funds sold and securities purchased under agreements to resell"""
 
+    db = "cr"
     options = ["62346", "72457", "82568", "92679"]
 
 
 class CROI_4518(BaseUserDbAttr):
     """1.g: Other interest income"""
 
+    db = "cr"
     options = ["10234", "21345", "32456", "43567"]
 
 
@@ -1884,46 +1897,427 @@ class CROI_4518(BaseUserDbAttr):
 class CROI_4508(BaseUserDbAttr):
     """2.a.(1): Interest on deposits - transaction accounts"""
 
+    db = "cr"
     options = ["98012", "10123", "21234", "32345"]
 
 
 class CROI_0093(BaseUserDbAttr):
     """2.a.(2)(a): Savings deposits (includes MMDAs)"""
 
+    db = "cr"
     options = ["43456", "54567", "65678", "76789"]
 
 
 class CROI_HK03(BaseUserDbAttr):
     """2.a.(2)(b): Time deposits of $250,000 or less"""
 
+    db = "cr"
     options = ["87890", "98901", "10912", "21023"]
 
 
 class CROI_HK04(BaseUserDbAttr):
     """2.a.(2)(c): Time deposits of more than $250,000"""
 
+    db = "cr"
     options = ["31134", "42245", "53356", "64467"]
 
 
 class CROI_4180(BaseUserDbAttr):
     """2.b: Expense of federal funds purchased and securities sold under agreements to repurchase"""
 
+    db = "cr"
     options = ["75578", "86689", "97790", "10891"]
 
 
 class CROI_4185(BaseUserDbAttr):
     """2.c: Interest on trading liabilities and other borrowed money"""
 
+    db = "cr"
     options = ["21902", "32013", "42124", "52235"]
 
 
 class CROI_4200(BaseUserDbAttr):
     """2.d: Interest on subordinated notes and debentures"""
 
+    db = "cr"
     options = ["11365", "22476", "33587", "44698"]
 
 
 class CROI_JJ33(BaseUserDbAttr):
     """4: Provisions for credit losses"""
 
+    db = "cr"
     options = ["62346", "72457", "82568", "92679"]
+
+
+### SEC FEATURES ###
+
+### SEC NL fields
+
+# class PortionOfAggregateSalesIssuer(BaseNumericField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.PortionOfAggregateSales
+
+
+class PortionOfAggregateSalesIssuer(BaseUserAttr):
+    """The portion of aggregate sales attributable to securities sold on behalf of the issuer"""
+
+    options = ["1000000", "2000000", "3000000", "4000000"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The portion of aggregate sales attributable to securities sold on behalf of the issuer is: {option}"
+
+
+# class PortionOfAggregateSalesSecurityHolders(BaseNumericField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.PortionOfAggregateSalesSecurityHolders
+class PortionOfAggregateSalesSecurityHolders(BaseUserAttr):
+    """The portion of aggregate sales attributable to securities sold on behalf of selling securityholders"""
+
+    options = ["500000", "600000", "700000", "800000"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The portion of aggregate sales attributable to securities sold on behalf of selling securityholders is: {option}"
+
+
+# class CrdNumber(BaseNumericField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.CrdNumber
+class CrdNumber(BaseUserAttr):
+    """CRD Number of any broker or dealer listed"""
+
+    options = ["1234567890", "1234567891", "1234567892", "1234567893"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The CRD Number of any broker or dealer listed is: {option}"
+
+
+class ApproximateNumberOfHolders(BaseUserAttr):
+    """Approximate number of holders"""
+
+    options = ["1000000", "2000000", "3000000", "4000000"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The approximate number of holders is: {option}"
+
+
+# class NetProceeds(BaseNumericField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.NetProceeds
+class NetProceeds(BaseUserAttr):
+    """Net proceeds from the sale of the security"""
+
+    options = ["37492837492837", "37492837492838", "37492837492839", "37492837492840"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The net proceeds from the sale of the security is: {option}"
+
+
+# class TitleOfEachClassOfSecurities(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.TitleOfEachClassOfSecurities
+
+
+class TitleOfEachClassOfSecurities(BaseUserAttr):
+    """Title of each class of securities"""
+
+    options = [
+        "Common Stock",
+        "Preferred Stock",
+        "Convertible Preferred Stock",
+        "Warrant",
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The title of each class of securities is: {option}"
+
+
+# class CommissionFileNumbers(BaseNumericField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.CommissionFileNumbers
+class CommissionFileNumbers(BaseUserAttr):
+    """Commission file numbers"""
+
+    options = ["1234567890", "1234567891", "1234567892", "1234567893"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The commission file numbers are: {option}"
+
+
+# class NameOfIssuerAsSpecifiedInTheCommissionFile(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.NameOfIssuerAsSpecifiedInTheCommissionFile
+class NameOfIssuerAsSpecifiedInTheCommissionFile(BaseUserAttr):
+    """Name of issuer as specified in the commission file"""
+
+    options = ["Soda Corp", "Popcorn Inc", "Corn Co", "Cheese Co"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The name of issuer as specified in the commission file is: {option}"
+
+
+# class By(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.By
+
+
+class By(BaseUserAttr):
+    """By"""
+
+    options = ["Joseph Lee", "John Smith", "Jane Doe", "Jim Beam"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The name of the person signing is: {option}"
+
+
+# class Title(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.Title
+
+
+class Title(BaseUserAttr):
+    """Title"""
+
+    options = ["CFO", "CEO", "CTO", "COO"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The title of the person signing is: {option}"
+
+
+# ### SEC DB Fields
+
+
+# class SEC_UnderwritersName(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.SEC_UnderwritersName
+class SEC_UnderwritersName(BaseUserDbAttr):
+    """Name of the underwriters"""
+
+    db = "sec"
+    col = "name"
+    row = "Underwriters"
+    options = [
+        "First Underwriter Co.",
+        "Second Underwriter Co.",
+        "Third Underwriter Co.",
+        "Fourth Underwriter Co.",
+    ]
+
+
+# class SEC_SalesCommissionsName(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.SEC_SalesCommissionsName
+class SEC_SalesCommissionsName(BaseUserDbAttr):
+    """Name of the sales commissions"""
+
+    db = "sec"
+    col = "name"
+    row = "SalesCommissions"
+    options = [
+        "First Sales Commission Co.",
+        "Second Sales Commission Co.",
+        "Third Sales Commission Co.",
+        "Fourth Sales Commission Co.",
+    ]
+
+
+# class SEC_FindersFeesName(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.SEC_FindersFeesName
+class SEC_FindersFeesName(BaseUserDbAttr):
+    """Name of the finders fees"""
+
+    db = "sec"
+    col = "name"
+    row = "FindersFees"
+    options = [
+        "First Finders Fee Co.",
+        "Second Finders Fee Co.",
+        "Third Finders Fee Co.",
+        "Fourth Finders Fee Co.",
+    ]
+
+
+# class SEC_AuditorName(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.SEC_AuditorName
+class SEC_AuditorName(BaseUserDbAttr):
+    """Name of the auditor"""
+
+    db = "sec"
+    col = "name"
+    row = "Auditor"
+    options = [
+        "First Auditor Co.",
+        "Second Auditor Co.",
+        "Third Auditor Co.",
+        "Fourth Auditor Co.",
+    ]
+
+
+# class SEC_LegalName(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.SEC_LegalName
+class SEC_LegalName(BaseUserDbAttr):
+    """Name of the legal"""
+
+    db = "sec"
+    col = "name"
+    row = "Legal"
+    options = [
+        "First Legal Co.",
+        "Second Legal Co.",
+        "Third Legal Co.",
+        "Fourth Legal Co.",
+    ]
+
+
+# class SEC_PromotersName(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.SEC_PromotersName
+class SEC_PromotersName(BaseUserDbAttr):
+    """Name of the promoters"""
+
+    db = "sec"
+    col = "name"
+    row = "Promoters"
+    options = [
+        "First Promoter Co.",
+        "Second Promoter Co.",
+        "Third Promoter Co.",
+        "Fourth Promoter Co.",
+    ]
+
+
+# class SEC_BlueSkyComplianceName(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.SEC_BlueSkyComplianceName
+class SEC_BlueSkyComplianceName(BaseUserDbAttr):
+    """Name of the blue sky compliance"""
+
+    db = "sec"
+    col = "name"
+    row = "BlueSkyCompliance"
+    options = [
+        "First Blue Sky Compliance Co.",
+        "Second Blue Sky Compliance Co.",
+        "Third Blue Sky Compliance Co.",
+        "Fourth Blue Sky Compliance Co.",
+    ]
+
+
+# class SEC_UnderwritersFees(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.SEC_UnderwritersFees
+class SEC_UnderwritersFees(BaseUserDbAttr):
+    """Fees of the underwriters"""
+
+    db = "sec"
+    col = "fees"
+    row = "Underwriters"
+    options = ["100000", "200000", "300000", "400000"]
+
+
+# class SEC_SalesCommissionsFees(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.SEC_SalesCommissionsFees
+class SEC_SalesCommissionsFees(BaseUserDbAttr):
+    """Fees of the sales commissions"""
+
+    db = "sec"
+    col = "fees"
+    row = "SalesCommissions"
+    options = ["330000", "331000", "332000", "333000"]
+
+
+# class SEC_FindersFeesFees(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.SEC_FindersFeesFees
+class SEC_FindersFeesFees(BaseUserDbAttr):
+    """Fees of the finders fees"""
+
+    db = "sec"
+    col = "fees"
+    row = "FindersFees"
+    options = ["111000", "112000", "113000", "114000"]
+
+
+# class SEC_AuditorFees(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.SEC_AuditorFees
+class SEC_AuditorFees(BaseUserDbAttr):
+    """Fees of the auditor"""
+
+    db = "sec"
+    col = "fees"
+    row = "Auditor"
+    options = ["111100", "111200", "111300", "111400"]
+
+
+# class SEC_LegalFees(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.SEC_LegalFees
+class SEC_LegalFees(BaseUserDbAttr):
+    """Fees of the legal"""
+
+    db = "sec"
+    col = "fees"
+    row = "Legal"
+    options = ["111110", "111120", "111130", "111140"]
+
+
+# class SEC_PromotersFees(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.SEC_PromotersFees
+class SEC_PromotersFees(BaseUserDbAttr):
+    """Fees of the promoters"""
+
+    db = "sec"
+    col = "fees"
+    row = "Promoters"
+    options = ["111111", "111112", "111113", "111114"]
+
+
+# class SEC_BlueSkyComplianceFees(BaseStringField):
+#     @classmethod
+#     def get_profile_info(cls, user_profile):
+#         return user_profile.features.SEC_BlueSkyComplianceFees
+class SEC_BlueSkyComplianceFees(BaseUserDbAttr):
+    """Fees of the blue sky compliance"""
+
+    db = "sec"
+    col = "fees"
+    row = "BlueSkyCompliance"
+    options = ["222222", "222223", "222224", "222225"]

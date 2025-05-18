@@ -202,7 +202,7 @@ class QuerySql(BaseAction):
     
     Example input:
         {"action": "QuerySql", "query": "SELECT value FROM features where key='CROI_0093'"}
-    """
+    """ # be careful if youe very change this. it's monkey patched in models.py
 
     def act(doc_state, query: str, db, **kwargs):
         assert db is not None

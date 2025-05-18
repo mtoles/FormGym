@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 def get_db_connection():
-    db_path = Path(__file__).parent / "gui_agents.db"
+    db_path = Path(__file__).parent / "gui_agents_sec.db"
     if not db_path.exists():
         print(f"Error: Database file not found at {db_path}")
         sys.exit(1)
