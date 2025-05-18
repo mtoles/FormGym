@@ -133,6 +133,12 @@ def get_e2e_prompt(
             has_source_image_str=has_source_image_str,
         )
     )
+
+    # terrible hack to retroactively make the prompt match the database
+    cr_query_example = """{"action": "QuerySql", "query": "SELECT value FROM features where key='CROI_0093'"}"""
+    sec_query_example = """{"action": "QuerySql", "query": "SELECT Name, Fees, Service FROM features where Service='Underwriters'"}"""
+    assert (not needs_db) or (cr_query_example in prompt)
+    prompt = prompt.replace(cr_query_example, sec_query_example)
     return prompt
 
 

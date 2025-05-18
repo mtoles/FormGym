@@ -127,6 +127,7 @@ class BaseDateField(BaseField):
             return False
         return input_date == gt_date
 
+
 class BaseNameField(BaseField):
     def is_correct(self, agent_generations_inside, profile_info: str):
         assert isinstance(profile_info, str)
@@ -134,13 +135,14 @@ class BaseNameField(BaseField):
         pred_words = concatted_input.split()
         gt_words = profile_info.split()
         # first name
-        if len(set(pred_words)) <=2:
+        if len(set(pred_words)) <= 2:
             return False
         for pred_word in pred_words:
             if pred_word not in gt_words:
                 return False
         return True
-        
+
+
 class AnnotatedField(BaseField):
     pass
 
@@ -363,7 +365,8 @@ class CityState(BaseStringField):
             if not hasattr(feat, n):
                 raise Exception(f"No user_feature for {n} in CityState.")
         return f"{feat.City}, {feat.State}"
-    
+
+
 class JointCityState(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
@@ -373,6 +376,7 @@ class JointCityState(BaseStringField):
             if not hasattr(feat, n):
                 raise Exception(f"No user_feature for {n} in JointCityState.")
         return f"{feat.JointCity}, {feat.JointState}"
+
 
 class City(BaseStringField):
     @classmethod
@@ -1890,3 +1894,153 @@ class CROI_JJ33(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.CROI_JJ33
+
+
+### SEC NL fields
+
+
+class PortionOfAggregateSalesIssuer(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.PortionOfAggregateSalesIssuer
+
+
+class PortionOfAggregateSalesSecurityHolders(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.PortionOfAggregateSalesSecurityHolders
+
+
+class CrdNumber(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CrdNumber
+
+
+class NetProceeds(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.NetProceeds
+
+
+class TitleOfEachClassOfSecurities(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.TitleOfEachClassOfSecurities
+
+
+class ApproximateNumberOfHolders(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.ApproximateNumberOfHolders
+
+
+class CommissionFileNumbers(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.CommissionFileNumbers
+
+
+class NameOfIssuerAsSpecifiedInTheCommissionFile(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.NameOfIssuerAsSpecifiedInTheCommissionFile
+
+
+class By(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.By
+
+
+class Title(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Title
+
+
+### SEC DB Fields
+
+
+class SEC_UnderwritersName(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SEC_UnderwritersName
+
+
+class SEC_SalesCommissionsName(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SEC_SalesCommissionsName
+
+
+class SEC_FindersFeesName(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SEC_FindersFeesName
+
+
+class SEC_AuditorName(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SEC_AuditorName
+
+
+class SEC_LegalName(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SEC_LegalName
+
+
+class SEC_PromotersName(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SEC_PromotersName
+
+
+class SEC_BlueSkyComplianceName(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SEC_BlueSkyComplianceName
+
+
+class SEC_UnderwritersFees(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SEC_UnderwritersFees
+
+
+class SEC_SalesCommissionsFees(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SEC_SalesCommissionsFees
+
+
+class SEC_FindersFeesFees(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SEC_FindersFeesFees
+
+
+class SEC_AuditorFees(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SEC_AuditorFees
+
+
+class SEC_LegalFees(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SEC_LegalFees
+
+
+class SEC_PromotersFees(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SEC_PromotersFees
+
+
+class SEC_BlueSkyComplianceFees(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SEC_BlueSkyComplianceFees

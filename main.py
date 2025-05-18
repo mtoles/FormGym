@@ -259,7 +259,9 @@ def main(
             with open(f"tmp/source_doc/{fid}/{args.user_idx}.txt", "w") as f:
                 f.write(nl_profile)
 
-        db = SqlDb(user_profile=user_profile)
+
+        db = SqlDb(user_profile=user_profile, file_id=fid) if needs_db else None
+        
 
         # flow = None
         if flow == FlowEnum.ONESHOT.value:
