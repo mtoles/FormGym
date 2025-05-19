@@ -45,17 +45,10 @@ class GUIModel:
         feedback: List[List] = None,
         suggest_localizer: bool = False,
         source_doc_image: str = None,
-<<<<<<< HEAD
         **kwargs: Dict
     ) -> List[Dict]:
         preds = []
         for fid in kwargs["file_ids"]:
-=======
-        file_ids: List[str] = None,
-    ) -> List[Dict]:
-        preds = []
-        for fid in file_ids:
->>>>>>> ff4feac (add gui_agents evaluator)
             script = self.scripts[fid]
             if self.count >= len(script):
                 # todo: terminate and check for errors

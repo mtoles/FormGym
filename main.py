@@ -165,17 +165,8 @@ def main(
 
     # Prepare list to collect per-file data for batch processing
     all_files = []
-<<<<<<< HEAD
     if domain == DomainEnum.FUN.value:
-<<<<<<< HEAD
         file_ids = [
-=======
-        args.file_ids = [
-=======
-    if file_ids[0] == "funsd_test":
-        file_ids = [
->>>>>>> b3d15d4 (add gui_agents evaluator)
->>>>>>> ff4feac (add gui_agents evaluator)
             f.split(".")[0]
             for f in os.listdir("annotations/funsd_test")
             if f.endswith(".json")
@@ -353,11 +344,7 @@ def main(
         model = models.CheaterModel()  # Instance now will use batched inputs
     elif model_type == "scripted":
         model = models.ScriptedModel(batch_size=BATCH_SIZE, script_name=file_ids[0])
-<<<<<<< HEAD
     elif model_type == "gui-agent":
-=======
-    elif model_type == "ui-agent":
->>>>>>> ff4feac (add gui_agents evaluator)
         model = gui_model.GUIModel(
             batch_size=BATCH_SIZE, model_name=model_name, file_ids=file_ids, user_idx=user_idx
         )
@@ -587,10 +574,6 @@ if __name__ == "__main__":
     overall_results = main(*params)
 
     # written to a csv file for easy temporary storage
-<<<<<<< HEAD
     os.makedirs("tmp/run_summaries", exist_ok=True)
     overall_results.to_csv("tmp/run_summaries/summary.csv", index=False)
-=======
-    overall_results.to_csv("summaries/summary.csv", index=False)
->>>>>>> b3d15d4 (add gui_agents evaluator)
     print(overall_results)
