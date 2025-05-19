@@ -57,7 +57,7 @@ tmp/
 .joblib_cache/
 static/
 pdfs/
-pngs/
+# pngs/
 form-filler/
 
 # Logs and databases
