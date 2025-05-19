@@ -1,0 +1,403 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "cr_1_0.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0196e0bf-eee0-935e-9832-cfba216c0b6b",
+      "dataset": {
+        "name": "Form Filling",
+        "slug": "form-filling",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1649572/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1649572&item=0196e0bf-eee0-935e-9832-cfba216c0b6b"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 1224,
+        "height": 1584,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/e94cdc80-3103-474c-9d20-0a405efe304e/thumbnail",
+        "source_files": [
+          {
+            "file_name": "cr_1_0.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/c966e070-b898-414c-a38e-ce58bd33c3c4"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 38.6129,
+        "w": 349.9297,
+        "x": 158.0717,
+        "y": 173.7582
+      },
+      "id": "bb150b3f-1e6a-4c3c-8de0-a188aa8a1637",
+      "name": "PortionOfAggregateSalesIssuer",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 47.0595,
+        "w": 277.5305,
+        "x": 390.9559,
+        "y": 399.4025
+      },
+      "id": "0da56bba-8013-42d7-92e9-e4ba7af61062",
+      "name": "SEC_UnderwritersName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 48.2662,
+        "w": 252.1907,
+        "x": 693.8261,
+        "y": 398.1959
+      },
+      "id": "e70f8dce-650b-4870-9f10-b558b8e9a48d",
+      "name": "SEC_UnderwritersFees",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 39.0939,
+        "w": 349.9381,
+        "x": 158.2826,
+        "y": 263.1687
+      },
+      "id": "7feaffac-e59f-40fa-81e8-1359684ad2b8",
+      "name": "PortionOfAggregateSalesSecurityHolders",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 42.9937,
+        "w": 370.332,
+        "x": 572.5977,
+        "y": 721.1214
+      },
+      "id": "f28b17f5-8bcc-438a-9669-8ad8aa26fd52",
+      "name": "CrdNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 45.9251,
+        "w": 521.787,
+        "x": 421.1427,
+        "y": 769.9778
+      },
+      "id": "3cae3284-7133-4eef-876a-23f0e8f3a881",
+      "name": "NetProceeds",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 45.9251,
+        "w": 288.2531,
+        "x": 655.6537,
+        "y": 972.2436
+      },
+      "id": "ca0d7ac7-99c8-4420-9b38-325b6420c093",
+      "name": "TitleOfEachClassOfSecurities",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 49.8336,
+        "w": 527.6498,
+        "x": 417.2342,
+        "y": 1022.0772
+      },
+      "id": "5222dd8d-2ce8-4188-b092-1d5c9866ab98",
+      "name": "CommissionFileNumbers",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 47.8793,
+        "w": 127.0268,
+        "x": 811.0172,
+        "y": 1073.865
+      },
+      "id": "41046d66-d0dc-4c41-905d-4790fc078f51",
+      "name": "ApproximateNumberOfHolders",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 53.7421,
+        "w": 240.3738,
+        "x": 592.1403,
+        "y": 1122.7215
+      },
+      "id": "570d8698-8f19-47fe-947e-4e1367f0f221",
+      "name": "NameOfIssuerAsSpecifiedInTheCommissionFile",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 34.1995,
+        "w": 575.5291,
+        "x": 260.8935,
+        "y": 1251.7025
+      },
+      "id": "43d31e19-5f27-43d7-8351-bbe43e8c8f83",
+      "name": "NameOfIssuerAsSpecifiedInTheCommissionFile",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 42.0166,
+        "w": 472.9305,
+        "x": 182.7232,
+        "y": 1337.6899
+      },
+      "id": "d6263592-f724-4e4a-bd2a-b3600deca38e",
+      "name": "By",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 57.6506,
+        "w": 234.511,
+        "x": 850.1024,
+        "y": 1322.0558
+      },
+      "id": "7392194e-5bac-4cdb-8900-3505d3aa28f6",
+      "name": "TodaysDate",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 46.9022,
+        "w": 445.5709,
+        "x": 200.3115,
+        "y": 1385.5692
+      },
+      "id": "40d51f99-4e3a-42a6-8a39-56bc91b486f4",
+      "name": "Title",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 48.4687,
+        "w": 277.9532,
+        "x": 390.7172,
+        "y": 443.1425
+      },
+      "id": "6b2c7501-1e04-445c-b0a4-abadda3c3885",
+      "name": "SEC_SalesCommissionsName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 49.4579,
+        "w": 273.0074,
+        "x": 394.6738,
+        "y": 488.6437
+      },
+      "id": "e7297994-7f94-458c-8126-74083650ac39",
+      "name": "SEC_FindersFeesName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 46.4904,
+        "w": 273.0074,
+        "x": 392.6955,
+        "y": 529.1992
+      },
+      "id": "164e9506-e17a-4dc5-9527-3a0e4f12c4ed",
+      "name": "SEC_AuditorName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 42.5338,
+        "w": 273.0074,
+        "x": 392.6955,
+        "y": 573.7113
+      },
+      "id": "1e67c058-03b0-4de7-8f62-ba5d6da81cc7",
+      "name": "SEC_LegalName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 46.4904,
+        "w": 273.0074,
+        "x": 393.6846,
+        "y": 615.2559
+      },
+      "id": "6601ed2c-2ebc-4b01-bc8c-d42ba86c770a",
+      "name": "SEC_PromotersName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 48.4687,
+        "w": 273.0074,
+        "x": 391.7063,
+        "y": 658.7788
+      },
+      "id": "3fdf2ffb-2e51-4b20-a301-1f9f1e6f7ee7",
+      "name": "SEC_BlueSkyComplianceName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 45.5012,
+        "w": 249.2677,
+        "x": 695.3776,
+        "y": 443.1425
+      },
+      "id": "017a84a3-5e61-4dfc-8a74-bb00c3cc1f24",
+      "name": "SEC_SalesCommissionsFees",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 48.4687,
+        "w": 250.2568,
+        "x": 697.3559,
+        "y": 485.6763
+      },
+      "id": "461d5b67-6730-4768-ad39-6e8cb62e764a",
+      "name": "SEC_PromotersFees",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 47.4796,
+        "w": 246.3002,
+        "x": 698.3451,
+        "y": 570.7438
+      },
+      "id": "2ec75dda-7e92-45d6-8fa9-2ef9dbef0073",
+      "name": "SEC_LegalFees",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 44.5121,
+        "w": 247.2893,
+        "x": 697.3559,
+        "y": 530.1883
+      },
+      "id": "9e68f2a6-4a25-4b69-bf5c-0afded43c69a",
+      "name": "SEC_AuditorFees",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 44.5121,
+        "w": 247.2893,
+        "x": 696.3668,
+        "y": 614.2667
+      },
+      "id": "1aeea917-b6ca-40ff-9ea3-6441acbc63f8",
+      "name": "SEC_PromotersFees",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 45.5012,
+        "w": 247.2893,
+        "x": 697.3559,
+        "y": 658.7788
+      },
+      "id": "418afabb-ec7f-4bec-b172-a5f8b5c9eb1c",
+      "name": "SEC_BlueSkyComplianceFees",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}
