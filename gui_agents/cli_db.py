@@ -4,16 +4,16 @@ import sqlite3
 import sys
 from pathlib import Path
 
+import pandas as pd
 
 def get_db_connection(db_file=None):
-    db_path = db_file or Path(__file__).parent / "gui_agents.db"
+    db_path = Path(__file__).parent / db_file
     if not db_path.exists():
         print(f"Error: Database file not found at {db_path}")
         sys.exit(1)
     return sqlite3.connect(db_path)
-
-
-def execute_query(conn, query):
+        
+def execute_query_df(conn, query):
     try:
         # Check if query is a SELECT query
         if not query.strip().upper().startswith("SELECT"):
@@ -26,21 +26,21 @@ def execute_query(conn, query):
         cursor.execute(query)
 
         results = cursor.fetchall()
+
         if results:
             # Get column names
             columns = [description[0] for description in cursor.description]
-            # Print column names
-            print("\n" + " | ".join(columns))
-            print("-" * (sum(len(col) for col in columns) + 3 * len(columns)))
-            # Print results
-            for row in results:
-                print(" | ".join(str(value) for value in row))
-            print(f"\n{len(results)} rows returned")
-        else:
-            print("No results found")
 
+        return pd.DataFrame(results, columns=columns,)
+    
     except sqlite3.Error as e:
         print(f"Error executing query: {e}")
+    
+def execute_query(conn, query):
+    result = execute_query_df(conn, query).to_string(index=False)
+    
+    if result:
+        print(result)
 
 
 def main(db_file=None):
@@ -49,7 +49,7 @@ def main(db_file=None):
     print("Type 'tables' to list all tables")
     print("-" * 50)
 
-    conn = get_db_connection(db_file=None)
+    conn = get_db_connection(db_file=db_file)
 
     try:
         while True:
