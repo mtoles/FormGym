@@ -89,6 +89,24 @@ class DocState:
             new_img.save(save_path)
         return new_img  # drawn on
 
+    def describe_bboxes(self):
+        """Get a description of the placement of the bboxes in the document"""
+        bbox_strs = [
+            "The document contains the following fillable fields, where the top left of the document is (0, 0) and the bottom right is (1, 1). Given is the coordinate of the center of the field"
+        ]
+        for field in self.fields:
+            bbox = field["bbox"]
+            formatted_bbox = {
+                "x": round(bbox["x"] + bbox["w"] / 2, 3),
+                "y": round(bbox["y"] + bbox["h"] / 2, 3),
+                # "width": round(bbox["w"], 3),
+                # "height": round(bbox["h"], 3),
+            }
+            bbox_strs.append(f"{field['field_name']}: {formatted_bbox}")
+        out = "\n".join(bbox_strs)
+        # print(out)
+        return out
+
     # def pop_random_k_deterministic(self, k):
     #     """Edits the doc state IN PLACE and pops/returns a random set of k fields"""
     #     def get_hashable(field):

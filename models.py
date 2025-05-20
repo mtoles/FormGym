@@ -59,6 +59,7 @@ def get_e2e_prompt(
     needs_db: bool,
     turns_remaining: int,
     has_source_image: bool,
+    box_locs: str = None,
 ) -> str:
     """Generates the prompt for the end-to-end form filling task."""
 
@@ -84,12 +85,13 @@ def get_e2e_prompt(
     {generation_instructions}
     {needs_db_str}
     {turns_remaining_str}
+    {box_locs_str}
     Return a form-filling API call as a JSON list of dictionaries.
     
     """
     generation_instructions = {
         FlowEnum.ONESHOT.value: "Generate a sequence of actions that will completely fill out the form.",
-        FlowEnum.ITERATIVE.value: "Generate the next set of actions that will help fill out the form. You may submit any number ofactions in one call.",
+        FlowEnum.ITERATIVE.value: "Generate the next set of actions that will help fill out the form. You may submit any number of actions in one call.",
     }[task]
     feedback_str = (
         "So far, you have received the following feedback on your previous actions:\n"
@@ -120,6 +122,15 @@ def get_e2e_prompt(
         if has_source_image
         else ""
     )
+    box_locs_str = (
+        (
+            f"The following is a list of the coordinates of the fields on the form:\n"
+            "{box_locs}\n"
+            "When placing text, place it in the center of the relevant field."
+        )
+        if box_locs
+        else ""
+    )
     prompt = textwrap.dedent(
         e2e_prompt_template_content.format(
             user_profile=user_profile if user_profile else "<No user profile provided>",
@@ -131,6 +142,7 @@ def get_e2e_prompt(
             needs_db_str=needs_db_str,
             turns_remaining_str=turns_remaining_str,
             has_source_image_str=has_source_image_str,
+            box_locs_str=box_locs_str,
         )
     )
 
@@ -300,6 +312,7 @@ class CheaterModel:
         needs_db: bool = False,
         turns_remaining: int = None,
         source_doc_image: Image.Image = None,
+        box_locs: str = None,
     ) -> List[Dict]:
         """
         Give the model the ground truth annotated doc so it can cheat, for data validation
@@ -445,7 +458,6 @@ class ScriptedModel:
         self.script = scripts[script_name]
         self.count = 0
 
-    # @add_bbox
     def forward(
         self,
         nl_profile: List[str],
@@ -457,6 +469,7 @@ class ScriptedModel:
         needs_db: bool = False,
         turns_remaining: int = None,
         source_doc_image: List[Image.Image] = None,
+        box_locs: str = None,
         **kwargs,
     ) -> List[Dict]:
         if self.count >= len(self.script):
@@ -481,7 +494,6 @@ class GptModelE2E:
         self.model_name = model_name
         self.draw_grid = draw_grid
 
-    # @add_bbox
     def forward(
         self,
         nl_profile: List[str],
@@ -493,6 +505,7 @@ class GptModelE2E:
         needs_db: bool = False,
         turns_remaining: int = None,
         source_doc_image: List[Image.Image] = None,
+        box_locs: str = None,
     ) -> List[Dict]:
         outputs = []
         for profile, image, f, source_image in zip(
@@ -508,6 +521,7 @@ class GptModelE2E:
                 needs_db=needs_db,
                 turns_remaining=turns_remaining,
                 has_source_image=source_doc_image is not None,
+                box_locs=box_locs,
             )
 
             if self.draw_grid:
@@ -672,7 +686,7 @@ def forward_anthropic(model_name, prompt, base64_image, base64_source_image=None
 
     message = client.messages.create(
         model=model_name,
-        max_tokens=1024,
+        max_tokens=4096,
         messages=messages,
     )
     return message
@@ -694,6 +708,7 @@ class AnthropicModelE2E:
         needs_db: bool = False,
         turns_remaining: int = None,
         source_doc_image: List[Image.Image] = None,
+        box_locs: str = None,
     ) -> List[Dict]:
         outputs = []
         for profile, image, f, source_image, source_doc_image in zip(
@@ -709,6 +724,7 @@ class AnthropicModelE2E:
                 needs_db=needs_db,
                 turns_remaining=turns_remaining,
                 has_source_image=source_doc_image is not None,
+                box_locs=box_locs,
             )
             if self.draw_grid:
                 image = add_grid_overlay(image)
@@ -738,6 +754,8 @@ class AnthropicModelE2E:
             print(response)
             tool_params = parse_and_reconstruct_fields(response)
             outputs.append(tool_params)
+        print(outputs[0])
+        # print(box_locs)
         return outputs
 
 
@@ -790,7 +808,7 @@ class HFE2EModel:
 
         self.sampling_params = SamplingParams(
             temperature=1.0,
-            max_tokens=64,
+            max_tokens=4096,
             stop_token_ids=self.model.stop_token_ids,
         )
 
@@ -808,6 +826,7 @@ class HFE2EModel:
         needs_db: bool = False,
         turns_remaining: int = None,
         source_doc_image: List[Image.Image] = None,
+        box_locs: str = None,
     ):
         base_prompts = []
 
@@ -822,6 +841,7 @@ class HFE2EModel:
                 needs_db=needs_db,
                 turns_remaining=turns_remaining,
                 has_source_image=source_doc_image is not None,
+                box_locs=box_locs,
             )
             base_prompts.append(base_prompt)
 

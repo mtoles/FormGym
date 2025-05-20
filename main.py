@@ -76,7 +76,7 @@ def get_completed_source_doc(source_doc_id: str, user_idx):
     nl_profile = "\n".join(user_profile.get_nl_profile())
 
     # Create database connection
-    db = SqlDb(user_profile=user_profile)
+    # db = SqlDb(user_profile=user_profile, file_id=source_doc_id)
 
     # Create and run cheater model
     cheater_model = models.CheaterModel(doc_state=doc_state, user_profile=user_profile)
@@ -149,12 +149,13 @@ def main(
     profile_source,
     note,
     download_dir,
+    gt_coordinates,
 ):
     today = datetime.now().strftime("%Y-%m-%d")
     now = datetime.now().strftime("%H:%M:%S")
     domain = get_domain_from_doc_ids(file_ids).value
     needs_db = domain == DomainEnum.CR.value
-    save_dir = f"results/{note}/{model_name.replace('/', '_')}/{domain}/{task}/{study_condition}/{profile_source}/u{user_idx}/{today}/{now}/"
+    save_dir = f"results/{note+'_gt_coords' if gt_coordinates else ''}/{model_name.replace('/', '_')}/{domain}/{task}/{study_condition}/{profile_source}/u{user_idx}/{today}/{now}/"
 
     # Validate the task argument
     flow = FlowEnum(task).value
@@ -253,16 +254,13 @@ def main(
                 else "<Refer to the source image for information on the user>"
             )
 
-
             # save the source image and nl profile to tmp folder for gui agent doc transfer
             os.makedirs(f"tmp/source_doc/{fid}", exist_ok=True)
             source_doc_img.save(f"tmp/source_doc/{fid}/{args.user_idx}.png")
             with open(f"tmp/source_doc/{fid}/{args.user_idx}.txt", "w") as f:
                 f.write(nl_profile)
 
-
         db = SqlDb(user_profile=user_profile, file_id=fid) if needs_db else None
-        
 
         # flow = None
         if flow == FlowEnum.ONESHOT.value:
@@ -371,7 +369,7 @@ def main(
             # Get current batch of examples
             batch = active_df.iloc[batch_start : batch_start + BATCH_SIZE]
             batch = batch.reset_index(drop=True)
-
+            bbox_desc = doc_state.describe_bboxes()
             # Get model predictions for the current batch
             batch_model_outputs = model.forward(
                 nl_profile=batch["nl_profile"].to_list(),
@@ -382,6 +380,7 @@ def main(
                 suggest_localizer=suggest_localizer,  # irrelevant
                 source_doc_image=batch["source_doc_img"].to_list(),
                 needs_db=needs_db,
+                box_locs=bbox_desc if gt_coordinates else None,
             )
 
             # Process each example in the batch
@@ -552,6 +551,12 @@ if __name__ == "__main__":
         default=ProfileSourceEnum.TEXT.value,
     )
     parser.add_argument("--note", type=str, default="no_note")
+    parser.add_argument(
+        "--gt_coordinates",
+        type=bool,
+        default=False,
+        help="Whether to pass ground truth coordinates to the model",
+    )
     args = parser.parse_args()
 
     # mirrors the argparse structure
@@ -569,6 +574,7 @@ if __name__ == "__main__":
         args.profile_source,
         args.note,
         args.download_dir,
+        args.gt_coordinates,
     ]
     # called with the param list
     overall_results = main(*params)
