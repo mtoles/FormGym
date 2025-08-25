@@ -92,7 +92,7 @@ class DocState:
     def describe_bboxes(self):
         """Get a description of the placement of the bboxes in the document"""
         bbox_strs = [
-            "The document contains the following fillable fields, where the top left of the document is (0, 0) and the bottom right is (1, 1). Given is the coordinate of the center of the field"
+            "The document contains the following fillable fields, where the top left of the document is (0, 0) and the bottom right is (1, 1). Given is the coordinate of the center of the field. For example, WeightLb: {'x': 0.123, 'y': 0.456} indicates that there is an empty text field centered at (0.123, 0.456) associated with 'Weight (lb). All field names are given in camel case. Only use the PlaceText action to fill in the fields, and only fill fields at coordinates listed below. Names containing an underscore (_) indicate a checkbox field. The string before the underscore is the question (e.g., are you a smoker?), and the string after the underscore is the checkbox option (e.g., yes). \n"
         ]
         for field in self.fields:
             bbox = field["bbox"]

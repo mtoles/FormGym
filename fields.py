@@ -123,7 +123,7 @@ class BaseDateField(BaseField):
         gt_date = parse(profile_info).date()
         try:
             input_date = parse(concatted_input).date()
-        except ParserError:
+        except (ParserError, OverflowError):
             return False
         return input_date == gt_date
 

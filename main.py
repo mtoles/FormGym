@@ -369,7 +369,7 @@ def main(
             # Get current batch of examples
             batch = active_df.iloc[batch_start : batch_start + BATCH_SIZE]
             batch = batch.reset_index(drop=True)
-            bbox_desc = doc_state.describe_bboxes()
+            bbox_descs = [doc_state[-1].describe_bboxes() for doc_state in batch["doc_state"]]
             # Get model predictions for the current batch
             batch_model_outputs = model.forward(
                 nl_profile=batch["nl_profile"].to_list(),
@@ -380,7 +380,7 @@ def main(
                 suggest_localizer=suggest_localizer,  # irrelevant
                 source_doc_image=batch["source_doc_img"].to_list(),
                 needs_db=needs_db,
-                box_locs=bbox_desc if gt_coordinates else None,
+                box_locs=bbox_descs if gt_coordinates else None,
             )
 
             # Process each example in the batch

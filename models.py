@@ -125,7 +125,7 @@ def get_e2e_prompt(
     box_locs_str = (
         (
             f"The following is a list of the coordinates of the fields on the form:\n"
-            "{box_locs}\n"
+            f"{box_locs}\n"
             "When placing text, place it in the center of the relevant field."
         )
         if box_locs
@@ -505,11 +505,11 @@ class GptModelE2E:
         needs_db: bool = False,
         turns_remaining: int = None,
         source_doc_image: List[Image.Image] = None,
-        box_locs: str = None,
+        box_locs: List[str] = None,
     ) -> List[Dict]:
         outputs = []
-        for profile, image, f, source_image in zip(
-            nl_profile, doc_image, flow, source_doc_image
+        for profile, image, f, source_image, box_loc in zip(
+            nl_profile, doc_image, flow, source_doc_image, box_locs
         ):
             prompt = get_e2e_prompt(
                 user_profile=profile,

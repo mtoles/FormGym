@@ -4,6 +4,7 @@ Script for reading every .md file in the results directory and making a table of
 
 import os
 import pandas as pd
+from copy import deepcopy
 
 
 def get_val(file_str, key):
@@ -19,7 +20,7 @@ def read_md(file_path):
 
     (
         _,
-        _,
+        # _,
         model_name,
         domain,
         tempo,
@@ -61,7 +62,7 @@ def read_md(file_path):
 
 
 def main():
-    results_dir = "results_old/paper_results.sh"
+    results_dir = "results/"
     results = []
     for root, dirs, files in os.walk(results_dir):
         for file in files:
@@ -151,43 +152,72 @@ def main():
     for metric in ["correct_fields", "total_placements"]:
         print("=" * 10 + f"{metric}" + "=" * 10)
         for model in models:
+            # baseline
             args = [
                 model,
                 "baseline",
-                "al",
+                # "al",
                 # "cr",
-                # "fun",
+                "fun",
                 "oneshot",
                 # "iterative",
                 "text",
                 # "image",
             ]
-            filtered_df = df_results.loc[
-                tuple(args),
-                :,
-            ][["correct_fields", "total_fields", "total_placements"]]
-            expected_len = 4
-            assert (
-                len(filtered_df) == expected_len
-            ), f"Expected {expected_len} results, got {len(filtered_df)}"
-            print(filtered_df.mean()[metric])
-
-            args2 = list(args)
+            df_b = df_results.loc[
+                tuple(args), ["correct_fields", "total_fields", "total_placements"]
+            ]
+            print(df_b.mean()[metric])
+        for model in models:
+            # ours
+            # args2 = [model, "ours", "al", "oneshot", "text"]
+            args2 = deepcopy(args)
+            args2[0] = model
             args2[1] = "ours"
-            args2 = tuple(args2)
-            filtered_df2 = df_results.loc[
-                tuple(args2),
-                :,
-            ][["correct_fields", "total_fields", "total_placements"]]
-            assert (
-                len(filtered_df2) == expected_len
-            ), f"Expected {expected_len} results, got {len(filtered_df2)}"
-            print(filtered_df2.mean()[metric])
+            df_o = df_results.loc[
+                tuple(args2), ["correct_fields", "total_fields", "total_placements"]
+            ]
+            print(df_o.mean()[metric])
+    # for metric in ["correct_fields", "total_placements"]:
+    #     print("=" * 10 + f"{metric}" + "=" * 10)
+    #     for model in models:
+    #         args = [
+    #             model,
+    #             "baseline",
+    #             "al",
+    #             # "cr",
+    #             # "fun",
+    #             "oneshot",
+    #             # "iterative",
+    #             "text",
+    #             # "image",
+    #         ]
+    #         filtered_df = df_results.loc[
+    #             tuple(args),
+    #             :,
+    #         ][["correct_fields", "total_fields", "total_placements"]]
+    #         expected_len = 4
+    #         assert (
+    #             len(filtered_df) == expected_len
+    #         ), f"Expected {expected_len} results, got {len(filtered_df)}"
+    #         print(filtered_df.mean()[metric])
 
-        # total placements
-        # print("=" * 10)
-        # print(filtered_df.mean()["total_placements"])
-        # print(filtered_df2.mean()["total_placements"])
+    #         args2 = list(args)
+    #         args2[1] = "ours"
+    #         args2 = tuple(args2)
+    #         filtered_df2 = df_results.loc[
+    #             tuple(args2),
+    #             :,
+    #         ][["correct_fields", "total_fields", "total_placements"]]
+    #         assert (
+    #             len(filtered_df2) == expected_len
+    #         ), f"Expected {expected_len} results, got {len(filtered_df2)}"
+    #         print(filtered_df2.mean()[metric])
+
+    #     # total placements
+    #     # print("=" * 10)
+    #     # print(filtered_df.mean()["total_placements"])
+    #     # print(filtered_df2.mean()["total_placements"])
 
 
 if __name__ == "__main__":

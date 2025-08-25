@@ -45,7 +45,7 @@ class AriaModel(BaseHFModel):
         super().__init__(n_images=n_images)
         self.engine_args = EngineArgs(
             model="rhymes-ai/Aria",
-            max_model_len=8192,
+            max_model_len=8192*2,
             max_num_seqs=2,
             dtype="bfloat16",
         )
@@ -133,7 +133,7 @@ class QwenVLModel(BaseHFModel):
         self.engine_args = EngineArgs(
             model="Qwen/Qwen-VL",
             trust_remote_code=True,
-            max_model_len=8192,
+            max_model_len=8192*2,
             max_num_seqs=2,
             hf_overrides={"architectures": ["QwenVLForConditionalGeneration"]},
         )
@@ -160,7 +160,7 @@ class DeepseekVL2Model(BaseHFModel):
         super().__init__(n_images=n_images)
         self.engine_args = EngineArgs(
             model="deepseek-ai/deepseek-vl2",
-            max_model_len=8192,
+            max_model_len=8192*2,
             max_num_seqs=2,
             hf_overrides={"architectures": ["DeepseekVLV2ForCausalLM"]},
         )
@@ -187,7 +187,7 @@ class Gemma3Model(BaseHFModel):
         super().__init__(n_images=n_images)
         self.engine_args = EngineArgs(
             model="google/gemma-3-4b-it",
-            max_model_len=8192,
+            max_model_len=8192*2,
             max_num_seqs=2,
             mm_processor_kwargs={"do_pan_and_scan": True},
         )
@@ -220,7 +220,7 @@ class MLLamaModel(BaseHFModel):
         super().__init__(n_images=n_images)
         self.engine_args = EngineArgs(
             model="meta-llama/Llama-3.2-90B-Vision-Instruct",
-            max_model_len=8192,
+            max_model_len=8192*2,
             max_num_seqs=16,
         )
         self.stop_token_ids = None

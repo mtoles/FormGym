@@ -202,6 +202,7 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
     #     max_iou_examples = MAX_IOU_EXAMPLES
     model.eval()
     total_iou = 0
+    total_center_accuracy = 0
     num_samples = 0
     predictions_data = []
 
@@ -213,7 +214,7 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
             heights,
             gt_bboxes,
             image_paths,
-        ) in enumerate(data_loader):
+        ) in tqdm(enumerate(data_loader)):
             if max_iou_examples is not None and num_samples >= max_iou_examples:
                 break
 
@@ -250,7 +251,10 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                         != model.config.text_config.eos_token_id
                     ):
                         generated_ids_list[i].append(next_tokens[i].item())
-                    if generated_ids_list[i][-1] == model.config.text_config.eos_token_id:
+                    if (
+                        generated_ids_list[i][-1]
+                        == model.config.text_config.eos_token_id
+                    ):
                         still_generating[i] = False
 
                 # Check if all sequences have reached EOS
@@ -261,7 +265,7 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                     break
 
                 # Update input for next iteration
-                print(f"token no: {current_ids.shape[1]}", end="\r")
+                # print(f"token no: {current_ids.shape[1]}", end="\r")
                 current_ids = torch.cat([current_ids, next_tokens], dim=-1)
 
                 if not any(still_generating):
@@ -307,12 +311,27 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
 
                 if len(pred_bboxes) == 0:
                     pred_bbox = None  # always wrong
+                    center_accuracy = 0
                 else:
                     pred_bbox = pred_bboxes[0]
+                    # Calculate center of predicted bbox
+                    pred_center_x = (pred_bbox["x1"] + pred_bbox["x2"]) / 2
+                    pred_center_y = (pred_bbox["y1"] + pred_bbox["y2"]) / 2
+
+                    # Check if center is inside ground truth bbox
+                    center_accuracy = (
+                        1
+                        if (
+                            gt_bbox["x1"] <= pred_center_x <= gt_bbox["x2"]
+                            and gt_bbox["y1"] <= pred_center_y <= gt_bbox["y2"]
+                        )
+                        else 0
+                    )
 
                 # Calculate IoU
                 iou = calculate_iou(pred_bbox, gt_bbox)
                 total_iou += iou
+                total_center_accuracy += center_accuracy
 
                 # Store data for DataFrame
                 predictions_data.append(
@@ -322,6 +341,7 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                         "ground_truth_bbox": gt_bboxes[i],
                         "predicted_bbox": pred_bbox,
                         "iou": iou,
+                        "center_accuracy": center_accuracy,
                         "image_width": widths[i],
                         "image_height": heights[i],
                         "pixel_values": inputs["pixel_values"][i].cpu().numpy(),
@@ -333,7 +353,8 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                 num_samples += 1
 
     avg_iou = total_iou / num_samples if num_samples > 0 else 0
-    return avg_iou, predictions_data
+    avg_center_accuracy = total_center_accuracy / num_samples if num_samples > 0 else 0
+    return avg_iou, avg_center_accuracy, predictions_data
 
 
 def manage_checkpoints(checkpoint_dir, max_checkpoints=4):
@@ -596,7 +617,7 @@ def main():
         )
 
     batch_no = -1
-    val_accuracy, val_loss, predictions_df = None, None, None
+    val_accuracy, val_center_accuracy, predictions_df = None, None, None
     total_batches = 0
     batches_per_epoch = len(train_loader)
     for epoch in tqdm(range(EPOCHS), desc="Training Epochs"):
@@ -642,16 +663,20 @@ def main():
                 and batch_no != 0
             ) or batch_no == EPOCHS * batches_per_epoch - 1:
                 val_loss = calculate_loss(model, val_loader, processor)
-                val_accuracy, predictions_data = calculate_iou_accuracy(
-                    model,
-                    val_loader,
-                    processor,
+                val_accuracy, val_center_accuracy, predictions_data = (
+                    calculate_iou_accuracy(
+                        model,
+                        val_loader,
+                        processor,
+                    )
                 )
                 predictions_df = pd.DataFrame(predictions_data)
 
                 print(f"Validation IoU: {val_accuracy}")
+                print(f"Validation Center Accuracy: {val_center_accuracy}")
                 print(f"Validation Loss: {val_loss}")
-                wandb.log({"accuracy/val_iou": val_accuracy, "loss/val_loss": val_loss})
+                wandb.log({"accuracy/val_iou": val_accuracy})
+                wandb.log({"accuracy/val_center_accuracy": val_center_accuracy})
                 wandb.log({"loss/val_loss": val_loss})
 
                 # Save model checkpoint after evaluation
@@ -699,10 +724,11 @@ def main():
     os.makedirs(f"tmp/tool/{timestamp}", exist_ok=True)
     if predictions_df is None:
         val_loss = calculate_loss(model, val_loader, processor)
-        val_accuracy, predictions_data = calculate_iou_accuracy(
+        val_accuracy, val_center_accuracy, predictions_data = calculate_iou_accuracy(
             model, val_loader, processor
         )
         wandb.log({"accuracy/val_iou": val_accuracy})
+        wandb.log({"accuracy/val_center_accuracy": val_center_accuracy})
         wandb.log({"loss/val_loss": val_loss})
         predictions_df = pd.DataFrame(predictions_data)
     for index, row in predictions_df.iterrows():
