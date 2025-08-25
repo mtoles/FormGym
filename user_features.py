@@ -22,6 +22,7 @@ class VehicleLoanConditionEnum(Enum):
     New = "New"
     Used = "Used"
     Refinance = "Refinance"
+    PrivateParty = "Private Party"
 
 
 class VehicleLoanTypeEnum(Enum):
@@ -52,6 +53,48 @@ class GrossIncomePeriodEnum(Enum):
     Yearly = "Yearly"
 
 
+### AL_5 ###
+
+
+class LoanSecuredEnum(Enum):
+    Secured = "Secured"
+    Unsecured = "Unsecured"
+
+
+class CreditTypeEnum(Enum):
+    Individual = "Individual"
+    Joint = "Joint"
+
+
+class AchFrequencyEnum(Enum):
+    Monthly = "Monthly"
+    SemiMonthly = "Semi-Monthly"
+
+
+class PayrollTypeEnum(Enum):
+    D124 = "D124"
+    D231 = "D231"
+    Aero = "Aero"
+    DebtConsolidation = "Debt Consolidation"
+
+
+class AlimonyTypeEnum(Enum):
+    CourtOrder = "Court Order"
+    WrittenAgreement = "Written Agreement"
+    OralUnderstanding = "Oral Understanding"
+    NA = "NA"
+
+
+class IncomeReductionEnum(Enum):
+    No = "No"
+    Yes = "Yes"
+
+
+class PreviousCreditEnum(Enum):
+    No = "No"
+    Yes = "Yes"
+
+
 ## USER ATTRIBUTES ###
 
 
@@ -76,7 +119,12 @@ class UserProfile:
 
         self.features = Features()
         # for name, attr_class in UserAttributeMeta.registry.items():
+        missing_user_attributes = []
         for name in self.relevant_features:
+            if name not in UserAttributeMeta.registry:
+                missing_user_attributes.append(name)
+                continue
+
             attr_class = UserAttributeMeta.registry[name]
             if name in relevant_features:
                 if hasattr(attr_class, "options") and isinstance(
@@ -85,6 +133,9 @@ class UserProfile:
                     setattr(self.features, name, attr_class.options[idx])
                 else:
                     raise AttributeError(f"Class {name} must have an 'options' list.")
+        if missing_user_attributes:
+            missing_str = "\n".join(missing_user_attributes)
+            raise ValueError(f"Missing user attributes: {missing_str}")
 
     def get_nl_profile(self):
         nl_profile = []
@@ -983,7 +1034,7 @@ class JointReferenceStreetName(BaseUserAttr):
 
 
 class JointReferenceCity(BaseUserAttr):
-    options = ["Springfield", "Havenport", "Lakeshire", "Brightvale"]
+    options = ["Springfield", "H Davenport", "Lakeshire", "Brightvale"]
 
     @staticmethod
     def nl_desc(option):
@@ -2321,3 +2372,318 @@ class SEC_BlueSkyComplianceFees(BaseUserDbAttr):
     col = "fees"
     row = "BlueSkyCompliance"
     options = ["222222", "222223", "222224", "222225"]
+
+
+# AL 5
+
+
+class JointEmployerWorkPhoneExtension(BaseUserAttr):
+    options = ["123", "456", "789", "012"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's employer work phone extension is: {option}"
+
+
+class PreviousEmployerMonths(BaseUserAttr):
+    options = ["6", "12", "18", "24"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user was at their previous employer for: {option} months"
+
+
+class AchFrequency(BaseUserAttr):
+    options = [AchFrequencyEnum.Monthly.value, AchFrequencyEnum.SemiMonthly.value] * 2
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's ACH repayment frequency is: {option}"
+
+
+class NearestRelativeYears(BaseUserAttr):
+    options = ["2", "5", "8", "12"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's nearest relative has been a relative for: {option} years"
+
+
+class JointRelationToApplicant(BaseUserAttr):
+    options = ["Spouse", "Parent", "Sibling", "Child"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's relation to the applicant is: {option}"
+
+
+class County(BaseUserAttr):
+    options = ["Dallas County", "Los Angeles County", "Hudson County", "Fulton County"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's county is: {option}"
+
+
+class JointCounty(BaseUserAttr):
+    options = ["Pinellas County", "King County", "New York County", "Jefferson County"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's county is: {option}"
+
+
+class JointPreviousEmployerState(BaseUserAttr):
+    options = ["TX", "CA", "NY", "FL"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's previous employer state is: {option}"
+
+
+class JointPreviousEmployerZip(BaseUserAttr):
+    options = ["75001", "90210", "10001", "33101"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's previous employer zip is: {option}"
+
+
+class JointAgesOfDependents(BaseUserAttr):
+    options = ["5, 8", "12, 15", "3, 6, 9", "10, 13, 16"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's ages of dependents are: {option}"
+
+
+class AgesOfDependents(BaseUserAttr):
+    options = ["4, 7", "11, 14", "2, 5, 8", "9, 12, 15"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's ages of dependents are: {option}"
+
+
+class JointPreviousEmployerHouseNumber(BaseUserAttr):
+    options = ["100", "200", "300", "400"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's previous employer house number is: {option}"
+
+
+class JointPreviousEmployerStreetName(BaseUserAttr):
+    options = ["Main Street", "Oak Avenue", "Pine Road", "Elm Drive"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's previous employer street name is: {option}"
+
+
+class NearestRelativeRelationship(BaseUserAttr):
+    options = ["Mother", "Father", "Sister", "Brother"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's nearest relative relationship is: {option}"
+
+
+class LoanSecured(BaseUserAttr):
+    options = [LoanSecuredEnum.Secured.value, LoanSecuredEnum.Unsecured.value]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The loan is: {option}"
+
+
+class JointPreviousEmployerYears(BaseUserAttr):
+    options = ["1", "3", "5", "7"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer was at their previous employer for: {option} years"
+
+
+class JointPreviousCreditWithUsWhen(BaseUserAttr):
+    options = ["2018", "2019", "2020", "2021"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's previous credit with us was in: {option}"
+
+
+class JointPreviousCreditWithUs(BaseUserAttr):
+    options = ["Yes", "No", "Yes", "No"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"Has the joint filer had previous credit with us: {option}"
+
+
+class EmployerWorkPhoneExtension(BaseUserAttr):
+    options = ["101", "202", "303", "404"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's employer work phone extension is: {option}"
+
+
+class NearestRelativeName(BaseUserAttr):
+    options = ["Sarah Johnson", "Michael Brown", "Lisa Davis", "Robert Wilson"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's nearest relative name is: {option}"
+
+
+class PayrollType(BaseUserAttr):
+    options = [
+        PayrollTypeEnum.D124.value,
+        PayrollTypeEnum.D231.value,
+        PayrollTypeEnum.Aero.value,
+        PayrollTypeEnum.DebtConsolidation.value,
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's payroll type is: {option}"
+
+
+class PreviousCounty(BaseUserAttr):
+    options = [
+        "Denver County",
+        "Wake County",
+        "Philadelphia County",
+        "Cumberland County",
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's previous county is: {option}"
+
+
+class NearestRelativePhone(BaseUserAttr):
+    options = ["555-0101", "555-0202", "555-0303", "555-0404"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's nearest relative phone is: {option}"
+
+
+class PreviousCreditWithUs(BaseUserAttr):
+    options = ["Yes", "No", "Yes", "No"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"Has the user had previous credit with us: {option}"
+
+
+class AlimonyType(BaseUserAttr):
+    options = [
+        AlimonyTypeEnum.CourtOrder.value,
+        AlimonyTypeEnum.WrittenAgreement.value,
+        AlimonyTypeEnum.OralUnderstanding.value,
+        AlimonyTypeEnum.NA.value,
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's alimony type is: {option}"
+
+
+class LoanDuration(BaseUserAttr):
+    options = ["24 months", "36 months", "48 months", "60 months"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The loan duration is: {option}"
+
+
+class PreviousEmployerYears(BaseUserAttr):
+    options = ["1", "2", "3", "4"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user was at their previous employer for: {option} years"
+
+
+class JointIncomeLikelyToBeReducedExplanation(BaseUserAttr):
+    options = [["", "Reduced hours", "", "Retirement"]] # must match JointIncomeLikelyToBeReduced_Yes/No
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's income likely to be reduced explanation is: {option}"
+
+
+class JointAlimonyType(BaseUserAttr):
+    options = [
+        AlimonyTypeEnum.CourtOrder.value,
+        AlimonyTypeEnum.WrittenAgreement.value,
+        AlimonyTypeEnum.OralUnderstanding.value,
+        AlimonyTypeEnum.NA.value,
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's alimony type is: {option}"
+
+
+class JointIncomeLikelyToBeReduced(BaseUserAttr):
+    options = [IncomeReductionEnum.No.value, IncomeReductionEnum.Yes.value] * 2
+
+    @staticmethod
+    def nl_desc(option):
+        return f"Is the joint filer's income likely to be reduced: {option}"
+
+
+class JointPreviousEmployerMonths(BaseUserAttr):
+    options = ["6", "12", "18", "24"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer was at their previous employer for: {option} months"
+
+
+class PreviousCreditWithUsWhen(BaseUserAttr):
+    options = ["2017", "2018", "2019", "2020"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's previous credit with us was in: {option}"
+
+
+class IncomeLikelyToBeReduced(BaseUserAttr):
+    options = [IncomeReductionEnum.No.value, IncomeReductionEnum.Yes.value] * 2
+
+    @staticmethod
+    def nl_desc(option):
+        return f"Is the user's income likely to be reduced: {option}"
+
+
+class CreditType(BaseUserAttr):
+    options = [CreditTypeEnum.Individual.value, CreditTypeEnum.Joint.value] * 2
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The credit type is: {option}"
+
+
+class IncomeLikelyToBeReducedExplanation(BaseUserAttr):
+    options = [["", "Reduced hours", "", "Retirement"]] # must match IncomeLikelyToBeReduced_Yes/No
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's income likely to be reduced explanation is: {option}"
+
+
+class VehicleCondition(BaseUserAttr):
+    options = [
+        VehicleLoanConditionEnum.New.value,
+        VehicleLoanConditionEnum.Used.value,
+        VehicleLoanConditionEnum.Refinance.value,
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The vehicle condition is: {option}"

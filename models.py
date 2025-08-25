@@ -78,6 +78,7 @@ def get_e2e_prompt(
     Fill checkboxes with a single "x".
     Format all dates as "MM/DD/YYYY".
     Names should be "First Middle Last" unless otherwise specified.
+    Use the user's home phone number if the phone type is not specified.
     
     {grid_subprompt}
     {suggest_localizer_str}
