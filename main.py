@@ -150,6 +150,7 @@ def main(
     note,
     download_dir,
     gt_coordinates,
+    source_doc_id=None,
 ):
     today = datetime.now().strftime("%Y-%m-%d")
     now = datetime.now().strftime("%H:%M:%S")
@@ -180,10 +181,15 @@ def main(
                 profile_source == ProfileSourceEnum.TEXT.value
             ), "Only auto loan docs dataset supports document transfer setting"
         if profile_source == ProfileSourceEnum.IMAGE.value:
-            source_doc_no = (
-                int(fid.split("_")[1]) - 1
-            ) % 4  # use the previous doc as the source doc
-            source_doc_id = f"al_{source_doc_no}_0"
+            if source_doc_id is not None:
+                # Use the provided source_doc_id
+                pass
+            else:
+                # Fall back to the current logic: use the previous doc as the source doc
+                source_doc_no = (
+                    int(fid.split("_")[1]) - 1
+                ) % 5  # use the previous doc as the source doc
+                source_doc_id = f"al_{source_doc_no}_0"
         png_path = f"pngs/{fid}.png"
         print(f"Processing file: {png_path}")
 
@@ -369,7 +375,9 @@ def main(
             # Get current batch of examples
             batch = active_df.iloc[batch_start : batch_start + BATCH_SIZE]
             batch = batch.reset_index(drop=True)
-            bbox_descs = [doc_state[-1].describe_bboxes() for doc_state in batch["doc_state"]]
+            bbox_descs = [
+                doc_state[-1].describe_bboxes() for doc_state in batch["doc_state"]
+            ]
             # Get model predictions for the current batch
             batch_model_outputs = model.forward(
                 nl_profile=batch["nl_profile"].to_list(),
@@ -537,7 +545,7 @@ if __name__ == "__main__":
     parser.add_argument("--k_missing_fields", type=int, default=1)
     parser.add_argument("--max_turns", type=int, default=10)
     parser.add_argument("--suggest_localizer", type=bool, default=False)
-    # parser.add_argument("--source_doc_id", type=str, default=None)
+    parser.add_argument("--source_doc_id", type=str, default=None)
     parser.add_argument("--user_idx", type=int, default=0)
     parser.add_argument(
         "--study_condition",
@@ -575,6 +583,7 @@ if __name__ == "__main__":
         args.note,
         args.download_dir,
         args.gt_coordinates,
+        args.source_doc_id,
     ]
     # called with the param list
     overall_results = main(*params)

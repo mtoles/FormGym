@@ -53,6 +53,11 @@ class GrossIncomePeriodEnum(Enum):
     Yearly = "Yearly"
 
 
+class ProceedsTypeEnum(Enum):
+    DebtConsolidation = "Debt Consolidation"
+    Other = "Other"
+
+
 ### AL_5 ###
 
 
@@ -558,7 +563,12 @@ class EmployeNamer(BaseUserAttr):
 
 
 class LengthEmployed(BaseUserAttr):
-    options = ["1 year", "3 years", "6 months", "9 years"]
+    options = [
+        f"{25*12} months",
+        f"{24*12} months",
+        f"{23*12} months",
+        f"{22*12} months",
+    ]
 
     @staticmethod
     def nl_desc(option):
@@ -853,32 +863,32 @@ class JointSocialSecurityNumber(BaseUserAttr):
         return f"The joint filer's social security number is: {option}"
 
 
-class TimeAtAddressYears(BaseUserAttr):
-    options = ["1", "3", "4", "7"]
+# class TimeAtAddressYears(BaseUserAttr):
+#     options = ["1", "3", "4", "7"]
 
-    @staticmethod
-    def nl_desc(option):
-        return f"The years the user has been at this address: {option}"
+#     @staticmethod
+#     def nl_desc(option):
+#         return f"The years the user has been at this address: {option}"
 
 
 class TimeAtAddressMonths(BaseUserAttr):
-    options = ["2", "5", "8", "10"]
+    options = ["12", "36", "48", "84"]
 
     @staticmethod
     def nl_desc(option):
         return f"The months the user has been at this address: {option}"
 
 
-class JointTimeAtAddressYears(BaseUserAttr):
-    options = ["2", "4", "6", "9"]
+# class JointTimeAtAddressYears(BaseUserAttr):
+#     options = ["2", "4", "6", "9"]
 
-    @staticmethod
-    def nl_desc(option):
-        return f"The years the joint filer has been at this address: {option}"
+#     @staticmethod
+#     def nl_desc(option):
+#         return f"The years the joint filer has been at this address: {option}"
 
 
 class JointTimeAtAddressMonths(BaseUserAttr):
-    options = ["3", "6", "9", "11"]
+    options = ["24", "48", "72", "96"]
 
     @staticmethod
     def nl_desc(option):
@@ -945,32 +955,32 @@ class JointPreviousResidenceStatus(BaseUserAttr):
         return f"The joint filer's most recent previous residence status ({', '.join([e.value for e in ResidenceStatusEnum])}) is: {option}"
 
 
-class TimeAtPreviousAddressYears(BaseUserAttr):
-    options = ["1", "2", "4", "6"]
+# class TimeAtPreviousAddressYears(BaseUserAttr):
+#     options = ["1", "2", "4", "6"]
 
-    @staticmethod
-    def nl_desc(option):
-        return f"The user's time at previous address in years is: {option}"
+#     @staticmethod
+#     def nl_desc(option):
+#         return f"The user's time at previous address in years is: {option}"
 
 
 class TimeAtPreviousAddressMonths(BaseUserAttr):
-    options = ["1", "4", "7", "11"]
+    options = ["12", "48", "84", "120"]
 
     @staticmethod
     def nl_desc(option):
         return f"The user's time at previous address in months is: {option}"
 
 
-class JointTimeAtPreviousAddressYears(BaseUserAttr):
-    options = ["1", "3", "5", "7"]
+# class JointTimeAtPreviousAddressYears(BaseUserAttr):
+#     options = [12, 36, 60, 84]
 
-    @staticmethod
-    def nl_desc(option):
-        return f"The joint filer's time at previous address in years is: {option}"
+#     @staticmethod
+#     def nl_desc(option):
+#         return f"The joint filer's time at previous address in years is: {option}"
 
 
 class JointTimeAtPreviousAddressMonths(BaseUserAttr):
-    options = ["2", "5", "8", "12"]
+    options = ["24", "60", "96", "120"]
 
     @staticmethod
     def nl_desc(option):
@@ -1187,12 +1197,12 @@ class EmployerName(BaseUserAttr):
         return f"The user's employer's name is: {option}"
 
 
-class EmployerLengthYears(BaseUserAttr):
-    options = ["1", "3", "5", "9"]
+# class EmployerLengthYears(BaseUserAttr):
+#     options = ["1", "3", "5", "9"]
 
-    @staticmethod
-    def nl_desc(option):
-        return f"The user's years at their current employer is: {option}"
+#     @staticmethod
+#     def nl_desc(option):
+#         return f"The user's years at their current employer is: {option}"
 
 
 class EmployerPosition(BaseUserAttr):
@@ -1232,12 +1242,12 @@ class JointEmployerCity(BaseUserAttr):
         return f"The joint filer's employer's city is: {option}"
 
 
-class JointEmployerLengthYears(BaseUserAttr):
-    options = ["2", "4", "6", "10"]
+# class JointEmployerLengthYears(BaseUserAttr):
+#     options = ["2", "4", "6", "10"]
 
-    @staticmethod
-    def nl_desc(option):
-        return f"The joint filer's years at their current employer is: {option}"
+#     @staticmethod
+#     def nl_desc(option):
+#         return f"The joint filer's years at their current employer is: {option}"
 
 
 class JointEmployerPosition(BaseUserAttr):
@@ -1325,13 +1335,13 @@ class PreviousEmployerPosition(BaseUserAttr):
         return f"The user's previous employer position is: {option}"
 
 
-class PreviousLengthEmployed(BaseUserAttr):
-    options = ["8 months", "1 year", "2 years", "4 years"]
+# class PreviousLengthEmployed(BaseUserAttr):
+#     options = ["8 months", "1 year", "2 years", "4 years"]
 
-    @staticmethod
-    def nl_desc(option):
-        # return f"The user's : {option}"
-        return f"The user was employed at their previous position for: {option}"
+#     @staticmethod
+#     def nl_desc(option):
+#         # return f"The user's : {option}"
+#         return f"The user was employed at their previous position for: {option}"
 
 
 class JointPreviousEmployerName(BaseUserAttr):
@@ -1363,12 +1373,12 @@ class JointPreviousEmployerPosition(BaseUserAttr):
         return f"The joint filer's previous employer's position is: {option}"
 
 
-class JointPreviousLengthEmployed(BaseUserAttr):
-    options = ["8 months", "1 year", "2 years", "4 years"]
+# class JointPreviousLengthEmployed(BaseUserAttr):
+#     options = ["8 months", "1 year", "2 years", "4 years"]
 
-    @staticmethod
-    def nl_desc(option):
-        return f"The joint filer was previously employed for: {option}"
+#     @staticmethod
+#     def nl_desc(option):
+#         return f"The joint filer was previously employed for: {option}"
 
 
 class BankAddress(BaseUserAttr):
@@ -2401,12 +2411,12 @@ class AchFrequency(BaseUserAttr):
         return f"The user's ACH repayment frequency is: {option}"
 
 
-class NearestRelativeYears(BaseUserAttr):
-    options = ["2", "5", "8", "12"]
+class NearestRelativeMonths(BaseUserAttr):
+    options = ["240", "360", "480", "600"]
 
     @staticmethod
     def nl_desc(option):
-        return f"The user's nearest relative has been a relative for: {option} years"
+        return f"The user's nearest relative has been a relative for: {option} months"
 
 
 class JointRelationToApplicant(BaseUserAttr):
@@ -2497,12 +2507,12 @@ class LoanSecured(BaseUserAttr):
         return f"The loan is: {option}"
 
 
-class JointPreviousEmployerYears(BaseUserAttr):
-    options = ["1", "3", "5", "7"]
+# class JointPreviousEmployerYears(BaseUserAttr):
+#     options = ["1", "3", "5", "7"]
 
-    @staticmethod
-    def nl_desc(option):
-        return f"The joint filer was at their previous employer for: {option} years"
+#     @staticmethod
+#     def nl_desc(option):
+#         return f"The joint filer was at their previous employer for: {option} years"
 
 
 class JointPreviousCreditWithUsWhen(BaseUserAttr):
@@ -2600,16 +2610,21 @@ class LoanDuration(BaseUserAttr):
         return f"The loan duration is: {option}"
 
 
-class PreviousEmployerYears(BaseUserAttr):
-    options = ["1", "2", "3", "4"]
+# class PreviousEmployerYears(BaseUserAttr):
+#     options = ["1", "2", "3", "4"]
 
-    @staticmethod
-    def nl_desc(option):
-        return f"The user was at their previous employer for: {option} years"
+#     @staticmethod
+#     def nl_desc(option):
+#         return f"The user was at their previous employer for: {option} years"
 
 
 class JointIncomeLikelyToBeReducedExplanation(BaseUserAttr):
-    options = [["", "Reduced hours", "", "Retirement"]] # must match JointIncomeLikelyToBeReduced_Yes/No
+    options = [
+        "N/A",
+        "Reduced hours",
+        "N/A",
+        "Retirement",
+    ]  # must match JointIncomeLikelyToBeReduced_Yes/No
 
     @staticmethod
     def nl_desc(option):
@@ -2670,7 +2685,12 @@ class CreditType(BaseUserAttr):
 
 
 class IncomeLikelyToBeReducedExplanation(BaseUserAttr):
-    options = [["", "Reduced hours", "", "Retirement"]] # must match IncomeLikelyToBeReduced_Yes/No
+    options = [
+        "N/A",
+        "Reduced hours",
+        "N/A",
+        "Retirement",
+    ]  # must match IncomeLikelyToBeReduced_Yes/No
 
     @staticmethod
     def nl_desc(option):
@@ -2687,3 +2707,14 @@ class VehicleCondition(BaseUserAttr):
     @staticmethod
     def nl_desc(option):
         return f"The vehicle condition is: {option}"
+
+
+class ProceedsType(BaseUserAttr):
+    options = [
+        ProceedsTypeEnum.DebtConsolidation.value,
+        ProceedsTypeEnum.Other.value,
+    ] * 2
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The proceeds of unsecured loan will be used for: {option}"

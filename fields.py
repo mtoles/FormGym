@@ -12,6 +12,7 @@ from typing import List
 from abc import ABC, abstractmethod
 import user_features
 from dateutil.parser import parse, ParserError
+import re
 
 
 # -----------------------------------------
@@ -143,6 +144,19 @@ class BaseNameField(BaseField):
         return True
 
 
+class BaseDurationField(BaseField):
+    def is_correct(self, agent_generations_inside, profile_info: str):
+        # convert years to months
+        years = re.search(r"(\d+) year", agent_generations_inside).group()
+        months = re.search(r"(\d+) month", agent_generations_inside).group()
+        if years is not None:
+            years = int(years)
+            months = years * 12
+        if months is not None:
+            months = int(months)
+        return months == int(profile_info)
+
+
 class AnnotatedField(BaseField):
     pass
 
@@ -209,7 +223,7 @@ def get_inputs_inside_field(field: BaseField, agent_generations: List):
 class AutoAmountRequested(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.AutoAmountRequested
+        return str(user_profile.features.AutoAmountRequested)
 
 
 class Term(BaseStringField):
@@ -532,7 +546,7 @@ class JointNumDependents(BaseNumericField):
 class TimeAtAddressYears(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.TimeAtAddressYears
+        return str(int(user_profile.features.TimeAtAddressMonths) // 12)
 
 
 class TimeAtAddressMonths(BaseNumericField):
@@ -544,7 +558,7 @@ class TimeAtAddressMonths(BaseNumericField):
 class JointTimeAtAddressYears(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.JointTimeAtAddressYears
+        return str(int(user_profile.features.JointTimeAtAddressMonths) // 12)
 
 
 class JointTimeAtAddressMonths(BaseNumericField):
@@ -617,7 +631,7 @@ class JointPreviousFullAddress(BaseStringField):
 class TimeAtPreviousAddressYears(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.TimeAtPreviousAddressYears
+        return str(int(user_profile.features.TimeAtPreviousAddressMonths) // 12)
 
 
 class TimeAtPreviousAddressMonths(BaseNumericField):
@@ -629,7 +643,7 @@ class TimeAtPreviousAddressMonths(BaseNumericField):
 class JointTimeAtPreviousAddressYears(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.JointTimeAtPreviousAddressYears
+        return str(int(user_profile.features.JointTimeAtPreviousAddressMonths) // 12)
 
 
 class JointTimeAtPreviousAddressMonths(BaseNumericField):
@@ -791,7 +805,7 @@ class EmployerCity(BaseStringField):
 class EmployerLengthYears(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.EmployerLengthYears
+        return str(int(user_profile.features.EmployerLengthMonths) // 12)
 
 
 class EmployerLengthMonths(BaseNumericField):
@@ -833,7 +847,7 @@ class JointEmployerCity(BaseStringField):
 class JointEmployerLengthYears(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.JointEmployerLengthYears
+        return str(int(user_profile.features.JointEmployerLengthMonths) // 12)
 
 
 class JointEmployerLengthMonths(BaseNumericField):
@@ -911,7 +925,7 @@ class PreviousEmployerPosition(BaseStringField):
 class PreviousLengthEmployed(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.PreviousLengthEmployed
+        return user_profile.features.JointPreviousEmployerMonths
 
 
 class JointPreviousEmployerName(BaseStringField):
@@ -935,7 +949,7 @@ class JointPreviousEmployerPosition(BaseStringField):
 class JointPreviousLengthEmployed(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.JointPreviousLengthEmployed
+        return user_profile.features.JointPreviousEmployerMonths
 
 
 # -----------------------------------------
@@ -1054,7 +1068,9 @@ class BusinessType(BaseStringField):
 class TimeInBusinessYears(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.TimeInBusinessYears
+        if user_profile.features.TimeInBusinessMonths == "N/A":
+            return "N/A"
+        return str(int(user_profile.features.TimeInBusinessMonths) // 12)
 
 
 class TimeInBusinessMonths(BaseNumericField):
@@ -1072,7 +1088,9 @@ class JointBusinessType(BaseStringField):
 class JointTimeInBusinessYears(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.JointTimeInBusinessYears
+        if user_profile.features.JointTimeInBusinessMonths == "N/A":
+            return "N/A"
+        return str(int(user_profile.features.JointTimeInBusinessMonths) // 12)
 
 
 class JointTimeInBusinessMonths(BaseNumericField):
@@ -1345,26 +1363,16 @@ class JointGrossIncomePeriod_Yearly(BaseCheckboxField):
 # -----------------------------------------
 
 
-class TimeAtAddressYearsAndMonths(BaseNumericField):
+class TimeAtAddressYearsAndMonths(BaseDurationField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.TimeAtAddressYears
-            + " years "
-            + user_profile.features.TimeAtAddressMonths
-            + " months"
-        )
+        return user_profile.features.TimeAtAddressMonths
 
 
-class JointTimeAtAddressYearsAndMonths(BaseNumericField):
+class JointTimeAtAddressYearsAndMonths(BaseDurationField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.JointTimeAtAddressYears
-            + " years "
-            + user_profile.features.JointTimeAtAddressMonths
-            + " months"
-        )
+        return user_profile.features.JointTimeAtAddressMonths
 
 
 class ResidenceStatus(BaseStringField):
@@ -2135,12 +2143,21 @@ class Payroll_Aero(BaseCheckboxField):
         )
 
 
-class Payroll_DebtConsolidation(BaseCheckboxField):
+class Proceeds_DebtConsolidation(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return (
-            user_profile.features.PayrollType
-            == user_features.PayrollTypeEnum.DebtConsolidation.value
+            user_profile.features.ProceedsType
+            == user_features.ProceedsTypeEnum.DebtConsolidation.value
+        )
+
+
+class Proceeds_Other(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.ProceedsType
+            == user_features.ProceedsTypeEnum.Other.value
         )
 
 
@@ -2201,26 +2218,16 @@ class PreviousCounty(BaseStringField):
         return user_profile.features.PreviousCounty
 
 
-class TimeAtPreviousAddressYearsAndMonths(BaseNumericField):
+class TimeAtPreviousAddressYearsAndMonths(BaseDurationField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.TimeAtPreviousAddressYears
-            + " years "
-            + user_profile.features.TimeAtPreviousAddressMonths
-            + " months"
-        )
+        return user_profile.features.TimeAtPreviousAddressMonths
 
 
-class EmployerLengthYearsAndMonths(BaseNumericField):
+class EmployerLengthYearsAndMonths(BaseDurationField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.EmployerLengthYears
-            + " years "
-            + user_profile.features.EmployerLengthMonths
-            + " months"
-        )
+        return user_profile.features.EmployerLengthMonths
 
 
 class EmployerWorkPhoneExtension(BaseNumericField):
@@ -2232,7 +2239,7 @@ class EmployerWorkPhoneExtension(BaseNumericField):
 class PayFrequencyALWAYSMONTHLY(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        _ = user_profile.features.FirstName # trick unit tests
+        _ = user_profile.features.FirstName  # trick unit tests
         return "Monthly"
 
 
@@ -2252,15 +2259,10 @@ class JointPreviousEmployerNameAndAddressFull(BaseStringField):
         )
 
 
-class PreviousEmployerYearsAndMonths(BaseNumericField):
+class PreviousEmployerYearsAndMonths(BaseDurationField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.PreviousEmployerYears
-            + " years "
-            + user_profile.features.PreviousEmployerMonths
-            + " months"
-        )
+        return user_profile.features.PreviousEmployerMonths
 
 
 class NearestRelativeName(BaseStringField):
@@ -2284,7 +2286,7 @@ class NearestRelativeRelationship(BaseStringField):
 class NearestRelativeYears(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.NearestRelativeYears
+        return str(int(user_profile.features.NearestRelativeMonths) // 12)
 
 
 class Alimony_CourtOrder(BaseCheckboxField):
@@ -2407,15 +2409,10 @@ class JointCounty(BaseStringField):
 ### Missing Joint Fields ###
 
 
-class JointEmployerLengthYearsAndMonths(BaseNumericField):
+class JointEmployerLengthYearsAndMonths(BaseDurationField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.JointEmployerLengthYears
-            + " years "
-            + user_profile.features.JointEmployerLengthMonths
-            + " months"
-        )
+        return user_profile.features.JointEmployerLengthMonths
 
 
 class JointEmployerWorkPhoneExtension(BaseNumericField):
@@ -2427,19 +2424,14 @@ class JointEmployerWorkPhoneExtension(BaseNumericField):
 class JointPayFrequencyALWAYSMONTHLY(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        _ = user_profile.features.FirstName # trick unit tests
+        _ = user_profile.features.FirstName  # trick unit tests
         return "Monthly"
 
 
-class JointPreviousEmployerYearsAndMonths(BaseNumericField):
+class JointPreviousEmployerYearsAndMonths(BaseDurationField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.JointPreviousEmployerYears
-            + " years "
-            + user_profile.features.JointPreviousEmployerMonths
-            + " months"
-        )
+        return user_profile.features.JointPreviousEmployerMonths
 
 
 class JointAlimony_CourtOrder(BaseCheckboxField):
