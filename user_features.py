@@ -38,7 +38,7 @@ class MarriageStatusEnum(Enum):
     Married = "Married"
     Single = "Single"
     Separated = "Separated"
-    Divorced = "Divorced"
+    Divorced = "Divorced"  # don't give profiles divorced (form logic clash)
 
 
 class EnterpriseTypeEnum(Enum):
@@ -68,6 +68,12 @@ class PreferredPhoneEnum(Enum):
 class YesNoEnum(Enum):
     Yes = "Yes"
     No = "No"
+
+
+class JointTypeEnum(Enum):
+    Coapplicant = "Coapplicant"
+    Spouse = "Spouse"
+    Other = "Other"
 
 
 ### AL_5 ###
@@ -100,7 +106,6 @@ class AlimonyTypeEnum(Enum):
     WrittenAgreement = "Written Agreement"
     OralUnderstanding = "Oral Understanding"
     NA = "NA"
-
 
 
 ## USER ATTRIBUTES ###
@@ -2583,7 +2588,7 @@ class EmployerWorkPhoneExtension(BaseUserAttr):
 
 
 class NearestRelativeName(BaseUserAttr):
-    options = ["Sarah Johnson", "Michael Brown", "Lisa Davis", "Robert Wilson"]
+    options = ["John Smithy", "Jane Doey", "Robert Johnsony", "Mary Wilsony"]
 
     @staticmethod
     def nl_desc(option):
@@ -2617,7 +2622,7 @@ class PreviousCounty(BaseUserAttr):
 
 
 class NearestRelativePhone(BaseUserAttr):
-    options = ["555-0101", "555-0202", "555-0303", "555-0404"]
+    options = ["(555) 111-1111", "(555) 222-2222", "(555) 333-3333", "(555) 444-4444"]
 
     @staticmethod
     def nl_desc(option):
@@ -3015,7 +3020,8 @@ class SavingsAccountNumber(BaseUserAttr):
         return f"The savings account number is: {option}"
 
 
-
+class SavingsAccountBankName(BaseUserAttr):
+    options = ["Chase Bank", "Wells Fargo", "Bank of America", "Citibank"]
 
     @staticmethod
     def nl_desc(option):
@@ -3046,7 +3052,6 @@ class HourlyWage(BaseUserAttr):
         return f"The hourly wage is: {option}"
 
 
-
 class PermissionForElectronicTransfer(BaseUserAttr):
     options = ["Yes", "No", "Pending", "Limited"]
 
@@ -3069,3 +3074,300 @@ class EmergencyContact2Name(BaseUserAttr):
     @staticmethod
     def nl_desc(option):
         return f"The second emergency contact name is: {option}"
+
+
+### NEW ENUMS ###
+
+
+class RepaymentMethodEnum(Enum):
+    PayrollDeduction = "Payroll Deduction"
+    Cash = "Cash"
+    MilitaryAllotment = "Military Allotment"
+    Automatic = "Automatic"
+
+
+### NEW CLASSES ###
+
+
+class PreviousEmployerEndDate(BaseUserAttr):
+    options = ["12/2022", "06/2023", "09/2021", "03/2023"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's previous employer end date is: {option}"
+
+
+class JointNearestRelativeZip(BaseUserAttr):
+    options = ["90210", "10001", "60601", "77001"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's nearest relative zip code is: {option}"
+
+
+class NearestRelativeHouseNumber(BaseUserAttr):
+    options = ["123", "456", "789", "654"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's nearest relative house number is: {option}"
+
+
+class NearestRelativeStreetName(BaseUserAttr):
+    options = ["Main Street", "Oak Avenue", "Pine Road", "Washington Boulevard"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's nearest relative street name is: {option}"
+
+
+class TimesAtWork(BaseUserAttr):
+    options = [
+        "8:00 AM - 5:00 PM",
+        "9:00 AM - 6:00 PM",
+        "7:00 AM - 4:00 PM",
+        "10:00 AM - 7:00 PM",
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's work hours are: {option}"
+
+
+class SelfEmployedTypeOfBusiness(BaseUserAttr):
+    options = [
+        "Plumbing",
+        "Hacking",
+        "Construction",
+        "Consulting",
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's self-employed type of business is: {option}"
+
+
+class NearestRelativeState(BaseUserAttr):
+    options = ["CA", "NY", "TX", "IL"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's nearest relative state is: {option}"
+
+
+class JointNearestRelativeStreetName(BaseUserAttr):
+    options = ["Maple Lane", "Cedar Boulevard", "Birch Court", "Willow Way"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's nearest relative street name is: {option}"
+
+
+class JointNearestRelativeHouseNumber(BaseUserAttr):
+    options = ["567", "890", "234", "678"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's nearest relative house number is: {option}"
+
+
+class JointDutyStationTransferDate(BaseUserAttr):
+    options = ["01/2026", "06/2026", "12/2026", "03/2026"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's duty station transfer date is: {option}"
+
+
+class JointNearestRelativeCity(BaseUserAttr):
+    options = ["Phoenix", "Philadelphia", "San Antonio", "San Diego"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's nearest relative city is: {option}"
+
+
+class NearestRelativeCity(BaseUserAttr):
+    options = ["New York", "Los Angeles", "Chicago", "Miami"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's nearest relative city is: {option}"
+
+
+class DutyStationTransferExpected(BaseUserAttr):
+    options = [
+        YesNoEnum.Yes.value,
+    ] * 4
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's duty station transfer is expected: {option}"
+
+
+class JointTimesAtWork(BaseUserAttr):
+    options = [
+        "8:30 AM - 5:30 PM",
+        "9:30 AM - 6:30 PM",
+        "7:30 AM - 4:30 PM",
+        "10:30 AM - 7:30 PM",
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's work hours are: {option}"
+
+
+class DutyStationTransferDate(BaseUserAttr):
+    options = ["01/2027", "06/2027", "12/2027", "03/2027"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's duty station transfer date is: {option}"
+
+
+class InterestedInLoanProtection(BaseUserAttr):
+    options = [
+        YesNoEnum.Yes.value,
+        YesNoEnum.No.value,
+    ] * 2
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user is interested in loan protection: {option}"
+
+
+class JointType(BaseUserAttr):
+    options = [
+        JointTypeEnum.Coapplicant.value,
+        JointTypeEnum.Spouse.value,
+        JointTypeEnum.Other.value,
+    ] * 4
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint type is: {option}"
+
+
+class JointNearestRelativeState(BaseUserAttr):
+    options = ["AZ", "PA", "OH", "NC"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's nearest relative state is: {option}"
+
+
+class JointSelfEmployedTypeOfBusiness(BaseUserAttr):
+    options = [
+        "Juggling",
+        "Clowning",
+        "Medicine",
+        "PhD stipend",
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's self-employed type of business is: {option}"
+
+
+class JointDutyStationTransferTo(BaseUserAttr):
+    options = ["Fort Hood", "Camp Pendleton", "Fort Bragg", "Naval Base San Diego"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's duty station transfer to is: {option}"
+
+
+class JointDutyStationTransferExpected(BaseUserAttr):
+    options = [
+        YesNoEnum.Yes.value,
+    ] * 4
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's duty station transfer is expected: {option}"
+
+
+class DutyStationTransferTo(BaseUserAttr):
+    options = ["Fort Campbell", "Fort Benning", "Fort Stewart", "Fort Carson"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's duty station transfer to is: {option}"
+
+
+class JointNearestRelativeRelationship(BaseUserAttr):
+    options = ["Sibling", "Child", "Cousin", "Neighbor"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's nearest relative relationship is: {option}"
+
+
+class JointCSEAccountNumber(BaseUserAttr):
+    options = ["CSE654321", "CSE098765", "CSE456789", "CSE210987"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's CSE account number is: {option}"
+
+
+class CSEAccountNumber(BaseUserAttr):
+    options = ["CSE111111", "CSE222222", "CSE333333", "CSE444444"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's CSE account number is: {option}"
+
+
+class JointNearestRelativeName(BaseUserAttr):
+    options = ["Michael Brown", "Sarah Davis", "David Miller", "Lisa Garcia"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's nearest relative name is: {option}"
+
+
+class NearestRelativeZip(BaseUserAttr):
+    options = ["10001", "90210", "60601", "77001"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's nearest relative zip code is: {option}"
+
+
+class RepaymentMethod(BaseUserAttr):
+    options = [
+        RepaymentMethodEnum.Automatic.value,
+        RepaymentMethodEnum.Cash.value,
+        RepaymentMethodEnum.PayrollDeduction.value,
+        RepaymentMethodEnum.MilitaryAllotment.value,
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The repayment method is: {option}"
+
+
+class JointPreviousEmployerEndDate(BaseUserAttr):
+    options = ["11/2022", "05/2023", "08/2021", "02/2023"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's previous employer end date is: {option}"
+
+
+class JointNearestRelativeHomePhone(BaseUserAttr):
+    options = ["(555) 123-4567", "(555) 234-5678", "(555) 345-6789", "(555) 456-7890"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's nearest relative home phone is: {option}"
+
+
+class JointPreviousEmployerHireDate(BaseUserAttr):
+    options = ["02/2020", "07/2019", "10/2021", "04/2018"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's previous employer hire date is: {option}"
