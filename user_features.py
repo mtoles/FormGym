@@ -38,6 +38,7 @@ class MarriageStatusEnum(Enum):
     Married = "Married"
     Single = "Single"
     Separated = "Separated"
+    Divorced = "Divorced"
 
 
 class EnterpriseTypeEnum(Enum):
@@ -64,12 +65,7 @@ class PreferredPhoneEnum(Enum):
     Cell = "Cell"
 
 
-class CitizenOrAlienEnum(Enum):
-    Yes = "Yes"
-    No = "No"
-
-
-class AutomaticDeductionFromFNBEnum(Enum):
+class YesNoEnum(Enum):
     Yes = "Yes"
     No = "No"
 
@@ -105,25 +101,6 @@ class AlimonyTypeEnum(Enum):
     OralUnderstanding = "Oral Understanding"
     NA = "NA"
 
-
-class IncomeReductionEnum(Enum):
-    No = "No"
-    Yes = "Yes"
-
-
-class PreviousCreditEnum(Enum):
-    No = "No"
-    Yes = "Yes"
-
-
-class ApplyingWithJointCreditEnum(Enum):
-    Yes = "Yes"
-    No = "No"
-
-
-class PreviousApplicantNameEnum(Enum):
-    Yes = "Yes"
-    No = "No"
 
 
 ## USER ATTRIBUTES ###
@@ -696,7 +673,7 @@ class AutoAmountRequested(BaseUserAttr):
 
 
 class Term(BaseUserAttr):
-    options = ["24 months", "36 months", "48 months", "60 months"]
+    options = ["12 months", "12 months", "24 months", "36 months"]
 
     @staticmethod
     def nl_desc(option):
@@ -749,7 +726,7 @@ class VehicleMiles(BaseUserAttr):
 
 
 class ApplyingWithJointCredit(BaseUserAttr):
-    options = ["Yes", "No", "Yes", "No"]
+    options = ["Yes", "Yes", "Yes", "Yes"]
 
     @staticmethod
     def nl_desc(option):
@@ -769,7 +746,7 @@ class HomePhoneNumber(BaseUserAttr):
 
     @staticmethod
     def nl_desc(option):
-        return f"The user's home phone number is: {option}"
+        return f"The user's home phone (evening) number is: {option}"
 
 
 class CellPhoneNumber(BaseUserAttr):
@@ -817,7 +794,7 @@ class JointHomePhoneNumber(BaseUserAttr):
 
     @staticmethod
     def nl_desc(option):
-        return f"The joint filer's home phone number is: {option}"
+        return f"The joint filer's home phone (evening) number is: {option}"
 
 
 class JointEmailAddress(BaseUserAttr):
@@ -1249,7 +1226,7 @@ class EmployerWorkPhone(BaseUserAttr):
 
     @staticmethod
     def nl_desc(option):
-        return f"The user's work phone is: {option}"
+        return f"The user's work (daytime) phone is: {option}"
 
 
 class JointEmployerName(BaseUserAttr):
@@ -1289,7 +1266,7 @@ class JointEmployerWorkPhone(BaseUserAttr):
 
     @staticmethod
     def nl_desc(option):
-        return f"The joint filer's work phone is: {option}"
+        return f"The joint filer's work (daytime) phone is: {option}"
 
 
 class JointGrossMonthlyIncome(BaseUserAttr):
@@ -2711,7 +2688,7 @@ class JointAlimonyType(BaseUserAttr):
 
 
 class JointIncomeLikelyToBeReduced(BaseUserAttr):
-    options = [IncomeReductionEnum.No.value, IncomeReductionEnum.Yes.value] * 2
+    options = [YesNoEnum.No.value, YesNoEnum.Yes.value] * 2
 
     @staticmethod
     def nl_desc(option):
@@ -2735,7 +2712,7 @@ class PreviousCreditWithUsWhen(BaseUserAttr):
 
 
 class IncomeLikelyToBeReduced(BaseUserAttr):
-    options = [IncomeReductionEnum.No.value, IncomeReductionEnum.Yes.value] * 2
+    options = [YesNoEnum.No.value, YesNoEnum.Yes.value] * 2
 
     @staticmethod
     def nl_desc(option):
@@ -2864,7 +2841,7 @@ class JointSupervisorName(BaseUserAttr):
 
 
 class CitizenOrAlien(BaseUserAttr):
-    options = [CitizenOrAlienEnum.Yes.value, CitizenOrAlienEnum.No.value] * 2
+    options = [YesNoEnum.Yes.value, YesNoEnum.No.value] * 2
 
     @staticmethod
     def nl_desc(option):
@@ -2872,7 +2849,7 @@ class CitizenOrAlien(BaseUserAttr):
 
 
 class JointCitizenOrAlien(BaseUserAttr):
-    options = [CitizenOrAlienEnum.Yes.value, CitizenOrAlienEnum.No.value] * 2
+    options = [YesNoEnum.Yes.value, YesNoEnum.No.value] * 2
 
     @staticmethod
     def nl_desc(option):
@@ -2931,8 +2908,8 @@ class JointPreviousEmployerLengthMonths(BaseUserAttr):
 
 class PreviousApplicantName(BaseUserAttr):
     options = [
-        PreviousApplicantNameEnum.Yes.value,
-        PreviousApplicantNameEnum.No.value,
+        YesNoEnum.Yes.value,
+        YesNoEnum.No.value,
     ] * 2
 
     @staticmethod
@@ -3010,17 +2987,85 @@ class SelfEmployed(BaseUserAttr):
         return f"The user's self-employed status is: {option}"
 
 
-# AutomaticDeductionFromFNB
-# DriversLicenseIssueDate
-# FNBCheckingAccountNumber
-# JointPreviousEmployerLengthMonths
-# PreviousApplicantName
-# JointPreviousEmployerPhone
-# VehiclePrice
-# JointSelfEmployed
-# VehicleDownPayment
-# JointPreviousEmployerLengthYears
-# PreviousEmployerPhone
-# JointDriversLicenseIssueDate
-# PreviousNames
-# SelfEmployed
+# EmergencyContactPhone
+# SavingsAccountNumber
+# SavingsAccountBankName
+# TotalMonthlyExpenses
+# EmergencyContact2Phone
+# HourlyWage
+# CheckingAccountBankName
+# PermissionForElectronicTransfer
+# EmergencyContactName
+# EmergencyContact2Name
+
+
+class EmergencyContactPhone(BaseUserAttr):
+    options = ["(555) 123-4567", "(555) 987-6543", "(555) 456-7890", "(555) 321-0987"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The emergency contact phone number is: {option}"
+
+
+class SavingsAccountNumber(BaseUserAttr):
+    options = ["123456789012", "987654321098", "456789123456", "789123456789"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The savings account number is: {option}"
+
+
+
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The savings account bank name is: {option}"
+
+
+class TotalMonthlyExpenses(BaseUserAttr):
+    options = ["$2,450", "$3,120", "$1,890", "$4,750"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The total monthly expenses are: {option}"
+
+
+class EmergencyContact2Phone(BaseUserAttr):
+    options = ["(555) 555-1234", "(555) 666-5678", "(555) 777-9012", "(555) 888-3456"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The second emergency contact phone number is: {option}"
+
+
+class HourlyWage(BaseUserAttr):
+    options = ["$18.50", "$22.75", "$15.25", "$28.90"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The hourly wage is: {option}"
+
+
+
+class PermissionForElectronicTransfer(BaseUserAttr):
+    options = ["Yes", "No", "Pending", "Limited"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The permission for electronic transfer is: {option}"
+
+
+class EmergencyContactName(BaseUserAttr):
+    options = ["Sarah Johnson", "Michael Chen", "Emily Rodriguez", "David Thompson"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The emergency contact name is: {option}"
+
+
+class EmergencyContact2Name(BaseUserAttr):
+    options = ["Jennifer Smith", "Robert Wilson", "Lisa Garcia", "Thomas Brown"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The second emergency contact name is: {option}"

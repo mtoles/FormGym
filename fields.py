@@ -2321,7 +2321,7 @@ class IncomeLikelyToBeReduced_No(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.IncomeLikelyToBeReduced
-            == user_features.IncomeReductionEnum.No.value
+            == user_features.YesNoEnum.No.value
         )
 
 
@@ -2330,7 +2330,7 @@ class IncomeLikelyToBeReduced_Yes(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.IncomeLikelyToBeReduced
-            == user_features.IncomeReductionEnum.Yes.value
+            == user_features.YesNoEnum.Yes.value
         )
 
 
@@ -2345,7 +2345,7 @@ class PreviousCreditWithUs_No(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.PreviousCreditWithUs
-            == user_features.PreviousCreditEnum.No.value
+            == user_features.YesNoEnum.No.value
         )
 
 
@@ -2354,7 +2354,7 @@ class PreviousCreditWithUs_Yes(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.PreviousCreditWithUs
-            == user_features.PreviousCreditEnum.Yes.value
+            == user_features.YesNoEnum.Yes.value
         )
 
 
@@ -2466,7 +2466,7 @@ class JointIncomeLikelyToBeReduced_No(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.JointIncomeLikelyToBeReduced
-            == user_features.IncomeReductionEnum.No.value
+            == user_features.YesNoEnum.No.value
         )
 
 
@@ -2475,7 +2475,7 @@ class JointIncomeLikelyToBeReduced_Yes(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.JointIncomeLikelyToBeReduced
-            == user_features.IncomeReductionEnum.Yes.value
+            == user_features.YesNoEnum.Yes.value
         )
 
 
@@ -2490,7 +2490,7 @@ class JointPreviousCreditWithUs_No(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.JointPreviousCreditWithUs
-            == user_features.PreviousCreditEnum.No.value
+            == user_features.YesNoEnum.No.value
         )
 
 
@@ -2499,7 +2499,7 @@ class JointPreviousCreditWithUs_Yes(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.JointPreviousCreditWithUs
-            == user_features.PreviousCreditEnum.Yes.value
+            == user_features.YesNoEnum.Yes.value
         )
 
 
@@ -2651,19 +2651,13 @@ class JointSupervisorName(BaseStringField):
 class CitizenOrAlien_Yes(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.CitizenOrAlien
-            == user_features.CitizenOrAlienEnum.Yes.value
-        )
+        return user_profile.features.CitizenOrAlien == user_features.YesNoEnum.Yes.value
 
 
 class CitizenOrAlien_No(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.CitizenOrAlien
-            == user_features.CitizenOrAlienEnum.No.value
-        )
+        return user_profile.features.CitizenOrAlien == user_features.YesNoEnum.No.value
 
 
 class JointCitizenOrAlien_Yes(BaseCheckboxField):
@@ -2671,7 +2665,7 @@ class JointCitizenOrAlien_Yes(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.JointCitizenOrAlien
-            == user_features.CitizenOrAlienEnum.Yes.value
+            == user_features.YesNoEnum.Yes.value
         )
 
 
@@ -2680,7 +2674,7 @@ class JointCitizenOrAlien_No(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.JointCitizenOrAlien
-            == user_features.CitizenOrAlienEnum.No.value
+            == user_features.YesNoEnum.No.value
         )
 
 
@@ -2692,7 +2686,7 @@ class ApplyingWithJointCredit_Yes(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.ApplyingWithJointCredit
-            == user_features.ApplyingWithJointCreditEnum.Yes.value
+            == user_features.YesNoEnum.Yes.value
         )
 
 
@@ -2702,7 +2696,7 @@ class ApplyingWithJointCredit_No(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.ApplyingWithJointCredit
-            == user_features.ApplyingWithJointCreditEnum.No.value
+            == user_features.YesNoEnum.No.value
         )
 
 
@@ -2723,7 +2717,7 @@ class PreviousApplicantName_Yes(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.PreviousApplicantName
-            == user_features.PreviousApplicantNameEnum.Yes.value
+            == user_features.YesNoEnum.Yes.value
         )
 
 
@@ -2732,7 +2726,7 @@ class PreviousApplicantName_No(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.PreviousApplicantName
-            == user_features.PreviousApplicantNameEnum.No.value
+            == user_features.YesNoEnum.No.value
         )
 
 
@@ -2772,7 +2766,7 @@ class AutomaticDeductionFromFNB_yes(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.AutomaticDeductionFromFNB
-            == user_features.AutomaticDeductionFromFNBEnum.Yes.value
+            == user_features.YesNoEnum.Yes.value
         )
 
 
@@ -2781,7 +2775,7 @@ class AutomaticDeductionFromFNB_no(BaseCheckboxField):
     def get_profile_info(cls, user_profile):
         return (
             user_profile.features.AutomaticDeductionFromFNB
-            == user_features.AutomaticDeductionFromFNBEnum.No.value
+            == user_features.YesNoEnum.No.value
         )
 
 
@@ -2867,3 +2861,116 @@ class JointPreviousEmployerPhone(BaseStringField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.JointPreviousEmployerPhone
+
+
+### AL 7 ###
+
+# HourlyWage
+# TotalMonthlyExpenses
+# Term_1year
+# Term_2years
+# Term_3years
+# BankruptcyStatus_yes
+# BankruptcyStatus_no
+# MarriageStatus_Divorced
+# PermissionForElectronicTransfer_yes
+# PermissionForElectronicTransfer_no
+# EmergencyContactName
+# EmergencyContact2Name
+# EmergencyContactPhone
+# EmergencyContact2Phone
+# CheckingAccountBankName
+# SavingsAccountBankName
+# SavingsAccountNumber
+
+# make all the new field classes
+
+
+class HourlyWage(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return str(user_profile.features.HourlyWage)
+
+
+class TotalMonthlyExpenses(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return str(user_profile.features.TotalMonthlyExpenses)
+
+
+class Term_1year(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Term == "12 months"
+
+
+class Term_2years(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Term == "24 months"
+
+
+class Term_3years(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.Term == "36 months"
+
+
+class BankruptcyStatus_yes(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.BankruptcyStatus == user_features.YesNoEnum.Yes.value
+
+
+class BankruptcyStatus_no(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.BankruptcyStatus == user_features.YesNoEnum.No.value
+
+
+class MarriageStatus_Divorced(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.MarriageStatus == user_features.MarriageStatusEnum.Divorced.value
+
+
+class PermissionForElectronicTransfer_yes(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.PermissionForElectronicTransfer == user_features.YesNoEnum.Yes.value
+
+
+class PermissionForElectronicTransfer_no(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.PermissionForElectronicTransfer == user_features.YesNoEnum.No.value
+
+
+class EmergencyContactName(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.EmergencyContactName
+
+
+class EmergencyContact2Name(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.EmergencyContact2Name
+
+
+class EmergencyContactPhone(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return str(user_profile.features.EmergencyContactPhone)
+
+
+class EmergencyContact2Phone(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return str(user_profile.features.EmergencyContact2Phone)
+
+
+class SavingsAccountNumber(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.SavingsAccountNumber
