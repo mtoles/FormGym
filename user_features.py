@@ -4,6 +4,11 @@ from utils import *
 ### ENUMS ###
 
 
+class TypeOfContractEnum(Enum):
+    Lease = "Lease"
+    Installment = "Installment"
+
+
 class ResidenceStatusEnum(Enum):
     Buying = "Buying"
     Renting = "Renting"
@@ -106,6 +111,19 @@ class AlimonyTypeEnum(Enum):
     WrittenAgreement = "Written Agreement"
     OralUnderstanding = "Oral Understanding"
     NA = "NA"
+
+
+class PreferredAccountEnum(Enum):
+    Checking = "Checking"
+    Savings = "Savings"
+
+
+class EducationEnum(Enum):
+    HighSchool = "High School"
+    SomeCollege = "Some College"
+    TwoYear = "2 Year"
+    FourYear = "4 Year"
+    SpecialTraining = "Special Training"
 
 
 ## USER ATTRIBUTES ###
@@ -583,12 +601,7 @@ class LengthEmployed(BaseUserAttr):
         return f"The user has been employed at their current job for: {option}"
 
 
-class GrossMonthlyIncome(BaseUserAttr):
-    options = ["$3,800", "$5,200", "$6,400", "$4,100"]
 
-    @staticmethod
-    def nl_desc(option):
-        return f"The user's gross monthly income is: {option}"
 
 
 class AdditionalIncome(BaseUserAttr):
@@ -620,7 +633,7 @@ class BankAccountNumber(BaseUserAttr):
 
     @staticmethod
     def nl_desc(option):
-        return f"The user's bank account number is: {option}"
+        return f"The user's checking account number is: {option}"
 
 
 class BankruptcyStatus(BaseUserAttr):
@@ -712,6 +725,14 @@ class VehicleMake(BaseUserAttr):
     @staticmethod
     def nl_desc(option):
         return f"The new vehicle make is: {option}"
+    
+
+class LastVehicleMake(BaseUserAttr):
+    options = ["Ford", "Chevrolet", "Toyota", "Honda"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's last vehicle was a: {option}"
 
 
 class VehicleModel(BaseUserAttr):
@@ -3371,3 +3392,222 @@ class JointPreviousEmployerHireDate(BaseUserAttr):
     @staticmethod
     def nl_desc(option):
         return f"The joint filer's previous employer hire date is: {option}"
+
+
+class PropertyReposessed(BaseUserAttr):
+    options = [
+        YesNoEnum.Yes.value,
+        YesNoEnum.No.value,
+        YesNoEnum.Yes.value,
+        YesNoEnum.No.value,
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's property has been repossessed: {option}"
+
+
+class IncomeFromEmployment(BaseUserAttr):
+    options = ["$3,500", "$4,200", "$2,800", "$5,100"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's income from employment is: {option}"
+
+
+class PreferredAccount(BaseUserAttr):
+    options = [
+        PreferredAccountEnum.Checking.value,
+    ] * 4
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's preferred account type is: {option}"
+
+
+class LastVehicleFinancedBy(BaseUserAttr):
+    options = [
+        "ABC Credit Union",
+        "XYZ Bank",
+        "Local Finance Co.",
+        "National Auto Loans",
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's last vehicle was financed by: {option}"
+
+
+class ApplicantsPrincipleDrivers(BaseUserAttr):
+    options = [
+        YesNoEnum.Yes.value,
+        YesNoEnum.No.value,
+        YesNoEnum.Yes.value,
+        YesNoEnum.No.value,
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The applicants are the principle drivers: {option}"
+
+
+class AlimonyAmount(BaseUserAttr):
+    options = ["$500", "$750", "$300", "$1,000"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user receives in alimony per month: {option}"
+
+
+class JointIncomeFromEmployment(BaseUserAttr):
+    options = ["$4,200", "$3,800", "$5,500", "$2,900"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's income from employment is: {option}"
+
+
+class MortgageCompanyLandlordState(BaseUserAttr):
+    options = ["TX", "CA", "NY", "FL"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The mortgage company/landlord state is: {option}"
+
+
+class MortgageCompanyLandlordCity(BaseUserAttr):
+    options = ["Austin", "Los Angeles", "New York", "Miami"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The mortgage company/landlord city is: {option}"
+
+
+class Education(BaseUserAttr):
+    options = [
+        EducationEnum.HighSchool.value,
+        EducationEnum.SomeCollege.value,
+        EducationEnum.TwoYear.value,
+        EducationEnum.FourYear.value,
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's education level is: {option}"
+
+
+class MortgageCompanyLandlordPhone(BaseUserAttr):
+    options = [
+        "(512) 555-1234",
+        "(213) 555-5678",
+        "(212) 555-9012",
+        "(305) 555-3456",
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The mortgage company/landlord phone number is: {option}"
+
+
+class LastVehicleCost(BaseUserAttr):
+    options = ["$25,000", "$32,000", "$18,500", "$45,000"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's last vehicle cost was: {option}"
+
+
+class LastVehicleModel(BaseUserAttr):
+    options = ["Toyota Camry", "Honda Civic", "Ford Focus", "Chevrolet Malibu"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's last vehicle model was: {option}"
+
+
+class TypeOfContract(BaseUserAttr):
+    options = [
+        TypeOfContractEnum.Lease.value,
+        TypeOfContractEnum.Installment.value,
+        TypeOfContractEnum.Lease.value,
+        TypeOfContractEnum.Installment.value,
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The type of contract is: {option}"
+
+
+class JointPreferredFirstName(BaseUserAttr):
+    options = ["Sarah", "Michael", "Emily", "David"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's preferred first name is: {option}"
+
+
+class PreviousTFSCredit(BaseUserAttr):
+    options = [
+        YesNoEnum.Yes.value,
+        YesNoEnum.No.value,
+        YesNoEnum.Yes.value,
+        YesNoEnum.No.value,
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user has previous TFS credit: {option}"
+
+
+class LastVehicleYear(BaseUserAttr):
+    options = ["2020", "2019", "2021", "2018"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's last vehicle year was: {option}"
+
+
+class PendingSuits(BaseUserAttr):
+    options = [
+        YesNoEnum.Yes.value,
+        YesNoEnum.No.value,
+        YesNoEnum.Yes.value,
+        YesNoEnum.No.value,
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user has pending suits: {option}"
+
+
+class PreferredFirstName(BaseUserAttr):
+    options = ["Lucas", "Ava", "Ethan", "Syke"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's preferred first name is: {option}"
+
+
+class JointAlimonyAmount(BaseUserAttr):
+    options = ["$600", "$850", "$400", "$1,200"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's alimony amount is: {option}"
+
+
+class JointAdditionalIncomeAmount(BaseUserAttr):
+    options = ["$800", "$1,200", "$600", "$950"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's additional income amount is: {option}"
+
+
+class AdditionalIncomeAmount(BaseUserAttr):
+    options = ["$600", "$900", "$400", "$1,100"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's additional income amount is: {option}"
+

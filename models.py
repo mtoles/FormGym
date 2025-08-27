@@ -79,7 +79,8 @@ def get_e2e_prompt(
     Format all dates as "MM/DD/YYYY" or "MM/YYYY" if only year and month is available.
     Today's date is "2/15/2025".
     Names should be "First Middle Last" unless otherwise specified.
-    Use the user's home phone number if the phone type is not specified.
+    Use a home phone number if the phone type is not specified.
+    You prefer to use your checking account rather than your savings account.
     
     {grid_subprompt}
     {suggest_localizer_str}

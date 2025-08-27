@@ -829,7 +829,11 @@ class EmployerWorkPhone(BaseNumericField):
 class GrossMonthlyIncome(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.GrossMonthlyIncome
+        return (
+            user_profile.features.IncomeFromEmployment
+            + user_profile.features.AdditionalIncomeAmount
+            + user_profile.features.AlimonyAmount
+        )
 
 
 class JointEmployerName(BaseStringField):
@@ -871,7 +875,11 @@ class JointEmployerWorkPhone(BaseNumericField):
 class JointGrossMonthlyIncome(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return user_profile.features.JointGrossMonthlyIncome
+        return (
+            user_profile.features.JointGrossMonthlyIncome
+            + user_profile.features.JointAdditionalMonthlyIncome
+            + user_profile.features.JointAlimonyAmount
+        )
 
 
 # -----------------------------------------
@@ -3315,3 +3323,327 @@ class JointNearestRelativeNameAndAddress(BaseStringField):
                 user_profile.features.JointNearestRelativeZip,
             )
         )
+
+
+# New fields from the list
+class TypeOfContract_Lease(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.TypeOfContract
+            == user_features.TypeOfContractEnum.Lease.value
+        )
+
+
+class TypeOfContract_RetailInstallment(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.TypeOfContract
+            == user_features.TypeOfContractEnum.Installment.value
+        )
+
+
+class PreferredFirstName(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.PreferredFirstName
+
+
+class ApplicantsPrincipleDrivers_yes(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.ApplicantsPrincipleDrivers
+            == user_features.YesNoEnum.Yes.value
+        )
+
+
+class ApplicantsPrincipleDrivers_no(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.ApplicantsPrincipleDrivers
+            == user_features.YesNoEnum.No.value
+        )
+
+
+class EmployerHouseNumberAndStreet(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.EmployerHouseNumber
+            + " "
+            + user_profile.features.EmployerStreetName
+        )
+
+
+class EmployerState(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.EmployerState
+
+
+class EmployerZip(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.EmployerZip
+
+
+class PreviousEmployerFullAddress(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.PreviousHouseNumber
+            + " "
+            + user_profile.features.PreviousStreetName
+            + " "
+            + user_profile.features.PreviousCity
+            + " "
+            + user_profile.features.PreviousState
+            + " "
+            + user_profile.features.PreviousZip
+        )
+
+
+class NearestRelativeFullAddress(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.NearestRelativeHouseNumber
+            + " "
+            + user_profile.features.NearestRelativeStreetName
+            + " "
+            + user_profile.features.NearestRelativeCity
+            + " "
+            + user_profile.features.NearestRelativeState
+            + " "
+            + user_profile.features.NearestRelativeZip
+        )
+
+
+class Education_HighSchool(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.Education
+            == user_features.EducationEnum.HighSchool.value
+        )
+
+
+class Education_SomeCollege(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.Education
+            == user_features.EducationEnum.SomeCollege.value
+        )
+
+
+class Education_2year(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.Education == user_features.EducationEnum.TwoYear.value
+        )
+
+
+class Education_4year(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.Education
+            == user_features.EducationEnum.FourYear.value
+        )
+
+
+class Education_SpecialTraining(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.Education
+            == user_features.EducationEnum.SpecialTraining.value
+        )
+
+
+class IncomeFromEmployment(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.IncomeFromEmployment
+
+
+class AlimonyAmount(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.AlimonyAmount
+
+
+class AdditionalIncomeAmount(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.AdditionalIncomeAmount
+
+
+class JointType_NonApplicantSpouse(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.JointType == user_features.JointTypeEnum.Spouse.value
+        )
+
+
+class JointPreferredFirstName(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.JointPreferredFirstName
+
+
+class JointEmployerState(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.JointEmployerState
+
+
+class JointEmployerZip(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.JointEmployerZip
+
+
+class JointPreviousEmployerAddressFull(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.JointPreviousEmployerHouseNumber
+            + " "
+            + user_profile.features.JointPreviousEmployerStreetName
+            + " "
+            + user_profile.features.JointPreviousEmployerCity
+            + " "
+            + user_profile.features.JointPreviousEmployerState
+            + " "
+            + user_profile.features.JointPreviousEmployerZip
+        )
+
+
+class JointIncomeFromEmployment(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.JointIncomeFromEmployment
+
+
+class JointAlimonyAmount(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.JointAlimonyAmount
+
+
+class JointAdditionalIncomeAmount(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.JointAdditionalIncomeAmount
+
+
+class MortgageCompanyLandlordCity(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.MortgageCompanyLandlordCity
+
+
+class MortgageCompanyLandlordState(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.MortgageCompanyLandlordState
+
+
+class MortgageCompanyLandlordPhone(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.MortgageCompanyLandlordPhone
+
+
+class PreviousTFSCredit_yes(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.PreviousTFSCredit == user_features.YesNoEnum.Yes.value
+        )
+
+
+class PreviousTFSCredit_no(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.PreviousTFSCredit == user_features.YesNoEnum.No.value
+        )
+
+
+class LastVehicleMakeModelYear(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.LastVehicleMake
+            + " "
+            + user_profile.features.LastVehicleModel
+            + " "
+            + user_profile.features.LastVehicleYear
+        )
+
+
+class LastVehicleFinancedBy(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.LastVehicleFinancedBy
+
+
+class LastVehicleCost(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.LastVehicleCost
+
+
+class PreferredAccount_Checking(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.PreferredAccount
+            == user_features.PreferredAccountEnum.Checking.value
+        )
+
+
+class PropertyReposessed_yes(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.PropertyReposessed
+            == user_features.YesNoEnum.Yes.value
+        )
+
+
+class PreferredAccount_Savings(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.PreferredAccount
+            == user_features.PreferredAccountEnum.Savings.value
+        )
+
+
+class PropertyReposessed_no(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.PropertyReposessed == user_features.YesNoEnum.No.value
+        )
+
+
+class PendingSuits_yes(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.PendingSuits == user_features.YesNoEnum.Yes.value
+
+
+class PendingSuits_No(BaseCheckboxField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.PendingSuits == user_features.YesNoEnum.No.value
