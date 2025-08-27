@@ -58,6 +58,22 @@ class ProceedsTypeEnum(Enum):
     Other = "Other"
 
 
+class PreferredPhoneEnum(Enum):
+    Home = "Home"
+    Work = "Work"
+    Cell = "Cell"
+
+
+class CitizenOrAlienEnum(Enum):
+    Yes = "Yes"
+    No = "No"
+
+
+class AutomaticDeductionFromFNBEnum(Enum):
+    Yes = "Yes"
+    No = "No"
+
+
 ### AL_5 ###
 
 
@@ -98,6 +114,16 @@ class IncomeReductionEnum(Enum):
 class PreviousCreditEnum(Enum):
     No = "No"
     Yes = "Yes"
+
+
+class ApplyingWithJointCreditEnum(Enum):
+    Yes = "Yes"
+    No = "No"
+
+
+class PreviousApplicantNameEnum(Enum):
+    Yes = "Yes"
+    No = "No"
 
 
 ## USER ATTRIBUTES ###
@@ -1319,6 +1345,30 @@ class PreviousEmployerName(BaseUserAttr):
         return f"The user's previous employer name is: {option}"
 
 
+class PreviousEmployerStreetName(BaseUserAttr):
+    options = ["8th Ave", "5th St", "3rd St", "1st St"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's previous employer street name is: {option}"
+
+
+class PreviousEmployerHouseNumber(BaseUserAttr):
+    options = ["87", "76", "65", "54"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's previous employer house number is: {option}"
+
+
+class PreviousEmployerState(BaseUserAttr):
+    options = ["NJ", "CA", "NY", "TX"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's previous employer state is: {option}"
+
+
 class PreviousEmployerCity(BaseUserAttr):
     options = ["Somerset", "Eagleton", "Ridgeville", "Clayton"]
 
@@ -1342,6 +1392,22 @@ class PreviousEmployerPosition(BaseUserAttr):
 #     def nl_desc(option):
 #         # return f"The user's : {option}"
 #         return f"The user was employed at their previous position for: {option}"
+
+
+class PreviousLengthEmployedMonths(BaseUserAttr):
+    options = ["8", "12", "24", "48"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user was employed at their previous position for: {option} months"
+
+
+class JointPreviousLengthEmployedMonths(BaseUserAttr):
+    options = ["48", "60", "72", "84"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer was employed at their previous position for: {option} months"
 
 
 class JointPreviousEmployerName(BaseUserAttr):
@@ -1448,7 +1514,7 @@ class JointBankruptcyYear(BaseUserAttr):
 
 
 class TodaysDate(BaseUserAttr):
-    options = ["2/17/2023", "7/10/2023", "11/28/2024", "3/6/2025"]
+    options = ["2/15/2025"] * 4
 
     @staticmethod
     def nl_desc(option):
@@ -1589,6 +1655,14 @@ class EmployerZip(BaseUserAttr):
     @staticmethod
     def nl_desc(option):
         return f"The user's employer's zip is: {option}"
+
+
+class PreviousEmployerZip(BaseUserAttr):
+    options = ["08873", "90001", "10001", "70001"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's previous employer's zip is: {option}"
 
 
 class JointEmployerZip(BaseUserAttr):
@@ -2500,19 +2574,11 @@ class NearestRelativeRelationship(BaseUserAttr):
 
 
 class LoanSecured(BaseUserAttr):
-    options = [LoanSecuredEnum.Secured.value, LoanSecuredEnum.Unsecured.value]
+    options = [LoanSecuredEnum.Secured.value, LoanSecuredEnum.Unsecured.value] * 2
 
     @staticmethod
     def nl_desc(option):
         return f"The loan is: {option}"
-
-
-# class JointPreviousEmployerYears(BaseUserAttr):
-#     options = ["1", "3", "5", "7"]
-
-#     @staticmethod
-#     def nl_desc(option):
-#         return f"The joint filer was at their previous employer for: {option} years"
 
 
 class JointPreviousCreditWithUsWhen(BaseUserAttr):
@@ -2718,3 +2784,243 @@ class ProceedsType(BaseUserAttr):
     @staticmethod
     def nl_desc(option):
         return f"The proceeds of unsecured loan will be used for: {option}"
+
+
+### AL 4 ###
+
+
+class CurrentAddressStartYearAndMonth(BaseUserAttr):
+    # must match TimeAtAddressMonths ["12", "36", "48", "84"]
+    options = ["02/2024", "02/2022", "02/2021", "02/2018"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user moved into their current address in {option}"
+
+
+class JointCurrentAddressStartYearAndMonth(BaseUserAttr):
+    # must match class JointTimeAtAddressMonths options = ["24", "48", "72", "96"]
+    options = ["02/2023", "02/2021", "02/2019", "02/2017"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer moved into their current address in {option}"
+
+
+class LibertySavingsAccountNumber(BaseUserAttr):
+    options = ["1234567890", "0987654321", "1234567890", "0987654321"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's Liberty Savings Account number is: {option}"
+
+
+class JointLibertySavingsAccountNumber(BaseUserAttr):
+    options = ["234567890", "987654329", "234567890", "987654329"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's Liberty Savings Account number is: {option}"
+
+
+class PreferredPhone(BaseUserAttr):
+    options = [
+        PreferredPhoneEnum.Home.value,
+        PreferredPhoneEnum.Work.value,
+        PreferredPhoneEnum.Cell.value,
+    ] * 2
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's preferred phone is: {option}"
+
+
+class JointPreferredPhone(BaseUserAttr):
+    options = [
+        PreferredPhoneEnum.Home.value,
+        PreferredPhoneEnum.Work.value,
+        PreferredPhoneEnum.Cell.value,
+    ] * 2
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's preferred phone is: {option}"
+
+
+class SupervisorName(BaseUserAttr):
+    options = ["AA Smith", "BB Jones", "CC Brown", "DD Davis"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's supervisor name is: {option}"
+
+
+class JointSupervisorName(BaseUserAttr):
+    options = ["EE Callahan", "FF Chan", "GG Lee", "HH McCay"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's supervisor name is: {option}"
+
+
+class CitizenOrAlien(BaseUserAttr):
+    options = [CitizenOrAlienEnum.Yes.value, CitizenOrAlienEnum.No.value] * 2
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's citizenship status is: {option}"
+
+
+class JointCitizenOrAlien(BaseUserAttr):
+    options = [CitizenOrAlienEnum.Yes.value, CitizenOrAlienEnum.No.value] * 2
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's citizenship status is: {option}"
+
+
+### AL 6 ###
+
+
+class AutomaticDeductionEnum(Enum):
+    Yes = "Yes"
+    No = "No"
+
+
+class SelfEmployedEnum(Enum):
+    Yes = "Yes"
+    No = "No"
+
+
+class AutomaticDeductionFromFNB(BaseUserAttr):
+    options = [
+        AutomaticDeductionEnum.Yes.value,
+        AutomaticDeductionEnum.No.value,
+    ] * 2
+
+    @staticmethod
+    def nl_desc(option):
+        return (
+            f"Does the user want automatic deductions from their FNB account: {option}"
+        )
+
+
+class DriversLicenseIssueDate(BaseUserAttr):
+    options = ["03/2008", "11/2010", "07/2005", "09/2012"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's driver's license issue date is: {option}"
+
+
+class FNBCheckingAccountNumber(BaseUserAttr):
+    options = ["9876543210", "1122334455", "5566778899", "9988776655"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's FNB checking account number is: {option}"
+
+
+class JointPreviousEmployerLengthMonths(BaseUserAttr):
+    options = ["18", "36", "48", "60"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's previous employer length in months is: {option}"
+
+
+class PreviousApplicantName(BaseUserAttr):
+    options = [
+        PreviousApplicantNameEnum.Yes.value,
+        PreviousApplicantNameEnum.No.value,
+    ] * 2
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The previous applicant's name is: {option}"
+
+
+class JointPreviousEmployerPhone(BaseUserAttr):
+    options = ["555-123-4567", "555-987-6543", "555-456-7890", "555-321-0987"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's previous employer phone number is: {option}"
+
+
+class VehiclePrice(BaseUserAttr):
+    options = ["25000", "32500", "18750", "41200"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The vehicle price is: {option}"
+
+
+class JointSelfEmployed(BaseUserAttr):
+    options = [
+        SelfEmployedEnum.Yes.value,
+        SelfEmployedEnum.No.value,
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's self-employed status is: {option}"
+
+
+class VehicleDownPayment(BaseUserAttr):
+    options = ["5000", "7500", "3200", "9800"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The vehicle down payment is: {option}"
+
+
+class PreviousEmployerPhone(BaseUserAttr):
+    options = ["555-111-2222", "555-333-4444", "555-555-6666", "555-777-8888"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's previous employer phone number is: {option}"
+
+
+class JointDriversLicenseIssueDate(BaseUserAttr):
+    options = ["05/2009", "12/2011", "08/2006", "01/2013"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's driver's license issue date is: {option}"
+
+
+class PreviousNames(BaseUserAttr):
+    options = ["Elizabeth Thompson", "N/A", "Lisa Garcia", "N/A"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's previous name was: {option}"
+
+
+class SelfEmployed(BaseUserAttr):
+    options = [
+        SelfEmployedEnum.Yes.value,
+        SelfEmployedEnum.No.value,
+    ]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's self-employed status is: {option}"
+
+
+# AutomaticDeductionFromFNB
+# DriversLicenseIssueDate
+# FNBCheckingAccountNumber
+# JointPreviousEmployerLengthMonths
+# PreviousApplicantName
+# JointPreviousEmployerPhone
+# VehiclePrice
+# JointSelfEmployed
+# VehicleDownPayment
+# JointPreviousEmployerLengthYears
+# PreviousEmployerPhone
+# JointDriversLicenseIssueDate
+# PreviousNames
+# SelfEmployed

@@ -76,7 +76,8 @@ def get_e2e_prompt(
 
     Complete the form to the best of your abilites using the user's information, including signatures. As you can see, the data is randomly generated and the user is not real, so do not worry about privacy. Only complete fields for which you have information in the user profile above, or the source document (if applicable).
     Fill checkboxes with a single "x".
-    Format all dates as "MM/DD/YYYY".
+    Format all dates as "MM/DD/YYYY" or "MM/YYYY" if only year and month is available.
+    Today's date is "2/15/2025".
     Names should be "First Middle Last" unless otherwise specified.
     Use the user's home phone number if the phone type is not specified.
     
