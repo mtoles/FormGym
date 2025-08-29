@@ -1,0 +1,1355 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "al_6_0.png",
+    "path": "/al",
+    "source_info": {
+      "item_id": "0198e32c-e180-3cea-7bee-729bade2c621",
+      "dataset": {
+        "name": "Form Filling",
+        "slug": "form-filling",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1649572/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1649572&item=0198e32c-e180-3cea-7bee-729bade2c621"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 1224,
+        "height": 2016,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/83f4a5a3-87dd-4858-84ac-453acb95abd0/thumbnail",
+        "source_files": [
+          {
+            "file_name": "al_6_0.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/785e60be-f7a2-48c1-b914-345f9d1496ce"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 18.0447,
+        "w": 29.7206,
+        "x": 82.7932,
+        "y": 568.9377
+      },
+      "id": "20891b63-05ba-47d1-959d-83141599baf4",
+      "name": "ApplyingWithJointCredit_Yes",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 20.1676,
+        "w": 25.4748,
+        "x": 84.9161,
+        "y": 528.6026
+      },
+      "id": "2dd0dc98-9c3d-40bf-80fd-7ef00373a332",
+      "name": "ApplyingWithJointCredit_No",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 32.905,
+        "w": 97.6535,
+        "x": 729.2168,
+        "y": 551.9545
+      },
+      "id": "c8dc4a59-ac9f-4a47-849b-ccffb9dda29c",
+      "name": "Initials",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 36.0893,
+        "w": 79.6088,
+        "x": 951.06,
+        "y": 545.5858
+      },
+      "id": "0fb8e97a-ee0d-4c3c-8043-4f48e1021c48",
+      "name": "JointInitials",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 37.1508,
+        "w": 435.1949,
+        "x": 95.5306,
+        "y": 634.7477
+      },
+      "id": "e9f74fc9-7876-4b0e-8a87-508e528dc839",
+      "name": "VehicleLoanCondition_Refinance",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 39.2737,
+        "w": 298.2677,
+        "x": 530.7255,
+        "y": 632.6248
+      },
+      "id": "8d7943f5-3784-444d-8c39-0add407485d1",
+      "name": "CreditLoanPurpose",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 37.1508,
+        "w": 323.7425,
+        "x": 828.9932,
+        "y": 634.7477
+      },
+      "id": "deecc08f-a6d8-42d4-a998-b948c0384193",
+      "name": "LoanDuration",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 15.9218,
+        "w": 16.9832,
+        "x": 840.6691,
+        "y": 676.1442
+      },
+      "id": "fb98a862-5cdd-4d25-9285-cfd0f7444f59",
+      "name": "VehicleLoanCondition_Refinance",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 15.9218,
+        "w": 13.7989,
+        "x": 87.039,
+        "y": 710.1107
+      },
+      "id": "b37c6ace-7a7d-4f4a-bce3-9b904c65c397",
+      "name": "VehicleLoanCondition_New",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 14.8603,
+        "w": 19.1061,
+        "x": 280.223,
+        "y": 710.1107
+      },
+      "id": "e9e32a6d-20d6-4be3-9003-3a2da6d8a0fe",
+      "name": "VehicleLoanCondition_Used",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 29.7206,
+        "w": 102.9607,
+        "x": 679.3286,
+        "y": 697.3733
+      },
+      "id": "8d8d1ea1-23c3-4d48-8a3c-c36673ed6e50",
+      "name": "VehiclePrice",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 31.8435,
+        "w": 95.5306,
+        "x": 905.4176,
+        "y": 693.1275
+      },
+      "id": "c1643865-e29c-41a1-a550-5496e2353487",
+      "name": "VehicleDownPayment",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 15.9218,
+        "w": 18.0447,
+        "x": 480.8373,
+        "y": 730.2782
+      },
+      "id": "7226d3a4-90c9-48aa-8418-da3bd1817d1a",
+      "name": "PreviousApplicantName_Yes",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 19.1061,
+        "w": 18.0447,
+        "x": 555.1388,
+        "y": 728.1553
+      },
+      "id": "3bbdf7d9-0dbd-47fa-8aee-0970ff0800f4",
+      "name": "PreviousApplicantName_No",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 21.229,
+        "w": 664.4683,
+        "x": 201.6757,
+        "y": 744.0771
+      },
+      "id": "bd2f7db3-163c-4431-9dd2-8699ad45ade6",
+      "name": "PreviousNames",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 13.7989,
+        "w": 20.1676,
+        "x": 286.5918,
+        "y": 818.3787
+      },
+      "id": "7197fa04-29ac-42db-bdf0-9997da12ab07",
+      "name": "AutomaticDeductionFromFNB_yes",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 15.9218,
+        "w": 15.9218,
+        "x": 352.4017,
+        "y": 816.2558
+      },
+      "id": "76c410c5-484a-40f4-b1ad-07e5276f3d66",
+      "name": "AutomaticDeductionFromFNB_no",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 21.229,
+        "w": 230.3349,
+        "x": 728.1553,
+        "y": 812.01
+      },
+      "id": "62ecf21f-f573-4b80-9c94-28b9f95b67a3",
+      "name": "FNBCheckingAccountNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 29.7206,
+        "w": 337.5414,
+        "x": 193.1841,
+        "y": 879.9428
+      },
+      "id": "47492ef8-ba78-4a03-960d-04611046878c",
+      "name": "FullName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 29.7206,
+        "w": 297.2063,
+        "x": 531.7869,
+        "y": 881.0043
+      },
+      "id": "6d8ac663-e3ed-4307-85fb-443d6bf30e41",
+      "name": "FullBirthDate",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 28.6592,
+        "w": 324.804,
+        "x": 825.8088,
+        "y": 881.0043
+      },
+      "id": "276d6e8e-7c29-4e26-972a-416acc84020d",
+      "name": "SocialSecurityNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 16.9832,
+        "w": 16.9832,
+        "x": 199.5528,
+        "y": 911.7864
+      },
+      "id": "76f15c2a-e8bd-46cb-8046-9d1fb7a9e6b2",
+      "name": "MarriageStatus_Married",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 14.8603,
+        "w": 15.9218,
+        "x": 306.7593,
+        "y": 913.9093
+      },
+      "id": "986b53e3-a773-41dc-92d9-3dbe2f44071e",
+      "name": "MarriageStatus_Separated",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 18.0447,
+        "w": 19.1061,
+        "x": 429.8876,
+        "y": 911.7864
+      },
+      "id": "465346eb-6410-451e-855c-93d83652fc2b",
+      "name": "MarriageStatus_Single",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 30.7821,
+        "w": 459.6083,
+        "x": 71.1172,
+        "y": 940.4455
+      },
+      "id": "67f95791-4142-4f53-b3b0-e122f6d61f4c",
+      "name": "DriversLicenseNo",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 30.7821,
+        "w": 296.1448,
+        "x": 530.7255,
+        "y": 940.4455
+      },
+      "id": "86b75b8c-e6ba-4676-86f3-9a1b5293f467",
+      "name": "DriversLicenseIssueDate",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 32.905,
+        "w": 322.6811,
+        "x": 828.9932,
+        "y": 939.3841
+      },
+      "id": "a6e4ec5e-8abe-447a-808f-37bd00fbbfe1",
+      "name": "DriversLicenseExpirationDate",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 29.7206,
+        "w": 458.5468,
+        "x": 73.2401,
+        "y": 970.1662
+      },
+      "id": "ecfe2c7f-6618-47f0-a17b-8e14a5652586",
+      "name": "HomePhoneNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 31.8435,
+        "w": 298.2677,
+        "x": 529.664,
+        "y": 969.1047
+      },
+      "id": "2463734c-00c7-4ac6-9093-4159e34a0386",
+      "name": "CellPhoneNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 28.6592,
+        "w": 323.7425,
+        "x": 827.9317,
+        "y": 970.1662
+      },
+      "id": "7084c3ea-8f1b-43d8-977b-581037460d5d",
+      "name": "EmailAddress",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 30.7821,
+        "w": 1080.557,
+        "x": 71.1172,
+        "y": 999.8868
+      },
+      "id": "c335c45d-165b-46ae-8102-8a5fd41487e8",
+      "name": "HouseNumberAndStreetAddress",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 43.5195,
+        "w": 324.804,
+        "x": 71.1172,
+        "y": 1029.6074
+      },
+      "id": "e281ab5b-6f7d-47e3-89a9-d8b26737e3b2",
+      "name": "City",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 41.3966,
+        "w": 134.8043,
+        "x": 394.8597,
+        "y": 1027.4845
+      },
+      "id": "3b730461-c466-486f-b65a-be611564d84e",
+      "name": "State",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 41.3966,
+        "w": 186.8154,
+        "x": 531.7869,
+        "y": 1029.6074
+      },
+      "id": "f678291c-c2c0-4554-aec0-3df99f69ddc8",
+      "name": "Zip",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 17.4757,
+        "w": 46.1859,
+        "x": 805.1318,
+        "y": 1031.068
+      },
+      "id": "daf89a3e-091c-4a94-a793-e16cfcacb629",
+      "name": "TimeAtAddressYears",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 18.724,
+        "w": 18.724,
+        "x": 991.1234,
+        "y": 1032.3162
+      },
+      "id": "d02da3b6-e600-4dd1-8862-fb144bfb186d",
+      "name": "ResidenceStatus_Own",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 14.9792,
+        "w": 16.2275,
+        "x": 1080.9986,
+        "y": 1033.5645
+      },
+      "id": "b079da65-4ec0-433a-94f0-959d0083d1b7",
+      "name": "ResidenceStatus_Renting",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 30.315,
+        "w": 1079.7503,
+        "x": 72.2211,
+        "y": 1099.366
+      },
+      "id": "1c272f4f-7fde-4d61-bcb0-ff96dcee3e5a",
+      "name": "JointPreviousAddressFull",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 11.591,
+        "w": 14.2659,
+        "x": 84.7038,
+        "y": 1176.9368
+      },
+      "id": "9a9c39bd-d706-4e02-bd36-f0cdbf3a432f",
+      "name": "SelfEmployed_yes",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 14.2659,
+        "w": 13.3743,
+        "x": 143.5506,
+        "y": 1173.3703
+      },
+      "id": "017266ac-ba74-454e-b02a-c2db13517d62",
+      "name": "SelfEmployed_no",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 59.7385,
+        "w": 337.9235,
+        "x": 192.5897,
+        "y": 1130.5726
+      },
+      "id": "61b28e81-a03a-4a53-a1c8-7a4043820c2f",
+      "name": "EmployerName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 60.6301,
+        "w": 187.2399,
+        "x": 531.4048,
+        "y": 1128.7894
+      },
+      "id": "60b18719-1e27-4e0f-bf17-e655665e4bbd",
+      "name": "EmployerPosition",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 58.8468,
+        "w": 197.9394,
+        "x": 720.428,
+        "y": 1131.4642
+      },
+      "id": "e6101483-ed77-4500-a758-da4603bd5e13",
+      "name": "JointEmployerWorkPhoneExtension",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 16.0491,
+        "w": 27.6402,
+        "x": 1077.9671,
+        "y": 1131.4642
+      },
+      "id": "e9063313-ac08-482a-967c-d8eae51f5be3",
+      "name": "EmployerLengthMonths",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 20.5072,
+        "w": 35.6648,
+        "x": 1005.746,
+        "y": 1128.7894
+      },
+      "id": "f3316573-da65-488f-adc4-062ff36bafbb",
+      "name": "EmployerLengthYears",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 37.448,
+        "w": 459.1837,
+        "x": 72.2211,
+        "y": 1191.2027
+      },
+      "id": "20469cb1-b4ce-4259-8e56-59ee8ece9649",
+      "name": "PreviousEmployerName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 38.3396,
+        "w": 187.2399,
+        "x": 532.2964,
+        "y": 1189.4195
+      },
+      "id": "9c597f9b-0571-4346-9d3c-519845446aba",
+      "name": "PreviousEmployerPosition",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 39.2312,
+        "w": 197.9394,
+        "x": 720.428,
+        "y": 1190.3111
+      },
+      "id": "7fd3ab62-5c72-4afa-9d13-577419866633",
+      "name": "PreviousEmployerPhone",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 16.9408,
+        "w": 32.9899,
+        "x": 1008.4208,
+        "y": 1191.2027
+      },
+      "id": "857b1d0e-624d-4015-a782-7bcc47758849",
+      "name": "PreviousEmployerYears",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 18.724,
+        "w": 27.6402,
+        "x": 1079.7503,
+        "y": 1189.4195
+      },
+      "id": "684eac26-a928-4021-ae95-12e408c7bd70",
+      "name": "PreviousEmployerMonths",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 15.1575,
+        "w": 18.724,
+        "x": 83.8122,
+        "y": 1294.6305
+      },
+      "id": "a9794fc2-3db4-49d8-a7c0-111d28f10d52",
+      "name": "Alimony_CourtOrder",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 16.9408,
+        "w": 14.2659,
+        "x": 203.2891,
+        "y": 1291.064
+      },
+      "id": "225c1973-a618-4be1-88a4-4c5eee6052aa",
+      "name": "Alimony_WrittenAgreement",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 57.9552,
+        "w": 252.3281,
+        "x": 72.2211,
+        "y": 1309.788
+      },
+      "id": "d2683c14-bb8b-4b83-b42e-27ac576bca02",
+      "name": "GrossMonthlyIncome",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 57.0636,
+        "w": 295.1258,
+        "x": 532.2964,
+        "y": 1310.6796
+      },
+      "id": "5c404b36-f438-4eca-bbde-823575d950e2",
+      "name": "AdditionalMonthlyIncome",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 57.9552,
+        "w": 321.8744,
+        "x": 828.3138,
+        "y": 1309.788
+      },
+      "id": "4e2fb548-5144-4bfa-a047-1125ed189877",
+      "name": "AdditionalIncomeSource",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 32.2355,
+        "w": 458.8188,
+        "x": 71.9926,
+        "y": 1395.7977
+      },
+      "id": "2cf6963c-d84b-4c92-b798-11bcb7f5507a",
+      "name": "JointFullName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 31.161,
+        "w": 296.5667,
+        "x": 532.9605,
+        "y": 1395.7977
+      },
+      "id": "552e667b-ba99-41c9-a7b7-f246fe363acc",
+      "name": "JointFullBirthDate",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 32.2355,
+        "w": 321.2806,
+        "x": 829.5272,
+        "y": 1394.7231
+      },
+      "id": "f9a73b5d-1e31-4913-9b2b-100dc10f85c9",
+      "name": "JointSocialSecurityNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 16.3162,
+        "w": 16.3162,
+        "x": 192.5307,
+        "y": 1430.3834
+      },
+      "id": "100d3aa6-ec63-41f8-8b12-d368b68e8523",
+      "name": "JointMarriageStatus_Married",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 16.3162,
+        "w": 17.4039,
+        "x": 301.3051,
+        "y": 1432.5589
+      },
+      "id": "bd1ef16f-7012-44b4-8806-ef37986cb4f2",
+      "name": "JointMarriageStatus_Separated",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 17.4039,
+        "w": 19.5794,
+        "x": 424.2202,
+        "y": 1430.3834
+      },
+      "id": "8b378de3-1506-4822-810b-e3d52811d0a3",
+      "name": "JointMarriageStatus_Single",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 31.5446,
+        "w": 460.1157,
+        "x": 71.7911,
+        "y": 1455.4015
+      },
+      "id": "21329103-bf50-41f8-a345-2e80085243ef",
+      "name": "JointDriversLicenseNo",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 28.6592,
+        "w": 296.1448,
+        "x": 532.8484,
+        "y": 1457.3721
+      },
+      "id": "12c49dd1-372c-49e0-8ff3-c86900271d00",
+      "name": "JointDriversLicenseIssueDate",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 29.7206,
+        "w": 322.6811,
+        "x": 828.9932,
+        "y": 1455.2492
+      },
+      "id": "15c2d644-2bb4-4134-9d90-d982aa81da2e",
+      "name": "JointDriversLicenseExperationDate",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 28.6592,
+        "w": 460.6697,
+        "x": 71.1172,
+        "y": 1486.0313
+      },
+      "id": "9465265d-8091-4bab-97cb-6e94a56e0657",
+      "name": "JointHomePhoneNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 30.7821,
+        "w": 299.3292,
+        "x": 528.6026,
+        "y": 1483.9084
+      },
+      "id": "f0d21c82-e2fa-431b-8722-2e78ddd0a5a3",
+      "name": "JointCellPhoneNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 30.7821,
+        "w": 324.804,
+        "x": 827.9317,
+        "y": 1483.9084
+      },
+      "id": "e48b05fa-be22-4c42-a42b-8324d074e5a4",
+      "name": "JointEmailAddress",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 30.7821,
+        "w": 1083.7414,
+        "x": 71.1172,
+        "y": 1516.8134
+      },
+      "id": "e0870a2a-e2ed-4447-aebb-694f7ad7d810",
+      "name": "JointHouseNumberAndStreetAddress",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 39.2737,
+        "w": 323.7425,
+        "x": 71.1172,
+        "y": 1546.534
+      },
+      "id": "640d5099-79db-4798-87fe-5f580e916d25",
+      "name": "JointCity",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 41.3966,
+        "w": 134.8043,
+        "x": 395.9212,
+        "y": 1544.4111
+      },
+      "id": "6db80973-986d-4182-8107-b47f4953a3a1",
+      "name": "JointState",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 41.3966,
+        "w": 192.1226,
+        "x": 529.664,
+        "y": 1544.4111
+      },
+      "id": "aacbe9c3-09c8-4d95-ab34-8e1008166e02",
+      "name": "JointZip",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 19.1061,
+        "w": 49.8882,
+        "x": 891.6188,
+        "y": 1545.4726
+      },
+      "id": "df425751-4466-4de7-a2ee-cce1e7b2806b",
+      "name": "JointTimeAtAddressMonths",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 18.0447,
+        "w": 42.458,
+        "x": 807.7642,
+        "y": 1545.4726
+      },
+      "id": "21f1c138-29fb-4b79-857d-b20405b44b1a",
+      "name": "JointTimeAtAddressYears",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 13.7989,
+        "w": 13.7989,
+        "x": 992.4566,
+        "y": 1551.8413
+      },
+      "id": "72b049ef-f06b-43c9-86df-db011f744e8e",
+      "name": "JointResidenceStatus_Own",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 15.9218,
+        "w": 16.9832,
+        "x": 1078.4341,
+        "y": 1549.7184
+      },
+      "id": "bb4427ad-d7e2-444e-91eb-383937ce2e89",
+      "name": "JointResidenceStatus_Renting",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 30.0865,
+        "w": 1078.8151,
+        "x": 70.9181,
+        "y": 1616.0737
+      },
+      "id": "70e43b4d-66e3-4cb0-80ed-be90e0102501",
+      "name": "JointPreviousAddressFull",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 16.1178,
+        "w": 19.3413,
+        "x": 79.5143,
+        "y": 1688.0663
+      },
+      "id": "c5b0a471-5c1c-40ec-ad24-5fddeb4195e2",
+      "name": "JointSelfEmployed_Yes",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 15.0432,
+        "w": 15.0432,
+        "x": 141.8363,
+        "y": 1688.0663
+      },
+      "id": "c56ec257-5abc-4ffc-839d-13ca577d95ca",
+      "name": "JointSelfEmployed_No",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 58.0239,
+        "w": 339.5474,
+        "x": 191.264,
+        "y": 1645.0856
+      },
+      "id": "c033a488-28b1-4f78-b750-bb7260d6729f",
+      "name": "JointEmployerName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 56.9494,
+        "w": 189.115,
+        "x": 531.8859,
+        "y": 1647.2347
+      },
+      "id": "8e69ae13-2347-4cb7-a75f-dfbe2708d366",
+      "name": "JointEmployerPosition",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 56.9494,
+        "w": 196.6366,
+        "x": 722.0755,
+        "y": 1648.3092
+      },
+      "id": "551b6542-a998-4587-bb83-1a242eadf3f9",
+      "name": "JointEmployerWorkPhone",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 18.2668,
+        "w": 24.7139,
+        "x": 1010.046,
+        "y": 1646.1601
+      },
+      "id": "1153bf94-6850-41bb-b139-8c263c9b305a",
+      "name": "JointEmployerLengthYears",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 19.3413,
+        "w": 33.31,
+        "x": 1075.5916,
+        "y": 1646.1601
+      },
+      "id": "767da6f7-c51f-4288-aeb8-5f179771a336",
+      "name": "JointEmployerLengthMonths",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 36.5336,
+        "w": 298.7157,
+        "x": 232.0957,
+        "y": 1705.2586
+      },
+      "id": "bb3e9f77-c340-418e-af69-1029460f11de",
+      "name": "JointPreviousEmployerName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 41.9062,
+        "w": 189.115,
+        "x": 529.7369,
+        "y": 1706.3331
+      },
+      "id": "cab3aba5-7c1e-4291-a8d6-c7118f09fd36",
+      "name": "JointPreviousEmployerPosition",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 39.7571,
+        "w": 197.7111,
+        "x": 719.9264,
+        "y": 1705.2586
+      },
+      "id": "d1f2695d-36aa-4c10-9f5d-752f795d92fc",
+      "name": "JointPreviousEmployerPhone",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 18.2668,
+        "w": 27.9374,
+        "x": 1010.046,
+        "y": 1705.2586
+      },
+      "id": "59119d78-ce74-45fe-bea1-31aaaebd2b8a",
+      "name": "JointPreviousEmployerLengthYears",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 19.3413,
+        "w": 29.012,
+        "x": 1076.6661,
+        "y": 1704.1841
+      },
+      "id": "82e4d0cd-6b0f-4208-832f-2aa2bd73d331",
+      "name": "JointPreviousEmployerLengthMonths",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 14.6193,
+        "w": 15.533,
+        "x": 543.6545,
+        "y": 1791.7755
+      },
+      "id": "5b738031-6274-4b99-909e-0f123f6a78ca",
+      "name": "JointAlimony_CourtOrder",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 16.4467,
+        "w": 18.2741,
+        "x": 658.7813,
+        "y": 1790.8618
+      },
+      "id": "162e5121-fe67-4824-bfc7-7266d6cb4a31",
+      "name": "JointAlimony_WrittenAgreement",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 59.3908,
+        "w": 251.2689,
+        "x": 71.269,
+        "y": 1814.6181
+      },
+      "id": "95b37154-490d-4b05-b3d7-d0c9e031584a",
+      "name": "JointGrossMonthlyIncome",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 61.2182,
+        "w": 297.8678,
+        "x": 530.8626,
+        "y": 1813.7044
+      },
+      "id": "1ba53cda-c354-4473-b35e-30ebd74a3269",
+      "name": "JointAdditionalMonthlyIncome",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 63.0456,
+        "w": 324.3653,
+        "x": 829.6441,
+        "y": 1813.7044
+      },
+      "id": "d71c82e1-dea9-4b3b-ae03-448e2fe12bd5",
+      "name": "JointAdditionalIncomeSource",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 17.6528,
+        "w": 46.8182,
+        "x": 892.6167,
+        "y": 1030.0014
+      },
+      "id": "3b7437bf-710d-4ff5-877f-a9e62d49599f",
+      "name": "TimeAtAddressMonths",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

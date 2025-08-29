@@ -161,7 +161,9 @@ class UserProfile:
                 if hasattr(attr_class, "options") and isinstance(
                     attr_class.options, list
                 ):
-                    setattr(self.features, name, attr_class.options[idx])
+                    # Use modulo to handle cases where there are fewer options than user indices
+                    safe_idx = idx % len(attr_class.options)
+                    setattr(self.features, name, attr_class.options[safe_idx])
                 else:
                     raise AttributeError(f"Class {name} must have an 'options' list.")
         if missing_user_attributes:
@@ -400,7 +402,7 @@ class MortgageCompany(BaseUserAttr):
 
 
 class MonthlyMortgageOrRent(BaseUserAttr):
-    options = ["$1,200", "$1,450", "$1,750", "$2,100"]
+    options = ["1200", "1450", "1750", "2100"]
 
     @staticmethod
     def nl_desc(option):
@@ -601,11 +603,8 @@ class LengthEmployed(BaseUserAttr):
         return f"The user has been employed at their current job for: {option}"
 
 
-
-
-
 class AdditionalIncome(BaseUserAttr):
-    options = ["$400", "$900", "$1,100", "$600"]
+    options = ["400", "900", "1100", "600"]
 
     @staticmethod
     def nl_desc(option):
@@ -658,7 +657,7 @@ class AutoCreditReference(BaseUserAttr):
 
 
 class AutoBalanceDue(BaseUserAttr):
-    options = ["$5,200", "$9,700", "$14,300", "$6,600"]
+    options = ["5200", "9700", "14300", "6600"]
 
     @staticmethod
     def nl_desc(option):
@@ -683,7 +682,7 @@ class RegisteredCarOwner(BaseUserAttr):
 
 
 class AutoAmountRequested(BaseUserAttr):
-    options = ["$8,000", "$12,000", "$18,500", "$7,300"]
+    options = ["8000", "12000", "18500", "7300"]
 
     @staticmethod
     def nl_desc(option):
@@ -725,7 +724,7 @@ class VehicleMake(BaseUserAttr):
     @staticmethod
     def nl_desc(option):
         return f"The new vehicle make is: {option}"
-    
+
 
 class LastVehicleMake(BaseUserAttr):
     options = ["Ford", "Chevrolet", "Toyota", "Honda"]
@@ -951,7 +950,7 @@ class JointMortgageCompanyLandlord(BaseUserAttr):
 
 
 class JointMortgageRent(BaseUserAttr):
-    options = ["$900", "$1,100", "$1,400", "$2,000"]
+    options = ["900", "1100", "1400", "2000"]
 
     @staticmethod
     def nl_desc(option):
@@ -1296,7 +1295,7 @@ class JointEmployerWorkPhone(BaseUserAttr):
 
 
 class JointGrossMonthlyIncome(BaseUserAttr):
-    options = ["$2,800", "$4,200", "$5,000", "$5,900"]
+    options = ["2800", "4200", "5000", "5900"]
 
     @staticmethod
     def nl_desc(option):
@@ -1312,7 +1311,7 @@ class AdditionalIncomeSource(BaseUserAttr):
 
 
 class AdditionalMonthlyIncome(BaseUserAttr):
-    options = ["$300", "$600", "$1,200", "$900"]
+    options = ["300", "600", "1200", "900"]
 
     @staticmethod
     def nl_desc(option):
@@ -1320,7 +1319,7 @@ class AdditionalMonthlyIncome(BaseUserAttr):
 
 
 class JointAdditionalIncomeSource(BaseUserAttr):
-    options = ["Child Support", "Small Business", "Online Sales", "Stocks/Dividends"]
+    options = ["Bank Robbery", "Small Business", "Online Sales", "Stocks/Dividends"]
 
     @staticmethod
     def nl_desc(option):
@@ -1328,7 +1327,7 @@ class JointAdditionalIncomeSource(BaseUserAttr):
 
 
 class JointAdditionalMonthlyIncome(BaseUserAttr):
-    options = ["$400", "$800", "$1,300", "$700"]
+    options = ["400", "800", "1300", "700"]
 
     @staticmethod
     def nl_desc(option):
@@ -1509,7 +1508,7 @@ class JointBankruptcyStatus(BaseUserAttr):
 
 
 class JointBankruptcyYear(BaseUserAttr):
-    options = ["None", "2018", "2020", "2022"]
+    options = ["N/A", "2018", "2020", "2022"]
 
     @staticmethod
     def nl_desc(option):
@@ -1549,7 +1548,7 @@ class VehicleLoanType(BaseUserAttr):
 
 
 class PersonalAmountRequested(BaseUserAttr):
-    options = ["None", "None", "None", "None"]
+    options = ["N/A", "N/A", "N/A", "N/A"]
 
     @staticmethod
     def nl_desc(option):
@@ -1557,7 +1556,7 @@ class PersonalAmountRequested(BaseUserAttr):
 
 
 class CreditAmountRequested(BaseUserAttr):
-    options = ["None", "None", "None", "None"]
+    options = ["N/A", "N/A", "N/A", "N/A"]
 
     @staticmethod
     def nl_desc(option):
@@ -1565,7 +1564,7 @@ class CreditAmountRequested(BaseUserAttr):
 
 
 class CreditLoanPurpose(BaseUserAttr):
-    options = ["None", "None", "None", "None"]
+    options = ["N/A", "", "N/A", "N/A"]
 
     @staticmethod
     def nl_desc(option):
@@ -1573,7 +1572,7 @@ class CreditLoanPurpose(BaseUserAttr):
 
 
 class PersonalLoanPurpose(BaseUserAttr):
-    options = ["None", "None", "None", "None"]
+    options = ["N/A", "N/A", "N/A", "N/A"]
 
     @staticmethod
     def nl_desc(option):
@@ -2465,7 +2464,7 @@ class SEC_BlueSkyComplianceFees(BaseUserDbAttr):
 
 
 class JointEmployerWorkPhoneExtension(BaseUserAttr):
-    options = ["123", "456", "789", "012"]
+    options = ["N/A", "N/A", "N/A", "N/A"]
 
     @staticmethod
     def nl_desc(option):
@@ -2601,7 +2600,7 @@ class JointPreviousCreditWithUs(BaseUserAttr):
 
 
 class EmployerWorkPhoneExtension(BaseUserAttr):
-    options = ["101", "202", "303", "404"]
+    options = ["N/A", "N/A", "N/A", "N/A"]
 
     @staticmethod
     def nl_desc(option):
@@ -2648,6 +2647,14 @@ class NearestRelativePhone(BaseUserAttr):
     @staticmethod
     def nl_desc(option):
         return f"The user's nearest relative phone is: {option}"
+
+
+class NearestRelativeCellPhone(BaseUserAttr):
+    options = ["(555) 111-2222", "(555) 222-3333", "(555) 333-4444", "(555) 444-5555"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's nearest relative cell phone is: {option}"
 
 
 class PreviousCreditWithUs(BaseUserAttr):
@@ -3050,7 +3057,7 @@ class SavingsAccountBankName(BaseUserAttr):
 
 
 class TotalMonthlyExpenses(BaseUserAttr):
-    options = ["$2,450", "$3,120", "$1,890", "$4,750"]
+    options = ["2450", "3120", "1890", "4750"]
 
     @staticmethod
     def nl_desc(option):
@@ -3116,6 +3123,14 @@ class PreviousEmployerEndDate(BaseUserAttr):
     @staticmethod
     def nl_desc(option):
         return f"The user's previous employer end date is: {option}"
+
+
+class PreviousEmployerHireDate(BaseUserAttr):
+    options = ["01/2020", "03/2019", "06/2020", "09/2018"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The user's previous employer hire date is: {option}"
 
 
 class JointNearestRelativeZip(BaseUserAttr):
@@ -3386,6 +3401,14 @@ class JointNearestRelativeHomePhone(BaseUserAttr):
         return f"The joint filer's nearest relative home phone is: {option}"
 
 
+class JointNearestRelativeCellPhone(BaseUserAttr):
+    options = ["(555) 123-5678", "(555) 234-6789", "(555) 345-7890", "(555) 456-8901"]
+
+    @staticmethod
+    def nl_desc(option):
+        return f"The joint filer's nearest relative cell phone is: {option}"
+
+
 class JointPreviousEmployerHireDate(BaseUserAttr):
     options = ["02/2020", "07/2019", "10/2021", "04/2018"]
 
@@ -3408,7 +3431,7 @@ class PropertyReposessed(BaseUserAttr):
 
 
 class IncomeFromEmployment(BaseUserAttr):
-    options = ["$3,500", "$4,200", "$2,800", "$5,100"]
+    options = ["3500", "4200", "2800", "5100"]
 
     @staticmethod
     def nl_desc(option):
@@ -3452,7 +3475,7 @@ class ApplicantsPrincipleDrivers(BaseUserAttr):
 
 
 class AlimonyAmount(BaseUserAttr):
-    options = ["$500", "$750", "$300", "$1,000"]
+    options = ["500", "750", "300", "1000"]
 
     @staticmethod
     def nl_desc(option):
@@ -3460,7 +3483,7 @@ class AlimonyAmount(BaseUserAttr):
 
 
 class JointIncomeFromEmployment(BaseUserAttr):
-    options = ["$4,200", "$3,800", "$5,500", "$2,900"]
+    options = ["4200", "3800", "5500", "2900"]
 
     @staticmethod
     def nl_desc(option):
@@ -3510,7 +3533,7 @@ class MortgageCompanyLandlordPhone(BaseUserAttr):
 
 
 class LastVehicleCost(BaseUserAttr):
-    options = ["$25,000", "$32,000", "$18,500", "$45,000"]
+    options = ["25000", "32000", "18500", "45000"]
 
     @staticmethod
     def nl_desc(option):
@@ -3589,7 +3612,7 @@ class PreferredFirstName(BaseUserAttr):
 
 
 class JointAlimonyAmount(BaseUserAttr):
-    options = ["$600", "$850", "$400", "$1,200"]
+    options = ["600", "850", "400", "1200"]
 
     @staticmethod
     def nl_desc(option):
@@ -3597,7 +3620,7 @@ class JointAlimonyAmount(BaseUserAttr):
 
 
 class JointAdditionalIncomeAmount(BaseUserAttr):
-    options = ["$800", "$1,200", "$600", "$950"]
+    options = ["800", "1200", "600", "950"]
 
     @staticmethod
     def nl_desc(option):
@@ -3605,9 +3628,8 @@ class JointAdditionalIncomeAmount(BaseUserAttr):
 
 
 class AdditionalIncomeAmount(BaseUserAttr):
-    options = ["$600", "$900", "$400", "$1,100"]
+    options = ["600", "900", "400", "1100"]
 
     @staticmethod
     def nl_desc(option):
         return f"The user's additional income amount is: {option}"
-

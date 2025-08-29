@@ -829,10 +829,10 @@ class EmployerWorkPhone(BaseNumericField):
 class GrossMonthlyIncome(BaseNumericField):
     @classmethod
     def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.IncomeFromEmployment
-            + user_profile.features.AdditionalIncomeAmount
-            + user_profile.features.AlimonyAmount
+        return str(
+            int(user_profile.features.IncomeFromEmployment)
+            + int(user_profile.features.AdditionalIncomeAmount)
+            + int(user_profile.features.AlimonyAmount)
         )
 
 
@@ -3406,22 +3406,6 @@ class PreviousEmployerFullAddress(BaseStringField):
         )
 
 
-class NearestRelativeFullAddress(BaseStringField):
-    @classmethod
-    def get_profile_info(cls, user_profile):
-        return (
-            user_profile.features.NearestRelativeHouseNumber
-            + " "
-            + user_profile.features.NearestRelativeStreetName
-            + " "
-            + user_profile.features.NearestRelativeCity
-            + " "
-            + user_profile.features.NearestRelativeState
-            + " "
-            + user_profile.features.NearestRelativeZip
-        )
-
-
 class Education_HighSchool(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
@@ -3647,3 +3631,47 @@ class PendingSuits_No(BaseCheckboxField):
     @classmethod
     def get_profile_info(cls, user_profile):
         return user_profile.features.PendingSuits == user_features.YesNoEnum.No.value
+
+
+class NearestRelativeFullAddress(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.NearestRelativeHouseNumber
+            + " "
+            + user_profile.features.NearestRelativeStreetName
+            + " "
+            + user_profile.features.NearestRelativeCity
+            + " "
+            + user_profile.features.NearestRelativeState
+            + " "
+            + user_profile.features.NearestRelativeZip
+        )
+
+
+class JointNearestRelativeFullAddress(BaseStringField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return (
+            user_profile.features.JointNearestRelativeHouseNumber
+            + " "
+            + user_profile.features.JointNearestRelativeStreetName
+            + " "
+            + user_profile.features.JointNearestRelativeCity
+            + " "
+            + user_profile.features.JointNearestRelativeState
+            + " "
+            + user_profile.features.JointNearestRelativeZip
+        )
+
+
+class NearestRelativeCellPhone(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.NearestRelativeCellPhone
+
+
+class JointNearestRelativeCellPhone(BaseNumericField):
+    @classmethod
+    def get_profile_info(cls, user_profile):
+        return user_profile.features.JointNearestRelativeCellPhone

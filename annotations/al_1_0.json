@@ -792,13 +792,27 @@
     },
     {
       "bounding_box": {
+        "h": 54.3281,
+        "w": 780.9004,
+        "x": 917.1678,
+        "y": 1142.7772
+      },
+      "id": "7482822b-2fc5-4cb7-9052-b7dfce6d0cec",
+      "name": "JointReferenceName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
         "h": 47.2363,
         "w": 303.4022,
         "x": 1395.2869,
         "y": 981.0611
       },
       "id": "d7deb2d9-6a1f-4cd7-acd2-4e7b3deae769",
-      "name": "JointReferenceRelationship",
+      "name": "JointNearestRelativeRelationship",
       "properties": [],
       "slot_names": [
         "0"
@@ -812,7 +826,7 @@
         "y": 982.8779
       },
       "id": "d59d45dd-5443-4738-ab24-bc0cebf4ea52",
-      "name": "ReferenceRelationship",
+      "name": "NearestRelativeRelationship",
       "properties": [],
       "slot_names": [
         "0"
@@ -826,7 +840,35 @@
         "y": 977.4275
       },
       "id": "728fd85c-1f74-4d1b-bcd0-90456e74bb15",
+      "name": "NearestRelativeNameAndAddress",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 59.6908,
+        "w": 773.458,
+        "x": 139.7176,
+        "y": 1139.1437
+      },
+      "id": "139f3513-4fc1-4bcb-8b09-2fcb80c4db97",
       "name": "ReferenceName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 54.5034,
+        "w": 781.2153,
+        "x": 920.8014,
+        "y": 1193.6471
+      },
+      "id": "f61850b0-b2fc-4b98-9b2d-5a6de7e9b9ab",
+      "name": "JointReferenceFullAddress",
       "properties": [],
       "slot_names": [
         "0"
@@ -840,7 +882,7 @@
         "y": 1031.9309
       },
       "id": "b42ff791-7b25-457b-998a-8b3e00d5e4c0",
-      "name": "JointReferenceFullAddress",
+      "name": "JointNearestRelativeFullAddress",
       "properties": [],
       "slot_names": [
         "0"
@@ -854,7 +896,35 @@
         "y": 1033.7477
       },
       "id": "fd0987e2-268f-4525-8275-68603fc08eb2",
+      "name": "NearestRelativeFullAddress",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 56.3202,
+        "w": 784.8489,
+        "x": 135.9525,
+        "y": 1195.4638
+      },
+      "id": "c13ae9f6-7148-4df2-97c5-c3c4c1cb25fd",
       "name": "ReferenceFullAddress",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 52.6866,
+        "w": 392.4244,
+        "x": 1311.4529,
+        "y": 1251.6964
+      },
+      "id": "5d3f75ec-9b3a-42b7-b90a-1d4ab4208561",
+      "name": "JointReferenceCellPhone",
       "properties": [],
       "slot_names": [
         "0"
@@ -868,7 +938,21 @@
         "y": 1086.4343
       },
       "id": "09b77eb9-bcfe-423f-813e-5fa437c1165c",
-      "name": "JointReferenceCellPhone",
+      "name": "JointNearestRelativeCellPhone",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 50.8698,
+        "w": 394.2412,
+        "x": 920.8014,
+        "y": 1251.784
+      },
+      "id": "700e059f-fda4-4345-b17e-5a5034552ab3",
+      "name": "JointReferenceHomePhone",
       "properties": [],
       "slot_names": [
         "0"
@@ -882,7 +966,21 @@
         "y": 1090.0679
       },
       "id": "87ac245e-ceaf-4e47-97a5-c2e71bb32c9a",
-      "name": "JointReferenceHomePhone",
+      "name": "JointNearestRelativeHomePhone",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 49.0531,
+        "w": 390.6077,
+        "x": 530.1937,
+        "y": 1253.6008
+      },
+      "id": "ad1e917f-fe4d-4303-8e80-24df75a6c2fb",
+      "name": "ReferenceCellPhone",
       "properties": [],
       "slot_names": [
         "0"
@@ -896,7 +994,7 @@
         "y": 1091.8847
       },
       "id": "93912501-4922-4112-ba85-3344fd6db7c1",
-      "name": "ReferenceCellPhone",
+      "name": "NearestRelativeCellPhone",
       "properties": [],
       "slot_names": [
         "0"
@@ -906,10 +1004,10 @@
       "bounding_box": {
         "h": 56.3202,
         "w": 390.6077,
-        "x": 136.2585,
-        "y": 1080.984
+        "x": 137.7693,
+        "y": 1242.7001
       },
-      "id": "459f9cf4-b33d-441c-b965-a586ff42d27a",
+      "id": "5fc2f33d-e0ad-41a8-ba80-a518b837547e",
       "name": "ReferenceHomePhone",
       "properties": [],
       "slot_names": [
@@ -918,111 +1016,13 @@
     },
     {
       "bounding_box": {
-        "h": 49.0531,
-        "w": 781.2153,
-        "x": 919.2906,
-        "y": 1142.7545
-      },
-      "id": "998509fd-6879-427f-9b6b-a04d09461842",
-      "name": "JointReference2Name",
-      "properties": [],
-      "slot_names": [
-        "0"
-      ]
-    },
-    {
-      "bounding_box": {
-        "h": 45.4195,
-        "w": 388.7909,
-        "x": 919.2906,
-        "y": 1200.8914
-      },
-      "id": "d537e8c1-0c27-4199-ae56-9e815a0cae12",
-      "name": "JointReference2FullAddress",
-      "properties": [],
-      "slot_names": [
-        "0"
-      ]
-    },
-    {
-      "bounding_box": {
-        "h": 49.0531,
-        "w": 386.9741,
-        "x": 1311.715,
-        "y": 1251.7613
-      },
-      "id": "2a77177f-0737-4d47-bbd2-0ef15cae83e8",
-      "name": "JointReference2CellPhone",
-      "properties": [],
-      "slot_names": [
-        "0"
-      ]
-    },
-    {
-      "bounding_box": {
-        "h": 45.4195,
-        "w": 392.4244,
-        "x": 919.2906,
-        "y": 1253.5781
-      },
-      "id": "9e4b6bd9-5f12-4957-8ef6-c1c9b6f8d412",
-      "name": "JointReference2HomePhone",
-      "properties": [],
-      "slot_names": [
-        "0"
-      ]
-    },
-    {
-      "bounding_box": {
-        "h": 52.6866,
-        "w": 786.6657,
-        "x": 130.8081,
-        "y": 1140.9377
-      },
-      "id": "ca558ac3-276b-4f75-9741-1a4df78bc4fb",
-      "name": "Reference2Name",
-      "properties": [],
-      "slot_names": [
-        "0"
-      ]
-    },
-    {
-      "bounding_box": {
-        "h": 61.7705,
-        "w": 394.2412,
-        "x": 132.6249,
-        "y": 1188.174
-      },
-      "id": "bdf978e1-60ba-496b-a7d9-5e1ffbab3f06",
-      "name": "Reference2FullAddress",
-      "properties": [],
-      "slot_names": [
-        "0"
-      ]
-    },
-    {
-      "bounding_box": {
-        "h": 54.5034,
+        "h": 49.2284,
         "w": 390.6077,
-        "x": 526.8661,
-        "y": 1248.1277
+        "x": 136.2585,
+        "y": 1088.0758
       },
-      "id": "87002a9d-0f7a-4472-8da1-cacd72899072",
-      "name": "Reference2CellPhone",
-      "properties": [],
-      "slot_names": [
-        "0"
-      ]
-    },
-    {
-      "bounding_box": {
-        "h": 50.8698,
-        "w": 388.7909,
-        "x": 138.0753,
-        "y": 1251.7613
-      },
-      "id": "2e91c433-03df-4aa2-a40a-cbaa63bd5afa",
-      "name": "Reference2HomePhone",
+      "id": "459f9cf4-b33d-441c-b965-a586ff42d27a",
+      "name": "JointNearestRelativeHomePhone",
       "properties": [],
       "slot_names": [
         "0"
