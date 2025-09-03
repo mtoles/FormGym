@@ -10,8 +10,9 @@ from collections import defaultdict
 from tqdm import tqdm
 from multiprocessing import Pool, cpu_count
 import cv2
-import torch
 from dataclasses import dataclass
+import shutil
+from tqdm import tqdm
 
 # import libcontent_aware_fill as cwf
 from resynthesizer import resynthesize, TImageSynthParameters
@@ -79,6 +80,45 @@ def get_full_question_text(entry: Dict, id_to_entry: Dict) -> str:
     return " | ".join(question_texts)
 
 
+def apply_content_aware_fill(
+    img: np.ndarray, mask: np.ndarray, output_path: str
+) -> bool:
+    """
+    Apply content-aware fill to an image using a mask.
+
+    Args:
+        img: Input image as numpy array
+        mask: Mask as numpy array (255 for areas to fill)
+        output_path: Path to save the processed image
+
+    Returns:
+        True if successful, False otherwise
+    """
+    # Apply content-aware fill
+    params = TImageSynthParameters()
+    params.isMakeSeamlesslyTileableHorizontally = False
+    params.isMakeSeamlesslyTileableVertically = False
+    params.matchContextType = 3
+    params.mapWeight = 0.5
+    params.sensitivityToOutliers = 0.117
+    params.patchSize = 50
+    params.maxProbeCount = 200
+
+    filled_img = np.array(
+        resynthesize(
+            Image.fromarray(img),
+            Image.fromarray(mask),
+            parameters=params,
+        )
+    )
+
+    if filled_img is None:
+        return False
+
+    cv2.imwrite(output_path, filled_img)
+    return True
+
+
 def get_question_and_answer(
     entry: Dict, form_id: str, width: int, height: int, id_to_entry: Dict
 ) -> dict:
@@ -108,7 +148,7 @@ def get_question_and_answer(
                         "answer_text": word["text"],
                         "answer_bbox": BoundingBox.from_list(word["box"]),
                         "question_bbox": question_bbox,
-                        "processed_image": f"processed_{form_id}.png",
+                        "processed_image": f"{args.dataset}_processed_{form_id}.png",
                         "w": width,
                         "h": height,
                     }
@@ -181,31 +221,11 @@ def process_annotation_and_image(
         pairs.append(pair)
     if len(pairs) == 0:
         return []
+
     # Apply content-aware fill once with combined mask
-    params = TImageSynthParameters()
-    params.isMakeSeamlesslyTileableHorizontally = False
-    params.isMakeSeamlesslyTileableVertically = False
-    params.matchContextType = 3
-    params.mapWeight = 0.5
-    params.sensitivityToOutliers = 0.117
-    params.patchSize = 50
-    params.maxProbeCount = 200
-
-    filled_img = np.array(
-        resynthesize(
-            Image.fromarray(img),
-            Image.fromarray(mask),
-            parameters=params,
-        )
-    )
-
-    # Save processed image
-    if filled_img is None:
+    if not apply_content_aware_fill(img, mask, output_image_path):
         print(f"Could not fill image for {form_id} (no answers found?)")
         return []
-    # cv2.imwrite("original_tmp.png", img)
-    # cv2.imwrite("filled_tmp.png", filled_img)
-    cv2.imwrite(output_image_path, filled_img)
 
     return pairs
 
@@ -263,24 +283,21 @@ def process_form_nlu_synthetic_file(
     """
     pairs = []
 
-    # Extract form_id from the first line of the synthetic file
-    with open(synthetic_file_path, "r") as f:
-        first_line = f.readline().strip()
-        first_data = json.loads(first_line)
-        form_id = first_data["original_filename"].replace(".png", "")
+    # Extract form_id from the filename
+    form_id = os.path.basename(synthetic_file_path).replace("_synthetic.jsonl", "")
 
     # print(f"Looking for image: {form_id}.png")
 
     # Find the image in annotations
     image_info = None
-    for img in annotations_data.get("images", []):
+    for img in annotations_data["images"]:
         if img["file_name"] == form_id + ".png":
             image_info = img
             break
 
     if not image_info:
         print(
-            f"Available images: {[img['file_name'] for img in annotations_data.get('images', [])[:5]]}"
+            f"Available images: {[img['file_name'] for img in annotations_data['images'][:5]]}"
         )
         print(f"Image {form_id}.png not found in annotations, skipping...")
         return []
@@ -301,23 +318,23 @@ def process_form_nlu_synthetic_file(
     with open(synthetic_file_path, "r") as f:
         lines = f.readlines()
 
-    # Skip the first line (original_filename)
-    for line in lines[1:]:
+    # Process all lines (each line is a kv_pair)
+    for line in lines:
         data = json.loads(line.strip())
 
-        # Only process QA type entries
-        if data.get("type") != "QA":
-            continue
+        # # Only process QA type entries
+        # if data.get("type") != "QA":
+        #     continue
 
         question_text = data["key"]
         answer_text = data["value"]
 
         # Find matching annotation by text content
         answer_bbox = None
-        for ann in annotations_data.get("annotations", []):
+        for ann in annotations_data["annotations"]:
             if (
-                ann.get("image_id") == image_info["id"]
-                and ann.get("text", "").strip() == answer_text.strip()
+                ann["image_id"] == image_info["id"]
+                and ann["text"].strip() == answer_text.strip()
             ):
                 bbox = ann["bbox"]
                 # print(f"Found exact match for '{answer_text}' with bbox: {bbox}")
@@ -329,10 +346,10 @@ def process_form_nlu_synthetic_file(
 
         if answer_bbox is None:
             # If no exact match, try partial match
-            for ann in annotations_data.get("annotations", []):
+            for ann in annotations_data["annotations"]:
                 if (
-                    ann.get("image_id") == image_info["id"]
-                    and answer_text.strip() in ann.get("text", "").strip()
+                    ann["image_id"] == image_info["id"]
+                    and answer_text.strip() in ann["text"].strip()
                 ):
                     bbox = ann["bbox"]
                     answer_bbox = BoundingBox(
@@ -374,30 +391,10 @@ def process_form_nlu_synthetic_file(
         return []
 
     # Apply content-aware fill
-    params = TImageSynthParameters()
-    params.isMakeSeamlesslyTileableHorizontally = False
-    params.isMakeSeamlesslyTileableVertically = False
-    params.matchContextType = 3
-    params.mapWeight = 0.5
-    params.sensitivityToOutliers = 0.117
-    params.patchSize = 50
-    params.maxProbeCount = 200
-
-    filled_img = np.array(
-        resynthesize(
-            Image.fromarray(img),
-            Image.fromarray(mask),
-            parameters=params,
-        )
-    )
-
-    if filled_img is None:
+    output_image_path = os.path.join(output_images_dir, f"processed_{form_id}.png")
+    if not apply_content_aware_fill(img, mask, output_image_path):
         print(f"Could not fill image for {form_id}")
         return []
-
-    # Save processed image
-    output_image_path = os.path.join(output_images_dir, f"processed_{form_id}.png")
-    cv2.imwrite(output_image_path, filled_img)
 
     return pairs
 
@@ -447,7 +444,7 @@ def process_form_nlu_annotations(
     annotations: Dict, input_images_dir: str, output_images_dir: str, split: str
 ) -> List[Dict]:
     """
-    Process form-nlu annotations directly from COCO format JSON.
+    Process form-nlu annotations using JSONL as primary data source and COCO for bbox validation.
 
     Args:
         annotations: COCO format annotations dictionary
@@ -462,7 +459,7 @@ def process_form_nlu_annotations(
 
     # Create mapping from image_id to image info
     image_map = {img["id"]: img for img in annotations["images"]}
-
+    print(f"Found {len(image_map)} images in annotations")
     # Group annotations by image_id
     annotations_by_image = {}
     for ann in annotations["annotations"]:
@@ -472,7 +469,7 @@ def process_form_nlu_annotations(
         annotations_by_image[image_id].append(ann)
 
     # Process each image
-    for image_id, image_anns in annotations_by_image.items():
+    for image_id, image_anns in tqdm(annotations_by_image.items()):
         if image_id not in image_map:
             continue
 
@@ -486,47 +483,132 @@ def process_form_nlu_annotations(
             print(f"Warning: Image {input_image_path} not found, skipping")
             continue
 
-        # Copy and process image
-        output_image_filename = f"processed_{image_filename}"
-        output_image_path = os.path.join(output_images_dir, output_image_filename)
+        # Load input image and get dimensions
+        img = cv2.imread(input_image_path)
+        if img is None:
+            print(f"Warning: Could not load image {input_image_path}, skipping")
+            continue
+        height, width = img.shape[:2]
 
-        try:
-            # Copy image to output directory
-            import shutil
+        # Create mask for content-aware fill
+        mask = np.zeros((height, width), dtype=np.uint8)
 
-            shutil.copy2(input_image_path, output_image_path)
-        except Exception as e:
-            print(f"Error copying image {input_image_path}: {e}")
+        # Load key-value pairs from JSONL (primary data source)
+        jsonl_filename = f"{image_filename.replace('.png', '')}_synthetic.jsonl"
+        jsonl_path = os.path.join("tool/dataset/form-nlu", jsonl_filename)
+
+        if not os.path.exists(jsonl_path):
+            print(
+                f"Warning: JSONL file {jsonl_path} not found, skipping image {image_filename}"
+            )
             continue
 
-        # Create QA pairs from annotations
-        for ann in image_anns:
-            # Extract text and bounding box
-            text = ann.get("text", "")
-            bbox = ann.get("bbox", [0, 0, 0, 0])  # [x, y, width, height]
+        # Load question-answer pairs from JSONL (new flexible format)
+        qa_data = []
+        with open(jsonl_path, "r") as f:
+            for line in f:
+                data = json.loads(line.strip())
 
-            if text.strip():
+                # Determine question text
+                question_parts = []
+                if "section" in data and str(data["section"]).strip():
+                    question_parts.append(str(data["section"]).strip())
+
+                question_text = None
+                if "key" in data and str(data["key"]).strip():
+                    question_text = str(data["key"]).strip()
+                else:
+                    rc_parts = []
+                    if "row" in data and str(data["row"]).strip():
+                        rc_parts.append(str(data["row"]).strip())
+                    if "column" in data and str(data["column"]).strip():
+                        rc_parts.append(str(data["column"]).strip())
+                    if rc_parts:
+                        question_text = " | ".join(rc_parts)
+
+                if question_text is None:
+                    continue
+
+                if "value" not in data:
+                    continue
+
+                answer_text = str(data["value"]).strip()
+                if not answer_text:
+                    continue
+
+                if question_parts:
+                    question_text = " | ".join(
+                        [" | ".join(question_parts), question_text]
+                    )
+
+                qa_data.append({"question": question_text, "answer": answer_text})
+
+        # Create mapping from answer text to bbox from COCO annotations
+        answer_to_bbox = {}
+        for ann in image_anns:
+            text = ann["text"].strip()
+            if text:
+                bbox = ann["bbox"]
                 # Convert bbox to [x1, y1, x2, y2] format
                 x1, y1, w, h = bbox
                 x2, y2 = x1 + w, y1 + h
-
-                # Create QA pair
-                qa_pair = {
-                    "form_id": form_id,
-                    "question_text": f"Extract text from this region",
-                    "answer_text": text,
-                    "answer_bbox": {
-                        "x1": float(x1),
-                        "y1": float(y1),
-                        "x2": float(x2),
-                        "y2": float(y2),
-                    },
-                    "question_bbox": None,
-                    "processed_image": output_image_filename,
-                    "w": image_info["width"],
-                    "h": image_info["height"],
+                answer_to_bbox[text] = {
+                    "x1": float(x1),
+                    "y1": float(y1),
+                    "x2": float(x2),
+                    "y2": float(y2),
                 }
-                pairs.append(qa_pair)
+
+        # Create QA pairs from JSONL data, checking bbox availability
+        image_pairs = []
+        for qa in qa_data:
+            question_text = qa["question"]
+            answer_text = qa["answer"]
+
+            # Check if both question and answer have bboxes
+            if answer_text not in answer_to_bbox:
+                # print(
+                #     f"Warning: Answer '{answer_text}' from JSONL not found in COCO annotations for {image_filename}"
+                # )
+                continue
+
+            answer_bbox = answer_to_bbox[answer_text]
+
+            # Add to mask for content-aware fill
+            x1, y1, x2, y2 = (
+                int(answer_bbox["x1"]),
+                int(answer_bbox["y1"]),
+                int(answer_bbox["x2"]),
+                int(answer_bbox["y2"]),
+            )
+            # Ensure coordinates are within image bounds
+            x1 = max(0, min(x1, width))
+            y1 = max(0, min(y1, height))
+            x2 = max(0, min(x2, width))
+            y2 = max(0, min(y2, height))
+            mask[y1:y2, x1:x2] = 255
+
+            # Create QA pair
+            qa_pair = {
+                "form_id": form_id,
+                "question_text": question_text,
+                "answer_text": answer_text,
+                "answer_bbox": answer_bbox,
+                "question_bbox": None,  # Could be populated if question bboxes exist
+                "processed_image": f"processed_{image_filename}",
+                "w": image_info["width"],
+                "h": image_info["height"],
+            }
+            image_pairs.append(qa_pair)
+
+        # Apply content-aware fill for this image if we have pairs
+        if len(image_pairs) > 0:
+            output_image_filename = f"processed_{image_filename}"
+            output_image_path = os.path.join(output_images_dir, output_image_filename)
+            if not apply_content_aware_fill(img, mask, output_image_path):
+                print(f"Could not fill image for {form_id}")
+                continue
+            pairs.extend(image_pairs)
 
     return pairs
 
@@ -596,6 +678,124 @@ def save_dataset(
             indent=2,
         )
 
+    # save images of the first 5 images in the short test set.
+    # draw the bounding boxes on the images  including text labels.
+
+    # Get the first 5 images from the short test set
+    short_test_df = test_df.head(SHORT_DATASET_SIZE)
+    first_5_images = short_test_df.head(5)
+
+    # Create output directory for annotated images
+    annotated_images_dir = os.path.join(output_dir, "annotated_images")
+    os.makedirs(annotated_images_dir, exist_ok=True)
+
+    # Process each of the first 5 images
+    for idx, row in first_5_images.iterrows():
+        form_id = row["form_id"]
+        image_filename = row["processed_image"].split("processed_")[1]
+        answer_bbox = row["answer_bbox"]
+        question_text = row["question_text"]
+        answer_text = row["answer_text"]
+
+        # Load the processed image
+        output_images_dir = "tmp/form-nlu/"
+        input_images_dir = "annotations/form-nlu/images"
+        image_path = os.path.join(input_images_dir, image_filename)
+        os.makedirs(output_images_dir, exist_ok=True)
+
+        # Load image using PIL
+        img = Image.open(image_path)
+        img_array = np.array(img)
+
+        # Convert to OpenCV format if needed
+        if len(img_array.shape) == 3 and img_array.shape[2] == 4:  # RGBA
+            img_array = cv2.cvtColor(img_array, cv2.COLOR_RGBA2RGB)
+        elif len(img_array.shape) == 3 and img_array.shape[2] == 3:  # RGB
+            img_array = cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR)
+
+        # Draw bounding box
+        if isinstance(answer_bbox, dict):
+            # Handle dict format (form-nlu)
+            x1, y1, x2, y2 = (
+                int(answer_bbox["x1"]),
+                int(answer_bbox["y1"]),
+                int(answer_bbox["x2"]),
+                int(answer_bbox["y2"]),
+            )
+        else:
+            # Handle BoundingBox object format (FUNSD/XFUND)
+            x1, y1, x2, y2 = (
+                int(answer_bbox.x1),
+                int(answer_bbox.y1),
+                int(answer_bbox.x2),
+                int(answer_bbox.y2),
+            )
+
+        # Draw rectangle
+        cv2.rectangle(img_array, (x1, y1), (x2, y2), (0, 255, 0), 2)
+
+        # Prepare text labels
+        question_label = (
+            f"Q: {question_text[:50]}{'...' if len(question_text) > 50 else ''}"
+        )
+        answer_label = f"A: {answer_text[:50]}{'...' if len(answer_text) > 50 else ''}"
+
+        # Draw text labels with background
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        font_scale = 0.6
+        thickness = 2
+
+        # Question text
+        (q_width, q_height), _ = cv2.getTextSize(
+            question_label, font, font_scale, thickness
+        )
+        cv2.rectangle(
+            img_array,
+            (x1, y1 - q_height - 10),
+            (x1 + q_width + 10, y1),
+            (255, 255, 255),
+            -1,
+        )
+        cv2.putText(
+            img_array,
+            question_label,
+            (x1 + 5, y1 - 5),
+            font,
+            font_scale,
+            (0, 0, 0),
+            thickness,
+        )
+
+        # Answer text
+        (a_width, a_height), _ = cv2.getTextSize(
+            answer_label, font, font_scale, thickness
+        )
+        cv2.rectangle(
+            img_array,
+            (x1, y2 + 5),
+            (x1 + a_width + 10, y2 + a_height + 15),
+            (255, 255, 255),
+            -1,
+        )
+        cv2.putText(
+            img_array,
+            answer_label,
+            (x1 + 5, y2 + a_height + 10),
+            font,
+            font_scale,
+            (0, 0, 0),
+            thickness,
+        )
+
+        # Save annotated image
+        output_filename = f"annotated_{form_id}_{image_filename}"
+        output_path = os.path.join(output_images_dir, output_filename)
+        cv2.imwrite(output_path, img_array)
+
+        print(f"Saved annotated image: {output_path}")
+
+    print(f"Saved {len(first_5_images)} annotated images to {annotated_images_dir}")
+
 
 def main(dataset: str = "funsd") -> None:
     """
@@ -652,7 +852,8 @@ def main(dataset: str = "funsd") -> None:
 
         # Combine all pairs and create proper train/test split
         all_pairs = train_pairs + val_pairs
-        
+        assert len(all_pairs) > 0
+
         print(
             f"Generated {len(train_pairs)} train QA pairs and {len(val_pairs)} test QA pairs"
         )
@@ -689,13 +890,15 @@ def main(dataset: str = "funsd") -> None:
 
     # Create and split dataset
     df = pd.DataFrame(all_pairs)
-    
+
     if dataset == "form-nlu":
         # For form-nlu, split based on the split identifier in form_id
         train_forms = df[df["form_id"].str.endswith("_train")]["form_id"].unique()
         test_forms = df[df["form_id"].str.endswith("_val")]["form_id"].unique()
-        
-        print(f"Form-nlu split: {len(train_forms)} train forms, {len(test_forms)} test forms")
+
+        print(
+            f"Form-nlu split: {len(train_forms)} train forms, {len(test_forms)} test forms"
+        )
     else:
         # For other datasets, use the standard split
         unique_forms = df["form_id"].unique()
