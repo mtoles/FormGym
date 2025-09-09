@@ -175,6 +175,8 @@ def main(
             if f.endswith(".json")
         ]
         # assert len(args.file_ids) == 50, "there should be 50 docs"
+    annot_path = f"tool/dataset/processed/form-nlu_test_qa_pairs_short.jsonl"
+    all_annots = annotations.read_annotations_from_preprocessed(annot_path)
     for i, fid in enumerate(args.file_ids):
         if "al" not in fid:
             assert (
@@ -193,10 +195,16 @@ def main(
         png_path = f"pngs/{fid}.png"
         print(f"Processing file: {png_path}")
 
+
         blank_img = Image.open(png_path).convert("RGB")
         if domain == DomainEnum.FUN.value:
-            annot_path = f"annotations/funsd_test/{fid}.json"
-            annots = annotations.read_annotations_funsd(annot_path)
+            annots = all_annots[all_annots["form_id"] == fid]
+            # annot_path_old = f"annotations/funsd_test/{fid}.json"
+            # annots_old = annotations.read_annotations_funsd(annot_path_old)
+            # assert (
+            #     annots_old == annots
+            # ), "annotations from old and new format should be equal"
+            # check each key/value is equal
             blank_img = mask_answer_field(blank_img, annots)
             targets = [x["id"] for x in annots]
             doc_state = DocState(annots, blank_img=blank_img, doc_id=fid)
@@ -388,7 +396,7 @@ def main(
                 suggest_localizer=suggest_localizer,  # irrelevant
                 source_doc_image=batch["source_doc_img"].to_list(),
                 needs_db=needs_db,
-                box_locs=bbox_descs if gt_coordinates else None,
+                box_locs=bbox_descs if gt_coordinates else [None],
             )
 
             # Process each example in the batch

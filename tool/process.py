@@ -80,6 +80,49 @@ def get_full_question_text(entry: Dict, id_to_entry: Dict) -> str:
     return " | ".join(question_texts)
 
 
+def deduplicate_pairs(pairs: List[Dict]) -> List[Dict]:
+    """
+    Remove duplicate pairs where both form_id and question_text are the same.
+    When duplicates are found, remove ALL instances of that (form_id, question_text) combination.
+
+    Args:
+        pairs: List of QA pairs
+
+    Returns:
+        List of deduplicated QA pairs
+    """
+    if not pairs:
+        return pairs
+
+    # Group pairs by (form_id, question_text)
+    groups = {}
+    for i, pair in enumerate(pairs):
+        key = (pair["form_id"], pair["question_text"])
+        if key not in groups:
+            groups[key] = []
+        groups[key].append(i)
+
+    # Find groups with duplicates and collect indices to remove
+    indices_to_remove = set()
+    for key, indices in groups.items():
+        if len(indices) > 1:
+            # Remove ALL instances of this duplicate
+            indices_to_remove.update(indices)
+            # print(
+            #     f"Removing {len(indices)} duplicate pairs for form_id='{key[0]}', question_text='{key[1][:50]}...'"
+            # )
+
+    # Filter out duplicates
+    deduplicated = [pair for i, pair in enumerate(pairs) if i not in indices_to_remove]
+
+    # if len(indices_to_remove) > 0:
+        # print(
+        #     f"Removed {len(indices_to_remove)} duplicate pairs, {len(deduplicated)} pairs remaining"
+        # )
+
+    return deduplicated
+
+
 def apply_content_aware_fill(
     img: np.ndarray, mask: np.ndarray, output_path: str
 ) -> bool:
@@ -120,7 +163,12 @@ def apply_content_aware_fill(
 
 
 def get_question_and_answer(
-    entry: Dict, form_id: str, width: int, height: int, id_to_entry: Dict, processed_filename: str = None
+    entry: Dict,
+    form_id: str,
+    width: int,
+    height: int,
+    id_to_entry: Dict,
+    processed_filename: str = None,
 ) -> dict:
     if entry["label"] == "question":
         cbs = [c for c in entry["text"] if c in "☑☐⬛✓✗\u2611\u2610"]
@@ -148,7 +196,8 @@ def get_question_and_answer(
                         "answer_text": word["text"],
                         "answer_bbox": BoundingBox.from_list(word["box"]),
                         "question_bbox": question_bbox,
-                        "processed_image": processed_filename or f"processed_{form_id}.png",
+                        "processed_image": processed_filename
+                        or f"processed_{form_id}.png",
                         "w": width,
                         "h": height,
                     }
@@ -211,7 +260,9 @@ def process_annotation_and_image(
     # filled_img = img.copy()
     mask = np.zeros((height, width), dtype=np.uint8)
     for entry in doc:
-        pair = get_question_and_answer(entry, form_id, width, height, id_to_entry, processed_filename)
+        pair = get_question_and_answer(
+            entry, form_id, width, height, id_to_entry, processed_filename
+        )
         if pair is None:
             continue
 
@@ -225,6 +276,12 @@ def process_annotation_and_image(
             pair["answer_bbox"].x1 : pair["answer_bbox"].x2,
         ] = 255
         pairs.append(pair)
+    if len(pairs) == 0:
+        return []
+
+    # Apply deduplication before content-aware fill
+    pairs = deduplicate_pairs(pairs)
+
     if len(pairs) == 0:
         return []
 
@@ -678,12 +735,12 @@ def save_dataset(
     if save_short:
         # Save short versions
         train_df.head(SHORT_DATASET_SIZE).to_json(
-            os.path.join(output_dir, f"{dataset_name}_train_qa_pairs_short.json"),
+            os.path.join(output_dir, f"{dataset_name}_train_qa_pairs_short.jsonl"),
             orient="records",
             indent=2,
         )
         test_df.head(SHORT_DATASET_SIZE).to_json(
-            os.path.join(output_dir, f"{dataset_name}_test_qa_pairs_short.json"),
+            os.path.join(output_dir, f"{dataset_name}_test_qa_pairs_short.jsonl"),
             orient="records",
             indent=2,
         )
@@ -896,7 +953,14 @@ def main(dataset: str = "funsd") -> None:
                     results = pool.starmap(
                         process_document_with_dirs,
                         [
-                            (d, input_images_dir, output_images_dir, "jpg", json_file, dataset)
+                            (
+                                d,
+                                input_images_dir,
+                                output_images_dir,
+                                "jpg",
+                                json_file,
+                                dataset,
+                            )
                             for d in dataset_items
                         ],
                     )

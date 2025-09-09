@@ -41,6 +41,94 @@ def read_annotations(filename):
     return annotations
 
 
+def read_annotations_from_preprocessed(filename):
+    """
+    Example entry in a .jsonl file
+    {
+    "form_id":"91161344_91161347",
+    "question_text":"D. C. | 1. STATES AND CITIES* SELECTED TO RECEIVE PRODUCT:",
+    "answer_text":"x",
+    "answer_bbox":{
+      "x1":234,
+      "x2":247,
+      "y1":399,
+      "y2":409
+    },
+    "processed_image":"funsd_processed_91161344_91161347.png",
+    "w":803,
+    "h":1000,
+    "question_bbox":null
+    },
+
+    example source jsonl: tool/dataset/processed/form-nlu_test_qa_pairs_short.jsonl
+    example image path: tool/dataset/processed/images/form-nlu_processed_00824775_page-1.png
+    """
+    # Load the JSON data
+    with open(filename, "r") as file:
+        data = json.load(file)
+
+    annotations = []
+
+    for entry in data:
+        form_id = entry["form_id"]
+        question_text = entry["question_text"]
+        answer_text = entry["answer_text"]
+        answer_bbox = entry["answer_bbox"]
+        w = entry["w"]
+        h = entry["h"]
+
+        # Create field name with prefix to avoid conflicts
+        key = f"FUNSD_{form_id}_{question_text}"
+
+        # Normalize bounding box coordinates
+        # Convert from x1,y1,x2,y2 format to x,y,w,h format and normalize
+        x1, y1, x2, y2 = (
+            answer_bbox["x1"],
+            answer_bbox["y1"],
+            answer_bbox["x2"],
+            answer_bbox["y2"],
+        )
+        bbox = {
+            "x": x1 / w,
+            "y": y1 / h,
+            "w": (x2 - x1) / w,
+            "h": (y2 - y1) / h,
+        }
+
+
+
+        new_field_class = fields.FieldMeta.__new__(
+            fields.FieldMeta,
+            key,
+            (fields.BaseStringField,),
+            {"get_profile_info": answer_text},
+        )
+
+        annotations.append(
+            {
+                "id": form_id,
+                "field_name": key,
+                "bbox": bbox,
+                "field": new_field_class,
+                "prefilled": False,  # whether to count the field in evaluation
+            }
+        )
+
+        # Add a new user feature to the user profile (should show up in metaclass)
+        new_user_feature_class = user_features.UserAttributeMeta.__new__(
+            user_features.UserAttributeMeta,
+            key,
+            (user_features.BaseUserAttr,),
+            {
+                "options": [answer_text],
+                "nl_desc": lambda x: f"The user's {key.split('_')[-1]} is: {x}",
+            },
+        )
+
+    return annotations
+
+
+# This is wrong. it reads from the unprocessed file.
 def read_annotations_funsd(filename):
     # Load the JSON data
     with open(filename, "r") as file:
