@@ -177,7 +177,7 @@ def main(
     # assert len(args.file_ids) == 50, "there should be 50 docs"
     if domain in [DomainEnum.FORM_NLU.value, DomainEnum.FUNSD.value]:
         if domain == DomainEnum.FORM_NLU.value:
-            annot_path = f"tool/dataset/processed/form-nlu_test_qa_pairs.jsonl"
+            annot_path = f"tool/dataset/processed/form-nlu_test_qa_pairs.json"
         elif domain == DomainEnum.FUNSD.value:
             annot_path = f"tool/dataset/processed/funsd_test_qa_pairs.jsonl"
         all_annots = annotations.read_annotations_from_preprocessed(annot_path)

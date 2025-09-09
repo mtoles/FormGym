@@ -490,7 +490,7 @@ def process_form_nlu_annotations(
 
         image_info = image_map[image_id]
         image_filename = image_info["file_name"]
-        form_id = f"{image_filename.replace('.png', '')}_{split}"
+        form_id = f"{image_filename.replace('.png', '')}"
 
         # Process image if it exists
         input_image_path = os.path.join(input_images_dir, image_filename)
@@ -606,6 +606,7 @@ def process_form_nlu_annotations(
             # Create QA pair
             qa_pair = {
                 "form_id": form_id,
+                "split": split,  # Add split information
                 "question_text": question_text,
                 "answer_text": answer_text,
                 "answer_bbox": answer_bbox,
@@ -673,12 +674,12 @@ def save_dataset(
 
     # Save full datasets
     train_df.to_json(
-        os.path.join(output_dir, f"{dataset_name}_train_qa_pairs.json"),
+        os.path.join(output_dir, f"{dataset_name}_train_qa_pairs.jsonl"),
         orient="records",
         indent=2,
     )
     test_df.to_json(
-        os.path.join(output_dir, f"{dataset_name}_test_qa_pairs.json"),
+        os.path.join(output_dir, f"{dataset_name}_test_qa_pairs.jsonl"),
         orient="records",
         indent=2,
     )
@@ -822,7 +823,7 @@ def save_dataset(
 
         print(f"Saved annotated image: {output_path}")
 
-    print(f"Saved {len(first_5_images)} annotated images to {temp_output_dir}")
+    # print(f"Saved {len(first_5_images)} annotated images to {temp_output_dir}")
 
 
 def main(dataset: str = "funsd") -> None:
@@ -928,14 +929,16 @@ def main(dataset: str = "funsd") -> None:
     df = pd.DataFrame(all_pairs)
 
     # drop duplicates where both the form_id and the question_text are the same
-    print(f"Dropped {len(df) - len(df.drop_duplicates(subset=['form_id', 'question_text']))} duplicates")
+    print(
+        f"Dropped {len(df) - len(df.drop_duplicates(subset=['form_id', 'question_text']))} duplicates"
+    )
     df = df.drop_duplicates(subset=["form_id", "question_text"])
     # print how many duplicates were dropped
 
     if dataset == "form-nlu":
-        # For form-nlu, split based on the split identifier in form_id
-        train_forms = df[df["form_id"].str.endswith("_train")]["form_id"].unique()
-        test_forms = df[df["form_id"].str.endswith("_val")]["form_id"].unique()
+        # For form-nlu, split based on the split field
+        train_forms = df[df["split"] == "train"]["form_id"].unique()
+        test_forms = df[df["split"] == "val"]["form_id"].unique()
 
         print(
             f"Form-nlu split: {len(train_forms)} train forms, {len(test_forms)} test forms"

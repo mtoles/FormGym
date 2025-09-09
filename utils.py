@@ -82,8 +82,10 @@ def get_domain_from_doc_id(doc_id: str) -> DomainEnum:
         return DomainEnum.AL
     elif doc_id.startswith("cr_"):
         return DomainEnum.CR
-    elif doc_id == "funsd_test":
+    elif doc_id == "funsd":
         return DomainEnum.FUNSD
+    elif doc_id == "form-nlu":
+        return DomainEnum.FORM_NLU
     elif doc_id.startswith("xx_"):
         return DomainEnum.AL
     else:
