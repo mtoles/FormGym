@@ -115,7 +115,7 @@ def read_annotations_from_preprocessed(filename):
         )
 
         # Add a new user feature to the user profile (should show up in metaclass)
-        new_user_feature_class = user_features.UserAttributeMeta.__new__(
+        _ = user_features.UserAttributeMeta.__new__(
             user_features.UserAttributeMeta,
             key,
             (user_features.BaseUserAttr,),

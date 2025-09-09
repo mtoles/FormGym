@@ -7,10 +7,13 @@ from typing import List
 #     MULTISHOT = "iterative"
 #     ONESHOT = "oneshot"
 
+
 class DomainEnum(Enum):
     AL = "al"  # auto loans
     CR = "cr"  # consolidated report of income
-    FUN = "fun"  # funsd/xfund
+    FUNSD = "funsd"  # funsd/xfund
+    FORM_NLU = "form-nlu"  # form-nlu
+
 
 class FlowEnum(Enum):
     ONESHOT = "oneshot"
@@ -43,9 +46,11 @@ class StudyConditionEnum(Enum):
     BASELINE = "baseline"
     EXPERIMENTAL = "ours"
 
+
 class ProfileSourceEnum(Enum):
     TEXT = "text"
     IMAGE = "image"
+
 
 FILLER_FONT = ImageFont.truetype("/usr/share/fonts/truetype/DejaVuSerif.ttf", 12)
 
@@ -63,20 +68,22 @@ def get_text_bbox(
         "height": text_height,
     }
 
+
 def get_domain_from_doc_ids(doc_ids: List[str]) -> DomainEnum:
     domains = set(get_domain_from_doc_id(doc_id) for doc_id in doc_ids)
     if len(domains) != 1:
         raise ValueError(f"Multiple domains found: {domains}")
-    
+
     return domains.pop()
-    
+
+
 def get_domain_from_doc_id(doc_id: str) -> DomainEnum:
     if doc_id.startswith("al_"):
         return DomainEnum.AL
     elif doc_id.startswith("cr_"):
         return DomainEnum.CR
-    elif doc_id=="funsd_test":
-        return DomainEnum.FUN
+    elif doc_id == "funsd_test":
+        return DomainEnum.FUNSD
     elif doc_id.startswith("xx_"):
         return DomainEnum.AL
     else:

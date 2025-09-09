@@ -168,16 +168,29 @@ def main(
 
     # Prepare list to collect per-file data for batch processing
     all_files = []
-    if domain == DomainEnum.FUN.value:
-        args.file_ids = [
-            f.split(".")[0]
-            for f in os.listdir("annotations/funsd_test")
-            if f.endswith(".json")
-        ]
-        # assert len(args.file_ids) == 50, "there should be 50 docs"
-    annot_path = f"tool/dataset/processed/form-nlu_test_qa_pairs_short.jsonl"
-    all_annots = annotations.read_annotations_from_preprocessed(annot_path)
-    for i, fid in enumerate(args.file_ids):
+    # if domain == DomainEnum.FUN.value:
+    #     args.file_ids = [
+    #         f.split(".")[0]
+    #         for f in os.listdir("annotations/funsd_test")
+    #         if f.endswith(".json")
+    #     ]
+    # assert len(args.file_ids) == 50, "there should be 50 docs"
+    if domain in [DomainEnum.FORM_NLU.value, DomainEnum.FUNSD.value]:
+        if domain == DomainEnum.FORM_NLU.value:
+            annot_path = f"tool/dataset/processed/form-nlu_test_qa_pairs.jsonl"
+        elif domain == DomainEnum.FUNSD.value:
+            annot_path = f"tool/dataset/processed/funsd_test_qa_pairs.jsonl"
+        all_annots = annotations.read_annotations_from_preprocessed(annot_path)
+        file_ids = [annot["id"] for annot in all_annots]
+    else:
+        raise ValueError(f"Invalid domain: {domain}")
+    # convert all_annots to a dictionary where the key is form_id and value is a list of annotations
+    all_annots_dict = {}
+    for annot in all_annots:
+        if annot["id"] not in all_annots_dict:
+            all_annots_dict[annot["id"]] = []
+        all_annots_dict[annot["id"]].append(annot)
+    for i, fid in enumerate(file_ids):
         if "al" not in fid:
             assert (
                 profile_source == ProfileSourceEnum.TEXT.value
@@ -195,10 +208,12 @@ def main(
         png_path = f"pngs/{fid}.png"
         print(f"Processing file: {png_path}")
 
-
-        blank_img = Image.open(png_path).convert("RGB")
-        if domain == DomainEnum.FUN.value:
-            annots = all_annots[all_annots["form_id"] == fid]
+        # blank_img = Image.open(png_path).convert("RGB")
+        blank_img = Image.open(
+            f"tool/dataset/processed/images/{domain}_processed_{fid}.png"
+        ).convert("RGB")
+        if domain == DomainEnum.FUNSD.value:
+            annots = all_annots_dict[fid]
             # annot_path_old = f"annotations/funsd_test/{fid}.json"
             # annots_old = annotations.read_annotations_funsd(annot_path_old)
             # assert (
@@ -225,17 +240,6 @@ def main(
         #     raise NotImplementedError
 
         user_profile = user_features.UserProfile(user_idx, relevant_user_features)
-        # Temp stuff for gui agent testing
-        # Save masked image to tmp folder
-        # os.makedirs("tmp/funsd", exist_ok=True)
-        # tmp_path = f"tmp/funsd/{fid}.png"
-        # blank_img.save(tmp_path)
-        # # Save annotations to txt file
-        # txt_path = f"tmp/funsd/{fid}.txt"
-        # os.makedirs(os.path.dirname(txt_path), exist_ok=True)
-        # with open(txt_path, "w") as f:
-        #     ann = annots[0]
-        #     f.write(user_profile.get_nl_profile()[0])
 
         if profile_source == ProfileSourceEnum.TEXT.value:
             nl_profile = "\n".join(

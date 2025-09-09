@@ -80,49 +80,6 @@ def get_full_question_text(entry: Dict, id_to_entry: Dict) -> str:
     return " | ".join(question_texts)
 
 
-def deduplicate_pairs(pairs: List[Dict]) -> List[Dict]:
-    """
-    Remove duplicate pairs where both form_id and question_text are the same.
-    When duplicates are found, remove ALL instances of that (form_id, question_text) combination.
-
-    Args:
-        pairs: List of QA pairs
-
-    Returns:
-        List of deduplicated QA pairs
-    """
-    if not pairs:
-        return pairs
-
-    # Group pairs by (form_id, question_text)
-    groups = {}
-    for i, pair in enumerate(pairs):
-        key = (pair["form_id"], pair["question_text"])
-        if key not in groups:
-            groups[key] = []
-        groups[key].append(i)
-
-    # Find groups with duplicates and collect indices to remove
-    indices_to_remove = set()
-    for key, indices in groups.items():
-        if len(indices) > 1:
-            # Remove ALL instances of this duplicate
-            indices_to_remove.update(indices)
-            # print(
-            #     f"Removing {len(indices)} duplicate pairs for form_id='{key[0]}', question_text='{key[1][:50]}...'"
-            # )
-
-    # Filter out duplicates
-    deduplicated = [pair for i, pair in enumerate(pairs) if i not in indices_to_remove]
-
-    # if len(indices_to_remove) > 0:
-        # print(
-        #     f"Removed {len(indices_to_remove)} duplicate pairs, {len(deduplicated)} pairs remaining"
-        # )
-
-    return deduplicated
-
-
 def apply_content_aware_fill(
     img: np.ndarray, mask: np.ndarray, output_path: str
 ) -> bool:
@@ -276,12 +233,6 @@ def process_annotation_and_image(
             pair["answer_bbox"].x1 : pair["answer_bbox"].x2,
         ] = 255
         pairs.append(pair)
-    if len(pairs) == 0:
-        return []
-
-    # Apply deduplication before content-aware fill
-    pairs = deduplicate_pairs(pairs)
-
     if len(pairs) == 0:
         return []
 
@@ -975,6 +926,11 @@ def main(dataset: str = "funsd") -> None:
 
     # Create and split dataset
     df = pd.DataFrame(all_pairs)
+
+    # drop duplicates where both the form_id and the question_text are the same
+    print(f"Dropped {len(df) - len(df.drop_duplicates(subset=['form_id', 'question_text']))} duplicates")
+    df = df.drop_duplicates(subset=["form_id", "question_text"])
+    # print how many duplicates were dropped
 
     if dataset == "form-nlu":
         # For form-nlu, split based on the split identifier in form_id
