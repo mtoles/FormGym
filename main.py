@@ -177,7 +177,7 @@ def main(
     # assert len(args.file_ids) == 50, "there should be 50 docs"
     if domain in [DomainEnum.FORM_NLU.value, DomainEnum.FUNSD.value]:
         if domain == DomainEnum.FORM_NLU.value:
-            annot_path = f"tool/dataset/processed/form-nlu_test_qa_pairs.json"
+            annot_path = f"tool/dataset/processed/form-nlu_test_qa_pairs.jsonl"
         elif domain == DomainEnum.FUNSD.value:
             annot_path = f"tool/dataset/processed/funsd_test_qa_pairs.jsonl"
         all_annots = annotations.read_annotations_from_preprocessed(annot_path)
@@ -212,7 +212,7 @@ def main(
         blank_img = Image.open(
             f"tool/dataset/processed/images/{domain}_processed_{fid}.png"
         ).convert("RGB")
-        if domain == DomainEnum.FUNSD.value:
+        if domain in [DomainEnum.FUNSD.value, DomainEnum.FORM_NLU.value]:
             annots = all_annots_dict[fid]
             # annot_path_old = f"annotations/funsd_test/{fid}.json"
             # annots_old = annotations.read_annotations_funsd(annot_path_old)
