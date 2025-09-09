@@ -120,7 +120,7 @@ def apply_content_aware_fill(
 
 
 def get_question_and_answer(
-    entry: Dict, form_id: str, width: int, height: int, id_to_entry: Dict
+    entry: Dict, form_id: str, width: int, height: int, id_to_entry: Dict, processed_filename: str = None
 ) -> dict:
     if entry["label"] == "question":
         cbs = [c for c in entry["text"] if c in "☑☐⬛✓✗\u2611\u2610"]
@@ -148,7 +148,7 @@ def get_question_and_answer(
                         "answer_text": word["text"],
                         "answer_bbox": BoundingBox.from_list(word["box"]),
                         "question_bbox": question_bbox,
-                        "processed_image": f"{args.dataset}_processed_{form_id}.png",
+                        "processed_image": processed_filename or f"processed_{form_id}.png",
                         "w": width,
                         "h": height,
                     }
@@ -161,7 +161,7 @@ def get_question_and_answer(
             "question_text": get_full_question_text(entry, id_to_entry),
             "answer_text": entry["text"],
             "answer_bbox": BoundingBox.from_list(entry["box"]),
-            "processed_image": f"processed_{form_id}.png",
+            "processed_image": processed_filename or f"processed_{form_id}.png",
             "w": width,
             "h": height,
         }
@@ -176,6 +176,7 @@ def process_annotation_and_image(
     input_images_dir: str,
     output_images_dir: str,
     image_ext: str = DEFAULT_IMAGE_EXT,
+    dataset_name: str = None,
 ) -> List[Dict]:
     """
     Process a single document and its corresponding image.
@@ -200,12 +201,17 @@ def process_annotation_and_image(
     if img is None:
         raise ValueError(f"Could not load image: {input_image_path}")
     height, width = img.shape[:2]
-    output_image_path = os.path.join(output_images_dir, f"processed_{form_id}.png")
+    # Add dataset prefix to processed image filename
+    if dataset_name:
+        processed_filename = f"{dataset_name}_processed_{form_id}.png"
+    else:
+        processed_filename = f"processed_{form_id}.png"
+    output_image_path = os.path.join(output_images_dir, processed_filename)
     mask_bboxes = []
     # filled_img = img.copy()
     mask = np.zeros((height, width), dtype=np.uint8)
     for entry in doc:
-        pair = get_question_and_answer(entry, form_id, width, height, id_to_entry)
+        pair = get_question_and_answer(entry, form_id, width, height, id_to_entry, processed_filename)
         if pair is None:
             continue
 
@@ -236,6 +242,7 @@ def process_document(
     output_images_dir: str,
     image_ext: str = DEFAULT_IMAGE_EXT,
     json_file: Optional[str] = None,
+    dataset_name: str = None,
 ) -> List[Dict]:
     """
     Process a single document and return its pairs.
@@ -259,7 +266,7 @@ def process_document(
         raise ValueError("Form ID could not be determined")
 
     return process_annotation_and_image(
-        doc, form_id, input_images_dir, output_images_dir, image_ext
+        doc, form_id, input_images_dir, output_images_dir, image_ext, dataset_name
     )
 
 
@@ -595,7 +602,7 @@ def process_form_nlu_annotations(
                 "answer_text": answer_text,
                 "answer_bbox": answer_bbox,
                 "question_bbox": None,  # Could be populated if question bboxes exist
-                "processed_image": f"processed_{image_filename}",
+                "processed_image": f"form-nlu_processed_{image_filename}",
                 "w": image_info["width"],
                 "h": image_info["height"],
             }
@@ -603,7 +610,8 @@ def process_form_nlu_annotations(
 
         # Apply content-aware fill for this image if we have pairs
         if len(image_pairs) > 0:
-            output_image_filename = f"processed_{image_filename}"
+            # Add dataset prefix to processed image filename
+            output_image_filename = f"form-nlu_processed_{image_filename}"
             output_image_path = os.path.join(output_images_dir, output_image_filename)
             if not apply_content_aware_fill(img, mask, output_image_path):
                 print(f"Could not fill image for {form_id}")
@@ -619,10 +627,11 @@ def process_document_with_dirs(
     output_images_dir: str,
     image_ext: str = DEFAULT_IMAGE_EXT,
     json_file: Optional[str] = None,
+    dataset_name: str = None,
 ) -> List[Dict]:
     """Process a single document with directory paths."""
     return process_document(
-        data, input_images_dir, output_images_dir, image_ext, json_file
+        data, input_images_dir, output_images_dir, image_ext, json_file, dataset_name
     )
 
 
@@ -633,6 +642,7 @@ def save_dataset(
     train_forms: np.ndarray,
     test_forms: np.ndarray,
     save_short: bool = True,
+    input_images_dir: str = None,
 ) -> None:
     """
     Save the processed dataset to JSON files.
@@ -685,23 +695,33 @@ def save_dataset(
     short_test_df = test_df.head(SHORT_DATASET_SIZE)
     first_5_images = short_test_df.head(5)
 
-    # Create output directory for annotated images
-    annotated_images_dir = os.path.join(output_dir, "annotated_images")
-    os.makedirs(annotated_images_dir, exist_ok=True)
+    # # Create output directory for annotated images
+    # annotated_images_dir = os.path.join(output_dir, "annotated_images")
+    # os.makedirs(annotated_images_dir, exist_ok=True)
 
     # Process each of the first 5 images
     for idx, row in first_5_images.iterrows():
         form_id = row["form_id"]
         image_filename = row["processed_image"].split("processed_")[1]
+        # Ensure correct source image extension per dataset
+        name_no_ext, current_ext = os.path.splitext(image_filename)
+        if dataset_name == "xfund":
+            image_filename = f"{name_no_ext}.jpg"
         answer_bbox = row["answer_bbox"]
         question_text = row["question_text"]
         answer_text = row["answer_text"]
 
-        # Load the processed image
-        output_images_dir = "tmp/form-nlu/"
-        input_images_dir = "annotations/form-nlu/images"
-        image_path = os.path.join(input_images_dir, image_filename)
-        os.makedirs(output_images_dir, exist_ok=True)
+        # Use the appropriate input_images_dir based on dataset
+        if input_images_dir is None:
+            if dataset_name == "form-nlu":
+                image_dir = "annotations/form-nlu/images"
+            else:
+                image_dir = f"tool/dataset/{dataset_name}/images"
+        else:
+            image_dir = input_images_dir
+        image_path = os.path.join(image_dir, image_filename)
+        temp_output_dir = os.path.join("tmp", dataset_name)
+        os.makedirs(temp_output_dir, exist_ok=True)
 
         # Load image using PIL
         img = Image.open(image_path)
@@ -789,12 +809,12 @@ def save_dataset(
 
         # Save annotated image
         output_filename = f"annotated_{form_id}_{image_filename}"
-        output_path = os.path.join(output_images_dir, output_filename)
+        output_path = os.path.join(temp_output_dir, output_filename)
         cv2.imwrite(output_path, img_array)
 
         print(f"Saved annotated image: {output_path}")
 
-    print(f"Saved {len(first_5_images)} annotated images to {annotated_images_dir}")
+    print(f"Saved {len(first_5_images)} annotated images to {temp_output_dir}")
 
 
 def main(dataset: str = "funsd") -> None:
@@ -862,7 +882,8 @@ def main(dataset: str = "funsd") -> None:
         # Process FUNSD or XFUND datasets
         all_pairs = []
         for json_file in tqdm(
-            list(annotations_dir.glob("*.json")), desc="Processing JSON files"
+            list(annotations_dir.glob("*.json")),
+            desc="Processing JSON files",
         ):
             with open(json_file, "r") as f:
                 data = json.load(f)
@@ -875,7 +896,7 @@ def main(dataset: str = "funsd") -> None:
                     results = pool.starmap(
                         process_document_with_dirs,
                         [
-                            (d, input_images_dir, output_images_dir, "jpg", json_file)
+                            (d, input_images_dir, output_images_dir, "jpg", json_file, dataset)
                             for d in dataset_items
                         ],
                     )
@@ -884,7 +905,7 @@ def main(dataset: str = "funsd") -> None:
             else:
                 # Process FUNSD documents
                 pairs = process_document(
-                    data, input_images_dir, output_images_dir, "png", json_file
+                    data, input_images_dir, output_images_dir, "png", json_file, dataset
                 )
                 all_pairs.extend(pairs)
 
@@ -908,7 +929,14 @@ def main(dataset: str = "funsd") -> None:
         test_forms = unique_forms[train_size:]
 
     # Save datasets
-    save_dataset(df, output_dir, dataset, train_forms, test_forms)
+    save_dataset(
+        df,
+        output_dir,
+        dataset,
+        train_forms,
+        test_forms,
+        input_images_dir=input_images_dir,
+    )
 
     # Log statistics
     logger.info(f"Processed {len(df)} question-answer pairs")

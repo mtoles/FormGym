@@ -13,4 +13,4 @@ max_examples_per_image: 100
 
 # Dataset paths
 train_paths: ["tool/dataset/processed/funsd_train_qa_pairs.json", "tool/dataset/processed/xfund_train_qa_pairs.json", "tool/dataset/processed/form-nlu_train_qa_pairs.json"]
-eval_path: "tool/dataset/processed/funsd_test_qa_pairs.json"
+eval_paths: ["tool/dataset/processed/funsd_test_qa_pairs.json", "tool/dataset/processed/xfund_test_qa_pairs.json", "tool/dataset/processed/form-nlu_test_qa_pairs.json"]
