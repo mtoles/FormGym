@@ -214,12 +214,6 @@ def main(
         ).convert("RGB")
         if domain in [DomainEnum.FUNSD.value, DomainEnum.FORM_NLU.value]:
             annots = all_annots_dict[fid]
-            # annot_path_old = f"annotations/funsd_test/{fid}.json"
-            # annots_old = annotations.read_annotations_funsd(annot_path_old)
-            # assert (
-            #     annots_old == annots
-            # ), "annotations from old and new format should be equal"
-            # check each key/value is equal
             blank_img = mask_answer_field(blank_img, annots)
             targets = [x["id"] for x in annots]
             doc_state = DocState(annots, blank_img=blank_img, doc_id=fid)
