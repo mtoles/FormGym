@@ -151,6 +151,7 @@ def main(
     download_dir,
     gt_coordinates,
     source_doc_id=None,
+    downsample=None,
 ):
     today = datetime.now().strftime("%Y-%m-%d")
     now = datetime.now().strftime("%H:%M:%S")
@@ -184,6 +185,10 @@ def main(
         file_ids = [annot["id"] for annot in all_annots]
     else:
         raise ValueError(f"Invalid domain: {domain}")
+
+    # Apply downsampling if specified
+    if downsample is not None:
+        file_ids = file_ids[:downsample]
     # convert all_annots to a dictionary where the key is form_id and value is a list of annotations
     all_annots_dict = {}
     for annot in all_annots:
@@ -571,6 +576,12 @@ if __name__ == "__main__":
         default=False,
         help="Whether to pass ground truth coordinates to the model",
     )
+    parser.add_argument(
+        "--downsample",
+        type=int,
+        default=None,
+        help="Number of files to process (downsample from total available files)",
+    )
     args = parser.parse_args()
 
     # mirrors the argparse structure
@@ -590,6 +601,7 @@ if __name__ == "__main__":
         args.download_dir,
         args.gt_coordinates,
         args.source_doc_id,
+        args.downsample,
     ]
     # called with the param list
     overall_results = main(*params)

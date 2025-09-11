@@ -95,13 +95,15 @@ def read_annotations_from_preprocessed(filename):
             "h": (y2 - y1) / h,
         }
 
-
+        # Add a new field to the field meta class
+        def new_get_profile_info(cls, user_profile):
+            return answer_text
 
         new_field_class = fields.FieldMeta.__new__(
             fields.FieldMeta,
             key,
             (fields.BaseStringField,),
-            {"get_profile_info": answer_text},
+            {"get_profile_info": new_get_profile_info},
         )
 
         annotations.append(
