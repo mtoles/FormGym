@@ -222,7 +222,7 @@ def main(
             blank_img = mask_answer_field(blank_img, annots)
             targets = [x["id"] for x in annots]
             doc_state = DocState(annots, blank_img=blank_img, doc_id=fid)
-            relevant_user_features = set([annots[0]["field_name"]])
+            relevant_user_features = set([annot["field_name"] for annot in annots])
 
         else:
             annot_path = f"annotations/{fid}.json"
