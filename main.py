@@ -235,7 +235,7 @@ def main(
             blank_img = Image.open(
                 f"tool/dataset/processed/images/{domain}_processed_{fid}.png"
             ).convert("RGB")
-        if domain in [DomainEnum.FUNSD.value, DomainEnum.FORM_NLU.value]:
+        if domain in [DomainEnum.FUNSD.value, DomainEnum.FORM_NLU.value, DomainEnum.XFUND.value]:
             annots = all_annots_dict[fid]
             blank_img = mask_answer_field(blank_img, annots)
             targets = [x["id"] for x in annots]
