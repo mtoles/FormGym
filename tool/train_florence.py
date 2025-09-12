@@ -51,18 +51,12 @@ class FormGymDataset(Dataset):
         with open(json_path, "r") as f:
             raw_data = json.load(f)
 
-        # Process and standardize format for all datasets
-        processed_data = []
-        for example in raw_data:
-            processed_example = self._standardize_format(example)
-            processed_data.append(processed_example)
-
         # Shuffle the data
-        random.shuffle(processed_data)
+        random.shuffle(raw_data)
 
         # Group examples by image file
         image_groups = {}
-        for example in processed_data:
+        for example in raw_data:
             image_path = example["processed_image"]
             # image_prefix = "_".join(image_path.split("_")[:-1])
             if image_path not in image_groups:
@@ -80,31 +74,10 @@ class FormGymDataset(Dataset):
             if max_examples_per_image is not None:
                 examples = examples[:max_examples_per_image]
             self.data.extend(examples)
-        print(f"Total examples reduced from {len(processed_data)} to {len(self.data)}")
+        print(f"Total examples reduced from {len(raw_data)} to {len(self.data)}")
         # Apply downsampling if max_size is specified
         if max_size is not None and max_size < len(self.data):
             self.data = random.sample(self.data, max_size)
-
-    def _standardize_format(self, example):
-        """
-        Standardize format across all datasets.
-        For form-nlu table cells, format question_text as "section | row | column"
-        """
-        processed_example = example.copy()
-
-        # Check if this is a form-nlu dataset entry with table structure
-        question_text = example.get("question_text", "")
-
-        # If question_text contains multiple "|" separators, it's likely form-nlu table data
-        if question_text.count("|") >= 2:
-            # Split into parts: section | row | column
-            parts = [part.strip() for part in question_text.split("|")]
-            if len(parts) >= 3:
-                section, row, column = parts[0], parts[1], parts[2]
-                # Format as "section | row | column" for table cells
-                processed_example["question_text"] = f"{section} | {row} | {column}"
-
-        return processed_example
 
     def __len__(self):
         return len(self.data)
@@ -223,215 +196,12 @@ def calculate_loss(model, data_loader, processor):
     return avg_loss
 
 
-def calculate_iou_accuracy_detailed(
-    model, data_loader, processor, max_iou_examples=None
-):
-    """Calculate IoU accuracy with per-dataset breakdown for concatenated datasets"""
-    model.eval()
-    total_iou = 0
-    total_center_accuracy = 0
-    num_samples = 0
-    predictions_data = []
-
-    # Track per-dataset metrics
-    dataset_metrics = {
-        "FUNSD": {"iou": [], "center_acc": []},
-        "XFUND": {"iou": [], "center_acc": []},
-        "FORM-NLU": {"iou": [], "center_acc": []},
-    }
-
-    with torch.no_grad():
-        for batch_idx, (
-            inputs,
-            answers,
-            widths,
-            heights,
-            gt_bboxes,
-            image_paths,
-        ) in tqdm(enumerate(data_loader)):
-            if max_iou_examples is not None and num_samples >= max_iou_examples:
-                break
-
-            input_text = processor.batch_decode(
-                inputs["input_ids"], skip_special_tokens=False
-            )
-            batch_size = len(input_text)
-
-            # Get decoder start tokens for the entire batch
-            decoder_input_ids = torch.tensor(
-                [[model.config.text_config.bos_token_id]] * batch_size, device=device
-            )
-            current_ids = decoder_input_ids
-            max_length = 64
-
-            # Generate tokens one by one for the entire batch
-            generated_ids_list = [[] for _ in range(batch_size)]
-            still_generating = [True for _ in range(batch_size)]
-            for _ in range(max_length):
-                outputs = model(
-                    input_ids=inputs["input_ids"],
-                    pixel_values=inputs["pixel_values"],
-                    decoder_input_ids=current_ids,
-                )
-
-                # Get the next tokens for the entire batch
-                next_tokens = outputs.logits[:, -1, :].argmax(dim=-1).unsqueeze(-1)
-
-                # Update generated IDs and check for EOS tokens
-                for i in range(batch_size):
-                    if (
-                        len(generated_ids_list[i]) == 0
-                        or generated_ids_list[i][-1]
-                        != model.config.text_config.eos_token_id
-                    ):
-                        generated_ids_list[i].append(next_tokens[i].item())
-                    if (
-                        generated_ids_list[i][-1]
-                        == model.config.text_config.eos_token_id
-                    ):
-                        still_generating[i] = False
-
-                # Check if all sequences have reached EOS
-                if all(
-                    len(ids) > 0 and ids[-1] == model.config.text_config.eos_token_id
-                    for ids in generated_ids_list
-                ):
-                    break
-
-                # Update input for next iteration
-                current_ids = torch.cat([current_ids, next_tokens], dim=-1)
-
-                if not any(still_generating):
-                    break
-
-            # Process each sample in the batch
-            generated_texts = processor.batch_decode(
-                generated_ids_list, skip_special_tokens=False
-            )
-
-            for i, generated_text in enumerate(generated_texts):
-
-                parsed_answer = processor.post_process_generation(
-                    generated_text,
-                    task=TASK_NAME_PREFIX,
-                    image_size=(widths[i], heights[i]),
-                )
-                parsed_bboxes = parsed_answer[TASK_NAME_PREFIX]["bboxes"]
-                pred_bboxes = [
-                    {
-                        "x1": float(bbox[0]) / 1000,
-                        "y1": float(bbox[1]) / 1000,
-                        "x2": float(bbox[2]) / 1000,
-                        "y2": float(bbox[3]) / 1000,
-                    }
-                    for bbox in parsed_bboxes
-                ]
-                gt_bbox = {
-                    "x1": float(gt_bboxes[i]["x1"]) / 1000,
-                    "y1": float(gt_bboxes[i]["y1"]) / 1000,
-                    "x2": float(gt_bboxes[i]["x2"]) / 1000,
-                    "y2": float(gt_bboxes[i]["y2"]) / 1000,
-                }
-
-                if len(pred_bboxes) == 0:
-                    pred_bbox = None  # always wrong
-                    center_accuracy = 0
-                else:
-                    pred_bbox = pred_bboxes[0]
-                    # Calculate center of predicted bbox
-                    pred_center_x = (pred_bbox["x1"] + pred_bbox["x2"]) / 2
-                    pred_center_y = (pred_bbox["y1"] + pred_bbox["y2"]) / 2
-
-                    # Check if center is inside ground truth bbox
-                    center_accuracy = (
-                        1
-                        if (
-                            gt_bbox["x1"] <= pred_center_x <= gt_bbox["x2"]
-                            and gt_bbox["y1"] <= pred_center_y <= gt_bbox["y2"]
-                        )
-                        else 0
-                    )
-
-                # Calculate IoU
-                iou = calculate_iou(pred_bbox, gt_bbox)
-                total_iou += iou
-                total_center_accuracy += center_accuracy
-
-                # Determine source dataset from image path (now prefixed)
-                image_path = image_paths[i]
-                source_dataset = "UNKNOWN"
-                if "funsd_processed_" in image_path.lower():
-                    source_dataset = "FUNSD"
-                elif "xfund_processed_" in image_path.lower():
-                    source_dataset = "XFUND"
-                elif "form-nlu_processed_" in image_path.lower():
-                    source_dataset = "FORM-NLU"
-                else:
-                    raise ValueError(f"Unknown dataset in image path: {image_path}")
-                    # # Fallback to old detection method for backward compatibility
-                    # if "funsd" in image_path.lower():
-                    #     source_dataset = "FUNSD"
-                    # elif "xfund" in image_path.lower() or any(
-                    #     lang in image_path.lower()
-                    #     for lang in ["pt_", "de_", "fr_", "it_", "es_", "ja_", "zh_"]
-                    # ):
-                    #     source_dataset = "XFUND"
-                    # elif any(
-                    #     pattern in image_path.lower() for pattern in ["00", "_page-"]
-                    # ):  # Form-NLU pattern
-                    #     source_dataset = "FORM-NLU"
-
-                # Track per-dataset metrics
-                if source_dataset in dataset_metrics:
-                    dataset_metrics[source_dataset]["iou"].append(iou)
-                    dataset_metrics[source_dataset]["center_acc"].append(
-                        center_accuracy
-                    )
-
-                # Store data for DataFrame
-                predictions_data.append(
-                    {
-                        "input_text": input_text[i],
-                        "generated_text": generated_text,
-                        "ground_truth_bbox": gt_bboxes[i],
-                        "predicted_bbox": pred_bbox,
-                        "iou": iou,
-                        "center_accuracy": center_accuracy,
-                        "image_width": widths[i],
-                        "image_height": heights[i],
-                        "pixel_values": inputs["pixel_values"][i].cpu().numpy(),
-                        "answer": answers[i],
-                        "image_path": image_paths[i],
-                        "source_dataset": source_dataset,
-                    }
-                )
-
-                num_samples += 1
-
-    avg_iou = total_iou / num_samples if num_samples > 0 else 0
-    avg_center_accuracy = total_center_accuracy / num_samples if num_samples > 0 else 0
-
-    # Calculate per-dataset averages
-    per_dataset_results = {}
-    for dataset_name, metrics in dataset_metrics.items():
-        if metrics["iou"]:  # if we have data for this dataset
-            per_dataset_results[dataset_name] = {
-                "avg_iou": sum(metrics["iou"]) / len(metrics["iou"]),
-                "avg_center_accuracy": sum(metrics["center_acc"])
-                / len(metrics["center_acc"]),
-                "sample_count": len(metrics["iou"]),
-            }
-
-    return avg_iou, avg_center_accuracy, predictions_data, per_dataset_results
-
-
 def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None):
     """Calculate IoU accuracy for the first max_examples examples"""
     # if max_iou_examples is None:
     #     max_iou_examples = MAX_IOU_EXAMPLES
     model.eval()
     total_iou = 0
-    total_center_accuracy = 0
     num_samples = 0
     predictions_data = []
 
@@ -443,7 +213,7 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
             heights,
             gt_bboxes,
             image_paths,
-        ) in tqdm(enumerate(data_loader)):
+        ) in enumerate(data_loader):
             if max_iou_examples is not None and num_samples >= max_iou_examples:
                 break
 
@@ -480,10 +250,7 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                         != model.config.text_config.eos_token_id
                     ):
                         generated_ids_list[i].append(next_tokens[i].item())
-                    if (
-                        generated_ids_list[i][-1]
-                        == model.config.text_config.eos_token_id
-                    ):
+                    if generated_ids_list[i][-1] == model.config.text_config.eos_token_id:
                         still_generating[i] = False
 
                 # Check if all sequences have reached EOS
@@ -494,7 +261,7 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                     break
 
                 # Update input for next iteration
-                # print(f"token no: {current_ids.shape[1]}", end="\r")
+                print(f"token no: {current_ids.shape[1]}", end="\r")
                 current_ids = torch.cat([current_ids, next_tokens], dim=-1)
 
                 if not any(still_generating):
@@ -540,27 +307,12 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
 
                 if len(pred_bboxes) == 0:
                     pred_bbox = None  # always wrong
-                    center_accuracy = 0
                 else:
                     pred_bbox = pred_bboxes[0]
-                    # Calculate center of predicted bbox
-                    pred_center_x = (pred_bbox["x1"] + pred_bbox["x2"]) / 2
-                    pred_center_y = (pred_bbox["y1"] + pred_bbox["y2"]) / 2
-
-                    # Check if center is inside ground truth bbox
-                    center_accuracy = (
-                        1
-                        if (
-                            gt_bbox["x1"] <= pred_center_x <= gt_bbox["x2"]
-                            and gt_bbox["y1"] <= pred_center_y <= gt_bbox["y2"]
-                        )
-                        else 0
-                    )
 
                 # Calculate IoU
                 iou = calculate_iou(pred_bbox, gt_bbox)
                 total_iou += iou
-                total_center_accuracy += center_accuracy
 
                 # Store data for DataFrame
                 predictions_data.append(
@@ -570,7 +322,6 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                         "ground_truth_bbox": gt_bboxes[i],
                         "predicted_bbox": pred_bbox,
                         "iou": iou,
-                        "center_accuracy": center_accuracy,
                         "image_width": widths[i],
                         "image_height": heights[i],
                         "pixel_values": inputs["pixel_values"][i].cpu().numpy(),
@@ -582,8 +333,7 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                 num_samples += 1
 
     avg_iou = total_iou / num_samples if num_samples > 0 else 0
-    avg_center_accuracy = total_center_accuracy / num_samples if num_samples > 0 else 0
-    return avg_iou, avg_center_accuracy, predictions_data
+    return avg_iou, predictions_data
 
 
 def manage_checkpoints(checkpoint_dir, max_checkpoints=4):
@@ -643,10 +393,9 @@ def main():
         nargs="+",
     )
     parser.add_argument(
-        "--eval_paths",
-        type=list,
-        help="Paths to evaluation data JSON files (overrides config)",
-        nargs="+",
+        "--eval_path",
+        type=str,
+        help="Path to evaluation data JSON file (overrides config)",
     )
     parser.add_argument(
         "--epochs",
@@ -776,15 +525,10 @@ def main():
         ]
     )
 
-    val_dataset = ConcatDataset(
-        [
-            FormGymDataset(
-                path,
-                max_size=VAL_SIZE,
-                max_examples_per_image=10,
-            )
-            for path in config["eval_paths"]
-        ]
+    val_dataset = FormGymDataset(
+        config["eval_path"],
+        max_size=VAL_SIZE,
+        max_examples_per_image=10,
     )
 
     train_loader = DataLoader(
@@ -852,7 +596,7 @@ def main():
         )
 
     batch_no = -1
-    val_accuracy, val_center_accuracy, predictions_df = None, None, None
+    val_accuracy, val_loss, predictions_df = None, None, None
     total_batches = 0
     batches_per_epoch = len(train_loader)
     for epoch in tqdm(range(EPOCHS), desc="Training Epochs"):
@@ -898,12 +642,7 @@ def main():
                 and batch_no != 0
             ) or batch_no == EPOCHS * batches_per_epoch - 1:
                 val_loss = calculate_loss(model, val_loader, processor)
-                (
-                    val_accuracy,
-                    val_center_accuracy,
-                    predictions_data,
-                    per_dataset_results,
-                ) = calculate_iou_accuracy_detailed(
+                val_accuracy, predictions_data = calculate_iou_accuracy(
                     model,
                     val_loader,
                     processor,
@@ -911,36 +650,9 @@ def main():
                 predictions_df = pd.DataFrame(predictions_data)
 
                 print(f"Validation IoU: {val_accuracy}")
-                print(f"Validation Center Accuracy: {val_center_accuracy}")
                 print(f"Validation Loss: {val_loss}")
-
-                # Log overall metrics
-                wandb.log({"accuracy/val_iou": val_accuracy})
-                wandb.log({"accuracy/val_center_accuracy": val_center_accuracy})
+                wandb.log({"accuracy/val_iou": val_accuracy, "loss/val_loss": val_loss})
                 wandb.log({"loss/val_loss": val_loss})
-
-                # Log per-dataset metrics
-                for dataset_name, metrics in per_dataset_results.items():
-                    print(
-                        f"{dataset_name} - IoU: {metrics['avg_iou']:.4f}, Center Acc: {metrics['avg_center_accuracy']:.4f}, Samples: {metrics['sample_count']}"
-                    )
-                    wandb.log(
-                        {f"accuracy/val_iou_{dataset_name.lower()}": metrics["avg_iou"]}
-                    )
-                    wandb.log(
-                        {
-                            f"accuracy/val_center_accuracy_{dataset_name.lower()}": metrics[
-                                "avg_center_accuracy"
-                            ]
-                        }
-                    )
-                    wandb.log(
-                        {
-                            f"metrics/samples_{dataset_name.lower()}": metrics[
-                                "sample_count"
-                            ]
-                        }
-                    )
 
                 # Save model checkpoint after evaluation
                 current_epoch_fraction = total_batches / batches_per_epoch
@@ -987,24 +699,11 @@ def main():
     os.makedirs(f"tmp/tool/{timestamp}", exist_ok=True)
     if predictions_df is None:
         val_loss = calculate_loss(model, val_loader, processor)
-        val_accuracy, val_center_accuracy, predictions_data, per_dataset_results = (
-            calculate_iou_accuracy_detailed(model, val_loader, processor)
+        val_accuracy, predictions_data = calculate_iou_accuracy(
+            model, val_loader, processor
         )
         wandb.log({"accuracy/val_iou": val_accuracy})
-        wandb.log({"accuracy/val_center_accuracy": val_center_accuracy})
         wandb.log({"loss/val_loss": val_loss})
-
-        # Log per-dataset final metrics
-        for dataset_name, metrics in per_dataset_results.items():
-            wandb.log({f"accuracy/val_iou_{dataset_name.lower()}": metrics["avg_iou"]})
-            wandb.log(
-                {
-                    f"accuracy/val_center_accuracy_{dataset_name.lower()}": metrics[
-                        "avg_center_accuracy"
-                    ]
-                }
-            )
-
         predictions_df = pd.DataFrame(predictions_data)
     for index, row in predictions_df.iterrows():
         # Load the actual image file

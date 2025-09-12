@@ -176,13 +176,23 @@ def main(
     #         if f.endswith(".json")
     #     ]
     # assert len(args.file_ids) == 50, "there should be 50 docs"
-    if domain in [DomainEnum.FORM_NLU.value, DomainEnum.FUNSD.value]:
+    if domain in [
+        DomainEnum.FORM_NLU.value,
+        DomainEnum.FUNSD.value,
+        DomainEnum.AL.value,
+    ]:
         if domain == DomainEnum.FORM_NLU.value:
             annot_path = f"tool/dataset/processed/form-nlu_test_qa_pairs.jsonl"
+            all_annots = annotations.read_annotations_from_preprocessed(annot_path)
+            file_ids = [annot["id"] for annot in all_annots]
         elif domain == DomainEnum.FUNSD.value:
             annot_path = f"tool/dataset/processed/funsd_test_qa_pairs.jsonl"
-        all_annots = annotations.read_annotations_from_preprocessed(annot_path)
-        file_ids = [annot["id"] for annot in all_annots]
+            all_annots = annotations.read_annotations_from_preprocessed(annot_path)
+            file_ids = [annot["id"] for annot in all_annots]
+        elif domain == DomainEnum.AL.value:
+            # AL domain uses file_ids directly, no preprocessed annotation files
+            all_annots = []
+            # file_ids are already provided as input parameter
     else:
         raise ValueError(f"Invalid domain: {domain}")
 
@@ -213,10 +223,13 @@ def main(
         png_path = f"pngs/{fid}.png"
         print(f"Processing file: {png_path}")
 
-        # blank_img = Image.open(png_path).convert("RGB")
-        blank_img = Image.open(
-            f"tool/dataset/processed/images/{domain}_processed_{fid}.png"
-        ).convert("RGB")
+        # AL domain uses original pngs, other domains use processed images
+        if domain == DomainEnum.AL.value:
+            blank_img = Image.open(png_path).convert("RGB")
+        else:
+            blank_img = Image.open(
+                f"tool/dataset/processed/images/{domain}_processed_{fid}.png"
+            ).convert("RGB")
         if domain in [DomainEnum.FUNSD.value, DomainEnum.FORM_NLU.value]:
             annots = all_annots_dict[fid]
             blank_img = mask_answer_field(blank_img, annots)

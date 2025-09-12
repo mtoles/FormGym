@@ -123,7 +123,7 @@ def read_annotations_from_preprocessed(filename):
             (user_features.BaseUserAttr,),
             {
                 "options": [answer_text],
-                "nl_desc": lambda x, k=key: f"The user's {k.split('_')[-1]} is: {x}",
+                "nl_desc": lambda x, _key=key: f"The user's {_key.split('_')[-1]} is: {x}",
             },
         )
 
