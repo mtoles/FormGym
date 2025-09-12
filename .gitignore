@@ -58,8 +58,6 @@ tmp/
 # *.png
 .joblib_cache/
 static/
-pdfs/
-# pngs/
 form-filler/
 
 # Logs and databases
