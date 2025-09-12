@@ -28,6 +28,15 @@ import matplotlib.pyplot as plt
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 import sys
 
+# set all random seeds
+random.seed(42)
+np.random.seed(42)
+torch.manual_seed(42)
+torch.cuda.manual_seed(42)
+torch.cuda.manual_seed_all(42)
+torch.backends.cudnn.deterministic = True
+
+
 print(os.environ["CUDA_HOME"])
 print(os.environ["LD_LIBRARY_PATH"])
 print(torch.cuda.is_available())
@@ -48,6 +57,7 @@ class FormGymDataset(Dataset):
         max_size: int = None,
     ):
         self.image_dir = "tool/dataset/processed/images"
+        # Load data - the .jsonl files are actually JSON arrays, not true JSONL
         with open(json_path, "r") as f:
             raw_data = json.load(f)
 
@@ -776,16 +786,55 @@ def main():
         ]
     )
 
-    val_dataset = ConcatDataset(
-        [
+    # Load each validation dataset separately with different max_examples_per_image
+    val_datasets = []
+    for path in config["eval_paths"]:
+        if "form-nlu" in path or "funsd" in path:
+            max_examples = None
+        elif "xfund" in path:
+            max_examples = 1
+        else:
+            raise ValueError("No such dataset")
+
+        val_datasets.append(
             FormGymDataset(
                 path,
                 max_size=VAL_SIZE,
-                max_examples_per_image=10,
+                max_examples_per_image=max_examples,
             )
-            for path in config["eval_paths"]
-        ]
-    )
+        )
+
+    val_dataset = ConcatDataset(val_datasets)
+
+    # Log dataset sizes to wandb
+    print("Dataset sizes:")
+    print(f"Training dataset: {len(train_dataset)} examples")
+    wandb.log({"dataset/train_size": len(train_dataset)})
+
+    print(f"Validation dataset: {len(val_dataset)} examples")
+    wandb.log({"dataset/val_size": len(val_dataset)})
+
+    # Log per-dataset validation sizes
+    for i, path in enumerate(config["eval_paths"]):
+        dataset_name = os.path.basename(path).replace("_test_qa_pairs.jsonl", "")
+        dataset_size = len(val_datasets[i])
+        print(f"  {dataset_name}: {dataset_size} examples")
+        wandb.log({f"dataset/val_{dataset_name.lower()}_size": dataset_size})
+
+    # Log per-dataset training sizes
+    train_dataset_sizes = []
+    for i, path in enumerate(config["train_paths"]):
+        dataset_name = os.path.basename(path).replace("_train_qa_pairs.jsonl", "")
+        # Get individual dataset size by creating a temporary dataset
+        temp_dataset = FormGymDataset(
+            path, max_size=TRAIN_SIZE, max_examples_per_image=MAX_EXAMPLES_PER_IMAGE
+        )
+        dataset_size = len(temp_dataset)
+        train_dataset_sizes.append(dataset_size)
+        print(f"  {dataset_name}: {dataset_size} examples")
+        wandb.log({f"dataset/train_{dataset_name.lower()}_size": dataset_size})
+
+    print()
 
     train_loader = DataLoader(
         train_dataset,
@@ -805,7 +854,7 @@ def main():
     optimizer = AdamW(model.parameters(), lr=LEARNING_RATE)
     num_training_steps = EPOCHS * len(train_loader)
     lr_scheduler = get_scheduler(
-        name="linear",
+        name="cosine",
         optimizer=optimizer,
         num_warmup_steps=int(0.05 * num_training_steps),
         num_training_steps=num_training_steps,

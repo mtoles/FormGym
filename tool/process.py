@@ -126,6 +126,7 @@ def get_question_and_answer(
     height: int,
     id_to_entry: Dict,
     processed_filename: str = None,
+    split: str = None,
 ) -> dict:
     if entry["label"] == "question":
         cbs = [c for c in entry["text"] if c in "☑☐⬛✓✗\u2611\u2610"]
@@ -158,6 +159,8 @@ def get_question_and_answer(
                         "w": width,
                         "h": height,
                     }
+                    if split:
+                        out_entry["split"] = split
                     return out_entry
         else:
             return None
@@ -171,6 +174,8 @@ def get_question_and_answer(
             "w": width,
             "h": height,
         }
+        if split:
+            out_entry["split"] = split
         return out_entry
     else:
         return None  # I didn't know there were other options
@@ -183,6 +188,7 @@ def process_annotation_and_image(
     output_images_dir: str,
     image_ext: str = DEFAULT_IMAGE_EXT,
     dataset_name: str = None,
+    split: str = None,
 ) -> List[Dict]:
     """
     Process a single document and its corresponding image.
@@ -200,7 +206,25 @@ def process_annotation_and_image(
     pairs = []
     id_to_entry = {entry["id"]: entry for entry in doc}
 
-    input_image_path = os.path.join(input_images_dir, f"{form_id}.{image_ext}")
+    # For XFUND, try both train and test directories due to mismatched organization
+    if dataset_name == "xfund":
+        train_image_path = os.path.join(
+            f"tool/dataset/{dataset_name}_train/images", f"{form_id}.{image_ext}"
+        )
+        test_image_path = os.path.join(
+            f"tool/dataset/{dataset_name}_test/images", f"{form_id}.{image_ext}"
+        )
+
+        if os.path.exists(train_image_path):
+            input_image_path = train_image_path
+        elif os.path.exists(test_image_path):
+            input_image_path = test_image_path
+        else:
+            raise ValueError(
+                f"Could not find image {form_id}.{image_ext} in either XFUND train or test directories"
+            )
+    else:
+        input_image_path = os.path.join(input_images_dir, f"{form_id}.{image_ext}")
 
     # Load input image and get dimensions
     img = cv2.imread(input_image_path)
@@ -218,7 +242,7 @@ def process_annotation_and_image(
     mask = np.zeros((height, width), dtype=np.uint8)
     for entry in doc:
         pair = get_question_and_answer(
-            entry, form_id, width, height, id_to_entry, processed_filename
+            entry, form_id, width, height, id_to_entry, processed_filename, split
         )
         if pair is None:
             continue
@@ -251,6 +275,7 @@ def process_document(
     image_ext: str = DEFAULT_IMAGE_EXT,
     json_file: Optional[str] = None,
     dataset_name: str = None,
+    split: str = None,
 ) -> List[Dict]:
     """
     Process a single document and return its pairs.
@@ -274,7 +299,13 @@ def process_document(
         raise ValueError("Form ID could not be determined")
 
     return process_annotation_and_image(
-        doc, form_id, input_images_dir, output_images_dir, image_ext, dataset_name
+        doc,
+        form_id,
+        input_images_dir,
+        output_images_dir,
+        image_ext,
+        dataset_name,
+        split,
     )
 
 
@@ -637,10 +668,17 @@ def process_document_with_dirs(
     image_ext: str = DEFAULT_IMAGE_EXT,
     json_file: Optional[str] = None,
     dataset_name: str = None,
+    split: str = None,
 ) -> List[Dict]:
     """Process a single document with directory paths."""
     return process_document(
-        data, input_images_dir, output_images_dir, image_ext, json_file, dataset_name
+        data,
+        input_images_dir,
+        output_images_dir,
+        image_ext,
+        json_file,
+        dataset_name,
+        split,
     )
 
 
@@ -724,11 +762,27 @@ def save_dataset(
         if input_images_dir is None:
             if dataset_name == "form-nlu":
                 image_dir = "annotations/form-nlu/images"
+                image_path = os.path.join(image_dir, image_filename)
             else:
-                image_dir = f"tool/dataset/{dataset_name}/images"
+                # Try both train and test directories for FUNSD/XFUND
+                train_image_path = os.path.join(
+                    f"tool/dataset/{dataset_name}_train/images", image_filename
+                )
+                test_image_path = os.path.join(
+                    f"tool/dataset/{dataset_name}_test/images", image_filename
+                )
+
+                if os.path.exists(train_image_path):
+                    image_path = train_image_path
+                elif os.path.exists(test_image_path):
+                    image_path = test_image_path
+                else:
+                    raise ValueError(
+                        f"Image {image_filename} not found in either train or test directories"
+                    )
         else:
             image_dir = input_images_dir
-        image_path = os.path.join(image_dir, image_filename)
+            image_path = os.path.join(image_dir, image_filename)
         temp_output_dir = os.path.join("tmp", dataset_name)
         os.makedirs(temp_output_dir, exist_ok=True)
 
@@ -844,8 +898,11 @@ def main(dataset: str = "funsd") -> None:
         train_annotations_file = "annotations/form-nlu/train.json"
         val_annotations_file = "annotations/form-nlu/val.json"
     else:
-        annotations_dir = Path(f"tool/dataset/{dataset}/annotations")
-        input_images_dir = f"tool/dataset/{dataset}/images"
+        # For funsd and xfund, we need to process both train and test splits
+        train_annotations_dir = Path(f"tool/dataset/{dataset}_train/annotations")
+        test_annotations_dir = Path(f"tool/dataset/{dataset}_test/annotations")
+        train_input_images_dir = f"tool/dataset/{dataset}_train/images"
+        test_input_images_dir = f"tool/dataset/{dataset}_test/images"
         output_images_dir = "tool/dataset/processed/images"
         output_dir = "tool/dataset/processed"
 
@@ -888,42 +945,57 @@ def main(dataset: str = "funsd") -> None:
         )
         print(f"Total QA pairs: {len(all_pairs)}")
     else:
-        # Process FUNSD or XFUND datasets
+        # Process FUNSD or XFUND datasets from both train and test directories
         all_pairs = []
-        for json_file in tqdm(
-            list(annotations_dir.glob("*.json")),
-            desc="Processing JSON files",
-        ):
-            with open(json_file, "r") as f:
-                data = json.load(f)
 
-            if dataset == "xfund":
-                # Process XFUND documents in parallel
-                dataset_items = data["documents"]
-                num_processes = min(cpu_count() // 2 + 1, len(dataset_items))
-                with Pool(processes=num_processes) as pool:
-                    results = pool.starmap(
-                        process_document_with_dirs,
-                        [
-                            (
-                                d,
-                                input_images_dir,
-                                output_images_dir,
-                                "jpg",
-                                json_file,
-                                dataset,
-                            )
-                            for d in dataset_items
-                        ],
+        # Process both train and test splits
+        for split_name, annotations_dir, input_images_dir in [
+            ("test", test_annotations_dir, test_input_images_dir),
+            ("train", train_annotations_dir, train_input_images_dir),
+        ]:
+            print(f"Processing {split_name} split from {annotations_dir}")
+
+            for json_file in tqdm(
+                list(annotations_dir.glob("*.json")),
+                desc=f"Processing {split_name} JSON files",
+            ):
+                with open(json_file, "r") as f:
+                    data = json.load(f)
+
+                if dataset == "xfund":
+                    # Process XFUND documents in parallel
+                    dataset_items = data["documents"]
+                    num_processes = min(cpu_count() // 2 + 1, len(dataset_items))
+                    with Pool(processes=num_processes) as pool:
+                        results = pool.starmap(
+                            process_document_with_dirs,
+                            [
+                                (
+                                    d,
+                                    input_images_dir,
+                                    output_images_dir,
+                                    "jpg",
+                                    json_file,
+                                    dataset,
+                                    split_name,
+                                )
+                                for d in dataset_items
+                            ],
+                        )
+                        for pairs in results:
+                            all_pairs.extend(pairs)
+                else:
+                    # Process FUNSD documents
+                    pairs = process_document(
+                        data,
+                        input_images_dir,
+                        output_images_dir,
+                        "png",
+                        json_file,
+                        dataset,
+                        split_name,
                     )
-                    for pairs in results:
-                        all_pairs.extend(pairs)
-            else:
-                # Process FUNSD documents
-                pairs = process_document(
-                    data, input_images_dir, output_images_dir, "png", json_file, dataset
-                )
-                all_pairs.extend(pairs)
+                    all_pairs.extend(pairs)
 
     # Create and split dataset
     df = pd.DataFrame(all_pairs)
@@ -944,12 +1016,13 @@ def main(dataset: str = "funsd") -> None:
             f"Form-nlu split: {len(train_forms)} train forms, {len(test_forms)} test forms"
         )
     else:
-        # For other datasets, use the standard split
-        unique_forms = df["form_id"].unique()
-        np.random.shuffle(unique_forms)
-        train_size = int(TRAIN_TEST_SPLIT_RATIO * len(unique_forms))
-        train_forms = unique_forms[:train_size]
-        test_forms = unique_forms[train_size:]
+        # For FUNSD/XFUND datasets, use the split field from directory structure
+        train_forms = df[df["split"] == "train"]["form_id"].unique()
+        test_forms = df[df["split"] == "test"]["form_id"].unique()
+
+        print(
+            f"{dataset.upper()} split: {len(train_forms)} train forms, {len(test_forms)} test forms"
+        )
 
     # Save datasets
     save_dataset(
