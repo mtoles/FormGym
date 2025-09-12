@@ -179,6 +179,7 @@ def main(
     if domain in [
         DomainEnum.FORM_NLU.value,
         DomainEnum.FUNSD.value,
+        DomainEnum.XFUND.value,
         DomainEnum.AL.value,
     ]:
         if domain == DomainEnum.FORM_NLU.value:
@@ -187,6 +188,10 @@ def main(
             file_ids = [annot["id"] for annot in all_annots]
         elif domain == DomainEnum.FUNSD.value:
             annot_path = f"tool/dataset/processed/funsd_test_qa_pairs.jsonl"
+            all_annots = annotations.read_annotations_from_preprocessed(annot_path)
+            file_ids = [annot["id"] for annot in all_annots]
+        elif domain == DomainEnum.XFUND.value:
+            annot_path = f"tool/dataset/processed/xfund_test_qa_pairs.jsonl"
             all_annots = annotations.read_annotations_from_preprocessed(annot_path)
             file_ids = [annot["id"] for annot in all_annots]
         elif domain == DomainEnum.AL.value:

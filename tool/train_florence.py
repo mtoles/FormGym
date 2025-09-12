@@ -215,6 +215,11 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
     num_samples = 0
     predictions_data = []
 
+    # Calculate total number of examples for progress bar
+    total_examples = len(data_loader.dataset)
+    if max_iou_examples is not None:
+        total_examples = min(total_examples, max_iou_examples)
+
     with torch.no_grad():
         for batch_idx, (
             inputs,
@@ -223,7 +228,13 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
             heights,
             gt_bboxes,
             image_paths,
-        ) in enumerate(data_loader):
+        ) in enumerate(
+            tqdm(
+                data_loader,
+                desc=f"Evaluating ({total_examples} examples)",
+                total=len(data_loader),
+            )
+        ):
             if max_iou_examples is not None and num_samples >= max_iou_examples:
                 break
 
@@ -260,7 +271,10 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                         != model.config.text_config.eos_token_id
                     ):
                         generated_ids_list[i].append(next_tokens[i].item())
-                    if generated_ids_list[i][-1] == model.config.text_config.eos_token_id:
+                    if (
+                        generated_ids_list[i][-1]
+                        == model.config.text_config.eos_token_id
+                    ):
                         still_generating[i] = False
 
                 # Check if all sequences have reached EOS

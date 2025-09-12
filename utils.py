@@ -13,7 +13,7 @@ class DomainEnum(Enum):
     CR = "cr"  # consolidated report of income
     FUNSD = "funsd"  # funsd/xfund
     FORM_NLU = "form-nlu"  # form-nlu
-
+    XFUND = "xfund"  # xfund
 
 class FlowEnum(Enum):
     ONESHOT = "oneshot"
@@ -86,6 +86,8 @@ def get_domain_from_doc_id(doc_id: str) -> DomainEnum:
         return DomainEnum.FUNSD
     elif doc_id == "form-nlu":
         return DomainEnum.FORM_NLU
+    elif doc_id == "xfund":
+        return DomainEnum.XFUND
     elif doc_id.startswith("xx_"):
         return DomainEnum.AL
     else:
