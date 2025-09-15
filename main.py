@@ -543,6 +543,13 @@ def main(
             f"- Total Placements: {sum([m['total_placements'] for m in file_wise_metrics])}\n"
         )
 
+        # Add cost information for API models
+        if hasattr(model, "total_cost") and model.total_cost > 0:
+            f.write(f"- Total Cost: ${model.total_cost:.4f}\n")
+            f.write(f"- Cost per Document: ${model.total_cost / len(file_ids):.4f}\n")
+            f.write(f"- Total Input Tokens: {model.total_input_tokens:,}\n")
+            f.write(f"- Total Output Tokens: {model.total_output_tokens:,}\n\n")
+
         # Write raw data
         f.write("## Raw Data\n")
         f.write("| File | Accuracy | Actions |\n")

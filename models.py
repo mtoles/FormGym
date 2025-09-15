@@ -270,6 +270,10 @@ def parse_and_reconstruct_fields(response_text):
             match_dict = json.loads(match)
             action_name = match_dict["action"]
 
+            # Handle case where LLM generates action as a list instead of string
+            if isinstance(action_name, list):
+                action_name = action_name[0] if action_name else "InvalidAction"
+
             # Assume these are defined somewhere in your code:
             #   ActionMeta.registry -> dict of valid actions
             #   InvalidAction -> some fallback action class
@@ -496,6 +500,31 @@ class GptModelE2E:
     def __init__(self, model_name: str, draw_grid: bool = False):
         self.model_name = model_name
         self.draw_grid = draw_grid
+        self.total_cost = 0.0
+        self.total_input_tokens = 0
+        self.total_output_tokens = 0
+
+    def calculate_cost(self, input_tokens, output_tokens):
+        """Calculate cost based on model pricing"""
+        # GPT-4 Vision pricing (as of 2024)
+        if "gpt-4o-mini" in self.model_name.lower():
+            input_cost_per_1k = 0.15  # $15 per 1M tokens
+            output_cost_per_1k = 0.6  # $6 per 1M tokens
+        elif "gpt-4o" in self.model_name.lower():
+            input_cost_per_1k = 2.5  # $2.5 per 1M tokens
+            output_cost_per_1k = 10  # $10 per 1M tokens
+        elif "gpt-5-mini" in self.model_name.lower():
+            input_cost_per_1k = 0.25  # $0.25 per 1M tokens
+            output_cost_per_1k = 2  # $20 per 1M tokens
+        elif "gpt-5" in self.model_name.lower():
+            input_cost_per_1k = 1.25  # $2.5 per 1M tokens
+            output_cost_per_1k = 10  # $10 per 1M tokens
+        else:  # Default to GPT-4 pricing
+            raise ValueError(f"Unsupported model: {self.model_name}")
+
+        input_cost = (input_tokens / 1000000) * input_cost_per_1k
+        output_cost = (output_tokens / 1000000) * output_cost_per_1k
+        return input_cost + output_cost
 
     def forward(
         self,
@@ -541,18 +570,26 @@ class GptModelE2E:
                 )
             else:
                 base64_source_image = None
-            response = (
-                forward_gpt(
-                    self.model_name,
-                    prompt,
-                    image_b64,
-                    base64_source_image=(
-                        base64_source_image if base64_source_image else None
-                    ),
-                )
-                .choices[0]
-                .message.content
+            completion = forward_gpt(
+                self.model_name,
+                prompt,
+                image_b64,
+                base64_source_image=(
+                    base64_source_image if base64_source_image else None
+                ),
             )
+
+            response = completion.choices[0].message.content
+
+            # Track usage and costs
+            if hasattr(completion, "usage") and completion.usage:
+                input_tokens = completion.usage.prompt_tokens
+                output_tokens = completion.usage.completion_tokens
+                self.total_input_tokens += input_tokens
+                self.total_output_tokens += output_tokens
+                cost = self.calculate_cost(input_tokens, output_tokens)
+                self.total_cost += cost
+
 
             tool_params = parse_and_reconstruct_fields(response)
             outputs.append(tool_params)
@@ -699,6 +736,25 @@ class AnthropicModelE2E:
     def __init__(self, model_name: str, draw_grid: bool = False):
         self.model_name = model_name
         self.draw_grid = draw_grid
+        self.total_cost = 0.0
+        self.total_input_tokens = 0
+        self.total_output_tokens = 0
+
+    def calculate_cost(self, input_tokens, output_tokens):
+        """Calculate cost based on Anthropic model pricing"""
+        # Anthropic Claude pricing (as of 2024)
+        if "claude-3-7-sonnet" in self.model_name.lower():
+            input_cost_per_1k = 3  # $3 per 1M tokens
+            output_cost_per_1k = 15  # $15 per 1M tokens
+        elif "claude-3-5-haiku" in self.model_name.lower():
+            input_cost_per_1k = 0.8  # $0.8 per 1M tokens
+            output_cost_per_1k = 4  # $4 per 1M tokens
+        else:  # Default to Sonnet pricing
+            raise ValueError(f"Unsupported model: {self.model_name}")
+
+        input_cost = (input_tokens / 1000000) * input_cost_per_1k
+        output_cost = (output_tokens / 1000000) * output_cost_per_1k
+        return input_cost + output_cost
 
     def forward(
         self,
@@ -744,16 +800,27 @@ class AnthropicModelE2E:
                     "utf-8"
                 )
 
-            response = (
-                forward_anthropic(
-                    self.model_name,
-                    prompt,
-                    base64_image,
-                    base64_source_image,
-                )
-                .content[0]
-                .text
+            message = forward_anthropic(
+                self.model_name,
+                prompt,
+                base64_image,
+                base64_source_image,
             )
+
+            response = message.content[0].text
+
+            # Track usage and costs
+            if hasattr(message, "usage") and message.usage:
+                input_tokens = message.usage.input_tokens
+                output_tokens = message.usage.output_tokens
+                self.total_input_tokens += input_tokens
+                self.total_output_tokens += output_tokens
+                cost = self.calculate_cost(input_tokens, output_tokens)
+                self.total_cost += cost
+                print(
+                    f"API call cost: ${cost:.4f} (input: {input_tokens}, output: {output_tokens})"
+                )
+
             print(response)
             tool_params = parse_and_reconstruct_fields(response)
             outputs.append(tool_params)

@@ -36,12 +36,13 @@ class ImagePdfFill(BaseTask):
                 field=field_class, agent_generations=doc_state.marks
             )
             mark_creators_inside = [x["creator"] for x in marks_inside]
-            concatted_input = fields.concat_agent_generations(marks_inside)
+            # concatted_input = fields.concat_agent_generations(agent_generations_inside)
             profile_info = field_class.get_profile_info(user_profile)
             field["gt"] = profile_info  # field_class.get_profile_info(form_state.state)
-            field["pred"] = concatted_input
+            field["pred"] = fields.concat_agent_generations(marks_inside)
             field["correct"] = field_class.is_correct(
-                agent_generations_inside=concatted_input,
+                # agent_generations_inside=fields.concat_agent_generations(marks_inside),
+                agent_generations_inside=marks_inside,
                 profile_info=profile_info,
             )
 

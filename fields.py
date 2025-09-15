@@ -146,6 +146,8 @@ class BaseNameField(BaseField):
 
 class BaseDurationField(BaseField):
     def is_correct(self, agent_generations_inside, profile_info: str):
+        if not agent_generations_inside:
+            return 0 == int(profile_info)
         # convert years to months
         years = re.search(r"(\d+) year", agent_generations_inside)
         months = re.search(r"(\d+) month", agent_generations_inside)
