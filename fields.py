@@ -147,14 +147,18 @@ class BaseNameField(BaseField):
 class BaseDurationField(BaseField):
     def is_correct(self, agent_generations_inside, profile_info: str):
         # convert years to months
-        years = re.search(r"(\d+) year", agent_generations_inside).group()
-        months = re.search(r"(\d+) month", agent_generations_inside).group()
+        years = re.search(r"(\d+) year", agent_generations_inside)
+        months = re.search(r"(\d+) month", agent_generations_inside)
         if years is not None:
-            years = int(years)
-            months = years * 12
+            years = int(years.group())
+            # months = years * 12
+        else:
+            years = 0
         if months is not None:
-            months = int(months)
-        return months == int(profile_info)
+            months = int(months.group())
+        else:
+            months = 0
+        return months + 12 * years == int(profile_info)
 
 
 class AnnotatedField(BaseField):
