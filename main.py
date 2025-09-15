@@ -181,6 +181,7 @@ def main(
         DomainEnum.FUNSD.value,
         DomainEnum.XFUND.value,
         DomainEnum.AL.value,
+        DomainEnum.CR.value,
     ]:
         if domain == DomainEnum.FORM_NLU.value:
             annot_path = f"tool/dataset/processed/form-nlu_test_qa_pairs.jsonl"
@@ -194,7 +195,7 @@ def main(
             annot_path = f"tool/dataset/processed/xfund_test_qa_pairs.jsonl"
             all_annots = annotations.read_annotations_from_preprocessed(annot_path)
             file_ids = [annot["id"] for annot in all_annots]
-        elif domain == DomainEnum.AL.value:
+        elif domain in [DomainEnum.AL.value, DomainEnum.CR.value]:
             # AL domain uses file_ids directly, no preprocessed annotation files
             all_annots = []
             # file_ids are already provided as input parameter
@@ -229,13 +230,17 @@ def main(
         print(f"Processing file: {png_path}")
 
         # AL domain uses original pngs, other domains use processed images
-        if domain == DomainEnum.AL.value:
+        if domain in [DomainEnum.AL.value, DomainEnum.CR.value]:
             blank_img = Image.open(png_path).convert("RGB")
         else:
             blank_img = Image.open(
                 f"tool/dataset/processed/images/{domain}_processed_{fid}.png"
             ).convert("RGB")
-        if domain in [DomainEnum.FUNSD.value, DomainEnum.FORM_NLU.value, DomainEnum.XFUND.value]:
+        if domain in [
+            DomainEnum.FUNSD.value,
+            DomainEnum.FORM_NLU.value,
+            DomainEnum.XFUND.value,
+        ]:
             annots = all_annots_dict[fid]
             blank_img = mask_answer_field(blank_img, annots)
             targets = [x["id"] for x in annots]

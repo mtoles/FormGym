@@ -103,6 +103,20 @@
       "slot_names": [
         "0"
       ]
+    },
+    {
+      "bounding_box": {
+        "h": 92.5241,
+        "w": 221.1325,
+        "x": 432.0873,
+        "y": 217.4315
+      },
+      "id": "2270f9f0-8921-491a-8f36-64689af7c5d8",
+      "name": "fun_new_class",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
     }
   ],
   "properties": []
