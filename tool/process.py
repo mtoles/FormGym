@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 SUPPORTED_DATASETS = ["funsd", "xfund", "form-nlu"]
 DEFAULT_IMAGE_EXT = "png"
 TRAIN_TEST_SPLIT_RATIO = 0.8
-SHORT_DATASET_SIZE = 64
+SHORT_DATASET_SIZE = 100
 
 
 @dataclass
@@ -724,6 +724,20 @@ def save_dataset(
         if input_images_dir is None:
             if dataset_name == "form-nlu":
                 image_dir = "annotations/form-nlu/images"
+            elif dataset_name == "funsd":
+                # For FUNSD, we need to find the image in either train or test split
+                # Try train first, then test
+                train_image_path = f"tool/dataset/funsd_train/images/{image_filename}"
+                test_image_path = f"tool/dataset/funsd_test/images/{image_filename}"
+                if os.path.exists(train_image_path):
+                    image_dir = "tool/dataset/funsd_train/images"
+                elif os.path.exists(test_image_path):
+                    image_dir = "tool/dataset/funsd_test/images"
+                else:
+                    print(
+                        f"Warning: Image {image_filename} not found in either train or test directories"
+                    )
+                    continue
             else:
                 image_dir = f"tool/dataset/{dataset_name}/images"
         else:
@@ -843,6 +857,11 @@ def main(dataset: str = "funsd") -> None:
         output_dir = "tool/dataset/processed"
         train_annotations_file = "annotations/form-nlu/train.json"
         val_annotations_file = "annotations/form-nlu/val.json"
+    elif dataset == "funsd":
+        # FUNSD has split directories, so we don't set a single input_images_dir
+        input_images_dir = None
+        output_images_dir = "tool/dataset/processed/images"
+        output_dir = "tool/dataset/processed"
     else:
         annotations_dir = Path(f"tool/dataset/{dataset}/annotations")
         input_images_dir = f"tool/dataset/{dataset}/images"
@@ -887,8 +906,40 @@ def main(dataset: str = "funsd") -> None:
             f"Generated {len(train_pairs)} train QA pairs and {len(val_pairs)} test QA pairs"
         )
         print(f"Total QA pairs: {len(all_pairs)}")
+    elif dataset == "funsd":
+        # Process FUNSD dataset with train/test splits
+        print(f"Processing FUNSD dataset...")
+        all_pairs = []
+
+        # Process both train and test splits
+        for split in ["train", "test"]:
+            split_annotations_dir = Path(f"tool/dataset/funsd_{split}/annotations")
+            split_images_dir = f"tool/dataset/funsd_{split}/images"
+
+            print(f"Processing {split} split from {split_annotations_dir}")
+
+            if not split_annotations_dir.exists():
+                print(f"Warning: {split_annotations_dir} does not exist, skipping")
+                continue
+
+            for json_file in tqdm(
+                list(split_annotations_dir.glob("*.json")),
+                desc=f"Processing {split} JSON files",
+            ):
+                with open(json_file, "r") as f:
+                    data = json.load(f)
+
+                # Process FUNSD documents
+                pairs = process_document(
+                    data, split_images_dir, output_images_dir, "png", json_file, dataset
+                )
+                all_pairs.extend(pairs)
+
+            print(
+                f"Generated {len([p for p in all_pairs if p.get('split') == split])} QA pairs for {split} split"
+            )
     else:
-        # Process FUNSD or XFUND datasets
+        # Process XFUND datasets
         all_pairs = []
         for json_file in tqdm(
             list(annotations_dir.glob("*.json")),
@@ -919,7 +970,7 @@ def main(dataset: str = "funsd") -> None:
                     for pairs in results:
                         all_pairs.extend(pairs)
             else:
-                # Process FUNSD documents
+                # Process other datasets
                 pairs = process_document(
                     data, input_images_dir, output_images_dir, "png", json_file, dataset
                 )
@@ -927,6 +978,16 @@ def main(dataset: str = "funsd") -> None:
 
     # Create and split dataset
     df = pd.DataFrame(all_pairs)
+
+    # Debug: Print DataFrame info
+    print(f"DataFrame shape: {df.shape}")
+    print(f"DataFrame columns: {df.columns.tolist()}")
+    if len(df) > 0:
+        print(f"First few rows:")
+        print(df.head())
+    else:
+        print("Warning: No data was processed! Check your dataset paths and structure.")
+        return
 
     # drop duplicates where both the form_id and the question_text are the same
     print(
