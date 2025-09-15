@@ -41,7 +41,8 @@ class ImagePdfFill(BaseTask):
             field["gt"] = profile_info  # field_class.get_profile_info(form_state.state)
             field["pred"] = fields.concat_agent_generations(marks_inside)
             field["correct"] = field_class.is_correct(
-                agent_generations_inside=marks_inside, profile_info=profile_info
+                agent_generations_inside=fields.concat_agent_generations(marks_inside),
+                profile_info=profile_info,
             )
 
         return doc_state
