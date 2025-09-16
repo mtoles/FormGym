@@ -152,6 +152,7 @@ def main(
     gt_coordinates,
     source_doc_id=None,
     downsample=None,
+    use_short_dataset=False,
 ):
     today = datetime.now().strftime("%Y-%m-%d")
     now = datetime.now().strftime("%H:%M:%S")
@@ -184,15 +185,24 @@ def main(
         DomainEnum.CR.value,
     ]:
         if domain == DomainEnum.FORM_NLU.value:
-            annot_path = f"tool/dataset/processed/form-nlu_test_qa_pairs.jsonl"
+            suffix = "_short" if use_short_dataset else ""
+            annot_path = f"tool/dataset/processed/form-nlu_test_qa_pairs{suffix}.jsonl"
+            if use_short_dataset:
+                print(f"Using short dataset: {annot_path}")
             all_annots = annotations.read_annotations_from_preprocessed(annot_path)
             file_ids = [annot["id"] for annot in all_annots]
         elif domain == DomainEnum.FUNSD.value:
-            annot_path = f"tool/dataset/processed/funsd_test_qa_pairs.jsonl"
+            suffix = "_short" if use_short_dataset else ""
+            annot_path = f"tool/dataset/processed/funsd_test_qa_pairs{suffix}.jsonl"
+            if use_short_dataset:
+                print(f"Using short dataset: {annot_path}")
             all_annots = annotations.read_annotations_from_preprocessed(annot_path)
             file_ids = [annot["id"] for annot in all_annots]
         elif domain == DomainEnum.XFUND.value:
-            annot_path = f"tool/dataset/processed/xfund_test_qa_pairs.jsonl"
+            suffix = "_short" if use_short_dataset else ""
+            annot_path = f"tool/dataset/processed/xfund_test_qa_pairs{suffix}.jsonl"
+            if use_short_dataset:
+                print(f"Using short dataset: {annot_path}")
             all_annots = annotations.read_annotations_from_preprocessed(annot_path)
             file_ids = [annot["id"] for annot in all_annots]
         elif domain in [DomainEnum.AL.value, DomainEnum.CR.value]:
@@ -612,6 +622,12 @@ if __name__ == "__main__":
         default=None,
         help="Number of files to process (downsample from total available files)",
     )
+    parser.add_argument(
+        "--use_short_dataset",
+        type=bool,
+        default=True,
+        help="Whether to use the _short.jsonl dataset files for form-nlu, funsd, or xfund",
+    )
     args = parser.parse_args()
 
     # mirrors the argparse structure
@@ -632,6 +648,7 @@ if __name__ == "__main__":
         args.gt_coordinates,
         args.source_doc_id,
         args.downsample,
+        args.use_short_dataset,
     ]
     # called with the param list
     overall_results = main(*params)

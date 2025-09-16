@@ -73,10 +73,6 @@ class FormGymDataset(Dataset):
                 image_groups[image_path] = []
             image_groups[image_path].append(example)
 
-        # # Print number of examples per image
-        # print("\nNumber of examples per image:")
-        # for image_path, examples in image_groups.items():
-        #     print(f"{image_path}: {len(examples)} examples")
 
         # Keep at most max_examples_per_image examples per image
         self.data = []
@@ -313,15 +309,6 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                     }
                     for bbox in parsed_bboxes
                 ]
-                # gt_bboxes = [
-                #     {
-                #         "x1": float(bbox["x1"]) / widths[i],
-                #         "y1": float(bbox["y1"]) / heights[i],
-                #         "x2": float(bbox["x2"]) / widths[i],
-                #         "y2": float(bbox["y2"]) / heights[i],
-                #     }
-                #     for bbox in gt_bboxes
-                # ]
                 gt_bbox = {
                     "x1": float(gt_bboxes[i]["x1"]) / 1000,
                     "y1": float(gt_bboxes[i]["y1"]) / 1000,
@@ -807,14 +794,7 @@ def main():
         output_path = f"tmp/tool/prediction_{index}.png"
         image.save(output_path)
 
-        # # Log to wandb
-        # wandb.log(
-        #     {
-        #         "visualization": wandb.Image(
-        #             image, caption=f"Prediction {index} (Green: GT, Red: Pred)"
-        #         )
-        #     }
-        # )
+
 
 
 if __name__ == "__main__":

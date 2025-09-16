@@ -36,14 +36,19 @@ def remove_punctuation(s):
 
 
 def concat_agent_generations(agent_generations):
-    return " ".join(
-        [
-            x["value"]
-            for x in sorted(
-                agent_generations, key=lambda item: (item["cy"], item["cx"])
-            )
-        ]
-    )
+    if isinstance(agent_generations, str):
+        return agent_generations
+    elif isinstance(agent_generations, list):
+        return " ".join(
+            [
+                x["value"]
+                for x in sorted(
+                    agent_generations, key=lambda item: (item["cy"], item["cx"])
+                )
+            ]
+        )
+    else:
+        raise ValueError(f"Invalid agent generations type: {type(agent_generations)}")
 
 
 def concatenate_address(house_number, street_name, city, state, zipcode):
