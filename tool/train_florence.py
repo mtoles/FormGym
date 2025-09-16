@@ -73,7 +73,6 @@ class FormGymDataset(Dataset):
                 image_groups[image_path] = []
             image_groups[image_path].append(example)
 
-
         # Keep at most max_examples_per_image examples per image
         self.data = []
         for image_path, examples in image_groups.items():
@@ -153,6 +152,28 @@ def calculate_iou(bbox1, bbox2):
     return iou
 
 
+def calculate_inside_accuracy(pred_bbox, gt_bbox):
+    """
+    Calculate if the predicted bounding box is completely inside the target box.
+    Returns 1 if pred_bbox is completely inside gt_bbox, 0 otherwise.
+    Bounding boxes are expected in format [x1, y1, x2, y2]
+    """
+    if pred_bbox is None or gt_bbox is None:
+        return 0
+
+    # Check if center of predicted box is completely inside ground truth box
+    pred_center_x = (pred_bbox["x1"] + pred_bbox["x2"]) / 2
+    pred_center_y = (pred_bbox["y1"] + pred_bbox["y2"]) / 2
+    inside = (
+        pred_center_x >= gt_bbox["x1"]
+        and pred_center_y >= gt_bbox["y1"]
+        and pred_center_x <= gt_bbox["x2"]
+        and pred_center_y <= gt_bbox["y2"]
+    )
+
+    return 1 if inside else 0
+
+
 def collate_fn(batch, processor):
     questions, answers, images, bboxes, image_paths = zip(*batch)
     inputs = processor(
@@ -172,6 +193,7 @@ def calculate_loss(model, data_loader, processor):
     model.eval()
     total_loss = 0
     num_batches = 0
+    print(f"Calculating loss for {len(data_loader)} batches")
 
     with torch.no_grad():
         for batch_idx, (
@@ -181,7 +203,7 @@ def calculate_loss(model, data_loader, processor):
             heights,
             gt_bboxes,
             image_paths,
-        ) in enumerate(data_loader):
+        ) in tqdm(enumerate(data_loader)):
             # Calculate loss for the batch
             labels = processor.tokenizer(
                 text=answers,
@@ -202,12 +224,15 @@ def calculate_loss(model, data_loader, processor):
     return avg_loss
 
 
-def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None):
+def calculate_iou_accuracy(
+    model, data_loader, processor, max_iou_examples=None, dataset_name=None
+):
     """Calculate IoU accuracy for the first max_examples examples"""
     # if max_iou_examples is None:
     #     max_iou_examples = MAX_IOU_EXAMPLES
     model.eval()
     total_iou = 0
+    total_inside_acc = 0
     num_samples = 0
     predictions_data = []
 
@@ -321,9 +346,11 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                 else:
                     pred_bbox = pred_bboxes[0]
 
-                # Calculate IoU
+                # Calculate IoU and inside accuracy
                 iou = calculate_iou(pred_bbox, gt_bbox)
+                inside_acc = calculate_inside_accuracy(pred_bbox, gt_bbox)
                 total_iou += iou
+                total_inside_acc += inside_acc
 
                 # Store data for DataFrame
                 predictions_data.append(
@@ -333,6 +360,8 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                         "ground_truth_bbox": gt_bboxes[i],
                         "predicted_bbox": pred_bbox,
                         "iou": iou,
+                        "inside_accuracy": inside_acc,
+                        "dataset_name": dataset_name,
                         "image_width": widths[i],
                         "image_height": heights[i],
                         "pixel_values": inputs["pixel_values"][i].cpu().numpy(),
@@ -344,7 +373,74 @@ def calculate_iou_accuracy(model, data_loader, processor, max_iou_examples=None)
                 num_samples += 1
 
     avg_iou = total_iou / num_samples if num_samples > 0 else 0
-    return avg_iou, predictions_data
+    avg_inside_acc = total_inside_acc / num_samples if num_samples > 0 else 0
+    return avg_iou, avg_inside_acc, predictions_data
+
+
+def evaluate_per_dataset(model, val_datasets, config, processor, max_iou_examples=None):
+    """Evaluate model on each dataset separately and log per-dataset metrics to wandb"""
+    per_dataset_metrics = {}
+    all_predictions_data = []
+
+    for i, dataset in enumerate(val_datasets):
+        dataset_name = os.path.basename(config["eval_paths"][i]).replace(
+            "_test_qa_pairs.jsonl", ""
+        )
+        print(f"Evaluating on {dataset_name} dataset...")
+
+        # Create data loader for this dataset
+        dataset_loader = DataLoader(
+            dataset,
+            batch_size=config["val_batch_size"],
+            collate_fn=lambda batch: collate_fn(batch, processor),
+            num_workers=config["num_workers"],
+        )
+
+        # Evaluate on this dataset
+        avg_iou, avg_inside_acc, predictions_data = calculate_iou_accuracy(
+            model, dataset_loader, processor, max_iou_examples, dataset_name
+        )
+
+        # Store metrics
+        per_dataset_metrics[dataset_name] = {
+            "iou": avg_iou,
+            "inside_accuracy": avg_inside_acc,
+            "num_samples": len(predictions_data),
+        }
+
+        # Add to all predictions data
+        all_predictions_data.extend(predictions_data)
+
+        # Log per-dataset metrics to wandb
+        wandb.log(
+            {
+                f"accuracy/{dataset_name}_iou": avg_iou,
+                f"accuracy/{dataset_name}_inside_acc": avg_inside_acc,
+                f"dataset/{dataset_name}_eval_samples": len(predictions_data),
+            }
+        )
+
+        print(f"{dataset_name} - IoU: {avg_iou:.4f}, Inside Acc: {avg_inside_acc:.4f}")
+
+    # Calculate overall metrics
+    overall_iou = sum(
+        [metrics["iou"] for metrics in per_dataset_metrics.values()]
+    ) / len(per_dataset_metrics)
+    overall_inside_acc = sum(
+        [metrics["inside_accuracy"] for metrics in per_dataset_metrics.values()]
+    ) / len(per_dataset_metrics)
+
+    # Log overall metrics
+    wandb.log(
+        {
+            "accuracy/overall_iou": overall_iou,
+            "accuracy/overall_inside_acc": overall_inside_acc,
+        }
+    )
+
+    print(f"Overall - IoU: {overall_iou:.4f}, Inside Acc: {overall_inside_acc:.4f}")
+
+    return per_dataset_metrics, all_predictions_data
 
 
 def manage_checkpoints(checkpoint_dir, max_checkpoints=4):
@@ -404,9 +500,10 @@ def main():
         nargs="+",
     )
     parser.add_argument(
-        "--eval_path",
+        "--eval_paths",
         type=str,
         help="Path to evaluation data JSON file (overrides config)",
+        nargs="+",
     )
     parser.add_argument(
         "--epochs",
@@ -539,10 +636,12 @@ def main():
     # Load each validation dataset separately with different max_examples_per_image
     val_datasets = []
     for path in config["eval_paths"]:
-        if "form-nlu" in path or "funsd" in path:
+        if "form-nlu" in path:
+            max_examples = None
+        elif "funsd" in path:
             max_examples = None
         elif "xfund" in path:
-            max_examples = 1
+            max_examples = None
         else:
             raise ValueError("No such dataset")
 
@@ -697,17 +796,32 @@ def main():
                 and batch_no != 0
             ) or batch_no == EPOCHS * batches_per_epoch - 1:
                 val_loss = calculate_loss(model, val_loader, processor)
-                val_accuracy, predictions_data = calculate_iou_accuracy(
-                    model,
-                    val_loader,
-                    processor,
+                per_dataset_metrics, all_predictions_data = evaluate_per_dataset(
+                    model, val_datasets, config, processor, MAX_IOU_EXAMPLES
                 )
-                predictions_df = pd.DataFrame(predictions_data)
+                predictions_df = pd.DataFrame(all_predictions_data)
 
-                print(f"Validation IoU: {val_accuracy}")
+                # Calculate overall metrics for logging
+                overall_iou = sum(
+                    [metrics["iou"] for metrics in per_dataset_metrics.values()]
+                ) / len(per_dataset_metrics)
+                overall_inside_acc = sum(
+                    [
+                        metrics["inside_accuracy"]
+                        for metrics in per_dataset_metrics.values()
+                    ]
+                ) / len(per_dataset_metrics)
+
+                print(f"Validation IoU: {overall_iou}")
+                print(f"Validation Inside Acc: {overall_inside_acc}")
                 print(f"Validation Loss: {val_loss}")
-                wandb.log({"accuracy/val_iou": val_accuracy, "loss/val_loss": val_loss})
-                wandb.log({"loss/val_loss": val_loss})
+                wandb.log(
+                    {
+                        "accuracy/val_iou": overall_iou,
+                        "accuracy/overall_inside_acc": overall_inside_acc,
+                        "loss/val_loss": val_loss,
+                    }
+                )
 
                 # Save model checkpoint after evaluation
                 current_epoch_fraction = total_batches / batches_per_epoch
@@ -754,12 +868,26 @@ def main():
     os.makedirs(f"tmp/tool/{timestamp}", exist_ok=True)
     if predictions_df is None:
         val_loss = calculate_loss(model, val_loader, processor)
-        val_accuracy, predictions_data = calculate_iou_accuracy(
-            model, val_loader, processor
+        per_dataset_metrics, all_predictions_data = evaluate_per_dataset(
+            model, val_datasets, config, processor, MAX_IOU_EXAMPLES
         )
-        wandb.log({"accuracy/val_iou": val_accuracy})
-        wandb.log({"loss/val_loss": val_loss})
-        predictions_df = pd.DataFrame(predictions_data)
+        predictions_df = pd.DataFrame(all_predictions_data)
+
+        # Calculate overall metrics for logging
+        overall_iou = sum(
+            [metrics["iou"] for metrics in per_dataset_metrics.values()]
+        ) / len(per_dataset_metrics)
+        overall_inside_acc = sum(
+            [metrics["inside_accuracy"] for metrics in per_dataset_metrics.values()]
+        ) / len(per_dataset_metrics)
+
+        wandb.log(
+            {
+                "accuracy/val_iou": overall_iou,
+                "accuracy/overall_inside_acc": overall_inside_acc,
+                "loss/val_loss": val_loss,
+            }
+        )
     for index, row in predictions_df.iterrows():
         # Load the actual image file
         image = Image.open(row["image_path"]).convert("RGB")
@@ -793,8 +921,6 @@ def main():
         # Save the image
         output_path = f"tmp/tool/prediction_{index}.png"
         image.save(output_path)
-
-
 
 
 if __name__ == "__main__":
