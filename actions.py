@@ -244,6 +244,14 @@ class InvalidAction(BaseAction):
         feedback = "Action: 'InvalidAction'\nDocument returned unchanged."
         return doc_state, feedback
 
+class ContextLengthExceededAction(BaseAction):
+    class Schema(BaseModel):
+        pass
+
+    def act(doc_state, **kwargs):
+        feedback = "Action: 'ContextLengthExceededAction'\nContext length exceeded."
+        return doc_state, feedback
+
 
 class FieldLocalizer(BaseAction):
     documentation = """

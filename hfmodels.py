@@ -106,8 +106,12 @@ class MolmoModel(BaseHFModel):
             model="allenai/Molmo-7B-D-0924",
             trust_remote_code=True,
             dtype="bfloat16",
+            max_model_len=4096,
+
         )
         self.stop_token_ids = None
+
+
 
     def get_templated_prompts(self, base_prompts: List[str]) -> List[str]:
         template_prompts = []

@@ -1,5 +1,5 @@
 import fields
-from actions import ActionMeta, InvalidAction
+from actions import ActionMeta, InvalidAction, ContextLengthExceededAction
 from openai import OpenAI
 import base64
 from PIL import Image, ImageDraw, ImageFont
@@ -39,7 +39,11 @@ from anthropic import (
     RateLimitError as AnthropicRateLimitError,
 )
 import torch
+from transformers import AutoProcessor
+import os
 
+
+os.environ["VLLM_ALLOW_LONG_MAX_MODEL_LEN"] = "1"
 
 memory = Memory(".joblib_cache", verbose=0)
 
@@ -590,7 +594,6 @@ class GptModelE2E:
                 cost = self.calculate_cost(input_tokens, output_tokens)
                 self.total_cost += cost
 
-
             tool_params = parse_and_reconstruct_fields(response)
             outputs.append(tool_params)
         return outputs
@@ -854,6 +857,12 @@ class HFE2EModel:
             raise ValueError(f"Unsupported model: {model_name}")
 
         self.model = model_registry[model_name](n_images=n_images)
+        self.processor = AutoProcessor.from_pretrained(
+            self.model.engine_args.model,
+            trust_remote_code=True,
+            torch_dtype="auto",
+            device_map="auto",
+        )  # for token counting
 
         engine_args_dict = asdict(self.model.engine_args)
         engine_args_dict["download_dir"] = download_dir
@@ -870,11 +879,13 @@ class HFE2EModel:
             ProfileSourceEnum.IMAGE.value: 2,
         }[profile_source]
 
+        # if model_name != "molmo":
         engine_args_dict["limit_mm_per_prompt"] = {"image": num_images}
         # TODO - Argument for multiple GPUs
         # engine_args_dict["tensor_parallel_size"] = 2
-
         self.llm = LLM(**engine_args_dict)
+
+            
 
         self.sampling_params = SamplingParams(
             temperature=1.0,
@@ -917,7 +928,11 @@ class HFE2EModel:
 
         prompts = self.model.get_templated_prompts(base_prompts)
 
-        all_inputs = []
+        # Check tokenized length for each input and filter valid ones
+        valid_inputs = []
+        valid_indices = []
+        max_model_len = self.model.engine_args.max_model_len
+
         for i, (img, sdi, prompt) in enumerate(
             zip(doc_image, source_doc_image, prompts)
         ):
@@ -926,23 +941,51 @@ class HFE2EModel:
                 "prompt": prompt,
                 "multi_modal_data": {"image": images},
             }
+            tokenized_len = self.processor.process(
+                images=input_data["multi_modal_data"]["image"],
+                text=input_data["prompt"],
+            )["input_ids"].shape[0]
 
-            all_inputs.append(input_data)
+            if tokenized_len > max_model_len:
+                print(
+                    f"Input {i} exceeds max model length: {tokenized_len} > {max_model_len}"
+                )
+                # Skip this input - it will be handled as InvalidAction later
+                continue
+            else:
+                valid_inputs.append(input_data)
+                valid_indices.append(i)
+
+        # Process only valid inputs through the LLM
+        if not valid_inputs:
+            # All inputs exceeded max length, return InvalidAction for all
+            return [InvalidAction() for _ in range(len(doc_image))]
 
         start_time = time.time()
-        outputs = self.llm.generate(all_inputs, sampling_params=self.sampling_params)
+        outputs = self.llm.generate(valid_inputs, sampling_params=self.sampling_params)
         elapsed_time = time.time() - start_time
 
+        # Create output mapping for all original inputs
         parsed_outputs = []
-        for i, out in enumerate(outputs):
-            raw_text = out.outputs[0].text
-            print(f"Raw Outputs for input {i}:")
-            print(raw_text)
-            print("====" * 20)
-            parsed_response = parse_and_reconstruct_fields(raw_text)
-            print(f"Parsed Outputs for input {i}:")
-            print(parsed_response)
-            print("====" * 20)
-            parsed_outputs.append(parsed_response)
+        valid_output_idx = 0
+
+        for i in range(len(doc_image)):
+            if i in valid_indices:
+                # This input was processed successfully
+                out = outputs[valid_output_idx]
+                raw_text = out.outputs[0].text
+                print(f"Raw Outputs for input {i}:")
+                print(raw_text)
+                print("====" * 20)
+                parsed_response = parse_and_reconstruct_fields(raw_text)
+                print(f"Parsed Outputs for input {i}:")
+                print(parsed_response)
+                print("====" * 20)
+                parsed_outputs.append(parsed_response)
+                valid_output_idx += 1
+            else:
+                # This input exceeded max length, return InvalidAction
+                print(f"Input {i} exceeded max model length, returning InvalidAction")
+                parsed_outputs.append(ContextLengthExceededAction())
 
         return parsed_outputs
