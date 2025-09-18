@@ -948,28 +948,14 @@ class HFE2EModel:
                     )
                 )
             elif self.model_name == "llava":
-                tokenized_len = len(
-                    self.processor.apply_chat_template(
-                        [
-                            {
-                                "role": "user",
-                                "content": [
-                                    {"type": "text", "text": input_data["prompt"]},
-                                    {
-                                        "type": "image",
-                                        "image": input_data["multi_modal_data"][
-                                            "image"
-                                        ],
-                                    },
-                                ],
-                            }
-                        ],
-                        add_generation_prompt=True,
-                        tokenize=True,
-                        return_dict=True,
-                        return_tensors="pt",
-                    )
-                )
+                tokenized_len = self.processor(
+                    text=prompt,
+                    images=input_data["multi_modal_data"]["image"],
+                    add_generation_prompt=True,
+                    tokenize=True,
+                    return_dict=True,
+                    return_tensors="pt",
+                )["input_ids"].shape[-1]
             else:
                 tokenized_len = self.processor.process(
                     images=input_data["multi_modal_data"]["image"],
