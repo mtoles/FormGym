@@ -152,7 +152,7 @@ def main(
     gt_coordinates,
     source_doc_id=None,
     downsample=None,
-    use_short_dataset=True
+    use_short_dataset=True,
 ):
     today = datetime.now().strftime("%Y-%m-%d")
     now = datetime.now().strftime("%H:%M:%S")

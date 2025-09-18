@@ -885,8 +885,6 @@ class HFE2EModel:
         # engine_args_dict["tensor_parallel_size"] = 2
         self.llm = LLM(**engine_args_dict)
 
-            
-
         self.sampling_params = SamplingParams(
             temperature=1.0,
             max_tokens=4096,
@@ -941,12 +939,44 @@ class HFE2EModel:
                 "prompt": prompt,
                 "multi_modal_data": {"image": images},
             }
-            tokenized_len = self.processor.process(
-                images=input_data["multi_modal_data"]["image"],
-                text=input_data["prompt"],
-            )["input_ids"].shape[0]
+            if self.model_name == "aria":
+                tokenized_len = len(
+                    self.processor.tokenizer.encode(
+                        self.processor.apply_chat_template(
+                            input_data, add_generation_prompt=True, tokenize=False
+                        )
+                    )
+                )
+            elif self.model_name == "llava":
+                tokenized_len = len(
+                    self.processor.apply_chat_template(
+                        [
+                            {
+                                "role": "user",
+                                "content": [
+                                    {"type": "text", "text": input_data["prompt"]},
+                                    {
+                                        "type": "image",
+                                        "image": input_data["multi_modal_data"][
+                                            "image"
+                                        ],
+                                    },
+                                ],
+                            }
+                        ],
+                        add_generation_prompt=True,
+                        tokenize=True,
+                        return_dict=True,
+                        return_tensors="pt",
+                    )
+                )
+            else:
+                tokenized_len = self.processor.process(
+                    images=input_data["multi_modal_data"]["image"],
+                    text=input_data["prompt"],
+                )["input_ids"].shape[0]
 
-            if tokenized_len > max_model_len:
+            if tokenized_len + 10 > max_model_len:
                 print(
                     f"Input {i} exceeds max model length: {tokenized_len} > {max_model_len}"
                 )
@@ -958,8 +988,8 @@ class HFE2EModel:
 
         # Process only valid inputs through the LLM
         if not valid_inputs:
-            # All inputs exceeded max length, return InvalidAction for all
-            return [InvalidAction() for _ in range(len(doc_image))]
+            # All inputs exceeded max length; return list-of-dicts per example
+            return [[{"action": "InvalidAction"}] for _ in range(len(doc_image))]
 
         start_time = time.time()
         outputs = self.llm.generate(valid_inputs, sampling_params=self.sampling_params)
@@ -984,8 +1014,8 @@ class HFE2EModel:
                 parsed_outputs.append(parsed_response)
                 valid_output_idx += 1
             else:
-                # This input exceeded max length, return InvalidAction
+                # This input exceeded max length; return a list of dicts
                 print(f"Input {i} exceeded max model length, returning InvalidAction")
-                parsed_outputs.append(ContextLengthExceededAction())
+                parsed_outputs.append([{"action": "ContextLengthExceededAction"}])
 
         return parsed_outputs
