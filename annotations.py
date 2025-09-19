@@ -96,14 +96,17 @@ def read_annotations_from_preprocessed(filename):
         }
 
         # Add a new field to the field meta class
-        def new_get_profile_info(cls, user_profile):
-            return answer_text
+        def make_get_profile_info(answer_text):
+            def new_get_profile_info(cls, user_profile):
+                return answer_text
+
+            return classmethod(new_get_profile_info)
 
         new_field_class = fields.FieldMeta.__new__(
             fields.FieldMeta,
             key,
             (fields.BaseStringField,),
-            {"get_profile_info": new_get_profile_info},
+            {"get_profile_info": make_get_profile_info(answer_text)},
         )
 
         annotations.append(

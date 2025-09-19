@@ -680,6 +680,7 @@ def forward_gpt(model_name, prompt, base64_image, base64_source_image=None):
     completion = client.chat.completions.create(
         model=model_name,
         messages=messages,
+        reasoning_effort="minimal",
     )
 
     return completion
