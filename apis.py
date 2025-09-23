@@ -1,4 +1,4 @@
-from user_features import UserAttributeMeta, UserProfile, BaseUserDbAttr
+from user_features import UserAttributeMeta, UserProfile, BaseUserCrDbAttr
 import sqlite3
 
 
@@ -9,7 +9,7 @@ class SqlDb:
             # for name, attr_class in UserAttributeMeta.registry.items():
             for name in user_profile.relevant_features:
                 attr_class = UserAttributeMeta.registry[name]
-                if issubclass(attr_class, BaseUserDbAttr) and attr_class.db == "cr":
+                if issubclass(attr_class, BaseUserCrDbAttr) and attr_class.db == "cr":
                     db_content[name] = getattr(user_profile.features, name)
 
             # Create an in-memory SQLite DB and insert key-value pairs
@@ -27,7 +27,7 @@ class SqlDb:
             # for name, attr_class in UserAttributeMeta.registry.items():
             for name in user_profile.relevant_features:
                 attr_class = UserAttributeMeta.registry[name]
-                if issubclass(attr_class, BaseUserDbAttr) and attr_class.db == "sec":
+                if issubclass(attr_class, BaseUserCrDbAttr) and attr_class.db == "sec":
                     row_key = attr_class.row
                     if row_key not in db_content:
                         db_content[row_key] = {}

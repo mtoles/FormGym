@@ -189,7 +189,7 @@ class BaseUserAttr(metaclass=UserAttributeMeta):
     pass
 
 
-class BaseUserDbAttr(metaclass=UserAttributeMeta):
+class BaseUserCrDbAttr(metaclass=UserAttributeMeta):
     form_name, cell_id = __name__.split("_")
 
     @staticmethod
@@ -1928,42 +1928,42 @@ class JointGrossIncomePeriod(BaseUserAttr):
 
 
 ### CONSOLIDATED REPORT OF INCOME FEATURES ###
-class CROI_4435(BaseUserDbAttr):
+class CROI_4435(BaseUserCrDbAttr):
     """1.a.(1)(a): Loans secured by 1–4 family residential properties"""
 
     db = "cr"
     options = ["23456", "34567", "45678", "56789"]
 
 
-class CROI_4436(BaseUserDbAttr):
+class CROI_4436(BaseUserCrDbAttr):
     """1.a.(1)(b): All other loans secured by real estate"""
 
     db = "cr"
     options = ["67890", "78901", "89012", "90123"]
 
 
-class CROI_4012(BaseUserDbAttr):
+class CROI_4012(BaseUserCrDbAttr):
     """1.a.(2): Commercial and industrial loans"""
 
     db = "cr"
     options = ["11234", "22345", "33456", "44567"]
 
 
-class CROI_B485(BaseUserDbAttr):
+class CROI_B485(BaseUserCrDbAttr):
     """1.a.(3)(a): Credit cards"""
 
     db = "cr"
     options = ["55678", "66789", "77890", "88901"]
 
 
-class CROI_B486(BaseUserDbAttr):
+class CROI_B486(BaseUserCrDbAttr):
     """1.a.(3)(b): Other"""
 
     db = "cr"
     options = ["40112", "51223", "62334", "73445"]
 
 
-class CROI_4058(BaseUserDbAttr):
+class CROI_4058(BaseUserCrDbAttr):
     """1.a.(5): All other loans"""
 
     db = "cr"
@@ -1976,49 +1976,49 @@ class CROI_4058(BaseUserDbAttr):
 #     options = ["43456", "54567", "65678", "76789"]
 
 
-class CROI_4065(BaseUserDbAttr):
+class CROI_4065(BaseUserCrDbAttr):
     """1.b: Income from lease financing receivables"""
 
     db = "cr"
     options = ["87890", "98901", "10912", "21023"]
 
 
-class CROI_4115(BaseUserDbAttr):
+class CROI_4115(BaseUserCrDbAttr):
     """1.c: Interest income on balances due from depository institutions"""
 
     db = "cr"
     options = ["31134", "42245", "53356", "64467"]
 
 
-class CROI_B488(BaseUserDbAttr):
+class CROI_B488(BaseUserCrDbAttr):
     """1.d.(1): U.S. Treasury securities and U.S. Government agency obligations"""
 
     db = "cr"
     options = ["75578", "86689", "97790", "10891"]
 
 
-class CROI_B489(BaseUserDbAttr):
+class CROI_B489(BaseUserCrDbAttr):
     """1.d.(2): Mortgage-backed securities"""
 
     db = "cr"
     options = ["21902", "32013", "42124", "52235"]
 
 
-class CROI_4060(BaseUserDbAttr):
+class CROI_4060(BaseUserCrDbAttr):
     """1.d.(3): (3) All other securities (includes securities issued by states and political subdivisions in the U.S.)"""
 
     db = "cr"
     options = ["11365", "22476", "33587", "44698"]
 
 
-class CROI_4020(BaseUserDbAttr):
+class CROI_4020(BaseUserCrDbAttr):
     """1.f: Interest income on federal funds sold and securities purchased under agreements to resell"""
 
     db = "cr"
     options = ["62346", "72457", "82568", "92679"]
 
 
-class CROI_4518(BaseUserDbAttr):
+class CROI_4518(BaseUserCrDbAttr):
     """1.g: Other interest income"""
 
     db = "cr"
@@ -2031,56 +2031,56 @@ class CROI_4518(BaseUserDbAttr):
 #     options = ["54678", "65789", "76890", "87901"]
 
 
-class CROI_4508(BaseUserDbAttr):
+class CROI_4508(BaseUserCrDbAttr):
     """2.a.(1): Interest on deposits - transaction accounts"""
 
     db = "cr"
     options = ["98012", "10123", "21234", "32345"]
 
 
-class CROI_0093(BaseUserDbAttr):
+class CROI_0093(BaseUserCrDbAttr):
     """2.a.(2)(a): Savings deposits (includes MMDAs)"""
 
     db = "cr"
     options = ["43456", "54567", "65678", "76789"]
 
 
-class CROI_HK03(BaseUserDbAttr):
+class CROI_HK03(BaseUserCrDbAttr):
     """2.a.(2)(b): Time deposits of $250,000 or less"""
 
     db = "cr"
     options = ["87890", "98901", "10912", "21023"]
 
 
-class CROI_HK04(BaseUserDbAttr):
+class CROI_HK04(BaseUserCrDbAttr):
     """2.a.(2)(c): Time deposits of more than $250,000"""
 
     db = "cr"
     options = ["31134", "42245", "53356", "64467"]
 
 
-class CROI_4180(BaseUserDbAttr):
+class CROI_4180(BaseUserCrDbAttr):
     """2.b: Expense of federal funds purchased and securities sold under agreements to repurchase"""
 
     db = "cr"
     options = ["75578", "86689", "97790", "10891"]
 
 
-class CROI_4185(BaseUserDbAttr):
+class CROI_4185(BaseUserCrDbAttr):
     """2.c: Interest on trading liabilities and other borrowed money"""
 
     db = "cr"
     options = ["21902", "32013", "42124", "52235"]
 
 
-class CROI_4200(BaseUserDbAttr):
+class CROI_4200(BaseUserCrDbAttr):
     """2.d: Interest on subordinated notes and debentures"""
 
     db = "cr"
     options = ["11365", "22476", "33587", "44698"]
 
 
-class CROI_JJ33(BaseUserDbAttr):
+class CROI_JJ33(BaseUserCrDbAttr):
     """4: Provisions for credit losses"""
 
     db = "cr"
@@ -2247,7 +2247,7 @@ class Title(BaseUserAttr):
 #     @classmethod
 #     def get_profile_info(cls, user_profile):
 #         return user_profile.features.SEC_UnderwritersName
-class SEC_UnderwritersName(BaseUserDbAttr):
+class SEC_UnderwritersName(BaseUserCrDbAttr):
     """Name of the underwriters"""
 
     db = "sec"
@@ -2265,7 +2265,7 @@ class SEC_UnderwritersName(BaseUserDbAttr):
 #     @classmethod
 #     def get_profile_info(cls, user_profile):
 #         return user_profile.features.SEC_SalesCommissionsName
-class SEC_SalesCommissionsName(BaseUserDbAttr):
+class SEC_SalesCommissionsName(BaseUserCrDbAttr):
     """Name of the sales commissions"""
 
     db = "sec"
@@ -2283,7 +2283,7 @@ class SEC_SalesCommissionsName(BaseUserDbAttr):
 #     @classmethod
 #     def get_profile_info(cls, user_profile):
 #         return user_profile.features.SEC_FindersFeesName
-class SEC_FindersFeesName(BaseUserDbAttr):
+class SEC_FindersFeesName(BaseUserCrDbAttr):
     """Name of the finders fees"""
 
     db = "sec"
@@ -2301,7 +2301,7 @@ class SEC_FindersFeesName(BaseUserDbAttr):
 #     @classmethod
 #     def get_profile_info(cls, user_profile):
 #         return user_profile.features.SEC_AuditorName
-class SEC_AuditorName(BaseUserDbAttr):
+class SEC_AuditorName(BaseUserCrDbAttr):
     """Name of the auditor"""
 
     db = "sec"
@@ -2319,7 +2319,7 @@ class SEC_AuditorName(BaseUserDbAttr):
 #     @classmethod
 #     def get_profile_info(cls, user_profile):
 #         return user_profile.features.SEC_LegalName
-class SEC_LegalName(BaseUserDbAttr):
+class SEC_LegalName(BaseUserCrDbAttr):
     """Name of the legal"""
 
     db = "sec"
@@ -2337,7 +2337,7 @@ class SEC_LegalName(BaseUserDbAttr):
 #     @classmethod
 #     def get_profile_info(cls, user_profile):
 #         return user_profile.features.SEC_PromotersName
-class SEC_PromotersName(BaseUserDbAttr):
+class SEC_PromotersName(BaseUserCrDbAttr):
     """Name of the promoters"""
 
     db = "sec"
@@ -2355,7 +2355,7 @@ class SEC_PromotersName(BaseUserDbAttr):
 #     @classmethod
 #     def get_profile_info(cls, user_profile):
 #         return user_profile.features.SEC_BlueSkyComplianceName
-class SEC_BlueSkyComplianceName(BaseUserDbAttr):
+class SEC_BlueSkyComplianceName(BaseUserCrDbAttr):
     """Name of the blue sky compliance"""
 
     db = "sec"
@@ -2373,7 +2373,7 @@ class SEC_BlueSkyComplianceName(BaseUserDbAttr):
 #     @classmethod
 #     def get_profile_info(cls, user_profile):
 #         return user_profile.features.SEC_UnderwritersFees
-class SEC_UnderwritersFees(BaseUserDbAttr):
+class SEC_UnderwritersFees(BaseUserCrDbAttr):
     """Fees of the underwriters"""
 
     db = "sec"
@@ -2386,7 +2386,7 @@ class SEC_UnderwritersFees(BaseUserDbAttr):
 #     @classmethod
 #     def get_profile_info(cls, user_profile):
 #         return user_profile.features.SEC_SalesCommissionsFees
-class SEC_SalesCommissionsFees(BaseUserDbAttr):
+class SEC_SalesCommissionsFees(BaseUserCrDbAttr):
     """Fees of the sales commissions"""
 
     db = "sec"
@@ -2399,7 +2399,7 @@ class SEC_SalesCommissionsFees(BaseUserDbAttr):
 #     @classmethod
 #     def get_profile_info(cls, user_profile):
 #         return user_profile.features.SEC_FindersFeesFees
-class SEC_FindersFeesFees(BaseUserDbAttr):
+class SEC_FindersFeesFees(BaseUserCrDbAttr):
     """Fees of the finders fees"""
 
     db = "sec"
@@ -2412,7 +2412,7 @@ class SEC_FindersFeesFees(BaseUserDbAttr):
 #     @classmethod
 #     def get_profile_info(cls, user_profile):
 #         return user_profile.features.SEC_AuditorFees
-class SEC_AuditorFees(BaseUserDbAttr):
+class SEC_AuditorFees(BaseUserCrDbAttr):
     """Fees of the auditor"""
 
     db = "sec"
@@ -2425,7 +2425,7 @@ class SEC_AuditorFees(BaseUserDbAttr):
 #     @classmethod
 #     def get_profile_info(cls, user_profile):
 #         return user_profile.features.SEC_LegalFees
-class SEC_LegalFees(BaseUserDbAttr):
+class SEC_LegalFees(BaseUserCrDbAttr):
     """Fees of the legal"""
 
     db = "sec"
@@ -2438,7 +2438,7 @@ class SEC_LegalFees(BaseUserDbAttr):
 #     @classmethod
 #     def get_profile_info(cls, user_profile):
 #         return user_profile.features.SEC_PromotersFees
-class SEC_PromotersFees(BaseUserDbAttr):
+class SEC_PromotersFees(BaseUserCrDbAttr):
     """Fees of the promoters"""
 
     db = "sec"
@@ -2451,7 +2451,7 @@ class SEC_PromotersFees(BaseUserDbAttr):
 #     @classmethod
 #     def get_profile_info(cls, user_profile):
 #         return user_profile.features.SEC_BlueSkyComplianceFees
-class SEC_BlueSkyComplianceFees(BaseUserDbAttr):
+class SEC_BlueSkyComplianceFees(BaseUserCrDbAttr):
     """Fees of the blue sky compliance"""
 
     db = "sec"
