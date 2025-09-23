@@ -1,0 +1,347 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "db_4_0.png",
+    "path": "/db",
+    "source_info": {
+      "item_id": "01996ff4-168d-e039-d0fc-9cca8553224a",
+      "dataset": {
+        "name": "Form Filling",
+        "slug": "form-filling",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1649572/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1649572&item=01996ff4-168d-e039-d0fc-9cca8553224a"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 8704,
+        "height": 11264,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/2ab4b3c6-24ec-4e70-9974-71786dd8c976/thumbnail",
+        "source_files": [
+          {
+            "file_name": "db_4_0.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/4a007d8c-323f-4f59-b0ac-d1c3ebc45cbd"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 295.643,
+        "w": 2542.5302,
+        "x": 5041.8338,
+        "y": 2719.916
+      },
+      "id": "2f3d344c-558f-4446-8863-be9a636431e1",
+      "name": "db_4_facade",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 295.643,
+        "w": 2542.5302,
+        "x": 5031.979,
+        "y": 3261.9283
+      },
+      "id": "12d826cf-1b01-41fa-ac7d-406ed59e32d7",
+      "name": "db_4_srfacade",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 197.0954,
+        "w": 2532.6754,
+        "x": 5041.8338,
+        "y": 3557.5713
+      },
+      "id": "0f1978b9-6cb6-4463-958e-2f3a3ccc2e17",
+      "name": "db_4_retail",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 197.0954,
+        "w": 1448.6509,
+        "x": 3228.5564,
+        "y": 4119.2931
+      },
+      "id": "979e43db-f3bc-4538-838d-44370f827734",
+      "name": "db_4_demolition",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 177.3858,
+        "w": 1428.9414,
+        "x": 3228.5564,
+        "y": 4336.098
+      },
+      "id": "6073c297-54de-4cf3-99cc-c468dd5c5212",
+      "name": "db_4_earthwork",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 177.3858,
+        "w": 1428.9414,
+        "x": 3218.7017,
+        "y": 4513.4838
+      },
+      "id": "5c8c668f-d68f-4e0d-a146-b28db364e002",
+      "name": "db_4_paving",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 177.3858,
+        "w": 1428.9414,
+        "x": 3238.4112,
+        "y": 4710.5792
+      },
+      "id": "fea02222-724d-4d36-b889-7cff11674fbf",
+      "name": "db_4_drainage",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 218.6008,
+        "w": 1442.6797,
+        "x": 3224.6729,
+        "y": 4896.0238
+      },
+      "id": "7c1bb9a3-04b7-463a-828d-fcb1f1b5bbfd",
+      "name": "db_4_water",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 177.3858,
+        "w": 1428.9414,
+        "x": 3248.266,
+        "y": 5144.189
+      },
+      "id": "a6b28b3c-c0ba-4299-bdce-496682a66dbc",
+      "name": "db_4_sewer",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 177.3858,
+        "w": 1428.9414,
+        "x": 3258.1207,
+        "y": 5341.2843
+      },
+      "id": "7d4e67a3-2bd5-43a8-ae97-612aca878e0b",
+      "name": "db_4_road",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 177.3858,
+        "w": 1428.9414,
+        "x": 3238.4112,
+        "y": 5518.6702
+      },
+      "id": "8743b782-8e99-4d92-be34-3690b5741fe6",
+      "name": "db_4_landscape",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 177.3858,
+        "w": 1428.9414,
+        "x": 3248.266,
+        "y": 5705.9108
+      },
+      "id": "dc07ec01-06ff-4e18-9fb5-f3cf2a2e26b4",
+      "name": "db_4_lighting",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 177.3858,
+        "w": 1428.9414,
+        "x": 3228.5564,
+        "y": 5883.2966
+      },
+      "id": "ac71c657-803a-436b-a448-97c9bea5b1a8",
+      "name": "db_4_other",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 295.643,
+        "w": 2542.5302,
+        "x": 5031.979,
+        "y": 5971.9895
+      },
+      "id": "ca722dbc-b8bb-49a7-9bf3-1922eebdd4ea",
+      "name": "db_4_sitework",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 295.643,
+        "w": 2542.5302,
+        "x": 5022.1242,
+        "y": 6346.4707
+      },
+      "id": "5e4c129e-7e5d-4a8a-8634-81e3d2a497a9",
+      "name": "db_4_general",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 197.0954,
+        "w": 2532.6754,
+        "x": 5022.1242,
+        "y": 6632.259
+      },
+      "id": "c109511e-9e75-42ee-8aa2-d7dcfcbc34b1",
+      "name": "db_4_overhead",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 197.0954,
+        "w": 2532.6754,
+        "x": 5031.979,
+        "y": 6829.3543
+      },
+      "id": "3336effc-6b83-4673-bb07-073d082af535",
+      "name": "db_4_pp",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 197.0954,
+        "w": 2532.6754,
+        "x": 5031.979,
+        "y": 7026.4497
+      },
+      "id": "fd678b2f-8a33-46e8-b548-f29dc7064a2e",
+      "name": "db_4_builderrisk",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 197.0954,
+        "w": 2532.6754,
+        "x": 5022.1242,
+        "y": 7213.6903
+      },
+      "id": "0204f409-8a29-4a89-a7bf-a152d0406033",
+      "name": "db_4_liability",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 295.643,
+        "w": 2542.5302,
+        "x": 5041.8338,
+        "y": 7489.6238
+      },
+      "id": "2fb2a17c-a964-40b7-8139-5826d716f0bc",
+      "name": "db_4_total",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 197.0954,
+        "w": 1271.2651,
+        "x": 3563.6185,
+        "y": 9233.9178
+      },
+      "id": "29a27192-a54f-47e1-9568-518970ff0f74",
+      "name": "db_4_electrical",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 295.643,
+        "w": 2512.9659,
+        "x": 5061.5433,
+        "y": 1990.6632
+      },
+      "id": "49c928ad-2880-4dee-b588-370e22fecefd",
+      "name": "db_4_building",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

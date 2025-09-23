@@ -1,0 +1,389 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "db_8_0.png",
+    "path": "/",
+    "source_info": {
+      "item_id": "0195ba19-2c66-3fbc-ed88-946792f8872b",
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "dataset": {
+        "name": "Form Filling",
+        "slug": "form-filling",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1649572/dataset-management"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1649572&item=0195ba19-2c66-3fbc-ed88-946792f8872b"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 1224,
+        "height": 1584,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/080d65bd-1d28-4943-ad07-2ae5d4586a2d/thumbnail",
+        "source_files": [
+          {
+            "file_name": "cr_0_0.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/1638677f-387f-4529-8869-3990b298a6fc"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 27.0059,
+        "w": 143.6716,
+        "x": 911.7206,
+        "y": 386.7251
+      },
+      "id": "e23bc275-c24b-41cf-b2f8-8b3a6e9bf8b3",
+      "name": "CROI_4435",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 21.6048,
+        "w": 146.9123,
+        "x": 910.6403,
+        "y": 412.6508
+      },
+      "id": "bec167f3-8ec8-4f73-b626-161e39ff9af7",
+      "name": "CROI_4436",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 27.0059,
+        "w": 145.8321,
+        "x": 911.7206,
+        "y": 434.2555
+      },
+      "id": "233e0d47-8561-429f-b949-d28b4dee6962",
+      "name": "CROI_4012",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 23.7652,
+        "w": 144.7518,
+        "x": 910.6403,
+        "y": 482.8662
+      },
+      "id": "d0c64451-4b0f-46c8-9a0a-6f783f122325",
+      "name": "CROI_B485",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 24.4339,
+        "w": 145.3177,
+        "x": 909.2,
+        "y": 531.1168
+      },
+      "id": "91bcb79c-03a8-42be-b43f-4d9e950eb2c2",
+      "name": "CROI_B486",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 21.862,
+        "w": 144.0317,
+        "x": 911.772,
+        "y": 582.5567
+      },
+      "id": "14deeded-5273-421f-ab17-401cd2857996",
+      "name": "CROI_4058",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 27.0059,
+        "w": 146.6037,
+        "x": 909.2,
+        "y": 600.5607
+      },
+      "id": "b1700fc7-8d80-48a6-8487-09c0d5a3862c",
+      "name": "CROI_4010",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 23.1479,
+        "w": 146.6037,
+        "x": 909.2,
+        "y": 630.1386
+      },
+      "id": "bc441309-29c1-49e7-bf23-889c018b7aae",
+      "name": "CROI_4065",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 27.0059,
+        "w": 146.6037,
+        "x": 911.772,
+        "y": 649.4286
+      },
+      "id": "c3662b8f-732e-4923-bee3-19e2cc302a36",
+      "name": "CROI_4115",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 23.1479,
+        "w": 145.3177,
+        "x": 911.772,
+        "y": 725.3024
+      },
+      "id": "42d39938-7759-43bc-8f46-2d7bef209fa1",
+      "name": "CROI_B488",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 25.7199,
+        "w": 145.3177,
+        "x": 910.486,
+        "y": 748.4504
+      },
+      "id": "b5b0fe91-828d-41fe-92f5-0eb608a10ea5",
+      "name": "CROI_B489",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 24.4339,
+        "w": 144.0317,
+        "x": 913.058,
+        "y": 797.3183
+      },
+      "id": "dc1c9f57-0f84-49a5-ad8e-08b73bd11886",
+      "name": "CROI_4060",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 20.576,
+        "w": 142.7457,
+        "x": 913.058,
+        "y": 847.4722
+      },
+      "id": "1a1931a9-9e20-480b-a03e-552605b7e77f",
+      "name": "CROI_4020",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 25.7199,
+        "w": 144.0317,
+        "x": 911.772,
+        "y": 869.3341
+      },
+      "id": "405694f8-bf26-4687-825d-d264a3646abd",
+      "name": "CROI_4518",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 24.4339,
+        "w": 145.3177,
+        "x": 911.772,
+        "y": 892.4821
+      },
+      "id": "a2de3c93-db66-41e9-aa42-d132e8bd3c22",
+      "name": "CROI_4107",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 21.862,
+        "w": 141.4597,
+        "x": 914.344,
+        "y": 990.2178
+      },
+      "id": "0c0aaee7-f2c9-42eb-8726-048021a3b31a",
+      "name": "CROI_4508",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 23.1479,
+        "w": 145.3177,
+        "x": 911.772,
+        "y": 1037.7997
+      },
+      "id": "8ea8f211-16a9-4b0b-a6e6-763d9d2bbb2b",
+      "name": "CROI_0093",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 29.5779,
+        "w": 146.6037,
+        "x": 911.772,
+        "y": 1060.9477
+      },
+      "id": "bea7571b-1506-4736-8ffb-43224fc79384",
+      "name": "CROI_HK03",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 23.1479,
+        "w": 140.1737,
+        "x": 914.344,
+        "y": 1090.5256
+      },
+      "id": "2f198208-0c78-4f99-867a-2f42fcfb7419",
+      "name": "CROI_HK04",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 24.4339,
+        "w": 145.3177,
+        "x": 911.772,
+        "y": 1111.1016
+      },
+      "id": "88de00e2-74f5-4055-b01d-5747ed6d2248",
+      "name": "CROI_4180",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 23.1479,
+        "w": 145.3177,
+        "x": 913.058,
+        "y": 1136.8215
+      },
+      "id": "b0a11155-69ef-42c4-ac67-82269b5a9a3f",
+      "name": "CROI_4185",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 25.7199,
+        "w": 145.3177,
+        "x": 911.772,
+        "y": 1159.9695
+      },
+      "id": "78e9cc40-e6aa-48ce-a046-bac371b4446d",
+      "name": "CROI_4200",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 25.7199,
+        "w": 145.3177,
+        "x": 913.058,
+        "y": 1184.4034
+      },
+      "id": "7569e262-c249-431f-8009-d0f2cbeaa57c",
+      "name": "CROI_4073",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 21.862,
+        "w": 144.0317,
+        "x": 722.7304,
+        "y": 1210.1234
+      },
+      "id": "36ff4a55-2697-4666-b5ca-a0a8d178c913",
+      "name": "CROI_4074",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 23.1479,
+        "w": 142.7457,
+        "x": 721.4444,
+        "y": 1234.5573
+      },
+      "id": "4fa5022e-ec34-4a17-b09c-46f32cfc720e",
+      "name": "CROI_JJ33",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

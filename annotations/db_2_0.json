@@ -1,0 +1,249 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "db_2_0.png",
+    "path": "/db",
+    "source_info": {
+      "item_id": "01996ff4-168d-8385-b772-809c06cb1af9",
+      "dataset": {
+        "name": "Form Filling",
+        "slug": "form-filling",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1649572/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1649572&item=01996ff4-168d-8385-b772-809c06cb1af9"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 8703,
+        "height": 11263,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/acff18e3-c6fe-42b0-9d3e-52f9dc028163/thumbnail",
+        "source_files": [
+          {
+            "file_name": "db_2_0.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/d32c1520-7867-4c86-973a-8daeec2e6192"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 198.5919,
+        "w": 2543.8682,
+        "x": 1334.7939,
+        "y": 1323.9463
+      },
+      "id": "4eb558e3-037c-4146-9bb5-7e98c59aa8fe",
+      "name": "Ach_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 189.1352,
+        "w": 2837.0277,
+        "x": 3897.5756,
+        "y": 1323.9463
+      },
+      "id": "c5141a81-db7f-4960-8e66-b2c5ded11f18",
+      "name": "Ach_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 226.9622,
+        "w": 5428.1797,
+        "x": 1334.7939,
+        "y": 1654.9328
+      },
+      "id": "e1459588-9dec-46e7-97fd-06353b3a882c",
+      "name": "Ach_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 245.8757,
+        "w": 5447.0932,
+        "x": 1315.8804,
+        "y": 1985.9194
+      },
+      "id": "e3b4ee41-e1f8-403a-ac0d-b5669eba7224",
+      "name": "Ach_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 224.2291,
+        "w": 938.9594,
+        "x": 5829.9568,
+        "y": 6362.501
+      },
+      "id": "238c8478-4ee3-4a13-8dc8-fce5a226ef19",
+      "name": "Ach_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 210.2148,
+        "w": 952.9737,
+        "x": 5829.9568,
+        "y": 6635.7802
+      },
+      "id": "e374de7a-f5b1-4a6d-8615-1ac8cfb69dbe",
+      "name": "Ach_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 308.315,
+        "w": 931.9522,
+        "x": 7287.446,
+        "y": 6972.1239
+      },
+      "id": "bcd13556-28f4-4909-9ed6-1804c23cda6b",
+      "name": "Ach_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 273.2792,
+        "w": 910.9308,
+        "x": 7301.4604,
+        "y": 7511.6751
+      },
+      "id": "65bb50ac-9cc3-4115-bfb0-6ee1a36fbddc",
+      "name": "Ach_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 308.315,
+        "w": 917.9379,
+        "x": 7273.4317,
+        "y": 8065.2408
+      },
+      "id": "1c49746d-1cb3-4f82-ae4b-b8b4d2994bdb",
+      "name": "Ach_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 273.2792,
+        "w": 896.9164,
+        "x": 7287.446,
+        "y": 8457.6417
+      },
+      "id": "0602a4aa-8444-41ff-91f0-eb45b45b2cd2",
+      "name": "Ach_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 113.2369,
+        "w": 113.2369,
+        "x": 8020.1273,
+        "y": 5489.5285
+      },
+      "id": "ff5759dc-b566-4e89-a8c2-d921af394f21",
+      "name": "Ach_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 271.2029,
+        "w": 1641.7464,
+        "x": 6547.614,
+        "y": 9385.5591
+      },
+      "id": "44002042-5571-4ca5-b9dd-856afe48b56d",
+      "name": "Ach_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 493.9768,
+        "w": 4179.4311,
+        "x": 1341.486,
+        "y": 10073.2522
+      },
+      "id": "3bd2b88d-dc46-4497-83e9-9bddb76992cb",
+      "name": "Ach_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 358.3753,
+        "w": 1099.3405,
+        "x": 5545.1316,
+        "y": 10204.0108
+      },
+      "id": "b3d6561f-24bc-4232-9d15-1d22389d650f",
+      "name": "Ach_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 368.0611,
+        "w": 1520.6737,
+        "x": 6668.6867,
+        "y": 10199.1679
+      },
+      "id": "93f1a0b3-7ff8-4a50-a2aa-26bef69c4066",
+      "name": "Ach_Monthly",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}

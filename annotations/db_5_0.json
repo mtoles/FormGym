@@ -1,0 +1,1019 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "db_5_0.png",
+    "path": "/db",
+    "source_info": {
+      "item_id": "01996ff4-168d-60c3-42ee-ec0f01abb253",
+      "dataset": {
+        "name": "Form Filling",
+        "slug": "form-filling",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1649572/dataset-management"
+      },
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1649572&item=01996ff4-168d-60c3-42ee-ec0f01abb253"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 6120,
+        "height": 7920,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/dd4a6b83-e0fb-4858-ab40-51b367906743/thumbnail",
+        "source_files": [
+          {
+            "file_name": "db_5_0.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/b2153c23-84b8-481d-a016-d8de3a7c70d8"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 137.9657,
+        "w": 1500.377,
+        "x": 338.016,
+        "y": 1665.9359
+      },
+      "id": "2929efe7-0de0-4bc9-84a0-a975f468ea4f",
+      "name": "db_5_assetacc1",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 141.4148,
+        "w": 1479.6822,
+        "x": 1848.7404,
+        "y": 1662.4867
+      },
+      "id": "959646f7-7096-4b35-b86f-c29df57d0586",
+      "name": "db_5_financial1",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 148.3131,
+        "w": 1479.6822,
+        "x": 3335.3209,
+        "y": 1659.0376
+      },
+      "id": "85f79043-3d6e-4d99-bcf9-142e8bbc19de",
+      "name": "db_5_accno1",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 127.6183,
+        "w": 862.2857,
+        "x": 4894.3334,
+        "y": 1661.7034
+      },
+      "id": "9dcf8263-2f99-4e6b-9225-67e81c1f5de1",
+      "name": "db_5_assetscmv1",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 134.5166,
+        "w": 1496.9279,
+        "x": 344.9143,
+        "y": 1814.249
+      },
+      "id": "e6bc31fb-aca8-4d31-a58d-be3273a3cd5e",
+      "name": "db_5_assetacc2",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 141.4148,
+        "w": 1476.233,
+        "x": 1855.6387,
+        "y": 1810.7999
+      },
+      "id": "ecde52cf-57d9-45c0-adb8-c78316852217",
+      "name": "db_5_financial2",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 141.4148,
+        "w": 1479.6822,
+        "x": 3335.3209,
+        "y": 1810.7999
+      },
+      "id": "230a6f25-fa5e-4562-a65f-38f04d75321c",
+      "name": "db_5_accno2",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 137.9657,
+        "w": 882.9805,
+        "x": 4883.9859,
+        "y": 1810.7999
+      },
+      "id": "637d627b-98a5-47b7-b525-07d74d24166b",
+      "name": "db_5_assetscmv2",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 144.864,
+        "w": 1496.9279,
+        "x": 344.9143,
+        "y": 1959.113
+      },
+      "id": "d8f1e866-f163-4f49-a08b-cf0824dc4ecd",
+      "name": "db_5_assetacc3",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 137.9657,
+        "w": 1479.6822,
+        "x": 1852.1896,
+        "y": 1959.113
+      },
+      "id": "b5f6b72f-061d-439b-9065-eb91f0eca4cf",
+      "name": "db_5_financial3",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 141.4148,
+        "w": 1472.7839,
+        "x": 3335.3209,
+        "y": 1959.113
+      },
+      "id": "6333747a-1735-47f4-837a-5b6047edfa90",
+      "name": "db_5_accno3",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 144.864,
+        "w": 865.7348,
+        "x": 4894.3334,
+        "y": 1959.113
+      },
+      "id": "27de8891-ab69-4132-b6cf-1f751f054d05",
+      "name": "db_5_assetscmv3",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 131.0674,
+        "w": 1507.2753,
+        "x": 334.5668,
+        "y": 2107.4261
+      },
+      "id": "6a54f9c6-f552-4dd6-b64b-301811c78bad",
+      "name": "db_5_assetacc4",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 141.4148,
+        "w": 1472.7839,
+        "x": 1852.1896,
+        "y": 2103.977
+      },
+      "id": "a6910045-9a89-4d85-9a4c-61750d6b3e5f",
+      "name": "db_5_financial4",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 141.4148,
+        "w": 1483.1313,
+        "x": 3328.4226,
+        "y": 2103.977
+      },
+      "id": "c6aacdb2-ff5c-4836-93d5-badc635448b9",
+      "name": "db_5_accno4",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 124.1691,
+        "w": 882.9805,
+        "x": 4883.9859,
+        "y": 2114.3244
+      },
+      "id": "1f5c55f5-6731-4745-a750-d51615e68d8f",
+      "name": "db_5_assetscmv4",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 127.6183,
+        "w": 1503.8262,
+        "x": 334.5668,
+        "y": 2255.7393
+      },
+      "id": "4e76120f-3881-47cd-84a9-430385173780",
+      "name": "db_5_assetacc5",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 131.0674,
+        "w": 1476.233,
+        "x": 1848.7404,
+        "y": 2252.2901
+      },
+      "id": "15943521-5a7d-48d4-bd56-0c58fe993660",
+      "name": "db_5_financial5",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 141.4148,
+        "w": 1490.0296,
+        "x": 3328.4226,
+        "y": 2252.2901
+      },
+      "id": "b08821c0-aa54-49b6-bcc4-6fb283cab0ee",
+      "name": "db_5_accno5",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 134.5166,
+        "w": 869.1839,
+        "x": 4890.8842,
+        "y": 2255.7393
+      },
+      "id": "5530b59b-6a7b-41c7-bfee-d6efc113b548",
+      "name": "db_5_assetscmv5",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 75.8811,
+        "w": 75.8811,
+        "x": 2162.6124,
+        "y": 2742.0684
+      },
+      "id": "985aa41a-c403-43d6-958f-b4e3ed721873",
+      "name": "db_5_othernotapply",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 153.809,
+        "w": 4509.0335,
+        "x": 348.0941,
+        "y": 3557.846
+      },
+      "id": "6d2ca313-e392-468d-892a-5a8cd43e8fb5",
+      "name": "db_5_assettype1",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 149.7614,
+        "w": 809.5213,
+        "x": 4946.1749,
+        "y": 3557.846
+      },
+      "id": "8870abad-ded4-4428-a35b-256613d3dfd5",
+      "name": "db_5_othercmv1",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 133.571,
+        "w": 4525.2239,
+        "x": 339.9989,
+        "y": 3715.7026
+      },
+      "id": "83951672-18e1-46d1-9103-dfc5830bd5a1",
+      "name": "db_5_assettype2",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 133.571,
+        "w": 821.6641,
+        "x": 4942.1273,
+        "y": 3719.7502
+      },
+      "id": "6235f940-e8f7-4366-9844-1a1d48227978",
+      "name": "db_5_othercmv2",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 145.7138,
+        "w": 4513.0811,
+        "x": 339.9989,
+        "y": 3861.4164
+      },
+      "id": "d4764e88-cdd0-48f6-abe4-efb5e8af0ee8",
+      "name": "db_5_assettype3",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 137.6186,
+        "w": 817.6165,
+        "x": 4946.1749,
+        "y": 3865.4641
+      },
+      "id": "1d988d68-39f4-43dd-83c4-41bfd6c47969",
+      "name": "db_5_othercmv3",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 141.6662,
+        "w": 4513.0811,
+        "x": 344.0465,
+        "y": 4019.2731
+      },
+      "id": "f6a13b5c-ed8f-4143-9395-e59bac962d23",
+      "name": "db_5_assettype4",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 141.6662,
+        "w": 825.7117,
+        "x": 4938.0797,
+        "y": 4015.2255
+      },
+      "id": "d349095c-edf1-4b39-b415-1cf803da7406",
+      "name": "db_5_othercmv4",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 145.7138,
+        "w": 987.6159,
+        "x": 356.1894,
+        "y": 5144.5077
+      },
+      "id": "84e984d9-fa41-4f89-b701-e9f09a7f277a",
+      "name": "db_5_liabilitiesacc1",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 149.7614,
+        "w": 995.7112,
+        "x": 344.0465,
+        "y": 5306.4119
+      },
+      "id": "2e62f397-430d-4b92-bb2f-e5814bc84790",
+      "name": "db_5_liabilitiesacc2",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 141.6662,
+        "w": 987.6159,
+        "x": 360.237,
+        "y": 5472.3638
+      },
+      "id": "2555343a-7917-476e-a648-1d28d6ec1fc0",
+      "name": "db_5_liabilitiesacc3",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 149.7614,
+        "w": 995.7112,
+        "x": 356.1894,
+        "y": 5630.2204
+      },
+      "id": "42370995-6116-4137-ba3c-116204a8064d",
+      "name": "db_5_liabilitiesacc4",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 145.7138,
+        "w": 999.7588,
+        "x": 356.1894,
+        "y": 5804.2675
+      },
+      "id": "376b6e55-d2e0-4343-9142-a7a12c596177",
+      "name": "db_5_liabilitiesacc5",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 137.6186,
+        "w": 1080.7109,
+        "x": 1351.9005,
+        "y": 5148.5553
+      },
+      "id": "2a01d055-fe72-4446-9019-42570fda35eb",
+      "name": "db_5_company1",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 137.6186,
+        "w": 1072.6157,
+        "x": 1355.9481,
+        "y": 5314.5071
+      },
+      "id": "b0e53d60-f612-4890-b617-e338a7fe548d",
+      "name": "db_5_company2",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 141.6662,
+        "w": 1076.6633,
+        "x": 1355.9481,
+        "y": 5472.3638
+      },
+      "id": "f270e166-2228-4968-9a67-b25215a3da22",
+      "name": "db_5_company3",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 157.8566,
+        "w": 1064.5205,
+        "x": 1359.9957,
+        "y": 5622.1252
+      },
+      "id": "55f196c1-7f4b-4143-a618-031dd1a7692a",
+      "name": "db_5_company4",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 141.6662,
+        "w": 1072.6157,
+        "x": 1355.9481,
+        "y": 5796.1723
+      },
+      "id": "44c25fc0-aee5-47a9-80ce-093b514eb6ae",
+      "name": "db_5_company5",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 137.6186,
+        "w": 1024.0444,
+        "x": 2436.659,
+        "y": 5152.6029
+      },
+      "id": "d3eaf9c6-cd7a-4e90-b3d4-e1fd2cdd1489",
+      "name": "db_5_liabaccno1",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 149.7614,
+        "w": 1032.1396,
+        "x": 2436.659,
+        "y": 5306.4119
+      },
+      "id": "2bf755f1-67b5-477b-bfed-22f8762a291e",
+      "name": "db_5_liabaccno2",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 161.9043,
+        "w": 1032.1396,
+        "x": 2432.6114,
+        "y": 5456.1733
+      },
+      "id": "4f455064-bc61-4b8e-8d58-91f7cdf414cc",
+      "name": "db_5_liabaccno3",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 169.9995,
+        "w": 1028.092,
+        "x": 2432.6114,
+        "y": 5618.0776
+      },
+      "id": "914e8826-0ebd-4014-b544-9ad85934f325",
+      "name": "db_5_liabaccno4",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 165.9519,
+        "w": 1044.2824,
+        "x": 2420.4686,
+        "y": 5775.9342
+      },
+      "id": "aef49350-f619-48e1-8d3b-c853b6d3a554",
+      "name": "db_5_liabaccno5",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 165.9519,
+        "w": 930.9495,
+        "x": 3561.8936,
+        "y": 5132.3648
+      },
+      "id": "fc0575ba-9b8d-4814-92c9-4481055ceb45",
+      "name": "db_5_unpaid1",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 153.809,
+        "w": 930.9495,
+        "x": 3549.7508,
+        "y": 5302.3643
+      },
+      "id": "86903afc-4fbc-4d0e-88e8-6dbd669d5a08",
+      "name": "db_5_unpaid2",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 157.8566,
+        "w": 951.1875,
+        "x": 3533.5603,
+        "y": 5460.221
+      },
+      "id": "e1a98155-9cfc-471d-9449-847e5d1e4ba0",
+      "name": "db_5_unpaid3",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 161.9043,
+        "w": 918.8066,
+        "x": 3565.9412,
+        "y": 5618.0776
+      },
+      "id": "c8f63927-077a-407b-b63d-3cd9c533fd79",
+      "name": "db_5_unpaid4",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 165.9519,
+        "w": 922.8542,
+        "x": 3553.7984,
+        "y": 5784.0295
+      },
+      "id": "22ccd03d-4749-40b3-8513-72c11855b8b7",
+      "name": "db_5_unpaid5",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 72.8569,
+        "w": 80.9521,
+        "x": 4504.9859,
+        "y": 5184.9837
+      },
+      "id": "a41394b5-98b3-4c30-b282-dcc417a6cc71",
+      "name": "db_5_preclosing1",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 68.8093,
+        "w": 68.8093,
+        "x": 4509.0335,
+        "y": 5342.8404
+      },
+      "id": "dee5d03b-3138-45b1-8cea-31eab6112b4d",
+      "name": "db_5_preclosing2",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 76.9045,
+        "w": 72.8569,
+        "x": 4509.0335,
+        "y": 5504.7446
+      },
+      "id": "bffbf1fd-d6e3-4cfa-a9a4-e87a8a419fc4",
+      "name": "db_5_preclosing3",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 80.9521,
+        "w": 68.8093,
+        "x": 4513.0811,
+        "y": 5662.6013
+      },
+      "id": "5ed9e887-95b2-4ee7-9369-3bcc388759cc",
+      "name": "db_5_preclosing4",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 80.9521,
+        "w": 93.0949,
+        "x": 4500.9382,
+        "y": 5828.5531
+      },
+      "id": "6b142bca-194d-436b-8e5d-a8098183ffa2",
+      "name": "db_5_preclosing5",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 153.809,
+        "w": 801.4261,
+        "x": 4934.0321,
+        "y": 5140.46
+      },
+      "id": "268b4569-73a9-408c-a21e-7b8e7c200e44",
+      "name": "db_5_otherliabpay1",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 129.5234,
+        "w": 805.4737,
+        "x": 4938.0797,
+        "y": 5318.5547
+      },
+      "id": "2a0ef258-3302-47d5-aac5-928009551820",
+      "name": "db_5_liabmonthpay2",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 161.9043,
+        "w": 797.3784,
+        "x": 4958.3178,
+        "y": 5464.2686
+      },
+      "id": "0b12e0e5-f0b0-42df-9032-fdea6a792043",
+      "name": "db_5_liabmonthpay3",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 145.7138,
+        "w": 793.3308,
+        "x": 4958.3178,
+        "y": 5634.268
+      },
+      "id": "0f0123d1-21b9-4239-b01b-c56520e01d10",
+      "name": "db_5_liabmonthpay4",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 153.809,
+        "w": 789.2832,
+        "x": 4958.3178,
+        "y": 5788.0771
+      },
+      "id": "d60cb0ba-1cb0-4175-befc-0f14e7fd77f8",
+      "name": "db_5_liabmonthpay5",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 66.8711,
+        "w": 73.9102,
+        "x": 2013.173,
+        "y": 6148.6246
+      },
+      "id": "a9c7e5b2-9bd7-4e61-8ce4-ad1fe66001c2",
+      "name": "db_5_otherliabnotapply",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 82.3964,
+        "w": 72.7027,
+        "x": 3300.7028,
+        "y": 4502.7208
+      },
+      "id": "91a4c250-52b0-400a-8f38-eb0f05526507",
+      "name": "db_5_liabilitiesnotapply",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 135.7117,
+        "w": 4502.7208,
+        "x": 358.6667,
+        "y": 6533.5497
+      },
+      "id": "af595f21-1622-4026-8579-3bd132ce5729",
+      "name": "db_5_liabothertype1",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 130.8649,
+        "w": 4512.4145,
+        "x": 348.973,
+        "y": 6683.802
+      },
+      "id": "509c806b-6312-407b-82a9-0b624ea223a4",
+      "name": "db_5_liabothertype2",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 145.4054,
+        "w": 4507.5677,
+        "x": 348.973,
+        "y": 6824.3605
+      },
+      "id": "e0951972-dddf-46cc-b101-bfe2df335250",
+      "name": "db_5_liabothertype3",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 130.8649,
+        "w": 838.5045,
+        "x": 4948.6308,
+        "y": 6543.2434
+      },
+      "id": "c7e11266-cfe3-48c5-9258-97712fecc1ea",
+      "name": "db_5_otherliabpay1",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 130.8649,
+        "w": 814.2703,
+        "x": 4968.0182,
+        "y": 6678.9551
+      },
+      "id": "65736926-50f9-47bd-8b49-e465c0c47353",
+      "name": "db_5_otherliabpay2",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 130.8649,
+        "w": 828.8108,
+        "x": 4958.3245,
+        "y": 6838.9011
+      },
+      "id": "af7d2062-1cd7-4e02-b671-e0ad6ff3b226",
+      "name": "db_5_otherliabpay3",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 144.0403,
+        "w": 879.1427,
+        "x": 4897.371,
+        "y": 2403.9833
+      },
+      "id": "9a18d39f-66bf-48fb-bd19-88427d05530a",
+      "name": "db_5_assetscmvtot",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 158.941,
+        "w": 824.5067,
+        "x": 4952.007,
+        "y": 4162.2687
+      },
+      "id": "2bf1b77c-adb5-40fe-a747-2b6d01dfebfa",
+      "name": "db_5_othercmvtot",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 144.0403,
+        "w": 2006.6307,
+        "x": 1018.2161,
+        "y": 7167.2479
+      },
+      "id": "b1e096c0-3728-484e-92bf-5676b3bec610",
+      "name": "db_5_borrowername",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}
