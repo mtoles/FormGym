@@ -55,6 +55,9 @@ def get_relevant_user_features(doc_state: DocState) -> set:
 
 
 def get_completed_source_doc(source_doc_id: str, user_idx):
+    # Enable FieldLocalizer for source document processing
+    actions.set_field_localizer_enabled(True)
+
     # Load the document image and annotations
     png_path = f"pngs/{source_doc_id}.png"
     blank_img = Image.open(png_path).convert("RGB")
@@ -165,6 +168,11 @@ def main(
     study_condition = StudyConditionEnum(study_condition).value
     profile_source = ProfileSourceEnum(profile_source).value
     BATCH_SIZE = min(1, len(file_ids))
+
+    # Enable FieldLocalizer only for experimental study condition
+    actions.set_field_localizer_enabled(
+        study_condition == StudyConditionEnum.EXPERIMENTAL.value
+    )
 
     # set up the db
 

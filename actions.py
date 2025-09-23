@@ -21,6 +21,15 @@ from utils import *
 from PIL import Image, ImageDraw
 from datetime import datetime
 
+# Global flag to control FieldLocalizer initialization
+FIELD_LOCALIZER_ENABLED = False
+
+
+def set_field_localizer_enabled(enabled: bool):
+    """Set whether FieldLocalizer should be initialized when needed."""
+    global FIELD_LOCALIZER_ENABLED
+    FIELD_LOCALIZER_ENABLED = enabled
+
 
 class ActionMeta(type):
     registry = {}
@@ -202,7 +211,7 @@ class QuerySql(BaseAction):
     
     Example input:
         {"action": "QuerySql", "query": "SELECT value FROM features where key='CROI_0093'"}
-    """ # be careful if youe very change this. it's monkey patched in models.py
+    """  # be careful if youe very change this. it's monkey patched in models.py
 
     def act(doc_state, query: str, db, **kwargs):
         assert db is not None
@@ -244,6 +253,7 @@ class InvalidAction(BaseAction):
         feedback = "Action: 'InvalidAction'\nDocument returned unchanged."
         return doc_state, feedback
 
+
 class ContextLengthExceededAction(BaseAction):
     class Schema(BaseModel):
         pass
@@ -263,16 +273,33 @@ class FieldLocalizer(BaseAction):
         {"action": "FieldLocalizer", "value": "First Name"}
     """
     PROD_TOOL_CHECKPOINT_PATH = "tool/prod_tool_checkpoint"
-    device = torch.device(
-        "cuda:1"
-        if torch.cuda.is_available() and torch.cuda.device_count() >= 2
-        else "cuda:0" if torch.cuda.is_available() else "cpu"
-    )
-    processor, model = load_from_checkpoint(PROD_TOOL_CHECKPOINT_PATH, device)
+    _instance = None
+    _initialized = False
+
+    def __init__(self):
+        if not self._initialized:
+            self.device = torch.device(
+                "cuda:1"
+                if torch.cuda.is_available() and torch.cuda.device_count() >= 2
+                else "cuda:0" if torch.cuda.is_available() else "cpu"
+            )
+            self.processor, self.model = load_from_checkpoint(
+                self.PROD_TOOL_CHECKPOINT_PATH, self.device
+            )
+            self._initialized = True
 
     @classmethod
+    def get_instance(cls):
+        if not FIELD_LOCALIZER_ENABLED:
+            raise RuntimeError(
+                "FieldLocalizer is not enabled. Call set_field_localizer_enabled(True) first."
+            )
+        if cls._instance is None:
+            cls._instance = cls()
+        return cls._instance
+
     def _visualize_localizer(
-        cls,
+        self,
         img,
         value: str,
         pred_bboxes: List[List[int]],
@@ -299,27 +326,28 @@ class FieldLocalizer(BaseAction):
         vis_img.save(save_path)
         return save_path
 
-    @classmethod
-    def act(cls, doc_state, value: str, return_bboxes: bool = False, **kwargs):
+    @staticmethod
+    def act(doc_state, value: str, return_bboxes: bool = False, **kwargs):
+        instance = FieldLocalizer.get_instance()
         img = doc_state.get_image_of_state()
         w = img.width
         h = img.height
         prompt = TEXT_INPUT_PROMPT_TEMPLATE.format(target=value)
-        inputs = cls.processor(text=prompt, images=img, return_tensors="pt").to(
-            cls.device
+        inputs = instance.processor(text=prompt, images=img, return_tensors="pt").to(
+            instance.device
         )
-        generated_ids = cls.model.generate(
+        generated_ids = instance.model.generate(
             input_ids=inputs["input_ids"],
             pixel_values=inputs["pixel_values"],
             max_new_tokens=512,
             num_beams=3,
             do_sample=False,
         )
-        generated_text = cls.processor.batch_decode(
+        generated_text = instance.processor.batch_decode(
             generated_ids, skip_special_tokens=False
         )[0]
 
-        parsed_answer = cls.processor.post_process_generation(
+        parsed_answer = instance.processor.post_process_generation(
             generated_text, task=TASK_NAME_PREFIX, image_size=(img.width, img.height)
         )
 
@@ -344,7 +372,7 @@ class FieldLocalizer(BaseAction):
                 all_bboxes.append(f"x1: {x1}, y1: {y1}, x2: {x2}, y2: {y2}")
 
             # Visualize predictions
-            # save_path = cls._visualize_localizer(
+            # save_path = instance._visualize_localizer(
             #     img,
             #     value,
             #     pred_bboxes,
