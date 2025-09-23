@@ -4,7 +4,7 @@ import sqlite3
 
 class SqlDb:
     def __init__(self, user_profile: UserProfile, file_id: str):
-        if file_id == "cr_0_0":
+        if file_id == "db_8_0":
             db_content = {}
             # for name, attr_class in UserAttributeMeta.registry.items():
             for name in user_profile.relevant_features:
@@ -21,7 +21,7 @@ class SqlDb:
                 cursor.execute(
                     "INSERT INTO features (key, value) VALUES (?, ?)", (k, str(v))
                 )
-        elif file_id == "cr_1_0":
+        elif file_id == "db_9_0":
             db_content = {}
 
             # for name, attr_class in UserAttributeMeta.registry.items():

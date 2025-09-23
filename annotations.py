@@ -15,6 +15,9 @@ def read_annotations(filename):
     annotations = []
     missing_fields = []
     for annotation in data.get("annotations", []):
+        if "bounding_box" not in annotation:
+            print(f"No bounding box for {annotation['name']}")
+            continue
         try:
             annotations.append(
                 {

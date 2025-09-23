@@ -10,7 +10,7 @@ from typing import List
 
 class DomainEnum(Enum):
     AL = "al"  # auto loans
-    CR = "cr"  # consolidated report of income
+    CR = "cr"  # database / consolidated report of income
     FUNSD = "funsd"  # funsd/xfund
     FORM_NLU = "form-nlu"  # form-nlu
     XFUND = "xfund"  # xfund
@@ -80,7 +80,7 @@ def get_domain_from_doc_ids(doc_ids: List[str]) -> DomainEnum:
 def get_domain_from_doc_id(doc_id: str) -> DomainEnum:
     if doc_id.startswith("al_"):
         return DomainEnum.AL
-    elif doc_id.startswith("cr_"):
+    elif doc_id.startswith("cr_") or doc_id.startswith("db_"):
         return DomainEnum.CR
     elif doc_id == "funsd":
         return DomainEnum.FUNSD

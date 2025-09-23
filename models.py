@@ -433,7 +433,7 @@ class ScriptedModel:
                     "action": "Terminate",
                 },
             ],
-            "cr_0_0": [
+            "db_8_0": [
                 {
                     "action": "QuerySql",
                     "query": "SELECT * FROM features WHERE key = 'CROI_4435'",

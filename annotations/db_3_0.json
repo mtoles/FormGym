@@ -246,34 +246,6 @@
     },
     {
       "bounding_box": {
-        "h": 379.0059,
-        "w": 2882.4398,
-        "x": 538.5874,
-        "y": 9714.5204
-      },
-      "id": "dba7ec1b-af77-4980-9141-a84dedf88f3c",
-      "name": "db_3_expirydate",
-      "properties": [],
-      "slot_names": [
-        "0"
-      ]
-    },
-    {
-      "bounding_box": {
-        "h": 423.8882,
-        "w": 2872.466,
-        "x": 538.5874,
-        "y": 9071.2077
-      },
-      "id": "651d03b7-bdb5-415a-90ac-131b7c95efd2",
-      "name": "db_3_county",
-      "properties": [],
-      "slot_names": [
-        "0"
-      ]
-    },
-    {
-      "bounding_box": {
         "h": 547.0022,
         "w": 3924.146,
         "x": 4122.3352,
