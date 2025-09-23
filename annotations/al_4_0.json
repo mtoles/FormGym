@@ -1,0 +1,781 @@
+{
+  "version": "2.0",
+  "schema_ref": "https://darwin-public.s3.eu-west-1.amazonaws.com/darwin_json/2.0/schema.json",
+  "item": {
+    "name": "al_4_0.png",
+    "path": "/al",
+    "source_info": {
+      "item_id": "0198e81e-4ed4-dfad-a49c-8ecaa0f954c7",
+      "team": {
+        "name": "ClosedAI",
+        "slug": "closedai"
+      },
+      "dataset": {
+        "name": "Form Filling",
+        "slug": "form-filling",
+        "dataset_management_url": "https://darwin.v7labs.com/datasets/1649572/dataset-management"
+      },
+      "workview_url": "https://darwin.v7labs.com/workview?dataset=1649572&item=0198e81e-4ed4-dfad-a49c-8ecaa0f954c7"
+    },
+    "slots": [
+      {
+        "type": "image",
+        "slot_name": "0",
+        "width": 1224,
+        "height": 1584,
+        "thumbnail_url": "https://darwin.v7labs.com/api/v2/teams/closedai/files/db3e7600-3eda-4618-a2e4-ae027bbdc738/thumbnail",
+        "source_files": [
+          {
+            "file_name": "al_4_0.png",
+            "url": "https://darwin.v7labs.com/api/v2/teams/closedai/uploads/1b0eddbf-7502-4501-8f1b-7cf514b34f17"
+          }
+        ]
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "bounding_box": {
+        "h": 28.835,
+        "w": 867.7947,
+        "x": 273.2455,
+        "y": 251.276
+      },
+      "id": "7312d841-80d3-47da-a6b8-8dc0a3894f75",
+      "name": "FullName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 68.6546,
+        "w": 902.1221,
+        "x": 236.172,
+        "y": 286.9764
+      },
+      "id": "8d27764e-65b5-45cf-8ea1-cd567c1ea557",
+      "name": "AddressFull",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 32.9542,
+        "w": 538.2524,
+        "x": 600.0416,
+        "y": 362.4965
+      },
+      "id": "cfd3072a-65ba-4a5a-9ef3-04bb55ce423e",
+      "name": "CurrentAddressStartYearAndMonth",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 34.3273,
+        "w": 369.362,
+        "x": 266.38,
+        "y": 396.8239
+      },
+      "id": "cfd0a54a-06f5-4be0-af03-aaa72bcecf73",
+      "name": "LibertySavingsAccountNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 35.7004,
+        "w": 363.8696,
+        "x": 774.4244,
+        "y": 392.7046
+      },
+      "id": "a777211c-c06e-4c02-8468-262b7df9564f",
+      "name": "EmailAddress",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 37.0735,
+        "w": 177.129,
+        "x": 197.7254,
+        "y": 428.405
+      },
+      "id": "85190e0a-f323-4618-a628-648ed2965620",
+      "name": "FullBirthDate",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 32.9542,
+        "w": 346.0194,
+        "x": 620.638,
+        "y": 431.1512
+      },
+      "id": "1adae9d7-9b22-49d4-98a4-100dbe43ed34",
+      "name": "DriversLicenseNo",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 38.4466,
+        "w": 113.9667,
+        "x": 1027.0735,
+        "y": 428.405
+      },
+      "id": "9ea1ddcb-171a-4ec2-a16a-4d037f964653",
+      "name": "State",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 37.0735,
+        "w": 336.4078,
+        "x": 271.8724,
+        "y": 466.8516
+      },
+      "id": "890266e1-e12f-402c-935c-ad26e24f3a73",
+      "name": "SocialSecurityNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 35.7004,
+        "w": 310.319,
+        "x": 827.975,
+        "y": 469.5978
+      },
+      "id": "a72ce0fc-8a49-4f19-a3a9-d6cf3e978fd2",
+      "name": "GrossMonthlyIncome",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 34.3273,
+        "w": 218.3218,
+        "x": 208.7101,
+        "y": 509.4175
+      },
+      "id": "03cb1e99-db77-4c45-b45f-40c53a491040",
+      "name": "HomePhoneNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 39.8197,
+        "w": 215.5756,
+        "x": 468.2247,
+        "y": 503.9251
+      },
+      "id": "7def0c44-3eb4-4d06-b007-1c8bd4eb5325",
+      "name": "CellPhoneNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 38.4466,
+        "w": 208.7101,
+        "x": 735.9778,
+        "y": 506.6713
+      },
+      "id": "2eea1d1c-3be0-4317-84a0-2c8e1b4e71fd",
+      "name": "EmployerWorkPhone",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 20.5964,
+        "w": 15.104,
+        "x": 1057.2816,
+        "y": 505.2982
+      },
+      "id": "e539f993-5c91-48aa-b6f8-5a10beeb07f4",
+      "name": "PreferredPhone_Home",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 19.2233,
+        "w": 21.9695,
+        "x": 1087.4896,
+        "y": 506.6713
+      },
+      "id": "bb8012fa-6bdf-44b7-8373-2a823d78dfa1",
+      "name": "PreferredPhone_Work",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 20.5964,
+        "w": 19.2233,
+        "x": 1123.19,
+        "y": 506.6713
+      },
+      "id": "d2989828-eeed-4ff9-8f04-8e6912598a3b",
+      "name": "PreferredPhone_Cell",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 31.5811,
+        "w": 766.1859,
+        "x": 372.1082,
+        "y": 549.2372
+      },
+      "id": "9276df9e-8fb5-4273-815f-66f92e848ddc",
+      "name": "PreviousEmployerNameAndAddress",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 32.9542,
+        "w": 208.7101,
+        "x": 208.7101,
+        "y": 587.6838
+      },
+      "id": "6a7c02c4-7a27-4e79-ba41-9bf4289abde1",
+      "name": "EmployerHireDate",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 37.0735,
+        "w": 539.6255,
+        "x": 604.1609,
+        "y": 582.1914
+      },
+      "id": "0254b2f6-d659-4498-b4a3-17924ef014f9",
+      "name": "SupervisorName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 35.7004,
+        "w": 315.8114,
+        "x": 822.4827,
+        "y": 619.2649
+      },
+      "id": "799dc9ae-d878-41a1-afa9-e80ef945fef8",
+      "name": "MonthlyMortgageOrRent",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 20.5964,
+        "w": 17.8502,
+        "x": 417.4202,
+        "y": 635.742
+      },
+      "id": "07ae06df-7e8f-4128-ac3a-d00702f25987",
+      "name": "ResidenceStatus_Renting",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 19.2233,
+        "w": 19.2233,
+        "x": 498.4327,
+        "y": 638.4882
+      },
+      "id": "5fac4841-8f70-4765-8d7f-632ee4975804",
+      "name": "ResidenceStatus_Buying",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 19.2233,
+        "w": 16.4771,
+        "x": 731.8585,
+        "y": 674.1886
+      },
+      "id": "60e2a960-ad21-4d02-ab69-2634c74fd0d3",
+      "name": "CitizenOrAlien_Yes",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 17.8502,
+        "w": 20.5964,
+        "x": 793.6477,
+        "y": 676.9348
+      },
+      "id": "1eb504c0-f58a-480f-aac6-47ce47579259",
+      "name": "CitizenOrAlien_No",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 30.208,
+        "w": 282.8571,
+        "x": 299.3343,
+        "y": 703.0236
+      },
+      "id": "20763a85-6d45-4c25-9c9d-e79956c72301",
+      "name": "AutoAmountRequested",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 33.8603,
+        "w": 869.859,
+        "x": 270.8823,
+        "y": 810.3116
+      },
+      "id": "a36c693f-bab9-4603-825a-29e8f7a66c9e",
+      "name": "JointFullName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 70.0558,
+        "w": 901.3841,
+        "x": 233.5192,
+        "y": 851.1775
+      },
+      "id": "8e6416e0-d858-42d1-a5f3-33fa8893f867",
+      "name": "JointAddressFull",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 28.0223,
+        "w": 533.5914,
+        "x": 598.9768,
+        "y": 927.0712
+      },
+      "id": "44bb3de4-225d-4543-b276-50ddfc3c2be2",
+      "name": "JointCurrentAddressStartYearAndMonth",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 36.1955,
+        "w": 364.29,
+        "x": 262.7091,
+        "y": 957.4287
+      },
+      "id": "1385d0e7-cc4b-4b49-9e08-93aa33e068b0",
+      "name": "JointLibertySavingsAccountNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 36.1955,
+        "w": 356.1168,
+        "x": 777.619,
+        "y": 958.5963
+      },
+      "id": "12e94c62-0547-4f16-912d-db4d3514fd48",
+      "name": "JointEmailAddress",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 35.0279,
+        "w": 178.6422,
+        "x": 199.6589,
+        "y": 995.9594
+      },
+      "id": "4a2e8cb1-5247-454c-9580-01725095d1e3",
+      "name": "JointFullBirthDate",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 39.6983,
+        "w": 345.6084,
+        "x": 618.8259,
+        "y": 992.4566
+      },
+      "id": "b793e260-09a4-4be0-b913-d5bb9e3921f4",
+      "name": "JointDriversLicenseNo",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 33.8603,
+        "w": 108.5864,
+        "x": 1028.6521,
+        "y": 994.7918
+      },
+      "id": "4d36cb1f-f386-4ebc-88d5-650fcc1df86e",
+      "name": "JointState",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 38.5307,
+        "w": 335.1001,
+        "x": 274.3851,
+        "y": 1029.8197
+      },
+      "id": "88bbc8cd-b172-4818-8594-f36bba52b4d4",
+      "name": "JointSocialSecurityNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 33.8603,
+        "w": 308.2454,
+        "x": 831.3284,
+        "y": 1032.1549
+      },
+      "id": "d72f90f6-df20-4715-b796-0a8da2c41003",
+      "name": "JointGrossMonthlyIncome",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 33.8603,
+        "w": 208.9997,
+        "x": 211.3349,
+        "y": 1071.8532
+      },
+      "id": "2b90a111-bea7-41d1-b41a-08507d7f57e5",
+      "name": "JointHomePhoneNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 35.0279,
+        "w": 210.1673,
+        "x": 471.7088,
+        "y": 1069.518
+      },
+      "id": "7ef47f59-fa17-4646-8f6e-2226ee21c40a",
+      "name": "JointCellPhoneNumber",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 37.3631,
+        "w": 207.8321,
+        "x": 739.0883,
+        "y": 1068.3504
+      },
+      "id": "643ecc74-b556-45a5-b24d-df30c3a19dcd",
+      "name": "JointEmployerWorkPhone",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 17.5139,
+        "w": 16.3463,
+        "x": 1055.5068,
+        "y": 1073.0207
+      },
+      "id": "caee7a54-b1d0-453f-866c-cab02bd8a763",
+      "name": "JointPreferredPhone_Home",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 19.8491,
+        "w": 22.1843,
+        "x": 1085.8643,
+        "y": 1070.6856
+      },
+      "id": "3ec2e623-fd93-4717-ab28-66fd5dd77168",
+      "name": "JointPreferredPhone_Work",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 15.1787,
+        "w": 16.3463,
+        "x": 1123.2274,
+        "y": 1075.3559
+      },
+      "id": "a3121a13-cfbc-415b-ba68-ad167a7872d9",
+      "name": "JointPreferredPhone_Cell",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 38.5307,
+        "w": 769.4458,
+        "x": 368.9603,
+        "y": 1106.881
+      },
+      "id": "9d96887b-ec9b-4b1f-b777-e72dab63abe8",
+      "name": "JointEmployerNameAndAddress",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 35.0279,
+        "w": 213.6701,
+        "x": 203.1617,
+        "y": 1147.7469
+      },
+      "id": "a9a4856c-a82f-46db-bf01-445f75d60e72",
+      "name": "JointEmployerHireDate",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 38.5307,
+        "w": 533.5914,
+        "x": 607.1499,
+        "y": 1145.4117
+      },
+      "id": "f690fcef-b8a8-44d0-b036-7a16df7500c5",
+      "name": "JointSupervisorName",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 16.3463,
+        "w": 16.3463,
+        "x": 419.167,
+        "y": 1202.6239
+      },
+      "id": "c2cf4476-8db2-41eb-944c-56b8fda7ccf3",
+      "name": "JointResidenceStatus_Renting",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 17.5139,
+        "w": 18.6815,
+        "x": 499.7311,
+        "y": 1201.4563
+      },
+      "id": "93ff93d2-4c0c-424a-b866-46f0aded8388",
+      "name": "JointResidenceStatus_Buying",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 37.3631,
+        "w": 317.5861,
+        "x": 820.82,
+        "y": 1182.7748
+      },
+      "id": "57669696-c6b4-4d30-8969-3ef8233b814c",
+      "name": "JointMonthlyMortgageOrRent",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 16.3463,
+        "w": 16.3463,
+        "x": 732.0827,
+        "y": 1238.8194
+      },
+      "id": "56a15c38-2d29-4242-8a46-5cc68b58c78a",
+      "name": "JointCitizenOrAlien_Yes",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 17.5139,
+        "w": 18.6815,
+        "x": 796.3005,
+        "y": 1239.987
+      },
+      "id": "a9ccdbb4-437b-40b1-bb46-0e4d45beb671",
+      "name": "JointCitizenOrAlien_No",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 33.8603,
+        "w": 455.3625,
+        "x": 332.7649,
+        "y": 1418.6292
+      },
+      "id": "e8195d50-9279-4e0c-b515-74080cb11116",
+      "name": "Signature",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 47.8714,
+        "w": 433.1781,
+        "x": 359.6196,
+        "y": 1454.8246
+      },
+      "id": "57ef2d10-1a25-4305-aa09-d9728394de9f",
+      "name": "JointSignature",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 35.0279,
+        "w": 295.4018,
+        "x": 840.6691,
+        "y": 1417.4616
+      },
+      "id": "cb754f76-f484-42c3-8a39-71e06a4928b8",
+      "name": "TodaysDate",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    },
+    {
+      "bounding_box": {
+        "h": 42.0335,
+        "w": 287.2286,
+        "x": 845.3395,
+        "y": 1459.495
+      },
+      "id": "f94c5b2b-d41f-4e60-8d47-4935574a82dd",
+      "name": "TodaysDate",
+      "properties": [],
+      "slot_names": [
+        "0"
+      ]
+    }
+  ],
+  "properties": []
+}
