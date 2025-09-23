@@ -114,7 +114,6 @@ def extract_kv_pairs_with_gpt5(image_path: str) -> List[Dict[str, str]]:
                         ],
                     },
                 ],
-                reasoning_effort="minimal",
             )
 
             # Extract the response content

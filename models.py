@@ -634,6 +634,22 @@ def exponential_backoff(func):
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
+        except AnthropicAPIError as e:
+            # Handle image size error - if image exceeds 5MB limit, return empty response
+            if "image exceeds 5 MB maximum" in str(e):
+                print(f"Image exceeds 5MB limit, returning empty response: {e}")
+
+                # Create a mock response object with empty content
+                class EmptyResponse:
+                    def __init__(self):
+                        self.content = [type("Content", (), {"text": ""})()]
+                        self.usage = None
+
+                return EmptyResponse()
+            else:
+                # Re-raise other Anthropic API errors
+                print(f"API call failed with error: {str(e)}")
+                raise
         except Exception as e:
             print(f"API call failed with error: {str(e)}")
             raise
@@ -748,16 +764,19 @@ class AnthropicModelE2E:
         """Calculate cost based on Anthropic model pricing"""
         # Anthropic Claude pricing (as of 2024)
         if "claude-3-7-sonnet" in self.model_name.lower():
-            input_cost_per_1k = 3  # $3 per 1M tokens
-            output_cost_per_1k = 15  # $15 per 1M tokens
+            input_cost_per_1m = 3  # $3 per 1M tokens
+            output_cost_per_1m = 15  # $15 per 1M tokens
         elif "claude-3-5-haiku" in self.model_name.lower():
-            input_cost_per_1k = 0.8  # $0.8 per 1M tokens
-            output_cost_per_1k = 4  # $4 per 1M tokens
+            input_cost_per_1m = 0.8  # $0.8 per 1M tokens
+            output_cost_per_1m = 4  # $4 per 1M tokens
+        elif "claude-sonnet-4-20250514" in self.model_name.lower():
+            input_cost_per_1m = 3  # $3 per 1M tokens
+            output_cost_per_1m = 15  # $15 per 1M tokens
         else:  # Default to Sonnet pricing
             raise ValueError(f"Unsupported model: {self.model_name}")
 
-        input_cost = (input_tokens / 1000000) * input_cost_per_1k
-        output_cost = (output_tokens / 1000000) * output_cost_per_1k
+        input_cost = (input_tokens / 1000000) * input_cost_per_1m
+        output_cost = (output_tokens / 1000000) * output_cost_per_1m
         return input_cost + output_cost
 
     def forward(
@@ -810,7 +829,6 @@ class AnthropicModelE2E:
                 base64_image,
                 base64_source_image,
             )
-
             response = message.content[0].text
 
             # Track usage and costs

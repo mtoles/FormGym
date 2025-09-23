@@ -594,7 +594,7 @@ if __name__ == "__main__":
         "--file_ids", type=str, nargs="+", help="List of file ids, e.g. al_0_0"
     )
     parser.add_argument("--k_missing_fields", type=int, default=1)
-    parser.add_argument("--max_turns", type=int, default=10)
+    parser.add_argument("--max_turns", type=int, default=3)
     parser.add_argument("--suggest_localizer", type=bool, default=False)
     parser.add_argument("--source_doc_id", type=str, default=None)
     parser.add_argument("--user_idx", type=int, default=0)
