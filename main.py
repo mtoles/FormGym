@@ -198,21 +198,21 @@ def main(
             if use_short_dataset:
                 print(f"Using short dataset: {annot_path}")
             all_annots = annotations.read_annotations_from_preprocessed(annot_path)
-            file_ids = [annot["id"] for annot in all_annots]
+            file_ids = list(set([annot["id"] for annot in all_annots]))
         elif domain == DomainEnum.FUNSD.value:
             suffix = "_short" if use_short_dataset else ""
             annot_path = f"tool/dataset/processed/funsd_test_qa_pairs{suffix}.jsonl"
             if use_short_dataset:
                 print(f"Using short dataset: {annot_path}")
             all_annots = annotations.read_annotations_from_preprocessed(annot_path)
-            file_ids = [annot["id"] for annot in all_annots]
+            file_ids = list(set([annot["id"] for annot in all_annots]))
         elif domain == DomainEnum.XFUND.value:
             suffix = "_short" if use_short_dataset else ""
             annot_path = f"tool/dataset/processed/xfund_test_qa_pairs{suffix}.jsonl"
             if use_short_dataset:
                 print(f"Using short dataset: {annot_path}")
             all_annots = annotations.read_annotations_from_preprocessed(annot_path)
-            file_ids = [annot["id"] for annot in all_annots]
+            file_ids = list(set([annot["id"] for annot in all_annots]))
         elif domain in [DomainEnum.AL.value, DomainEnum.CR.value]:
             # AL domain uses file_ids directly, no preprocessed annotation files
             all_annots = []

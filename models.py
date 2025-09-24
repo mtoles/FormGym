@@ -73,7 +73,8 @@ def get_e2e_prompt(
 
     {api_documentation}
 
-    You know the following information about the user (user profile):
+    You know the following information about the user (user profile)
+    | is used to indicate a hierarchical relationship, or a row and column in a table:
 
     {user_profile}
     {has_source_image_str}
@@ -556,8 +557,8 @@ class GptModelE2E:
                 suggest_localizer=suggest_localizer,
                 needs_db=needs_db,
                 turns_remaining=turns_remaining,
-                has_source_image=source_doc_image is not None,
-                box_locs=box_locs,
+                has_source_image=source_doc_image[0] is not None,
+                box_locs=box_locs[0],
             )
 
             if self.draw_grid:

@@ -685,13 +685,23 @@ def save_dataset(
     )
 
     if save_short:
-        # Save short versions
-        train_df.head(SHORT_DATASET_SIZE).to_json(
+        # Save short versions - select 100 unique documents, not 100 examples
+        # Get unique form_ids from train set
+        train_unique_forms = train_df["form_id"].unique()
+        train_short_forms = train_unique_forms[:SHORT_DATASET_SIZE]
+        train_short_df = train_df[train_df["form_id"].isin(train_short_forms)]
+
+        # Get unique form_ids from test set
+        test_unique_forms = test_df["form_id"].unique()
+        test_short_forms = test_unique_forms[:SHORT_DATASET_SIZE]
+        test_short_df = test_df[test_df["form_id"].isin(test_short_forms)]
+
+        train_short_df.to_json(
             os.path.join(output_dir, f"{dataset_name}_train_qa_pairs_short.jsonl"),
             orient="records",
             indent=2,
         )
-        test_df.head(SHORT_DATASET_SIZE).to_json(
+        test_short_df.to_json(
             os.path.join(output_dir, f"{dataset_name}_test_qa_pairs_short.jsonl"),
             orient="records",
             indent=2,
@@ -701,7 +711,10 @@ def save_dataset(
     # draw the bounding boxes on the images  including text labels.
 
     # Get the first 5 images from the short test set
-    short_test_df = test_df.head(SHORT_DATASET_SIZE)
+    if save_short:
+        short_test_df = test_short_df
+    else:
+        short_test_df = test_df.head(SHORT_DATASET_SIZE)
     first_5_images = short_test_df.head(5)
 
     # # Create output directory for annotated images
