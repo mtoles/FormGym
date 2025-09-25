@@ -31,26 +31,37 @@ models = ["Aria 25B", "Claude 4", "GPT-5", "Llava 7B", "Molmo 7B"]
 
 # Base model data
 base_data = {
-    "Auto Loans (Text) - One Shot": [0.0, 0.5, 1.3, 0.0, 0.0],
+    "Auto Loans (Text) - One Shot": [0.0, 0.0, 1.0, 0.0, 0.0],
     "Auto Loans (Text) - Iterative": [0.0, 0.3, 2.0, 0.0, 0.0],
-    "Auto Loans (Doc Transfer) - One Shot": [0.0, 1.0, 0.3, 0.0, 0.0],
-    "Auto Loans (Doc Transfer) - Iterative": [0.0, 0.0, 0.3, 0.0, 0.0],
-    "FUNSD - One Shot": [1.0, 18.0, 1.0, 1.0, 1.0],
-    "XFUND - One Shot": [1.0, 1.0, 1.0, 1.0, 1.0],
-    "Form-NLU - One Shot": [0.0, 0.0, 3.0, 0.0, 0.0],
+    "Auto Loans (Doc Transfer) - One Shot": [0.0, 0.3, 0.5, 0.0, 0.0],
+    "Auto Loans (Doc Transfer) - Iterative": [
+        0.0,
+        0.0,
+        1.0,
+        0.00000001,
+        0.0,
+    ],  # .00000001 to avoid 0 and have a label
+    "FUNSD - One Shot": [1.0, 21.0, 2.0, 1.0, 1.0],
+    "XFUND - One Shot": [1.0, 1.0, 2.0, 1.0, 1.0],
+    "Form-NLU - One Shot": [0.0, 0.0, 0.0, 0.0, 0.0],
 }
 
 # FF enhanced data
-ff_data = {
-    "Auto Loans (Text) - One Shot": [3.5, 7.7, 9.0, 0.3, 0.5],
-    "Auto Loans (Text) - Iterative": [3.3, 7.7, 8.0, 0.5, 1.0],
-    "Auto Loans (Doc Transfer) - One Shot": [1.3, 5.5, 2.5, 0.3, 0.0],
-    "Auto Loans (Doc Transfer) - Iterative": [1.3, 3.7, 3.3, 0.3, 0.0],
-    "FUNSD - One Shot": [17.0, 31.0, 34.0, 4.0, 6.0],
-    "XFUND - One Shot": [12.0, 18.0, 16.0, 3.0, 4.0],
-    "Form-NLU - One Shot": [23.0, 45.0, 51.0, 4.0, 13.0],
+ff_data_needs_destack = {
+    "Auto Loans (Text) - One Shot": [3.3, 8.3, 8.5, 1.0, 0.5],
+    "Auto Loans (Text) - Iterative": [2.8, 7.8, 8.0, 0.3, 1.0],
+    "Auto Loans (Doc Transfer) - One Shot": [1.5, 4.8, 3.0, 0.3, 0.0],
+    "Auto Loans (Doc Transfer) - Iterative": [1.3, 2.8, 3.0, 0.0, 0.0],
+    "FUNSD - One Shot": [20.0, 32.0, 29.0, 4.0, 9.0],
+    "XFUND - One Shot": [9.0, 15.0, 14.0, 3.0, 3.0],
+    "Form-NLU - One Shot": [29.0, 54.0, 50.0, 4.0, 7.0],
 }
 
+# subtract base_data from ff_data_needs_destack
+ff_data = {
+    k: [v[i] - base_data[k][i] for i in range(len(v))]
+    for k, v in ff_data_needs_destack.items()
+}
 # Create the visualization
 fig, ax = plt.subplots(figsize=(18, 10))
 

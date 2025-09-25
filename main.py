@@ -111,7 +111,7 @@ def example_should_be_active(example):
     for action in example["actions"][-1]:
         if action["action"] == "Terminate":
             return False
-    if len(example["doc_state"]) >= example["max_turns"]:
+    if len(example["doc_state"]) > example["max_turns"]:
         return False
     return True
 
@@ -161,7 +161,7 @@ def main(
     now = datetime.now().strftime("%H:%M:%S")
     domain = get_domain_from_doc_ids(file_ids).value
     needs_db = domain == DomainEnum.CR.value
-    save_dir = f"results/{note+'_gt_coords' if gt_coordinates else ''}/{model_name.replace('/', '_')}/{domain}/{task}/{study_condition}/{profile_source}/u{user_idx}/{today}/{now}/"
+    save_dir = f"results/{model_name.replace('/', '_')}{'_gt_coords' if gt_coordinates else ''}/{domain}/{task}/{study_condition}/{profile_source}/u{user_idx}/{today}/{now}/"
 
     # Validate the task argument
     flow = FlowEnum(task).value
@@ -484,9 +484,9 @@ def main(
         for field in result.fields:
             if field["prefilled"]:
                 continue
-            total_count += 1
             if field["gt"] in [None, "None", "N/A", False, ""]:
                 continue
+            total_count += 1
             if field["correct"]:
                 correct_count += 1
         file_acc = correct_count / total_count
@@ -620,8 +620,7 @@ if __name__ == "__main__":
     parser.add_argument("--note", type=str, default="no_note")
     parser.add_argument(
         "--gt_coordinates",
-        type=bool,
-        default=False,
+        action="store_true",
         help="Whether to pass ground truth coordinates to the model",
     )
     parser.add_argument(

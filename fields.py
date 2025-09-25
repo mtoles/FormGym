@@ -153,7 +153,7 @@ class BaseDurationField(BaseField):
     def is_correct(self, agent_generations_inside, profile_info: str):
         agent_generations_inside = concat_agent_generations(agent_generations_inside)
         if not agent_generations_inside:
-            return 0 == int(profile_info)
+            return False  # Empty input should never be considered correct
         # convert years to months
         years = re.search(r"(\d+) year", agent_generations_inside)
         months = re.search(r"(\d+) month", agent_generations_inside)
