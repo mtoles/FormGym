@@ -156,12 +156,18 @@ def main(
     source_doc_id=None,
     downsample=None,
     use_short_dataset=True,
+    draw_grid=False,
 ):
     today = datetime.now().strftime("%Y-%m-%d")
     now = datetime.now().strftime("%H:%M:%S")
     domain = get_domain_from_doc_ids(file_ids).value
     needs_db = domain == DomainEnum.CR.value
-    save_dir = f"results/{model_name.replace('/', '_')}{'_gt_coords' if gt_coordinates else ''}/{domain}/{task}/{study_condition}/{profile_source}/u{user_idx}/{today}/{now}/"
+    special_condition_str = ""
+    if draw_grid:
+        special_condition_str = "_draw_grid"
+    if gt_coordinates:
+        special_condition_str = "_gt_coords"
+    save_dir = f"results/{model_name.replace('/', '_')}{special_condition_str}/{domain}/{task}/{study_condition}/{profile_source}/u{user_idx}/{today}/{now}/"
 
     # Validate the task argument
     flow = FlowEnum(task).value
@@ -406,7 +412,7 @@ def main(
     #         batch_size=BATCH_SIZE, model_name=model_name, filename=file_ids[0], user_idx=user_idx
     #     )
     elif model_type.lower().startswith("gpt"):
-        model = models.GptModelE2E(model_name=model_name, draw_grid=False)
+        model = models.GptModelE2E(model_name=model_name, draw_grid=draw_grid)
     elif model_type.lower().startswith("hf"):
         model = models.HFE2EModel(
             model_name=model_name,
@@ -415,7 +421,7 @@ def main(
             n_images=2 if profile_source == ProfileSourceEnum.IMAGE.value else 1,
         )
     elif model_type.lower().startswith("anthropic"):
-        model = models.AnthropicModelE2E(model_name=model_name, draw_grid=False)
+        model = models.AnthropicModelE2E(model_name=model_name, draw_grid=draw_grid)
     else:
         raise ValueError(f"Unknown model type: {model_type}")
     # Set batch size to 2 and process in batches
@@ -635,6 +641,12 @@ if __name__ == "__main__":
         default=True,
         help="Whether to use the _short.jsonl dataset files for form-nlu, funsd, or xfund",
     )
+    parser.add_argument(
+        "--draw_grid",
+        action="store_true",
+        default=False,
+        help="Whether to enable grid drawing in the model",
+    )
     args = parser.parse_args()
 
     # mirrors the argparse structure
@@ -656,6 +668,7 @@ if __name__ == "__main__":
         args.source_doc_id,
         args.downsample,
         args.use_short_dataset,
+        args.draw_grid,
     ]
     # called with the param list
     overall_results = main(*params)
