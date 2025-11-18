@@ -143,7 +143,8 @@ def main(
     model_name,
     doc_format,
     task,
-    file_ids,
+    domain,
+    chosen_file_ids,
     k_missing_fields,
     max_turns,
     suggest_localizer,
@@ -160,7 +161,8 @@ def main(
 ):
     today = datetime.now().strftime("%Y-%m-%d")
     now = datetime.now().strftime("%H:%M:%S")
-    domain = get_domain_from_doc_ids(file_ids).value
+    # domain = get_domain_from_doc_ids(file_ids).value
+    # domain = DomainEnum(domain).value
     needs_db = domain == DomainEnum.CR.value
     special_condition_str = ""
     if draw_grid:
@@ -173,7 +175,6 @@ def main(
     flow = FlowEnum(task).value
     study_condition = StudyConditionEnum(study_condition).value
     profile_source = ProfileSourceEnum(profile_source).value
-    BATCH_SIZE = min(1, len(file_ids))
 
     # Enable FieldLocalizer only for experimental study condition
     actions.set_field_localizer_enabled(
@@ -204,21 +205,21 @@ def main(
             if use_short_dataset:
                 print(f"Using short dataset: {annot_path}")
             all_annots = annotations.read_annotations_from_preprocessed(annot_path)
-            file_ids = list(set([annot["id"] for annot in all_annots]))
+            all_file_ids = list(set([annot["id"] for annot in all_annots]))
         elif domain == DomainEnum.FUNSD.value:
             suffix = "_short" if use_short_dataset else ""
             annot_path = f"tool/dataset/processed/funsd_test_qa_pairs{suffix}.jsonl"
             if use_short_dataset:
                 print(f"Using short dataset: {annot_path}")
             all_annots = annotations.read_annotations_from_preprocessed(annot_path)
-            file_ids = list(set([annot["id"] for annot in all_annots]))
+            all_file_ids = list(set([annot["id"] for annot in all_annots]))
         elif domain == DomainEnum.XFUND.value:
             suffix = "_short" if use_short_dataset else ""
             annot_path = f"tool/dataset/processed/xfund_test_qa_pairs{suffix}.jsonl"
             if use_short_dataset:
                 print(f"Using short dataset: {annot_path}")
             all_annots = annotations.read_annotations_from_preprocessed(annot_path)
-            file_ids = list(set([annot["id"] for annot in all_annots]))
+            all_file_ids = list(set([annot["id"] for annot in all_annots]))
         elif domain in [DomainEnum.AL.value, DomainEnum.CR.value]:
             # AL domain uses file_ids directly, no preprocessed annotation files
             all_annots = []
@@ -229,6 +230,15 @@ def main(
     # Apply downsampling if specified
     if downsample is not None:
         file_ids = file_ids[:downsample]
+    # apply id-based downsampling
+    file_ids = []
+    if chosen_file_ids is not None:
+        for fid in chosen_file_ids:
+            if fid in all_file_ids:
+                file_ids.append(fid)
+    assert len(file_ids) == len(chosen_file_ids), f"Number of chosen file ids ({len(chosen_file_ids)}) does not match number of file ids ({len(file_ids)}) found. Probably some do not exist in this domain."
+    BATCH_SIZE = min(1, len(file_ids))
+ 
     # convert all_annots to a dictionary where the key is form_id and value is a list of annotations
     all_annots_dict = {}
     for annot in all_annots:
@@ -604,8 +614,9 @@ if __name__ == "__main__":
     parser.add_argument("--doc_format", type=str)
     parser.add_argument("--task", type=str)
     # New argument to take a list of PNG file paths
+    parser.add_argument("--domain", type=str, choices=[d.value for d in DomainEnum])
     parser.add_argument(
-        "--file_ids", type=str, nargs="+", help="List of file ids, e.g. al_0_0"
+        "--chosen_file_ids", type=str, nargs="+", help="List of file ids, e.g. al_0_0"
     )
     parser.add_argument("--k_missing_fields", type=int, default=1)
     parser.add_argument("--max_turns", type=int, default=3)
@@ -655,7 +666,8 @@ if __name__ == "__main__":
         args.model_name,
         args.doc_format,
         args.task,
-        args.file_ids,
+        args.domain,
+        args.chosen_file_ids,
         args.k_missing_fields,
         args.max_turns,
         args.suggest_localizer,
