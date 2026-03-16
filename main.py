@@ -222,7 +222,7 @@ def main(
             all_file_ids = list(set([annot["id"] for annot in all_annots]))
         elif domain in [DomainEnum.AL.value, DomainEnum.CR.value]:
             # AL domain uses file_ids directly, no preprocessed annotation files
-            all_annots = []
+            all_file_ids = [f"al_{i}_0" for i in range(10)]
             # file_ids are already provided as input parameter
     else:
         raise ValueError(f"Invalid domain: {domain}")
@@ -241,10 +241,11 @@ def main(
  
     # convert all_annots to a dictionary where the key is form_id and value is a list of annotations
     all_annots_dict = {}
-    for annot in all_annots:
-        if annot["id"] not in all_annots_dict:
-            all_annots_dict[annot["id"]] = []
-        all_annots_dict[annot["id"]].append(annot)
+    if domain in [DomainEnum.FUNSD.value, DomainEnum.FORM_NLU.value, DomainEnum.XFUND.value]:
+        for annot in all_annots:
+            if annot["id"] not in all_annots_dict:
+                all_annots_dict[annot["id"]] = []
+            all_annots_dict[annot["id"]].append(annot)
     for i, fid in enumerate(file_ids):
         if "al" not in fid:
             assert (

@@ -191,6 +191,9 @@ def visualize_preds(doc_state, fields, img):
     # Draw correct text boxes in green and incorrect text boxes in red
 
     for field in fields:
+        if not field["gt"]:
+            # skip false/empty
+            continue
         x = field["bbox"]["x"] * width
         y = field["bbox"]["y"] * height
         w = field["bbox"]["w"] * width
