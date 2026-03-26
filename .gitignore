@@ -7,9 +7,18 @@ wandb
 test.py
 results/
 results/old/
+tool/dataset/
+tool/checkpoints/
+tool/prod_tool_checkpoint/
 
 form-conda/
 form-conda-vllm/
+
+*.pdf
+*.png
+.cursorrules
+old/
+results_old/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -40,7 +40,7 @@ torch.backends.cudnn.deterministic = True
 print(os.environ["CUDA_HOME"])
 print(os.environ["LD_LIBRARY_PATH"])
 print(torch.cuda.is_available())
-assert torch.cuda.is_available()  # not available in debug mode, dunno why
+# assert torch.cuda.is_available()  # not available in debug mode, dunno why
 
 TASK_NAME_PREFIX = "<OPEN_VOCABULARY_DETECTION>"  # config["task_name_prefix"]
 TEXT_INPUT_PROMPT_TEMPLATE = (

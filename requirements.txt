@@ -6,14 +6,14 @@ numpy
 pandas
 pillow
 pydantic
-# torch
+torch>=2.4.0
 torchvision
 tqdm
 transformers==4.48.0
-vllm
+vllm>=0.6.0
 wandb
 peft
-einops 
+einops
 timm
 albumentations
 torchmetrics
@@ -24,3 +24,13 @@ pybind11
 joblib
 tenacity
 bitsandbytes
+opencv-python
+python-dateutil
+pyyaml
+requests
+tiktoken
+scikit-image
+
+# dev
+pytest
+pytest-asyncio

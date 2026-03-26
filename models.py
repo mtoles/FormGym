@@ -11,16 +11,6 @@ from utils import *
 import re
 from pydantic import ValidationError
 from dataclasses import asdict
-from hfmodels import (
-    AriaModel,
-    LlavaModel,
-    MolmoModel,
-    QwenVLModel,
-    DeepseekVL2Model,
-    Gemma3Model,
-    MLLamaModel,
-)
-from vllm import LLM, EngineArgs, SamplingParams
 import time
 from prompt import parse_raw_output
 from json import JSONDecodeError
@@ -38,12 +28,8 @@ from anthropic import (
     APIError as AnthropicAPIError,
     RateLimitError as AnthropicRateLimitError,
 )
-import torch
-from transformers import AutoProcessor
 import os
 
-
-os.environ["VLLM_ALLOW_LONG_MAX_MODEL_LEN"] = "1"
 
 memory = Memory(".joblib_cache", verbose=0)
 
@@ -865,6 +851,21 @@ class HFE2EModel:
         seed=42,
         draw_grid: bool = False,
     ):
+        # Lazy imports: vllm, torch, transformers, hfmodels are only needed for HF inference
+        os.environ["VLLM_ALLOW_LONG_MAX_MODEL_LEN"] = "1"
+        import torch
+        from transformers import AutoProcessor
+        from vllm import LLM, EngineArgs, SamplingParams
+        from hfmodels import (
+            AriaModel,
+            LlavaModel,
+            MolmoModel,
+            QwenVLModel,
+            DeepseekVL2Model,
+            Gemma3Model,
+            MLLamaModel,
+        )
+
         model_registry = {
             "aria": AriaModel,
             "llava": LlavaModel,

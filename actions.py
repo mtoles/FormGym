@@ -8,16 +8,6 @@ from copy import deepcopy
 from pydantic import BaseModel
 from enum import Enum
 from utils import *
-from transformers import AutoProcessor, AutoModelForCausalLM
-import torch
-from pathlib import Path
-import yaml
-from tool.train_florence import (
-    load_from_checkpoint,
-    TEXT_INPUT_PROMPT_TEMPLATE,
-    TASK_NAME_PREFIX,
-)
-from utils import *
 from PIL import Image, ImageDraw
 from datetime import datetime
 
@@ -278,6 +268,9 @@ class FieldLocalizer(BaseAction):
 
     def __init__(self):
         if not self._initialized:
+            import torch
+            from tool.train_florence import load_from_checkpoint
+
             self.device = torch.device(
                 "cuda:1"
                 if torch.cuda.is_available() and torch.cuda.device_count() >= 2
@@ -328,6 +321,8 @@ class FieldLocalizer(BaseAction):
 
     @staticmethod
     def act(doc_state, value: str, return_bboxes: bool = False, **kwargs):
+        from tool.train_florence import TEXT_INPUT_PROMPT_TEMPLATE, TASK_NAME_PREFIX
+
         instance = FieldLocalizer.get_instance()
         img = doc_state.get_image_of_state()
         w = img.width
