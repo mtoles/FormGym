@@ -13,9 +13,9 @@ FormGym includes four datasets spanning scanned and digital documents:
 | Dataset | Domain | Forms (train/test) | Fields (train/test) | Language | Source |
 |---------|--------|-------------------|---------------------|----------|--------|
 | **Auto Loans (AL)** | Financial | — / 10 | - / 886 | English | Manually annotated |
-| **FUNSD** | Tobacco industry | 155 / 39 | — / — | English | Scanned documents |
-| **XFUND** | Common Crawl | 1,112 / 100 | — / — | 7 languages | Scanned documents |
-| **Form-NLU** | Australian financial | 442 / 66 | — / — | English | Digital filings |
+| **FUNSD** | Tobacco industry | 155 / 39 | 2,246 / 577 | English | Scanned documents |
+| **XFUND** | Common Crawl | 1,112 / 100 | 19,559 / 1,950 | 7 languages | Scanned documents |
+| **Form-NLU** | Australian financial | 442 / 66 | 3,661 / 476 | English | Digital filings |
 
 ## Task Overview
 
